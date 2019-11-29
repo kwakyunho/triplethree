@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="shop.triplethree.mapper.CompanyMapper">
+
+	<insert id="insertOrganizationChart" parameterType="shop.triplethree.vo.Company">
+		INSERT INTO
+			DEMG (
+				code
+				,dename
+				,level
+				,updamgcode
+				,reason
+				,writer
+				,writer_day)
+		VALUES
+			(#{departmentCode}
+			,#{departmentName}
+			,#{departmentLevel}
+			,#{departmentUpcode}
+			,#{departmentSau}
+			,'id001'
+			,NOW());
+	</insert>
+	
+	<select id="selectOrganizationChart" resultType="shop.triplethree.vo.Company">
+		SELECT
+			code AS departmentCode
+			,dename AS departmentName
+			,level AS departmentLevel
+			,updamgcode AS departmentUpcode
+			,writer AS departmentWriter
+			,writer_day AS departmentWriterDay
+			,approver AS departmentApprover
+			,approver_st AS departmentApperverSt
+			,appro_day AS departmentApproDay
+			,reason AS departmentSau
+			,yes_or_no AS departmentYesNO
+		FROM
+			DEMG
+	</select>
+	
+	<select id="selectBox" resultType="shop.triplethree.vo.Company">
+		SELECT
+			code AS departmentCode
+			,dename AS departmentName
+			,level AS departmentLevel
+			,updamgcode AS departmentUpcode
+			,writer AS departmentWriter
+			,writer_day AS departmentWriterDay
+			,approver AS departmentApprover
+			,approver_st AS departmentApperverSt
+			,appro_day AS departmentApproDay
+			,reason AS departmentSau
+			,yes_or_no AS departmentYesNO
+		FROM
+			DEMG
+		WHERE
+			yes_or_no = 'Y'
+	</select>
+	
+	<select id="selectUpCode" parameterType="String" resultType="String">
+		SELECT 
+			code
+		FROM 
+			DEMG
+		WHERE 
+			dename = #{upCode};
+	</select>
+</mapper>

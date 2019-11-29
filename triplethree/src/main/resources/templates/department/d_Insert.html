@@ -13,7 +13,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">부서 등록</h1>
+				<h1 class="m-0 text-dark">부서 관리</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -27,26 +27,136 @@
 </div>
 <!-- /.content-header -->
 
-<div class="content">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="card">
-				알아서 사용하세요
+<!-- 부서등록 시작  -->
+<form th:action="@{teamNameInsert}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+					<table>
+						<tr>
+							<th style="width:150px;">부서명</th>
+							<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="부서명을 입력해주세요" id="departmentName" name="departmentName"></td>
+						</tr>
+						<tr>
+							<th style="width:150px;">레벨</th>
+							<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
+						</tr>
+						<tr>
+							<th style="width:150px;">상위부서코드</th>
+								<td>
+									<div class="form-group">
+										<select class="form-control form-control-lg" name="departmentUpcode">
+											<option th:each="C : ${selectBox}" th:text="${C.departmentName}"></option>
+										</select>
+				                      </div>
+			                      </td>
+							<!-- <td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="상위부서의코드를 입력해주세요" id="departmentUpcode" name="departmentUpcode"></td> -->
+						</tr>
+<!-- 						<tr>
+							<th style="width:150px;"></th>
+								<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="상위부서의코드를 입력해주세요" id="departmentUpcode" name="departmentUpcode"></td>
+						</tr> -->
+						<tr>
+							<th style="width:150px;">사유</th>
+							<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="등록사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<span style="float:right;"><input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg"></span>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<!-- /.card -->
-			<!-- /.card -->
+				<div class="col-lg-2"></div>
 			</div>
+			<!-- /.row -->
 		</div>
-		<!-- /.row -->
+		<!-- /.container-fluid -->
 	</div>
-	<!-- /.container-fluid -->
-</div>
+</form>
+<!-- 부서등록 끝  -->
+
+
+
+<!-- 부서 조회 시작  -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">부서 리스트</h3>
+					<div class="card-tools">
+						<div class="input-group input-group-sm" style="width: 150px;">
+							<input type="text" name="table_search"
+								class="form-control float-right" placeholder="Search">
+
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-default">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body table-responsive p-0">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>부서관리코드</th>
+								<th>부서명</th>
+								<th>레벨</th>
+								<th>상위부서코드</th>
+								<th>초기등록자</th>
+								<th>작성일자</th>
+								<th>사유</th>
+								<th>승인자</th>
+								<th>승인일자</th>
+								<th>승인상태</th>
+								<th>사용유무</th>
+								<th>수정</th>
+								<th>삭제</th>
+							</tr>
+							<tr th:each="C : ${CompanyList}">	
+								<td th:text="${C.departmentCode}"></td>
+								<td th:text="${C.departmentName}"></td>
+								<td th:text="${C.departmentLevel}"></td>
+								<td th:text="${C.departmentUpcode}"></td>
+								<td th:text="${C.departmentWriter}"></td>
+								<td th:text="${C.departmentWriterDay}"></td>
+								<td th:text="${C.departmentSau}"></td>
+								<td th:text="${C.departmentApprover}"></td>
+								<td th:text="${C.departmentApproDay}"></td>
+								<td th:text="${C.departmentApperverSt}"></td>
+								<td th:text="${C.departmentYesNO}"></td>
+								<td><a th:href="@{#}">수정</a></td>
+								<td><a th:href="@{#}">삭제</a></td>								
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+			
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+<!-- 부서 조회 끝 -->
 </th:block>
 
 <th:block layout:fragment="customScript">
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+<script>
+	
+</script>
 
 </th:block>
 </html>
