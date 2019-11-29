@@ -1,91 +1,87 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
-      layout:decorate="~{layouts/default}">
-
-<th:block layout:fragment="customTitle">
-	<title>index</title>
-</th:block>
-
-<th:block layout:fragment="customContents">
-<!-- Content Header (Page header) -->
-<div class="content-header">
-	<div class="container-fluid">
-		<div class="row mb-2">
-			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">부서 리스트</h1>
-			</div><!-- /.col -->
-			<div class="col-sm-6">
-				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
-				</ol>
-			</div><!-- /.col -->
-		</div><!-- /.row -->
-	</div><!-- /.container-fluid -->
+<div class="card-body">
+	<div id="accordion">
+		<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+		<div class="card card-primary">
+			<div class="card-header">
+				<h4 class="card-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="" aria-expanded="true"> Collapsible Group Item #1 </a>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse in collapse show" style="">
+				<div class="card-body">Anim pariatur cliche reprehenderit,
+					enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+					moon officia aute, non cupidatat skateboard dolor brunch. Food
+					truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+					sunt aliqua put a bird on it squid single-origin coffee nulla
+					assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer
+					labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+					excepteur butcher vice lomo. Leggings occaecat craft beer
+					farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- /.content-header -->
 
-<!-- 부서 조회 시작  -->
-<th:block>
-	<div class="row">
-		<div class="col-12">
-			<div class="card">
-				<div class="card-header">
-					<h3 class="card-title">부서 리스트</h3>
-					<div class="card-tools">
-						<div class="input-group input-group-sm" style="width: 150px;">
-							<input type="text" name="table_search"
-								class="form-control float-right" placeholder="Search">
 
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-default">
-									<i class="fas fa-search"></i>
-								</button>
+<!-- 부서등록 시작  -->
+<form th:action="@{teamNameInsert}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+				<div class="card-body">
+					<div id="accordion">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary">
+							<div class="card-header">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="" aria-expanded="true"> 부서 등록 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse in collapse show" style="">
+							<div class="card-body">
+								<table>
+									<tr>
+										<th style="width:150px;">부서명</th>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="부서명을 입력해주세요" id="departmentName" name="departmentName"></td>
+									</tr>
+									<tr>
+										<th style="width:150px;">레벨</th>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
+									</tr>
+									<tr>
+										<th style="width:150px;">상위부서코드</th>
+										<td>
+											<div class="form-group">
+												<select class="form-control form-control-lg" name="departmentUpcode">
+													<option th:each="C : ${selectBox}" th:text="${C.departmentName}"></option>
+												</select>
+						                      </div>
+					                      </td>
+									</tr>
+									<tr>
+										<th style="width:150px;">사유</th>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="등록사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
+									</tr>
+									<tr>
+										<th></th>
+										<td>
+											<span style="float:right;"><input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg"></span>
+										</td>
+									</tr>
+								</table>
+							</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- /.card-header -->
-				<div class="card-body table-responsive p-0">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>부서관리코드</th>
-								<th>부서명</th>
-								<th>레벨</th>
-								<th>상위부서코드</th>
-								<th>초기등록자</th>
-								<th>작성일자</th>
-								<th>사유</th>
-								<th>승인자</th>
-								<th>승인일자</th>
-								<th>사유</th>
-								<th>사용유무</th>
-								<th>수정</th>
-								<th>삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-			
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /.card-body -->
+				<div class="col-lg-2"></div>
 			</div>
-			<!-- /.card -->
+			<!-- /.row -->
 		</div>
+		<!-- /.container-fluid -->
 	</div>
-</th:block>
-<!-- 부서 조회 끝 -->
-</th:block>
-
-<th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
-</th:block>
-</html>
+</form>
+<!-- 부서등록 끝  -->

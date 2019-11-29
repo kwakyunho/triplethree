@@ -34,47 +34,53 @@
 			<div class="row">
 				<div class="col-lg-2"></div>
 				<div class="card col-lg-8" style="text-align: center;">
-					<table>
-						<tr>
-							<th style="width:150px;">부서명</th>
-							<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="부서명을 입력해주세요" id="departmentName" name="departmentName"></td>
-						</tr>
-						<tr>
-							<th style="width:150px;">레벨</th>
-							<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
-						</tr>
-						<tr>
-							<th style="width:150px;">상위부서코드</th>
-								<td>
-									<div class="form-group">
-										<select class="form-control form-control-lg" name="departmentUpcode">
-											<option th:each="C : ${selectBox}" th:text="${C.departmentName}"></option>
-										</select>
-				                      </div>
-			                      </td>
-							<!-- <td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="상위부서의코드를 입력해주세요" id="departmentUpcode" name="departmentUpcode"></td> -->
-						</tr>
-<!-- 						<tr>
-							<th style="width:150px;"></th>
-								<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="상위부서의코드를 입력해주세요" id="departmentUpcode" name="departmentUpcode"></td>
-						</tr> -->
-						<tr>
-							<th style="width:150px;">사유</th>
-							<td><input class="form-control form-control-lg" type="text" style="width:100%" placeholder="등록사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>
-								<span style="float:right;"><input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg"></span>
-							</td>
-						</tr>
-					</table>
+				<div style="align-self:center; width:90%;">
+					<div id="accordion">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary small" style="margin-top: 15px;">
+							<div class="card-header" style="align-self: center;">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="" aria-expanded="false"> 부서 등록 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse in collapse" style="">
+							<div class="card-body" style="text-align: -webkit-center;">
+								<table style="text-align: center;">
+									<tr>
+										<td style="width:150px;">부서명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="departmentName" name="departmentName"></td>
+										<td style="width:150px;">레벨</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
+									</tr>
+									<tr>
+										<td style="width:150px;">상위부서코드</td>
+										<td>
+											<div class="form-group">
+												<select class="form-control form-control-lg" style="font-size: medium;" name="departmentUpcode">
+													<option th:each="C : ${selectBox}" th:text="${C.departmentName}"></option>
+												</select>
+						                      </div>
+					                      </td>
+					                      <td style="width:150px;">사유</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="등록사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg">
+										</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
 			<!-- /.row -->
 		</div>
 		<!-- /.container-fluid -->
+	</div>
 	</div>
 </form>
 <!-- 부서등록 끝  -->
@@ -102,7 +108,7 @@
 				</div>
 				<!-- /.card-header -->
 				<div class="card-body table-responsive p-0">
-					<table class="table table-hover">
+					<table class="table table-hover small">
 						<thead>
 							<tr>
 								<th>부서관리코드</th>
