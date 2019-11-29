@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.ClientMapper">
+<resultMap id="ClientResultMap" type="shop.triplethree.vo.Client">
+<result column="code" property="code"/>
+<result column="li_code" property="liCode"/>
+<result column="li_code2" property="liCode2"/>
+<result column="acc_name" property="accCode"/>
+<result column="acc_ceo_name" property="accCeoName"/>
+<result column="acc_addr" property="accAddr"/>
+<result column="acc_bln" property="accBln"/>
+<result column="acc_fax" property="accFax"/>
+<result column="repre_number" property="repreNumber"/>
+<result column="acc_phone" property="accPhone"/>
+<result column="acc_email" property="accEmail"/>
+</resultMap>
+
+	<select id="codeGeneration" parameterType="String" resultType="String">
+		SELECT CONCAT(
+			(SELECT CONCAT(
+				(SELECT @a:= CODE
+				FROM CODE_MANAGE
+				WHERE co_table = #{tb_Name}),
+				'-',
+				(SELECT DATE_FORMAT(CURDATE(),'%Y%m%d')))),
+		
+			(SELECT LPAD(RIGHT(IFNULL(MAX(CODE), 0),6)+1,6,0)
+			FROM ${tb_Name}
+			WHERE CODE LIKE (
+			SELECT CONCAT(@a, '-',
+				(SELECT DATE_FORMAT(CURDATE(),'%Y%m%d')),
+				'%')))
+		)
+	</select>
+	<!-- 인서트 할때 사업장의 존폐여부는 일단 박고 시작  나중에 수정 -->
+	<insert id="clientInsert" parameterType="shop.triplethree.vo.Client">
+		INSERT INTO ACC_MANAGE
+			(code
+			,li_code
+			,li_code2
+			,acc_name
+			,acc_ceo_name
+			,acc_addr
+			,acc_bln
+			,acc_fax
+			,repre_number
+			,acc_phone
+			,acc_email
+			,writer
+			,writer_day)
+		 VALUES 
+		 (#{code}
+		 ,#{liCode}
+		 ,'LIS-어쩌고저쩌고'
+		 , #{accCode}
+		 , #{accCeoName}
+		 , #{accAddr}
+		 , #{accBln}
+		 , #{accBln}
+		 , #{accBln}
+		 , #{accBln}
+		 , #{accBln}
+		 , #{accBln}
+		 , now());
+	</insert>
+	
+</mapper>

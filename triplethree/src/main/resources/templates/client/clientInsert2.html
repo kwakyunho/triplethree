@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-12">
+				<h1 class="m-0 text-dark">거래처 등록</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-12">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="/client">거래처조회</a></li>
+					<li class="breadcrumb-item">거래처등록</li>
+					<!-- <li class="breadcrumb-item">Dashboard v3</li> -->
+				</ol>
+			</div>
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			
+			<div class="col-lg-12">
+			
+				<div class="card-header border-0">
+				        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">거래처 등록</h3>
+
+            <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
+            </div> -->
+          </div>
+          <!-- /.card-header -->
+          
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>거래처명</label>
+                  <input type="text" class="from-control" placeholder="거래처명" >
+                  <!-- <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select> -->
+                </div>
+               <div class="card-footer">
+                  <button type="submit" class="btn btn-info">등록하기</button>
+                  <button type="submit" class="btn btn-default float-right">취소</button>
+                </div>
+         
+        </div>
+        <!-- /.card -->
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+			<!-- <div class="col-lg-6">
+				<div class="card">
+				알아서 사용하세요
+				</div>
+				/.card
+			</div> -->
+			<!-- /.col-md-6 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>
