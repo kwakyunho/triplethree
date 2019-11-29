@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">카테고리 등록</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/documentFormCateInsert}">카테고리 등록</a></li>
+					<li class="breadcrumb-item">기본설정</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="card card-info col-lg-8">
+				<!-- form start -->
+				<form class="form-horizontal" th:action="@{/documentFormCateInsert}" method="POST">
+					<div class="card-body">
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">대분류</label>
+							<div class="col-sm-10">
+								<div class="input-group-prepend">
+									<div class="input-group input-group-lg mb-3">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="largeCateNameBtn">대분류</button>
+											<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+												<li class="dropdown-item"><a href="#">대분류1</a></li>
+												<li class="dropdown-item"><a href="#">대분류2</a></li>
+												<li class="dropdown-item"><a href="#">대분류3</a></li>
+												<li class="dropdown-divider"></li>
+												<li class="dropdown-item"><a href="#">기타</a></li>
+											</ul>
+										</div>
+										<!-- /btn-group -->
+										<input type="text" class="form-control" id="largeCateName" name="largeCateName" value="">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">중분류</label>
+							<div class="col-sm-10">
+								<div class="input-group-prepend">
+									<div class="input-group input-group-lg mb-3">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="middleCateNameBtn">중분류</button>
+											<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+												<li class="dropdown-item"><a href="#">중분류1</a></li>
+												<li class="dropdown-item"><a href="#">중분류2</a></li>
+												<li class="dropdown-item"><a href="#">중분류3</a></li>
+												<li class="dropdown-divider"></li>
+												<li class="dropdown-item"><a href="#">기타</a></li>
+											</ul>
+										</div>
+										<!-- /btn-group -->
+										<input type="text" class="form-control" id="middleCateName" name="middleCateName" value="">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">소분류</label>
+							<div class="col-sm-10">
+								<div class="input-group-prepend">
+									<div class="input-group input-group-lg mb-3">
+										<input type="text" class="form-control" id="smallCateName" name="smallCateName" value="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+						<button type="submit" class="btn btn-info float-right">등록</button>
+					</div>
+					<!-- /.card-footer -->
+				</form>
+			</div>
+			<div class="col-lg-4">
+				<select multiple="" class="form-control" style="height: 342px;">
+					<option>option 1</option>
+					<option>option 2</option>
+					<option>option 3</option>
+					<option>option 4</option>
+					<option>option 5</option>
+				</select>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script type="text/javascript">
+$(document).ready(function(){
+	var btn = $('.input-group');
+	btn.find('.dropdown-item').click(function(){
+		var local = $(this).parents('.input-group');
+		var select = $(this).text();
+		
+		if(select == '기타'){
+			local.find('button').text('기타');
+			local.find('.form-control').val('');
+		}else{
+			var link = local.parents('.form-group');
+			var text = link.children('label').text();
+			local.find('button').text(text);
+			local.find('.form-control').val(select);
+		}
+	});
+});
+</script>
+</th:block>
+</html>

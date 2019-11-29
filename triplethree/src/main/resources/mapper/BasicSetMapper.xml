@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.BasicSetMapper">
+
+	<resultMap type="shop.triplethree.vo.CateNameList" id="CateNameListResultMap">
+		<result property="code" column="code"></result>
+		<result property="largeCateName" column="l_section"></result>
+		<result property="middleCateName" column="m_section"></result>
+		<result property="smallCateName" column="s_section"></result>
+		<result property="itemCode" column="item_code"></result>
+		<result property="useYn" column="yes_or_no"></result>
+		<result property="average" column="average"></result>
+		<result property="writerUser" column="writer"></result>
+		<result property="writerDay" column="writer_day"></result>
+		<result property="gasoline" column="gasoline"></result>
+		<result property="diesel" column="diesel"></result>
+		<result property="lpg" column="lpg"></result>
+		<result property="bus" column="public"></result>
+		<result property="room" column="room"></result>
+		<result property="roomPeriod" column="room_period"></result>
+		<result property="confUser" column="cal_place"></result>
+		<result property="confDay" column="appro_day"></result>
+	</resultMap>
+	
+	<insert id="insertListName" parameterType="shop.triplethree.vo.CateNameList">
+		INSERT INTO LIST_MANAGE (code, l_section, m_section, s_section, writer, writer_day)
+		VALUES (#{code}, #{largeCateName}, #{middleCateName}, #{smallCateName}, 'id001', now());
+	</insert>
+
+</mapper>
