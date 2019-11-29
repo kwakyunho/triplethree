@@ -14,7 +14,7 @@ public class MainController {
 	public String mainpage() {
 		String code = commonService.codeGeneration("TRAVEL_HISTORY");
 		System.out.println("생성된 코드명 : " + code);
-		return "/index";
+		return "employee/login";
 	}
 	
 	@GetMapping("/Dashboard_v1")
