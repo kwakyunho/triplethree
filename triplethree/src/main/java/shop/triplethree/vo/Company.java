@@ -2,7 +2,8 @@ package shop.triplethree.vo;
 
 public class Company {
 
-	private String departmentName;
+	private String departmentNameBe;
+	private String departmentNameAf;
 	private String departmentLevel;
 	private String departmentUpcode;
 	private String departmentSau;
@@ -14,11 +15,17 @@ public class Company {
 	private String departmentCode;
 	private String departmentYesNO;
 	
-	public String getDepartmentName() {
-		return departmentName;
+	public String getDepartmentNameBe() {
+		return departmentNameBe;
 	}
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+	public void setDepartmentNameBe(String departmentNameBe) {
+		this.departmentNameBe = departmentNameBe;
+	}
+	public String getDepartmentNameAf() {
+		return departmentNameAf;
+	}
+	public void setDepartmentNameAf(String departmentNameAf) {
+		this.departmentNameAf = departmentNameAf;
 	}
 	public String getDepartmentLevel() {
 		return departmentLevel;
@@ -83,11 +90,11 @@ public class Company {
 	
 	@Override
 	public String toString() {
-		return "Company [departmentName=" + departmentName + ", departmentLevel=" + departmentLevel
-				+ ", departmentUpcode=" + departmentUpcode + ", departmentSau=" + departmentSau + ", departmentWriter="
-				+ departmentWriter + ", departmentWriterDay=" + departmentWriterDay + ", departmentApprover="
-				+ departmentApprover + ", departmentApperverSt=" + departmentApperverSt + ", departmentApproDay="
-				+ departmentApproDay + ", departmentCode=" + departmentCode + ", departmentYesNO=" + departmentYesNO
-				+ "]";
-	}
+		return "Company [departmentNameBe=" + departmentNameBe + ", departmentNameAf=" + departmentNameAf
+				+ ", departmentLevel=" + departmentLevel + ", departmentUpcode=" + departmentUpcode + ", departmentSau="
+				+ departmentSau + ", departmentWriter=" + departmentWriter + ", departmentWriterDay="
+				+ departmentWriterDay + ", departmentApprover=" + departmentApprover + ", departmentApperverSt="
+				+ departmentApperverSt + ", departmentApproDay=" + departmentApproDay + ", departmentCode="
+				+ departmentCode + ", departmentYesNO=" + departmentYesNO + "]";
+	}	
 }

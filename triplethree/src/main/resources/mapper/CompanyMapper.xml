@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="shop.triplethree.mapper.CompanyMapper">
-
+	
+	<!-- 부서정보 등록 쿼리문 -->
 	<insert id="insertOrganizationChart" parameterType="shop.triplethree.vo.Company">
 		INSERT INTO
 			DEMG (
@@ -17,7 +18,7 @@
 				,writer_day)
 		VALUES
 			(#{departmentCode}
-			,#{departmentName}
+			,#{departmentNameBe}
 			,#{departmentLevel}
 			,#{departmentUpcode}
 			,#{departmentSau}
@@ -25,10 +26,11 @@
 			,NOW());
 	</insert>
 	
+	<!-- 부서정보 리스트 쿼리문 -->
 	<select id="selectOrganizationChart" resultType="shop.triplethree.vo.Company">
 		SELECT
 			code AS departmentCode
-			,dename AS departmentName
+			,dename AS departmentNameBe
 			,level AS departmentLevel
 			,updamgcode AS departmentUpcode
 			,writer AS departmentWriter
@@ -42,10 +44,11 @@
 			DEMG
 	</select>
 	
+	<!-- 부서등록시 상위부서 selectbox 리스트 쿼리문 -->
 	<select id="selectBox" resultType="shop.triplethree.vo.Company">
 		SELECT
 			code AS departmentCode
-			,dename AS departmentName
+			,dename AS departmentNameBe
 			,level AS departmentLevel
 			,updamgcode AS departmentUpcode
 			,writer AS departmentWriter
@@ -61,6 +64,7 @@
 			yes_or_no = 'Y'
 	</select>
 	
+	<!-- 부서명으로 부서코드 가져오기 -->
 	<select id="selectUpCode" parameterType="String" resultType="String">
 		SELECT 
 			code
@@ -69,4 +73,87 @@
 		WHERE 
 			dename = #{upCode};
 	</select>
+	
+	<!-- 부서정보 삭제 쿼리문 (상태만 N으로 변경) -->
+	<update id="deleteOrganizationChart" parameterType="String">
+		UPDATE 
+			DEMG AS d 
+		SET 
+			d.yes_or_no  = 'N' 
+			,d.reason = '사용안함'
+		WHERE 
+			d.code = #{departmentCode}
+	</update>
+	
+	<!-- 부서정보 수정 쿼리문 -->
+	<update id="updateOrganizationChart" parameterType="shop.triplethree.vo.Company">
+		UPDATE 
+			DEMG AS d 
+		SET 
+			d.dename = #{departmentNameAf}
+			,d.level = #{departmentLevel}
+			,d.updamgcode = #{departmentUpcode}
+			,d.reason = #{departmentSau}
+		WHERE 
+			d.dename = #{departmentNameBe}
+	</update>
+	
+	<!-- 직급정보 등록 쿼리 -->
+	<insert id="insertPosition" parameterType="shop.triplethree.vo.Position">
+		INSERT INTO
+			POSISYS (
+				code
+				,poname
+				,level
+				,reason
+				,writer
+				,writer_day)
+		VALUES
+			(#{positionCode}
+			,#{positionNameBe}
+			,#{positionLevel}
+			,#{positionSau}
+			,'id001'
+			,NOW());
+	</insert>
+	
+	<!-- 직급정보 수정 쿼리문 -->
+	<update id="updatePosition" parameterType="shop.triplethree.vo.Position">
+		UPDATE 
+			POSISYS
+		SET 
+			poname = #{positionNameAf}
+			,level = #{positionLevel}
+			,reason = #{positionSau}
+		WHERE 
+			poname = #{positionNameBe}
+	</update>
+	
+	<!-- 직급정보 리스트 쿼리문 -->
+	<select id="selectPosition" resultType="shop.triplethree.vo.Position">
+		SELECT
+			code AS positionCode
+			,poname AS positionNameBe
+			,level AS positionLevel
+			,writer AS positionWriter
+			,writer_day AS positionWriterDay
+			,approver AS positionApprover
+			,approver_st AS positionApperverSt
+			,appro_day AS positionApproDay
+			,reason AS positionSau
+			,yes_or_no AS positionYesNO
+		FROM 
+			POSISYS
+	</select>
+	
+	<!-- 직급정보 삭제 쿼리문 ( 상태만 N으로 변경 ) -->
+	<delete id="deletePosition" parameterType="String">
+		UPDATE 
+			POSISYS AS p
+		SET 
+			p.yes_or_no  = 'N' 
+			,p.reason = '사용안함'
+		WHERE 
+			p.code = #{positionCode}
+	</delete>
 </mapper>
