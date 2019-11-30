@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.CompanyMapper">
+	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+	INSERT INTO
+	EM_INFO
+		(code,co_name,co_ceoname,co_addr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
+	VALUES
+		(#{Code}
+		,#{coName}
+		,#{coCeoname}
+		,#{coAddr}
+		,#{coBin}
+		,#{coFax}
+		,#{coPhone}
+		,#{coLogo}
+		,#{coEmail}
+		,#{writer}
+		,now()
+	)
+	</insert>
+</mapper>
