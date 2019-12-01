@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+  
+  
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div>
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>일정 관리</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Calendar</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="sticky-top mb-3">
+							<div class="content">
+								<div>
+									<form th:action="@{ScheduleInsert}" method="post">
+										<!-- the events -->
+										<div id="external-events">
+											<div id="accordion1">
+												<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+												<div class="card card-primary small"
+													style="margin-top: 15px;">
+													<div class="card-header" style="align-self: center;">
+														<h4 class="card-title">
+															<a data-toggle="collapse" data-parent="#accordion1"	href="#collapseOne1" class="" aria-expanded="false">일정 등록 </a>
+														</h4>
+													</div>
+												</div>
+												<div class="card-body">
+													<div id="collapseOne1" class="panel-collapse in collapse"
+														style="">
+														<div class="card-body" style="text-align: -webkit-center;">
+															<table style="text-align: center;">
+																<tr>
+																	<td style="width: 150px;">일정 구분</td>
+																	<td>
+																		<select class="form-control form-control-lg"style="font-size: medium;" name="sortation">
+																				<option value="전체일정">전체일정</option>
+																				<option value="부서일정">부서일정</option>
+																				<option value="개인일정">개인일정</option>
+																		</select>
+																	</td>
+																</tr>
+																<tr>
+																	<td style="width: 150px;">일정명</td>
+																	<td>
+																		<input class="form-control form-control-lg" type="text" style="width: 100%; font-size: small;" placeholder="일정명을 입력해주세요" id="departmentNameBe" name="name">
+																	</td>
+																</tr>
+																<tr>
+																	<td style="width: 150px;">일정내용</td>
+																	<td>
+																		<input class="form-control form-control-lg" type="text" style="width: 100%; font-size: small;" placeholder="내용 입력해주세요" id="departmentLevel" name="content">
+																	</td>
+																</tr>
+																<tr>
+																	<td style="width: 150px;">일정 시작일</td>
+																	<td>
+																		<input class="form-control form-control-lg" type="text" style="width: 100%; font-size: small;" placeholder="예) 2019-12-01" id="departmentSau" name="startDay">
+																	</td>
+																</tr>
+																<tr>
+																	<td style="width: 150px;">일정 종료일</td>
+																	<td>
+																		<input class="form-control form-control-lg" type="text" style="width: 100%; font-size: small;" placeholder="예) 2019-12-01" id="departmentSau" name="endDay">
+																	</td>
+																</tr>
+																<tr>
+																	<td colspan="4"><input type="submit" value="일정 등록하기"
+																		class="btn btn-block btn-primary btn-lg"></td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.col -->
+					<div class="col-md-9">
+						<div class="card card-primary">
+							<div class="card-body p-0">
+								<!-- THE CALENDAR -->
+								<div id="calendar"></div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+
+	<aside class="control-sidebar control-sidebar-dark"></aside>
+
+	<th:block layout:fragment="customScript">
+
+<!-- jQuery -->
+<script th:src="@{plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery UI -->
+<script th:src="@{plugins/jquery-ui/jquery-ui.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{dist/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{dist/js/demo.js}"></script>
+<!-- fullCalendar 2.2.5 -->
+<script th:src="@{plugins/moment/moment.min.js}"></script>
+<script th:src="@{plugins/fullcalendar/main.min.js}"></script>
+<script th:src="@{plugins/fullcalendar-daygrid/main.min.js}"></script>
+<script th:src="@{plugins/fullcalendar-timegrid/main.min.js}"></script>
+<script th:src="@{plugins/fullcalendar-interaction/main.min.js}"></script>
+<script th:src="@{plugins/fullcalendar-bootstrap/main.min.js}"></script>
+<!-- Page specific script -->
+
+<script th:src=@{custom/js/CssCalender.js}></script>
+
+</th:block>
+
+</html>

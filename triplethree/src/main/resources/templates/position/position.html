@@ -18,8 +18,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
+					<li class="breadcrumb-item"><a href="#">직급관리</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -35,15 +34,15 @@
 				<div class="col-lg-2"></div>
 				<div class="card col-lg-8" style="text-align: center;">
 				<div style="align-self:center; width:90%;">
-					<div id="accordion">
+					<div id="accordion1">
 						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
 						<div class="card card-primary small" style="margin-top: 15px;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="" aria-expanded="false"> 직급 등록 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 직급 등록 하기 </a>
 								</h4>
 							</div>
-							<div id="collapseOne" class="panel-collapse in collapse" style="">
+							<div id="collapseOne1" class="panel-collapse in collapse" style="">
 							<div class="card-body" style="text-align: -webkit-center;">
 								<table style="text-align: center;">
 									<tr>
@@ -85,29 +84,27 @@
 				<div class="col-lg-2"></div>
 				<div class="card col-lg-8" style="text-align: center;">
 				<div style="align-self:center; width:90%;">
-					<div id="accordion">
+					<div id="accordion2">
 						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
 						<div class="card card-primary small" style="margin-top: 15px;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="" aria-expanded="false"> 직급 수정 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false"> 직급 수정 하기 </a>
 								</h4>
 							</div>
-							<div id="collapseOne" class="panel-collapse in collapse" style="">
+							<div id="collapseOne2" class="panel-collapse in collapse" style="">
 							<div class="card-body" style="text-align: -webkit-center;">
 								<table style="text-align: center;">
 									<tr>
 										<td style="width:150px;">변경전 직급명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="positionNameBe" name="positionNameBe"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBe" name="positionNameBe"></td>
 										<td style="width:150px;">변경후 직급명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="positionNameAf" name="positionNameAf"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameAf" name="positionNameAf"></td>
 									</tr>
 									<tr>
 										<td style="width:150px;">레벨</td>
 										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevel" name="positionLevel"></td>
-									</tr>
-									<tr>
-					                      <td style="width:150px;">사유</td>
+					                    <td style="width:150px;">사유</td>
 										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="positionSau" name="positionSau"></td>
 									</tr>
 									<tr>

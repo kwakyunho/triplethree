@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="shop.triplethree.mapper.ScheduleMapper">
+ 
+ 	<!-- 일정 등록 쿼리문 -->
+ 	<insert id="insertSchedule" parameterType="shop.triplethree.vo.Schedule">
+		 INSERT INTO
+			CALENDAR
+				(code
+				,emp_code
+				,cal_sortation
+				,cal_name
+				,cal_content
+				,cal_start
+				,cal_end
+				,writer_day)
+		VALUES
+			(#{code}
+			,'id001'
+			,#{sortation}
+			,#{name}
+			,#{content}
+			,#{startDay}
+			,#{endDay}
+			,NOW());
+ 	</insert>
+ 
+ </mapper>
