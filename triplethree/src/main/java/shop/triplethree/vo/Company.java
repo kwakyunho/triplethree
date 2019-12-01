@@ -1,6 +1,7 @@
 package shop.triplethree.vo;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
 
 public class Company {
 	private String Code;
@@ -13,13 +14,7 @@ public class Company {
 	private String coEmail;
 	private String coLogo;
 	private String writer;
-	private Date writerDay;
-	@Override
-	public String toString() {
-		return "Company [Code=" + Code + ", coName=" + coName + ", coCeoname=" + coCeoname + ", coAddr=" + coAddr
-				+ ", coBin=" + coBin + ", coFax=" + coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail
-				+ ", coLogo=" + coLogo + ", writer=" + writer + ", writerDay=" + writerDay + "]";
-	}
+	private LocalDateTime writerDay;
 	public String getCode() {
 		return Code;
 	}
@@ -80,13 +75,32 @@ public class Company {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Date getWriterDay() {
+	public LocalDateTime getWriterDay() {
 		return writerDay;
 	}
-	public void setWriterDay(Date writerDay) {
+	public void setWriterDay(LocalDateTime writerDay) {
 		this.writerDay = writerDay;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Company [Code=" + Code + ", coName=" + coName + ", coCeoname=" + coCeoname + ", coAddr=" + coAddr
+				+ ", coBin=" + coBin + ", coFax=" + coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail
+				+ ", coLogo=" + coLogo + ", writer=" + writer + ", writerDay=" + writerDay + "]";
+	}
+	public Company(String code, String coName, String coCeoname, String coAddr, String coBin, String coFax,
+			String coPhone, String coEmail, String coLogo, String writer, LocalDateTime writerDay) {
+		super();
+		Code = code;
+		this.coName = coName;
+		this.coCeoname = coCeoname;
+		this.coAddr = coAddr;
+		this.coBin = coBin;
+		this.coFax = coFax;
+		this.coPhone = coPhone;
+		this.coEmail = coEmail;
+		this.coLogo = coLogo;
+		this.writer = writer;
+		this.writerDay = writerDay;
+	}
 	
 }

@@ -22,4 +22,21 @@
 		,now()
 	)
 	</insert>
+	<select id="selectCompany" resultType="shop.triplethree.vo.Company">
+	select
+		code AS Code
+		,co_name AS coName
+		,co_ceoname AS coCeoname
+		,co_addr AS coAddr
+		,co_bln AS coBin
+		,co_fax AS coFax
+		,co_phone AS coPhone
+		,co_email AS coEmail
+		,co_logo AS coLogo
+		,writer AS writer
+		,writer_day AS writerDay
+	FROM 
+		EM_INFO
+	
+	</select>
 </mapper>

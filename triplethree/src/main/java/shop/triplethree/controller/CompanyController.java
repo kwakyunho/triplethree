@@ -34,6 +34,7 @@ public class CompanyController {
 	@GetMapping("/companyInfo")
 	public String selectCompany(Model model) {
 		
+		model.addAttribute("companyInfo", companyService.selectCompany());
 		return "company/information/companyInfo";
 	}
 	
