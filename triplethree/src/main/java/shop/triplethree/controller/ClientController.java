@@ -18,18 +18,23 @@ public class ClientController {
 	public String ClientList() {
 		return "/client/clientList";
 	}
+//	//거래처 정보조회 리스트
+//		@PostMapping("/clientList")
+//		public String ClientList(매개변수 뭐로받을래) {
+//			return "/client/clientList";
+//		}
 
 	//거래처 정보등록
 	@GetMapping("/clientInsert")
 	public String ClientInsert() {
-		return "/client/clientInsert.html";
+		return "/client/clientInsert2.html";
 	}
 	@PostMapping("/clientInsert")
 	public String ClientInsert(Client client) {
 		System.out.println(client + "<-client");
 		//코드생성 메서드 호출
 		clientService.createClientCode(client);
-		return "redirect:/";
+		return "/client/clientList";
 	}
 	
 	
