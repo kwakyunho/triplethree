@@ -1,5 +1,7 @@
 package shop.triplethree.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,14 @@ public class BasicSetService {
 		System.out.println(code);
 		cateNameList.setCode(code);
 		return basicSetMapper.insertListName(cateNameList);
+	}
+	
+	public List<CateNameList> selectLargeCateNameList() {
+		return basicSetMapper.selectLargeCateNameList();
+	}
+	
+	public List<CateNameList> selectMiddleCateNameList(String largeCateName){
+		return basicSetMapper.selectMiddleCateNameList(largeCateName);
 	}
 
 }

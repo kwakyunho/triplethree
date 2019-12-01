@@ -29,5 +29,21 @@
 		INSERT INTO LIST_MANAGE (code, l_section, m_section, s_section, writer, writer_day)
 		VALUES (#{code}, #{largeCateName}, #{middleCateName}, #{smallCateName}, 'id001', now());
 	</insert>
+	
+	<select id="selectLargeCateNameList" resultMap="CateNameListResultMap">
+		SELECT l_section
+		FROM LIST_MANAGE
+		GROUP BY l_section
+	</select>
+	
+	<select id="">
+		<if test="#{largeCateName} neq ''">
+			SELECT m_section
+			FROM LIST_MANAGE
+			WHERE l_section = #{largeCateName}
+			GROUP BY m_section
+		</if>
+	
+	</select>
 
 </mapper>

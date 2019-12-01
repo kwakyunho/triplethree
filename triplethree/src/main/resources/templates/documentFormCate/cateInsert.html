@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="card card-info col-lg-8">
 				<!-- form start -->
-				<form class="form-horizontal" th:action="@{/documentFormCateInsert}" method="POST">
+				<form id="cateNameList" class="form-horizontal" th:action="@{/documentFormCateInsert}" method="POST">
 					<div class="card-body">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">대분류</label>
@@ -39,11 +39,11 @@
 								<div class="input-group-prepend">
 									<div class="input-group input-group-lg mb-3">
 										<div class="input-group-prepend">
-											<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="largeCateNameBtn">대분류</button>
+											<button id="largeCateNameBtn" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">대분류</button>
 											<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
-												<li class="dropdown-item"><a href="#">대분류1</a></li>
-												<li class="dropdown-item"><a href="#">대분류2</a></li>
-												<li class="dropdown-item"><a href="#">대분류3</a></li>
+												<th:block th:each="ll : ${largeCateNameList}">
+													<li class="dropdown-item"><a href="#" th:text="${ll.largeCateName}"></a></li>
+												</th:block>
 												<li class="dropdown-divider"></li>
 												<li class="dropdown-item"><a href="#">기타</a></li>
 											</ul>
@@ -60,7 +60,7 @@
 								<div class="input-group-prepend">
 									<div class="input-group input-group-lg mb-3">
 										<div class="input-group-prepend">
-											<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="middleCateNameBtn">중분류</button>
+											<button id="middleCateNameBtn" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">중분류</button>
 											<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
 												<li class="dropdown-item"><a href="#">중분류1</a></li>
 												<li class="dropdown-item"><a href="#">중분류2</a></li>
@@ -88,7 +88,7 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-info float-right">등록</button>
+						<button id="submitBtn" type="button" class="btn btn-info float-right">등록</button>
 					</div>
 					<!-- /.card-footer -->
 				</form>
@@ -113,18 +113,75 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var btn = $('.input-group');
+	
+	// 인풋 값 변경 감지
+	$('#largeCateName').on("propertychange change keyup paste input", function(){
+		$('#middleCateName').val('');
+		$('#smallCateName').val('');
+	})
+	$('#middleCateName').on("propertychange change keyup paste input", function(){
+		$('#smallCateName').val('');
+		var a = $('#largeCateName').val();
+		if(a == ''){
+			alert('순차적으로 입력해주세요');
+			$('#middleCateName').val('');
+		}
+	})
+	$('#smallCateName').on("propertychange change keyup paste input", function(){
+		var b = $('#middleCateName').val();
+		if(b == ''){
+			alert('순차적으로 입력해주세요');
+		}
+	})
+	
 	btn.find('.dropdown-item').click(function(){
 		var local = $(this).parents('.input-group');
 		var select = $(this).text();
+		var link = local.parents('.form-group');
+		var cateText = link.children('label').text();
 		
 		if(select == '기타'){
 			local.find('button').text('기타');
 			local.find('.form-control').val('');
 		}else{
-			var link = local.parents('.form-group');
-			var text = link.children('label').text();
-			local.find('button').text(text);
+			local.find('button').text(cateText);
 			local.find('.form-control').val(select);
+		}
+		
+		// 분류 클릭시 하위분류 input 정리
+		if(cateText == '대분류'){
+			$('#middleCateName').val('');
+			$('#smallCateName').val('');
+		}else if(cateText == '중분류'){
+			$('#smallCateName').val('');
+		}
+		
+			
+		// ajax 호출
+		var largeCateName = $('#largeCateName').val();
+		var middleCateName = $('#middleCateName').val();
+		
+		$.ajax({
+			async: true,
+			type : 'POST',
+			data : largeCateName,
+			url : "test",
+			dataType : "json",
+			contentType: "application/text; charset=UTF-8",
+			success : function(data) {
+				alert('에이작스 성공');
+			},
+			error : function(error) {
+				alert("error : " + error);
+			}
+		});
+	});
+	
+	$('#submitBtn').click(function(){
+		if($('#largeCateName').val() == '' || $('#middleCateName').val() == '' || $('#smallCateName').val() == ''){
+			alert('누락된 값이 있습니다.');
+		}else{
+			$('#cateNameList').submit();
 		}
 	});
 });
