@@ -31,12 +31,7 @@
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date()
-    var d    = date.getDate(),
-        m    = date.getMonth(),
-        y    = date.getFullYear()
-
+  
     var Calendar = FullCalendar.Calendar;
     var Draggable = FullCalendarInteraction.Draggable;
 
@@ -65,16 +60,61 @@
       header    : {
         left  : 'prev,next today',
         center: 'title',
-        right : 'dayGridMonth,timeGridWeek,timeGridDay'
+        right : 'dayGridMonth,timeGridWeek,timeGridDay',
+        locale: 'ko'
       },
-      //Random default events
-      events    : [
-      ],
       editable  : true,
-      navLinks  : true,
-      eventLimet: true,
+      navLinks  : false,
+      eventLimet: false,
       droppable : true, // this allows things to be dropped onto the calendar !!!
-      drop      : function(info) {
+      //Random default events
+      events    : function(dateObject, callback){
+    	
+    	  var getStartStr = dateObject.startStr.substring(0, 10);
+    	  var getEndStr = dateObject.endStr.substring(0, 10);
+    	      	  
+    	  console.log(getStartStr, getEndStr)
+    	  
+    	  $.ajax({
+    		  async : true,
+    		  type : 'POST',
+    		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
+    		  url : "companySchedule",
+    		  datetype : "json",
+    		  success : function(data){
+    			  if(data != undefined && data.length > 0){
+    				  var dateArray = [];
+    				  for(var i=0; i < data.length; i++){
+    					  var dataObj = data[i];
+    					  var start = dataObj.start;
+    					  var end = dataObj.end;
+    					  var title = dataObj.title;
+    					  var backgroundColor = dataObj.backgroundColor;
+    					  var dateObject = {
+    							  title 			: title,
+    							  start 			: new Date(start),
+    							  end 				: new Date(end),
+		    					  allDay         	: false,
+		    			          backgroundColor	: backgroundColor //Blue
+		    			          /*borderColor    	: '#0073b7'*/ //Blue
+    					  };
+    					  dateArray.push(dateObject);
+    				  }    
+    				  callback(dateArray);
+    				
+    			  }
+    			  console.log(data);    			  
+    		  },
+    		  error : function(error){
+    			  
+    		  }
+    		  
+    	  });
+    	  
+    	  
+    	  
+      },
+     drop      : function(info) {
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
           // if so, remove the element from the "Draggable Events" list

@@ -4,10 +4,12 @@ public class Schedule {
 
 	private String code;
 	private String sortation;
-	private String name;
+	private String title;
 	private String content;
-	private String startDay;
-	private String endDay;
+	private String start;
+	private String end;
+	private String backgroundColor;
+	private String borderColor;
 	
 	public String getCode() {
 		return code;
@@ -21,11 +23,11 @@ public class Schedule {
 	public void setSortation(String sortation) {
 		this.sortation = sortation;
 	}
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -33,22 +35,35 @@ public class Schedule {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getStartDay() {
-		return startDay;
+	public String getStart() {
+		return start;
 	}
-	public void setStartDay(String startDay) {
-		this.startDay = startDay;
+	public void setStart(String start) {
+		this.start = start;
 	}
-	public String getEndDay() {
-		return endDay;
+	public String getEnd() {
+		return end;
 	}
-	public void setEndDay(String endDay) {
-		this.endDay = endDay;
+	public void setEnd(String end) {
+		this.end = end;
+	}
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	public String getBorderColor() {
+		return borderColor;
+	}
+	public void setBorderColor(String borderColor) {
+		this.borderColor = borderColor;
 	}
 	
 	@Override
 	public String toString() {
-		return "Schedule [code=" + code + ", sortation=" + sortation + ", name=" + name + ", content=" + content
-				+ ", startDay=" + startDay + ", endDay=" + endDay + "]";
+		return "Schedule [code=" + code + ", sortation=" + sortation + ", title=" + title + ", content=" + content
+				+ ", start=" + start + ", end=" + end + ", backgroundColor=" + backgroundColor + ", borderColor="
+				+ borderColor + "]";
 	}
 }

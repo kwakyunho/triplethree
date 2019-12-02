@@ -1,5 +1,7 @@
 package shop.triplethree.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import shop.triplethree.vo.Schedule;
@@ -17,6 +19,6 @@ public interface ScheduleMapper {
 	public int deleteSchedule();
 	
 	// 일정 조회
-	public int selectSchedule();
+	public List<Schedule> selectSchedule();
 	
 }

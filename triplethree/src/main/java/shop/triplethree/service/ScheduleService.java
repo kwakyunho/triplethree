@@ -1,5 +1,7 @@
 package shop.triplethree.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +24,13 @@ public class ScheduleService {
 		
 		return schedulemapper.insertSchedule(schedule);
 	}
+	
+	/**
+	 * 일정 조회 메서드
+	 * */
+	public List<Schedule> selectSchedule() {
+		return schedulemapper.selectSchedule();
+	}
+	
+	
 }

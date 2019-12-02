@@ -16,16 +16,29 @@
 				,cal_content
 				,cal_start
 				,cal_end
+				,backgroundColor
+				,borderColor
 				,writer_day)
 		VALUES
 			(#{code}
 			,'id001'
 			,#{sortation}
-			,#{name}
+			,#{title}
 			,#{content}
-			,#{startDay}
-			,#{endDay}
+			,#{start}
+			,#{end}
+			,#{backgroundColor}
+			,#{borderColor}
 			,NOW());
  	</insert>
  
+ 	<select id="selectSchedule" resultType="shop.triplethree.vo.Schedule">
+ 		SELECT
+			cal_name AS title
+			,cal_start AS start 
+			,cal_end AS end
+			,backgroundColor AS backgroundColor
+		FROM
+			CALENDAR
+ 	</select>
  </mapper>
