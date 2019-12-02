@@ -15,5 +15,5 @@ public interface BasicSetMapper {
 	public List<CateNameList> selectLargeCateNameList(); 
 	
 	// 중분류 리스트 가져오기
-	public List<CateNameList> selectMiddleCateNameList(String largeCateName);
+	public List<CateNameList> selectCateNameList(String largeCateName, String middleCateName);
 }

@@ -36,12 +36,19 @@
 		GROUP BY l_section
 	</select>
 	
-	<select id="">
-		<if test="#{largeCateName} neq ''">
+	<select id="selectCateNameList" parameterType="String" resultMap="CateNameListResultMap">
+		<if test="largeCateName neq ''.toString() and middleCateName eq ''.toString()">
 			SELECT m_section
 			FROM LIST_MANAGE
 			WHERE l_section = #{largeCateName}
 			GROUP BY m_section
+		</if>
+		<if test="largeCateName neq ''.toString() and middleCateName neq ''.toString()">
+			SELECT s_section
+			FROM LIST_MANAGE
+			WHERE l_section = #{largeCateName}
+			AND m_section = #{middleCateName}
+			GROUP BY s_section
 		</if>
 	
 	</select>

@@ -40,16 +40,16 @@
 									<div class="input-group input-group-lg mb-3">
 										<div class="input-group-prepend">
 											<button id="largeCateNameBtn" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">대분류</button>
-											<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+											<ul id="largeCateList" class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
 												<th:block th:each="ll : ${largeCateNameList}">
-													<li class="dropdown-item"><a href="#" th:text="${ll.largeCateName}"></a></li>
+													<li class="dropdown-item cateList"><a href="#" th:text="${ll.largeCateName}"></a></li>
 												</th:block>
 												<li class="dropdown-divider"></li>
-												<li class="dropdown-item"><a href="#">기타</a></li>
+												<li class="dropdown-item cateList"><a href="#">기타</a></li>
 											</ul>
 										</div>
 										<!-- /btn-group -->
-										<input type="text" class="form-control" id="largeCateName" name="largeCateName" value="">
+										<input id="largeCateName" type="text" class="form-control" name="largeCateName" value="">
 									</div>
 								</div>
 							</div>
@@ -61,16 +61,12 @@
 									<div class="input-group input-group-lg mb-3">
 										<div class="input-group-prepend">
 											<button id="middleCateNameBtn" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">중분류</button>
-											<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
-												<li class="dropdown-item"><a href="#">중분류1</a></li>
-												<li class="dropdown-item"><a href="#">중분류2</a></li>
-												<li class="dropdown-item"><a href="#">중분류3</a></li>
-												<li class="dropdown-divider"></li>
-												<li class="dropdown-item"><a href="#">기타</a></li>
+											<ul id="middleCateList" class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+												<li class="dropdown-item cateList"><a href="#">기타</a></li>
 											</ul>
 										</div>
 										<!-- /btn-group -->
-										<input type="text" class="form-control" id="middleCateName" name="middleCateName" value="">
+										<input id="middleCateName" type="text" class="form-control" name="middleCateName" value="">
 									</div>
 								</div>
 							</div>
@@ -80,7 +76,7 @@
 							<div class="col-sm-10">
 								<div class="input-group-prepend">
 									<div class="input-group input-group-lg mb-3">
-										<input type="text" class="form-control" id="smallCateName" name="smallCateName" value="">
+										<input id="smallCateName" type="text" class="form-control" name="smallCateName" value="">
 									</div>
 								</div>
 							</div>
@@ -94,12 +90,8 @@
 				</form>
 			</div>
 			<div class="col-lg-4">
-				<select multiple="" class="form-control" style="height: 342px;">
-					<option>option 1</option>
-					<option>option 2</option>
-					<option>option 3</option>
-					<option>option 4</option>
-					<option>option 5</option>
+				<select id="smallCateList" multiple="" class="form-control" style="height: 342px;">
+					<option value="">소분류 내용</option>
 				</select>
 			</div>
 		</div>
@@ -112,7 +104,8 @@
 <th:block layout:fragment="customScript">
 <script type="text/javascript">
 $(document).ready(function(){
-	var btn = $('.input-group');
+	
+	var insertCheck = 0;
 	
 	// 인풋 값 변경 감지
 	$('#largeCateName').on("propertychange change keyup paste input", function(){
@@ -131,55 +124,133 @@ $(document).ready(function(){
 		var b = $('#middleCateName').val();
 		if(b == ''){
 			alert('순차적으로 입력해주세요');
+			$('#smallCateName').val('');
+		}
+		var inputText = $(this).val();
+		if($('#smallCateList').find('option[value="'+inputText+'"]').length > 0){
+			$('#smallCateName').removeClass("is-valid");
+			$('#smallCateName').addClass("is-invalid");
+			
+			insertCheck = 0;
+			
+		}else if($('#smallCateList').length > 0){
+			$('#smallCateName').removeClass("is-invalid");
+			$('#smallCateName').addClass("is-valid");
+			
+			insertCheck = 1;
 		}
 	})
 	
-	btn.find('.dropdown-item').click(function(){
-		var local = $(this).parents('.input-group');
-		var select = $(this).text();
-		var link = local.parents('.form-group');
-		var cateText = link.children('label').text();
+	
+	var cateEvent = function(){
+		var largeCateName = '';
+		var middleCateName = '';
+		var superName = '';
+		var cate = '';
+		var commonName = '';
+		var inputId = '';
+		var buttonId = '';
 		
-		if(select == '기타'){
-			local.find('button').text('기타');
-			local.find('.form-control').val('');
-		}else{
-			local.find('button').text(cateText);
-			local.find('.form-control').val(select);
-		}
+		// 부모 클래스 아이디값
+		superName = $(this).closest('ul').attr('id');
+		cate = '#';
+		cate += superName;
 		
-		// 분류 클릭시 하위분류 input 정리
-		if(cateText == '대분류'){
+		// 공통ID명 추출
+		commonName = cate.substr(1, cate.length - 5);
+		
+		// inputId 생성
+		inputId = '#';
+		inputId += commonName;
+		inputId += 'Name';
+		
+		// buttonId 생성
+		buttonId = inputId;
+		buttonId += 'Btn';
+		
+		// 선택자 text명
+		select = $(this).text();
+		
+		if(superName == 'largeCateList'){
 			$('#middleCateName').val('');
+			$('#middleCateList').html('<li class="dropdown-item cateList"><a href="#">기타</a></li>');
 			$('#smallCateName').val('');
-		}else if(cateText == '중분류'){
-			$('#smallCateName').val('');
-		}
-		
+			$('#smallCateList').html('<option>소분류 내용</option>');
 			
-		// ajax 호출
-		var largeCateName = $('#largeCateName').val();
-		var middleCateName = $('#middleCateName').val();
+			$('#smallCateName').removeClass("is-invalid");
+			$('#smallCateName').removeClass("is-valid");
+			
+		}else if(superName == 'middleCateList'){
+			$('#smallCateName').val('');
+			
+			$('#smallCateName').removeClass("is-invalid");
+			$('#smallCateName').removeClass("is-valid");
+		}
+		$('.cateList').off("click");
+		$('.cateList').on("click", cateEvent);
+		if(select == '기타'){
+			$(buttonId).text('기타');
+			$(inputId).val('');
+			$('#smallCateName').val('');
+			$('#smallCateList').html('');
+			
+			
+		}else{
+			var selectCate = $(cate).closest('.form-group').find('label').text();
+			$(buttonId).text(selectCate);
+			$(inputId).val(select);
 		
-		$.ajax({
-			async: true,
-			type : 'POST',
-			data : largeCateName,
-			url : "test",
-			dataType : "json",
-			contentType: "application/text; charset=UTF-8",
-			success : function(data) {
-				alert('에이작스 성공');
-			},
-			error : function(error) {
-				alert("error : " + error);
-			}
-		});
-	});
+			largeCateName = $('#largeCateName').val();
+			middleCateName = $('#middleCateName').val();
+			// ajax 호출
+			$.ajax({
+				async: true,
+				type : 'POST',
+				data : {'largeCateName': largeCateName, 'middleCateName': middleCateName},
+				url : "test",
+				dataType : "json",
+				success : function(result) {
+					
+					if(result[0].middleCateName != null){
+						var value = null; 
+						var output = '';
+						for(var i=0; i<result.length; i++){
+							value = result[i].middleCateName;
+							output += '<li class="dropdown-item cateList"><a href="#">';
+							output += value;
+							output += '</a></li>';
+						}
+						output += '<li class="dropdown-divider"></li>';
+						output += '<li class="dropdown-item cateList"><a href="#">기타</a></li>';
+						$('#middleCateList').html(output);
+						
+					}else if(result[0].smallCateName != null){
+						var value = null; 
+						var output = '';
+						for(var i=0; i<result.length; i++){
+							value = result[i].smallCateName;
+							output += '<option value="'+value+'">';
+							output += value;
+							output += '</option>';
+						}
+						$('#smallCateList').html(output);
+					}
+					
+					$('.cateList').off("click");
+					$('.cateList').on("click", cateEvent);
+				},
+				error : function(error) {
+					//alert("error : " + error);
+				}
+			});
+		}
+	}
+	
+	$('.cateList').on("click", cateEvent);
 	
 	$('#submitBtn').click(function(){
-		if($('#largeCateName').val() == '' || $('#middleCateName').val() == '' || $('#smallCateName').val() == ''){
-			alert('누락된 값이 있습니다.');
+		if($('#largeCateName').val() == '' || $('#middleCateName').val() == '' || $('#smallCateName').val() == '' || insertCheck == 0){
+			alert('누락된 값 또는 중복된 값이 있습니다.');
 		}else{
 			$('#cateNameList').submit();
 		}

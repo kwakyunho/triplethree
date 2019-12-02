@@ -25,8 +25,8 @@ public class BasicSetService {
 		return basicSetMapper.selectLargeCateNameList();
 	}
 	
-	public List<CateNameList> selectMiddleCateNameList(String largeCateName){
-		return basicSetMapper.selectMiddleCateNameList(largeCateName);
+	public List<CateNameList> selectCateNameList(String largeCateName, String middleCateName){
+		return basicSetMapper.selectCateNameList(largeCateName, middleCateName);
 	}
 
 }
