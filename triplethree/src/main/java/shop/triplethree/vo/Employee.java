@@ -1,15 +1,17 @@
 package shop.triplethree.vo;
 
+import java.time.LocalDateTime;
+
 public class Employee {
-	private String code;
+	private String code; //사원관리코드
 	private String demgCode; //부서코드랑 부서명 받아서 가지고노는 변수 
-	private String poCode;
-	private String liCode;
-	private String empNum;
-	private String password;
-	private String empName;
-	private String addr;
-	private String phone;
+	private String poCode; //직급관리코드
+	private String liCode; //목록관리코드로 재직상태 가지고오기 
+	private String empNum; //사원번호
+	private String password; //패스워드
+	private String empName; //사원명
+	private String addr; //주소
+	private String phone; //연락처
 	private String email;
 	private char carPresence;
 	private String joinDate;
@@ -20,7 +22,7 @@ public class Employee {
 	private String conType;
 	private String basicPay;
 	private String writer;
-	private String writerDay;
+	private LocalDateTime writerDay; // 부를때 포맷형식 바꿔야함
 	public String getCode() {
 		return code;
 	}
@@ -135,10 +137,10 @@ public class Employee {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getWriterDay() {
+	public LocalDateTime getWriterDay() {
 		return writerDay;
 	}
-	public void setWriterDay(String writerDay) {
+	public void setWriterDay(LocalDateTime writerDay) {
 		this.writerDay = writerDay;
 	}
 	

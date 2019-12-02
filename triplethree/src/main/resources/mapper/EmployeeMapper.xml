@@ -9,4 +9,11 @@
 		
 	</select>
 	
+	<select id="selectForDepart" resultType="shop.triplethree.vo.Employee">
+		SELECT
+			 de.dename as demgCode,
+			 de.code as code
+		FROM
+			 DEMG AS de
+	</select>
 </mapper>

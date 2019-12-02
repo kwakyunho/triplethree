@@ -17,6 +17,12 @@ public class MainController {
 		return "employee/login";
 	}
 	
+	@GetMapping("/index")
+	public String index() {
+		
+		return "/index";
+	}
+	
 	@GetMapping("/Dashboard_v1")
 	public String Dashboard_v1() {
 		return "/index1";

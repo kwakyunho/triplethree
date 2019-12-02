@@ -4,7 +4,7 @@
       layout:decorate="~{layouts/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>index</title>
+	<title>사원 관리</title>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -13,43 +13,217 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">사원 관리</h1>
+				<h1 class="m-0 text-dark">사원 관리 - 사원 등록</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
+					<li class="breadcrumb-item"><a href="/index">Home</a></li>
+					<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
+					<li class="breadcrumb-item"><a href="/employeeInsert">사원 등록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
+	<div class="content">
+		<div class="col-md-2">
+		 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employeeList'">사원 조회</button>
+		 </div>
+	</div>
+ <br>
 
-<div class="col-5 col-sm-3">
-                <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">사원 등록</a>
-                  <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false">사원 조회</a>
-                </div>
-</div>
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-6">
-				<div class="card">
-				알아서 사용하세요
-				</div>
-				<!-- /.card -->
-			<!-- /.card -->
-			</div>
+			<div class="col-lg-12">
+				<div class="card card-info">
+	              <div class="card-header">
+	                <h3 class="card-title">사원 정보를 등록해주세요.</h3>
+	              </div>
+	              <!-- /.card-header -->
+	              <!-- form start -->
+	              <form method="post" action="" class="form-horizontal">
+	                <div class="card-body">                
+	                  <div style="color:red;" >*은 필수로 입력해주시길 바랍니다.</div>
+	                  <br>
+	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
+			                    <div class="col-sm-3">
+			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" placeholder="*사원번호는 자동으로 생성됩니다." readonly="readonly" >
+			                 	</div>	
+	                 </div>
+	                  
+	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원명</label>
+		                    	<div class="col-sm-3">
+		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" placeholder="*사원명을 입력해주세요.">
+		                 		</div>
+	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
+			                    <div class="col-sm-3">
+			                    	<input type="text" class="form-control" name="password" id="exampleInputEmail1" placeholder="*패스워드를 입력해주세요.">
+			                 	</div>		
+	                 </div>
+	                 
+	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">주소</label>
+			                    <div class="col-sm-6">
+			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" placeholder="주소를 입력해주세요.">
+			                 	</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+                 			 <label for="inputEmail3" class="col-sm-1 col-form-label"> 연락처 </label>
+
+			                 <div class="col-md-6">
+				                  <div class="input-group">
+				                    <div class="input-group-prepend">
+				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+				                    </div>					             
+				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" placeholder="*-을 빼고 번호를 입력해주세요.">
+				                  	 </div>				                
+			                 </div>
+			                  <!-- /.input group -->
+               		 </div>
+               		 
+               		  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">차량 유무</label>
+			                <div class="col-sm-6">
+			                    <!-- radio -->
+			                    
+			                      <div class="icheck-success d-inline">
+			                         <label><input type="radio" name="carPresence" checked="" id="radioSuccess1" value="Y">Y</label>
+			                      </div>
+			                      <div class="icheck-success d-inline">
+			                         <label><input type="radio" name="carPresence" checked="" id="radioSuccess1" value="N">N</label>
+			                      </div>
+			                      
+			                    
+                 			 </div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">이메일</label>
+			                    <div class="col-sm-6">
+			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
+			                 	</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">생년월일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="birthDate"  placeholder="생년월일을 입력해주세요.">
+
+			                  </div>
+                			</div>
+	                 </div>
+	                 
+	                  <div class="form-group row">
+	                   <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
+			                    <select class="col-sm-3" name="demgCode" >
+		                          <option th:each= "C :${depart}" th:text="${C.demgCode}" ></option>
+		                          
+	                        </select>
+                        </div>
+                        
+                       	<div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
+			                    <select class="col-sm-3" name="poCode">
+		                          <option vlaue="이사">이사</option>
+		                          <option vlaue="상무">상무</option>
+		                          <option vlaue="부장">부장</option>
+		                          <option vlaue="대리">대리</option>
+		                          <option vlaue="신입" selected="selected">신입</option>
+	                        </select>
+                        </div>
+                        
+                        <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
+			                    <select class="col-sm-3" name="liCode">
+		                          <option vlaue="재직" selected="selected">재직</option>
+		                          <option vlaue="퇴사">퇴사</option>
+		                          <option vlaue="휴직">휴직</option>
+		                          
+	                        </select>
+                        </div>
+		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
+		                    <div class="col-sm-2">
+		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
+		                 	</div>
+		                 <label for="inputEmail3" class="col-sm-1 col-form-label">재직상태</label>
+		                    <div class="col-sm-2">
+		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
+		                 	</div> -->
+	                 </div>
+	                 
+	                  <div class="form-group row">
+	                   	  <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">계약형태</label>
+			                   <select class="col-sm-3" name="conType">
+		                          <option vlaue="연봉">연봉</option>
+		                          <option vlaue="시급">시급</option>
+		                          <option vlaue="일급">일급</option>
+	                        </select>
+	                       </div>
+	                  
+                       
+                       	
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
+		                    <div class="col-sm-3">
+			                    	<input type="text" class="form-control" name="basicPay" id="exampleInputEmail1" placeholder="*기본급여를 입력해주세요.">
+			                 </div>
+                        
+	                 </div>
+	                 
+	                <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">입사일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="joinDate"  placeholder="*입사일을 입력해주세요.">
+
+			                  </div>
+                			</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                    <label for="exampleInputFile" class="col-sm-1 col-form-label">서명올리기</label>
+	                    <div class="col-sm-4">                      
+	                        <input type="file" name="signature" placeholder="Choose file">	                   	                      
+	                    </div>
+	                  </div>
+	                  
+	                
+	                  
+	                  <div class="form-group row">
+	                    <label for="exampleInputFile" class="col-sm-1 col-form-label">서명올리기</label>
+	                    <div class="col-sm-4">	                      
+	                        <input type="file" name="signature" placeholder="Choose file">	                      
+	                    </div>
+	                  </div>
+	                  
+	                </div>
+	                <!-- /.card-body -->
+	
+	                <div class="card-footer">
+	                  <button type="submit" class="btn btn-primary">등록하기</button>
+	                </div>
+	              </form>
+	            </div>
+	           </div>
 			<!-- /.col-md-6 -->
-			<div class="col-lg-6">
-				<div class="card">
-				알아서 사용하세요
-				</div>
-				<!-- /.card -->
-			</div>
+			
 			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->
@@ -59,8 +233,31 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+<script>
+	$(document).ready(function () {
+		   $(function () {
+		            
+		            $('#MOBILE_NO').keydown(function (event) {
+		             var key = event.charCode || event.keyCode || 0;
+		             $text = $(this); 
+		             if (key !== 8 && key !== 9) {
+		                 if ($text.val().length === 3) {
+		                     $text.val($text.val() + '-');
+		                 }
+		                 if ($text.val().length === 8) {
+		                     $text.val($text.val() + '-');
+		                 }
+		                 
+		                 
+		             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+					 // Key 8번 백스페이스, Key 9번 탭, Key 46번 Delete 부터 0 ~ 9까지, Key 96 ~ 105까지 넘버패트
+					 // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함 
+		             }
+		         })
+		   });
+	
+		});
+</script>
 
 </th:block>
 </html>
