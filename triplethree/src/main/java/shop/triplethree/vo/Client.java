@@ -1,10 +1,12 @@
 package shop.triplethree.vo;
 
+import java.time.LocalDateTime;
+
 public class Client {
 	private String code;
 	private String liCode;
 	private String liCode2;
-	private String accCode;
+	private String accName;
 	private String accCeoName;
 	private String accAddr;
 	private String accBln;
@@ -12,6 +14,11 @@ public class Client {
 	private String repreNumber;
 	private String accPhone;
 	private String accEmail;
+	private String writer;
+	private LocalDateTime writerDay;
+	private String approver;
+	private String approDay;
+	private String approverSt;
 	public String getCode() {
 		return code;
 	}
@@ -30,11 +37,11 @@ public class Client {
 	public void setLiCode2(String liCode2) {
 		this.liCode2 = liCode2;
 	}
-	public String getAccCode() {
-		return accCode;
+	public String getAccName() {
+		return accName;
 	}
-	public void setAccCode(String accCode) {
-		this.accCode = accCode;
+	public void setAccName(String accName) {
+		this.accName = accName;
 	}
 	public String getAccCeoName() {
 		return accCeoName;
@@ -78,11 +85,46 @@ public class Client {
 	public void setAccEmail(String accEmail) {
 		this.accEmail = accEmail;
 	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public LocalDateTime getWriterDay() {
+		return writerDay;
+	}
+	public void setWriterDay(LocalDateTime writerDay) {
+		this.writerDay = writerDay;
+	}
+	public String getApprover() {
+		return approver;
+	}
+	public void setApprover(String approver) {
+		this.approver = approver;
+	}
+	public String getApproDay() {
+		return approDay;
+	}
+	public void setApproDay(String approDay) {
+		this.approDay = approDay;
+	}
+	public String getApproverSt() {
+		return approverSt;
+	}
+	public void setApproverSt(String approverSt) {
+		this.approverSt = approverSt;
+	}
 	@Override
 	public String toString() {
-		return "Client [code=" + code + ", liCode=" + liCode + ", liCode2=" + liCode2 + ", accCode=" + accCode
+		return "Client [code=" + code + ", liCode=" + liCode + ", liCode2=" + liCode2 + ", accName=" + accName
 				+ ", accCeoName=" + accCeoName + ", accAddr=" + accAddr + ", accBln=" + accBln + ", accFax=" + accFax
-				+ ", repreNumber=" + repreNumber + ", accPhone=" + accPhone + ", accEmail=" + accEmail + "]";
+				+ ", repreNumber=" + repreNumber + ", accPhone=" + accPhone + ", accEmail=" + accEmail + ", writer="
+				+ writer + ", writerDay=" + writerDay + ", approver=" + approver + ", approDay=" + approDay
+				+ ", approverSt=" + approverSt + "]";
 	}
+	
+	
+	
 	
 }

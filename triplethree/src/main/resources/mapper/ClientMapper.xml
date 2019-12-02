@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.triplethree.mapper.ClientMapper">
-<resultMap id="ClientResultMap" type="shop.triplethree.vo.Client">
+<resultMap id="clientResultMap" type="shop.triplethree.vo.Client">
 <result column="code" property="code"/>
 <result column="li_code" property="liCode"/>
 <result column="li_code2" property="liCode2"/>
-<result column="acc_name" property="accCode"/>
+<result column="acc_name" property="accName"/>
 <result column="acc_ceo_name" property="accCeoName"/>
 <result column="acc_addr" property="accAddr"/>
 <result column="acc_bln" property="accBln"/>
@@ -37,7 +37,7 @@
 	</select>
 	<!-- 인서트 할때 사업장의 존폐여부는 일단 박고 시작  나중에 수정 -->
 	<insert id="clientInsert" parameterType="shop.triplethree.vo.Client">
-		INSERT INTO ACC_MANAGE
+	INSERT INTO ACC_MANAGE
 			(code
 			,li_code
 			,li_code2
@@ -53,18 +53,38 @@
 			,writer_day)
 		 VALUES 
 		 (#{code}
-		 ,#{liCode}
-		 ,'LIS-어쩌고저쩌고'
-		 , #{accCode}
+		 ,'LIS-20191201000026'
+		 ,'LIS-20191201000030'
+		 , #{accName}
 		 , #{accCeoName}
 		 , #{accAddr}
 		 , #{accBln}
-		 , #{accBln}
-		 , #{accBln}
-		 , #{accBln}
-		 , #{accBln}
-		 , #{accBln}
+		 , #{accFax}
+		 , #{repreNumber}
+		 , #{accPhone}
+		 , #{accEmail}
+		 , #{writer}
 		 , now());
 	</insert>
+	
+	<select id="getClientList" resultMap="clientResultMap">
+		SELECT 
+			 code 	
+			,li_code 	
+			,li_code2 	
+			,acc_name 	
+			,acc_ceo_name
+			,acc_addr
+			,acc_bln
+			,acc_fax 
+			,repre_number
+			,acc_email
+			,writer
+			,writer_day
+			,approver
+			,appro_day
+			,approver_st			
+		FROM ACC_MANAGE
+	</select>
 	
 </mapper>

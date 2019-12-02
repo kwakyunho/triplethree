@@ -2,6 +2,7 @@ package shop.triplethree.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -15,19 +16,21 @@ public class ClientController {
 
 	//거래처 정보조회 리스트
 	@GetMapping("/clientList")
-	public String ClientList() {
+	public String ClientList(Model model) {
+		model.addAttribute("clientList", clientService.getClientList());
 		return "/client/clientList";
 	}
-//	//거래처 정보조회 리스트
-//		@PostMapping("/clientList")
-//		public String ClientList(매개변수 뭐로받을래) {
-//			return "/client/clientList";
-//		}
 
+	/*
+	 * //거래처 정보조회 리스트
+	 * 
+	 * @PostMapping("/clientList") public String getClientList(Client client) {
+	 * clientService.getClientList(); return "/client/clientList"; } /
+	 */
 	//거래처 정보등록
 	@GetMapping("/clientInsert")
 	public String ClientInsert() {
-		return "/client/clientInsert2.html";
+		return "/client/clientInsert";
 	}
 	@PostMapping("/clientInsert")
 	public String ClientInsert(Client client) {
