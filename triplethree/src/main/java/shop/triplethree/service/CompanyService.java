@@ -30,7 +30,15 @@ public class CompanyService {
 		System.out.println(list.toString());
 	
 		return companyMapper.selectCompany();
-		
 	}
 	
+	//회사 정보 수정
+	public Company updateCompanySelect(String company) {
+		
+		return companyMapper.updateCompanySelect(company);
+	}
+	//회사 정보 진짜 수정하여 변경
+	public int updateCompany(Company company) {
+		return companyMapper.updateCompany(company);
+	}
 }

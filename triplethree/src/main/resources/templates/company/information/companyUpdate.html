@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>회사 정보 수정화면</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-12">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item">Dashboard v3</li>
+				</ol>
+			</div><!-- /.col -->
+			</br></br>
+		</div><!-- /.row -->
+			<div class="col-sm-12">
+				<h1 class="m-0 text-dark" align="center" style="font-family:궁서체";>회사 정보 수정화면입니다</h1>
+			</div><!-- /.col -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+<style>
+	h1 {  
+		margin: 0 auto; 
+	}
+	form { 
+       margin: 0 auto; 
+          }
+    #right-box {
+  	float: right;
+	}
+    #btn-info input{ 
+    border: 3px solid blue;
+     background-color: rgba(0,0,0,0); 
+     color: black; padding: 5px; }
+   
+</style>
+ <th:block> 	
+	<form th:action="@{/companyUpdate}" method="post">
+  	 <table border="1"height=100%>  	   	 
+	  <div class="input-group mb-3">
+                          		
+	   	<tr>
+	   		<td>회사코드</td>	
+	   		<td><input type="text" name="Code" size="10" th:value="${company.Code}" readonly="readonly"></td>
+	   	</tr>
+	   	<tr>
+	   		<td>회사명</td>	
+	   		<td><input type="text" name="coName" size="10" th:value="${company.coName}" readonly="readonly"></td>
+	   	</tr>
+		<tr>
+	   		<td>대표자명</td>	
+	   		<td><input type="text" name="coCeoname" size="10" th:value="${company.coCeoname}"></td>
+	   	</tr>
+	   	<tr>
+	   		<td>회사주소</td>	
+	   		<td><input type="text" name="coAddr" size="30" th:value="${company.coAddr}"></td>
+	   	</tr>
+	   	<tr>
+	   		<td>사업자등록번호</td>	
+	   		<td><input type="text" name="coBin" size="30" th:value="${company.coBin}" readonly="readonly"></td>
+	   	</tr>
+	   	<tr>
+	   		<td>팩스번호</td>	
+	   		<td><input type="tel" name="coFax" required
+	   		pattern="[0-9]{11}"
+	   		title="-없이 11자리 숫자를 입력해주세요" size="20" th:value="${company.coFax}"></td>		
+	   	</tr>
+	   	<tr>
+	   		<td>회사대표번호</td>	
+	   		<td><input type="tel" name="coPhone" required
+	   		pattern="[0-9]{11}"
+	   		title="-없이 11자리 숫자를 입력해주세요" size="20" th:value="${company.coPhone}"></td>
+	   	</tr>
+	   	<tr>
+	   		<td>회사 이메일</td>	
+	   		<td><input type="email" name="coEmail"  size="30" th:value="${company.coEmail}"></td>
+	   	</tr>
+	   	<tr>
+	   		<td>회사 로고</td>	
+	   		<td><input type="file" id="img-input" name="coLogo" size="30" th:value="${company.coLogo}"></td>	
+	   	</tr>	   	
+	   	<tr>
+	   		<td>작성자</td>	
+	   		<td><input type="text" name="writer" size="5" th:value="${company.writer}"></td>
+	   	</tr>
+	   
+  	 </table>
+  	 <input type="submit" class="btn btn-block bg-gradient-secondary btn-flat"
+  	  name="infoInsert" value="회사 정보 수정하기">
+   </form>
+  </th:block>
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+			<!-- /.col-md-6 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>

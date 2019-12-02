@@ -16,8 +16,8 @@
 		,#{coBin}
 		,#{coFax}
 		,#{coPhone}
-		,#{coLogo}
 		,#{coEmail}
+		,#{coLogo}
 		,#{writer}
 		,now()
 	)
@@ -37,6 +37,30 @@
 		,writer_day AS writerDay
 	FROM 
 		EM_INFO
+	</select>
+	<select id="updateCompanySelect" resultType="shop.triplethree.vo.Company">
+	select
+		*
+	FROM 
+		EM_INFO
+	where
+		code=#{Code}	
 	
 	</select>
+	<update id="updateCompany" parameterType="shop.triplethree.vo.Company">
+		UPDATE EM_INFO
+	SET
+		co_ceoname=#{coCeoname}
+		,co_addr=#{coAddr}
+		,co_fax=#{coFax}
+		,co_phone=#{coPhone}
+		,co_email=#{coEmail}
+		,co_logo=#{coLogo}
+		,writer=#{writer}
+		,writer_day=now()
+	where
+		code=#{Code}
+	
+	
+	</update>
 </mapper>
