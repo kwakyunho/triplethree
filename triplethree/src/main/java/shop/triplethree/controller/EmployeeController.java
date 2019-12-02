@@ -38,8 +38,10 @@ public class EmployeeController {
 	   * @return employee/employeeInsert
 	   */
 	 @GetMapping("/employeeInsert")
-	 public String insertEmployee(Model model) {
-		 model.addAttribute("depart", employeeService.selectForDepart());
+	 public String insertEmployee(Model model1, Model model2,Model model3) {
+		 model1.addAttribute("depart", employeeService.selectForDepart());
+		 model2.addAttribute("position", employeeService.selectForPosition());
+		 model3.addAttribute("status", employeeService.selectForStatus());
 		 return "/employee/employeeInsert";
 	 }
 	 
@@ -52,7 +54,8 @@ public class EmployeeController {
 	 public String insertEmployee(Employee employee) {
 		 String code = commonService.codeGeneration("EMP_MANAGE");
 		 employee.setCode(code);
-		 
+		 System.out.println(employee.getCode() + "<-생성된 코드");
+		 employeeService.insertEmployee(employee);
 		 return "/employee/employeeList";
 	 }
 	 

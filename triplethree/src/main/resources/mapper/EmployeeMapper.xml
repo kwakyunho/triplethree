@@ -15,5 +15,58 @@
 			 de.code as code
 		FROM
 			 DEMG AS de
+	    where de.approver_st = 'Y'
 	</select>
+	
+	<select id="selectForPosition" resultType="shop.triplethree.vo.Employee">
+		SELECT
+			po.CODE AS code,
+			po.poname AS poCode
+		FROM
+			POSISYS AS po
+		WHERE 
+			po.approver_st = 'Y'
+	</select>
+	
+	<select id="selectForStatus" resultType="shop.triplethree.vo.Employee">
+		SELECT
+			li.CODE as code,
+			li.s_section as liCode 
+		FROM
+		 	LIST_MANAGE AS li
+		 WHERE li.m_section='재직여부' AND li.yes_or_no='Y'
+	</select>
+	
+	<insert id="insertEmployee" parameterType="shop.triplethree.vo.Employee">
+		INSERT INTO EMP_MANAGE (emp_num,CODE,demgcode,pocode,li_code,emp_name,password,addr,phone,car_presence,email,
+								birth_date,con_type,basic_pay,join_date,photo,signature,retire_date,writer,writer_day)
+
+			SELECT CONCAT('TT', DATE_FORMAT(CURDATE(),'%Y%m%d'), LPAD(RIGHT(IFNULL(MAX(emp_num), 0),3)+1,3,0)) AS emp_num, 
+				    #{code} as CODE, 
+				    #{demgCode} as demgcode,  
+			        #{poCode} as pocode, 
+			        #{liCode} as li_code, 
+			        #{empName} as emp_name, 
+			        #{password} as password, 
+			        #{addr} as addr, 
+			        #{phone} as phone, 
+			        #{carPresence} as car_presence, 
+			        #{email} as email, 
+			        #{birthDate} as birth_date, 
+			        #{conType} as con_type, 
+			        #{basicPay} as basic_pay, 
+			        #{joinDate} as join_date, 
+			        #{photo} as photo, 
+			        #{signature} as signature, 
+			        #{retireDate} as retire_date, 
+			        #{writer} as writer, 
+			        #{writerDay} as writer_day 
+			        
+			FROM EMP_MANAGE
+			WHERE emp_num LIKE (
+				CONCAT('TT', DATE_FORMAT(CURDATE(),'%Y%m%d'),'%')
+			)
+	</insert>
+	
+	
 </mapper>

@@ -25,4 +25,19 @@ public class EmployeeService {
 		  
 		  return employeeMapper.selectForDepart();
 	  }
+	  
+	  public List<Employee> selectForPosition(){
+		  
+		  return employeeMapper.selectForPosition();
+	  }
+	  
+	 public List<Employee> selectForStatus(){
+		  
+		  return employeeMapper.selectForStatus();
+	  }
+	 
+	 public int insertEmployee(Employee employee){
+		  
+		  return employeeMapper.insertEmployee(employee);
+	  }
 }

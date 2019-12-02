@@ -43,7 +43,7 @@
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="post" action="" class="form-horizontal">
+	              <form method="post" action="/employeeInsert" class="form-horizontal">
 	                <div class="card-body">                
 	                  <div style="color:red;" >*은 필수로 입력해주시길 바랍니다.</div>
 	                  <br>
@@ -61,7 +61,7 @@
 		                 		</div>
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
 			                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="password" id="exampleInputEmail1" placeholder="*패스워드를 입력해주세요.">
+			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="*패스워드를 입력해주세요.">
 			                 	</div>		
 	                 </div>
 	                 
@@ -128,7 +128,7 @@
 	                   <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode" >
-		                          <option th:each= "C :${depart}" th:text="${C.demgCode}" ></option>
+		                          <option th:each= "C :${depart}" th:text="${C.demgCode}" th:value="${C.code}"></option>
 		                          
 	                        </select>
                         </div>
@@ -136,21 +136,14 @@
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                          <option vlaue="이사">이사</option>
-		                          <option vlaue="상무">상무</option>
-		                          <option vlaue="부장">부장</option>
-		                          <option vlaue="대리">대리</option>
-		                          <option vlaue="신입" selected="selected">신입</option>
+		                          <option th:each ="P : ${position}"  th:text="${P.poCode}" th:value="${P.code}"></option>	                         
 	                        </select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                          <option vlaue="재직" selected="selected">재직</option>
-		                          <option vlaue="퇴사">퇴사</option>
-		                          <option vlaue="휴직">휴직</option>
-		                          
+		                          <option th:each="L :${status}" th:text="${L.liCode}" th:value="${L.code}"></option>		                      		                          
 	                        </select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
