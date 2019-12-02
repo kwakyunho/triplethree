@@ -13,7 +13,7 @@ public interface ScheduleMapper {
 	public int insertSchedule(Schedule schedule);
 	
 	// 일정 수정
-	public int updateSchedule();
+	public int updateSchedule(Schedule schedule);
 	
 	// 일정 삭제
 	public int deleteSchedule();

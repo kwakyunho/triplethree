@@ -32,5 +32,10 @@ public class ScheduleService {
 		return schedulemapper.selectSchedule();
 	}
 	
-	
+	/**
+	 * 일정 수정 메서드
+	 * */
+	public int updateSchedule(Schedule schedule) {
+		return schedulemapper.updateSchedule(schedule);
+	}
 }

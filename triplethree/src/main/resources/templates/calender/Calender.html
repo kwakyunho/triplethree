@@ -29,28 +29,169 @@
 			<!-- /.container-fluid -->
 		</section>
 
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-		  Launch demo modal
-		</button>
+		<!-- 일정 등록 Modal -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form th:action="@{ScheduleInsert}" method="post">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">일정 등록하기11</h4>
+						</div>
+						<div class="modal-body">
+							<div class="content">
+								<div class="container-fluid">
+									<div>
+										<div>
+											<div class="card">
+												<table style="text-align: center;">
+													<tr>
+														<td style="width: 150px;">일정 구분</td>
+														<td><select class="form-control form-control-lg"
+															style="font-size: medium;" name="sortation">
+																<option value="전체일정">전체일정</option>
+																<option value="부서일정">부서일정</option>
+																<option value="개인일정">개인일정</option>
+														</select></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">일정명</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="일정명을 입력해주세요" id="title" name="title">
+														</td>
+													</tr>
+													<!-- <tr>
+														<td style="width: 150px;">일정내용</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="내용 입력해주세요" id="content" name="content"></td>
+													</tr> -->
+													<tr>
+														<td style="width: 150px;">일정 시작일</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="예) 2019-12-01" id="startDay" name="start"></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">일정 종료일</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="예) 2019-12-01" id="endDay" name="end"></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">일정 배경을 선택해주세요</td>
+														<td><select class="form-control form-control-lg"
+															style="font-size: medium;" name="backgroundColor">
+																<option value="#0073b7">파랑</option>
+																<option value="#f56954">빨강</option>
+																<option value="#00c0ef">아쿠아</option>
+																<option value="#00a65a">녹색</option>
+																<option value="#3c8dbc">밝은파랑</option>
+														</select></td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+							<input type="submit" value="일정 등록하기" class="btn btn-primary"
+								id="scheduleBtn">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 		
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-		      </div>
-		      <div class="modal-body">
-		        ...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
-		    </div>
-		  </div>
+		<!-- 일정 수정&삭제 Modal -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form th:action="@{Schedule}" method="post">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">일정 등록하기22</h4>
+						</div>
+						<div class="modal-body">
+							<div class="content">
+								<div class="container-fluid">
+									<div>
+										<div>
+											<div class="card">
+												<table style="text-align: center;">
+													<tr>
+														<td style="width: 150px;">일정 구분</td>
+														<td><select class="form-control form-control-lg"
+															style="font-size: medium;" name="sortation">
+																<option value="전체일정">전체일정</option>
+																<option value="부서일정">부서일정</option>
+																<option value="개인일정">개인일정</option>
+														</select></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">변경할 일정명</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="일정명을 입력해주세요" id="title" name="title">
+														</td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">변경 일정명</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="일정명을 입력해주세요" id="content" name="content"></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">일정 시작일</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="예) 2019-12-01" id="startDay" name="start"></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">일정 종료일</td>
+														<td><input class="form-control form-control-lg"
+															type="text" style="width: 100%; font-size: small;"
+															placeholder="예) 2019-12-01" id="endDay" name="end"></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">일정 배경을 선택해주세요</td>
+														<td><select class="form-control form-control-lg"
+															style="font-size: medium;" name="backgroundColor">
+																<option value="#0073b7">파랑</option>
+																<option value="#f56954">빨강</option>
+																<option value="#00c0ef">아쿠아</option>
+																<option value="#00a65a">녹색</option>
+																<option value="#3c8dbc">밝은파랑</option>
+														</select></td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+							<input type="submit" value="일정 수정하기" class="btn btn-primary" id="updateBtn">
+							<!-- <input type="submit" value="일정 삭제하기" class="btn btn-primary" id="deleteBtn"> -->
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 
 
@@ -62,9 +203,8 @@
 						<div class="sticky-top mb-3">
 							<div class="content">
 								<div>
-										<!-- the events -->
-										<div id="external-events">
-										</div>
+									<!-- the events -->
+									<div id="external-events"></div>
 								</div>
 							</div>
 						</div>
@@ -95,60 +235,48 @@
 
 	<th:block layout:fragment="customScript">
 
-<!-- jQuery -->
-<script th:src="@{plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap -->
-<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- jQuery UI -->
-<script th:src="@{plugins/jquery-ui/jquery-ui.min.js}"></script>
-<!-- AdminLTE App -->
-<script th:src="@{dist/js/adminlte.min.js}"></script>
-<!-- AdminLTE for demo purposes -->
-<script th:src="@{dist/js/demo.js}"></script>
-<!-- fullCalendar 2.2.5 -->
-<script th:src="@{plugins/moment/moment.min.js}"></script>
-<script th:src="@{plugins/fullcalendar/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-daygrid/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-timegrid/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-interaction/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-bootstrap/main.min.js}"></script>
-<!-- Page specific script -->
+		<!-- jQuery -->
+		<script th:src="@{plugins/jquery/jquery.min.js}"></script>
+		<!-- Bootstrap -->
+		<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<!-- jQuery UI -->
+		<script th:src="@{plugins/jquery-ui/jquery-ui.min.js}"></script>
+		<!-- AdminLTE App -->
+		<script th:src="@{dist/js/adminlte.min.js}"></script>
+		<!-- AdminLTE for demo purposes -->
+		<script th:src="@{dist/js/demo.js}"></script>
+		<!-- fullCalendar 2.2.5 -->
+		<script th:src="@{plugins/moment/moment.min.js}"></script>
+		<script th:src="@{plugins/fullcalendar/main.min.js}"></script>
+		<script th:src="@{plugins/fullcalendar-daygrid/main.min.js}"></script>
+		<script th:src="@{plugins/fullcalendar-timegrid/main.min.js}"></script>
+		<script th:src="@{plugins/fullcalendar-interaction/main.min.js}"></script>
+		<script th:src="@{plugins/fullcalendar-bootstrap/main.min.js}"></script>
+		<!-- Page specific script -->
 
-<script th:src=@{custom/js/CssCalender.js}></script>
+		<script th:src=@{custom/js/CssCalender.js}></script>
 
-<!-- 캘린더영역을 선택시 실행될 이벤트 -->
-<script type="text/javascript">
+		<!-- 캘린더영역을 선택시 실행될 이벤트 -->
+		<script type="text/javascript">
 
-$(document).ready(function(){
- 	$('.fc-day-grid').click(function(){
-		
-		var url = "/ScheduleInsert"
-		
-		var popupX = (document.body.offsetWidth / 2) - (400/ 2);
-		//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-
-		var popupY= (document.body.offsetHeight / 2) - (320 / 2);
-		//&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-		
-		window.open(url, "", "width=400, height=320, left="+ popupX + ", top="+ popupY);
-	});
-	
-	$('.fc-event-container').click(function(){
+		$(document).ready(function(){
 			
-		var url = "/ScheduleInsert"
+			// 캘린더 날짜부분을 클릭시 모달이벤트 실행
+			$('.fc-day-top').click(function(){
+				$('#myModal1').modal('show');
+				
+			});
+			
+			// 일정 클릭시 수정&삭제 이벤트 실행
+			$('.fc-day-grid').click(function() {
+				$('#myModal2').modal('show');
+				var title = $('#title').val();
+				console.log(title);
+			});
+			
+		});
 		
-		var popupX = (document.body.offsetWidth / 2) - (400/ 2);
-		//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+		</script>
 
-		var popupY= (document.body.offsetHeight / 2) - (320 / 2);
-		//&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-		
-		window.open(url, "", "width=400, height=500, left="+ popupX + ", top="+ popupY);
-	});
-});
-
-</script>
-
-</th:block>
-
+	</th:block>
 </html>

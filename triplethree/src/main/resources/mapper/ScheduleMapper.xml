@@ -41,4 +41,16 @@
 		FROM
 			CALENDAR
  	</select>
+ 	
+ 	<update id="updateSchedule" parameterType="shop.triplethree.vo.Schedule">
+ 		UPDATE
+			CALENDAR AS c
+		SET
+			c.cal_sortation = #{sortation}
+			,c.cal_name = #{content}
+			,c.cal_start = #{start}
+			,c.cal_end = #{end}
+		WHERE
+			c.cal_name = #{title}
+ 	</update>
  </mapper>

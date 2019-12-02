@@ -24,6 +24,9 @@ public class ScheduleController {
 		return "calender/Calender";
 	}
 	
+	/**
+	 * 일정 조회 메서드
+	 * */
 	@PostMapping(value="/companySchedule" , produces = "application/json")
 	public @ResponseBody List<Schedule> selectSchdule() {
 		return scheduleService.selectSchedule();
@@ -48,5 +51,15 @@ public class ScheduleController {
 		return "redirect:companySchedule";
 	}
 	
-	
+	/**
+	 * 일정 수정 메서드
+	 * */
+	@PostMapping("/Schedule")
+	public String Schedule(Schedule schedule) {
+		System.out.println(schedule.toString());
+		System.out.println("수정 버튼이 눌렸어요.");
+		
+		scheduleService.updateSchedule(schedule);
+		return "redirect:companySchedule";
+	}
 }
