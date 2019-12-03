@@ -7,6 +7,9 @@ public class Company {
 	private String Code;
 	private String coName;
 	private String coCeoname;
+	private String coPostCode;
+	private String coDetaiAddr;
+	private String coExtrAaddr;
 	private String coAddr;
 	private String coBin;
 	private String coFax;
@@ -32,6 +35,24 @@ public class Company {
 	}
 	public void setCoCeoname(String coCeoname) {
 		this.coCeoname = coCeoname;
+	}
+	public String getCoPostCode() {
+		return coPostCode;
+	}
+	public void setCoPostCode(String coPostCode) {
+		this.coPostCode = coPostCode;
+	}
+	public String getCoDetaiAddr() {
+		return coDetaiAddr;
+	}
+	public void setCoDetaiAddr(String coDetaiAddr) {
+		this.coDetaiAddr = coDetaiAddr;
+	}
+	public String getCoExtrAaddr() {
+		return coExtrAaddr;
+	}
+	public void setCoExtrAaddr(String coExtrAaddr) {
+		this.coExtrAaddr = coExtrAaddr;
 	}
 	public String getCoAddr() {
 		return coAddr;
@@ -83,24 +104,11 @@ public class Company {
 	}
 	@Override
 	public String toString() {
-		return "Company [Code=" + Code + ", coName=" + coName + ", coCeoname=" + coCeoname + ", coAddr=" + coAddr
+		return "Company [Code=" + Code + ", coName=" + coName + ", coCeoname=" + coCeoname + ", coPostCode="
+				+ coPostCode + ", coDetaiAddr=" + coDetaiAddr + ", coExtrAaddr=" + coExtrAaddr + ", coAddr=" + coAddr
 				+ ", coBin=" + coBin + ", coFax=" + coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail
 				+ ", coLogo=" + coLogo + ", writer=" + writer + ", writerDay=" + writerDay + "]";
 	}
-	public Company(String code, String coName, String coCeoname, String coAddr, String coBin, String coFax,
-			String coPhone, String coEmail, String coLogo, String writer, LocalDateTime writerDay) {
-		super();
-		Code = code;
-		this.coName = coName;
-		this.coCeoname = coCeoname;
-		this.coAddr = coAddr;
-		this.coBin = coBin;
-		this.coFax = coFax;
-		this.coPhone = coPhone;
-		this.coEmail = coEmail;
-		this.coLogo = coLogo;
-		this.writer = writer;
-		this.writerDay = writerDay;
-	}
+	
 	
 }

@@ -4,59 +4,53 @@
       layout:decorate="~{layouts/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>회사정보</title>
+	<title>index</title>
 </th:block>
 
 <th:block layout:fragment="customContents">
 <!-- Content Header (Page header) -->
 <div class="content-header">
 	<div class="container-fluid">
-			<div class="row mb-2">
-			<div class="col-sm-12">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+					<div class="col-sm-12">
+				<h2 class="m-0 text-dark" style="font-family:궁서체";>회사 정보</h2>
+			</div>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="#">Home</a></li>
 					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
 					<li class="breadcrumb-item">Dashboard v3</li>
 				</ol>
 			</div><!-- /.col -->
-			
 		</div><!-- /.row -->
-			<div class="col-sm-12">
-				<h2 class="m-0 text-dark" align="center" style="font-family:궁서체";>회사 정보</h2>
-			</div><!-- /.col -->
 	</div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 
 <div class="content">
-	 <div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12"> 
-			
+	<!-- <div class="container-fluid">
+		<div class="row"> -->
+			<div class="col-12">
 				<div class="card">
-				
-				
-	<style>
-	h1 {  
-		margin: 0 auto; 
-	}
-	form { 
-       margin: 0 auto; 
-       
-    }
-    #right-box {
-  	float: right;
-	}
-   
-</style>
+				<div class="card-header">
+				<h3 class="card-title">회사정보 리스트</h3>
+
+              </div>
+              <!-- /.card-header -->
+             
 	<form th:action="@{/companyUpdate}">
-	 <div class="card-body table-responsive p-0" style="height: 300px;" >
-  	 <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:500px; height:150px;">  	   	 
+	 <div class="card-body table-responsive p-0" style="height: auto;">
+  	 <table class="table table-bordered table-striped dataTable"role="grid" style="white-space:nowrap; overflow:auto;  width:500px; height:150px;">  	   	 
    	  <thead>
 	   	<tr>
 	   		<td align="center">회사코드</td>	   		
 	   		<td align="center">회사명</td>	
+	   		<td align="center">우편번호</td>	
 	   		<td align="center">대표자명</td>	
+	   		<td align="center">회사주소</td>	
+	   		<td align="center">상세주소</td>	
 	   		<td align="center">회사주소</td>	
 	   		<td align="center">사업자 등록번호</td>	
 	   		<td align="center">팩스번호</td>	
@@ -73,16 +67,18 @@
 	   		<td th:text="${l.Code}"></td>
 	   		<td th:text="${l.coName}"></td>
 	   		<td th:text="${l.coCeoname}"></td>
+	   		<td th:text="${l.coPostCode}"></td>
+	   		<td th:text="${l.coDetaiAddr}"></td>
 	   		<td th:text="${l.coAddr}"></td>
+	   		<td th:text="${l.coExtrAaddr}"></td>
 	   		<td th:text="${l.coBin}"></td>
 	   		<td th:text="${l.coFax}"></td>
 	   		<td th:text="${l.coPhone}"></td>
 	   		<td th:text="${l.coEmail}"></td>
 	   		<td th:text="${l.coLogo}"></td>
 	   		<td th:text="${l.writer}"></td>
-	   		<td th:text="${#temporals.format(l.writerDay,'yyyy-MM-dd HH:mm:ss')}"></td> 	   
-  	
-  		 <div id="right-box"class="col-lg-4" >	
+	   		<td th:text="${#temporals.format(l.writerDay,'yyyy-MM-dd HH:mm:ss')}"></td> 	   	
+  		 <div id="right-box"class="col-lg-4">	
   		     <td><div class="input-group-prepend show">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                      	 사유를 선택해주세요
@@ -94,27 +90,25 @@
                       <div class="dropdown-divider"></div>              
                     </div>  
                    </div>  	 	 	 	 	
-			</td>
-			
-	 	</div>	 
+			</td>				 		 
 	   	</tr>
 	   	</tbody>
   	 </table>
   	 </div>
-   </form>
+   </form>													
+					</div>
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
-
+			</div>
 			<!-- /.col-md-6 -->
-		</div>
-		<!-- /.row -->
-	
-	 </div>
+<!-- 		</div>
+		/.row
+	</div> -->
 	<!-- /.container-fluid -->
-	</div> 
+</div>
 </th:block>
 
 <th:block layout:fragment="customScript">

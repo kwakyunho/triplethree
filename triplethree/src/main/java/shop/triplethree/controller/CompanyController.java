@@ -34,8 +34,8 @@ public class CompanyController {
 	//회사정보 조회
 	@GetMapping("/companyInfo")
 	public String selectCompany(Model model) {
-		
 		model.addAttribute("companyInfo", companyService.selectCompany());
+		System.out.println(model+"<--model");
 		return "company/information/companyInfo";
 	}
 	//회사정보 수정 클릭시 화면 보여주기
