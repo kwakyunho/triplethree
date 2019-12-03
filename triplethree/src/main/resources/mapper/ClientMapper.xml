@@ -11,13 +11,67 @@
 <result column="acc_name" property="accName"/>
 <result column="acc_ceo_name" property="accCeoName"/>
 <result column="acc_addr" property="accAddr"/>
+<result column="acc_postcode" property="accPostcode"/>
+<result column="acc_detailaddr" property="accDetailAddr"/>
+<result column="acc_extraaddr" property="accExtraAddr"/>
 <result column="acc_bln" property="accBln"/>
 <result column="acc_fax" property="accFax"/>
 <result column="repre_number" property="repreNumber"/>
 <result column="acc_phone" property="accPhone"/>
 <result column="acc_email" property="accEmail"/>
 </resultMap>
+	<select id="getLicodeList" resultType="shop.triplethree.vo.Client">
+	select
+		s_section as liCode
+		,code as code
+	FROM
+		LIST_MANAGE
+	WHERE m_section='거래처구분'
+	</select>
 
+	<update id="clientUpdate" parameterType="shop.triplethree.vo.Client">
+		update acc_manage
+			SET
+			 code	= #{code},
+			 li_code	= #{liCode},
+			 li_code2	= #{liCode2},
+			 acc_name	= #{accName},
+			 acc_ceo_name	= #{accCeoName},
+			 acc_addr	= #{accAddr},
+			 acc_postcode	= #{accPostcode},
+			 acc_detailaddr	= #{accDetailAddr},
+			 acc_extraaddr	= #{accExtraAddr},
+			 acc_bln	= #{accBln},
+			 acc_fax	= #{accFax},
+			 repre_number	= #{repreNumber},
+			 acc_phone	= #{accPhone},
+			 acc_email	= #{accEmail}
+		where 
+			code=#{code}
+					
+	</update>
+	
+	<select id="getClientBycode" parameterType="String" resultMap="clientResultMap">
+		select 
+			code 	
+			,li_code 	
+			,li_code2 	
+			,acc_name 	
+			,acc_ceo_name
+			,acc_phone
+			,acc_addr
+			,acc_bln
+			,acc_fax 
+			,repre_number
+			,acc_email
+			,writer
+			,writer_day
+			,approver
+			,appro_day
+			,approver_st			
+		FROM ACC_MANAGE where code=#{code}
+	</select>
+	
 	<select id="codeGeneration" parameterType="String" resultType="String">
 		SELECT CONCAT(
 			(SELECT CONCAT(
@@ -35,7 +89,8 @@
 				'%')))
 		)
 	</select>
-	<!-- 인서트 할때 사업장의 존폐여부는 일단 박고 시작  나중에 수정 -->
+	
+	<!-- 인서트 할때 사업장의 존폐여부는 일단 박고 시작-->
 	<insert id="clientInsert" parameterType="shop.triplethree.vo.Client">
 	INSERT INTO ACC_MANAGE
 			(code
@@ -53,7 +108,7 @@
 			,writer_day)
 		 VALUES 
 		 (#{code}
-		 ,'LIS-20191201000026'
+		 , #{liCode}
 		 ,'LIS-20191201000030'
 		 , #{accName}
 		 , #{accCeoName}
