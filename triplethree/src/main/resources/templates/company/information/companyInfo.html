@@ -50,8 +50,8 @@
 	   		<td align="center">우편번호</td>	
 	   		<td align="center">대표자명</td>	
 	   		<td align="center">회사주소</td>	
-	   		<td align="center">상세주소</td>	
-	   		<td align="center">회사주소</td>	
+	   		<td align="center">상세주소</td>		
+	   		<td align="center">참고주소</td>		
 	   		<td align="center">사업자 등록번호</td>	
 	   		<td align="center">팩스번호</td>	
 	   		<td align="center">회사 대표번호</td>	
@@ -59,6 +59,7 @@
 	   		<td align="center">회사 로고</td>	   		
 	   		<td align="center">작성자</td>		   		
 	   		<td align="center">작성일자</td>		   		
+	   		<td align="center">변경사유</td>		   		
 	   		<td align="center">상태</td>		   		
 	   		<td align="center">수정</td>		   		
 	   	</tr>
@@ -67,11 +68,11 @@
 	   	<tr th:each="l:${companyInfo}">
 	   		<td th:text="${l.Code}"></td>
 	   		<td th:text="${l.coName}"></td>
-	   		<td th:text="${l.coCeoname}"></td>
 	   		<td th:text="${l.coPostCode}"></td>
-	   		<td th:text="${l.coDetaiAddr}"></td>
+	   		<td th:text="${l.coCeoname}"></td>
 	   		<td th:text="${l.coAddr}"></td>
-	   		<td th:text="${l.coExtrAaddr}"></td>
+	   		<td th:text="${l.coDetailAddr}"></td>
+	   		<td th:text="${l.coExtraAddr}"></td>
 	   		<td th:text="${l.coBin}"></td>
 	   		<td th:text="${l.coFax}"></td>
 	   		<td th:text="${l.coPhone}"></td>
@@ -79,6 +80,7 @@
 	   		<td th:text="${l.coLogo}"></td>
 	   		<td th:text="${l.writer}"></td>
 	   		<td th:text="${#temporals.format(l.writerDay,'yyyy-MM-dd HH:mm:ss')}"></td> 	   	
+	   		<td th:text="${l.coReason}"></td> 	   	
 	   		<td th:text="${l.yesOrNo}"></td> 	   	
   		 <div id="right-box"class="col-lg-4">	
   		     <td><div class="input-group-prepend show">

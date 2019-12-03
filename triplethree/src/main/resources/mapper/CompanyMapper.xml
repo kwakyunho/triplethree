@@ -7,15 +7,15 @@
 	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
 	INSERT INTO
 	EM_INFO
-		(code,co_name,co_ceoname,co_postcode,co_addr,co_detaiaddr,co_extraaddr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
+		(code,co_name,co_ceoname,co_postcode,co_addr,co_detailaddr,co_extraaddr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
 	VALUES
 		(#{Code}
 		,#{coName}
 		,#{coCeoname}
 		,#{coPostCode}
 		,#{coAddr}
-		,#{coDetaiAddr}
-		,#{coExtrAaddr}
+		,#{coDetailAddr}
+		,#{coExtraAddr}
 		,#{coBin}
 		,#{coFax}
 		,#{coPhone}
@@ -31,8 +31,8 @@
 		,co_name AS coName
 		,co_ceoname AS coCeoname
 		,co_postcode AS coPostCode
-		,co_detaiaddr AS coDetaiAddr
-		,co_extraaddr AS coExtrAaddr
+		,co_detailaddr AS coDetailAddr
+		,co_extraaddr AS coExtraAddr
 		,co_addr AS coAddr
 		,co_bln AS coBin
 		,co_fax AS coFax
@@ -42,6 +42,7 @@
 		,writer AS writer
 		,writer_day AS writerDay
 		,yes_or_no AS yesOrNo
+		,co_reason AS coReason
 	FROM 
 		EM_INFO
 	</select>

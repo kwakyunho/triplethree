@@ -58,8 +58,8 @@
 	   			<input type="text" name="coPostCode" id="sample6_postcode" placeholder="우편번호" class="form-control col-4" th:value="${company.coPostCode}">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br><br>
 				<input type="text" name="coAddr"id="sample6_address" placeholder="주소" class="form-control" th:value="${company.coAddr}"><br>
-				<input type="text" name="coDetaiAddr"id="sample6_detailAddress" placeholder="상세주소" class="form-control" th:value="${company.coDetaiAddr}"><br>
-				<input type="text" name="coExtrAaddr"id="sample6_extraAddress" placeholder="참고주소" class="form-control col-sm-4" th:value="${company.coDetaiAddr}">
+				<input type="text" name="coDetailAddr"id="sample6_detailAddress" placeholder="상세주소" class="form-control" th:value="${company.coDetailAddr}"><br>
+				<input type="text" name="coExtraAddr"id="sample6_extraAddress" placeholder="참고주소" class="form-control col-sm-4" th:value="${company.coExtraAddr}">
 			<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<script>
    			 function sample6_execDaumPostcode() {
@@ -146,6 +146,10 @@
 	   			<label class="col-sm-2 col-form-label">작성자</label>
 	   		<div class="col-sm-4">	
 	   			<input type="text" name="writer" size="5" class="form-control col-6" th:value="${company.writer}">
+			</div>
+	   			<label class="col-sm-2 col-form-label">수정 변경 사유</label>
+	   		<div class="col-sm-4">	
+	   			<input type="text" name="coReason" size="5" class="form-control col-6" th:value="${company.coReason}">
 			</div>
   			</div>
   	 <input class="btn btn-block bg-gradient-secondary btn-flat"

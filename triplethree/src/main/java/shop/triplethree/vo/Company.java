@@ -8,8 +8,8 @@ public class Company {
 	private String coName;
 	private String coCeoname;
 	private String coPostCode;
-	private String coDetaiAddr;
-	private String coExtrAaddr;
+	private String coDetailAddr;
+	private String coExtraAddr;
 	private String coAddr;
 	private String coBin;
 	private String coFax;
@@ -19,12 +19,7 @@ public class Company {
 	private String writer;
 	private LocalDateTime writerDay;
 	private String yesOrNo;
-	public String getYesOrNo() {
-		return yesOrNo;
-	}
-	public void setYesOrNo(String yesOrNo) {
-		this.yesOrNo = yesOrNo;
-	}
+	private String coReason;
 	public String getCode() {
 		return Code;
 	}
@@ -49,17 +44,17 @@ public class Company {
 	public void setCoPostCode(String coPostCode) {
 		this.coPostCode = coPostCode;
 	}
-	public String getCoDetaiAddr() {
-		return coDetaiAddr;
+	public String getCoDetailAddr() {
+		return coDetailAddr;
 	}
-	public void setCoDetaiAddr(String coDetaiAddr) {
-		this.coDetaiAddr = coDetaiAddr;
+	public void setCoDetailAddr(String coDetailAddr) {
+		this.coDetailAddr = coDetailAddr;
 	}
-	public String getCoExtrAaddr() {
-		return coExtrAaddr;
+	public String getCoExtraAddr() {
+		return coExtraAddr;
 	}
-	public void setCoExtrAaddr(String coExtrAaddr) {
-		this.coExtrAaddr = coExtrAaddr;
+	public void setCoExtraAddr(String coExtraAddr) {
+		this.coExtraAddr = coExtraAddr;
 	}
 	public String getCoAddr() {
 		return coAddr;
@@ -109,13 +104,27 @@ public class Company {
 	public void setWriterDay(LocalDateTime writerDay) {
 		this.writerDay = writerDay;
 	}
+	public String getYesOrNo() {
+		return yesOrNo;
+	}
+	public void setYesOrNo(String yesOrNo) {
+		this.yesOrNo = yesOrNo;
+	}
+	public String getCoReason() {
+		return coReason;
+	}
+	public void setCoReason(String coReason) {
+		this.coReason = coReason;
+	}
 	@Override
 	public String toString() {
 		return "Company [Code=" + Code + ", coName=" + coName + ", coCeoname=" + coCeoname + ", coPostCode="
-				+ coPostCode + ", coDetaiAddr=" + coDetaiAddr + ", coExtrAaddr=" + coExtrAaddr + ", coAddr=" + coAddr
+				+ coPostCode + ", coDetailAddr=" + coDetailAddr + ", coExtraAddr=" + coExtraAddr + ", coAddr=" + coAddr
 				+ ", coBin=" + coBin + ", coFax=" + coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail
-				+ ", coLogo=" + coLogo + ", writer=" + writer + ", writerDay=" + writerDay + "]";
+				+ ", coLogo=" + coLogo + ", writer=" + writer + ", writerDay=" + writerDay + ", yesOrNo=" + yesOrNo
+				+ ", coReason=" + coReason + "]";
 	}
+	
 	
 	
 }
