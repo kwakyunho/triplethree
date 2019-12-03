@@ -12,45 +12,70 @@
 				(code
 				,emp_code
 				,cal_sortation
-				,cal_name
-				,cal_content
+				,cal_title
 				,cal_start
 				,cal_end
+				,color
 				,backgroundColor
-				,borderColor
 				,writer_day)
 		VALUES
 			(#{code}
 			,'id001'
 			,#{sortation}
 			,#{title}
-			,#{content}
 			,#{start}
 			,#{end}
+			,#{color}
 			,#{backgroundColor}
-			,#{borderColor}
 			,NOW());
  	</insert>
  
+ 	<!-- 일정 조회 쿼리문 -->
  	<select id="selectSchedule" resultType="shop.triplethree.vo.Schedule">
  		SELECT
-			cal_name AS title
+ 			 code
+ 			,cal_sortation AS sortation
+			,cal_title AS title
 			,cal_start AS start 
 			,cal_end AS end
+			,color AS color
 			,backgroundColor AS backgroundColor
 		FROM
 			CALENDAR
  	</select>
  	
+ 	<!-- 일정 수정 쿼리문 -->
  	<update id="updateSchedule" parameterType="shop.triplethree.vo.Schedule">
  		UPDATE
 			CALENDAR AS c
 		SET
 			c.cal_sortation = #{sortation}
-			,c.cal_name = #{content}
+			,c.cal_title = #{title}
 			,c.cal_start = #{start}
 			,c.cal_end = #{end}
 		WHERE
-			c.cal_name = #{title}
+			code = #{code}
  	</update>
+ 	
+ 	<!-- 일정 수정시 화면에 뿌려줄 값 가져오는 쿼리문 -->
+ 	<select id="selectUpdate" resultType="shop.triplethree.vo.Schedule" parameterType="String">
+ 		 		SELECT
+ 			 code
+ 			,cal_sortation AS sortation
+			,cal_title AS title
+			,cal_start AS start 
+			,cal_end AS end
+			,color AS color
+			,backgroundColor AS backgroundColor
+		FROM
+			CALENDAR
+		WHERE
+			code = #{code}
+ 	</select>
+ 	
+ 	<!-- 일정 삭제 쿼리문 -->
+ 	<delete id="deleteSchedule" parameterType="shop.triplethree.vo.Schedule">
+ 		
+ 	</delete>
+ 	
  </mapper>

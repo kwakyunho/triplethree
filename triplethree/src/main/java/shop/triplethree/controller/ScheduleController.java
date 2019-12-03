@@ -35,15 +35,15 @@ public class ScheduleController {
 	/**
 	 * 일정 등록 메서드
 	 * */
-	@GetMapping("/ScheduleInsert")
-	public String insertSchedule() {
-		return "calender/CalenderInsert";
-	}
+	/*
+	 * @GetMapping("/companyScheduleInsert") public String insertSchedule() { return
+	 * "calender/CalenderInsert"; }
+	 */
 	
 	/**
 	 * 일정 등록 메서드
 	 * */
-	@PostMapping("/ScheduleInsert")
+	@PostMapping("/companyScheduleInsert")
 	public String insertSchedule(Schedule schedule) {
 		System.out.println(schedule.toString());
 		
@@ -54,12 +54,33 @@ public class ScheduleController {
 	/**
 	 * 일정 수정 메서드
 	 * */
-	@PostMapping("/Schedule")
+	@PostMapping("/companyScheduleUpdate")
 	public String Schedule(Schedule schedule) {
 		System.out.println(schedule.toString());
 		System.out.println("수정 버튼이 눌렸어요.");
 		
 		scheduleService.updateSchedule(schedule);
+		return "redirect:companySchedule";
+	}
+	
+	/**
+	 * 일정 수정시 화면에 값을 뿌려주기 위한 메서드
+	 * */
+	@PostMapping(value="/selectUpdate" , produces = "application/json")
+	public @ResponseBody Schedule selectUpdate(String code){
+		System.out.println("일정이 클릭되었나요?");
+		System.out.println("값을 확인해봐요" + code);
+		Schedule sc = scheduleService.selectUpdate(code);
+		System.out.println(sc);
+		return scheduleService.selectUpdate(code);
+	}
+	
+	/**
+	 * 일정 삭제 메서드
+	 * */
+	@PostMapping("/companyScheduleDelet")
+	public String deleteSchedule(Schedule schedule) {
+		System.out.println("삭제버튼이 클릭되었나요?");
 		return "redirect:companySchedule";
 	}
 }

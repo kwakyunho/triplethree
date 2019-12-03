@@ -5,12 +5,17 @@ public class Schedule {
 	private String code;
 	private String sortation;
 	private String title;
-	private String content;
 	private String start;
 	private String end;
-	private String backgroundColor;
-	private String borderColor;
+	private String color;
 	
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	private String backgroundColor;
 	public String getCode() {
 		return code;
 	}
@@ -28,12 +33,6 @@ public class Schedule {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 	public String getStart() {
 		return start;
@@ -53,17 +52,10 @@ public class Schedule {
 	public void setBackgroundColor(String backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
-	public String getBorderColor() {
-		return borderColor;
-	}
-	public void setBorderColor(String borderColor) {
-		this.borderColor = borderColor;
-	}
-	
 	@Override
 	public String toString() {
-		return "Schedule [code=" + code + ", sortation=" + sortation + ", title=" + title + ", content=" + content
-				+ ", start=" + start + ", end=" + end + ", backgroundColor=" + backgroundColor + ", borderColor="
-				+ borderColor + "]";
+		return "Schedule [code=" + code + ", sortation=" + sortation + ", title=" + title + ", start=" + start
+				+ ", end=" + end + ", color=" + color + ", backgroundColor=" + backgroundColor + "]";
 	}
+
 }

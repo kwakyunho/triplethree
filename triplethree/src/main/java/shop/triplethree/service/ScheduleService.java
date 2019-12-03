@@ -38,4 +38,11 @@ public class ScheduleService {
 	public int updateSchedule(Schedule schedule) {
 		return schedulemapper.updateSchedule(schedule);
 	}
+	
+	/**
+	 * 일정 수정시 화면에 값을 뿌려줄 메서드
+	 * */
+	public Schedule selectUpdate(String code){
+		return schedulemapper.selectUpdate(code);
+	}
 }

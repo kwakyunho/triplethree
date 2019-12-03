@@ -16,9 +16,12 @@ public interface ScheduleMapper {
 	public int updateSchedule(Schedule schedule);
 	
 	// 일정 삭제
-	public int deleteSchedule();
+	public int deleteSchedule(Schedule schedule);
 	
 	// 일정 조회
 	public List<Schedule> selectSchedule();
+	
+	//일정 수정시 코드로 내용 뽑아서 뿌려주는 메서드
+	public Schedule selectUpdate(String code);
 	
 }

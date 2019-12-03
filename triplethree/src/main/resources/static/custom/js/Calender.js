@@ -45,7 +45,7 @@
     new Draggable(containerEl, {
       itemSelector: '.external-event',
       eventData: function(eventEl) {
-        console.log(eventEl);
+        //console.log(eventEl);
         return {
           title: eventEl.innerText,
           backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
@@ -56,12 +56,12 @@
     });
 
     var calendar = new Calendar(calendarEl, {
+    locale: 'ko',
       plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
       header    : {
         left  : 'prev,next today',
         center: 'title',
-        right : 'dayGridMonth,timeGridWeek,timeGridDay',
-        locale: 'ko'
+        right : 'dayGridMonth'
       },
       editable  : true,
       navLinks  : false,
@@ -69,11 +69,11 @@
       droppable : true, // this allows things to be dropped onto the calendar !!!
       //Random default events
       events    : function(dateObject, callback){
-    	
+    	  
     	  var getStartStr = dateObject.startStr.substring(0, 10);
     	  var getEndStr = dateObject.endStr.substring(0, 10);
     	      	  
-    	  console.log(getStartStr, getEndStr)
+    	  //console.log(getStartStr, getEndStr)
     	  
     	  $.ajax({
     		  async : true,
@@ -83,27 +83,34 @@
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
+    				  //console.log(data)
     				  var dateArray = [];
     				  for(var i=0; i < data.length; i++){
     					  var dataObj = data[i];
+    					  var code = dataObj.code;    
+    					  var sortation = dataObj.sortation;
+    					  //console.log(sortation);
     					  var start = dataObj.start;
-    					  var end = dataObj.end;
-    					  var title = dataObj.title;
+    					  var end = moment(dataObj.end).add(1,'day').format('YYYY-MM-DD');
+    					  var title = (sortation +'\n'+ dataObj.title);
+    					  var color = dataObj.color;
     					  var backgroundColor = dataObj.backgroundColor;
+    					  //console.log(code);
     					  var dateObject = {
+    						  	  id				: code,
     							  title 			: title,
     							  start 			: new Date(start),
     							  end 				: new Date(end),
-		    					  allDay         	: false,
-		    			          backgroundColor	: backgroundColor //Blue
-		    			          /*borderColor    	: '#0073b7'*/ //Blue
-    					  };
+		    					  allDay         	: true,
+		    					  editable			: false,
+		    					  className			: 'calendarDayClickEv',
+		    					  textColor			: color,
+		    			          backgroundColor	: backgroundColor
+    					  }; 
     					  dateArray.push(dateObject);
     				  }    
-    				  callback(dateArray);
-    				
-    			  }
-    			  console.log(data);    			  
+    				  callback(dateArray);	
+    			  }		  
     		  },
     		  error : function(error){
     			  
@@ -120,7 +127,44 @@
           // if so, remove the element from the "Draggable Events" list
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
-      }
+      },
+            
+      // 일정 클릭시 발생하는 이벤트
+      eventClick: function(info) {
+    	  // id(code) 값이 있다면 ajax로 값을 보여주면서 modal을 띄워주고
+    	  // id(code) 값이 없다면 ajax로 값을 입력해주도로고 modal을 띄워준다.
+    	  var code = info.event.id;
+    	    //console.log(code)	  
+    	  
+    	    // 일정 클릭시 수정&삭제 이벤트 실행
+       		  $('#myModal2').modal('show');
+       		  
+       		  // 일정 클릭시 db조회하여 일치하는 값을 셋팅해준다.
+        	  $.ajax({
+        		  async : true,
+        		  type : 'POST',
+        		  data : {code : code},
+        		  url : "selectUpdate",
+        		  datetype : "json",
+        		  success : function(data){
+       
+        			  // input 창에 data에서 조회한 값을 처리해준다.
+        			  $('input[name=title]').attr('value', data.title);
+        			  $('input[name=start]').attr('value', data.start);
+        			  $('input[name=end]').attr('value', data.end);
+        			  $('input[name=code]').attr('value', data.code);
+        			  
+        		  },
+        		  error : function(error){ 
+        		  }
+        	  });
+        },
+      
+        // 일정 빈공간 클릭시 발생하는 이벤트
+      	dateClick: function(info) {
+    		// 캘린더 날짜부분을 클릭시 모달이벤트 실행
+			$('#myModal1').modal('show');
+    	  },
     });
 
     calendar.render();
