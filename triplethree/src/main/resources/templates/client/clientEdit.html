@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-12">
+				<h1 class="m-0 text-dark">거래처 정보수정</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-12">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/clientList}">거래처관리</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientInsert}">거래처등록</li>
+					<li class="breadcrumb-item">거래처 정보수정</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-primary">
+				<form role="form" class="form-horozontal" action="/clientEdit" method="post">
+				
+				   <div class="card-body">
+				   <div class="form-group row col-sm-12">
+				   		<label class="col-sm-2 col-form-label">거래처코드</label>
+				   		 <div class="col-sm-4">
+				  		 <input type="text" class="form-control" placeholder="누른거 가져오기 + *거래처코드는 수정할 수 없습니다" disabled="">
+				  		 </div>
+				   </div>
+				   <div class="form-group row col-sm-12">
+				   		<label class="col-sm-2 col-form-label">거래처종류</label>
+				   		 <div class="col-sm-4">
+					   		 <select class="form-control" name="liCode2">
+					   		 	<option value="은행">은행</option>
+					   		 	<option  value="주유소">주유소</option>
+					   		 	<option  value="식당">식당</option>
+					   		 	<option  value="카페">카페</option>
+				   		 	</select>
+				  		 </div>
+				   </div>
+                  	<div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처명</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accName" placeholder="거래처명">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">대표자명</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accCeoName" placeholder="대표자명">
+	                    </div>
+                  	</div>
+
+                  <div class="form-group row col-sm-12">
+                  	<label class="col-sm-2 col-form-label">사업장주소</label>
+                  	<div class="col-sm-10">
+                      <input type="text" class="form-control" name="accAddr" value="">
+                 	</div>
+                 	<br><br>
+                 	<div class="col-sm-2"></div>
+                 	<div class="col-sm-4">
+                      <input type="text" class="form-control" name="accAddr2" placeholder="사업장주소 상세">
+                 	</div>
+                  </div>
+                  
+                  <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">사업자등록번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accBln" placeholder="사업자등록번호">
+	                    </div>
+                  </div>
+                  <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accPhone" placeholder="거래처번호">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">거래처대표번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="repreNumber" placeholder="거래처 대표자 번호">
+	                    </div>
+                  </div>
+                   <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처이메일</label>
+	                    <div class="col-sm-4">
+	                      <input type="email" class="form-control col-12" name="accEmail" placeholder="거래처이메일을 입력하세요">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">거래처팩스번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accFax" placeholder="거래처 팩스번호를 입력하세요">
+	                    </div>
+                  </div>
+				  </div><!-- card body -->
+				
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary">수정하기</button>
+				</div><!--  card footer -->
+				
+				</form>
+				</div><!-- /.cardcard-primary -->
+				</div><!-- lg-12 구역 -->
+			</div><!-- /.row -->
+		</div>
+	</div><!-- /.container-fluid -->
+</div>
+<div class="col-sm-2"></div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>

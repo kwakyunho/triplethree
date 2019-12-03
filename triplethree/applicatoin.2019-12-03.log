@@ -1,0 +1,53 @@
+2019:12:03 09:31:29.824 ERROR --- [restartedMain] o.s.boot.SpringApplication : Application run failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'clientController' defined in file [C:\Users\smart-202-5\git\triplethree\triplethree\target\classes\shop\triplethree\controller\ClientController.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [shop.triplethree.controller.ClientController]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error, insert ";" to complete ReturnStatement
+	Syntax error on tokens, delete these tokens
+	Syntax error, insert "}" to complete ClassBody
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1320)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:879)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at shop.triplethree.TriplethreeApplication.main(TriplethreeApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [shop.triplethree.controller.ClientController]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error, insert ";" to complete ReturnStatement
+	Syntax error on tokens, delete these tokens
+	Syntax error, insert "}" to complete ClassBody
+
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:213)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1312)
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error, insert ";" to complete ReturnStatement
+	Syntax error on tokens, delete these tokens
+	Syntax error, insert "}" to complete ClassBody
+
+	at shop.triplethree.controller.ClientController.<init>(ClientController.java:36)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:200)
+	... 24 common frames omitted

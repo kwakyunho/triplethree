@@ -13,14 +13,20 @@ import shop.triplethree.vo.Client;
 public class ClientController {
 	@Autowired
 	private ClientService clientService;
-
+	
+	//거래처 정보 수정
+	@GetMapping("/clientEdit")
+	public String ClientEdit(Model model) {
+		
+		return "/client/clientEdit";
+	}
 	//거래처 정보조회 리스트
 	@GetMapping("/clientList")
 	public String ClientList(Model model) {
 		model.addAttribute("clientList", clientService.getClientList());
 		return "/client/clientList";
 	}
-
+	
 	/*
 	 * //거래처 정보조회 리스트
 	 * 
@@ -37,7 +43,8 @@ public class ClientController {
 		System.out.println(client + "<-client");
 		//코드생성 메서드 호출
 		clientService.createClientCode(client);
-		return "/client/clientList";
+		/* return "/client/clientList"; */
+		return "redirect:/clientList";
 	}
 	
 	
