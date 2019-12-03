@@ -9,12 +9,33 @@ public class Client {
 	private String accName;
 	private String accCeoName;
 	private String accAddr;
+	private String accPostcode;
+	private String accDetailAddr;
+	private String accExtraAddr;
 	private String accBln;
 	private String accFax;
 	private String repreNumber;
 	private String accPhone;
 	private String accEmail;
 	private String writer;
+	public String getAccPostcode() {
+		return accPostcode;
+	}
+	public void setAccPostcode(String accPostcode) {
+		this.accPostcode = accPostcode;
+	}
+	public String getAccDetailAddr() {
+		return accDetailAddr;
+	}
+	public void setAccDetailAddr(String accDetailAddr) {
+		this.accDetailAddr = accDetailAddr;
+	}
+	public String getAccExtraAddr() {
+		return accExtraAddr;
+	}
+	public void setAccExtraAddr(String accExtraAddr) {
+		this.accExtraAddr = accExtraAddr;
+	}
 	private LocalDateTime writerDay;
 	private String approver;
 	private String approDay;

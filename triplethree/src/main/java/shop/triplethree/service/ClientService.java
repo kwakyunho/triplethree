@@ -38,10 +38,21 @@ public class ClientService {
 		return clientMapper.getLicodeList();
 	}
 	
+	//거래상태 가져오기
+	public List<Client> getLicode2List(){
+		return clientMapper.getLicode2List();
+	}
+	
+	
 	//거래처 정보 수정하기
 	public int clientUpdate(Client client) {
 		
 		return clientMapper.clientUpdate(client);
+	}
+	
+	//거래처 삭제하기
+	public int clientDelete(String code) {
+		return  clientMapper.clientDelete(code);
 	}
 	
 }

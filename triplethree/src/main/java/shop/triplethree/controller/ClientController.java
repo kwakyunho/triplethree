@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import shop.triplethree.mapper.ClientMapper;
 import shop.triplethree.service.ClientService;
 import shop.triplethree.vo.Client;
 
@@ -20,13 +22,13 @@ public class ClientController {
 			return "/client/clientList";
 		}
 		
-		
 	//거래처 정보 수정화면 이동
 	@GetMapping("/clientUpdate")
 	public String clientUpdate(@RequestParam(value="code")
 								String code,Model model) {
 		System.out.println(code + "<--수정 할 거래처 code");
 		model.addAttribute("liCode", clientService.getLicodeList());
+		model.addAttribute("liCode2", clientService.getLicode2List());
 		model.addAttribute("client", clientService.getClientBycode(code));
 		return "/client/clientEdit";
 	}
@@ -37,6 +39,15 @@ public class ClientController {
 		clientService.clientUpdate(client);
 		return "redirect:/clientList";
 	}
+	
+	//거래처 정보삭제(상태변경)
+	@GetMapping("/clientDelete")
+	public String clientDelete(@RequestParam(value="code")String code,Model model) {
+		System.out.println(code + "<--삭제  할 거래처 code");
+		clientService.clientDelete(code);
+		return "redirect:/clientList";
+	}
+
 	
 	
 	//거래처 정보등록 화면이동 (거래처 상태가지고감)

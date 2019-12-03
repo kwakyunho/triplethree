@@ -28,9 +28,18 @@
 		LIST_MANAGE
 	WHERE m_section='거래처구분'
 	</select>
+	
+	<select id="getLicode2List" resultType="shop.triplethree.vo.Client">
+	select
+		s_section as liCode2
+		,code as code
+	FROM
+		LIST_MANAGE
+	WHERE m_section='거래처상태'
+	</select>
 
 	<update id="clientUpdate" parameterType="shop.triplethree.vo.Client">
-		update acc_manage
+		update ACC_MANAGE
 			SET
 			 code	= #{code},
 			 li_code	= #{liCode},
@@ -47,8 +56,16 @@
 			 acc_phone	= #{accPhone},
 			 acc_email	= #{accEmail}
 		where 
-			code=#{code}
+			code = #{code}
 					
+	</update>
+	
+	<update id="clientDelete" parameterType="shop.triplethree.vo.Client">
+		update ACC_MANAGE
+			SET
+			 li_code2 = 'LIS-20191201000031'
+		where 
+			code = #{code}
 	</update>
 	
 	<select id="getClientBycode" parameterType="String" resultMap="clientResultMap">
@@ -125,13 +142,14 @@
 	<select id="getClientList" resultMap="clientResultMap">
 		SELECT 
 			 code 	
-			,li_code 	
+			,li_code 
 			,li_code2 	
 			,acc_name 	
 			,acc_ceo_name
 			,acc_addr
 			,acc_bln
 			,acc_fax 
+			,acc_phone
 			,repre_number
 			,acc_email
 			,writer
@@ -141,5 +159,4 @@
 			,approver_st			
 		FROM ACC_MANAGE
 	</select>
-	
 </mapper>
