@@ -28,5 +28,12 @@ public class BasicSetService {
 	public List<CateNameList> selectCateNameList(String largeCateName, String middleCateName){
 		return basicSetMapper.selectCateNameList(largeCateName, middleCateName);
 	}
-
+	
+	public CateNameList CateNameConfig(int condition, String smallCateName, String useConfig){
+		CateNameList result = new CateNameList();
+		if(condition == 1) {
+			result = basicSetMapper.selectCateNameConfig(condition, smallCateName, useConfig);
+		}
+		return result;
+	}
 }

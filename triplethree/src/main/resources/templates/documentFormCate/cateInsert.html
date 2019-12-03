@@ -3,8 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
       layout:decorate="~{layouts/default}">
 
+<!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>index</title>
+	<title>카테고리</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<!-- jsGrid -->
+<link rel="stylesheet" th:href="@{plugins/jsgrid/jsgrid.min.css}">
+<link rel="stylesheet" th:href="@{plugins/jsgrid/jsgrid-theme.min.css}">
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -94,6 +102,33 @@
 					<option value="">소분류 내용</option>
 				</select>
 			</div>
+			<div class="card card-info col-lg-12" style="height: 242px;">
+				<div class="card-body">
+					<div class="form-group row">
+						<div class="jsgrid-grid-header jsgrid-header-scrollbar">
+							<table class="jsgrid-table">
+								<tr class="jsgrid-header-row">
+									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 70px;">코드</th>
+									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">대분류</th>
+									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">중분류</th>
+									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">소분류</th>
+									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">사용유무</th>
+								</tr>
+							</table>
+						</div>
+						<div class="jsgrid-grid-body">
+							<!-- form start -->
+							<form id="samllCateNameConfig" class="form-horizontal">
+								<table class="jsgrid-table">
+									<tr class="jsgrid-row samllCateNamePrint">
+										
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- /.row -->
 	</div>
@@ -101,6 +136,7 @@
 </div>
 </th:block>
 
+<!-- 사용자 자바스크립트 -->
 <th:block layout:fragment="customScript">
 <script type="text/javascript">
 $(document).ready(function(){
@@ -175,7 +211,7 @@ $(document).ready(function(){
 			$('#middleCateName').val('');
 			$('#middleCateList').html('<li class="dropdown-item cateList"><a href="#">기타</a></li>');
 			$('#smallCateName').val('');
-			$('#smallCateList').html('<option>소분류 내용</option>');
+			$('#smallCateList').html('<option value="">소분류 내용</option>');
 			
 			$('#smallCateName').removeClass("is-invalid");
 			$('#smallCateName').removeClass("is-valid");
@@ -207,7 +243,7 @@ $(document).ready(function(){
 				async: true,
 				type : 'POST',
 				data : {'largeCateName': largeCateName, 'middleCateName': middleCateName},
-				url : "test",
+				url : "selectCateNameList",
 				dataType : "json",
 				success : function(result) {
 					
@@ -255,7 +291,84 @@ $(document).ready(function(){
 			$('#cateNameList').submit();
 		}
 	});
+	
+	(function($) {
+		$.fn.smallCateEvent = function(input){
+			var condition = 0;	// 0 : 작동없음, 1 : SELECT, 2 : UPDATE, 3 : DELETE
+			var smallCateName = '';
+			var useConfig = '';
+			
+			
+			$(this).on('click', function(){
+				condition = input;
+				smallCateName = $(this).val()[0];
+			
+				// ajax 호출
+				$.ajax({
+					async: true,
+					type : 'POST',
+					data : {'condition' : condition, 'smallCateName': smallCateName, 'useConfig' : useConfig},
+					url : "updateCateNameConfig",
+					dataType : "json",
+					success : function(result) {
+						
+						if(condition == 1){
+							var tdObjectArray = [];
+							for(var i=0; i < 5; i++){	
+								var tdObj = $('<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;"></td>');
+								if(i == 0) {
+									tdObj.css('width', '70px').text(result.code);
+								}else if(i == 1){
+									tdObj.addClass('largeCateName').css('width', '100px').text(result.largeCateName);
+								}else if(i == 2){
+									tdObj.addClass('middleCateName').css('width', '100px').text(result.middleCateName);
+								}else if(i == 3){
+									tdObj.addClass('smallCateName').css('width', '100px').text(result.smallCateName);
+								}else{
+									var inputObj = $('<input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success">');
+									if(result.useYn == 'Y'){
+										inputObj.prop('checked', true);
+									}else if(result.useYn == 'N'){
+										inputObj.prop('checked', false);
+									}
+									tdObj.css('width', '50px').append(inputObj);	
+								}	
+								tdObjectArray.push(tdObj);
+							}
+							$('.samllCateNamePrint').html('');
+							for(var i=0; i < tdObjectArray.length; i ++){
+								$('.samllCateNamePrint').append(tdObjectArray[i]);
+							}
+							
+							$("input[data-bootstrap-switch]").each(function(){
+								$(this).bootstrapSwitch('state', $(this).prop('checked'));
+							});
+						}
+					},
+					error : function(error) {
+						//alert("error : " + error);
+					}
+				});
+			})
+		}
+	}(jQuery));
+	
+	// 소분류 클릭에 따른 이벤트
+	$('#smallCateList').smallCateEvent('1');
+	
+	$('td').on('click', function(){
+		console.log('확인');
+	});
 });
 </script>
+<script type="text/javascript">
+$(function () {
+	$("input[data-bootstrap-switch]").each(function(){
+		$(this).bootstrapSwitch('state', $(this).prop('checked'));
+	});
+});
+</script>
+<!-- Bootstrap Switch -->
+<script th:src="@{plugins/bootstrap-switch/js/bootstrap-switch.min.js}"></script>
 </th:block>
 </html>

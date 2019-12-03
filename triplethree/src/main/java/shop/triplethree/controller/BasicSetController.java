@@ -30,8 +30,16 @@ public class BasicSetController {
 		return "redirect:/documentFormCateInsert";
 	}
 	
-	@PostMapping(value="/test", produces="application/json")
-	public @ResponseBody List<CateNameList> selectCateNameList(@RequestParam(value="largeCateName", required=false) String largeCateName, @RequestParam(value="middleCateName", required=false) String middleCateName) {
+	@PostMapping(value="/selectCateNameList", produces="application/json")
+	public @ResponseBody List<CateNameList> selectCateNameList(@RequestParam(value="largeCateName", required=false) String largeCateName,
+			@RequestParam(value="middleCateName", required=false) String middleCateName) {
 		return basicSetService.selectCateNameList(largeCateName, middleCateName);
+	}
+	
+	@PostMapping(value="/updateCateNameConfig", produces="application/json")
+	public @ResponseBody CateNameList updateCateNameConfig(@RequestParam(value="condition", required=false) int condition,
+			@RequestParam(value="smallCateName", required=false) String smallCateName,
+			@RequestParam(value="useConfig", required=false) String useConfig){
+		return basicSetService.CateNameConfig(condition, smallCateName, useConfig);
 	}
 }

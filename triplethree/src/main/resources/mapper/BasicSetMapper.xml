@@ -50,7 +50,18 @@
 			AND m_section = #{middleCateName}
 			GROUP BY s_section
 		</if>
-	
 	</select>
+	
+	<select id="selectCateNameConfig" parameterType="String" resultMap="CateNameListResultMap">
+		SELECT *
+		FROM LIST_MANAGE
+		WHERE s_section = #{smallCateName}
+	</select>
+	
+	<!-- <update id="updateCateNameConfig" parameterType="CateNameListResultMap">
+		UPDATE LIST_MANAGE
+		SET l_section = #{largeCateName}, m_section = #{middleCateName}, s_section = #{smallCateName}, yes_or_no = #{useYn}
+		WHERE code = #{code}
+	</update> -->
 
 </mapper>
