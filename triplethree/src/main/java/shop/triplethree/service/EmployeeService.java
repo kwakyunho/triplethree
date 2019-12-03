@@ -15,10 +15,10 @@ public class EmployeeService {
 		
 	@Autowired private EmployeeMapper employeeMapper;  
 	
-	  public String login(Employee employee, HttpSession session) {
-			
-		  
-		return "/index"; 
+	  public Employee login(Employee employee) {
+				
+		  return employeeMapper.login(employee);  
+		
 		  }
 	  
 	  public List<Employee> selectForDepart(){
@@ -40,4 +40,11 @@ public class EmployeeService {
 		  
 		  return employeeMapper.insertEmployee(employee);
 	  }
+	 
+	  public List<Employee> selectEmployee(){
+			  
+			  return employeeMapper.selectEmployee();
+		  }
+	 
+	 
 }

@@ -1,5 +1,9 @@
 package shop.triplethree.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpServerErrorException;
 
 import shop.triplethree.service.CommonService;
 import shop.triplethree.service.EmployeeService;
@@ -23,14 +29,59 @@ public class EmployeeController {
 	   * @param employee
 	   * @param session
 	   * @return index
+	 * @throws IOException 
 	   */
-	  @PostMapping("/login")
-	  public String login(Employee employee, HttpSession session) {
+	  @PostMapping(value="login", produces ="text/html")
+	  public @ResponseBody String login(Employee employee, HttpSession session,HttpServletResponse response) throws IOException {
 		System.out.println(employee.getEmpNum()+ "<- 로그인 아이디 입력값 ");  
-		System.out.println(employee.getPassword()+ "<- 로그인 패스워드 입력값 ");  
-		 //아직 로그인 처리과정 완성못함 
-		 //사원관리 등록먼저하고 다시 할 예정 
-		return "/index"; 
+		System.out.println(employee.getPassword()+ "<- 로그인 패스워드 입력값 ");  		
+		
+		String scriptStr = "<script>alert('아이디와 패스워드를 입력해주세요'); history.go(-1);</script>";
+		String scriptStr2 = "<script>alert('로그인 성공~!'); location.href='/index';</script>";
+		String scriptStr3 = "<script>alert('등록된 비밀번호와 일치하지 않습니다.'); history.go(-1);</script>";
+		String scriptStr4 = "<script>alert('등록된 정보가 없습니다.'); history.go(-1);</script>";
+		String html = "text/html; charset=UTF-8";
+		
+		if(employee.getEmpNum() != null && !"".equals(employee.getEmpNum())) {
+			
+			Employee em2 = employeeService.login(employee); //로그인받은 값을 조회하고 결과값을 가지고온 객체 
+			
+				if(em2 != null) {
+					//디비 조회 값이 있을 경우
+					if(em2.getPassword() != null && em2.getPassword().equals(employee.getPassword())) {
+						session.setAttribute("SID", em2.getEmpNum());
+						session.setAttribute("SNAME", em2.getEmpName());
+						session.setAttribute("SDEPART", em2.getDemgCode());
+						session.setAttribute("SPOSI", em2.getPoCode());
+						return scriptStr2;
+					}else {
+						
+						return scriptStr3;
+					}
+					
+				}else {
+					//디비 조회 값이 없을 경우
+					return scriptStr4;
+				}
+			}else {
+				//아이디랑 패스워드값 누락
+			}
+					
+		
+		return scriptStr;
+		
+		
+	  }
+	  
+	  /**
+	   * 로그아웃 세션 초기화하는 메서드
+	   * @param session
+	   * @return
+	   */
+	  @GetMapping("/logout")
+	  public String logout(HttpSession session) {
+		  session.invalidate();
+		  return "redirect:/";
 	  }
 	 
 	  /**
@@ -56,7 +107,7 @@ public class EmployeeController {
 		 employee.setCode(code);
 		 System.out.println(employee.getCode() + "<-생성된 코드");
 		 employeeService.insertEmployee(employee);
-		 return "/employee/employeeList";
+		 return "redirect:/employeeList";
 	 }
 	 
 	/**
@@ -64,11 +115,19 @@ public class EmployeeController {
 	 * @return employee/employeeList
 	 */
 	 @GetMapping("/employeeList")
-	 public String selectEmployee() {
-		
+	 public String selectEmployee(Model model) {
+		 model.addAttribute("emList", employeeService.selectEmployee());
 		 return "/employee/employeeList";
 	 }
 	 
-	 
+	 /**
+	  * 사원목록에서 사원의 상세데이터 보여주기
+	  * @param model
+	  * @return
+	  */
+	 @GetMapping("/employeeDetail")
+	 public String detailEmployee(Model model) {
+		 return "/employee/employeeDetail";
+	 }
 	
 }

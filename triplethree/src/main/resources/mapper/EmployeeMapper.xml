@@ -6,7 +6,19 @@
 <mapper namespace="shop.triplethree.mapper.EmployeeMapper">
 
 	<select id="login" parameterType="shop.triplethree.vo.Employee" resultType="shop.triplethree.vo.Employee">
-		
+		SELECT 
+			em.emp_num as empNum,
+			em.emp_name as empName,
+			em.PASSWORD as password,
+			de.dename as demgCode,
+			po.poname as poCode
+		FROM
+			EMP_MANAGE AS em
+			JOIN DEMG AS de
+			JOIN POSISYS AS po
+		ON em.demgcode = de.CODE AND em.pocode = po.CODE
+		WHERE em.emp_num = #{empNum} 
+		<!-- AND em.PASSWORD = #{password} --> 
 	</select>
 	
 	<select id="selectForDepart" resultType="shop.triplethree.vo.Employee">
@@ -68,5 +80,21 @@
 			)
 	</insert>
 	
+	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
+		SELECT 
+			em.emp_num as empNum,
+			em.emp_name AS empName,
+			de.dename AS demgCode,
+			po.poname AS poCode,
+			em.email AS email,
+			em.car_presence AS carPresence,
+			li.s_section AS liCode
+		FROM
+			EMP_MANAGE AS em
+			JOIN DEMG AS de
+			JOIN POSISYS AS po
+			JOIN LIST_MANAGE AS li
+		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
+	</select>
 	
 </mapper>
