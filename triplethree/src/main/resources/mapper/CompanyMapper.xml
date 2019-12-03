@@ -41,6 +41,7 @@
 		,co_logo AS coLogo
 		,writer AS writer
 		,writer_day AS writerDay
+		,yes_or_no AS yesOrNo
 	FROM 
 		EM_INFO
 	</select>

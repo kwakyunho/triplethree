@@ -18,6 +18,13 @@ public class Company {
 	private String coLogo;
 	private String writer;
 	private LocalDateTime writerDay;
+	private String yesOrNo;
+	public String getYesOrNo() {
+		return yesOrNo;
+	}
+	public void setYesOrNo(String yesOrNo) {
+		this.yesOrNo = yesOrNo;
+	}
 	public String getCode() {
 		return Code;
 	}

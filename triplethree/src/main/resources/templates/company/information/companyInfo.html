@@ -59,6 +59,7 @@
 	   		<td align="center">회사 로고</td>	   		
 	   		<td align="center">작성자</td>		   		
 	   		<td align="center">작성일자</td>		   		
+	   		<td align="center">상태</td>		   		
 	   		<td align="center">수정</td>		   		
 	   	</tr>
 	   	</thead>
@@ -78,6 +79,7 @@
 	   		<td th:text="${l.coLogo}"></td>
 	   		<td th:text="${l.writer}"></td>
 	   		<td th:text="${#temporals.format(l.writerDay,'yyyy-MM-dd HH:mm:ss')}"></td> 	   	
+	   		<td th:text="${l.yesOrNo}"></td> 	   	
   		 <div id="right-box"class="col-lg-4">	
   		     <td><div class="input-group-prepend show">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
