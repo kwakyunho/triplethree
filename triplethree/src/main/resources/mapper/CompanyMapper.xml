@@ -48,7 +48,22 @@
 	</select>
 	<select id="updateCompanySelect" resultType="shop.triplethree.vo.Company">
 	select
-		*
+		code AS Code
+		,co_name AS coName
+		,co_ceoname AS coCeoname
+		,co_postcode AS coPostCode
+		,co_detailaddr AS coDetailAddr
+		,co_extraaddr AS coExtraAddr
+		,co_addr AS coAddr
+		,co_bln AS coBin
+		,co_fax AS coFax
+		,co_phone AS coPhone
+		,co_email AS coEmail
+		,co_logo AS coLogo
+		,writer AS writer
+		,writer_day AS writerDay
+		,yes_or_no AS yesOrNo
+		,co_reason AS coReason
 	FROM 
 		EM_INFO
 	where
@@ -58,15 +73,18 @@
 	<update id="updateCompany" parameterType="shop.triplethree.vo.Company">
 		UPDATE EM_INFO
 	SET
-		co_ceoname=#{coCeoname}
-		
+		co_ceoname=#{coCeoname}		
+		,co_postcode=#{coPostCode}
 		,co_addr=#{coAddr}
+		,co_detailaddr=#{coDetailAddr}
+		,co_extraaddr=#{coExtraAddr}
 		,co_fax=#{coFax}		
 		,co_phone=#{coPhone}
 		,co_email=#{coEmail}
 		,co_logo=#{coLogo}
 		,writer=#{writer}
 		,writer_day=now()
+		,co_reason=#{coReason}
 	where
 		code=#{Code}
 	

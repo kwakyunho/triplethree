@@ -40,10 +40,11 @@ public class CompanyController {
 	}
 	//회사정보 수정 클릭시 화면 보여주기
 	@GetMapping("/companyUpdate")
-	public String updateCompany(@RequestParam(value="Code") String Code,Model model) {
-		System.out.println("Code"+Code);
-		companyService.updateCompanySelect(Code);
-		model.addAttribute("company", companyService.updateCompanySelect(Code));
+	public String updateCompanySelect(@RequestParam(value="Code") String code,Model model) {
+		System.out.println("Code"+code);
+		//companyService.updateCompanySelect(code);
+		model.addAttribute("company", companyService.updateCompanySelect(code));
+		System.out.println(model+"<--model수정");
 		return "company/information/companyUpdate";	
 	}
 	

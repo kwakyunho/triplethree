@@ -33,9 +33,9 @@ public class CompanyService {
 	}
 	
 	//회사 정보 수정
-	public Company updateCompanySelect(String company) {
+	public Company updateCompanySelect(String code) {
 		
-		return companyMapper.updateCompanySelect(company);
+		return companyMapper.updateCompanySelect(code);
 	}
 	//회사 정보 진짜 수정하여 변경
 	public int updateCompany(Company company) {
