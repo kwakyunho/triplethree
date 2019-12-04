@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="shop.triplethree.mapper.BoardMapper">
+	<resultMap id="boardResultMap" type="shop.triplethree.vo.Board">
+		<result column="code" property="code"/>
+		<result column="emp_code" property="empCode"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_con" property="boardCon"/>
+		<result column="board_count" property="boardCount"/>
+		<result column="writer_day" property="writerDay"/>
+	</resultMap>
+	
+	<insert id="boardInsert" parameterType="shop.triplethree.vo.Board">
+		Insert into BOARD
+			(code
+			,emp_code
+			,board_title
+			,board_con
+			,board_count
+			,writer_day)
+		values
+			(#{code}
+			,#{empCode}
+			,#{boardTitle}
+			,#{boardCon}
+			,#{boardCount}
+			,NOW());
+	</insert>
+	
+	<select id="boardList" resultMap="boardResultMap">
+		Select 
+			code
+			,emp_code
+			,board_title
+			,board_con
+			,board_count
+			,writer_day 
+		from BOARD
+	</select>
+	
+	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
+		Select 
+			code
+			,emp_code
+			,board_title
+			,board_con
+			,board_count
+			,writer_day 
+		from BOARD
+		where code=#{code}
+	</select>
+	
+	<update id="boardUpdate" parameterType="shop.triplethree.vo.Board" >
+		update BOARD
+			set
+			code = #{code}
+			,emp_code = #{empCode}
+			,board_title = #{boardTitle}
+			,board_con = #{boardCon}
+			,board_count = #{boardCount}
+			,writer_day = #{writerDay}
+		where
+			code = #{code}
+	</update>
+
+
+
+</mapper>

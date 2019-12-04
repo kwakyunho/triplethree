@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">공지사항 글목록</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">공지사항 글목록</li>
+					<li class="breadcrumb-item"><a href="@{/boardInsert}">공지사항 작성</a></li>
+					
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<div class="content">
+ <div class="col-10">
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">공지사항 글 목록</h3>
+       </div>
+	<div class="card-body table-responsive p-0" style="height: 550px;" >
+         <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:200px; height:150px;">
+             <thead>
+               <tr>
+                 <th>글번호</th>
+                 <th>작성자</th>
+                 <th>글제목</th>
+                 <th>글내용</th>
+                 <th>조회수</th>
+                 <th>작성일자</th>
+                 <th>수정</th>
+                 <th>삭제</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr th:each="b : ${boardList}">
+				<td th:text="${b.code}"></td>
+				<td th:text="${b.empCode}"></td>
+				<td th:text="${b.boardTitle}"></td>
+				<td th:text="${b.boardCon}"></td>
+				<td th:text="${b.boardCount}"></td>
+				<td th:text="${b.writerDay}"></td>
+				<td>
+					<a th:href="@{/boardUpdate(code=${b.code})}">수정</a>
+				</td>
+				<td>
+					<a th:href="@{/boardDelete(code=${b.code})}">삭제</a>
+				</td>
+			</tr>
+            </tbody>
+           	</table>
+         </div>
+         <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+ </div>
+ </div>
+		</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>

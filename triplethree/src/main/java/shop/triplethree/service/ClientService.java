@@ -21,12 +21,12 @@ public class ClientService {
 		client.setWriter("id007");//세션에서 가져올 값 : 작성자 세팅
 		return clientMapper.clientInsert(client);
 	}
-	//거래처 정보 리스트로 뽑아오기
+	//거래처 리스트 가져오기
 	public List<Client> getClientList(){
 		List<Client> list = clientMapper.getClientList();
 		return list;
 	}
-	//거래처 정보 리스트로 뽑아오기
+	//거래처(거래중) 리스트 가져오기
 	public List<Client> getClientList2(){
 		List<Client> list = clientMapper.getClientList2();
 		return list;
@@ -47,7 +47,6 @@ public class ClientService {
 	public List<Client> getLicode2List(){
 		return clientMapper.getLicode2List();
 	}
-	
 	
 	//거래처 정보 수정하기
 	public int clientUpdate(Client client) {
