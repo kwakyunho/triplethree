@@ -148,11 +148,11 @@
         <form id="updateCateName">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">대분류</label>
-            <input type="text" class="form-control CateNameInput" id="largeCateNameInput" name="largeCateNameInput" value="">
+            <input type="text" class="form-control" id="largeCateNameInput" name="largeCateNameInput" value="" readonly="readonly">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">중분류</label>
-            <input type="text" class="form-control CateNameInput" id="middleCateNameInput" name="middleCateNameInput" value="">
+            <input type="text" class="form-control" id="middleCateNameInput" name="middleCateNameInput" value="" readonly="readonly">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">소분류</label>
@@ -347,11 +347,16 @@ $(document).ready(function(){
 					}else{
 						if(confirm('내용 수정이 맞습니까?')){
 							condition = 2;
+							largeCateName = $('#largeCateNameInput').val();
+							middleCateName = $('#middleCateNameInput').val();
+							smallCateName = $('#smallCateNameInput').val();
+							console.log(smallCateName);
 						}
 					}
 				}
-			
+				console.log(condition);
 				// ajax 호출
+				// 'largeCateName': largeCateName, 'middleCateName': middleCateName,
 				$.ajax({
 					async: true,
 					type : 'POST',
@@ -401,8 +406,16 @@ $(document).ready(function(){
 							$("input[data-bootstrap-switch]").each(function(){
 								$(this).bootstrapSwitch('state', $(this).prop('checked'));
 							});
+							
+							condition = 0;
+							
 						}else if(condition == 2){
 							$('#cateModal').modal("hide");
+							$('.smallCateName').text(smallCateName);
+							var beName = $('#smallCateList').select().val()
+							$('#smallCateList option[value='+beName+']').text(smallCateName)
+							$('#smallCateList option[value='+beName+']').val(smallCateName)
+							
 						}
 					},
 					error : function(error) {
@@ -418,7 +431,7 @@ $(document).ready(function(){
 	})
 	
 	$('.samllCateNamePrint').on('click', function(){
-		$("#cateModal").modal();
+		$("#cateModal").modal('show');
 	});
 	
 	// modal input click시 공란변환

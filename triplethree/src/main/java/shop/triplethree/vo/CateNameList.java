@@ -2,6 +2,7 @@ package shop.triplethree.vo;
 
 public class CateNameList {
 	
+	private int re;
 	private int condition;
 	private String cateCode;
 	private String largeCateName;
@@ -21,6 +22,12 @@ public class CateNameList {
 	private String confUser;
 	private String confDay;
 	
+	public int getRe() {
+		return re;
+	}
+	public void setRe(int re) {
+		this.re = re;
+	}
 	public int getCondition() {
 		return condition;
 	}
@@ -132,11 +139,11 @@ public class CateNameList {
 	
 	@Override
 	public String toString() {
-		return "CateNameList [condition=" + condition + ", cateCode=" + cateCode + ", largeCateName=" + largeCateName
-				+ ", middleCateName=" + middleCateName + ", smallCateName=" + smallCateName + ", itemCode=" + itemCode
-				+ ", useYn=" + useYn + ", average=" + average + ", writerUser=" + writerUser + ", writerDay="
-				+ writerDay + ", gasoline=" + gasoline + ", diesel=" + diesel + ", lpg=" + lpg + ", bus=" + bus
-				+ ", room=" + room + ", roomPeriod=" + roomPeriod + ", confUser=" + confUser + ", confDay=" + confDay
-				+ "]";
+		return "CateNameList [re=" + re + ", condition=" + condition + ", cateCode=" + cateCode + ", largeCateName="
+				+ largeCateName + ", middleCateName=" + middleCateName + ", smallCateName=" + smallCateName
+				+ ", itemCode=" + itemCode + ", useYn=" + useYn + ", average=" + average + ", writerUser=" + writerUser
+				+ ", writerDay=" + writerDay + ", gasoline=" + gasoline + ", diesel=" + diesel + ", lpg=" + lpg
+				+ ", bus=" + bus + ", room=" + room + ", roomPeriod=" + roomPeriod + ", confUser=" + confUser
+				+ ", confDay=" + confDay + "]";
 	}
 }

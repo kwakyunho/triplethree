@@ -19,5 +19,5 @@ public interface BasicSetMapper {
 	
 	public CateNameList selectCateNameConfig(int condition, String smallCateName, String useConfig);
 	
-	public CateNameList updateCateNameConfig(int condition, String cateCode, String smallCateName, String useConfig); 
+	public int updateCateNameConfig(int condition, String cateCode, String largeCateName, String middleCateName, String smallCateName, String useConfig); 
 }

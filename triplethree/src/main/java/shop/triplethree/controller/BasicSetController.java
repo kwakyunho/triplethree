@@ -39,8 +39,11 @@ public class BasicSetController {
 	@PostMapping(value="/updateCateNameConfig", produces="application/json")
 	public @ResponseBody CateNameList updateCateNameConfig(@RequestParam(value="condition", required=false) int condition,
 			@RequestParam(value="cateCode", required=false) String cateCode,
+			@RequestParam(value="largeCateName1", required=false) String largeCateName,
+			@RequestParam(value="middleCateName1", required=false) String middleCateName,
 			@RequestParam(value="smallCateName", required=false) String smallCateName,
 			@RequestParam(value="useConfig", required=false) String useConfig){
-		return basicSetService.CateNameConfig(condition, cateCode, smallCateName, useConfig);
+		System.out.println("controller - largeCateName : " + largeCateName);
+		return basicSetService.CateNameConfig(condition, cateCode, largeCateName, middleCateName, smallCateName, useConfig);
 	}
 }

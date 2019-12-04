@@ -28,12 +28,14 @@ public class BasicSetService {
 		return basicSetMapper.selectCateNameList(largeCateName, middleCateName);
 	}
 	
-	public CateNameList CateNameConfig(int condition, String cateCode, String smallCateName, String useConfig){
+	public CateNameList CateNameConfig(int condition, String cateCode, String largeCateName, String middleCateName, String smallCateName, String useConfig){
 		CateNameList result = new CateNameList();
+		System.out.println("service - largeCateName : " + largeCateName);
 		if(condition == 1) {
 			result = basicSetMapper.selectCateNameConfig(condition, smallCateName, useConfig);
 		}else if(condition == 2) {
-			result = basicSetMapper.updateCateNameConfig(condition, cateCode, smallCateName, useConfig);
+			int re = basicSetMapper.updateCateNameConfig(condition, cateCode, largeCateName, middleCateName, smallCateName, useConfig);
+			result.setRe(re);
 		}
 		return result;
 	}
