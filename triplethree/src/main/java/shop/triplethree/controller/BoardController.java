@@ -15,7 +15,12 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardservice;
-	
+	//공지사항  작성하기
+	@GetMapping("/boardInsert")
+	public String boardInsert() {
+		
+		return "/board/boardInsert";
+	}
 	//글목록 가져오기
 	@GetMapping("/boardList")
 	public String boardList(Model model) {
