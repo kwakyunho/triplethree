@@ -139,9 +139,41 @@
 				</div>
    		 	 </div>   		 
 	   			<label class="col-sm-2 col-form-label">회사 로고</label>	
-   			 <div class="col-sm-4">
-   				<input type="file" id="img-input" name="coLogo" size="30">
-			 </div>
+	   			<div class="form-group">
+				<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
+				<div class="col-xs-4">
+					<img id="snsBoardImgView" class="img-responsive" src="#" alt="your image" style="width:100px; height:100px;"/>
+					<input class="form-control" name="coLogo" id="snsBoardImg" type="file"/>
+					<span id="imgFail" >사진을 올려주세요.</span>
+				</div>
+			</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<script type="text/javascript">
+						function readURL(input, id) {
+						if (input.files && input.files[0]) {
+							var reader = new FileReader();
+					
+							reader.onload = function(e) {
+								$("#" + id).attr('src', e.target.result);
+							}					
+							reader.readAsDataURL(input.files[0]);
+						}
+					}
+						//이미지 파일 입력 여부 검사
+						$('#snsBoardImg').change(function(){
+							if($('#snsBoardImg').val() == '') { 
+								$('#imgFail').show();
+								$('#snsBoardImg').focus();
+							return false;
+							}else{
+								$('#imgFail').hide();
+								var id = $(this).attr('id');
+								id = id + "View";
+								console.log(id);
+								readURL(this, id);
+							}
+						});				
+					</script>  			
 			 <!--작성자는 나중에 세션걸꺼니까 지울꺼임 지금은 테스트중이니까 살리고  -->
 	   			<label class="col-sm-2 col-form-label">작성자</label>
 	   		<div class="col-sm-4">	

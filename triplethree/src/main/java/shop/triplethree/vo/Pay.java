@@ -21,16 +21,25 @@ public class Pay {
 	private int DeductPay;
 	private String Writer;
 	private LocalDateTime WriterDay;
-	public String getCode() {
-		return Code;
-	}
+	private LocalDateTime PaymentDate;
+	
 	@Override
 	public String toString() {
 		return "Pay [Code=" + Code + ", EmpCode=" + EmpCode + ", DeCode=" + DeCode + ", BasicPay=" + BasicPay
 				+ ", Benefit=" + Benefit + ", HolidayPay=" + HolidayPay + ", OvertimePay=" + OvertimePay + ", QualiPay="
 				+ QualiPay + ", SpecialPay=" + SpecialPay + ", PositionBenefit=" + PositionBenefit + ", SelfDriPay="
 				+ SelfDriPay + ", ComPay=" + ComPay + ", MealCost=" + MealCost + ", ChildPay=" + ChildPay
-				+ ", DeductPay=" + DeductPay + ", Writer=" + Writer + ", WriterDay=" + WriterDay + "]";
+				+ ", DeductPay=" + DeductPay + ", Writer=" + Writer + ", WriterDay=" + WriterDay + ", PaymentDate="
+				+ PaymentDate + "]";
+	}
+	public String getCode() {
+		return Code;
+	}
+	public LocalDateTime getPaymentDate() {
+		return PaymentDate;
+	}
+	public void setPaymentDate(LocalDateTime paymentDate) {
+		PaymentDate = paymentDate;
 	}
 	public void setCode(String code) {
 		Code = code;
