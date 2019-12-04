@@ -60,7 +60,7 @@
 	
 	<update id="updateCateNameConfig" parameterType="String">
 		UPDATE LIST_MANAGE
-		SET s_section = #{smallCateName}
+		SET s_section = #{smallCateName}, yes_or_no = #{useConfig}
 		WHERE code = #{cateCode}
 	</update>
 
