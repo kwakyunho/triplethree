@@ -140,13 +140,13 @@
    		 	 </div>   		 
 	   			<label class="col-sm-2 col-form-label">회사 로고</label>	
 	   			<div class="form-group">
-				<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
-				<div class="col-xs-4">
-					<img id="snsBoardImgView" class="img-responsive" src="#" alt="your image" style="width:100px; height:100px;"/>
-					<input class="form-control" name="coLogo" id="snsBoardImg" type="file"/>
-					<span id="imgFail" >사진을 올려주세요.</span>
+					<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
+					<div class="col-xs-4">
+						<img id="logoImgView" class="img-responsive" src="#" alt="your image" style="width:100px; height:100px;"/>
+						<input class="form-control" name="coLogo" id="logoImg" type="file"/>
+						<span id="imgFail" >로고를 선택해주세요</span>
+					</div>
 				</div>
-			</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			<script type="text/javascript">
 						function readURL(input, id) {
@@ -160,10 +160,10 @@
 						}
 					}
 						//이미지 파일 입력 여부 검사
-						$('#snsBoardImg').change(function(){
-							if($('#snsBoardImg').val() == '') { 
+						$('#logoImg').change(function(){
+							if($('#logoImg').val() == '') { 
 								$('#imgFail').show();
-								$('#snsBoardImg').focus();
+								$('#logoImg').focus();
 							return false;
 							}else{
 								$('#imgFail').hide();

@@ -4,141 +4,142 @@ import java.time.LocalDateTime;
 
 
 public class Pay {
-	private String Code;
-	private String EmpCode;
-	private String DeCode;
-	private int BasicPay;
-	private int Benefit;
-	private int HolidayPay;
-	private int OvertimePay;
-	private int QualiPay;
-	private int SpecialPay;
-	private int PositionBenefit;
-	private int SelfDriPay;
-	private int ComPay;
-	private int MealCost;
-	private int ChildPay;
-	private int DeductPay;
-	private String Writer;
-	private LocalDateTime WriterDay;
-	private LocalDateTime PaymentDate;
-	
-	@Override
-	public String toString() {
-		return "Pay [Code=" + Code + ", EmpCode=" + EmpCode + ", DeCode=" + DeCode + ", BasicPay=" + BasicPay
-				+ ", Benefit=" + Benefit + ", HolidayPay=" + HolidayPay + ", OvertimePay=" + OvertimePay + ", QualiPay="
-				+ QualiPay + ", SpecialPay=" + SpecialPay + ", PositionBenefit=" + PositionBenefit + ", SelfDriPay="
-				+ SelfDriPay + ", ComPay=" + ComPay + ", MealCost=" + MealCost + ", ChildPay=" + ChildPay
-				+ ", DeductPay=" + DeductPay + ", Writer=" + Writer + ", WriterDay=" + WriterDay + ", PaymentDate="
-				+ PaymentDate + "]";
-	}
+	private String code;
+	private String empCode;
+	private String deCode;
+	private int basicPay;
+	private int benefit;
+	private int holidayPay;
+	private int overtimePay;
+	private int qualiPay;
+	private int specialPay;
+	private int positionBenefit;
+	private int selfDriPay;
+	private int comPay;
+	private int mealCost;
+	private int childPay;
+	private int deductPay;
+	private String writer;
+	private LocalDateTime writerDay;
+	private LocalDateTime paymentDate;
 	public String getCode() {
-		return Code;
-	}
-	public LocalDateTime getPaymentDate() {
-		return PaymentDate;
-	}
-	public void setPaymentDate(LocalDateTime paymentDate) {
-		PaymentDate = paymentDate;
+		return code;
 	}
 	public void setCode(String code) {
-		Code = code;
+		this.code = code;
 	}
 	public String getEmpCode() {
-		return EmpCode;
+		return empCode;
 	}
 	public void setEmpCode(String empCode) {
-		EmpCode = empCode;
+		this.empCode = empCode;
 	}
 	public String getDeCode() {
-		return DeCode;
+		return deCode;
 	}
 	public void setDeCode(String deCode) {
-		DeCode = deCode;
+		this.deCode = deCode;
 	}
 	public int getBasicPay() {
-		return BasicPay;
+		return basicPay;
 	}
 	public void setBasicPay(int basicPay) {
-		BasicPay = basicPay;
+		this.basicPay = basicPay;
 	}
 	public int getBenefit() {
-		return Benefit;
+		return benefit;
 	}
 	public void setBenefit(int benefit) {
-		Benefit = benefit;
+		this.benefit = benefit;
 	}
 	public int getHolidayPay() {
-		return HolidayPay;
+		return holidayPay;
 	}
 	public void setHolidayPay(int holidayPay) {
-		HolidayPay = holidayPay;
+		this.holidayPay = holidayPay;
 	}
 	public int getOvertimePay() {
-		return OvertimePay;
+		return overtimePay;
 	}
 	public void setOvertimePay(int overtimePay) {
-		OvertimePay = overtimePay;
+		this.overtimePay = overtimePay;
 	}
 	public int getQualiPay() {
-		return QualiPay;
+		return qualiPay;
 	}
 	public void setQualiPay(int qualiPay) {
-		QualiPay = qualiPay;
+		this.qualiPay = qualiPay;
 	}
 	public int getSpecialPay() {
-		return SpecialPay;
+		return specialPay;
 	}
 	public void setSpecialPay(int specialPay) {
-		SpecialPay = specialPay;
+		this.specialPay = specialPay;
 	}
 	public int getPositionBenefit() {
-		return PositionBenefit;
+		return positionBenefit;
 	}
 	public void setPositionBenefit(int positionBenefit) {
-		PositionBenefit = positionBenefit;
+		this.positionBenefit = positionBenefit;
 	}
 	public int getSelfDriPay() {
-		return SelfDriPay;
+		return selfDriPay;
 	}
 	public void setSelfDriPay(int selfDriPay) {
-		SelfDriPay = selfDriPay;
+		this.selfDriPay = selfDriPay;
 	}
 	public int getComPay() {
-		return ComPay;
+		return comPay;
 	}
 	public void setComPay(int comPay) {
-		ComPay = comPay;
+		this.comPay = comPay;
 	}
 	public int getMealCost() {
-		return MealCost;
+		return mealCost;
 	}
 	public void setMealCost(int mealCost) {
-		MealCost = mealCost;
+		this.mealCost = mealCost;
 	}
 	public int getChildPay() {
-		return ChildPay;
+		return childPay;
 	}
 	public void setChildPay(int childPay) {
-		ChildPay = childPay;
+		this.childPay = childPay;
 	}
 	public int getDeductPay() {
-		return DeductPay;
+		return deductPay;
 	}
 	public void setDeductPay(int deductPay) {
-		DeductPay = deductPay;
+		this.deductPay = deductPay;
 	}
 	public String getWriter() {
-		return Writer;
+		return writer;
 	}
 	public void setWriter(String writer) {
-		Writer = writer;
+		this.writer = writer;
 	}
 	public LocalDateTime getWriterDay() {
-		return WriterDay;
+		return writerDay;
 	}
 	public void setWriterDay(LocalDateTime writerDay) {
-		WriterDay = writerDay;
+		this.writerDay = writerDay;
 	}
+	public LocalDateTime getPaymentDate() {
+		return paymentDate;
+	}
+	public void setPaymentDate(LocalDateTime paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+	@Override
+	public String toString() {
+		return "Pay [code=" + code + ", empCode=" + empCode + ", deCode=" + deCode + ", basicPay=" + basicPay
+				+ ", benefit=" + benefit + ", holidayPay=" + holidayPay + ", overtimePay=" + overtimePay + ", qualiPay="
+				+ qualiPay + ", specialPay=" + specialPay + ", positionBenefit=" + positionBenefit + ", selfDriPay="
+				+ selfDriPay + ", comPay=" + comPay + ", mealCost=" + mealCost + ", childPay=" + childPay
+				+ ", deductPay=" + deductPay + ", writer=" + writer + ", writerDay=" + writerDay + ", paymentDate="
+				+ paymentDate + "]";
+	}
+	
+	
 	
 }
