@@ -46,5 +46,12 @@ public class EmployeeService {
 			  return employeeMapper.selectEmployee();
 		  }
 	 
+	  public Employee selectForDetail(String empNum) {
+		   return employeeMapper.selectForDetail(empNum);
+	  }
+	  
+	  public Employee selectForUpdate(String empNum) {
+		   return employeeMapper.selectForUpdate(empNum);
+	  }
 	 
 }

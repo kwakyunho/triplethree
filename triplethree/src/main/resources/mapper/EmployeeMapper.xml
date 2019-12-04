@@ -72,7 +72,7 @@
 			        #{signature} as signature, 
 			        #{retireDate} as retire_date, 
 			        #{writer} as writer, 
-			        #{writerDay} as writer_day 
+			        now() as writer_day 
 			        
 			FROM EMP_MANAGE
 			WHERE emp_num LIKE (
@@ -95,6 +95,81 @@
 			JOIN POSISYS AS po
 			JOIN LIST_MANAGE AS li
 		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
+		
 	</select>
+	
+	<select id="selectForDetail" parameterType="String" resultType="shop.triplethree.vo.Employee">
+		
+		SELECT 
+			em.photo as photo,
+			em.signature as signature,
+			em.emp_num as empNum,
+			em.emp_name as empName,
+			em.addr as addr,
+			em.phone as phone,
+			em.car_presence as carPresence,
+			em.email as email,
+			date_format(em.birth_date,'%Y-%m-%d') as birthDate,
+			de.dename as demgName,
+			po.poname as poName,
+			li.s_section as liName,
+			em.con_type as conType,
+			em.basic_pay as basicPay,
+			DATE_FORMAT(em.join_date,'%Y-%m-%d') as joinDate,
+			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
+			em.writer as writer,
+			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
+		FROM
+			EMP_MANAGE AS em
+			JOIN DEMG AS de
+			JOIN POSISYS AS po
+			JOIN LIST_MANAGE AS li
+		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
+		WHERE em.emp_num = #{empNum}
+
+	
+		
+	</select>
+	
+	<select id="selectForUpdate" parameterType="String" resultType="shop.triplethree.vo.Employee">
+		
+		SELECT 
+			em.photo as photo,
+			em.signature as signature,
+			em.emp_num as empNum,
+			em.emp_name as empName,
+			em.password as password,
+			em.addr as addr,
+			em.phone as phone,
+			em.car_presence as carPresence,
+			em.email as email,
+			date_format(em.birth_date,'%Y-%m-%d') as birthDate,
+			de.dename as demgName,
+			po.poname as poName,
+			li.s_section as liName,
+			em.con_type as conType,
+			em.basic_pay as basicPay,
+			DATE_FORMAT(em.join_date,'%Y-%m-%d') as joinDate,
+			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
+			em.writer as writer,
+			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
+		FROM
+			EMP_MANAGE AS em
+			JOIN DEMG AS de
+			JOIN POSISYS AS po
+			JOIN LIST_MANAGE AS li
+		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
+		WHERE em.emp_num = #{empNum}
+
+	
+		
+	</select>
+	
+	<insert id="updateEmpliyee" parameterType="shop.triplethree.vo.Employee">
+		INSERT INTO EMP_MANAGE (emp_num,CODE,demgcode,pocode,li_code,emp_name,password,addr,phone,car_presence,email,
+								birth_date,con_type,basic_pay,join_date,photo,signature,retire_date,writer,writer_day)
+
+			values()
+	</insert>
 	
 </mapper>

@@ -71,7 +71,7 @@
 	                      <th>재직상태</th>
 	                      <th>상세보기</th>
 	                      <th>수정</th>
-	                      <th>수정</th>
+	                      <th>삭제(재직상태변경)</th>
                     </tr>
                     <tr th:each="e :${emList}">
 						<td th:text="${e.empNum}"></td>
@@ -82,11 +82,11 @@
 						<td th:text="${e.carPresence}"></td>
 						<td th:text="${e.liCode}"></td>
 						<td>
-							<a th:href="@{/employeeDetail}">상세보기</a>
+							<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
 						</td>
 						<td>
 							<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
-							<a th:href="@{/}">수정</a>
+							<a th:href="@{/employeeUpdate(empNum=${e.empNum})}">수정</a>
 						</td>
 						<td>
 							<a th:href="@{/}">삭제</a>

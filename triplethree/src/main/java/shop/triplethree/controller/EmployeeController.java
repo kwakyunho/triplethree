@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -106,6 +107,7 @@ public class EmployeeController {
 		 String code = commonService.codeGeneration("EMP_MANAGE");
 		 employee.setCode(code);
 		 System.out.println(employee.getCode() + "<-생성된 코드");
+		 
 		 employeeService.insertEmployee(employee);
 		 return "redirect:/employeeList";
 	 }
@@ -126,8 +128,31 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @GetMapping("/employeeDetail")
-	 public String detailEmployee(Model model) {
+	 public String detailEmployee(@RequestParam(value="empNum")String empNum, Model model) {
+		 model.addAttribute("detail",employeeService.selectForDetail(empNum));
 		 return "/employee/employeeDetail";
+	 }
+	 /**
+	  * 선택된 사원정보의 수정할 데이터와 화면 보여주기
+	  * @param empNum
+	  * @param model
+	  * @return
+	  */
+	 @GetMapping("/employeeUpdate")
+	 public String updateEmployee(@RequestParam(value="empNum")String empNum, Model model) {
+		 model.addAttribute("update", employeeService.selectForUpdate(empNum));
+		 return "/employee/employeeUpdate";
+	 }
+	
+	 /**
+	  * 수정된 회원정보를 처리하기
+	  * @param employee
+	  * @return
+	  */
+	 @PostMapping("/employeeUpdate")
+	 public String updateEmployee(Employee employee) {
+		 
+		 return "/employee/employeeUpdate";
 	 }
 	
 }

@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 public class Employee {
 	private String code; //사원관리코드
-	private String demgCode; //부서코드랑 부서명 받아서 가지고노는 변수 
+	private String demgCode; //부서코드
+	private String demgName; //부서명
 	private String poCode; //직급관리코드
+	private String poName; //직급관리코드
 	private String liCode; //목록관리코드로 재직상태 가지고오기 
+	private String liName; //목록명 담는 변수
 	private String empNum; //사원번호
 	private String password; //패스워드
 	private String empName; //사원명
@@ -23,6 +26,7 @@ public class Employee {
 	private String basicPay;
 	private String writer;
 	private LocalDateTime writerDay; // 부를때 포맷형식 바꿔야함
+	
 	public String getCode() {
 		return code;
 	}
@@ -143,16 +147,34 @@ public class Employee {
 	public void setWriterDay(LocalDateTime writerDay) {
 		this.writerDay = writerDay;
 	}
-	
+	public String getDemgName() {
+		return demgName;
+	}
+	public void setDemgName(String demgName) {
+		this.demgName = demgName;
+	}
+	public String getPoName() {
+		return poName;
+	}
+	public void setPoName(String poName) {
+		this.poName = poName;
+	}
+	public String getLiName() {
+		return liName;
+	}
+	public void setLiName(String liName) {
+		this.liName = liName;
+	}
 	@Override
 	public String toString() {
-		return "Employee [code=" + code + ", demgCode=" + demgCode + ", poCode=" + poCode + ", liCode=" + liCode
-				+ ", empNum=" + empNum + ", password=" + password + ", empName=" + empName + ", addr=" + addr
-				+ ", phone=" + phone + ", email=" + email + ", carPresence=" + carPresence + ", joinDate=" + joinDate
-				+ ", birthDate=" + birthDate + ", photo=" + photo + ", retireDate=" + retireDate + ", signature="
-				+ signature + ", conType=" + conType + ", basicPay=" + basicPay + ", writer=" + writer + ", writerDay="
-				+ writerDay + "]";
+		return "Employee [code=" + code + ", demgCode=" + demgCode + ", demgName=" + demgName + ", poCode=" + poCode
+				+ ", poName=" + poName + ", liCode=" + liCode + ", liName=" + liName + ", empNum=" + empNum
+				+ ", password=" + password + ", empName=" + empName + ", addr=" + addr + ", phone=" + phone + ", email="
+				+ email + ", carPresence=" + carPresence + ", joinDate=" + joinDate + ", birthDate=" + birthDate
+				+ ", photo=" + photo + ", retireDate=" + retireDate + ", signature=" + signature + ", conType="
+				+ conType + ", basicPay=" + basicPay + ", writer=" + writer + ", writerDay=" + writerDay + "]";
 	}
+	
 	
 	
 	

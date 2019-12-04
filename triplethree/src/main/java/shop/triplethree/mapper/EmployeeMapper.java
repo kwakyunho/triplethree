@@ -26,4 +26,13 @@ public interface EmployeeMapper {
 	
 	//사원목록 조회하는 메서드
 	public List<Employee> selectEmployee();
+	
+	//상세정보에서 뿌려줄 데이터 찾는 메서드
+	public Employee selectForDetail(String empNum);
+	
+	//수정할 정보를 뿌려줄 테이터를 찾는 메서드
+	public Employee selectForUpdate(String empNum);
+	
+	//수정할 정보를 업데이트하는 메서드
+	public int updateEmpliyee(Employee employee);
 }

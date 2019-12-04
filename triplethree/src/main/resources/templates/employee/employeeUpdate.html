@@ -13,13 +13,13 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">사원 관리 - 사원 상세 정보</h1>
+				<h1 class="m-0 text-dark">사원 관리 - 사원 수정</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="/index">Home</a></li>
 					<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
-					<li class="breadcrumb-item"><a href="/employeeDetail">사원 상세 정보</a></li>
+					<li class="breadcrumb-item"><a href="/employeeUpdate">사원 수정</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -44,11 +44,11 @@
 			<div class="col-lg-12">
 				<div class="card card-info">
 	              <div class="card-header">
-	                <h3 class="card-title">사원 상세페이지 입니다.</h3>
+	                <h3 class="card-title">사원 수정페이지 입니다.</h3>
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="get" action="/employeeList" class="form-horizontal" th:each="d :${detail}">
+	              <form method="post" action="/employeeUpdate" class="form-horizontal" th:each="u:${update}">
 	                <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
@@ -66,37 +66,37 @@
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
 			                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${d.empNum}" readonly="readonly" >
+			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${u.empNum}" readonly="readonly" >
 			                 	</div>	
 	                 </div>
 	                  
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원명</label>
 		                    	<div class="col-sm-3">
-		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" th:value="${d.empName}" readonly="readonly">
+		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" th:value="${u.empName}" readonly="readonly">
 		                 		</div>
-	                 		<!-- <label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
+	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
 			                    <div class="col-sm-3">
-			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="*패스워드를 입력해주세요.">
-			                 	</div>	 -->	
+			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" th:value="${u.password}">
+			                 	</div>		
 	                 </div>
 	                 
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">주소</label>
 			                    <div class="col-sm-6">
-			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" th:value="${d.addr}" readonly="readonly">
+			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" th:value="${u.addr}" >
 			                 	</div>
 	                 </div>
 	                 
 	                 <div class="form-group row">
-                 			 <label for="inputEmail3" class="col-sm-1 col-form-label"> 연락처 </label>
+                 			 <label for="inputEmail3" class="col-sm-1 col-form-label">연락처 </label>
 
 			                 <div class="col-md-6">
 				                  <div class="input-group">
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 				                    </div>					             
-				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" th:value="${d.phone}" readonly="readonly">
+				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" th:value="${u.phone}">
 				                  	 </div>				                
 			                 </div>
 			                  <!-- /.input group -->
@@ -105,20 +105,20 @@
                		  <div class="form-group row" >
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">차량 유무</label>
 			                <div class="col-sm-6" >
-			                	<th:block th:if="${d.carPresence} eq 'Y'">
+			                	<th:block th:if="${u.carPresence} eq 'Y'">
 				                	<div class="icheck-success d-inline">
-				                    	<label><input type="radio" name="carPresence"  id="radioSuccess1" th:value="Y" checked disabled="disabled">Y</label>
+				                    	<label><input type="radio" name="carPresence"  id="radioSuccess1" value="Y" checked >Y</label>
 				                    </div>
 			                    	<div class="icheck-success d-inline">
-			                    		<label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" disabled="disabled">N</label>
+			                    		<label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" >N</label>
 			                    	</div>
 			                	</th:block>
-			                	<th:block th:unless="${d.carPresence} eq 'Y'">
+			                	<th:block th:unless="${u.carPresence} eq 'Y'">
 			                		<div class="icheck-success d-inline">
-			                         <label><input type="radio" name="carxPresence"  id="radioSuccess1" th:value="Y" disabled="disabled">Y</label>
+			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="Y" >Y</label>
 			                      </div>
 			                      <div class="icheck-success d-inline">
-			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" checked disabled="disabled">N</label>
+			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" checked >N</label>
 			                      </div>
 			                	</th:block>
                  		   </div>
@@ -127,7 +127,7 @@
 	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">이메일</label>
 			                    <div class="col-sm-6">
-			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" th:value="${d.email}" readonly="readonly">
+			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" th:value="${u.email}" >
 			                 	</div>
 	                 </div>
 	                 
@@ -140,7 +140,7 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="birthDate"  th:value="${d.birthDate}" readonly="readonly">
+									<input type="date" class="form-control" name="birthDate"  th:value="${u.birthDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
@@ -150,7 +150,7 @@
 	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode" >
-		                          <option  th:text="${d.demgName}"></option>
+		                          <option  th:text="수정"></option>
 		                          
 	                        </select>
                         </div>
@@ -158,14 +158,14 @@
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                           <option  th:text="${d.poName}"></option>                         
+		                           <option  th:text="수정"></option>                         
 	                        </select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                           <option  th:text="${d.liName}"></option>   		                      		                          
+		                           <option  th:text="수정"></option>   		                      		                          
 	                        </select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
@@ -182,7 +182,7 @@
 	                   	  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">계약형태</label>
 			                   <select class="col-sm-3" name="conType">
-		                          <option th:text="${d.conType}"></option>
+		                          <option th:text="수정"></option>
 	                       	 </select>
 	                       </div>
 	                  
@@ -190,7 +190,11 @@
                        	
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
 		                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" th:value="${d.basicPay}"  name="basicPay" id="exampleInputEmail1" readonly="readonly">
+			                    	<input type="text" class="form-control" th:value="${u.basicPay}"  name="basicPay" id="exampleInputEmail1">
+			                 </div>
+			                 
+			                  <div class="col-sm-2">
+			                 	 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='#'">급여 수정</button>
 			                 </div>
                         
 	                 </div>
@@ -204,7 +208,7 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="joinDate" th:value="${d.joinDate}" readonly="readonly">
+									<input type="date" class="form-control" name="joinDate" th:value="${u.joinDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
@@ -219,7 +223,7 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="retireDate"  th:value="${d.retireDate}" readonly="readonly">
+									<input type="date" class="form-control" name="retireDate"  th:value="${u.retireDate}" >
 
 			                  </div>
                 			</div>
@@ -228,22 +232,9 @@
 	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">작성자</label>
 		                    	<div class="col-sm-3">
-		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${d.writer}" readonly="readonly">
+		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${session.SID}" >
 		                 		</div>
-	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">작성일자</label>
-			                    <div class="col-md-4">
-									<div class="col-md-7">
-			                 <div class="input-group">
-			                    <div class="input-group-prepend">
-			                      <span class="input-group-text">
-			                        <i class="far fa-calendar-alt"></i>
-			                      </span>
-			                    </div>
-									<input type="date" class="form-control" name="writerDay"  th:value="${d.writerDay}" readonly="readonly">
-
-			                  </div>
-                			</div>
-			                 	</div>		
+	                 				
 	                 </div>
 	                 
 	                 
@@ -251,7 +242,7 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">사원 조회 목록으로 가기</button>
+	                  <button type="submit" class="btn btn-primary">수정 하기</button>
 	                </div>
 	                
 	              </form>
