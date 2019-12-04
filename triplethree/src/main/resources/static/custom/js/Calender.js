@@ -63,6 +63,14 @@
         center: 'title',
         right : 'dayGridMonth'
       },
+      
+      /*구글캘린더 추가 시작*/
+      googleCalendarApiKey: "AIzaSyAroDyz92eDMv-R9QsGLfcuA40KJF46764",                             
+      events:{
+        googleCalendarId:"446519400056-chkp1jpu6t4l2k47red8neetulk7s2sk.apps.googleusercontent.com"
+      },
+      /*구글캘린더 추가 끝*/
+      
       editable  : true,
       navLinks  : false,
       eventLimet: false,
