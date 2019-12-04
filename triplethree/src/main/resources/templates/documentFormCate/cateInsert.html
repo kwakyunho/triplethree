@@ -112,7 +112,7 @@
 									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">대분류</th>
 									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">중분류</th>
 									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">소분류</th>
-									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">사용유무</th>
+									<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">사용상태</th>
 								</tr>
 							</table>
 						</div>
@@ -395,11 +395,13 @@ $(document).ready(function(){
 							}else if(i == 3){
 								tdObj.addClass('smallCateName').css('width', '100px').text(result.smallCateName);
 							}else{
-								var inputObj = $('<input type="checkbox" name="useConfig" data-bootstrap-switch data-off-color="danger" data-on-color="success">');
+								var inputObj = $('<a class="useConfig"></a>');
 								if(result.useYn == 'Y'){
-									inputObj.prop('checked', true);
+									inputObj.text('사용중');
+									inputObj.css('color', 'darkgreen');
 								}else if(result.useYn == 'N'){
-									inputObj.prop('checked', false);
+									inputObj.text('사용 해제');
+									inputObj.css('color', 'red');
 								}
 								tdObj.css('width', '50px').append(inputObj);	
 							}	
@@ -421,10 +423,6 @@ $(document).ready(function(){
 							$('.samllCateNamePrint').append(tdObjectArray[i]);
 						}
 						
-						$("input[data-bootstrap-switch]").each(function(){
-							$(this).bootstrapSwitch('state', $(this).prop('checked'));
-						});
-						
 						condition = 0;
 						
 					}else if(condition == 2){
@@ -433,6 +431,13 @@ $(document).ready(function(){
 						var beName = $('#smallCateList').select().val()
 						$('#smallCateList option[value='+beName+']').text(smallCateName)
 						$('#smallCateList option[value='+beName+']').val(smallCateName)
+						if(useConfig == 'Y'){
+							$('.useConfig').text('사용중');
+							$('.useConfig').css('color', 'darkgreen');
+						}else if(useConfig == 'N'){
+							$('.useConfig').text('사용 해제');
+							$('.useConfig').css('color', 'red');
+						}
 					}
 				},
 				error : function(error) {
@@ -461,7 +466,5 @@ $(document).ready(function(){
 	})
 });
 </script>
-<!-- Bootstrap Switch -->
-<script th:src="@{plugins/bootstrap-switch/js/bootstrap-switch.js}"></script>
 </th:block>
 </html>
