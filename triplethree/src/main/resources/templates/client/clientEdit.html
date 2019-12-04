@@ -45,7 +45,7 @@
 				   <div class="form-group row col-sm-12">
 				   		<label class="col-sm-2 col-form-label">거래처종류</label>
 				   		 <div class="col-sm-4">
-					   		 <select class="form-control" th:value="${liCode}" name="liCode">
+					   		 <select class="form-control"  th:value="${liCode}" name="liCode">
 				   		 		<option th:each="l :${liCode}" th:value="${l.code}" th:text="${l.liCode}"></option>
 				   		 	</select>
 				  		 </div>

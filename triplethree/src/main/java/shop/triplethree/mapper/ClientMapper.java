@@ -18,7 +18,10 @@ public interface ClientMapper {
 	
 	//거래처 정보 목록가져오기
 	public List<Client> getClientList();
-	
+
+	//거래중 거래처 정보 목록가져오기
+	public List<Client> getClientList2();
+		
 	//거래처 정보 하나만 가져오기(수정.삭제할때)
 	public Client getClientBycode(String code);
 	

@@ -26,6 +26,11 @@ public class ClientService {
 		List<Client> list = clientMapper.getClientList();
 		return list;
 	}
+	//거래처 정보 리스트로 뽑아오기
+	public List<Client> getClientList2(){
+		List<Client> list = clientMapper.getClientList2();
+		return list;
+	}
 	
 	//거래처 정보 하나만 (수정하기위해서 가져오는거)
 	public Client getClientBycode(String code){

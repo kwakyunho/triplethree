@@ -21,21 +21,21 @@
 <result column="acc_email" property="accEmail"/>
 </resultMap>
 	<select id="getLicodeList" resultType="shop.triplethree.vo.Client">
-	select
-		s_section as liCode
-		,code as code
-	FROM
-		LIST_MANAGE
-	WHERE m_section='거래처구분'
+		select
+			s_section as liCode
+			,code as code
+		FROM
+			LIST_MANAGE
+		WHERE m_section='거래처구분'
 	</select>
 	
 	<select id="getLicode2List" resultType="shop.triplethree.vo.Client">
-	select
-		s_section as liCode2
-		,code as code
-	FROM
-		LIST_MANAGE
-	WHERE m_section='거래처상태'
+		select
+			s_section as liCode2
+			,code as code
+		FROM
+			LIST_MANAGE
+		WHERE m_section='거래처상태'
 	</select>
 
 	<update id="clientUpdate" parameterType="shop.triplethree.vo.Client">
@@ -69,6 +69,33 @@
 	</update>
 	
 	<select id="getClientBycode" parameterType="String" resultMap="clientResultMap">
+		SELECT
+				A.code
+				, B.s_section as li_code
+				, C.s_section as li_code2
+				, A.acc_name as acc_name
+				, A.acc_ceo_name as acc_ceo_name
+				,A.acc_addr
+				,A.acc_bln
+				,A.acc_fax 
+				,A.acc_phone
+				,A.repre_number
+				,A.acc_email
+				,A.writer
+				,A.writer_day
+				,A.approver
+				,A.appro_day
+				,A.approver_st
+		FROM ACC_MANAGE as A
+		LEFT JOIN LIST_MANAGE as B
+				on	A.li_code = B.code
+		LEFT JOIN LIST_MANAGE C
+				 on	A.li_code2 = C.code
+			 
+	 	WHERE A.code = #{code}
+	</select>
+	
+	<select id="getClientBycode1" parameterType="String" resultMap="clientResultMap">
 		select 
 			code 	
 			,li_code 	
@@ -140,6 +167,58 @@
 	</insert>
 	
 	<select id="getClientList" resultMap="clientResultMap">
+		SELECT
+			A.code as code
+			, B.s_section as li_code
+			, C.s_section as li_code2
+			, A.acc_name as acc_name
+			, A.acc_ceo_name as acc_ceo_name
+			,A.acc_addr
+			,A.acc_bln
+			,A.acc_fax 
+			,A.acc_phone
+			,A.repre_number
+			,A.acc_email
+			,A.writer
+			,A.writer_day
+			,A.approver
+			,A.appro_day
+			,A.approver_st
+		 FROM ACC_MANAGE as A
+			LEFT JOIN LIST_MANAGE as B
+			on	A.li_code = B.code
+			LEFT JOIN LIST_MANAGE C
+			 on	A.li_code2 = C.code
+	</select>
+	
+	<select id="getClientList2" resultMap="clientResultMap">
+			SELECT
+			A.code
+			, B.s_section as li_code
+			, C.s_section as li_code2
+			, A.acc_name as acc_name
+			, A.acc_ceo_name as acc_ceo_name
+			,A.acc_addr
+			,A.acc_bln
+			,A.acc_fax 
+			,A.acc_phone
+			,A.repre_number
+			,A.acc_email
+			,A.writer
+			,A.writer_day
+			,A.approver
+			,A.appro_day
+			,A.approver_st
+		 FROM ACC_MANAGE as A
+			LEFT JOIN LIST_MANAGE as B
+			on	A.li_code = B.code
+			LEFT JOIN LIST_MANAGE C
+			 on	A.li_code2 = C.code
+			 
+		 WHERE C.s_section = '영업중(거래중)'
+	</select>
+	
+	<select id="getClientList1" resultMap="clientResultMap">
 		SELECT 
 			 code 	
 			,li_code 

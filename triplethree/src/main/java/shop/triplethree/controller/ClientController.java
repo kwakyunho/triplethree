@@ -22,6 +22,13 @@ public class ClientController {
 			return "/client/clientList";
 		}
 		
+	//거래중 거래처 정보조회 리스트
+	@GetMapping("/clientList2")
+	public String clientList2(Model model) {
+		model.addAttribute("client", clientService.getClientList2());
+		return "/client/clientList2";
+	}
+		
 	//거래처 정보 수정화면 이동
 	@GetMapping("/clientUpdate")
 	public String clientUpdate(@RequestParam(value="code")
@@ -48,8 +55,6 @@ public class ClientController {
 		return "redirect:/clientList";
 	}
 
-	
-	
 	//거래처 정보등록 화면이동 (거래처 상태가지고감)
 	@GetMapping("/clientInsert")
 	public String clientInsert(Model model) {
@@ -64,7 +69,6 @@ public class ClientController {
 		//코드생성 메서드 호출
 		clientService.createClientCode(client);
 		
-		/* return "/client/clientList"; */
 		return "redirect:/clientList";
 	}
 	

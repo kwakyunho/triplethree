@@ -13,12 +13,13 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">거래처 조회</h1>
+				<h1 class="m-0 text-dark">거래처(거래중) 조회</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item">거래처 전체 리스트</li>
-					<li class="breadcrumb-item"><a th:href="@{/clientList2}">거래처(거래중) 목록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList}">거래처 전체 리스트</a></li>
+					<li class="breadcrumb-item">거래처(거래중) 목록</li>
+					
 					
 				</ol>
 			</div><!-- /.col -->
@@ -31,7 +32,7 @@
    <div class="col-12">
      <div class="card">
        <div class="card-header">
-         <h3 class="card-title">거래처 정보 리스트 ( 컬럼 늘리는거는 나중에 주석 풀어요 )</h3>
+         <h3 class="card-title">거래중 거래처 ( 컬럼 늘리는거는 나중에 주석 풀어요 )</h3>
        </div>
        <!-- /.card-header -->
       <!--  <div class="card-body" style="height:100px;">
