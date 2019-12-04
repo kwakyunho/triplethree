@@ -25,8 +25,7 @@ public class Employee {
 	private String conType;
 	private String basicPay;
 	private String writer;
-	private LocalDateTime writerDay; // 부를때 포맷형식 바꿔야함
-	
+	private String writerDay; // 부를때 포맷형식 바꿔야함
 	public String getCode() {
 		return code;
 	}
@@ -39,17 +38,35 @@ public class Employee {
 	public void setDemgCode(String demgCode) {
 		this.demgCode = demgCode;
 	}
+	public String getDemgName() {
+		return demgName;
+	}
+	public void setDemgName(String demgName) {
+		this.demgName = demgName;
+	}
 	public String getPoCode() {
 		return poCode;
 	}
 	public void setPoCode(String poCode) {
 		this.poCode = poCode;
 	}
+	public String getPoName() {
+		return poName;
+	}
+	public void setPoName(String poName) {
+		this.poName = poName;
+	}
 	public String getLiCode() {
 		return liCode;
 	}
 	public void setLiCode(String liCode) {
 		this.liCode = liCode;
+	}
+	public String getLiName() {
+		return liName;
+	}
+	public void setLiName(String liName) {
+		this.liName = liName;
 	}
 	public String getEmpNum() {
 		return empNum;
@@ -141,29 +158,11 @@ public class Employee {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public LocalDateTime getWriterDay() {
+	public String getWriterDay() {
 		return writerDay;
 	}
-	public void setWriterDay(LocalDateTime writerDay) {
+	public void setWriterDay(String writerDay) {
 		this.writerDay = writerDay;
-	}
-	public String getDemgName() {
-		return demgName;
-	}
-	public void setDemgName(String demgName) {
-		this.demgName = demgName;
-	}
-	public String getPoName() {
-		return poName;
-	}
-	public void setPoName(String poName) {
-		this.poName = poName;
-	}
-	public String getLiName() {
-		return liName;
-	}
-	public void setLiName(String liName) {
-		this.liName = liName;
 	}
 	@Override
 	public String toString() {
@@ -174,6 +173,8 @@ public class Employee {
 				+ ", photo=" + photo + ", retireDate=" + retireDate + ", signature=" + signature + ", conType="
 				+ conType + ", basicPay=" + basicPay + ", writer=" + writer + ", writerDay=" + writerDay + "]";
 	}
+	
+	
 	
 	
 	

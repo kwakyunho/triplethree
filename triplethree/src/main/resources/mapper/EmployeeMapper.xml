@@ -82,6 +82,7 @@
 	
 	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
 		SELECT 
+			
 			em.emp_num as empNum,
 			em.emp_name AS empName,
 			de.dename AS demgCode,
@@ -96,6 +97,16 @@
 			JOIN LIST_MANAGE AS li
 		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
 		
+		WHERE
+			em.writer_day in
+			(
+		SELECT
+			MAX(e.writer_day) AS date
+		FROM
+			EMP_MANAGE AS e
+		GROUP BY
+			e.emp_name)
+				
 	</select>
 	
 	<select id="selectForDetail" parameterType="String" resultType="shop.triplethree.vo.Employee">
@@ -126,8 +137,10 @@
 			JOIN LIST_MANAGE AS li
 		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
 		WHERE em.emp_num = #{empNum}
-
-	
+		ORDER BY
+			em.writer_day DESC
+		LIMIT 1;
+			
 		
 	</select>
 	
@@ -160,16 +173,65 @@
 			JOIN LIST_MANAGE AS li
 		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
 		WHERE em.emp_num = #{empNum}
+		ORDER BY
+			em.writer_day DESC
+		LIMIT 1
 
 	
 		
 	</select>
 	
-	<insert id="updateEmpliyee" parameterType="shop.triplethree.vo.Employee">
-		INSERT INTO EMP_MANAGE (emp_num,CODE,demgcode,pocode,li_code,emp_name,password,addr,phone,car_presence,email,
-								birth_date,con_type,basic_pay,join_date,photo,signature,retire_date,writer,writer_day)
-
-			values()
+	<insert id="updateEmployee" parameterType="shop.triplethree.vo.Employee">
+		INSERT INTO EMP_MANAGE (code, demgcode, pocode, li_code, emp_num, emp_name, password, 
+								addr, phone, car_presence, email, birth_date, con_type, basic_pay,
+								join_date, photo, signature, writer, writer_day)
+			VALUES (
+					#{code},
+					#{demgCode},
+					#{poCode},
+					#{liCode},
+					#{empNum},
+					#{empName},
+					#{password},
+					#{addr},
+					#{phone},
+					#{carPresence},
+					#{email},
+					#{birthDate},
+					#{conType},
+					#{basicPay},
+					#{joinDate},
+					#{photo},
+					#{signature},
+					#{writer},
+					 NOW())
+			 
+		<if test="retireDate neq null and retireDate neq ''.toString()">
+ 				INSERT INTO EMP_MANAGE (code, demgcode, pocode, li_code, emp_num, emp_name, password, 
+								addr, phone, car_presence, email, birth_date, con_type, basic_pay,
+								join_date, photo, signature, retire_date, writer, writer_day)
+				VALUES (
+						#{code},
+						#{demgCode},
+						#{poCode},
+						#{liCode},
+						#{empNum},
+						#{empName},
+						#{password},
+						#{addr},
+						#{phone},
+						#{carPresence},
+						#{email},
+						#{birthDate},
+						#{conType},
+						#{basicPay},
+						#{joinDate},
+						#{photo},
+						#{signature},
+						#{retireDate},
+						#{writer},
+						 NOW())
+ 			</if>
 	</insert>
 	
 </mapper>

@@ -34,5 +34,5 @@ public interface EmployeeMapper {
 	public Employee selectForUpdate(String empNum);
 	
 	//수정할 정보를 업데이트하는 메서드
-	public int updateEmpliyee(Employee employee);
+	public int updateEmployee(Employee employee);
 }

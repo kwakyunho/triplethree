@@ -149,24 +149,23 @@
 	                  <div class="form-group row">
 	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
-			                    <select class="col-sm-3" name="demgCode" >
-		                          <option  th:text="수정"></option>
-		                          
-	                        </select>
+			                    <select class="col-sm-3" name="demgCode">
+		                          <option th:each= "C :${depart}" th:selected="${C.demgCode} == ${u.demgName}" th:text="${C.demgCode}" th:value="${C.code}"></option>
+	                        	</select>
                         </div>
-                        
+                        <th:script></th:script>
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                           <option  th:text="수정"></option>                         
-	                        </select>
+		                          <option th:each ="P : ${position}" th:selected="${P.poCode} == ${u.PoName}" th:text="${P.poCode}" th:value="${P.code}"></option>	                         
+	                        	</select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                           <option  th:text="수정"></option>   		                      		                          
-	                        </select>
+		                          <option th:each="L :${status}"  th:selected="${L.liCode} == ${u.liName}" th:text="${L.liCode}" th:value="${L.code}"></option>		                      		                          
+	                        	</select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
 		                    <div class="col-sm-2">
@@ -178,11 +177,15 @@
 		                 	</div> -->
 	                 </div>
 	                 
+	                 
+	                 <!--  아직 여기는 셀렉트 못해오겠음.. -->
 	                  <div class="form-group row">
 	                   	  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">계약형태</label>
 			                   <select class="col-sm-3" name="conType">
-		                          <option th:text="수정"></option>
+		                          <option value="연봉">연봉</option>
+		                          <option value="시급">시급</option>
+		                          <option value="일급">일급</option>
 	                       	 </select>
 	                       </div>
 	                  
@@ -232,7 +235,7 @@
 	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">작성자</label>
 		                    	<div class="col-sm-3">
-		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${session.SID}" >
+		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${session.SID}" readonly="readonly">
 		                 		</div>
 	                 				
 	                 </div>

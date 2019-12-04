@@ -139,8 +139,11 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @GetMapping("/employeeUpdate")
-	 public String updateEmployee(@RequestParam(value="empNum")String empNum, Model model) {
+	 public String updateEmployee(@RequestParam(value="empNum")String empNum, Model model,Model model1, Model model2,Model model3) {
 		 model.addAttribute("update", employeeService.selectForUpdate(empNum));
+		 model1.addAttribute("depart", employeeService.selectForDepart());
+		 model2.addAttribute("position", employeeService.selectForPosition());
+		 model3.addAttribute("status", employeeService.selectForStatus());
 		 return "/employee/employeeUpdate";
 	 }
 	
@@ -151,8 +154,10 @@ public class EmployeeController {
 	  */
 	 @PostMapping("/employeeUpdate")
 	 public String updateEmployee(Employee employee) {
-		 
-		 return "/employee/employeeUpdate";
+		 String code = commonService.codeGeneration("EMP_MANAGE");
+		 employee.setCode(code);
+		 employeeService.updateEmployee(employee);
+		 return "redirect:/employeeList";
 	 }
 	
 }
