@@ -45,4 +45,11 @@ public class ScheduleService {
 	public Schedule selectUpdate(String code){
 		return schedulemapper.selectUpdate(code);
 	}
+	
+	/**
+	 * 일정 삭제 메서드
+	 * */
+	public int deleteSchedule(Schedule schedule) {
+		return schedulemapper.deleteSchedule(schedule);
+	}
 }

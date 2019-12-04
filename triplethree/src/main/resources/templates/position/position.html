@@ -47,17 +47,18 @@
 								<table style="text-align: center;">
 									<tr>
 										<td style="width:150px;">직급명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBe" name="positionNameBe"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBeIn" name="positionNameBe">
+										<div class="check_font" id="name_checkBe"></div></td>
 										<td style="width:150px;">레벨</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevel" name="positionLevel"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevelIn" name="positionLevel"></td>
 									</tr>
 									<tr>
 					                      <td style="width:150px;">사유</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="등록사유를 입력해주세요" id="positionSau" name="positionSau"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="등록사유를 입력해주세요" id="positionSauIn" name="positionSau"></td>
 									</tr>
 									<tr>
 										<td colspan="4">
-											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg">
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputPoBtn">
 										</td>
 									</tr>
 								</table>
@@ -97,19 +98,20 @@
 								<table style="text-align: center;">
 									<tr>
 										<td style="width:150px;">변경전 직급명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBe" name="positionNameBe"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBeUp" name="positionNameBe"></td>
 										<td style="width:150px;">변경후 직급명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameAf" name="positionNameAf"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameAfUp" name="positionNameAf">
+										<div class="check_font" id="name_checkAf"></div></td>
 									</tr>
 									<tr>
 										<td style="width:150px;">레벨</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevel" name="positionLevel"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevelUp" name="positionLevel"></td>
 					                    <td style="width:150px;">사유</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="positionSau" name="positionSau"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="positionSauUp" name="positionSau"></td>
 									</tr>
 									<tr>
 										<td colspan="4">
-											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg">
+											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updatePoBtn">
 										</td>
 									</tr>
 								</table>
@@ -166,17 +168,17 @@
 								<th>사용유무</th>
 								<th>삭제</th>
 							</tr>
-							<tr th:each="P : ${PositionList}">	
-								<td th:text="${P.positionCode}"></td>
-								<td th:text="${P.positionNameBe}"></td>
-								<td th:text="${P.positionLevel}"></td>
-								<td th:text="${P.positionWriter}"></td>
-								<td th:text="${P.positionWriterDay}"></td>
-								<td th:text="${P.positionSau}"></td>
-								<td th:text="${P.positionApprover}"></td>
-								<td th:text="${P.positionApproDay}"></td>
-								<td th:text="${P.positionApperverSt}"></td>
-								<td th:text="${P.positionYesNO}"></td>
+							<tr class="positionListTr" th:each="P : ${PositionList}">	
+								<td id="positionCode" th:text="${P.positionCode}"></td>
+								<td id="positionNameBe" th:text="${P.positionNameBe}"></td>
+								<td id="positionLevel" th:text="${P.positionLevel}"></td>
+								<td id="positionWriter" th:text="${P.positionWriter}"></td>
+								<td id="positionWriterDay" th:text="${P.positionWriterDay}"></td>
+								<td id="positionSau" th:text="${P.positionSau}"></td>
+								<td id="positionApprover" th:text="${P.positionApprover}"></td>
+								<td id="positionApproDay" th:text="${P.positionApproDay}"></td>
+								<td id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
+								<td id="positionYesNO" th:text="${P.positionYesNO}"></td>
 								<td><a th:href="@{positionListDelete(positionCode=${P.positionCode})}">삭제</a></td>								
 							</tr>
 						</thead>
@@ -199,6 +201,8 @@
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
 
+<!-- 공란 체크 스크립트-->       	         
+<script th:src="@{custom/js/blankCkeck.js}"></script>	
 <script>
 	
 </script>

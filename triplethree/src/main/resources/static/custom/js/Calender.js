@@ -164,6 +164,8 @@
       	dateClick: function(info) {
     		// 캘린더 날짜부분을 클릭시 모달이벤트 실행
 			$('#myModal1').modal('show');
+			$('.inputValue').val('');
+				
     	  },
     });
 

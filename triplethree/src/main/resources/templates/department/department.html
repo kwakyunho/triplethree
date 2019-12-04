@@ -47,7 +47,8 @@
 								<table style="text-align: center;">
 									<tr>
 										<td style="width:150px;">부서명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="departmentNameBe" name="departmentNameBe"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="inputTitle" name="departmentNameBe">
+										<div class="check_font" id="id_checkBe"></div></td>
 										<td style="width:150px;">레벨</td>
 										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
 									</tr>
@@ -65,7 +66,8 @@
 									</tr>
 									<tr>
 										<td colspan="4">
-											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg">
+											<!-- <button type="button" id="inputBtn" class="btn btn-block btn-primary btn-lg">등록하기</button> -->
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
 										</td>
 									</tr>
 								</table>
@@ -105,13 +107,14 @@
 								<table style="text-align: center;">
 									<tr>
 										<td style="width:150px;">변경전 부서명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="departmentNameBe" name="departmentNameBe"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="리스트에서 부서명을 클릭" id="departmentNameBeUp" name="departmentNameBe"></td>
 										<td style="width:150px;">변경후 부서명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="departmentNameAf" name="departmentNameAf"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="departmentNameAf" name="departmentNameAf">
+										<div class="check_font" id="id_checkAf"></div></td>
 									</tr>
 									<tr>
 										<td style="width:150px;">레벨</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="departmentLevelUp" name="departmentLevel"></td>
 										<td style="width:150px;">상위부서명</td>
 										<td>
 						                      <input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="상위부서명을 입력해주세요" id="departmentUpcode" name="departmentUpcode">
@@ -119,11 +122,11 @@
 									</tr>
 									<tr>
 					                      <td style="width:150px;">사유</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="departmentSauUp" name="departmentSau"></td>
 									</tr>
 									<tr>
 										<td colspan="4">
-											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg">
+											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updateBtn">
 										</td>
 									</tr>
 								</table>
@@ -181,18 +184,18 @@
 								<th>사용유무</th>
 								<th>삭제</th>
 							</tr>
-							<tr th:each="C : ${CompanyList}">	
-								<td th:text="${C.departmentCode}"></td>
-								<td th:text="${C.departmentNameBe}"></td>
-								<td th:text="${C.departmentLevel}"></td>
-								<td th:text="${C.departmentUpcode}"></td>
-								<td th:text="${C.departmentWriter}"></td>
-								<td th:text="${C.departmentWriterDay}"></td>
-								<td th:text="${C.departmentSau}"></td>
-								<td th:text="${C.departmentApprover}"></td>
-								<td th:text="${C.departmentApproDay}"></td>
-								<td th:text="${C.departmentApperverSt}"></td>
-								<td th:text="${C.departmentYesNO}"></td>
+							<tr class="groupListTr" th:each="C : ${CompanyList}">	
+								<td id="departmentCode" th:text="${C.departmentCode}"></td>
+								<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
+								<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
+								<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
+								<td id="departmentWriter" th:text="${C.departmentWriter}"></td>
+								<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
+								<td id="departmentSau" th:text="${C.departmentSau}"></td>
+								<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
+								<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
+								<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
+								<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
 								<td><a th:href="@{teamNameDelete(departmentCode=${C.departmentCode})}">삭제</a></td>								
 							</tr>
 						</thead>
@@ -215,9 +218,7 @@
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
 
-<script>
-	
-</script>
-
+<!-- 공란 / 유효성검사 체크 스크립트-->       	         
+<script th:src="@{custom/js/blankCkeck.js}"></script>	         
 </th:block>
 </html>

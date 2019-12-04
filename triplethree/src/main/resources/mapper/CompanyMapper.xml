@@ -156,4 +156,24 @@
 		WHERE 
 			p.code = #{positionCode}
 	</delete>
+	
+	<!-- 부서명 유효성 검사진행 -->
+	<select id="checkName" parameterType="shop.triplethree.vo.Company" resultType="int">
+		SELECT
+			COUNT(1) AS cnt
+		FROM 
+			DEMG AS D
+		WHERE
+			D.dename = #{departmentNameBe}
+		
+	</select>
+	
+	<select id="checkPoName" parameterType="shop.triplethree.vo.Position" resultType="int">
+		SELECT
+			COUNT(1) AS cnt
+		FROM 
+			POSISYS AS P
+		WHERE
+			P.poname = #{positionNameBe}
+	</select>
 </mapper>

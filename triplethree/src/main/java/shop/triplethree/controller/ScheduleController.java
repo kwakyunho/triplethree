@@ -81,6 +81,9 @@ public class ScheduleController {
 	@PostMapping("/companyScheduleDelet")
 	public String deleteSchedule(Schedule schedule) {
 		System.out.println("삭제버튼이 클릭되었나요?");
+		System.out.println(schedule.toString());
+		
+		scheduleService.deleteSchedule(schedule);
 		return "redirect:companySchedule";
 	}
 }

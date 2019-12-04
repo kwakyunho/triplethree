@@ -86,5 +86,18 @@ public class CompanyService {
 	public int deletePosition(String positionCode) {
 		return companyMapper.deletePosition(positionCode);
 	}
+
+	/**
+	 * 부서명 유효성 검사 메서드
+	 * */
+	public int checkDeName(Company company) {		
+		return companyMapper.checkDeName(company);
+	}
 	
+	/**
+	 * 직급명 유효성 검사 메서드
+	 * */
+	public int checkPoName(Position position) {
+		return companyMapper.checkPoName(position);
+	}
 }

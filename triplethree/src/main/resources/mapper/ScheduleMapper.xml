@@ -53,6 +53,8 @@
 			,c.cal_title = #{title}
 			,c.cal_start = #{start}
 			,c.cal_end = #{end}
+			,color = #{color}
+			,backgroundColor = #{backgroundColor}
 		WHERE
 			code = #{code}
  	</update>
@@ -75,7 +77,11 @@
  	
  	<!-- 일정 삭제 쿼리문 -->
  	<delete id="deleteSchedule" parameterType="shop.triplethree.vo.Schedule">
- 		
+ 		DELETE 
+		FROM 
+			CALENDAR
+		WHERE 
+			CODE = #{code}
  	</delete>
  	
  </mapper>

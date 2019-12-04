@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.triplethree.mapper.CompanyMapper;
 import shop.triplethree.service.CompanyService;
@@ -40,7 +41,7 @@ public class CompanyController {
 	public String insertOrganizationChart(Company company) {
 		System.out.println("부서 등록버튼 클릭이 되었나요 ?");
 			
-		companyService.insertOrganizationChart(company);
+		/* companyService.insertOrganizationChart(company); */ 
 		
 		//System.out.println(company.toString());
 		return "redirect:/teamNameInsert";
@@ -53,7 +54,7 @@ public class CompanyController {
 	public String updateOrganizationChart(Company company) {
 		System.out.println("부서 수정 버튼이 클릭되었나요?");
 		
-		companyService.updateOrganizationChart(company);
+		companyService.updateOrganizationChart(company); 
 		return "redirect:/teamNameInsert";
 	}
 	
@@ -89,7 +90,7 @@ public class CompanyController {
 	public String insertPosition(Position position) {
 		System.out.println("직급 등록 버튼이 클릭되었나요?");
 		System.out.println(position.toString());
-		companyService.insertPosition(position);
+		companyService.insertPosition(position); 
 		return "redirect:/positionInsert";
 	}
 	
@@ -99,7 +100,7 @@ public class CompanyController {
 	@PostMapping("/positionUpdate")
 	public String updatePosition(Position position) {
 		System.out.println("직급 수정 버튼이 클릭되었나요?");
-		companyService.updatePosition(position);
+		companyService.updatePosition(position); 
 		return "redirect:/positionInsert";
 	}
 	
@@ -114,4 +115,29 @@ public class CompanyController {
 		return "redirect:/positionInsert";
 	}
 
+	/**
+	 * 부서 등록/수정 유효성 검사 메서드
+	 * */
+	@PostMapping(value="/deNameCheck" , produces = "application/json")
+	public @ResponseBody int deNameCheck(String title, Company company) {
+		System.out.println("부서명이 제대로 전달 되었나요? "+ title);
+		System.out.println("부서명이 있는지 확인해볼께요.");
+		company.setDepartmentNameBe(title);
+		int cnt = companyService.checkDeName(company);
+		System.out.println("어떤 숫자가 왔나요? " + cnt);
+		return companyService.checkDeName(company);
+	}
+	
+	/**
+	 * 직급 등록/수정 유효성 검사 메서드
+	 * */
+	@PostMapping(value = "/poNameCheck", produces = "application/json")
+	public @ResponseBody int poNameCheck(String name, Position position) {
+		System.out.println("직급명이 제대로 전달 되었나요 ? " + name);
+		System.out.println("직급명이 있는지 확인해볼께요.");
+		position.setPositionNameBe(name);
+		int cnt = companyService.checkPoName(position);
+		System.out.println("어떤 숫자가 왔나요? " + cnt);
+		return companyService.checkPoName(position);
+	}
 }

@@ -8,6 +8,7 @@ public class Schedule {
 	private String start;
 	private String end;
 	private String color;
+	private String backgroundColor;
 	
 	public String getColor() {
 		return color;
@@ -15,7 +16,6 @@ public class Schedule {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	private String backgroundColor;
 	public String getCode() {
 		return code;
 	}
