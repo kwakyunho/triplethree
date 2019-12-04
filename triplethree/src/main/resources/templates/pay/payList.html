@@ -4,7 +4,7 @@
       layout:decorate="~{layouts/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>index</title>
+	<title>급여 조회</title>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -13,7 +13,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h4 class="m-0 text-dark">급여 입력</h4>
+				<h4 class="m-0 text-dark">급여 조회</h4>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -123,13 +123,7 @@
 						<tr><td colspan="2" align="left">차인지급액 :
 						<input type="text" name="deductHap" class="form-control"></td></tr>
 				</table>
-				</div>
-				<div align="center">
-				<form th:action="@{/payList}" method="post">
-				<div class="col-4">					
-					<input type="submit" name="paylist" value="급여 지급액 등록"></div>
-				</form>
-				</div>
+				</div>				
 				<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
