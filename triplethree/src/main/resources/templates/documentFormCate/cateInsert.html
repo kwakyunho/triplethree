@@ -134,6 +134,43 @@
 	</div>
 	<!-- /.container-fluid -->
 </div>
+<!-- Modal -->
+<div class="modal fade" id="cateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">카테고리명 수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="updateCateName">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">대분류</label>
+            <input type="text" class="form-control CateNameInput" id="largeCateNameInput" name="largeCateNameInput" value="">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">중분류</label>
+            <input type="text" class="form-control CateNameInput" id="middleCateNameInput" name="middleCateNameInput" value="">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">소분류</label>
+            <input type="text" class="form-control CateNameInput" id="smallCateNameInput" name="smallCateNameInput" value="">
+          </div>
+          <div class="form-group cateUseModal">
+            <!-- <label for="recipient-name" class="col-form-label">사용유무</label>
+            <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success"> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary">수정</button>
+      </div>
+    </div>
+  </div>
+</div>
 </th:block>
 
 <!-- 사용자 자바스크립트 -->
@@ -292,32 +329,47 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 카테고리 공통 플러그인 작업
+	var condition = 0;	// 0 : 작동없음, 1 : SELECT, 2 : UPDATE, 3 : DELETE
+	var cateCode = '';
+	var smallCateName = '';
+	var useConfig = '';
 	(function($) {
 		$.fn.smallCateEvent = function(input){
-			var condition = 0;	// 0 : 작동없음, 1 : SELECT, 2 : UPDATE, 3 : DELETE
-			var smallCateName = '';
-			var useConfig = '';
 			
-			
-			$(this).on('click', function(){
-				condition = input;
-				smallCateName = $(this).val()[0];
+				if(input == 1){
+					condition = 1;
+					smallCateName = $(this).val()[0];
+				}else if(input == 2){
+					if($('#largeCateNameInput').val() == '' || $('#middleCateNameInput').val() == '' || $('#smallCateNameInput').val() == ''){
+						condition = 0;
+						alert('누락된 값이 있습니다.');
+					}else{
+						if(confirm('내용 수정이 맞습니까?')){
+							condition = 2;
+						}
+					}
+				}
 			
 				// ajax 호출
 				$.ajax({
 					async: true,
 					type : 'POST',
-					data : {'condition' : condition, 'smallCateName': smallCateName, 'useConfig' : useConfig},
+					data : {'condition' : condition, 'cateCode' : cateCode, 'smallCateName': smallCateName, 'useConfig' : useConfig},
 					url : "updateCateNameConfig",
 					dataType : "json",
 					success : function(result) {
+						// log 출력 test 중
+						console.log(result);
 						
 						if(condition == 1){
+							cateCode = result.cateCode;
 							var tdObjectArray = [];
+							
 							for(var i=0; i < 5; i++){	
 								var tdObj = $('<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;"></td>');
 								if(i == 0) {
-									tdObj.css('width', '70px').text(result.code);
+									tdObj.css('width', '70px').text(result.cateCode);
 								}else if(i == 1){
 									tdObj.addClass('largeCateName').css('width', '100px').text(result.largeCateName);
 								}else if(i == 2){
@@ -335,6 +387,12 @@ $(document).ready(function(){
 								}	
 								tdObjectArray.push(tdObj);
 							}
+							
+							// modal input value 값 넣기
+							$('#largeCateNameInput').val(result.largeCateName);
+							$('#middleCateNameInput').val(result.middleCateName);
+							$('#smallCateNameInput').val(result.smallCateName);
+							
 							$('.samllCateNamePrint').html('');
 							for(var i=0; i < tdObjectArray.length; i ++){
 								$('.samllCateNamePrint').append(tdObjectArray[i]);
@@ -343,22 +401,34 @@ $(document).ready(function(){
 							$("input[data-bootstrap-switch]").each(function(){
 								$(this).bootstrapSwitch('state', $(this).prop('checked'));
 							});
+						}else if(condition == 2){
+							$('#cateModal').modal("hide");
 						}
 					},
 					error : function(error) {
 						//alert("error : " + error);
 					}
 				});
-			})
 		}
 	}(jQuery));
 	
 	// 소분류 클릭에 따른 이벤트
-	$('#smallCateList').smallCateEvent('1');
+	$('#smallCateList').on('click', function(){
+		$('#smallCateList').smallCateEvent('1');
+	})
 	
-	$('td').on('click', function(){
-		console.log('확인');
+	$('.samllCateNamePrint').on('click', function(){
+		$("#cateModal").modal();
 	});
+	
+	// modal input click시 공란변환
+	$('.CateNameInput').on('click', function(){
+		$(this).val('');
+	})
+	$('.btn-primary').on('click', function(){
+		$('.btn-primary').smallCateEvent('2');
+	})
+	
 });
 </script>
 <script type="text/javascript">

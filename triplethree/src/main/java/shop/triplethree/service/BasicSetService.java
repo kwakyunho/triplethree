@@ -16,8 +16,7 @@ public class BasicSetService {
 	
 	public int insertListName(CateNameList cateNameList) {
 		String code = commonService.codeGeneration("LIST_MANAGE");
-		System.out.println(code);
-		cateNameList.setCode(code);
+		cateNameList.setCateCode(code);
 		return basicSetMapper.insertListName(cateNameList);
 	}
 	
@@ -29,10 +28,12 @@ public class BasicSetService {
 		return basicSetMapper.selectCateNameList(largeCateName, middleCateName);
 	}
 	
-	public CateNameList CateNameConfig(int condition, String smallCateName, String useConfig){
+	public CateNameList CateNameConfig(int condition, String cateCode, String smallCateName, String useConfig){
 		CateNameList result = new CateNameList();
 		if(condition == 1) {
 			result = basicSetMapper.selectCateNameConfig(condition, smallCateName, useConfig);
+		}else if(condition == 2) {
+			result = basicSetMapper.updateCateNameConfig(condition, cateCode, smallCateName, useConfig);
 		}
 		return result;
 	}
