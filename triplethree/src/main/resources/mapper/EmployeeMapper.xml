@@ -17,7 +17,11 @@
 			JOIN DEMG AS de
 			JOIN POSISYS AS po
 		ON em.demgcode = de.CODE AND em.pocode = po.CODE
-		WHERE em.emp_num = #{empNum} 
+		WHERE em.emp_num = 'TT20191202001' 
+			and em.demgcode = de.CODE
+ 			AND em.pocode = po.CODE
+		
+			GROUP BY em.emp_num
 		<!-- AND em.PASSWORD = #{password} --> 
 	</select>
 	
@@ -81,7 +85,7 @@
 	</insert>
 	
 	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
-		SELECT 
+		<!-- SELECT 
 			
 			em.emp_num as empNum,
 			em.emp_name AS empName,
@@ -105,7 +109,25 @@
 		FROM
 			EMP_MANAGE AS e
 		GROUP BY
-			e.emp_name)
+			e.emp_name) -->
+			
+			SELECT
+				 em.CODE,
+			  	 de.dename AS demgCode,
+			     po.poname AS poCode,
+				 li.s_section AS liCode, 
+				 em.emp_num AS empNum, 
+				 em.emp_name AS empName, 
+				 em.email AS email,
+				 em.car_presence AS carPresence, 
+				 MAX(em.writer_day)
+			FROM 
+				EMP_MANAGE em, DEMG de, POSISYS po, LIST_MANAGE li
+				WHERE em.demgcode = de.CODE
+				AND em.pocode = po.CODE
+				AND em.li_code = li.code
+				GROUP BY em.emp_num
+						
 				
 	</select>
 	
