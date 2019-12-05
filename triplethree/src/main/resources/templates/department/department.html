@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">부서 관리</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">부서관리</a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- 부서등록 시작  -->
+<form th:action="@{teamNameInsert}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+				<div style="align-self:center; width:90%;">
+					<div id="accordion1">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary small" style="margin-top: 15px;">
+							<div class="card-header" style="align-self: center;">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 부서 등록 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne1" class="panel-collapse in collapse" style="">
+							<div class="card-body" style="text-align: -webkit-center;">
+								<table style="text-align: center;">
+									<tr>
+										<td style="width:150px;">부서명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="inputTitle" name="departmentNameBe">
+										<div class="check_font" id="id_checkBe"></div></td>
+										<td style="width:150px;">레벨</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="departmentLevel" name="departmentLevel"></td>
+									</tr>
+									<tr>
+										<td style="width:150px;">상위부서코드</td>
+										<td>
+											<div class="form-group">
+												<select class="form-control form-control-lg" style="font-size: medium;" name="departmentUpcode">
+													<option th:each="C : ${selectBox}" th:text="${C.departmentNameBe}"></option>
+												</select>
+						                      </div>
+					                      </td>
+					                      <td style="width:150px;">사유</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="등록사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<!-- <button type="button" id="inputBtn" class="btn btn-block btn-primary btn-lg">등록하기</button> -->
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
+										</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	</div>
+</form>
+<!-- 부서등록 끝  -->
+
+<!-- 부서수정 시작  -->
+<form th:action="@{teamNameUpdate}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+				<div style="align-self:center; width:90%;">
+					<div id="accordion2">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary small" style="margin-top: 15px;">
+							<div class="card-header" style="align-self: center;">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false"> 부서 수정 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne2" class="panel-collapse in collapse" style="">
+							<div class="card-body" style="text-align: -webkit-center;">
+								<table style="text-align: center;">
+									<tr>
+										<td style="width:150px;">변경전 부서명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="리스트에서 부서명을 클릭" id="departmentNameBeUp" name="departmentNameBe"></td>
+										<td style="width:150px;">변경후 부서명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="부서명을 입력해주세요" id="departmentNameAf" name="departmentNameAf">
+										<div class="check_font" id="id_checkAf"></div></td>
+									</tr>
+									<tr>
+										<td style="width:150px;">레벨</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="departmentLevelUp" name="departmentLevel"></td>
+										<td style="width:150px;">상위부서명</td>
+										<td>
+						                      <input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="상위부서명을 입력해주세요" id="departmentUpcode" name="departmentUpcode">
+					                      </td>
+									</tr>
+									<tr>
+					                      <td style="width:150px;">사유</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="departmentSauUp" name="departmentSau"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updateBtn">
+										</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	</div>
+</form>
+<!-- 부서수정 끝  -->
+
+
+
+<!-- 부서 조회 시작  -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">부서 리스트</h3>
+					<div class="card-tools">
+						<div class="input-group input-group-sm" style="width: 150px;">
+							<input type="text" name="table_search"
+								class="form-control float-right" placeholder="Search">
+
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-default">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body table-responsive p-0" style="overflow-y: scroll;">
+					<table class="table table-hover small" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>부서관리코드</th>
+								<th>부서명</th>
+								<th>레벨</th>
+								<th>상위부서코드</th>
+								<th>초기등록자</th>
+								<th>작성일자</th>
+								<th>사유</th>
+								<th>승인자</th>
+								<th>승인일자</th>
+								<th>승인상태</th>
+								<th>사용유무</th>
+								<th>삭제</th>
+							</tr>
+							<tr class="groupListTr" th:each="C : ${CompanyList}">	
+								<td id="departmentCode" th:text="${C.departmentCode}"></td>
+								<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
+								<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
+								<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
+								<td id="departmentWriter" th:text="${C.departmentWriter}"></td>
+								<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
+								<td id="departmentSau" th:text="${C.departmentSau}"></td>
+								<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
+								<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
+								<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
+								<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
+								<td><a th:href="@{teamNameDelete(departmentCode=${C.departmentCode})}">삭제</a></td>								
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+			
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+<!-- 부서 조회 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+<!-- 공란 / 유효성검사 체크 스크립트-->       	         
+<script th:src="@{custom/js/blankCkeck.js}"></script>	         
+</th:block>
+</html>

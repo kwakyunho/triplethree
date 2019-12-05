@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+	layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>사원 목록</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+
+
+<th:block layout:fragment="customContents">
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0 text-dark">사원 관리 - 사원 조회</h1>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="/index">Home</a></li>
+						<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
+						<li class="breadcrumb-item">사원 조회</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /.content-header -->
+
+	
+	<div class="col-md-9">
+		<div class="col-md-2">
+			<button type="button" class="btn btn-block bg-gradient-primary"
+				onclick="location.href='/employeeInsert'">사원 등록</button>
+		</div>
+	</div>	
+	
+	<br>
+	<div class="content">
+		<div class="container-fluid">
+			<div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">사원 조회 목록</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover" style="margid:auto; text-align:center;">
+                  <thead>
+                    <tr>
+	                      <th>사원번호</th>
+	                      <th>사원명</th>
+	                      <th>부서</th>
+	                      <th>직급</th>
+	                      <th>이메일</th>
+	                      <th>차량유무</th>
+	                      <th>재직상태</th>
+	                      <th>상세보기</th>
+	                      <th>수정</th>
+	                      <th>삭제(재직상태변경)</th>
+                    </tr>
+                    <tr th:each="e :${emList}">
+						<td th:text="${e.empNum}"></td>
+						<td th:text="${e.empName}"></td>
+						<td th:text="${e.demgCode}"></td>
+						<td th:text="${e.poCode}"></td>
+						<td th:text="${e.email}"></td>
+						<td th:text="${e.carPresence}"></td>
+						<td th:text="${e.liCode}"></td>
+						<td>
+							<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
+						</td>
+						<td>
+							<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
+							<a th:href="@{/employeeUpdate(empNum=${e.empNum})}">수정</a>
+						</td>
+						<td>
+							<a th:href="@{/}">삭제</a>
+						</td>
+					</tr>
+                  </thead>
+                  <tbody>
+                   <!--  <tr>
+                      <td>183</td>
+                      <td>John Doe</td>
+                      <td>11-7-2014</td>
+                      <td><span class="tag tag-success">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr> -->
+                   
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+
+	<script src="../../plugins/jquery/jquery.min.js"></script>
+
+
+
+	<script src="../../plugins/datatables/jquery.dataTables.js"></script>
+	<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+	<script>
+		$(function() {
+			$("#example1").DataTable();
+			$('#example2').DataTable({
+				"paging" : true,
+				"lengthChange" : false,
+				"searching" : false,
+				"ordering" : true,
+				"info" : true,
+				"autoWidth" : false,
+			});
+		});
+	</script>
+</th:block>
+</html>

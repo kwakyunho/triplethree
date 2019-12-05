@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts">
+<head th:replace="includes/head :: headFragment"></head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to to the body tag
+to get the desired effect
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+<div class="wrapper">
+
+
+	<!-- Main Sidebar Container -->
+	<div th:replace="includes/sidebar :: sidebarFragment"></div>
+
+
+		<!-- Main content -->
+		<th:block layout:fragment="customContents"></th:block>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+	<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<div th:replace="includes/foot :: javaScript"></div>
+<th:block layout:fragment="customScript"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="shop.triplethree.mapper.ScheduleMapper">
+ 
+ 	<!-- 일정 등록 쿼리문 -->
+ 	<insert id="insertSchedule" parameterType="shop.triplethree.vo.Schedule">
+		 INSERT INTO
+			CALENDAR
+				(code
+				,emp_code
+				,cal_sortation
+				,cal_title
+				,cal_start
+				,cal_end
+				,color
+				,backgroundColor
+				,writer_day)
+		VALUES
+			(#{code}
+			,'id001'
+			,#{sortation}
+			,#{title}
+			,#{start}
+			,#{end}
+			,#{color}
+			,#{backgroundColor}
+			,NOW());
+ 	</insert>
+ 
+ 	<!-- 일정 조회 쿼리문 -->
+ 	<select id="selectSchedule" resultType="shop.triplethree.vo.Schedule">
+ 		SELECT
+ 			 code
+ 			,cal_sortation AS sortation
+			,cal_title AS title
+			,cal_start AS start 
+			,cal_end AS end
+			,color AS color
+			,backgroundColor AS backgroundColor
+		FROM
+			CALENDAR
+ 	</select>
+ 	
+ 	<!-- 일정 수정 쿼리문 -->
+ 	<update id="updateSchedule" parameterType="shop.triplethree.vo.Schedule">
+ 		UPDATE
+			CALENDAR AS c
+		SET
+			c.cal_sortation = #{sortation}
+			,c.cal_title = #{title}
+			,c.cal_start = #{start}
+			,c.cal_end = #{end}
+			,color = #{color}
+			,backgroundColor = #{backgroundColor}
+		WHERE
+			code = #{code}
+ 	</update>
+ 	
+ 	<!-- 일정 수정시 화면에 뿌려줄 값 가져오는 쿼리문 -->
+ 	<select id="selectUpdate" resultType="shop.triplethree.vo.Schedule" parameterType="String">
+ 		 		SELECT
+ 			 code
+ 			,cal_sortation AS sortation
+			,cal_title AS title
+			,cal_start AS start 
+			,cal_end AS end
+			,color AS color
+			,backgroundColor AS backgroundColor
+		FROM
+			CALENDAR
+		WHERE
+			code = #{code}
+ 	</select>
+ 	
+ 	<!-- 일정 삭제 쿼리문 -->
+ 	<delete id="deleteSchedule" parameterType="shop.triplethree.vo.Schedule">
+ 		DELETE 
+		FROM 
+			CALENDAR
+		WHERE 
+			CODE = #{code}
+ 	</delete>
+ 	
+ </mapper>

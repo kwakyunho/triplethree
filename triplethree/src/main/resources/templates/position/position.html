@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">직급 관리</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">직급관리</a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- 직급등록 시작  -->
+<form th:action="@{positionInsert}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+				<div style="align-self:center; width:90%;">
+					<div id="accordion1">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary small" style="margin-top: 15px;">
+							<div class="card-header" style="align-self: center;">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 직급 등록 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne1" class="panel-collapse in collapse" style="">
+							<div class="card-body" style="text-align: -webkit-center;">
+								<table style="text-align: center;">
+									<tr>
+										<td style="width:150px;">직급명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBeIn" name="positionNameBe">
+										<div class="check_font" id="name_checkBe"></div></td>
+										<td style="width:150px;">레벨</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevelIn" name="positionLevel"></td>
+									</tr>
+									<tr>
+					                      <td style="width:150px;">사유</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="등록사유를 입력해주세요" id="positionSauIn" name="positionSau"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputPoBtn">
+										</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	</div>
+</form>
+<!-- 직급등록 끝  -->
+
+<!-- 직급수정 시작  -->
+<form th:action="@{positionUpdate}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+				<div style="align-self:center; width:90%;">
+					<div id="accordion2">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary small" style="margin-top: 15px;">
+							<div class="card-header" style="align-self: center;">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false"> 직급 수정 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne2" class="panel-collapse in collapse" style="">
+							<div class="card-body" style="text-align: -webkit-center;">
+								<table style="text-align: center;">
+									<tr>
+										<td style="width:150px;">변경전 직급명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBeUp" name="positionNameBe"></td>
+										<td style="width:150px;">변경후 직급명</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameAfUp" name="positionNameAf">
+										<div class="check_font" id="name_checkAf"></div></td>
+									</tr>
+									<tr>
+										<td style="width:150px;">레벨</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="레벨을 입력해주세요" id="positionLevelUp" name="positionLevel"></td>
+					                    <td style="width:150px;">사유</td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="positionSauUp" name="positionSau"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updatePoBtn">
+										</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	</div>
+</form>
+<!-- 직급수정 끝  -->
+
+
+
+<!-- 직급 조회 시작  -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">직급 리스트</h3>
+					<div class="card-tools">
+						<div class="input-group input-group-sm" style="width: 150px;">
+							<input type="text" name="table_search"
+								class="form-control float-right" placeholder="Search">
+
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-default">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body table-responsive p-0" style="overflow-y: scroll;">
+					<table class="table table-hover small" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>직급관리코드</th>
+								<th>직급명</th>
+								<th>레벨</th>
+								<th>초기등록자</th>
+								<th>작성일자</th>
+								<th>사유</th>
+								<th>승인자</th>
+								<th>승인일자</th>
+								<th>승인상태</th>
+								<th>사용유무</th>
+								<th>삭제</th>
+							</tr>
+							<tr class="positionListTr" th:each="P : ${PositionList}">	
+								<td id="positionCode" th:text="${P.positionCode}"></td>
+								<td id="positionNameBe" th:text="${P.positionNameBe}"></td>
+								<td id="positionLevel" th:text="${P.positionLevel}"></td>
+								<td id="positionWriter" th:text="${P.positionWriter}"></td>
+								<td id="positionWriterDay" th:text="${P.positionWriterDay}"></td>
+								<td id="positionSau" th:text="${P.positionSau}"></td>
+								<td id="positionApprover" th:text="${P.positionApprover}"></td>
+								<td id="positionApproDay" th:text="${P.positionApproDay}"></td>
+								<td id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
+								<td id="positionYesNO" th:text="${P.positionYesNO}"></td>
+								<td><a th:href="@{positionListDelete(positionCode=${P.positionCode})}">삭제</a></td>								
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+			
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+<!-- 직급 조회 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+<!-- 공란 체크 스크립트-->       	         
+<script th:src="@{custom/js/blankCkeck.js}"></script>	
+<script>
+	
+</script>
+
+</th:block>
+</html>

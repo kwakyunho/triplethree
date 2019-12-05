@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="shop.triplethree.mapper.CompanyMapper">
+	
+	<!-- 부서정보 등록 쿼리문 -->
+	<insert id="insertOrganizationChart" parameterType="shop.triplethree.vo.Company">
+		INSERT INTO
+			DEMG (
+				code
+				,dename
+				,level
+				,updamgcode
+				,reason
+				,writer
+				,writer_day)
+		VALUES
+			(#{departmentCode}
+			,#{departmentNameBe}
+			,#{departmentLevel}
+			,#{departmentUpcode}
+			,#{departmentSau}
+			,'id001'
+			,NOW());
+	</insert>
+	
+	<!-- 부서정보 리스트 쿼리문 -->
+	<select id="selectOrganizationChart" resultType="shop.triplethree.vo.Company">
+		SELECT
+			code AS departmentCode
+			,dename AS departmentNameBe
+			,level AS departmentLevel
+			,updamgcode AS departmentUpcode
+			,writer AS departmentWriter
+			,writer_day AS departmentWriterDay
+			,approver AS departmentApprover
+			,approver_st AS departmentApperverSt
+			,appro_day AS departmentApproDay
+			,reason AS departmentSau
+			,yes_or_no AS departmentYesNO
+		FROM
+			DEMG
+	</select>
+	
+	<!-- 부서등록시 상위부서 selectbox 리스트 쿼리문 -->
+	<select id="selectBox" resultType="shop.triplethree.vo.Company">
+		SELECT
+			code AS departmentCode
+			,dename AS departmentNameBe
+			,level AS departmentLevel
+			,updamgcode AS departmentUpcode
+			,writer AS departmentWriter
+			,writer_day AS departmentWriterDay
+			,approver AS departmentApprover
+			,approver_st AS departmentApperverSt
+			,appro_day AS departmentApproDay
+			,reason AS departmentSau
+			,yes_or_no AS departmentYesNO
+		FROM
+			DEMG
+		WHERE
+			yes_or_no = 'Y'
+	</select>
+	
+	<!-- 부서명으로 부서코드 가져오기 -->
+	<select id="selectUpCode" parameterType="String" resultType="String">
+		SELECT 
+			code
+		FROM 
+			DEMG
+		WHERE 
+			dename = #{upCode};
+	</select>
+	
+	<!-- 부서정보 삭제 쿼리문 (상태만 N으로 변경) -->
+	<update id="deleteOrganizationChart" parameterType="String">
+		UPDATE 
+			DEMG AS d 
+		SET 
+			d.yes_or_no  = 'N' 
+			,d.reason = '사용안함'
+		WHERE 
+			d.code = #{departmentCode}
+	</update>
+	
+	<!-- 부서정보 수정 쿼리문 -->
+	<update id="updateOrganizationChart" parameterType="shop.triplethree.vo.Company">
+		UPDATE 
+			DEMG AS d 
+		SET 
+			d.dename = #{departmentNameAf}
+			,d.level = #{departmentLevel}
+			,d.updamgcode = #{departmentUpcode}
+			,d.reason = #{departmentSau}
+		WHERE 
+			d.dename = #{departmentNameBe}
+	</update>
+	
+	<!-- 직급정보 등록 쿼리 -->
+	<insert id="insertPosition" parameterType="shop.triplethree.vo.Position">
+		INSERT INTO
+			POSISYS (
+				code
+				,poname
+				,level
+				,reason
+				,writer
+				,writer_day)
+		VALUES
+			(#{positionCode}
+			,#{positionNameBe}
+			,#{positionLevel}
+			,#{positionSau}
+			,'id001'
+			,NOW());
+	</insert>
+	
+	<!-- 직급정보 수정 쿼리문 -->
+	<update id="updatePosition" parameterType="shop.triplethree.vo.Position">
+		UPDATE 
+			POSISYS
+		SET 
+			poname = #{positionNameAf}
+			,level = #{positionLevel}
+			,reason = #{positionSau}
+		WHERE 
+			poname = #{positionNameBe}
+	</update>
+	
+	<!-- 직급정보 리스트 쿼리문 -->
+	<select id="selectPosition" resultType="shop.triplethree.vo.Position">
+		SELECT
+			code AS positionCode
+			,poname AS positionNameBe
+			,level AS positionLevel
+			,writer AS positionWriter
+			,writer_day AS positionWriterDay
+			,approver AS positionApprover
+			,approver_st AS positionApperverSt
+			,appro_day AS positionApproDay
+			,reason AS positionSau
+			,yes_or_no AS positionYesNO
+		FROM 
+			POSISYS
+	</select>
+	
+	<!-- 직급정보 삭제 쿼리문 ( 상태만 N으로 변경 ) -->
+	<delete id="deletePosition" parameterType="String">
+		UPDATE 
+			POSISYS AS p
+		SET 
+			p.yes_or_no  = 'N' 
+			,p.reason = '사용안함'
+		WHERE 
+			p.code = #{positionCode}
+	</delete>
+	
+	<!-- 부서명 유효성 검사진행 -->
+	<select id="checkDeName" parameterType="shop.triplethree.vo.Company" resultType="int">
+		SELECT
+			COUNT(1) AS cnt
+		FROM 
+			DEMG AS D
+		WHERE
+			D.dename = #{departmentNameBe}
+		
+	</select>
+	
+	<!-- 직급명 유효성 검사진행 -->
+	<select id="checkPoName" parameterType="shop.triplethree.vo.Position" resultType="int">
+		SELECT
+			COUNT(1) AS cnt
+		FROM 
+			POSISYS AS P
+		WHERE
+			P.poname = #{positionNameBe}
+	</select>
+	
+	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+	INSERT INTO
+	EM_INFO
+		(code,co_name,co_ceoname,co_postcode,co_addr,co_detailaddr,co_extraaddr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
+	VALUES
+		(#{Code}
+		,#{coName}
+		,#{coCeoname}
+		,#{coPostCode}
+		,#{coAddr}
+		,#{coDetailAddr}
+		,#{coExtraAddr}
+		,#{coBin}
+		,#{coFax}
+		,#{coPhone}
+		,#{coEmail}
+		,#{coLogo}
+		,#{writer}
+		,now()
+	)
+	</insert>
+	<select id="selectCompany" resultType="shop.triplethree.vo.Company">
+	select
+		code AS Code
+		,co_name AS coName
+		,co_ceoname AS coCeoname
+		,co_postcode AS coPostCode
+		,co_detailaddr AS coDetailAddr
+		,co_extraaddr AS coExtraAddr
+		,co_addr AS coAddr
+		,co_bln AS coBin
+		,co_fax AS coFax
+		,co_phone AS coPhone
+		,co_email AS coEmail
+		,co_logo AS coLogo
+		,writer AS writer
+		,writer_day AS writerDay
+		,yes_or_no AS yesOrNo
+		,co_reason AS coReason
+	FROM 
+		EM_INFO
+	</select>
+	<select id="updateCompanySelect" resultType="shop.triplethree.vo.Company">
+	select
+		code AS Code
+		,co_name AS coName
+		,co_ceoname AS coCeoname
+		,co_postcode AS coPostCode
+		,co_detailaddr AS coDetailAddr
+		,co_extraaddr AS coExtraAddr
+		,co_addr AS coAddr
+		,co_bln AS coBin
+		,co_fax AS coFax
+		,co_phone AS coPhone
+		,co_email AS coEmail
+		,co_logo AS coLogo
+		,writer AS writer
+		,writer_day AS writerDay
+		,yes_or_no AS yesOrNo
+		,co_reason AS coReason
+	FROM 
+		EM_INFO
+	where
+		code=#{Code}	
+	
+	</select>
+	<update id="updateCompany" parameterType="shop.triplethree.vo.Company">
+		UPDATE EM_INFO
+	SET
+		co_ceoname=#{coCeoname}		
+		,co_postcode=#{coPostCode}
+		,co_addr=#{coAddr}
+		,co_detailaddr=#{coDetailAddr}
+		,co_extraaddr=#{coExtraAddr}
+		,co_fax=#{coFax}		
+		,co_phone=#{coPhone}
+		,co_email=#{coEmail}
+		,co_logo=#{coLogo}
+		,writer=#{writer}
+		,writer_day=now()
+		,co_reason=#{coReason}
+	where
+		code=#{Code}
+	</update>
+</mapper>
