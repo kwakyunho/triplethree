@@ -33,7 +33,7 @@
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
-									<p>회사정보</p>
+									<p>회사정보등록</p>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -63,15 +63,23 @@
 						</ul>
 					</li>
 					<li class="nav-item has-treeview">
-						<a href="#" class="nav-link">
+						<a th:href="@{#}" class="nav-link">
 							<i class="nav-icon fas fa-link"></i>
 							<p>거래처관리<i class="right fas fa-angle-left"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>거래처정보</p>
+								<a th:href="@{/clientInsert}" class="nav-link">
+									<i class="nav-icon fas fa-edit"></i>
+									<p>거래처정보등록</p>
+								</a>
+							</li>
+						</ul>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a th:href="@{/clientList}" class="nav-link">
+									<i class="nav-icon fas fa-clipboard-list"></i>
+									<p>거래처조회</p>
 								</a>
 							</li>
 						</ul>
@@ -83,20 +91,20 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+								<a th:href="@{/boardList}" class="nav-link">
+									<i class="nav-icon fas fa-check-double"></i>
 									<p>공지사항</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+									<i class="nav-icon far fa-list-alt"></i>
 									<p>자유게시판</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+									<i class="nav-icon fas fa-list-alt"></i>
 									<p>익명게시판</p>
 								</a>
 							</li>
