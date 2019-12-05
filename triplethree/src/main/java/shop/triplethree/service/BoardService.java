@@ -24,7 +24,7 @@ public class BoardService {
 	//게시물 목록 가져오기
 	public List<Board> boardList() {
 		List<Board> list = boardMapper.boardList();
-		return	list;
+		return boardMapper.boardList();
 	}
 	
 	//게시물  가져오기
