@@ -36,13 +36,17 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-cogs"></i>
-							<p>운영관리<i class="right fas fa-angle-left"></i></p>
+							<p>1.운영관리<i class="right fas fa-angle-left"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{/companyInsert}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
-									<p>회사정보리스트</p>
+									<p>!.회사정보등록</p>
+								</a>
+								<a th:href="@{/companyInfo}" class="nav-link">
+									<i class="nav-icon far fa-building"></i>
+									<p>!.회사정보리스트</p>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -60,13 +64,13 @@
 							<li class="nav-item">
 								<a th:href="@{/employeeList}" class="nav-link">
 									<i class="nav-icon fas fa-users-cog"></i>
-									<p>사원관리</p>
+									<p>!.사원관리</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon fas fa-clipboard-list"></i>
-									<p>인사이동이력</p>
+									<p>#.인사이동이력</p>
 								</a>
 							</li>
 						</ul>
@@ -74,13 +78,13 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-link"></i>
-							<p>거래처관리<i class="right fas fa-angle-left"></i></p>
+							<p>2.거래처관리<i class="right fas fa-angle-left"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{/clientInsert}" class="nav-link">
 									<i class="nav-icon fas fa-edit"></i>
-									<p>거래처정보등록</p>
+									<p>!.거래처정보등록</p>
 								</a>
 							</li>
 						</ul>
@@ -88,7 +92,7 @@
 							<li class="nav-item">
 								<a th:href="@{/clientList}" class="nav-link">
 									<i class="nav-icon fas fa-clipboard-list"></i>
-									<p>거래처조회</p>
+									<p>!.거래처조회</p>
 								</a>
 							</li>
 						</ul>
@@ -96,25 +100,25 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-copy"></i>
-							<p>게시판관리<i class="fas fa-angle-left right"></i></p>
+							<p>3.게시판관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{/boardList}" class="nav-link">
 									<i class="nav-icon fas fa-check-double"></i>
-									<p>공지사항</p>
+									<p>!.공지사항</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon far fa-list-alt"></i>
-									<p>자유게시판</p>
+									<p>#.자유게시판</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon fas fa-list-alt"></i>
-									<p>익명게시판</p>
+									<p>#.익명게시판</p>
 								</a>
 							</li>
 						</ul>
@@ -122,7 +126,7 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-chart-pie"></i>
-							<p>일정관리<i class="right fas fa-angle-left"></i></p>
+							<p>4.일정관리<i class="right fas fa-angle-left"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
@@ -134,13 +138,13 @@
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>부서일정</p>
+									<p>#.부서일정</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>개인일정</p>
+									<p>#.개인일정</p>
 								</a>
 							</li>
 						</ul>
@@ -148,37 +152,37 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-copy"></i>
-							<p>전자결재<i class="fas fa-angle-left right"></i></p>
+							<p>5.#.전자결재<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>문서양식함</p>
+									<p>#.문서양식함</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon fas fa-edit"></i>
-									<p>기안할문서</p>
+									<p>#.기안할문서</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>결재대기함</p>
+									<p>#.결재대기함</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>반려문서함</p>
+									<p>#.반려문서함</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>결재완료함</p>
+									<p>#.결재완료함</p>
 								</a>
 							</li>
 						</ul>
@@ -186,13 +190,13 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-edit"></i>
-							<p>출장관리<i class="fas fa-angle-left right"></i></p>
+							<p>6.#.출장관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>출장이력관리</p>
+									<p>#.출장이력관리</p>
 								</a>
 							</li>
 						</ul>
@@ -200,25 +204,25 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-won-sign"></i>
-							<p>자산관리<i class="fas fa-angle-left right"></i></p>
+							<p>7.#.자산관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>시설물관리</p>
+									<p>#.시설물관리</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>비품관리</p>
+									<p>#.비품관리</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>보유차량관리</p>
+									<p>#.보유차량관리</p>
 								</a>
 							</li>
 						</ul>
@@ -226,31 +230,31 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-table"></i>
-							<p>예약관리<i class="fas fa-angle-left right"></i></p>
+							<p>8.#.예약관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>차량이용신청</p>
+									<p>#.차량이용신청</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>회의실이용신청</p>
+									<p>#.회의실이용신청</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>비품이용신청</p>
+									<p>#.비품이용신청</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>이용내역조회</p>
+									<p>#.이용내역조회</p>
 								</a>
 							</li>
 						</ul>
@@ -258,31 +262,31 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-hand-holding-usd"></i>
-							<p>급여관리<i class="fas fa-angle-left right"></i></p>
+							<p>9.급여관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{/insertPay}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>급여 지급액 등록</p>
+									<p>!.급여 지급액 등록</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>연차기준설정</p>
+									<p>#.연차기준설정</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>공재액설정</p>
+									<p>#.공재액설정</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon fas fa-file-invoice-dollar"></i>
-									<p>지급내역조회(급여,퇴직,성과)</p>
+									<p>#.지급내역조회</p>
 								</a>
 							</li>
 						</ul>
@@ -290,19 +294,19 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-table"></i>
-							<p>근태관리<i class="fas fa-angle-left right"></i></p>
+							<p>10.근태관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>출퇴근기록부</p>
+									<p>#.출퇴근기록부</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>휴가사용이력조회</p>
+									<p>#.휴가사용이력조회</p>
 								</a>
 							</li>
 						</ul>
@@ -310,25 +314,25 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-table"></i>
-							<p>평가관리<i class="fas fa-angle-left right"></i></p>
+							<p>11.#.평가관리<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>평가서제작</p>
+									<p>#.평가서제작</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>평가응시</p>
+									<p>#.평가응시</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>평가결과확인</p>
+									<p>#.평가결과확인</p>
 								</a>
 							</li>
 						</ul>
@@ -336,13 +340,13 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-address-card"></i>
-							<p>마이페이지<i class="fas fa-angle-left right"></i></p>
+							<p>12.#.마이페이지<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>개인정보수정</p>
+									<p>#.개인정보수정</p>
 								</a>
 							</li>
 						</ul>
@@ -350,7 +354,7 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-address-card"></i>
-							<p>기본설정<i class="fas fa-angle-left right"></i></p>
+							<p>13.기본설정<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
