@@ -3,8 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
       layout:decorate="~{layouts/default}">
 
+<!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>index</title>
+	<title>인덱스</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -30,17 +36,45 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-9">
 				<div class="card">
-				알아서 사용하세요
+					알아서 사용하세요
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
-			<div class="col-lg-6">
+			<div class="col-lg-3">
 				<div class="card">
-				알아서 사용하세요
+				
+					<!-- Profile Image -->
+					<div class="card card-primary card-outline">
+						<div class="card-body box-profile">
+							<div class="text-left fas fa-align-justify" style="font-size: 30px;"><span> 근태관리</span></div>
+							<div class="text-center" style="border-bottom-style: groove; margin-top: 5px;"></div>
+							<div class="text-muted text-center" style="margin-top: 10px;">
+								<span id="nowDay"></span>
+							</div>
+							<div class="profile-username text-center" style="margin-top: -10px;">
+								<span id="nowTime" style="font-size: -webkit-xxx-large;"></span>
+							</div>
+							<ul class="list-group list-group-unbordered mb-3">
+								<li class="list-group-item">
+									<b>출근시간</b> <a class="float-right">미등록</a>
+								</li>
+								<li class="list-group-item">
+									<b>퇴근시간</b> <a class="float-right">미등록</a>
+								</li>
+								<li class="list-group-item">
+									<b>근무시간</b> <a class="float-right">미등록</a>
+								</li>
+							</ul>
+							<a href="#" class="btn btn-primary btn-block"><b>근무상태변경</b></a>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				
 				</div>
 				<!-- /.card -->
 			</div>
@@ -53,8 +87,31 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+<script type="text/javascript">
+
+<!-- 현재 날짜/시간 출력 -->
+
+setInterval("now()",1000);
+function now(){
+	var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+	var now = new Date();
+	hours = now.getHours();
+	minutes = now.getMinutes();
+	seconds = now.getSeconds();
+	if (hours < 10){
+		hours = "0" + hours;
+	}
+	if (minutes < 10){
+		minutes = "0" + minutes;
+	}
+	if (seconds < 10){
+		seconds = "0" + seconds;
+	}
+	document.getElementById("nowDay").innerHTML = st_date;
+	document.getElementById("nowTime").innerHTML = hours + ":" + minutes + ":" + seconds;
+}
+
+</script>
 
 </th:block>
 </html>

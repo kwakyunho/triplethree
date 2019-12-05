@@ -1,7 +1,10 @@
 package shop.triplethree.vo;
 
 public class CateNameList {
-	private String code;
+	
+	private int re;
+	private int condition;
+	private String cateCode;
 	private String largeCateName;
 	private String middleCateName;
 	private String smallCateName;
@@ -18,19 +21,24 @@ public class CateNameList {
 	private String roomPeriod;
 	private String confUser;
 	private String confDay;
-	@Override
-	public String toString() {
-		return "CateNameList [code=" + code + ", largeCateName=" + largeCateName + ", middleCateName=" + middleCateName
-				+ ", smallCateName=" + smallCateName + ", itemCode=" + itemCode + ", useYn=" + useYn + ", average="
-				+ average + ", writerUser=" + writerUser + ", writerDay=" + writerDay + ", gasoline=" + gasoline
-				+ ", diesel=" + diesel + ", lpg=" + lpg + ", bus=" + bus + ", room=" + room + ", roomPeriod="
-				+ roomPeriod + ", confUser=" + confUser + ", confDay=" + confDay + "]";
+	
+	public int getRe() {
+		return re;
 	}
-	public String getCode() {
-		return code;
+	public void setRe(int re) {
+		this.re = re;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public int getCondition() {
+		return condition;
+	}
+	public void setCondition(int condition) {
+		this.condition = condition;
+	}
+	public String getCateCode() {
+		return cateCode;
+	}
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
 	}
 	public String getLargeCateName() {
 		return largeCateName;
@@ -127,5 +135,15 @@ public class CateNameList {
 	}
 	public void setConfDay(String confDay) {
 		this.confDay = confDay;
+	}
+	
+	@Override
+	public String toString() {
+		return "CateNameList [re=" + re + ", condition=" + condition + ", cateCode=" + cateCode + ", largeCateName="
+				+ largeCateName + ", middleCateName=" + middleCateName + ", smallCateName=" + smallCateName
+				+ ", itemCode=" + itemCode + ", useYn=" + useYn + ", average=" + average + ", writerUser=" + writerUser
+				+ ", writerDay=" + writerDay + ", gasoline=" + gasoline + ", diesel=" + diesel + ", lpg=" + lpg
+				+ ", bus=" + bus + ", room=" + room + ", roomPeriod=" + roomPeriod + ", confUser=" + confUser
+				+ ", confDay=" + confDay + "]";
 	}
 }
