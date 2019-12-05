@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample4_postcode').value = data.zonecode;
+            document.getElementById("sample4_roadAddress").value = roadAddr;
+            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if(roadAddr !== ''){
+                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+            } else {
+                document.getElementById("sample4_extraAddress").value = '';
+            }
+
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                guideTextBox.style.display = 'block';
+
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                guideTextBox.style.display = 'block';
+            } else {
+                guideTextBox.innerHTML = '';
+                guideTextBox.style.display = 'none';
+            }
+        }
+        }
+    }).open();
+</script>
+
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-12">
+				<h1 class="m-0 text-dark">거래처 등록</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-12">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/clientList}">거래처관리</a></li>
+					<li class="breadcrumb-item">거래처등록</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-primary">
+				<form role="form" class="form-horozontal" action="/clientInsert" method="post">
+				
+				   <div class="card-body">
+				   <div class="form-group row col-sm-12">
+				   		<label class="col-sm-2 col-form-label">거래처코드</label>
+				   		 <div class="col-sm-4">
+				  		 <input type="text" class="form-control" placeholder="*거래처코드는 자동생성" disabled="">
+				  		 </div>
+				   </div>
+				   <div class="form-group row col-sm-12">
+				   		<label class="col-sm-2 col-form-label">거래처종류</label>
+				   		 <div class="col-sm-4">
+					   		 <select class="form-control" name="liCode" >
+					   		 	<option th:each="l :${liCode}" th:value="${l.code}" th:text="${l.liCode}"></option>
+				   		 	</select>
+				  		 </div>
+				   </div>
+                  	<div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처명</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accName" placeholder="거래처명">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">대표자명</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accCeoName" placeholder="대표자명">
+	                    </div>
+                  	</div>
+                  	
+                   <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accPhone" placeholder="거래처번호">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">거래처대표번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="repreNumber" placeholder="거래처 대표자 번호">
+	                    </div>
+                  </div>
+                  
+                   <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처이메일</label>
+	                    <div class="col-sm-4">
+	                      <input type="email" class="form-control col-12" name="accEmail" placeholder="거래처이메일을 입력하세요">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">거래처팩스번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accFax" placeholder="거래처 팩스번호를 입력하세요">
+	                    </div>
+                  </div>
+                  
+                  
+                  <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">사업자등록번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accBln" placeholder="사업자등록번호">
+	                    </div>
+                  </div>
+                 
+                  
+                  <div class="form-group row col-sm-12">
+                  		<label class="col-sm-2 col-form-label">사업장주소</label>
+                  		<div class="col-sm-10" style="float:left;">
+	                  		<input type="text" class="form-control col-6" id="accPostcode" placeholder="우편번호" style="float:left; margin-right:10px;">
+							<input type="button" class="form-control col-2" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+						</div> <!-- col-sm-10 -->
+				</div><!-- col-sm-12-->
+				
+				 
+                  
+                  
+				<div class="form-group row col-sm-12">
+					<div class="col-2"></div>
+					<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accAddr" placeholder="도로명주소">
+                 	</div>
+                 	<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accDetailAddr" placeholder="지번주소">
+                 		<span id="guide" style="color:#999;display:none"></span>
+                 	</div>
+                </div>
+                
+                <div class="form-group row col-sm-12">
+					<div class="col-2"></div>
+					<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accDetailAddr" placeholder="상세주소">
+                 	</div>
+                 	<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accExtraAddr" placeholder="참고항목">
+                 	</div>
+                </div>
+                
+                 
+				  </div><!-- card body -->
+				
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary">등록하기</button>
+				</div><!--  card footer -->
+				
+				</form>
+				</div><!-- /.cardcard-primary -->
+				</div><!-- lg-12 구역 -->
+			</div><!-- /.row -->
+		</div>
+	</div><!-- /.container-fluid -->
+</div>
+<div class="col-sm-2"></div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+
+
+</html>
+
