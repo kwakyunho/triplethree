@@ -158,7 +158,7 @@
 	</delete>
 	
 	<!-- 부서명 유효성 검사진행 -->
-	<select id="checkName" parameterType="shop.triplethree.vo.Company" resultType="int">
+	<select id="checkDeName" parameterType="shop.triplethree.vo.Company" resultType="int">
 		SELECT
 			COUNT(1) AS cnt
 		FROM 

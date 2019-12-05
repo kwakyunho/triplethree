@@ -71,7 +71,7 @@ $("#inputTitle").blur(function() {
 	console.log(title + " <- 부서명이에요.");
 	
 		$.ajax({
-			type 		: 'POST',
+		type 		: 'POST',
 		data 		: {'title': title},
 		url 		: "deNameCheck",
 		datatype	: 'json',
