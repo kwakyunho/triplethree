@@ -141,8 +141,6 @@ public class CompanyController {
 		return companyService.checkPoName(position);
 	}
 	
-	@Autowired
-	private CompanyService companyService;
 	//회사정보 입력화면
 	@GetMapping("/companyInsert")
 	public String insertCompany() {
