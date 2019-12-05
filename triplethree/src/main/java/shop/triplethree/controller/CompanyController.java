@@ -140,4 +140,44 @@ public class CompanyController {
 		System.out.println("어떤 숫자가 왔나요? " + cnt);
 		return companyService.checkPoName(position);
 	}
+	
+	@Autowired
+	private CompanyService companyService;
+	//회사정보 입력화면
+	@GetMapping("/companyInsert")
+	public String insertCompany() {
+		System.out.println("회사정보입력화면");
+		return "company/information/companyInsert";	
+	}
+	//회사정보 입력처리
+	@PostMapping("/companyInsert")
+	public String insertCompany(Company company) {
+		companyService.insertCompany(company);
+		System.out.println(company.toString()+"company");
+		return "redirect:/";
+	}
+	
+	//회사정보 조회
+	@GetMapping("/companyInfo")
+	public String selectCompany(Model model) {
+		model.addAttribute("companyInfo", companyService.selectCompany());
+		System.out.println(model+"<--model");
+		return "company/information/companyInfo";
+	}
+	//회사정보 수정 클릭시 화면 보여주기
+	@GetMapping("/companyUpdate")
+	public String updateCompanySelect(@RequestParam(value="Code") String code,Model model) {
+		System.out.println("Code"+code);
+		//companyService.updateCompanySelect(code);
+		model.addAttribute("company", companyService.updateCompanySelect(code));
+		System.out.println(model+"<--model수정");
+		return "company/information/companyUpdate";	
+	}
+	
+	//회사정보 진짜 수정클릭시 내용변경
+	@PostMapping("companyUpdate")
+	public String updateCompany(Company company) {
+		companyService.updateCompany(company);
+		return "redirect:/companyInfo";
+	}
 }

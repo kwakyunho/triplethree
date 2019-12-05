@@ -168,6 +168,7 @@
 		
 	</select>
 	
+	<!-- 직급명 유효성 검사진행 -->
 	<select id="checkPoName" parameterType="shop.triplethree.vo.Position" resultType="int">
 		SELECT
 			COUNT(1) AS cnt
@@ -176,4 +177,89 @@
 		WHERE
 			P.poname = #{positionNameBe}
 	</select>
+	
+	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+	INSERT INTO
+	EM_INFO
+		(code,co_name,co_ceoname,co_postcode,co_addr,co_detailaddr,co_extraaddr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
+	VALUES
+		(#{Code}
+		,#{coName}
+		,#{coCeoname}
+		,#{coPostCode}
+		,#{coAddr}
+		,#{coDetailAddr}
+		,#{coExtraAddr}
+		,#{coBin}
+		,#{coFax}
+		,#{coPhone}
+		,#{coEmail}
+		,#{coLogo}
+		,#{writer}
+		,now()
+	)
+	</insert>
+	<select id="selectCompany" resultType="shop.triplethree.vo.Company">
+	select
+		code AS Code
+		,co_name AS coName
+		,co_ceoname AS coCeoname
+		,co_postcode AS coPostCode
+		,co_detailaddr AS coDetailAddr
+		,co_extraaddr AS coExtraAddr
+		,co_addr AS coAddr
+		,co_bln AS coBin
+		,co_fax AS coFax
+		,co_phone AS coPhone
+		,co_email AS coEmail
+		,co_logo AS coLogo
+		,writer AS writer
+		,writer_day AS writerDay
+		,yes_or_no AS yesOrNo
+		,co_reason AS coReason
+	FROM 
+		EM_INFO
+	</select>
+	<select id="updateCompanySelect" resultType="shop.triplethree.vo.Company">
+	select
+		code AS Code
+		,co_name AS coName
+		,co_ceoname AS coCeoname
+		,co_postcode AS coPostCode
+		,co_detailaddr AS coDetailAddr
+		,co_extraaddr AS coExtraAddr
+		,co_addr AS coAddr
+		,co_bln AS coBin
+		,co_fax AS coFax
+		,co_phone AS coPhone
+		,co_email AS coEmail
+		,co_logo AS coLogo
+		,writer AS writer
+		,writer_day AS writerDay
+		,yes_or_no AS yesOrNo
+		,co_reason AS coReason
+	FROM 
+		EM_INFO
+	where
+		code=#{Code}	
+	
+	</select>
+	<update id="updateCompany" parameterType="shop.triplethree.vo.Company">
+		UPDATE EM_INFO
+	SET
+		co_ceoname=#{coCeoname}		
+		,co_postcode=#{coPostCode}
+		,co_addr=#{coAddr}
+		,co_detailaddr=#{coDetailAddr}
+		,co_extraaddr=#{coExtraAddr}
+		,co_fax=#{coFax}		
+		,co_phone=#{coPhone}
+		,co_email=#{coEmail}
+		,co_logo=#{coLogo}
+		,writer=#{writer}
+		,writer_day=now()
+		,co_reason=#{coReason}
+	where
+		code=#{Code}
+	</update>
 </mapper>

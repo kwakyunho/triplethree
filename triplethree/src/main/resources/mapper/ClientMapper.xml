@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.ClientMapper">
+<resultMap id="clientResultMap" type="shop.triplethree.vo.Client">
+<result column="code" property="code"/>
+<result column="li_code" property="liCode"/>
+<result column="li_code2" property="liCode2"/>
+<result column="acc_name" property="accName"/>
+<result column="acc_ceo_name" property="accCeoName"/>
+<result column="acc_addr" property="accAddr"/>
+<result column="acc_postcode" property="accPostcode"/>
+<result column="acc_detailaddr" property="accDetailAddr"/>
+<result column="acc_extraaddr" property="accExtraAddr"/>
+<result column="acc_bln" property="accBln"/>
+<result column="acc_fax" property="accFax"/>
+<result column="repre_number" property="repreNumber"/>
+<result column="acc_phone" property="accPhone"/>
+<result column="acc_email" property="accEmail"/>
+</resultMap>
+	<select id="getLicodeList" resultType="shop.triplethree.vo.Client">
+		select
+			s_section as liCode
+			,code as code
+		FROM
+			LIST_MANAGE
+		WHERE m_section='거래처구분'
+	</select>
+	
+	<select id="getLicode2List" resultType="shop.triplethree.vo.Client">
+		select
+			s_section as liCode2
+			,code as code
+		FROM
+			LIST_MANAGE
+		WHERE m_section='거래처상태'
+	</select>
+
+	<update id="clientUpdate" parameterType="shop.triplethree.vo.Client">
+		update ACC_MANAGE
+			SET
+			 code	= #{code},
+			 li_code	= #{liCode},
+			 li_code2	= #{liCode2},
+			 acc_name	= #{accName},
+			 acc_ceo_name	= #{accCeoName},
+			 acc_addr	= #{accAddr},
+			 acc_postcode	= #{accPostcode},
+			 acc_detailaddr	= #{accDetailAddr},
+			 acc_extraaddr	= #{accExtraAddr},
+			 acc_bln	= #{accBln},
+			 acc_fax	= #{accFax},
+			 repre_number	= #{repreNumber},
+			 acc_phone	= #{accPhone},
+			 acc_email	= #{accEmail}
+		where 
+			code = #{code}
+					
+	</update>
+	
+	<update id="clientDelete" parameterType="shop.triplethree.vo.Client">
+		update ACC_MANAGE
+			SET
+			 li_code2 = 'LIS-20191201000031'
+		where 
+			code = #{code}
+	</update>
+	
+	<select id="getClientBycode" parameterType="String" resultMap="clientResultMap">
+		SELECT
+				A.code
+				, B.s_section as li_code
+				, C.s_section as li_code2
+				, A.acc_name as acc_name
+				, A.acc_ceo_name as acc_ceo_name
+				,A.acc_addr
+				,A.acc_bln
+				,A.acc_fax 
+				,A.acc_phone
+				,A.repre_number
+				,A.acc_email
+				,A.writer
+				,A.writer_day
+				,A.approver
+				,A.appro_day
+				,A.approver_st
+		FROM ACC_MANAGE as A
+		LEFT JOIN LIST_MANAGE as B
+				on	A.li_code = B.code
+		LEFT JOIN LIST_MANAGE C
+				 on	A.li_code2 = C.code
+			 
+	 	WHERE A.code = #{code}
+	</select>
+	
+	<select id="getClientBycode1" parameterType="String" resultMap="clientResultMap">
+		select 
+			code 	
+			,li_code 	
+			,li_code2 	
+			,acc_name 	
+			,acc_ceo_name
+			,acc_phone
+			,acc_addr
+			,acc_bln
+			,acc_fax 
+			,repre_number
+			,acc_email
+			,writer
+			,writer_day
+			,approver
+			,appro_day
+			,approver_st			
+		FROM ACC_MANAGE where code=#{code}
+	</select>
+	
+	<select id="codeGeneration" parameterType="String" resultType="String">
+		SELECT CONCAT(
+			(SELECT CONCAT(
+				(SELECT @a:= CODE
+				FROM CODE_MANAGE
+				WHERE co_table = #{tb_Name}),
+				'-',
+				(SELECT DATE_FORMAT(CURDATE(),'%Y%m%d')))),
+		
+			(SELECT LPAD(RIGHT(IFNULL(MAX(CODE), 0),6)+1,6,0)
+			FROM ${tb_Name}
+			WHERE CODE LIKE (
+			SELECT CONCAT(@a, '-',
+				(SELECT DATE_FORMAT(CURDATE(),'%Y%m%d')),
+				'%')))
+		)
+	</select>
+	
+	<!-- 인서트 할때 사업장의 존폐여부는 일단 박고 시작-->
+	<insert id="clientInsert" parameterType="shop.triplethree.vo.Client">
+	INSERT INTO ACC_MANAGE
+			(code
+			,li_code
+			,li_code2
+			,acc_name
+			,acc_ceo_name
+			,acc_addr
+			,acc_bln
+			,acc_fax
+			,repre_number
+			,acc_phone
+			,acc_email
+			,writer
+			,writer_day)
+		 VALUES 
+		 (#{code}
+		 , #{liCode}
+		 ,'LIS-20191201000030'
+		 , #{accName}
+		 , #{accCeoName}
+		 , #{accAddr}
+		 , #{accBln}
+		 , #{accFax}
+		 , #{repreNumber}
+		 , #{accPhone}
+		 , #{accEmail}
+		 , #{writer}
+		 , now());
+	</insert>
+	
+	<select id="getClientList" resultMap="clientResultMap">
+		SELECT
+			A.code as code
+			, B.s_section as li_code
+			, C.s_section as li_code2
+			, A.acc_name as acc_name
+			, A.acc_ceo_name as acc_ceo_name
+			,A.acc_addr
+			,A.acc_bln
+			,A.acc_fax 
+			,A.acc_phone
+			,A.repre_number
+			,A.acc_email
+			,A.writer
+			,A.writer_day
+			,A.approver
+			,A.appro_day
+			,A.approver_st
+		 FROM ACC_MANAGE as A
+			LEFT JOIN LIST_MANAGE as B
+			on	A.li_code = B.code
+			LEFT JOIN LIST_MANAGE C
+			 on	A.li_code2 = C.code
+	</select>
+	
+	<select id="getClientList2" resultMap="clientResultMap">
+			SELECT
+			A.code
+			, B.s_section as li_code
+			, C.s_section as li_code2
+			, A.acc_name as acc_name
+			, A.acc_ceo_name as acc_ceo_name
+			,A.acc_addr
+			,A.acc_bln
+			,A.acc_fax 
+			,A.acc_phone
+			,A.repre_number
+			,A.acc_email
+			,A.writer
+			,A.writer_day
+			,A.approver
+			,A.appro_day
+			,A.approver_st
+		 FROM ACC_MANAGE as A
+			LEFT JOIN LIST_MANAGE as B
+			on	A.li_code = B.code
+			LEFT JOIN LIST_MANAGE C
+			 on	A.li_code2 = C.code
+			 
+		 WHERE C.s_section = '영업중(거래중)'
+	</select>
+	
+	<select id="getClientList1" resultMap="clientResultMap">
+		SELECT 
+			 code 	
+			,li_code 
+			,li_code2 	
+			,acc_name 	
+			,acc_ceo_name
+			,acc_addr
+			,acc_bln
+			,acc_fax 
+			,acc_phone
+			,repre_number
+			,acc_email
+			,writer
+			,writer_day
+			,approver
+			,appro_day
+			,approver_st			
+		FROM ACC_MANAGE
+	</select>
+</mapper>

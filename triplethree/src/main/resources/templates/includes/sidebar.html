@@ -15,7 +15,16 @@
 					<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 				</div>
 				<div class="info">
-					<a href="#" class="d-block">Alexander Pierce</a>
+					<!-- <a href="#" class="d-block">Alexander Pierce</a> -->
+					<th:block th:if="${session.SID eq null}" style="text-align: right;">Please Login<a th:href="@{/}"> 로그인</a></th:block>
+					<th:block th:unless="${session.SID eq null}">
+						<label>
+						
+						[[${session.SNAME}]] [[${session.SPOSI}]]님,<br>
+						오늘도 좋은 하루되세요. </label>
+					<!-- 	[[${session.SDEPART}]]부서 입니다.<br>  분기처리는 나중에 ..-->
+						<div><a th:href="@{/logout}" style="text-align: right;">로그아웃</a></div>	
+					</th:block>
 				</div>
 			</div>
 	
@@ -31,9 +40,9 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
+								<a th:href="@{/companyInsert}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
-									<p>회사정보</p>
+									<p>회사정보리스트</p>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -49,9 +58,9 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
+								<a th:href="@{/employeeList}" class="nav-link">
 									<i class="nav-icon fas fa-users-cog"></i>
-									<p>직원관리</p>
+									<p>사원관리</p>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -69,9 +78,17 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>거래처정보</p>
+								<a th:href="@{/clientInsert}" class="nav-link">
+									<i class="nav-icon fas fa-edit"></i>
+									<p>거래처정보등록</p>
+								</a>
+							</li>
+						</ul>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a th:href="@{/clientList}" class="nav-link">
+									<i class="nav-icon fas fa-clipboard-list"></i>
+									<p>거래처조회</p>
 								</a>
 							</li>
 						</ul>
@@ -83,20 +100,20 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+								<a th:href="@{/boardList}" class="nav-link">
+									<i class="nav-icon fas fa-check-double"></i>
 									<p>공지사항</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+									<i class="nav-icon far fa-list-alt"></i>
 									<p>자유게시판</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+									<i class="nav-icon fas fa-list-alt"></i>
 									<p>익명게시판</p>
 								</a>
 							</li>
@@ -245,6 +262,12 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
+								<a th:href="@{/insertPay}" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>급여 지급액 등록</p>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>연차기준설정</p>
@@ -320,6 +343,20 @@
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>개인정보수정</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item has-treeview">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-address-card"></i>
+							<p>기본설정<i class="fas fa-angle-left right"></i></p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a th:href="@{/documentFormCateInsert}" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>카테고리 등록</p>
 								</a>
 							</li>
 						</ul>

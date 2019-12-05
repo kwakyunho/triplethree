@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-12">
+				<h1 class="m-0 text-dark">거래처 수정하기</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-12">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a>거래처수정</a> </li>
+					<li class="breadcrumb-item"><a th:href="@{/clientInsert}">거래처등록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList}">거래처목록 </a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-primary">
+				<form role="form" class="form-horozontal" action="/clientUpdate" method="post">
+				
+				   <div class="card-body">
+				   <div class="form-group row col-sm-12">
+				   		<label class="col-sm-2 col-form-label">거래처코드</label>
+				   		 <div class="col-sm-4">
+				  		 <input type="text" class="form-control" th:value="${client.code}" name="code" readonly="readonly">
+				  		 </div>
+				  		 <p class="text-danger">*거래처 코드는 수정할 수 없습니다.</p>
+				   </div>
+				   <div class="form-group row col-sm-12">
+				   		<label class="col-sm-2 col-form-label">거래처종류</label>
+				   		 <div class="col-sm-4">
+					   		 <select class="form-control"  th:value="${liCode}" name="liCode">
+				   		 		<option th:each="l :${liCode}" th:value="${l.code}" th:text="${l.liCode}"></option>
+				   		 	</select>
+				  		 </div>
+				  		 <label class="col-sm-2 col-form-label">거래처 상태변경 </label>
+				   		 <div class="col-sm-4">
+					   		 <select class="form-control" th:value="${liCode2}" name="liCode2">
+				   		 		<option th:each="ll :${liCode2}" th:value="${ll.code}" th:text="${ll.liCode2}"></option>
+				   		 	</select>
+				  		 </div>
+				   </div>
+                  	<div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처명</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accName" th:value="${client.accName}" >
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">대표자명</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accCeoName" th:value="${client.accCeoName}">
+	                    </div>
+                  	</div>
+                  	
+                   <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accPhone" th:value="${client.accPhone}">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">거래처대표번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="repreNumber" th:value="${client.repreNumber}">
+	                    </div>
+                  </div>
+                  
+                   
+                   <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">거래처이메일</label>
+	                    <div class="col-sm-4">
+	                      <input type="email" class="form-control col-12" name="accEmail"  th:value="${client.accEmail}">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">거래처팩스번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accFax" th:value="${client.accFax}" >
+	                    </div>
+                  </div>
+                  
+                  <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">사업자등록번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" name="accBln"  th:value="${client.accBln}">
+	                    </div>
+                  </div>
+                  
+                  <div class="form-group row col-sm-12">
+                  		<label class="col-sm-2 col-form-label">사업장주소</label>
+                  		<div class="col-sm-10" style="float:left;">
+	                  		<input type="text" class="form-control col-6" id="accPostcode" th:value="${client.accPostcode}"  style="float:left; margin-right:10px;">
+							<input type="button" class="form-control col-2" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+						</div> <!-- col-sm-10 -->
+				</div><!-- col-sm-12-->
+				
+				 
+                  
+                  
+				<div class="form-group row col-sm-12">
+					<div class="col-2"></div>
+					<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accAddr" th:value="${client.accAddr}">
+                 	</div>
+                 	<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accDetailAddr" th:value="${client.accDetailAddr}">
+                 		<span id="guide" style="color:#999;display:none"></span>
+                 	</div>
+                </div>
+                
+                <div class="form-group row col-sm-12">
+					<div class="col-2"></div>
+					<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accDetailAddr" th:value="${client.accDetailAddr}">
+                 	</div>
+                 	<div class="col-sm-5" style="float:left;">
+						<input type="text" class="form-control" id="accExtraAddr" th:value="${client.accExtraAddr}">
+                 	</div>
+                </div>
+                
+                  
+                 
+				  </div><!-- card body -->
+				  
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary">수정하기</button>
+				</div><!--  card footer -->
+				
+				</form>
+				</div><!-- /.cardcard-primary -->
+				</div><!-- lg-12 구역 -->
+			</div><!-- /.row -->
+		</div>
+	</div><!-- /.container-fluid -->
+</div>
+<div class="col-sm-2"></div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>
