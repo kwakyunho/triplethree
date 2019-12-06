@@ -22,7 +22,7 @@
 			,writer_day)
 		values
 			(#{code}
-			,#{empCode}
+			,#{empCode} = 
 			,#{boardTitle}
 			,#{boardCon}
 			,#{boardCount}

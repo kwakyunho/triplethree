@@ -8,10 +8,10 @@ public class Client {
 	private String liCode2;
 	private String accName;
 	private String accCeoName;
-	private String accAddr;
-	private String accPostcode;
-	private String accDetailAddr;
-	private String accExtraAddr;
+	private String accPostcode; //우편번호
+	private String accAddr; //도로명주소
+	private String accDetailAddr; //상세주소
+	private String accExtraAddr; // 참고주소
 	private String accBln;
 	private String accFax;
 	private String repreNumber;
