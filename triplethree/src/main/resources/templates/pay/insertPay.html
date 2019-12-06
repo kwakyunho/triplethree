@@ -124,14 +124,13 @@
 						<input type="text" name="deductHap" class="form-control"></td></tr>
 				</table>
 				</div>
-				<div align="center">
-				<form th:action="@{/payList}" method="post">
-				<div class="col-4">					
-					<input type="submit" name="paylist" value="급여 지급액 등록"></div>
-				</form>
-				</div>
+			
+				<button type="button" value="급여지급" class="col-12" align="center">							
+					<a th:href="@{/payList}" class="nav-link">급여 지급액 등록</a>
+				</button>				
+				
 				<!-- /.card -->
-			</div>
+			
 			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->

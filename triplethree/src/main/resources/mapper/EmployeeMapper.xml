@@ -17,7 +17,7 @@
 			JOIN DEMG AS de
 			JOIN POSISYS AS po
 		ON em.demgcode = de.CODE AND em.pocode = po.CODE
-		WHERE em.emp_num = 'TT20191202001' 
+		WHERE em.emp_num = #{empNum} 
 			and em.demgcode = de.CODE
  			AND em.pocode = po.CODE
 		

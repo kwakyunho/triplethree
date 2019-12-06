@@ -4,5 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.triplethree.mapper.PayMapper">
-	
+		<!--급여 대장 클릭시 사원리스트  -->
+	<select id="payList" resultType="shop.triplethree.vo.Employee">		
+	SELECT A.CODE, B.dename, C.poname, D.s_section, A.emp_num, A.emp_name
+FROM (
+	SELECT A.*
+	FROM EMP_MANAGE A
+	INNER JOIN (
+		SELECT emp_num, MAX(writer_day) AS writer_day
+		FROM EMP_MANAGE
+		GROUP BY emp_num) B
+	ON A.writer_day = B.writer_day
+	AND A.emp_num = B.emp_num) A
+
+LEFT JOIN DEMG B
+ON A.demgcode = B.CODE
+
+LEFT JOIN POSISYS C
+ON A.pocode = C.CODE
+
+LEFT JOIN LIST_MANAGE D
+ON A.li_code = D.code				
+	</select>
 </mapper>
