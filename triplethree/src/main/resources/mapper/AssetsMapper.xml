@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.AssetsMapper">
+
+	<resultMap type="shop.triplethree.vo.Assets" id="AssetsResult">
+		<result property="faName" column="fa_name"/>
+		<result property="faLocal" column="fa_local"/>
+		<result property="faSeat" column="fa_seat"/>
+		<result property="faDate" column="fa_date"/>
+		<result property="faImage" column="fa_image"/>
+		<result property="faSt" column="fa_st"/>
+		<result property="writer" column="writer"/>
+		<result property="writerDay" column="writer_day"/>
+	</resultMap>
+	
+	<!-- 시설물 조회 쿼리문 -->
+	<select id="selectAssets" resultMap="AssetsResult">
+	<!-- 	SELECT
+			fa_name AS faName
+			,fa_local AS faLocal
+			,fa_seat AS faSeat
+			,fa_date AS faDate
+			,fa_image AS faImage
+			,fa_st AS faSt
+			,writer AS writer
+			,writer_day AS writerDay
+		FROM
+			FACILITY_MANAGE -->
+			
+		SELECT
+			fa_name
+			,fa_local
+			,fa_seat
+			,fa_date
+			,fa_image
+			,fa_st
+			,writer
+			,writer_day
+		FROM
+			FACILITY_MANAGE	
+	</select>
+</mapper>

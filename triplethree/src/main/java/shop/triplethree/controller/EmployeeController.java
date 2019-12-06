@@ -46,7 +46,7 @@ public class EmployeeController {
 		if(employee.getEmpNum() != null && !"".equals(employee.getEmpNum())) {
 			
 			Employee em2 = employeeService.login(employee); //로그인받은 값을 조회하고 결과값을 가지고온 객체 
-			
+			System.out.println(em2.toString());
 				if(em2 != null) {
 					//디비 조회 값이 있을 경우
 					if(em2.getPassword() != null && em2.getPassword().equals(employee.getPassword())) {
@@ -54,6 +54,8 @@ public class EmployeeController {
 						session.setAttribute("SNAME", em2.getEmpName());
 						session.setAttribute("SDEPART", em2.getDemgCode());
 						session.setAttribute("SPOSI", em2.getPoCode());
+						session.setAttribute("SCODE", em2.getCode());
+						session.setAttribute("SDECODE", em2.getDemgName());
 						return scriptStr2;
 					}else {
 						

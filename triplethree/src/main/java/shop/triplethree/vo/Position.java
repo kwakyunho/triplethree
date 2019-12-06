@@ -2,6 +2,7 @@ package shop.triplethree.vo;
 
 public class Position {
 
+	private String sid;
 	private String positionCode;
 	private String positionNameBe;
 	private String positionNameAf;
@@ -14,6 +15,12 @@ public class Position {
 	private String positionApproDay;
 	private String positionYesNO;
 	
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 	public String getPositionCode() {
 		return positionCode;
 	}
@@ -80,12 +87,11 @@ public class Position {
 	public void setPositionYesNO(String positionYesNO) {
 		this.positionYesNO = positionYesNO;
 	}
-	
 	@Override
 	public String toString() {
-		return "Position [positionCode=" + positionCode + ", positionNameBe=" + positionNameBe + ", positionNameAf="
-				+ positionNameAf + ", positionLevel=" + positionLevel + ", positionSau=" + positionSau
-				+ ", positionWriter=" + positionWriter + ", positionWriterDay=" + positionWriterDay
+		return "Position [sid=" + sid + ", positionCode=" + positionCode + ", positionNameBe=" + positionNameBe
+				+ ", positionNameAf=" + positionNameAf + ", positionLevel=" + positionLevel + ", positionSau="
+				+ positionSau + ", positionWriter=" + positionWriter + ", positionWriterDay=" + positionWriterDay
 				+ ", positionApprover=" + positionApprover + ", positionApperverSt=" + positionApperverSt
 				+ ", positionApproDay=" + positionApproDay + ", positionYesNO=" + positionYesNO + "]";
 	}

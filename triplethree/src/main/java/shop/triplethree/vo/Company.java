@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Company {
 
+	private String sid;
 	private String departmentNameBe;
 	private String departmentNameAf;
 	private String departmentLevel;
@@ -33,6 +34,12 @@ public class Company {
 	private String yesOrNo;
 	private String coReason;
 	
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 	public String getDepartmentNameBe() {
 		return departmentNameBe;
 	}
@@ -204,16 +211,15 @@ public class Company {
 	}
 	@Override
 	public String toString() {
-		return "Company [departmentNameBe=" + departmentNameBe + ", departmentNameAf=" + departmentNameAf
-				+ ", departmentLevel=" + departmentLevel + ", departmentUpcode=" + departmentUpcode + ", departmentSau="
-				+ departmentSau + ", departmentWriter=" + departmentWriter + ", departmentWriterDay="
-				+ departmentWriterDay + ", departmentApprover=" + departmentApprover + ", departmentApperverSt="
-				+ departmentApperverSt + ", departmentApproDay=" + departmentApproDay + ", departmentCode="
-				+ departmentCode + ", departmentYesNO=" + departmentYesNO + ", Code=" + Code + ", coName=" + coName
-				+ ", coCeoname=" + coCeoname + ", coPostCode=" + coPostCode + ", coDetailAddr=" + coDetailAddr
-				+ ", coExtraAddr=" + coExtraAddr + ", coAddr=" + coAddr + ", coBin=" + coBin + ", coFax=" + coFax
-				+ ", coPhone=" + coPhone + ", coEmail=" + coEmail + ", coLogo=" + coLogo + ", writer=" + writer
+		return "Company [sid=" + sid + ", departmentNameBe=" + departmentNameBe + ", departmentNameAf="
+				+ departmentNameAf + ", departmentLevel=" + departmentLevel + ", departmentUpcode=" + departmentUpcode
+				+ ", departmentSau=" + departmentSau + ", departmentWriter=" + departmentWriter
+				+ ", departmentWriterDay=" + departmentWriterDay + ", departmentApprover=" + departmentApprover
+				+ ", departmentApperverSt=" + departmentApperverSt + ", departmentApproDay=" + departmentApproDay
+				+ ", departmentCode=" + departmentCode + ", departmentYesNO=" + departmentYesNO + ", Code=" + Code
+				+ ", coName=" + coName + ", coCeoname=" + coCeoname + ", coPostCode=" + coPostCode + ", coDetailAddr="
+				+ coDetailAddr + ", coExtraAddr=" + coExtraAddr + ", coAddr=" + coAddr + ", coBin=" + coBin + ", coFax="
+				+ coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail + ", coLogo=" + coLogo + ", writer=" + writer
 				+ ", writerDay=" + writerDay + ", yesOrNo=" + yesOrNo + ", coReason=" + coReason + "]";
 	}
-
 }

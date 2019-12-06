@@ -1,5 +1,7 @@
 package shop.triplethree.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,10 +40,12 @@ public class CompanyController {
 	 * db 에 부서를 등록함
 	 * */
 	@PostMapping("/teamNameInsert")
-	public String insertOrganizationChart(Company company) {
+	public String insertOrganizationChart(Company company, HttpSession session) {
 		System.out.println("부서 등록버튼 클릭이 되었나요 ?");
-			
-		/* companyService.insertOrganizationChart(company); */ 
+		String sid = (String) session.getAttribute("SID");
+		System.out.println("세션값이 들어왔나요?"+sid);
+		company.setSid(sid);
+		companyService.insertOrganizationChart(company);
 		
 		//System.out.println(company.toString());
 		return "redirect:/teamNameInsert";
@@ -51,10 +55,12 @@ public class CompanyController {
 	 * 부서수정
 	 * */
 	@PostMapping("/teamNameUpdate")
-	public String updateOrganizationChart(Company company) {
+	public String updateOrganizationChart(Company company, HttpSession session) {
 		System.out.println("부서 수정 버튼이 클릭되었나요?");
-		
-		companyService.updateOrganizationChart(company); 
+		String sid = (String) session.getAttribute("SID");
+		System.out.println("세션값이 들어왔나요 ? " + sid);
+		company.setSid(sid);
+		/* companyService.updateOrganizationChart(company); */
 		return "redirect:/teamNameInsert";
 	}
 	
@@ -87,9 +93,12 @@ public class CompanyController {
 	 * db에 직급을 등록함
 	 * */
 	@PostMapping("/positionInsert")
-	public String insertPosition(Position position) {
+	public String insertPosition(Position position, HttpSession session) {
 		System.out.println("직급 등록 버튼이 클릭되었나요?");
 		System.out.println(position.toString());
+		String sid = (String) session.getAttribute("SID");
+		System.out.println("세션값이 들어왔나요?" + sid);
+		position.setSid(sid);
 		companyService.insertPosition(position); 
 		return "redirect:/positionInsert";
 	}
@@ -98,8 +107,11 @@ public class CompanyController {
 	 * 직급 수정
 	 * */
 	@PostMapping("/positionUpdate")
-	public String updatePosition(Position position) {
+	public String updatePosition(Position position, HttpSession session) {
 		System.out.println("직급 수정 버튼이 클릭되었나요?");
+		String sid = (String) session.getAttribute("SID");
+		System.out.println("세션값이 들어왔나요?" + sid);
+		position.setSid(sid);
 		companyService.updatePosition(position); 
 		return "redirect:/positionInsert";
 	}

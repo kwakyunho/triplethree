@@ -2,6 +2,8 @@ package shop.triplethree.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +30,17 @@ public class ScheduleController {
 	 * 일정 조회 메서드
 	 * */
 	@PostMapping(value="/companySchedule" , produces = "application/json")
-	public @ResponseBody List<Schedule> selectSchdule() {
-		return scheduleService.selectSchedule();
+	public @ResponseBody List<Schedule> selectSchdule(HttpSession session, Schedule schedule) {
+		String scode = (String) session.getAttribute("SCODE");
+		String sdecode = (String) session.getAttribute("SDECODE");
+		System.out.println("세션에서 사원코드가 넘어왔나요?" + scode);
+		System.out.println("세션에서 부서코드가 넘어왔나요 ?" + sdecode);
+		
+		schedule.setSid(scode);
+		schedule.setDemgcode(sdecode);
+		List<Schedule> sc = scheduleService.selectSchedule(schedule);
+		System.out.println(sc.toString());
+		return scheduleService.selectSchedule(schedule);
 	}
 	
 	/**
@@ -44,10 +55,19 @@ public class ScheduleController {
 	 * 일정 등록 메서드
 	 * */
 	@PostMapping("/companyScheduleInsert")
-	public String insertSchedule(Schedule schedule) {
+	public String insertSchedule(Schedule schedule, HttpSession session) {
+		
 		System.out.println(schedule.toString());
 		
-		scheduleService.insertSchedule(schedule);
+		String scode = (String) session.getAttribute("SCODE");
+		String sdecode = (String) session.getAttribute("SDECODE");
+		System.out.println("세션에서 사원코드가 넘어왔나요?" + scode);
+		System.out.println("세션에서 부서코드가 넘어왔나요 ?" + sdecode);
+		
+		schedule.setSid(scode);
+		schedule.setDemgcode(sdecode);
+		
+		scheduleService.insertSchedule(schedule); 
 		return "redirect:companySchedule";
 	}
 	

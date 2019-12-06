@@ -2,7 +2,9 @@ package shop.triplethree.vo;
 
 public class Schedule {
 
+	private String sid;
 	private String code;
+	private String demgcode;
 	private String sortation;
 	private String title;
 	private String start;
@@ -10,6 +12,18 @@ public class Schedule {
 	private String color;
 	private String backgroundColor;
 	
+	public String getDemgcode() {
+		return demgcode;
+	}
+	public void setDemgcode(String demgcode) {
+		this.demgcode = demgcode;
+	}
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 	public String getColor() {
 		return color;
 	}
@@ -54,8 +68,8 @@ public class Schedule {
 	}
 	@Override
 	public String toString() {
-		return "Schedule [code=" + code + ", sortation=" + sortation + ", title=" + title + ", start=" + start
-				+ ", end=" + end + ", color=" + color + ", backgroundColor=" + backgroundColor + "]";
+		return "Schedule [sid=" + sid + ", code=" + code + ", demgcode=" + demgcode + ", sortation=" + sortation
+				+ ", title=" + title + ", start=" + start + ", end=" + end + ", color=" + color + ", backgroundColor="
+				+ backgroundColor + "]";
 	}
-
 }
