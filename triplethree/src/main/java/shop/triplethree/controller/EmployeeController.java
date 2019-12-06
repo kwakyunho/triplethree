@@ -37,10 +37,10 @@ public class EmployeeController {
 		//System.out.println(employee.getEmpNum()+ "<- 로그인 아이디 입력값 ");  
 		//System.out.println(employee.getPassword()+ "<- 로그인 패스워드 입력값 ");  		
 		
-		String scriptStr = "<script>alert('아이디와 패스워드를 입력해주세요'); history.go(-1);</script>";
-		String scriptStr2 = "<script>alert('로그인 성공~!'); location.href='/index';</script>";
-		String scriptStr3 = "<script>alert('등록된 비밀번호와 일치하지 않습니다.'); history.go(-1);</script>";
-		String scriptStr4 = "<script>alert('등록된 정보가 없습니다.'); history.go(-1);</script>";
+		String scriptStr = "<script>alert('아이디와 패스워드를 입력해주세요'); location.href='/';</script>";
+		String scriptStr2 = "<script>alert('로그인 성공~!'); location.href='/';</script>";
+		String scriptStr3 = "<script>alert('등록된 비밀번호와 일치하지 않습니다.'); location.href='/';</script>";
+		String scriptStr4 = "<script>alert('등록된 정보가 없습니다.'); location.href='/';</script>";
 		String html = "text/html; charset=UTF-8";
 		
 		if(employee.getEmpNum() != null && !"".equals(employee.getEmpNum())) {
@@ -54,6 +54,9 @@ public class EmployeeController {
 						session.setAttribute("SNAME", em2.getEmpName());
 						session.setAttribute("SDEPART", em2.getDemgCode());
 						session.setAttribute("SPOSI", em2.getPoCode());
+						session.setAttribute("SADDR", em2.getAddr());
+						session.setAttribute("SPHONE", em2.getPhone());
+						session.setAttribute("SEMAIL", em2.getEmail());
 						return scriptStr2;
 					}else {
 						

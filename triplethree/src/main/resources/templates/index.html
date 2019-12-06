@@ -17,18 +17,6 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
 	<div class="container-fluid">
-		<div class="row mb-2">
-			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">제목 필수 변경</h1>
-			</div><!-- /.col -->
-			<div class="col-sm-6">
-				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
-				</ol>
-			</div><!-- /.col -->
-		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -36,29 +24,38 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-9">
+			<div class="col-lg-5">
 				<div class="card">
-					알아서 사용하세요
+					뭐 넣을지 아직 정하지 못함
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
-			<div class="col-lg-3">
+			<div class="col-lg-5">
+				<div class="card">
+					뭐 넣을지 아직 정하지 못함
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+			<!--  style="visibility: hidden;" -->
+			<div class="col-lg-2">
 				<div class="card">
 				
 					<!-- Profile Image -->
 					<div class="card card-primary card-outline">
 						<div class="card-body box-profile">
-							<div class="text-left fas fa-align-justify" style="font-size: 30px;"><span> 근태관리</span></div>
+							<div class="text-center strong small" style="font-size: 1.3em;"><strong>근태관리</strong></div>
 							<div class="text-center" style="border-bottom-style: groove; margin-top: 5px;"></div>
 							<div class="text-muted text-center" style="margin-top: 10px;">
 								<span id="nowDay"></span>
 							</div>
 							<div class="profile-username text-center" style="margin-top: -10px;">
-								<span id="nowTime" style="font-size: -webkit-xxx-large;"></span>
+								<span id="nowTime" style="font-size:xx-large;"></span>
 							</div>
-							<ul class="list-group list-group-unbordered mb-3">
+							<ul class="list-group list-group-unbordered mb-3" style="font-size: 0.8em;">
 								<li class="list-group-item">
 									<b>출근시간</b> <a class="float-right">미등록</a>
 								</li>
@@ -87,10 +84,9 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script type="text/javascript">
 
 <!-- 현재 날짜/시간 출력 -->
-
+<script type="text/javascript">
 setInterval("now()",1000);
 function now(){
 	var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
@@ -110,7 +106,6 @@ function now(){
 	document.getElementById("nowDay").innerHTML = st_date;
 	document.getElementById("nowTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 }
-
 </script>
 
 </th:block>

@@ -11,7 +11,11 @@
 			em.emp_name as empName,
 			em.PASSWORD as password,
 			de.dename as demgCode,
-			po.poname as poCode
+			po.poname as poCode,
+			em.email as email,
+			em.phone as phone,
+			em.addr as addr
+			
 		FROM
 			EMP_MANAGE AS em
 			JOIN DEMG AS de

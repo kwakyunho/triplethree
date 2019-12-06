@@ -9,24 +9,6 @@
 	
 		<!-- Sidebar -->
 		<div class="sidebar">
-			<!-- Sidebar user panel (optional) -->
-			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-				<div class="image">
-					<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-				</div>
-				<div class="info">
-					<!-- <a href="#" class="d-block">Alexander Pierce</a> -->
-					<th:block th:if="${session.SID eq null}" style="text-align: right;">Please Login<a th:href="@{/}"> 로그인</a></th:block>
-					<th:block th:unless="${session.SID eq null}">
-						<label>
-						
-						[[${session.SNAME}]] [[${session.SPOSI}]]님,<br>
-						오늘도 좋은 하루되세요. </label>
-					<!-- 	[[${session.SDEPART}]]부서 입니다.<br>  분기처리는 나중에 ..-->
-						<div><a th:href="@{/logout}" style="text-align: right;">로그아웃</a></div>	
-					</th:block>
-				</div>
-			</div>
 	
 			<!-- Sidebar Menu -->
 			<nav class="mt-2">
@@ -340,21 +322,7 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-address-card"></i>
-							<p>12.#.마이페이지<i class="fas fa-angle-left right"></i></p>
-						</a>
-						<ul class="nav nav-treeview">
-							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>#.개인정보수정</p>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="nav-item has-treeview">
-						<a href="#" class="nav-link">
-							<i class="nav-icon fas fa-address-card"></i>
-							<p>13.기본설정<i class="fas fa-angle-left right"></i></p>
+							<p>12.기본설정<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
