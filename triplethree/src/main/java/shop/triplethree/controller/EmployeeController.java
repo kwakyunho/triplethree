@@ -57,6 +57,7 @@ public class EmployeeController {
 						session.setAttribute("SADDR", em2.getAddr());
 						session.setAttribute("SPHONE", em2.getPhone());
 						session.setAttribute("SEMAIL", em2.getEmail());
+						session.setAttribute("SPHOTO", em2.getPhoto());
 						return scriptStr2;
 					}else {
 						

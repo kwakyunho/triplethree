@@ -16,7 +16,7 @@
 					<i class="fas fa-file-signature"></i>
 					<span class="badge badge-danger navbar-badge" style="margin-right:2.0rem;">15</span>
 				</a>
-				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+				<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
 					<span class="dropdown-item dropdown-header">15개의 미확인 리스트</span>
 					<div class="dropdown-divider"></div>
 					<a href="#" class="dropdown-item">
@@ -48,7 +48,7 @@
 					<div class="card card-primary card-outline">
 						<div class="card-body box-profile">
 							<div class="text-center">
-								<img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+								<img class="profile-user-img img-fluid img-circle" th:src="@{dist/img/user4-128x128.jpg}" alt="User profile picture">
 							</div>
 							<h3 class="profile-username text-left">
 								<strong>[[${session.SNAME}]]</strong>
@@ -69,7 +69,7 @@
 			</li>
 			
 			<li class="nav-item">
-				<a class="nav-link" data-slide="true" href="#"><i class="fas fa-th-large"></i></a>
+				<a class="nav-link nav-link-workTime" data-slide="true" href="#"><i class="fas fa-th-large"></i></a>
 			</li>
 		</ul>
 	</nav>

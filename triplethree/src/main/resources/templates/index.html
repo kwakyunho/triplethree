@@ -24,7 +24,7 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-5">
+			<div class="index-page col-lg-5">
 				<div class="card">
 					뭐 넣을지 아직 정하지 못함
 				</div>
@@ -32,7 +32,7 @@
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
-			<div class="col-lg-5">
+			<div class="index-page col-lg-5">
 				<div class="card">
 					뭐 넣을지 아직 정하지 못함
 				</div>
@@ -41,7 +41,7 @@
 			</div>
 			<!-- /.col-md-6 -->
 			<!--  style="visibility: hidden;" -->
-			<div class="col-lg-2">
+			<div class="col-lg-2 workTimeTool">
 				<div class="card">
 				
 					<!-- Profile Image -->
@@ -66,7 +66,25 @@
 									<b>근무시간</b> <a class="float-right">미등록</a>
 								</li>
 							</ul>
-							<a href="#" class="btn btn-primary btn-block"><b>근무상태변경</b></a>
+							<div class="btn btn-block">
+								<a href="#" class="btn btn-success btn-sm" style="width:45%"><b>출근</b></a>
+								<a href="#" class="btn btn-secondary btn-sm" style="width:45%"><b>퇴근</b></a>
+							</div>
+							
+							<div class="btn-group" style="width:100%;">
+								<button type="button" class="btn btn-default" style="font-size: 0.8rem;">근무중</button>
+								<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+									<span class="sr-only">Toggle Dropdown</span>
+									<div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-start" style="position: absolute; font-size: 0.8rem; will-change: transform; top: 0px; left: 0px; transform: translate3d(-1px, 37px, 0px);">
+										<a class="dropdown-item" href="#">근무중</a>
+										<a class="dropdown-item" href="#">회의중</a>
+										<a class="dropdown-item" href="#">자리비움</a>
+										<a class="dropdown-item" href="#">외출</a>
+										<a class="dropdown-item" href="#">외근</a>
+									</div>
+								</button>
+							</div>
+							
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -106,6 +124,21 @@ function now(){
 	document.getElementById("nowDay").innerHTML = st_date;
 	document.getElementById("nowTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 }
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.nav-link-workTime').on('click', function(){
+		if($('.workTimeTool').attr('hidden') == 'hidden'){
+			$('.workTimeTool').prop('hidden', false);
+			$('.index-page').removeClass('col-lg-6');
+			$('.index-page').addClass('col-lg-5');
+		}else{
+			$('.workTimeTool').prop('hidden', true);
+			$('.index-page').removeClass('col-lg-5');
+			$('.index-page').addClass('col-lg-6');
+		}
+	});
+});
 </script>
 
 </th:block>

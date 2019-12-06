@@ -9,12 +9,13 @@
 		SELECT 
 			em.emp_num as empNum,
 			em.emp_name as empName,
-			em.PASSWORD as password,
+			em.PASSWORD,
 			de.dename as demgCode,
 			po.poname as poCode,
-			em.email as email,
-			em.phone as phone,
-			em.addr as addr
+			em.email,
+			em.phone,
+			em.addr,
+			em.photo
 			
 		FROM
 			EMP_MANAGE AS em
