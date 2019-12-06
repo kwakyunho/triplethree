@@ -159,5 +159,40 @@ public class EmployeeController {
 		 employeeService.updateEmployee(employee);
 		 return "redirect:/employeeList";
 	 }
+	 
+	 /**
+	  * 로그인한 회원의 기본정보를 보여주는 화면
+	  * @return
+	  */
+	 @GetMapping("/employeeMyPage")
+	 public String employeeMyPage(Model model, HttpSession session) {
+		
+		 String SID = (String)session.getAttribute("SID");
+		 if(SID != null) {
+			 model.addAttribute("mypage", employeeService.employeeMyPage(SID));
+		 }else {
+			 
+		 }
+		 return "/employee/employeeMyPage";
+	 }
+	 
+	 /**
+	  * 로그인한 회원의 기본정보를 수정하는 화면
+	  * @return
+	  */
+	 @GetMapping("/employeeMyUpdate")
+	 public String employeeMyUpdate() {
+		 return "/employee/employeeMyUpdate";
+	 }
+	 
+	 /**
+	  * 로그인한 회원의 인사이동목록을 보여주는 화면
+	  * @return
+	  */
+	 @GetMapping("/employeeMyMoveList")
+	 public String employeeMyMoveList() {
+		 return "/employee/employeeMyMoveList";
+	 }
 	
+	 
 }

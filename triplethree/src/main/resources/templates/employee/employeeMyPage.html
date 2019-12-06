@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>My Page</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<!-- <th:block layout:fragment="customCss">
+
+</th:block> -->
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">My Page</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="/index">Home</a></li>
+					<li class="breadcrumb-item"><a href="/employeeMyPage">사원 관리</a></li>
+					
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+	<div class="content">
+		 <div class="row">
+              <div class="col-md-12">
+				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employeeMyUpdate'">수정하기</button></div>
+			 
+		 	</div>	     			
+	     </div>
+	
+	</div>
+	
+ <br>
+	
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-info">
+	              <div class="card-header">
+	                <h3 class="card-title">*마이페이지  기본정보 화면입니다.</h3>
+	              </div>
+	              <!-- /.card-header -->
+	              <!-- form start -->
+	              <form method="get" action="/employeeList" class="form-horizontal" th:each="m :${mypage}">
+	                <div class="card-body">  
+	                	<div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
+		                    	<div class="col-sm-3">
+		                 			<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+		                 		</div>
+	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
+			                    <div class="col-sm-3">
+			                 		<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+			                 	</div>		
+	               	   </div>
+	                	
+	                  
+	                  <br>
+	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
+			                    <div class="col-sm-3">
+			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${m.empNum}" readonly="readonly" >
+			                 	</div>	
+	                 </div>
+	                  
+	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원명</label>
+		                    	<div class="col-sm-3">
+		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" th:value="${m.empName}" readonly="readonly">
+		                 		</div>
+	                 		<!-- <label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
+			                    <div class="col-sm-3">
+			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="*패스워드를 입력해주세요.">
+			                 	</div>	 -->	
+	                 </div>
+	                 
+	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">주소</label>
+			                    <div class="col-sm-6">
+			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" th:value="${m.addr}" readonly="readonly">
+			                 	</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+                 			 <label for="inputEmail3" class="col-sm-1 col-form-label"> 연락처 </label>
+
+			                 <div class="col-md-6">
+				                  <div class="input-group">
+				                    <div class="input-group-prepend">
+				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+				                    </div>					             
+				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" th:value="${m.phone}" readonly="readonly">
+				                  	 </div>				                
+			                 </div>
+			                  <!-- /.input group -->
+               		 </div>
+               		 
+               		  <div class="form-group row" >
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">차량 유무</label>
+			                <div class="col-sm-6" >
+			                	<th:block th:if="${m.carPresence} eq 'Y'">
+				                	<div class="icheck-success d-inline">
+				                    	<label><input type="radio" name="carPresence"  id="radioSuccess1" th:value="Y" checked disabled="disabled">Y</label>
+				                    </div>
+			                    	<div class="icheck-success d-inline">
+			                    		<label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" disabled="disabled">N</label>
+			                    	</div>
+			                	</th:block>
+			                	<th:block th:unless="${m.carPresence} eq 'Y'">
+			                		<div class="icheck-success d-inline">
+			                         <label><input type="radio" name="carxPresence"  id="radioSuccess1" th:value="Y" disabled="disabled">Y</label>
+			                      </div>
+			                      <div class="icheck-success d-inline">
+			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" checked disabled="disabled">N</label>
+			                      </div>
+			                	</th:block>
+                 		   </div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">이메일</label>
+			                    <div class="col-sm-6">
+			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" th:value="${m.email}" readonly="readonly">
+			                 	</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">생년월일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="birthDate"  th:value="${m.birthDate}" readonly="readonly">
+
+			                  </div>
+                			</div>
+	                 </div>
+	                 
+	                  <div class="form-group row">
+	                  <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
+			                    <select class="col-sm-3" name="demgCode" >
+		                          <option  th:text="${m.demgName}"></option>
+		                          
+	                        </select>
+                        </div>
+                        
+                       	<div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
+			                    <select class="col-sm-3" name="poCode">
+		                           <option  th:text="${m.poName}"></option>                         
+	                        </select>
+                        </div>
+                        
+                        <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
+			                    <select class="col-sm-3" name="liCode">
+		                           <option  th:text="${m.liName}"></option>   		                      		                          
+	                        </select>
+                        </div>
+		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
+		                    <div class="col-sm-2">
+		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
+		                 	</div>
+		                 <label for="inputEmail3" class="col-sm-1 col-form-label">재직상태</label>
+		                    <div class="col-sm-2">
+		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
+		                 	</div> -->
+	                 </div>
+	                 
+	                  <div class="form-group row">
+	                   	  <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">계약형태</label>
+			                   <select class="col-sm-3" name="conType">
+		                          <option th:text="${m.conType}"></option>
+	                       	 </select>
+	                       </div>
+	                  
+                       
+                       	
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
+		                    <div class="col-sm-3">
+			                    	<input type="text" class="form-control" th:value="${m.basicPay}"  name="basicPay" id="exampleInputEmail1" readonly="readonly">
+			                 </div>
+                        
+	                 </div>
+	                 
+	                <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">입사일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="joinDate" th:value="${m.joinDate}" readonly="readonly">
+
+			                  </div>
+                			</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">퇴사일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="retireDate"  th:value="${m.retireDate}" readonly="readonly">
+
+			                  </div>
+                			</div>
+	                 </div>
+	                 
+	                 <div class="form-group row" style="visibility:hidden;">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">작성자</label>
+		                    	<div class="col-sm-3">
+		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${m.writer}" readonly="readonly">
+		                 		</div>
+	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">작성일자</label>
+			                    <div class="col-md-4">
+									<div class="col-md-7">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="writerDay"  th:value="${m.writerDay}" readonly="readonly">
+
+			                  </div>
+                			</div>
+			                 	</div>		
+	                 </div>
+	                 
+	                 
+	                  
+	                </div>
+	                <!-- /.card-body -->
+					
+	                
+	              </form>
+	            </div>
+	           </div>
+			<!-- /.col-md-6 -->
+			
+			<!-- /.col-md-6 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script>
+	$(document).ready(function () {
+		   $(function () {
+		            
+		            $('#MOBILE_NO').keydown(function (event) {
+		             var key = event.charCode || event.keyCode || 0;
+		             $text = $(this); 
+		             if (key !== 8 && key !== 9) {
+		                 if ($text.val().length === 3) {
+		                     $text.val($text.val() + '-');
+		                 }
+		                 if ($text.val().length === 8) {
+		                     $text.val($text.val() + '-');
+		                 }
+		                 
+		                 
+		             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+					 // Key 8번 백스페이스, Key 9번 탭, Key 46번 Delete 부터 0 ~ 9까지, Key 96 ~ 105까지 넘버패트
+					 // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함 
+		             }
+		         })
+		   });
+	
+		});
+</script>
+
+</th:block>
+</html>

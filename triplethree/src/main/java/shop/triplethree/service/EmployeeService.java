@@ -57,5 +57,9 @@ public class EmployeeService {
 	  public int updateEmployee(Employee employee) {
 		  return employeeMapper.updateEmployee(employee);
 	  }
+	  
+	  public Employee employeeMyPage(String SID) {
+		  return employeeMapper.employeeMyPage(SID);
+	  }
 	 
 }
