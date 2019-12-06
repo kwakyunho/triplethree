@@ -33,9 +33,9 @@ public class EmployeeController {
 	 * @throws IOException 
 	   */
 	  @PostMapping(value="login", produces ="text/html")
-	  public @ResponseBody String login(Employee employee, HttpSession session,HttpServletResponse response) throws IOException {
-		System.out.println(employee.getEmpNum()+ "<- 로그인 아이디 입력값 ");  
-		System.out.println(employee.getPassword()+ "<- 로그인 패스워드 입력값 ");  		
+	  public @ResponseBody String login(Employee employee, HttpSession session, HttpServletResponse response) throws IOException {
+		//System.out.println(employee.getEmpNum()+ "<- 로그인 아이디 입력값 ");  
+		//System.out.println(employee.getPassword()+ "<- 로그인 패스워드 입력값 ");  		
 		
 		String scriptStr = "<script>alert('아이디와 패스워드를 입력해주세요'); history.go(-1);</script>";
 		String scriptStr2 = "<script>alert('로그인 성공~!'); location.href='/index';</script>";

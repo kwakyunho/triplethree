@@ -1,20 +1,21 @@
 package shop.triplethree.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import shop.triplethree.service.CommonService;
 
 @Controller
 public class MainController {
 	
-	@Autowired private CommonService commonService;
 	@GetMapping("/")
-	public String mainpage() {
-		String code = commonService.codeGeneration("TRAVEL_HISTORY");
-		System.out.println("생성된 코드명 : " + code);
-		return "employee/login";
+	public String mainpage(HttpSession session) {
+		if(session.getAttribute("SID") != null) {
+			return "index";
+		}else {
+			return "employee/login";
+		}
 	}
 	
 	@GetMapping("/index")
