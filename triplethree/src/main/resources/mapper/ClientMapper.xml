@@ -61,6 +61,7 @@
 		WHERE m_section='거래처상태'
 	</select>
 	
+	<!-- 거래처리스트 가져오기 -->
 	<select id="getClientList" resultMap="clientResultMap">
 		SELECT
 			A.code as code
@@ -68,17 +69,17 @@
 			, C.s_section as li_code2
 			, A.acc_name as acc_name
 			, A.acc_ceo_name as acc_ceo_name
-			,A.acc_addr
-			,A.acc_bln
-			,A.acc_fax 
-			,A.acc_phone
-			,A.repre_number
-			,A.acc_email
-			,A.writer
-			,A.writer_day
-			,A.approver
-			,A.appro_day
-			,A.approver_st
+			, A.acc_addr
+			, A.acc_bln
+			, A.acc_fax 
+			, A.acc_phone
+			, A.repre_number
+			, A.acc_email
+			, A.writer
+			, A.writer_day
+			, A.approver
+			, A.appro_day
+			, A.approver_st
 		 FROM ACC_MANAGE as A
 			LEFT JOIN LIST_MANAGE as B
 			on	A.li_code = B.code
@@ -114,7 +115,7 @@
 	</select>
 
 	<!-- 거래처 거래처 수정처리 메서드 -->
-	<update id="clientUpdate" parameterType="shop.triplethree.vo.Client">
+	<update id="updateClient" parameterType="shop.triplethree.vo.Client">
 		update ACC_MANAGE
 			SET
 			 code	= #{code},
@@ -136,7 +137,7 @@
 	</update>
 	
 	<!-- 거래처삭제 삭제지만 상태 수정 메서드 -->
-	<update id="clientDelete" parameterType="shop.triplethree.vo.Client">
+	<update id="deleteClient" parameterType="shop.triplethree.vo.Client">
 		UPDATE
 			ACC_MANAGE
 		SET
@@ -149,7 +150,7 @@
 	</update>
 	
 	<!-- 인서트 할때 사업장의 존폐여부는 일단 박고 시작-->
-	<insert id="clientInsert" parameterType="shop.triplethree.vo.Client">
+	<insert id="insertClient" parameterType="shop.triplethree.vo.Client">
 	INSERT INTO ACC_MANAGE
 			(code
 			,li_code
@@ -182,8 +183,7 @@
 			 , now());
 	</insert>
 	
-	
-	
+	<!-- 영업중 거래처 리스트 가져오기 -->	
 	<select id="getClientList2" resultMap="clientResultMap">
 		SELECT
 			A.code

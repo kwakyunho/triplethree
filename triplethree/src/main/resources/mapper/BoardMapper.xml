@@ -12,7 +12,7 @@
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
 	
-	<insert id="boardInsert" parameterType="shop.triplethree.vo.Board">
+	<insert id="insertBoard" parameterType="shop.triplethree.vo.Board">
 		Insert into BOARD
 			(code
 			,emp_code
@@ -22,33 +22,40 @@
 			,writer_day)
 		values
 			(#{code}
-			,#{empCode} = 
+			,#{empCode}
 			,#{boardTitle}
 			,#{boardCon}
 			,#{boardCount}
 			,NOW());
 	</insert>
-	
+	<!-- 공지사항 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
 	<select id="boardList" resultMap="boardResultMap">
-		Select 
-			code
+		SELECT
+			B.code
 			,emp_code
+			,EM.emp_name
 			,board_title
 			,board_con
 			,board_count
-			,writer_day 
-		from BOARD
+			,B.writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.code
 	</select>
 	
+	<!--글 정보 하나만 뽑아오기 code로   -->
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
-		Select 
-			code
+		SELECT
+			B.code
 			,emp_code
+			,EM.emp_name
 			,board_title
 			,board_con
 			,board_count
-			,writer_day 
-		from BOARD
+			,B.writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.code
 		where code=#{code}
 	</select>
 	
@@ -56,7 +63,7 @@
 		update BOARD
 			set
 			code = #{code}
-			,emp_code = #{empCode}
+			<!-- ,emp_code = #{empCode} -->
 			,board_title = #{boardTitle}
 			,board_con = #{boardCon}
 			,board_count = #{boardCount}

@@ -14,7 +14,7 @@ public interface ClientMapper {
 	public List<Client> getLicode2List();
 	
 	//거래처 정보 등록
-	public int clientInsert(Client client);
+	public int insertClient(Client client);
 	
 	//거래처 정보 목록가져오기
 	public List<Client> getClientList();
@@ -26,9 +26,9 @@ public interface ClientMapper {
 	public Client getClientBycode(String code);
 	
 	//거래처 정보 수정하기
-	public int clientUpdate(Client client);
+	public int updateClient(Client client);
 	
 	//거래처 정보 삭제하기
-	public int clientDelete(String code);
+	public int deleteClient(String code);
 	
 }

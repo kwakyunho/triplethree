@@ -15,12 +15,20 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardservice;
-	//공지사항  작성하기
+	//공지사항  작성하기화면 이동
 	@GetMapping("/boardInsert")
 	public String boardInsert() {
-		
 		return "/board/boardInsert";
 	}
+	
+	//공지사항 작성
+	@PostMapping("/boardInsert")
+	public String insertBoard(Board board) {
+		boardservice.insertBoard(board);
+		return "redirect:/boardList";
+	}
+	
+	
 	//글목록 가져오기
 	@GetMapping("/boardList")
 	public String boardList(Model model) {

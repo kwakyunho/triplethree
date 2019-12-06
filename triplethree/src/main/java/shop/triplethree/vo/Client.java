@@ -18,6 +18,8 @@ public class Client {
 	private String accPhone;
 	private String accEmail;
 	private String writer;
+	
+	
 	public String getAccPostcode() {
 		return accPostcode;
 	}

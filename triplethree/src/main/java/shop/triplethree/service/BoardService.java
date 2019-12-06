@@ -12,13 +12,18 @@ public class BoardService {
 	@Autowired private CommonService commonService;
 	@Autowired private BoardMapper boardMapper;
 	
+	//공지사항 작성
+	public int insertBoard(Board board) {
+		//board 안에 pk 코드 세팅이 되어서 온 상태
+		return boardMapper.insertBoard(board);
+	}
 	//게시물인서트 pk 코드 생성 메서드
 	public int createBoardCode(Board board) {
 		String code = commonService.codeGeneration("BOARD");
 		board.setCode(code);
 		System.out.println(code+" : 생성된 공지게시물 PK코드");
-		board.setEmpCode("EMP-20191202000003");//세션에서 값 가져와서 작성자 넣기
-		return boardMapper.boardInsert(board);
+		//board.setEmpCode("EMP-20191202000003");//세션에서 값 가져와서 작성자 넣기
+		return boardMapper.insertBoard(board);
 	}
 	
 	//게시물 목록 가져오기
