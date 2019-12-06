@@ -1,7 +1,5 @@
 package shop.triplethree.vo;
 
-import java.time.LocalDateTime;
-
 public class Employee {
 	private String code; //사원관리코드
 	private String demgCode; //부서코드
