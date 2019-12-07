@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+	layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>시설물 관리</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+
+
+<th:block layout:fragment="customContents">
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0 text-dark">시설물 관리</h1>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="/index">Home</a></li>
+						<li class="breadcrumb-item"><a href="/assetSelect">자산 관리</a></li>
+						<li class="breadcrumb-item">시설물 관리</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /.content-header -->
+
+	
+<!-- 시설물 등록 시작  -->
+<form th:action="@{assetsBeInsert}" method="post">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="card col-lg-8" style="text-align: center;">
+				<div style="align-self:center; width:90%;">
+					<div id="accordion1">
+						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+						<div class="card card-primary small" style="margin-top: 15px;">
+							<div class="card-header" style="align-self: center;">
+								<h4 class="card-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 시설물 등록 하기 </a>
+								</h4>
+							</div>
+							<div id="collapseOne1" class="panel-collapse in collapse" style="">
+							<div class="card-body" style="text-align: -webkit-center;">
+								<table style="text-align: center;">
+									<tr>
+										<td style="width:150px;">시설물명</td>
+										<td>
+											<input class="form-control form-control-lg" type="text" style="width:100%; 
+											font-size: small;" placeholder="시설물명을 입력해주세요" id="inName" name="faName">
+										</td>
+										
+										<td style="width:150px;">시설물 위치</td>
+										<td>
+											<input class="form-control form-control-lg" type="text" style="width:100%; 
+											font-size: small;" placeholder="시설물위치를 입력해주세요" id="inLocal" name="faLocal">
+										</td>
+									</tr>
+									<tr>
+										<td style="width:150px;">수용인원</td>
+										<td>
+											<input class="form-control form-control-lg" type="text" style="width:100%; 
+											font-size: small;" placeholder="수용인월을 입력해주세요" id="inSeat" name="faSeat">
+										</td>
+										
+										<td style="width:150px;">이용일자</td>
+										<td>
+											<input class="form-control form-control-lg" type="date" style="width:100%; 
+											font-size: small;" placeholder="예) 2019-12-07" id="inDatd" name="faDate">
+										</td>
+									</tr>
+									<tr>
+										<td style="width:150px;">상태</td>
+										<td>
+											<input class="form-control form-control-lg" type="text" style="width:100%; 
+											font-size: small;" placeholder="에)사용가능 , 수리중" id="inSt" name="faSt">
+										</td>
+										
+										<td style="width:150px;">이미지</td>
+										<td>
+											<input class="form-control form-control-lg" type="file" style="width:100%; 
+											font-size: small;" id="inImage" name="faImage">
+										</td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
+										</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	</div>
+</form>
+<!-- 시설물 등록 끝  -->
+
+<!-- 시설물 수정 시작 -->
+<form th:action="@{assetsBeUpdate}" method="post">
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">시설물 정보 수정</h4>
+							</div>
+								<div class="modal-body">
+									<table style="text-align: center;">
+										<tr>
+											<td style="width:150px;">시설물 관리 코드</td>
+											<td>
+												<input class="form-control form-control-lg" type="text" style="width:100%; 
+												font-size: small;" id="Code" name="Code" readonly="readonly">
+											</td>
+											<td>
+												<p class="text-danger">*관리코드는 수정 할 수 없습니다.</p>
+											</td>
+										</tr>
+										<tr>
+											<td style="width:150px;">시설물명</td>
+											<td>
+												<input class="form-control form-control-lg" type="text" style="width:100%; 
+												font-size: small;" placeholder="시설물명을 입력해주세요" id="upName" name="faName">
+											</td>
+											
+											<td style="width:150px;">시설물 위치</td>
+											<td>
+												<input class="form-control form-control-lg" type="text" style="width:100%; 
+												font-size: small;" placeholder="시설물위치를 입력해주세요" id="upLocal" name="faLocal">
+											</td>
+										</tr>
+										<tr>
+											<td style="width:150px;">수용인원</td>
+											<td>
+												<input class="form-control form-control-lg" type="text" style="width:100%; 
+												font-size: small;" placeholder="수용인월을 입력해주세요" id="upSeat" name="faSeat">
+											</td>
+											
+											<td style="width:150px;">이용일자</td>
+											<td>
+												<input class="form-control form-control-lg" type="date" style="width:100%; 
+												font-size: small;" placeholder="예) 2019-12-07" id="upDatd" name="faDate">
+											</td>
+										</tr>
+										<tr>
+											<td style="width:150px;">상태</td>
+											<td>
+												<input class="form-control form-control-lg" type="text" style="width:100%; 
+												font-size: small;" placeholder="에)사용가능 , 수리중" id="upSt" name="faSt">
+											</td>
+											
+											<td style="width:150px;">이미지</td>
+											<td>
+												<input class="form-control form-control-lg" type="file" style="width:100%; 
+												font-size: small;" id="upImage" name="faImage">
+											</td>
+										</tr>
+									</table>
+								</div>
+							<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-primary" id="updateBtn">수정하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<!-- 시설물 수정 끝-->
+
+<!-- 시설물 리스트 시작 -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">시설물 목록</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" style="overflow-y: scroll;">
+                <table class="table table-hover" style="margid:auto; text-align:center;">
+                  <thead>
+                    <tr>
+	                      <th>시설물 관리코드</th>
+	                      <th>시설물명</th>
+	                      <th>위치</th>
+	                      <th>수용인원</th>
+	                      <th>이용일자</th>
+	                      <th>이미지</th>
+	                      <th>상태</th>
+	                      <th>작성자</th>
+	                      <th>작성일자</th>
+	                      <th>수정</th>
+	                      <th>삭제</th>
+                    </tr>
+                    <tr th:each="a :${AssetsList}" class="AssetsListTr">
+						<td id="upCode" th:text="${a.code}"></td>
+						<td id="faName" th:text="${a.faName}"></td>
+						<td id="faLocal"  th:text="${a.faLocal}"></td>
+						<td id="faSeat"  th:text="${a.faSeat}"></td>
+						<td id="faDate"  th:text="${a.faDate}"></td>
+						<td id="faImage"  th:text="${a.faImage}"></td>
+						<td id="faSt"  th:text="${a.faSt}"></td>
+						<td id="writer"  th:text="${a.writer}"></td>
+						<td id="writerDay"  th:text="${a.writerDay}"></td>
+						<td class="update">
+							<input type="button" id="updateBtn" value="수정" class="btn btn-primary">
+						</td>
+						<td>
+							<a th:href="@{assetsBeDelete(code=${a.code})}" class="btn btn-primary">삭제</a>
+						</td>
+					</tr>
+                  </thead>
+                  <tbody>
+                   
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+</th:block>
+<!-- 시설물 리스트 끝 -->
+
+<th:block layout:fragment="customScript">
+<!-- 자산관리에 해당하는 모든 스크립트 -->
+<script th:src="@{custom/js/assets.js}"></script>
+</th:block>
+</html>

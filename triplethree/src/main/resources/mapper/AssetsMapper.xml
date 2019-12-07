@@ -17,21 +17,10 @@
 	</resultMap>
 	
 	<!-- 시설물 조회 쿼리문 -->
-	<select id="selectAssets" resultMap="AssetsResult">
-	<!-- 	SELECT
-			fa_name AS faName
-			,fa_local AS faLocal
-			,fa_seat AS faSeat
-			,fa_date AS faDate
-			,fa_image AS faImage
-			,fa_st AS faSt
-			,writer AS writer
-			,writer_day AS writerDay
-		FROM
-			FACILITY_MANAGE -->
-			
+	<select id="selectBeAssets" resultMap="AssetsResult">
 		SELECT
-			fa_name
+			code
+			,fa_name
 			,fa_local
 			,fa_seat
 			,fa_date
@@ -42,4 +31,56 @@
 		FROM
 			FACILITY_MANAGE	
 	</select>
+	
+	<!-- 시설물 등록 쿼리문 -->
+	<insert id="insertBeAssets" parameterType="shop.triplethree.vo.Assets">
+	INSERT INTO
+		FACILITY_MANAGE 
+			(code
+			,fa_name
+			,fa_local
+			,fa_seat
+			,fa_date
+			,fa_image
+			,fa_st
+			,writer
+			,writer_day)
+		VALUES
+			(#{code}
+			,#{faName}
+			,#{faLocal}
+			,#{faSeat}
+			,#{faDate}
+			,#{faImage}
+			,#{faSt}
+			,#{writer}
+			,NOW());
+	</insert>
+	
+	<!-- 시설물 수정 쿼리문 -->
+	<update id="updateBeAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			FACILITY_MANAGE
+		SET
+			fa_name = #{faName}
+			,fa_local = #{faLocal}
+			,fa_seat = #{faSeat}
+			,fa_date = #{faDate}
+			,fa_image = #{faImage}
+			,fa_st = #{faSt}
+			,writer = #{sid}
+			,writer_day = NOW()
+		WHERE
+			code = #{code}
+	</update>
+	
+	<!-- 시설물 삭제 쿼리문 -->
+	<update id="deleteBeAssets" parameterType="String">
+		UPDATE
+			FACILITY_MANAGE
+		SET
+			fa_st = '사용안함'
+		WHERE
+			code = #{code}
+	</update>
 </mapper>

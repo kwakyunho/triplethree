@@ -10,5 +10,14 @@ import shop.triplethree.vo.Assets;
 public interface AssetsMapper {
 
 	// 시설물 조회 메서드
-	public List<Assets> selectAssets();
+	public List<Assets> selectBeAssets();
+	
+	// 시설물 등록 메서드
+	public int insertBeAssets(Assets assets);
+	
+	// 시설물 수정 메서드
+	public int updateBeAssets(Assets assets);
+	
+	// 시설물 삭제 메서드
+	public int deleteBeAssets(String code);
 }
