@@ -98,7 +98,7 @@
 								<table style="text-align: center;">
 									<tr>
 										<td style="width:150px;">변경전 직급명</td>
-										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameBeUp" name="positionNameBe"></td>
+										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="리스트에서 직급명을 클릭해주세요" id="positionNameBeUp" name="positionNameBe"></td>
 										<td style="width:150px;">변경후 직급명</td>
 										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="직급명을 입력해주세요" id="positionNameAfUp" name="positionNameAf">
 										<div class="check_font" id="name_checkAf"></div></td>
@@ -179,7 +179,7 @@
 								<td id="positionApproDay" th:text="${P.positionApproDay}"></td>
 								<td id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
 								<td id="positionYesNO" th:text="${P.positionYesNO}"></td>
-								<td><a th:href="@{positionListDelete(positionCode=${P.positionCode})}">삭제</a></td>								
+								<td><a th:href="@{positionListDelete(positionCode=${P.positionCode})}" class="btn btn-block btn-primary btn-sm">삭제</a></td>								
 							</tr>
 						</thead>
 						<tbody>

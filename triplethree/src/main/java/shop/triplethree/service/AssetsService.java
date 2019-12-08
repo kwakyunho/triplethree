@@ -40,7 +40,14 @@ public class AssetsService {
 	/**
 	 * 시설물 삭제 메서드
 	 * */
-	public int deleteBeAssets(String code) {
-		return assetMapper.deleteBeAssets(code);
+	public int deleteBeAssets(Assets assets) {
+		return assetMapper.deleteBeAssets(assets);
+	}
+	
+	/**
+	 * 시설물 등록/수정 유효성 검사 메서드
+	 * */
+	public int beNameCheck(Assets assets) {
+		return assetMapper.beNameCheck(assets);
 	}
 }

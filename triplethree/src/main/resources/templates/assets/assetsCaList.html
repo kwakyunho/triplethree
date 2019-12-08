@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>시설물 관리</title>
+	<title>차량 관리</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -17,14 +17,14 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">시설물 관리</h1>
+					<h1 class="m-0 text-dark">차량 관리</h1>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/index">Home</a></li>
 						<li class="breadcrumb-item"><a href="/assetSelect">자산 관리</a></li>
-						<li class="breadcrumb-item">시설물 관리</li>
+						<li class="breadcrumb-item">차량 관리</li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -36,7 +36,7 @@
 	<!-- /.content-header -->
 
 	
-<!-- 시설물 등록 시작  -->
+<!-- 차량 등록 시작  -->
 <form th:action="@{assetsBeInsert}" method="post">
 	<div class="content">
 		<div class="container-fluid">
@@ -49,7 +49,7 @@
 						<div class="card card-primary small" style="margin-top: 15px;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 시설물 등록 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 차량 등록 하기 </a>
 								</h4>
 							</div>
 							<div id="collapseOne1" class="panel-collapse in collapse" style="">
@@ -114,7 +114,7 @@
 	</div>
 	</div>
 </form>
-<!-- 시설물 등록 끝  -->
+<!-- 차량 등록 끝  -->
 
 <!-- 시설물 수정 시작 -->
 <form th:action="@{assetsBeUpdate}" method="post">
@@ -187,9 +187,9 @@
 		</div>
 	</div>
 </form>
-<!-- 시설물 수정 끝-->
+<!-- 차량 수정 끝-->
 
-<!-- 시설물 리스트 시작 -->
+<!-- 차량 리스트 시작 -->
 	<div class="content">
 		<div class="container-fluid">
 			<div class="col-12">
@@ -255,7 +255,7 @@
 		<!-- /.container-fluid -->
 	</div>
 </th:block>
-<!-- 시설물 리스트 끝 -->
+<!-- 차량 리스트 끝 -->
 
 <th:block layout:fragment="customScript">
 <!-- 자산관리에 해당하는 모든 스크립트 -->

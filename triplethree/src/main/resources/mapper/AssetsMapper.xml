@@ -75,12 +75,24 @@
 	</update>
 	
 	<!-- 시설물 삭제 쿼리문 -->
-	<update id="deleteBeAssets" parameterType="String">
+	<update id="deleteBeAssets" parameterType="shop.triplethree.vo.Assets">
 		UPDATE
 			FACILITY_MANAGE
 		SET
 			fa_st = '사용안함'
+			,writer = #{writer}
+			,writer_day = NOW()
 		WHERE
 			code = #{code}
 	</update>
+	
+	<!-- 시설물 등록 / 수정 유효성검사 쿼리문 -->
+	<select id="beNameCheck" parameterType="shop.triplethree.vo.Assets" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			FACILITY_MANAGE
+		WHERE
+			fa_name = #{faName}
+	</select>
 </mapper>
