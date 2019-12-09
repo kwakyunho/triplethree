@@ -18,12 +18,12 @@ public class BoardController {
 	private BoardService boardservice;
 	//공지사항  작성하기화면 이동
 	@GetMapping("/boardInsert")
-	public String insertBoard() {
-		
+	public String insertBoard(HttpSession session) {
 		return "/board/boardInsert";
 	}
+
 	//공지사항 작성
-	@PostMapping("/boardInsert")
+	@PostMapping("/boardInsert2")
 	public String insertBoard(Board board,HttpSession session){
 		boardService.createBoardCode(session,board);
 		return "redirect:/boardList";

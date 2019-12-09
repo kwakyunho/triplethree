@@ -19,7 +19,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">제목 필수 변경</h1>
+				<h1 class="m-0 text-dark">게시판 관리</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -47,7 +47,7 @@
 	                 <th>글번호</th>
 	                 <th>작성자</th>
 	                 <th>글제목</th>
-	                 <th>글내용</th>
+	                 <!-- <th>글내용</th> -->
 	                 <th>조회수</th>
 	                 <th>작성일자</th>
 	                 <th>수정</th>
@@ -57,9 +57,9 @@
 	             <tbody>
 	               <tr th:each="b : ${boardList}">
 					<td th:text="${b.code}"></td>
-					<td th:text="${b.empCode}"></td>
+					<td th:text="${b.empName}"></td>
 					<td th:text="${b.boardTitle}"></td>
-					<td th:text="${b.boardCon}"></td>
+					<!-- <td th:text="${b.boardCon}"></td> -->
 					<td th:text="${b.boardCount}"></td>
 					<td th:text="${b.writerDay}"></td>
 					<td>
@@ -77,7 +77,7 @@
 	     </div>
 	     <!-- /.card -->
 	     <div class="col-4">
-			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardInsert'">공지사항 작성하기</a></button>
+			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardInsert'" >공지사항 작성하기</a></button>
 	     </div>
 	 </div>
 	 </div>

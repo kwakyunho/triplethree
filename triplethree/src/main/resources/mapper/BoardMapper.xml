@@ -9,6 +9,7 @@
 		<result column="board_title" property="boardTitle"/>
 		<result column="board_con" property="boardCon"/>
 		<result column="board_count" property="boardCount"/>
+		<result column="board_pw" property="boardPw"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
 	<!-- 사원번호(SID)로 사원명 가져오기  -->
@@ -42,7 +43,7 @@
 		SELECT
 			B.code
 			,emp_code
-			,EM.emp_name
+			,EM.emp_name as name
 			,board_title
 			,board_con
 			,board_count

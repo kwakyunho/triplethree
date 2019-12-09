@@ -54,6 +54,4 @@ public class BoardService {
 		return boardMapper.boardUpdate(board);
 	}
 	
-		
-	
 }
