@@ -110,7 +110,9 @@ setInterval("now()",1000);
 function now(){
 	var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
 	var now = new Date();
+	var ingWorkTime = new Date();
 	var oldTime = new Date();
+	var endTime = new Date();
 	years = now.getFullYear();
 	months = now.getMonth();
 	days = now.getDate();
@@ -133,49 +135,63 @@ function now(){
 	document.getElementById("nowDay").innerHTML = st_date;
 	document.getElementById("nowTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 	
+	// 계산
+	var firstOldTime = oldTime.toString().substr(0,16);
+	var middleOldTime = $('#startWorkTime').text();
+	var lastOldTime = oldTime.toString().substr(24,18);
+	var oldTimeText = firstOldTime + middleOldTime + lastOldTime;
+	oldTime = new Date(oldTimeText);
+	
+	var firstEndTime = endTime.toString().substr(0,16);
+	var middleEndTime = $('#endWorkTime').text();
+	var lastEndTime = endTime.toString().substr(24,18);
+	var endTimeText = firstEndTime + middleEndTime + lastEndTime;
+	endTime = new Date(endTimeText);
+	
 	if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() == '미등록'){
-		var firstOldTime = oldTime.toString().substr(0,16);
-		var middleOldTime = $('#startWorkTime').text();
-		var lastOldTime = oldTime.toString().substr(24,18);
-		var oldTimeText = firstOldTime + middleOldTime + lastOldTime;
-		oldTime = new Date(oldTimeText);
-		var ingWorkTime = now.getTime() - oldTime.getTime();
-		
-		var ingHours = (ingWorkTime / 1000 / 60 / 60) % 24;
-		var ingMinutes = (ingWorkTime / 1000 / 60) % 60;
-		var ingSeconds = (ingWorkTime / 1000) % 60;
-		
-		// 시간 출력부
-		if(0 <= ingHours && ingHours < 10){
-			ingHours = "0" + Math.floor(ingHours);
-		}else if(ingHours < 0 || isNaN(ingHours)){
-			ingHours = "00";
-		}else{
-			ingHours = Math.floor(ingHours);
-		}
-		
-		// 분 출력부
-		if(0 <= ingMinutes && ingMinutes < 10){
-			ingMinutes = "0" + Math.floor(ingMinutes);
-		}else if(ingMinutes < 0 || isNaN(ingMinutes)){
-			ingMinutes = "00";
-		}else{
-			ingMinutes = Math.floor(ingMinutes);
-		}
-		
-		// 초 출력부
-		if(0 <= ingSeconds && ingSeconds < 10){
-			ingSeconds = "0" + Math.floor(ingSeconds);
-		}else if(ingSeconds < 0 || isNaN(ingSeconds)){
-			ingSeconds = "00";
-		}else{
-			ingSeconds = Math.floor(ingSeconds);
-		}
-		
+		ingWorkTime = now.getTime() - oldTime.getTime();
+	}else if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() != '미등록'){
+		ingWorkTime = endTime.getTime() - oldTime.getTime();
+	}else{
+		ingWorkTime = new Date();
+	}
+	
+	var ingHours = (ingWorkTime / 1000 / 60 / 60) % 24;
+	var ingMinutes = (ingWorkTime / 1000 / 60) % 60;
+	var ingSeconds = (ingWorkTime / 1000) % 60;
+	
+	// 시간 출력부
+	if(0 <= ingHours && ingHours < 10){
+		ingHours = "0" + Math.floor(ingHours);
+	}else if(ingHours < 0 || isNaN(ingHours)){
+		ingHours = "00";
+	}else{
+		ingHours = Math.floor(ingHours);
+	}
+	
+	// 분 출력부
+	if(0 <= ingMinutes && ingMinutes < 10){
+		ingMinutes = "0" + Math.floor(ingMinutes);
+	}else if(ingMinutes < 0 || isNaN(ingMinutes)){
+		ingMinutes = "00";
+	}else{
+		ingMinutes = Math.floor(ingMinutes);
+	}
+	
+	// 초 출력부
+	if(0 <= ingSeconds && ingSeconds < 10){
+		ingSeconds = "0" + Math.floor(ingSeconds);
+	}else if(ingSeconds < 0 || isNaN(ingSeconds)){
+		ingSeconds = "00";
+	}else{
+		ingSeconds = Math.floor(ingSeconds);
+	}
+	
+	// 출근 퇴근 입력에 따른 출력 분기처리
+	if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() == '미등록'){
 		document.getElementById("ingWorkTime").innerHTML = ingHours + ":" + ingMinutes + ":" + ingSeconds;
 	}else if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() != '미등록'){
-		
-		document.getElementById("ingWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
+		document.getElementById("ingWorkTime").innerHTML = ingHours + ":" + ingMinutes + ":" + ingSeconds;
 	}else{
 		$('#ingWorkTime').text('미등록')
 	}
@@ -196,6 +212,43 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	var condition = 0;
+	(function($){
+		$.fn.workTimeEvent = function(conditionValue){
+			
+			if(conditionValue == 1){
+				
+			var sendData = '{';
+			sendData += '"type" : ' + $('#type').val();
+			sendData += '", complete" : ' + $('#complete').val();
+			sendData += '", page" : ' + $('#page').val();
+			sendData += '}';
+			
+			console.log(sendData);
+			
+			}
+			
+			
+			/* $.ajax({
+				async: true,
+				type : 'POST',
+				data : sendData,
+				url : "/test",
+				dataType : "json",
+				success : function(result) {
+					console.log(result);
+				},
+				error : function(error) {
+					//alert("error : " + error);
+				}
+			}); */
+		}
+	}(jQuery));
+	
+	// 페이지 시작시 함수 호출
+	$.fn.workTimeEvent('1');
+		
 	// 버튼 클릭시 현재 상태 변경하기
 	$('.nowWorkStateList').on('click', function(){
 		$('.nowWorkState').text($(this).text());
@@ -216,7 +269,6 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
 });
 </script>
 
