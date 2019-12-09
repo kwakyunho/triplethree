@@ -13,8 +13,14 @@ import shop.triplethree.vo.Employee;
 public class PayService {
 	
 	@Autowired private PayMapper payMapper;  
-	
+	/**급여 대장**/
 	public List<Employee> selectPay(){		  
 		  return payMapper.selectPay();
 	  }
+	
+	/**퇴직금  검색 조회**/
+	public List<Employee> selectRetiring(){
+		return payMapper.selectRetiring();
+				
+	}
 }

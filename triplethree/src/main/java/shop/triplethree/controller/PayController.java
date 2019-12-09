@@ -30,7 +30,7 @@ public class PayController {
 	/**퇴직금 등록화면**/
 	@GetMapping("/selectRetiring")
 	public String selectRetiring() {
-		System.out.println("공제액등록화면");
+		System.out.println("퇴직금 등록화면");
 		return "pay/selectRetiring";
 	}
 	

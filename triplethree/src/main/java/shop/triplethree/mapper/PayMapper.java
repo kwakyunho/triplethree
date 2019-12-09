@@ -10,4 +10,6 @@ import shop.triplethree.vo.Employee;
 public interface PayMapper {
 
 	public List<Employee> selectPay();
+	
+	public List<Employee> selectRetiring();
 }
