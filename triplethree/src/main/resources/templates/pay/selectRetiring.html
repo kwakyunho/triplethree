@@ -29,10 +29,10 @@
 <div class="content">
 	<div class="col-12">
 		<div class="card">
-			<form action="/selectRetiring" method="post">
-				<div>
+			<form th:href="@{/selectRetiring}" method="post">
+ 				<div>
 				<input type="date" name="retirng1">~<input type="date" name="retirng2">
-				<button type="submit">조회</button>
+				<button type="button">조회</button>
 				</div>
 			</form>
 		</div>

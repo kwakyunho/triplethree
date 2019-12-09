@@ -29,4 +29,13 @@
 		ON A.pocode = C.CODE
 				
 	</select>
+	
+	<!--퇴직금 검색쿼리문짜야험  -->
+	<select id="selectRetiring" resultType="shop.triplethree.vo.Employee">	
+		SELECT 
+	em.retire_date
+	FROM EMP_MANAGE AS em
+	left JOIN DEMG AS d ON em.demgcode = d.code 
+	left JOIN POSISYS AS p ON em.pocode  = p.code
+	</select>
 </mapper>

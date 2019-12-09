@@ -10,6 +10,6 @@ import shop.triplethree.vo.Employee;
 public interface PayMapper {
 
 	public List<Employee> selectPay();
-	
+	/**퇴직금 검색조회***/
 	public List<Employee> selectRetiring();
 }
