@@ -80,9 +80,10 @@
 			                 	 -->
 			                 <div class="col-sm-3">
 				                	
-				                 		<input type="text" name="coPostCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control"><br>
-									
-										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기"><br>									
+				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control">
+							</div>		
+							 <div class="col-sm-3">
+										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
 									
 							 </div>	
 			           </div>     	
@@ -91,16 +92,22 @@
 			               
 				             <label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">
-									<input type="text" name="coAddr"id="sample6_address" placeholder="주소" class="form-control">
+									<input type="text" name="addr"id="sample6_address" placeholder="주소를 입력해주세요." class="form-control">
 								</div>
+						</div>
+						
 								 
-							
+						<div class="form-group row">	
+							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">	
-									<input type="text" name="coDetailAddr"id="sample6_detailAddress" placeholder="상세주소" class="form-control">
+									<input type="text" name="detailAddr"id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." class="form-control">
 								</div>
-								
+						</div>
+						
+						<div class="form-group row">		
+							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">	
-									<input type="text" name="coExtraAddr"id="sample6_extraAddress" placeholder="참고주소" class="form-control col-sm-4">
+									<input type="text" name="extraAddr"id="sample6_extraAddress" placeholder="참고주소를 입력해주세요." class="form-control col-sm-4">
 								</div>
 										
 							<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -212,7 +219,7 @@
 	                   <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode" >
-		                          <option th:each= "C :${depart}" th:text="${C.demgCode}" th:value="${C.code}"></option>
+		                          <option th:each= "C :${depart}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
 		                          
 	                        </select>
                         </div>
@@ -220,14 +227,14 @@
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                          <option th:each ="P : ${position}"  th:text="${P.poCode}" th:value="${P.code}"></option>	                         
+		                          <option th:each ="P : ${position}"  th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
 	                        </select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                          <option th:each="L :${status}" th:text="${L.liCode}" th:value="${L.code}"></option>		                      		                          
+		                          <option th:each="L :${status}" th:text="${L.liName}" th:value="${L.liCode}"></option>		                      		                          
 	                        </select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>

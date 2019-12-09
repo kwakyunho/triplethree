@@ -36,7 +36,7 @@ public interface EmployeeMapper {
 	//수정할 정보를 업데이트하는 메서드
 	public int updateEmployee(Employee employee);
 	
-	//수정할 정보를 업데이트하는 메서드
+	//마이페이지의 정보를 뿌려줄 메서드
 	public Employee employeeMyPage(String SID);
 	
 	

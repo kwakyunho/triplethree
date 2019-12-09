@@ -12,6 +12,9 @@ public class Employee {
 	private String password; //패스워드
 	private String empName; //사원명
 	private String addr; //주소
+	private String detailAddr; //상세주소
+	private String extraAddr; //참고 주소
+	private String postCode;
 	private String phone; //연락처
 	private String email;
 	private char carPresence;
@@ -23,7 +26,7 @@ public class Employee {
 	private String conType;
 	private String basicPay;
 	private String writer;
-	private String writerDay; // 부를때 포맷형식 바꿔야함
+	private String writerDay;
 	public String getCode() {
 		return code;
 	}
@@ -89,6 +92,24 @@ public class Employee {
 	}
 	public void setAddr(String addr) {
 		this.addr = addr;
+	}
+	public String getDetailAddr() {
+		return detailAddr;
+	}
+	public void setDetailAddr(String detailAddr) {
+		this.detailAddr = detailAddr;
+	}
+	public String getExtraAddr() {
+		return extraAddr;
+	}
+	public void setExtraAddr(String extraAddr) {
+		this.extraAddr = extraAddr;
+	}
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
 	}
 	public String getPhone() {
 		return phone;
@@ -166,13 +187,12 @@ public class Employee {
 	public String toString() {
 		return "Employee [code=" + code + ", demgCode=" + demgCode + ", demgName=" + demgName + ", poCode=" + poCode
 				+ ", poName=" + poName + ", liCode=" + liCode + ", liName=" + liName + ", empNum=" + empNum
-				+ ", password=" + password + ", empName=" + empName + ", addr=" + addr + ", phone=" + phone + ", email="
-				+ email + ", carPresence=" + carPresence + ", joinDate=" + joinDate + ", birthDate=" + birthDate
-				+ ", photo=" + photo + ", retireDate=" + retireDate + ", signature=" + signature + ", conType="
-				+ conType + ", basicPay=" + basicPay + ", writer=" + writer + ", writerDay=" + writerDay + "]";
+				+ ", password=" + password + ", empName=" + empName + ", addr=" + addr + ", detailAddr=" + detailAddr
+				+ ", extraAddr=" + extraAddr + ", postCode=" + postCode + ", phone=" + phone + ", email=" + email
+				+ ", carPresence=" + carPresence + ", joinDate=" + joinDate + ", birthDate=" + birthDate + ", photo="
+				+ photo + ", retireDate=" + retireDate + ", signature=" + signature + ", conType=" + conType
+				+ ", basicPay=" + basicPay + ", writer=" + writer + ", writerDay=" + writerDay + "]";
 	}
-	
-	
 	
 	
 	

@@ -80,11 +80,11 @@
                     <tr th:each="e :${emList}">
 						<td th:text="${e.empNum}"></td>
 						<td th:text="${e.empName}"></td>
-						<td th:text="${e.demgCode}"></td>
-						<td th:text="${e.poCode}"></td>
+						<td th:text="${e.demgName}"></td>
+						<td th:text="${e.poName}"></td>
 						<td th:text="${e.email}"></td>
 						<td th:text="${e.carPresence}"></td>
-						<td th:text="${e.liCode}"></td>
+						<td th:text="${e.liName}"></td>
 						<td>
 							<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
 						</td>

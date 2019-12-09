@@ -19,13 +19,12 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">기본정보수정</h1>
+				<h1 class="m-0 text-dark">기본 정보 수정</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/index">Home</a></li>
-					<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
-					<li class="breadcrumb-item"><a href="/employeeUpdate">사원 수정</a></li>
+					<li class="breadcrumb-item"><a href="/employeeMyPage">My Page</a></li>
+					<li class="breadcrumb-item"><a href="/employeeMyUpdate">기본 정보 수정</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -54,7 +53,7 @@
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="post" action="#" class="form-horizontal" th:each="u:${update}">
+	              <form method="post" action="#" class="form-horizontal" th:each="m :${mypage}">
 	                <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
@@ -72,26 +71,111 @@
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
 			                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${u.empNum}" readonly="readonly" >
+			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${m.empNum}" readonly="readonly" >
 			                 	</div>	
 	                 </div>
 	                  
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원명</label>
 		                    	<div class="col-sm-3">
-		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" th:value="${u.empName}" readonly="readonly">
+		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" th:value="${m.empName}" readonly="readonly">
 		                 		</div>
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
 			                    <div class="col-sm-3">
-			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" th:value="${u.password}">
+			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" th:value="${m.password}">
 			                 	</div>		
 	                 </div>
 	                 
-	                  <div class="form-group row">
+	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">주소</label>
-			                    <div class="col-sm-6">
-			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" th:value="${u.addr}" >
+			                   <!--  <div class="col-sm-6">
+			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" placeholder="주소를 입력해주세요.">
 			                 	</div>
+			                 				                			               	
+			                 	 -->
+			                 <div class="col-sm-3">
+				                	
+				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${m.postCode}">
+							</div>		
+							 <div class="col-sm-3">
+										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
+									
+							 </div>	
+			           </div>     	
+			                 	
+			            <div class="form-group row">	
+			               
+				             <label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
+								<div class="col-sm-8">
+									<input type="text" name="addr"id="sample6_address" placeholder="주소를 입력해주세요." class="form-control" th:value="${m.addr}">
+								</div>
+						</div>
+						
+								 
+						<div class="form-group row">	
+							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
+								<div class="col-sm-8">	
+									<input type="text" name="detailAddr"id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." class="form-control" th:value="${m.detailAddr}">
+								</div>
+						</div>
+						
+						<div class="form-group row">		
+							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
+								<div class="col-sm-8">	
+									<input type="text" name="extraAddr"id="sample6_extraAddress" placeholder="참고주소를 입력해주세요." class="form-control col-sm-4" th:value="${m.extraAddr}">
+								</div>
+										
+							<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+							<script>
+				   			 function sample6_execDaumPostcode() {
+						        		new daum.Postcode({
+						          		  oncomplete: function(data) {
+						                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+						
+						                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+						                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						                var addr = ''; // 주소 변수
+						                var extraAddr = ''; // 참고항목 변수
+						
+						                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						                    addr = data.roadAddress;
+						                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+						                    addr = data.jibunAddress;
+						                }
+						
+						                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+						                if(data.userSelectedType === 'R'){
+						                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+						                        extraAddr += data.bname;
+						                    }
+						                    // 건물명이 있고, 공동주택일 경우 추가한다.
+						                    if(data.buildingName !== '' && data.apartment === 'Y'){
+						                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						                    }
+						                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						                    if(extraAddr !== ''){
+						                        extraAddr = ' (' + extraAddr + ')';
+						                    }
+						                    // 조합된 참고항목을 해당 필드에 넣는다.
+						                    document.getElementById("sample6_extraAddress").value = extraAddr;
+						                
+							                } else {
+							                    document.getElementById("sample6_extraAddress").value = '';
+							                }
+							
+							                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+							                document.getElementById('sample6_postcode').value = data.zonecode;
+							                document.getElementById("sample6_address").value = addr;
+							                // 커서를 상세주소 필드로 이동한다.
+							                document.getElementById("sample6_detailAddress").focus();
+							            }
+							        }).open();
+							    }
+							</script>		
+					   			
 	                 </div>
 	                 
 	                 <div class="form-group row">
@@ -102,7 +186,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 				                    </div>					             
-				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" th:value="${u.phone}">
+				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" th:value="${m.phone}">
 				                  	 </div>				                
 			                 </div>
 			                  <!-- /.input group -->
@@ -111,7 +195,7 @@
                		  <div class="form-group row" >
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">차량 유무</label>
 			                <div class="col-sm-6" >
-			                	<th:block th:if="${u.carPresence} eq 'Y'">
+			                	<th:block th:if="${m.carPresence} eq 'Y'">
 				                	<div class="icheck-success d-inline">
 				                    	<label><input type="radio" name="carPresence"  id="radioSuccess1" value="Y" checked >Y</label>
 				                    </div>
@@ -119,7 +203,7 @@
 			                    		<label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" >N</label>
 			                    	</div>
 			                	</th:block>
-			                	<th:block th:unless="${u.carPresence} eq 'Y'">
+			                	<th:block th:unless="${m.carPresence} eq 'Y'">
 			                		<div class="icheck-success d-inline">
 			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="Y" >Y</label>
 			                      </div>
@@ -133,7 +217,7 @@
 	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">이메일</label>
 			                    <div class="col-sm-6">
-			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" th:value="${u.email}" >
+			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" th:value="${m.email}" >
 			                 	</div>
 	                 </div>
 	                 
@@ -146,7 +230,7 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="birthDate"  th:value="${u.birthDate}" readonly="readonly">
+									<input type="date" class="form-control" name="birthDate"  th:value="${m.birthDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
@@ -156,21 +240,21 @@
 	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode">
-		                          <option th:each= "C :${depart}" th:selected="${C.demgCode} == ${u.demgName}" th:text="${C.demgCode}" th:value="${C.code}"></option>
+		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${m.demgName}" th:text="${C.demgName}" th:value="${C.code}"></option>
 	                        	</select>
                         </div>
                         <th:script></th:script>
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                          <option th:each ="P : ${position}" th:selected="${P.poCode} == ${u.PoName}" th:text="${P.poCode}" th:value="${P.code}"></option>	                         
+		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${m.PoName}" th:text="${P.poName}" th:value="${P.code}"></option>	                         
 	                        	</select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                          <option th:each="L :${status}"  th:selected="${L.liCode} == ${u.liName}" th:text="${L.liCode}" th:value="${L.code}"></option>		                      		                          
+		                          <option th:each="L :${status}"  th:selected="${L.liName} == ${m.liName}" th:text="${L.liName}" th:value="${L.code}"></option>		                      		                          
 	                        	</select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
@@ -199,7 +283,7 @@
                        	
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
 		                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" th:value="${u.basicPay}"  name="basicPay" id="exampleInputEmail1">
+			                    	<input type="text" class="form-control" th:value="${m.basicPay}"  name="basicPay" id="exampleInputEmail1" readonly="readonly">
 			                 </div>
 			                 
 			                  <div class="col-sm-2">
@@ -217,7 +301,7 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="joinDate" th:value="${u.joinDate}" readonly="readonly">
+									<input type="date" class="form-control" name="joinDate" th:value="${m.joinDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
@@ -232,7 +316,7 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="retireDate"  th:value="${u.retireDate}" >
+									<input type="date" class="form-control" name="retireDate"  th:value="${m.retireDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
@@ -245,7 +329,6 @@
 		                 		</div>
 	                 				
 	                 </div>
-	                 
 	                 
 	                  
 	                </div>

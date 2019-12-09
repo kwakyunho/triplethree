@@ -6,29 +6,44 @@
 <mapper namespace="shop.triplethree.mapper.EmployeeMapper">
 
 	<select id="login" parameterType="shop.triplethree.vo.Employee" resultType="shop.triplethree.vo.Employee">
-		SELECT 
+		SELECT
+			em.CODE as code,
+			em.demgcode as demgCode,
+			de.dename as demgName,
+			po.poname as poName,
+			em.postcode as postCode,
+			em.addr as addr,
+			em.detailaddr as detailAddr,
+			em.photo as photo,
+			em.phone as phone,
+			em.email as email,
 			em.emp_num as empNum,
 			em.emp_name as empName,
-			em.PASSWORD as password,
-			de.dename as demgCode,
-			po.poname as poCode
-		FROM
-			EMP_MANAGE AS em
-			JOIN DEMG AS de
-			JOIN POSISYS AS po
-		ON em.demgcode = de.CODE AND em.pocode = po.CODE
-		WHERE em.emp_num = #{empNum} 
-			and em.demgcode = de.CODE
- 			AND em.pocode = po.CODE
+			em.password as password
+		FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+			SELECT emp_num, MAX(writer_day) AS writer_day
+			FROM EMP_MANAGE
+			GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) AS em
 		
-			GROUP BY em.emp_num
+		LEFT JOIN DEMG AS de
+		ON em.demgcode = de.CODE
+		
+		LEFT JOIN POSISYS AS po
+		ON em.pocode = po.CODE
+		
+		WHERE em.emp_num= #{empNum}
 		<!-- AND em.PASSWORD = #{password} --> 
 	</select>
 	
 	<select id="selectForDepart" resultType="shop.triplethree.vo.Employee">
 		SELECT
-			 de.dename as demgCode,
-			 de.code as code
+			 de.dename as demgName,
+			 de.code as demgCode
 		FROM
 			 DEMG AS de
 	    where de.approver_st = 'Y'
@@ -36,8 +51,8 @@
 	
 	<select id="selectForPosition" resultType="shop.triplethree.vo.Employee">
 		SELECT
-			po.CODE AS code,
-			po.poname AS poCode
+			po.CODE AS poCode,
+			po.poname AS poName
 		FROM
 			POSISYS AS po
 		WHERE 
@@ -46,15 +61,15 @@
 	
 	<select id="selectForStatus" resultType="shop.triplethree.vo.Employee">
 		SELECT
-			li.CODE as code,
-			li.s_section as liCode 
+			li.CODE as liCode,
+			li.s_section as liName 
 		FROM
 		 	LIST_MANAGE AS li
 		 WHERE li.m_section='재직여부' AND li.yes_or_no='Y'
 	</select>
 	
 	<insert id="insertEmployee" parameterType="shop.triplethree.vo.Employee">
-		INSERT INTO EMP_MANAGE (emp_num,CODE,demgcode,pocode,li_code,emp_name,password,addr,phone,car_presence,email,
+		INSERT INTO EMP_MANAGE (emp_num,CODE,demgcode,pocode,li_code,emp_name,password,postcode,addr,detailaddr,extraaddr,phone,car_presence,email,
 								birth_date,con_type,basic_pay,join_date,photo,signature,retire_date,writer,writer_day)
 
 			SELECT CONCAT('TT', DATE_FORMAT(CURDATE(),'%Y%m%d'), LPAD(RIGHT(IFNULL(MAX(emp_num), 0),3)+1,3,0)) AS emp_num, 
@@ -64,7 +79,10 @@
 			        #{liCode} as li_code, 
 			        #{empName} as emp_name, 
 			        #{password} as password, 
+			        #{postCode} as postcode,
 			        #{addr} as addr, 
+			        #{detailAddr} as detailaddr,
+			        #{extraAddr} as extraaddr,
 			        #{phone} as phone, 
 			        #{carPresence} as car_presence, 
 			        #{email} as email, 
@@ -85,49 +103,35 @@
 	</insert>
 	
 	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
-		<!-- SELECT 
-			
-			em.emp_num as empNum,
-			em.emp_name AS empName,
-			de.dename AS demgCode,
-			po.poname AS poCode,
-			em.email AS email,
-			em.car_presence AS carPresence,
-			li.s_section AS liCode
-		FROM
-			EMP_MANAGE AS em
-			JOIN DEMG AS de
-			JOIN POSISYS AS po
-			JOIN LIST_MANAGE AS li
-		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
-		
-		WHERE
-			em.writer_day in
-			(
-		SELECT
-			MAX(e.writer_day) AS date
-		FROM
-			EMP_MANAGE AS e
-		GROUP BY
-			e.emp_name) -->
-			
 			SELECT
-				 em.CODE,
-			  	 de.dename AS demgCode,
-			     po.poname AS poCode,
-				 li.s_section AS liCode, 
-				 em.emp_num AS empNum, 
-				 em.emp_name AS empName, 
-				 em.email AS email,
-				 em.car_presence AS carPresence, 
-				 MAX(em.writer_day)
-			FROM 
-				EMP_MANAGE em, DEMG de, POSISYS po, LIST_MANAGE li
-				WHERE em.demgcode = de.CODE
-				AND em.pocode = po.CODE
-				AND em.li_code = li.code
-				GROUP BY em.emp_num
-						
+				em.emp_num as empNum,
+				em.emp_name as empName,
+				de.dename as demgName,
+				po.poname as poName,
+				li.s_section as liName,
+				em.email as email,
+				em.car_presence as carPresence
+				
+			FROM (
+				SELECT A.*
+				FROM EMP_MANAGE A
+				INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) B
+				ON A.writer_day = B.writer_day
+				AND A.emp_num = B.emp_num) AS em
+				
+			LEFT JOIN DEMG AS de
+			ON em.demgcode = de.CODE
+			
+			LEFT JOIN POSISYS AS po
+			ON em.pocode = po.CODE
+			
+			LEFT JOIN LIST_MANAGE AS li
+			ON em.li_code = li.code
+							
+										
 				
 	</select>
 	
@@ -138,7 +142,11 @@
 			em.signature as signature,
 			em.emp_num as empNum,
 			em.emp_name as empName,
+			em.password as password,
+			em.postcode as postCode,
 			em.addr as addr,
+			em.detailaddr as detailAddr,
+			em.extraaddr as extraAddr,
 			em.phone as phone,
 			em.car_presence as carPresence,
 			em.email as email,
@@ -152,17 +160,26 @@
 			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
 			em.writer as writer,
 			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
-		FROM
-			EMP_MANAGE AS em
-			JOIN DEMG AS de
-			JOIN POSISYS AS po
-			JOIN LIST_MANAGE AS li
-		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
-		WHERE em.emp_num = #{empNum}
-		ORDER BY
-			em.writer_day DESC
-		LIMIT 1;
+		FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+			SELECT emp_num, MAX(writer_day) AS writer_day
+			FROM EMP_MANAGE
+			GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) AS em
 			
+			LEFT JOIN DEMG AS de
+			ON em.demgcode = de.CODE
+			
+			LEFT JOIN POSISYS AS po
+			ON em.pocode = po.CODE
+			
+			LEFT JOIN LIST_MANAGE AS li
+			ON em.li_code = li.code
+
+		where emp_num= #{empNum}
 		
 	</select>
 	
@@ -174,7 +191,10 @@
 			em.emp_num as empNum,
 			em.emp_name as empName,
 			em.password as password,
+			em.postcode as postCode,
 			em.addr as addr,
+			em.detailaddr as detailAddr,
+			em.extraaddr as extraAddr,
 			em.phone as phone,
 			em.car_presence as carPresence,
 			em.email as email,
@@ -188,24 +208,32 @@
 			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
 			em.writer as writer,
 			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
-		FROM
-			EMP_MANAGE AS em
-			JOIN DEMG AS de
-			JOIN POSISYS AS po
-			JOIN LIST_MANAGE AS li
-		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
-		WHERE em.emp_num = #{empNum}
-		ORDER BY
-			em.writer_day DESC
-		LIMIT 1
+		FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+			SELECT emp_num, MAX(writer_day) AS writer_day
+			FROM EMP_MANAGE
+			GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) AS em
+			
+			LEFT JOIN DEMG AS de
+			ON em.demgcode = de.CODE
+			
+			LEFT JOIN POSISYS AS po
+			ON em.pocode = po.CODE
+			
+			LEFT JOIN LIST_MANAGE AS li
+			ON em.li_code = li.code
 
-	
+		where emp_num= #{empNum}
 		
 	</select>
 	
 	<insert id="updateEmployee" parameterType="shop.triplethree.vo.Employee">
 		INSERT INTO EMP_MANAGE (code, demgcode, pocode, li_code, emp_num, emp_name, password, 
-								addr, phone, car_presence, email, birth_date, con_type, basic_pay,
+								postcode,addr,detailaddr,extraaddr, phone, car_presence, email, birth_date, con_type, basic_pay,
 								join_date, photo, signature, writer, writer_day)
 			VALUES (
 					#{code},
@@ -215,7 +243,10 @@
 					#{empNum},
 					#{empName},
 					#{password},
-					#{addr},
+					#{postCode},
+			        #{addr}, 
+			        #{detailAddr},
+			        #{extraAddr},
 					#{phone},
 					#{carPresence},
 					#{email},
@@ -230,7 +261,7 @@
 			 
 		<if test="retireDate neq null and retireDate neq ''.toString()">
  				INSERT INTO EMP_MANAGE (code, demgcode, pocode, li_code, emp_num, emp_name, password, 
-								addr, phone, car_presence, email, birth_date, con_type, basic_pay,
+								postcode,addr,detailaddr,extraaddr, phone, car_presence, email, birth_date, con_type, basic_pay,
 								join_date, photo, signature, retire_date, writer, writer_day)
 				VALUES (
 						#{code},
@@ -240,7 +271,10 @@
 						#{empNum},
 						#{empName},
 						#{password},
-						#{addr},
+						#{postCode},
+				        #{addr}, 
+				        #{detailAddr},
+				        #{extraAddr},
 						#{phone},
 						#{carPresence},
 						#{email},
@@ -263,7 +297,11 @@
 			em.signature as signature,
 			em.emp_num as empNum,
 			em.emp_name as empName,
+			em.password as password,
+			em.postcode as postCode,
 			em.addr as addr,
+			em.detailaddr as detailAddr,
+			em.extraaddr as extraAddr,
 			em.phone as phone,
 			em.car_presence as carPresence,
 			em.email as email,
@@ -277,16 +315,26 @@
 			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
 			em.writer as writer,
 			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
-		FROM
-			EMP_MANAGE AS em
-			JOIN DEMG AS de
-			JOIN POSISYS AS po
-			JOIN LIST_MANAGE AS li
-		ON em.demgcode = de.CODE AND em.pocode = po.CODE AND em.li_code = li.code
-		WHERE em.emp_num = #{SID}
-		ORDER BY
-			em.writer_day DESC
-		LIMIT 1;
+		FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+			SELECT emp_num, MAX(writer_day) AS writer_day
+			FROM EMP_MANAGE
+			GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) AS em
+			
+			LEFT JOIN DEMG AS de
+			ON em.demgcode = de.CODE
+			
+			LEFT JOIN POSISYS AS po
+			ON em.pocode = po.CODE
+			
+			LEFT JOIN LIST_MANAGE AS li
+			ON em.li_code = li.code
+		
+		where emp_num= #{SID}
 			
 		
 	</select>
