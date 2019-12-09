@@ -96,7 +96,7 @@
 			                 	 -->
 			                 <div class="col-sm-3">
 				                	
-				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${m.postCode}">
+				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${m.postCode}" readonly="readonly">
 							</div>		
 							 <!-- <div class="col-sm-3">
 										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
@@ -108,7 +108,7 @@
 			               
 				             <label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">
-									<input type="text" name="addr"id="sample6_address" placeholder="주소를 입력해주세요." class="form-control" th:value="${m.addr}">
+									<input type="text" name="addr"id="sample6_address" placeholder="주소를 입력해주세요." class="form-control" th:value="${m.addr}" readonly="readonly">
 								</div>
 						</div>
 						
@@ -116,14 +116,14 @@
 						<div class="form-group row">	
 							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">	
-									<input type="text" name="detailAddr"id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." class="form-control" th:value="${m.detailAddr}">
+									<input type="text" name="detailAddr"id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." class="form-control" th:value="${m.detailAddr}" readonly="readonly">
 								</div>
 						</div>
 						
 						<div class="form-group row">		
 							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">	
-									<input type="text" name="extraAddr"id="sample6_extraAddress" placeholder="참고주소를 입력해주세요." class="form-control col-sm-4" th:value="${m.extraAddr}">
+									<input type="text" name="extraAddr"id="sample6_extraAddress" placeholder="참고주소를 입력해주세요." class="form-control col-sm-4" th:value="${m.extraAddr}" readonly="readonly">
 								</div>
 										
 							<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

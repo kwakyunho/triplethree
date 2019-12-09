@@ -204,6 +204,18 @@ public class EmployeeController {
 		 
 		 return "/employee/employeeMyUpdate";
 	 }
+	 /**
+	  * 나의 기본정보를 수정처리하는 메서드
+	  * @param employee
+	  * @return
+	  */
+	 @PostMapping("/employeeMyUpdate")
+	 public String employeeMyUpdate(Employee employee) {
+		 String code = commonService.codeGeneration("EMP_MANAGE");
+		 employee.setCode(code);
+		 employeeService.updateEmployee(employee);
+		 return "redirect:/employeeMyPage";
+	 }
 	 
 	 /**
 	  * 로그인한 회원의 인사이동목록을 보여주는 화면

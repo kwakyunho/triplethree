@@ -53,7 +53,7 @@
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="post" action="#" class="form-horizontal" th:each="m :${mypage}">
+	              <form method="post" action="/employeeMyUpdate" class="form-horizontal" th:each="m :${mypage}">
 	                <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
@@ -240,21 +240,21 @@
 	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode">
-		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${m.demgName}" th:text="${C.demgName}" th:value="${C.code}"></option>
+		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${m.demgName}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
 	                        	</select>
                         </div>
                         <th:script></th:script>
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${m.PoName}" th:text="${P.poName}" th:value="${P.code}"></option>	                         
+		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${m.PoName}" th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
 	                        	</select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                          <option th:each="L :${status}"  th:selected="${L.liName} == ${m.liName}" th:text="${L.liName}" th:value="${L.code}"></option>		                      		                          
+		                          <option th:each="L :${status}"  th:selected="${L.liName} == ${m.liName}" th:text="${L.liName}" th:value="${L.liCode}"></option>		                      		                          
 	                        	</select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
