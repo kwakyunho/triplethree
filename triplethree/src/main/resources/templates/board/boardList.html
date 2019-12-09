@@ -44,22 +44,19 @@
 	         style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
 	             <thead>
 	               <tr>
-	                 <th>글번호</th>
+	                 <th style="width:500px;">글제목</th>
 	                 <th>작성자</th>
-	                 <th>글제목</th>
-	                 <!-- <th>글내용</th> -->
-	                 <th>조회수</th>
-	                 <th>작성일자</th>
+	                 <th style="width:100px;">조회수</th>
+	                 <th style="width:100px;">작성일자</th>
 	                 <th>수정</th>
 	                 <th>삭제</th>
 	               </tr>
 	             </thead>
+	             
 	             <tbody>
 	               <tr th:each="b : ${boardList}">
-					<td th:text="${b.code}"></td>
-					<td th:text="${b.empName}"></td>
 					<td th:text="${b.boardTitle}"></td>
-					<!-- <td th:text="${b.boardCon}"></td> -->
+					<td th:text="${b.writer}"></td>
 					<td th:text="${b.boardCount}"></td>
 					<td th:text="${b.writerDay}"></td>
 					<td>
@@ -68,7 +65,7 @@
 					<td>
 						<a th:href="@{/boardDelete(code=${b.code})}">삭제</a>
 					</td>
-				</tr>
+				   </tr>
 	            </tbody>
 	           	</table>
 	           	<!-- /.table -->
@@ -90,4 +87,5 @@
 	<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
 	
 	</th:block>
+	<script></script>
 	</html>

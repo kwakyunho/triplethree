@@ -7,7 +7,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>바뀐거 ㅇㅕ기여기</title>
+	<title>글 작성하기 </title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-			 <form role="form" action="/boardInsert2" method="post">
+			 <form action="/boardInsert" method="POST">
              <div class="card-body">
               <div class="form-group row col-sm-12">
                 <label class="col-sm-2 col-form-label">제목 </label>
@@ -65,7 +65,7 @@
              <div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">작성자</label>
 	                    <div class="col-sm-4">
-	                      <input type="text" class="form-control col-12" name="writer" th:value=${session.SNAME} readonly="readonly">
+	                      <input type="text" class="form-control col-12" th:value=${session.SNAME} readonly="readonly">
 	                    </div>
 	                    <label class="col-sm-2 col-form-label">비밀번호</label>
 	                    <div class="col-sm-4">
@@ -79,13 +79,15 @@
 		        </div>
 		      </div>
             </div>
-            <!-- /.card-body -->
             </form>
+            <!-- /.card-body -->
+           
 				</div>
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
-			</div>
+			</div> 
+			
 			<!-- /.col-md-6 -->
 			
 		</div>

@@ -17,7 +17,7 @@
 		SELECT
 			emp_name
 		FROM EMP_MANAGE
-		WHERE emp_num=#{empCode}
+		WHERE code=#{empCode}
 	</select>
 	
 	<insert id="insertBoard" parameterType="shop.triplethree.vo.Board">
@@ -34,7 +34,7 @@
 			,#{empCode}
 			,#{boardTitle}
 			,#{boardCon}
-			,#{boardCount}
+			,0
 			,#{boardPw}
 			,NOW());
 	</insert>
@@ -43,20 +43,31 @@
 		SELECT
 			B.code
 			,emp_code
-			,EM.emp_name as name
-			,board_title
+            ,EM.emp_name as writer
+            ,board_title
 			,board_con
 			,board_count
 			,B.writer_day
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.code
+		
+		<!-- SELECT
+			B.code
+			,emp_code
+			,board_title
+			,board_con
+			,board_count
+			,B.writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.code -->
 	</select>
 	
 	<!--글 정보 하나만 뽑아오기 code로   -->
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
 		SELECT
-			B.code
+			B.code as code
 			,emp_code
 			,EM.emp_name
 			,board_title
@@ -66,7 +77,7 @@
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.code
-		where code=#{code}
+		where B.code=#{code}
 	</select>
 	
 	<update id="boardUpdate" parameterType="shop.triplethree.vo.Board" >
@@ -76,7 +87,7 @@
 			<!-- ,emp_code = #{empCode} -->
 			,board_title = #{boardTitle}
 			,board_con = #{boardCon}
-			,board_count = #{boardCount}
+			,board_count =#{boardCount}
 			,writer_day = #{writerDay}
 		where
 			code = #{code}
