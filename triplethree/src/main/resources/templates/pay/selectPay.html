@@ -51,15 +51,15 @@
 					<tr><div align="center">사원목록</div>
 						<th>사원번호</th>
 						<th>사원명</th>
-						<th>부서</th>
+						<th>부서명</th>
 						<th>직급</th>
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						 <tr th:each="e :${payList}">
+						 <tr th:each="e :${selectPay}">
 						 <td th:text="${e.empNum}"></td>
 						 <td th:text="${e.empName}"></td>
-						 <td th:text="${e.demgCode}"></td>										
-						 <td th:text="${e.poCode}"></td>										
+						 <td th:text="${e.demgName}"></td>										
+						 <td th:text="${e.poName}"></td>										
 						</tr>						
 				</table>
 				</div>

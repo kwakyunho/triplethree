@@ -9,5 +9,5 @@ import shop.triplethree.vo.Employee;
 @Mapper
 public interface PayMapper {
 
-	public List<Employee> payList();
+	public List<Employee> selectPay();
 }

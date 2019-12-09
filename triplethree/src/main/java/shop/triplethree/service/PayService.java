@@ -14,7 +14,7 @@ public class PayService {
 	
 	@Autowired private PayMapper payMapper;  
 	
-	public List<Employee> payList(){		  
-		  return payMapper.payList();
+	public List<Employee> selectPay(){		  
+		  return payMapper.selectPay();
 	  }
 }

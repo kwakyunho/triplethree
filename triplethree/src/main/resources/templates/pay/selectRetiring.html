@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>퇴직금조회</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">퇴직금조회</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item">Dashboard v3</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="card">
+				알아서 사용하세요
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+			<div class="col-lg-6">
+				<div class="card">
+				알아서 사용하세요
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>
