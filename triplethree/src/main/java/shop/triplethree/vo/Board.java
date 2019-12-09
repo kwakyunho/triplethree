@@ -7,7 +7,14 @@ public class Board {
 	private String boardCon;
 	private String boardCount;
 	private String writerDay;
+	private String boardPw;
 	
+	public String getBoardPw() {
+		return boardPw;
+	}
+	public void setBoardPw(String boardPw) {
+		this.boardPw = boardPw;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}
