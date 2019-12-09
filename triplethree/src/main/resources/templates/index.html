@@ -118,10 +118,7 @@ function now(){
 	minutes = now.getMinutes();
 	seconds = now.getSeconds();
 	
-	console.log(oldTime.toString());
-	console.log(oldTime.toString().substr(0,16));
-	console.log(oldTime.toString().substr(16,8));
-	console.log(oldTime.toString().substr(24,18));
+	//console.log(oldTime.toString());
 	
 	if (hours < 10){
 		hours = "0" + hours;
@@ -137,12 +134,45 @@ function now(){
 	document.getElementById("nowTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 	
 	if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() == '미등록'){
-		$('#startWorkTime').text();
-		console.log($('#startWorkTime').text());
-		console.log(now);
-		//Mon Dec 09 2019 16:37:19 GMT+0900 (한국 표준시)
+		var firstOldTime = oldTime.toString().substr(0,16);
+		var middleOldTime = $('#startWorkTime').text();
+		var lastOldTime = oldTime.toString().substr(24,18);
+		var oldTimeText = firstOldTime + middleOldTime + lastOldTime;
+		oldTime = new Date(oldTimeText);
+		var ingWorkTime = now.getTime() - oldTime.getTime();
 		
-		document.getElementById("ingWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
+		var ingHours = (ingWorkTime / 1000 / 60 / 60) % 24;
+		var ingMinutes = (ingWorkTime / 1000 / 60) % 60;
+		var ingSeconds = (ingWorkTime / 1000) % 60;
+		
+		// 시간 출력부
+		if(0 <= ingHours && ingHours < 10){
+			ingHours = "0" + Math.floor(ingHours);
+		}else if(ingHours < 0 || isNaN(ingHours)){
+			ingHours = "00";
+		}else{
+			ingHours = Math.floor(ingHours);
+		}
+		
+		// 분 출력부
+		if(0 <= ingMinutes && ingMinutes < 10){
+			ingMinutes = "0" + Math.floor(ingMinutes);
+		}else if(ingMinutes < 0 || isNaN(ingMinutes)){
+			ingMinutes = "00";
+		}else{
+			ingMinutes = Math.floor(ingMinutes);
+		}
+		
+		// 초 출력부
+		if(0 <= ingSeconds && ingSeconds < 10){
+			ingSeconds = "0" + Math.floor(ingSeconds);
+		}else if(ingSeconds < 0 || isNaN(ingSeconds)){
+			ingSeconds = "00";
+		}else{
+			ingSeconds = Math.floor(ingSeconds);
+		}
+		
+		document.getElementById("ingWorkTime").innerHTML = ingHours + ":" + ingMinutes + ":" + ingSeconds;
 	}else if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() != '미등록'){
 		
 		document.getElementById("ingWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
@@ -174,7 +204,7 @@ $(document).ready(function(){
 	// 출근 버튼 클릭
 	$('.startWorkTime').on('click', function(){
 		if($('#startWorkTime').text() == '미등록'){
-			document.getElementById("startWorkTime").innerHTML = years + "-" + months + "-" + days + " " + hours + ":" + minutes + ":" + seconds;
+			document.getElementById("startWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 		}
 	});
 	
