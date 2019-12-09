@@ -3,11 +3,20 @@ package shop.triplethree.vo;
 public class Board {
 	private String code;
 	private String empCode;
+	private String writer;
 	private String boardTitle;
 	private String boardCon;
 	private String boardCount;
 	private String writerDay;
 	private String boardPw;
+
+	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	
 	public String getBoardPw() {
 		return boardPw;

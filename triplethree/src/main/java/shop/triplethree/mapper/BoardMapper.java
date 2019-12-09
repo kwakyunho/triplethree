@@ -19,4 +19,7 @@ public interface BoardMapper {
 	
 	//게시글 수정하기
 	public Board boardUpdate(Board board);
+	
+	//emp_code로 사원명 알려주기
+	public String getNameByEmpCode(String empcode);
 }

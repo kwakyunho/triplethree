@@ -1,5 +1,6 @@
 package shop.triplethree.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +13,19 @@ import shop.triplethree.vo.Board;
 
 @Controller
 public class BoardController {
-	
+	@Autowired private BoardService boardService;
 	@Autowired
 	private BoardService boardservice;
 	//공지사항  작성하기화면 이동
 	@GetMapping("/boardInsert")
-	public String boardInsert() {
+	public String insertBoard() {
+		
 		return "/board/boardInsert";
 	}
-	
 	//공지사항 작성
 	@PostMapping("/boardInsert")
-	public String insertBoard(Board board) {
-		boardservice.insertBoard(board);
+	public String insertBoard(Board board,HttpSession session){
+		boardService.createBoardCode(session,board);
 		return "redirect:/boardList";
 	}
 	

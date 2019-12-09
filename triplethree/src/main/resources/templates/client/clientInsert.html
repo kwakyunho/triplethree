@@ -32,8 +32,8 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="card card-primary">
 				<form role="form" class="form-horozontal" action="/clientInsert" method="post">
+				<div class="card card-primary">
 				
 				   <div class="card-body">
 				   <div class="form-group row col-sm-12">
@@ -173,7 +173,7 @@
                  <div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">작성자</label>
 	                    <div class="col-sm-4">
-	                      <input type="text" class="form-control col-12" name="writer" th:value="${session.SID}" readonly="readonly">
+	                      <input type="text" class="form-control col-12" name="empCode" th:value="${session.SID}" readonly="readonly">
 	                    </div>
                  </div>
                  
@@ -183,13 +183,13 @@
 					<button type="submit" class="btn btn-primary">등록하기</button>
 				</div><!--  card footer -->
 				
-				</form>
+				
 				</div><!-- /.cardcard-primary -->
+				</form>
 				</div><!-- lg-12 구역 -->
 			</div><!-- /.row -->
 		</div>
 	</div><!-- /.container-fluid -->
-</div>
 <div class="col-sm-2"></div>
 </th:block>
 

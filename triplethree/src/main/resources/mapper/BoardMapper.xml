@@ -11,6 +11,13 @@
 		<result column="board_count" property="boardCount"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
+	<!-- 사원번호(SID)로 사원명 가져오기  -->
+	<select id="getNameByEmpCode" parameterType="String" resultType="String">
+		SELECT
+			emp_name
+		FROM EMP_MANAGE
+		WHERE emp_num=#{empCode}
+	</select>
 	
 	<insert id="insertBoard" parameterType="shop.triplethree.vo.Board">
 		Insert into BOARD
@@ -19,6 +26,7 @@
 			,board_title
 			,board_con
 			,board_count
+			,board_pw
 			,writer_day)
 		values
 			(#{code}
@@ -26,6 +34,7 @@
 			,#{boardTitle}
 			,#{boardCon}
 			,#{boardCount}
+			,#{boardPw}
 			,NOW());
 	</insert>
 	<!-- 공지사항 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->

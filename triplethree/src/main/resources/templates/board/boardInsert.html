@@ -42,18 +42,12 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-			
-            	
+			<form role="form" action="/boardInsert" method="post">
              <div class="card-body">
               <div class="form-group">
                 <label for="inputName">공지사항 제목 </label>
                 <input type="text" id="inputName" placeholder="제목을 입력하세요 " class="form-control">
               </div>
-            	  
-              	<div class="row">
-              
-      			</div>
-      		
               <div class="form-group">
                 <label for="inputDescription">공지사항 내용 </label>
              
@@ -66,15 +60,21 @@
              <div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">작성자</label>
 	                    <div class="col-sm-4">
-	                      <input type="text" class="form-control col-12" name="writer" th:value="${session.SID}" readonly="readonly">
+	                      <input type="text" class="form-control col-12" name="writer" th:value="${}" readonly="readonly">
 	                    </div>
              </div>
              
+             <div class="form-group">
+                <label for="inputName">공지사항 제목 </label>
+                <input type="password"  class="form-control" name="boardPw">
+              </div>
               <div class="row">
+              
 		        <div class="col-12">
 		          <input type="submit" value="공지 작성하기" class="btn btn-success float-right">
 		        </div>
 		      </div>
+		      </form>
             </div>
             <!-- /.card-body -->
 				</div>
