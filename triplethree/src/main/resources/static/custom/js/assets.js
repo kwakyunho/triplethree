@@ -3,29 +3,25 @@
  */
 
 // 시설물 관리 수정시 modal에 데이터 넣어주는 스크립트
-$(function(){
-	$('.AssetsListTr').click(function(){
+$(document).ready(function(){
+	$('.updateBe').children('input').on('click', function(){
+		var uri = $(this).parents('.AssetsListTr')
 		
-		$('#myModal2').modal();	
+		$('#Code').val(uri.children('#upCode').text());
+		$('#upName').val(uri.children('#faName').text());
+		$('#upLocal').val(uri.children('#faLocal').text());
+		$('#upSeat').val(uri.children('#faSeat').text());
+		$('#upDatd').val(uri.children('#faDate').text());
+		$('#upImage').val(uri.children('#faImage').text());
+		$('#upSt').val(uri.children('#faSt').text());
 		
-		var code  = $(this).children('#upCode').text();
-		var faName  = $(this).children('#faName').text();
-		var faLocal  = $(this).children('#faLocal').text();
-		var faSeat  = $(this).children('#faSeat').text();
-		var faDate  = $(this).children('#faDate').text();
-		var faSt  = $(this).children('#faSt').text();
-		$('#Code').val(code);
-		$('#upName').val(faName);
-		$('#upLocal').val(faLocal);
-		$('#upSeat').val(faSeat);
-		$('#upDatd').val(faDate);
-		$('#upSt').val(faSt);
+		$('#myModal2').modal();
 	});
 });
 
 // 시설물 등록 시 공란 체크 스크립트
 $(function(){
-	$('#inputBtn').click(function(){
+	$('#inputBeBtn').click(function(){
 		var nameCheck = $('input[name=faName]');
 		var localCheck = $('input[name=faLocal]');
 		var seatCheck = $('input[name=faSeat]');
@@ -63,12 +59,13 @@ $(function(){
 			imageCheck.focus();
 			return false;
 		}
+		
 	});
 });
 
 //시설물 수정 시 공란 체크 스크립트
 $(function(){
-	$('#updateBtn').click(function(){
+	$('#updateBeBtn').click(function(){
 		var nameCheck = $('input[id=upName]');
 		var localCheck = $('input[id=upLocal]');
 		var seatCheck = $('input[id=upSeat]');
@@ -170,5 +167,95 @@ $("#upName").blur(function() {
 			}, error : function() {
 				console.log("실패");
 			}
+	});
+});
+
+// 차량 등록시 공란체크 스크립트
+$(function(){
+	$('#inCarBtn').click(function(){
+		var veMakeCheck = $('input[name=veMake]');
+		var veNameCheck = $('input[name=veName]');
+		var veNunberCheck = $('input[name=veNunber]');
+		var veCcCheck = $('input[name=veCc]');
+		var faStCheck = $('input[name=faSt]');
+		var veUseCheck = $('input[name=veUse]');
+		var veBuyCheck = $('input[name=veBuy]');
+		var veModelYearCheck = $('input[name=veModelYear]');
+		
+		if(veMakeCheck.val() == ""){
+			alert('제조사를 입력해주세요');
+			veMakeCheck.focus();
+			return false;
+		}
+		if(veNameCheck.val() == ""){
+			alert('차량명을 입력해주세요');
+			veNameCheck.focus();
+			return false;
+		}
+		if(veNunberCheck.val() == ""){
+			alert('차량번호를 입력해주세요');
+			veNunberCheck.focus();
+			return false;
+		}
+		if(veCcCheck.val() == ""){
+			alert('배기량을 입력해주세요');
+			veCcCheck.focus();
+			return false;
+		}
+		if(veUseCheck.val() == ""){
+			alert('용도를 입력해주세요');
+			veUseCheck.focus();
+			return false;
+		}
+		if(faStCheck.val() == ""){
+			alert('상태를 입력해주세요');
+			faStCheck.focus();
+			return false;
+		}
+		if(veModelYearCheck.val() == ""){
+			alert('차량연식을 선택해주세요');
+			veModelYearCheck.focus();
+			return false;
+		}
+		if(veBuyCheck.val() == ""){
+			alert('구입연도를 선택해주세요');
+			veBuyCheck.focus();
+			return false;
+		}
+	});
+});
+
+//차량 관리 수정시 modal에 데이터 넣어주는 스크립트
+$(document).ready(function(){
+	$('.updateCar').children('input').on('click', function(){
+		var uri = $(this).parents('.AssetsListTr')
+		
+		$('#code').val(uri.children('#upCode').text());
+		$('#upVeMake').val(uri.children('#veMake').text());
+		$('#upVeName').val(uri.children('#veName').text());
+		$('#upVeNunber').val(uri.children('#veNunber').text());
+		$('#upVeCc').val(uri.children('#veCc').text());
+		$('#upVeUse').val(uri.children('#veUse').text());
+		$('#upVeBuy').val(uri.children('#veBuy').text());
+		$('#upVeModelYear').val(uri.children('#veModelYear').text());
+		$('#upFaSt').val(uri.children('#faSt').text());
+		
+		$('#myModal2').modal();
+	});
+});
+
+// 차량관리에서 등록,수정,삭제 버튼 클릭시 발생하는 이벤트
+$(function(){
+	
+/*	$('#inCarBtn').click(function(){
+		if(confirm('등록하시겠습니까?')){
+			$('#formInput').attr('action', 'assetsCaInsert').submit();	
+		}
+	});*/	
+	
+	$('.deleteCarBtn').click(function(){
+		if(confirm('삭제하시겠습니까?')){
+			$('#formId').attr('href', 'assetsCaDelete(code=${c.code})').submit();	
+		 }
 	});
 });

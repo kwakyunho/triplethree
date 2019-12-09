@@ -3,15 +3,22 @@ package shop.triplethree.vo;
 public class Assets {
 
 	private String sid; // 세션에서 사원id 가지고 와서 저장할 공간
-	private String code; // Assets pk code
+	private String code; // Assets pk code + Car pk code
 	private String faName; // Assets 시설명
 	private String faLocal; // Assets 위치
 	private String faSeat; // Assets 수용인원
 	private String faDate; // Assets 이용기간
 	private String faImage; // Assets 이미지
-	private String faSt; // Assets 상태
-	private String writer; // Assets 작성자
-	private String writerDay; // Assets 작성일
+	private String faSt; // Assets 상태 + Car 상태
+	private String writer; // Assets + Car 작성자
+	private String writerDay; // Assets + Car 작성일
+	private String veMake; // Car 제조사
+	private String veName; // Car 이름
+	private String veNunber; // Car 차량번호
+	private String veCc; // Car 배기량
+	private String veUse; // Car 사용 용도
+	private String veBuy; // Car 구입연도
+	private String veModelYear; // Car 차량연식
 	
 	public String getSid() {
 		return sid;
@@ -73,10 +80,54 @@ public class Assets {
 	public void setWriterDay(String writerDay) {
 		this.writerDay = writerDay;
 	}
+	public String getVeMake() {
+		return veMake;
+	}
+	public void setVeMake(String veMake) {
+		this.veMake = veMake;
+	}
+	public String getVeName() {
+		return veName;
+	}
+	public void setVeName(String veName) {
+		this.veName = veName;
+	}
+	public String getVeNunber() {
+		return veNunber;
+	}
+	public void setVeNunber(String veNunber) {
+		this.veNunber = veNunber;
+	}
+	public String getVeCc() {
+		return veCc;
+	}
+	public void setVeCc(String veCc) {
+		this.veCc = veCc;
+	}
+	public String getVeUse() {
+		return veUse;
+	}
+	public void setVeUse(String veUse) {
+		this.veUse = veUse;
+	}
+	public String getVeBuy() {
+		return veBuy;
+	}
+	public void setVeBuy(String veBuy) {
+		this.veBuy = veBuy;
+	}
+	public String getVeModelYear() {
+		return veModelYear;
+	}
+	public void setVeModelYear(String veModelYear) {
+		this.veModelYear = veModelYear;
+	}
+	
 	@Override
 	public String toString() {
 		return "Assets [sid=" + sid + ", code=" + code + ", faName=" + faName + ", faLocal=" + faLocal + ", faSeat="
 				+ faSeat + ", faDate=" + faDate + ", faImage=" + faImage + ", faSt=" + faSt + ", writer=" + writer
-				+ ", writerDay=" + writerDay + "]";
+				+ ", writerDay=" + writerDay + ", veMake=" + veMake + ", veName=" + veName + ", veNunber=" + veNunber
+				+ ", veCc=" + veCc + ", veUse=" + veUse + ", veBuy=" + veBuy + ", veModelYear=" + veModelYear + "]";
 	}
 }

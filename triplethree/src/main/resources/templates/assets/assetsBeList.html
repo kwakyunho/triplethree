@@ -97,7 +97,7 @@
 									</tr>
 									<tr>
 										<td colspan="4">
-											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
+											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBeBtn">
 										</td>
 									</tr>
 								</table>
@@ -131,7 +131,7 @@
 											<td style="width:150px;">시설물 관리 코드</td>
 											<td>
 												<input class="form-control form-control-lg updateValue" type="text" style="width:100%; 
-												font-size: small;" id="Code" name="Code" readonly="readonly">
+												font-size: small;" id="code" name="code" readonly="readonly">
 											</td>
 											<td>
 												<p class="text-danger">*관리코드는 수정 할 수 없습니다.</p>
@@ -181,7 +181,7 @@
 								</div>
 							<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="updateBtn">수정하기</button>
+					<button type="submit" class="btn btn-primary" id="updateBeBtn">수정하기</button>
 				</div>
 			</div>
 		</div>
@@ -234,8 +234,8 @@
 						<td id="faSt"  th:text="${a.faSt}"></td>
 						<td id="writer"  th:text="${a.writer}"></td>
 						<td id="writerDay"  th:text="${a.writerDay}"></td>
-						<td class="update">
-							<input type="button" id="updateBtn" value="수정" class="btn btn-block btn-primary">
+						<td class="updateBe">
+							<input type="button" id="updateBeBtn2" value="수정" class="btn btn-block btn-primary">
 						</td>
 						<td>
 							<a th:href="@{assetsBeDelete(code=${a.code})}" class="btn btn-block btn-primary">삭제</a>

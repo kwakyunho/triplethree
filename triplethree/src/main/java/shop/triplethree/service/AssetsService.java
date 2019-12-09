@@ -50,4 +50,27 @@ public class AssetsService {
 	public int beNameCheck(Assets assets) {
 		return assetMapper.beNameCheck(assets);
 	}
+	
+	/**
+	 * 차량 등록 메서드
+	 * */
+	public int insertCaAssets(Assets assets) {
+		String code = commonService.codeGeneration("VE_MANAGE");
+		assets.setCode(code);
+		return assetMapper.insertCaAssets(assets);
+	}
+	
+	/**
+	 * 차량 조회 메서드
+	 * */
+	public List<Assets> selectCaAssets(){
+		return assetMapper.selectCaAssets();
+	}
+	
+	/**
+	 * 차량 수정 메서드
+	 * */
+	public int updateCaAssets(Assets assets) {
+		return assetMapper.updateCaAssets(assets);
+	}
 }

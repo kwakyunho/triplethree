@@ -23,4 +23,13 @@ public interface AssetsMapper {
 	
 	// 시설물 등록/수정 유효성 검사 메서드
 	public int beNameCheck(Assets assets);
+	
+	// 차량 등록 메서드
+	public int insertCaAssets(Assets assets);
+	
+	// 차량 조회 메서드
+	public List<Assets> selectCaAssets();
+	
+	// 차량 수정 메서드
+	public int updateCaAssets(Assets assets);
 }

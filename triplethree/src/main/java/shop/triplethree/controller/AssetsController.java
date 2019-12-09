@@ -82,7 +82,47 @@ public class AssetsController {
 	 * */
 	@GetMapping("/assetCaSelect")
 	public String selectCaAssets(Model model) {
-		System.out.println("차량 관리가 클릭 되었나요?");
+		//System.out.println("차량 관리가 클릭 되었나요?");
+		model.addAttribute("carList", assetsService.selectCaAssets());
 		return "/assets/assetsCaList";
+	}
+	
+	/**
+	 * 차량 등록 메서드
+	 * */
+	@PostMapping("/assetsCaInsert")
+	public String insertCaAssets(Assets assets, HttpSession session) {
+		String cc = assets.getVeCc();
+		String sid = (String) session.getAttribute("SID");
+		assets.setVeCc(cc+"CC");
+		assets.setWriter(sid);
+		//System.out.println("차량cc 확인" + assets.getVeCc());
+		//System.out.println("차량등록 버튼이 클릭되었나요?");
+		assetsService.insertCaAssets(assets);
+		return "redirect:assetCaSelect";
+	}
+	
+	/**
+	 * 차량 수정 메서드
+	 * */
+	@PostMapping("/assetsCaUpdate")
+	public String updateCaAssets(Assets assets, HttpSession session) {
+		//System.out.println("차량 수정버튼이 클릭되었나요?");
+		//System.out.println("무엇이 담겨있나요?" + assets);
+		String sid = (String) session.getAttribute("SID");
+		assets.setWriter(sid);
+		assetsService.updateCaAssets(assets);
+		return "redirect:assetCaSelect";
+	}
+	
+	/**
+	 * 차랑 삭제 메서드
+	 * */
+	@GetMapping("/assetsCaDelete")
+	public String deleteCaAssets(@RequestParam(value="code", required = false)String code, Assets assets, HttpSession session) {
+		System.out.println("삭제버튼이 클릭되었나요?");
+		System.out.println("코드가 넘어왔는지 확인해요." + code);
+		
+		return null;
 	}
 }

@@ -12,8 +12,16 @@
 		<result property="faDate" column="fa_date"/>
 		<result property="faImage" column="fa_image"/>
 		<result property="faSt" column="fa_st"/>
+		<result property="faSt" column="ve_state"/>
 		<result property="writer" column="writer"/>
 		<result property="writerDay" column="writer_day"/>
+		<result property="veMake" column="ve_make"/>
+		<result property="veName" column="ve_name"/>
+		<result property="veNunber" column="ve_number"/>
+		<result property="veCc" column="ve_cc"/>
+		<result property="veUse" column="ve_use"/>
+		<result property="veBuy" column="ve_buy"/>
+		<result property="veModelYear" column="ve_model_year"/>
 	</resultMap>
 	
 	<!-- 시설물 조회 쿼리문 -->
@@ -95,4 +103,70 @@
 		WHERE
 			fa_name = #{faName}
 	</select>
+	
+	<!-- 차량 등록 쿼리문 -->
+	<insert id="insertCaAssets" parameterType="shop.triplethree.vo.Assets">
+		INSERT INTO
+			VE_MANAGE
+			(code
+			,ve_make
+			,ve_name
+			,ve_number
+			,ve_cc
+			,ve_use
+			,ve_buy
+			,ve_model_year
+			,ve_state
+			,writer
+			,writer_day)
+		VALUES
+		(#{code}
+		,#{veMake}
+		,#{veName}
+		,#{veNunber}
+		,#{veCc}
+		,#{veUse}
+		,#{veBuy}
+		,#{veModelYear}
+		,#{faSt}
+		,#{writer}
+		,NOW())	
+	</insert>
+	
+	<!-- 차량 리스트 조회 쿼리문 -->
+	<select id="selectCaAssets" resultMap="AssetsResult">
+		SELECT
+			code
+			,ve_make
+			,ve_name
+			,ve_number
+			,ve_cc
+			,ve_use
+			,ve_buy
+			,ve_state
+			,ve_model_year
+			,writer
+			,writer_day
+		FROM
+			VE_MANAGE
+	</select>
+	
+	<!-- 차량 수정 쿼리문 -->
+	<update id="updateCaAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			VE_MANAGE
+		SET
+			ve_make = #{veMake}
+			,ve_name = #{veName}
+			,ve_number = #{veNunber}
+			,ve_cc = #{veCc}
+			,ve_use = #{veUse}
+			,ve_buy = #{veBuy}
+			,ve_state = #{faSt}
+			,ve_model_year = #{veModelYear}
+			,writer = #{writer}
+			,writer_day = NOW()
+		WHERE
+			CODE = #{code}
+	</update>
 </mapper>
