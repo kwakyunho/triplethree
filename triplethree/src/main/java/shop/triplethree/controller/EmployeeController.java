@@ -52,6 +52,7 @@ public class EmployeeController {
 					if(em2.getPassword() != null && em2.getPassword().equals(employee.getPassword())) {
 						session.setAttribute("SID", em2.getEmpNum());
 						session.setAttribute("SNAME", em2.getEmpName());
+						session.setAttribute("SCODE", em2.getCode());
 						session.setAttribute("SDEPART", em2.getDemgCode());
 						session.setAttribute("SPOSI", em2.getPoCode());
 						return scriptStr2;

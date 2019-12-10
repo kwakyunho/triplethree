@@ -10,8 +10,10 @@
 		<result column="board_con" property="boardCon"/>
 		<result column="board_count" property="boardCount"/>
 		<result column="board_pw" property="boardPw"/>
+		<result column="writer" property="writer"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
+	
 	<!-- 사원번호(SID)로 사원명 가져오기  -->
 	<select id="getNameByEmpCode" parameterType="String" resultType="String">
 		SELECT
@@ -43,52 +45,45 @@
 		SELECT
 			B.code
 			,emp_code
-            ,EM.emp_name as writer
+            ,EM.emp_name AS writer
             ,board_title
 			,board_con
 			,board_count
 			,B.writer_day
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
-		ON	B.emp_code = EM.code
+		ON	B.emp_code = EM.emp_num
 		
-		<!-- SELECT
-			B.code
-			,emp_code
-			,board_title
-			,board_con
-			,board_count
-			,B.writer_day
- 		FROM BOARD AS B
-		LEFT JOIN EMP_MANAGE AS EM
-		ON	B.emp_code = EM.code -->
 	</select>
 	
 	<!--글 정보 하나만 뽑아오기 code로   -->
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
 		SELECT
 			B.code as code
-			,emp_code
-			,EM.emp_name
-			,board_title
-			,board_con
-			,board_count
-			,B.writer_day
+			,EM.emp_num as empCode
+			,EM.emp_name as writer
+			,board_title as boardTitle
+			,board_con as boardCon
+			,board_count as boardCount
+			,board_pw as boardPw
+			,B.writer_day as writerDay
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
-		ON	B.emp_code = EM.code
+		ON	B.emp_code = EM.emp_num
 		where B.code=#{code}
+		
 	</select>
 	
-	<update id="boardUpdate" parameterType="shop.triplethree.vo.Board" >
+	<update id="updateBoard" parameterType="shop.triplethree.vo.Board" >
 		update BOARD
 			set
 			code = #{code}
-			<!-- ,emp_code = #{empCode} -->
+			,emp_code = #{empCode}
 			,board_title = #{boardTitle}
 			,board_con = #{boardCon}
 			,board_count =#{boardCount}
 			,writer_day = #{writerDay}
+			,board_pw = #{boardPw}
 		where
 			code = #{code}
 	</update>

@@ -40,7 +40,10 @@ public class ClientController {
 		return "/client/clientUpdate";
 	}
 	
-	//거래처 정보 수정
+	/**거래처 정보 수정처리
+	 * @param client
+	 * @return 
+	 * */
 	@PostMapping("/clientUpdate")
 	public String clientUpdate(Client client) {
 		clientService.updateClient(client);

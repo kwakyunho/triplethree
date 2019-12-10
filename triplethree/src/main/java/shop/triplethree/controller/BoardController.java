@@ -17,8 +17,17 @@ public class BoardController {
 	@Autowired
 	private BoardService boardservice;
 	
+	/**게시글 상세보기
+	 * @param code
+	 * */
+	@GetMapping("/boardDetail")
+	public String selectDetail(@RequestParam(value="code")String code,Model model) {
+		//code로 선택된 글의 정보를 board 에 담아서 보내기
+		model.addAttribute("board", boardservice.getBoardByCode(code));
+		return "/board/boarDetail.html";
+	}
 	/**
-	  * 공지사항 작성하는 화면으로 이 
+	  * 게시글 작성폼
 	  * @param session
 	  * @return
 	  */
@@ -29,14 +38,15 @@ public class BoardController {
 	}
 
 	/**
-	  * 공지사항 작성하기 
+	  * 게시물 insert 처리
 	  * @param board
 	  * @param session
 	  * @return
 	  */
 	@PostMapping("/boardInsert")
 	public String insertBoard(Board board,HttpSession session){
-		boardService.createBoardCode(session,board);
+		board = boardService.createBoardCode(session,board);
+		boardService.insertBoard(board);
 		System.out.println(board.toString() + "작성하기 폼에서 들어온 값들 ");
 		return "redirect:/boardList";
 	}
@@ -62,8 +72,10 @@ public class BoardController {
 	  */
 	@GetMapping("/boardUpdate")
 	public String boardUpdate(@RequestParam(value="code")String code,Model model) {
-//		System.out.println(code + "수정할 게시글 code");
-//		model.addAttribute("board", boardservice.getBoardByCode(code));
+		System.out.println("*************************");
+		System.out.println("boardUpdate 화면 보여주기");
+		System.out.println("#########################");
+		model.addAttribute("board", boardservice.getBoardByCode(code));
 		return "/board/boardUpdate";
 	}
 	
@@ -72,10 +84,12 @@ public class BoardController {
 	  * @param board
 	  * @return
 	  */
-	//글 수정
 	@PostMapping("/boardUpdate")
 	public String boardUpdate(Board board) {
-		boardservice.boardUpdate(board);
+		System.out.println("*************************");
+		System.out.println("******boardUpdate 처리****");
+		System.out.println("*************************");
+		boardservice.updateBoard(board);
 		return "redirect:/boardList";
 	}
 	

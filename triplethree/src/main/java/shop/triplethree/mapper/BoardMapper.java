@@ -18,6 +18,6 @@ public interface BoardMapper {
 	public Board getBoardByCode(String code);
 	
 	//게시글 수정하기
-	public Board boardUpdate(Board board);
+	public int updateBoard(Board board);
 	
 }

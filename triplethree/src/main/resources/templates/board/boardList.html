@@ -48,23 +48,25 @@
 	                 <th>작성자</th>
 	                 <th style="width:100px;">조회수</th>
 	                 <th style="width:100px;">작성일자</th>
-	                 <th>수정</th>
-	                 <th>삭제</th>
+              <!--   <th>수정</th>
+	                 <th>삭제</th> -->
 	               </tr>
 	             </thead>
 	             
 	             <tbody>
 	               <tr th:each="b : ${boardList}">
-					<td th:text="${b.boardTitle}"></td>
+					<td>
+						<a style="color:#212529" th:href="@{/boardDetail(code=${b.code})}" th:text="${b.boardTitle}"></a>
+					</td>
 					<td th:text="${b.writer}"></td>
 					<td th:text="${b.boardCount}"></td>
 					<td th:text="${b.writerDay}"></td>
-					<td>
+					<!-- <td>
 						<a th:href="@{/boardUpdate(code=${b.code})}">수정</a>
 					</td>
 					<td>
 						<a th:href="@{/boardDelete(code=${b.code})}">삭제</a>
-					</td>
+					</td> -->
 				   </tr>
 	            </tbody>
 	           	</table>
