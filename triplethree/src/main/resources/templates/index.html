@@ -273,16 +273,12 @@ $(document).ready(function(){
 			
 			// 콜백함수
 			$(document).workTimeEvent(sendData, function(result){
-				
+				if(result != 'error'){
+					if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+					if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+				}
 			});
-			
-			document.getElementById("startWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 		}
-	});
-	
-	// 버튼 클릭시 현재 상태 변경하기
-	$('.nowWorkStateList').on('click', function(){
-		$('.nowWorkState').text($(this).text());
 	});
 	
 	// 퇴근 버튼 클릭
@@ -290,9 +286,30 @@ $(document).ready(function(){
 		if($('#endWorkTime').text() == '미등록' && $('#startWorkTime').text() != '미등록'){
 			if(confirm('퇴근이 확실합니까?')){
 				
+				var sendData = {};
+				sendData.conditionValue = 3;
+				sendData.ajaxType = 'POST';	// 전송타입
+				sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+				sendData.ajaxDataType = 'json';	// 리턴 타입
+				
+				sendData.userCode = [[${session.SCODE}]];
+				
+				// 콜백함수
+				$(document).workTimeEvent(sendData, function(result){
+					if(result != 'error'){
+						if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+						if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+					}
+				});
+				
 				document.getElementById("endWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 			}
 		}
+	});
+	
+	// 버튼 클릭시 현재 상태 변경하기
+	$('.nowWorkStateList').on('click', function(){
+		$('.nowWorkState').text($(this).text());
 	});
 });
 

@@ -33,4 +33,15 @@
 		VALUES (#{workAttCode}, #{userCode}, DATE_FORMAT(CURDATE(),'%Y%m%d'), now(), #{userId}, now())
 	</insert>
 	
+	<update id="endUpdateWorkAttitude" parameterType="map">
+		UPDATE ABS_MANAGE A
+		INNER JOIN (
+			SELECT *
+			FROM ABS_MANAGE
+			WHERE emp_code = #{userCode}
+			AND annual = DATE_FORMAT(CURDATE(),'%Y%m%d')) B
+		ON A.code = B.code
+		SET A.leavework = NOW();
+	</update>
+	
 </mapper>

@@ -14,4 +14,7 @@ public interface WorkAttitudeMapper {
 	// 출근시간 입력
 	public int startInsertWorkAttitude(Map<String, String> json);
 	
+	// 출근시간 입력
+	public int endUpdateWorkAttitude(Map<String, String> json);
+	
 }
