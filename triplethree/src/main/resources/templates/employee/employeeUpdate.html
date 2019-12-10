@@ -35,7 +35,7 @@
 	<div class="content">
 		 <div class="row">
               <div class="col-md-12">
-				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/'">사원 수정</button></div>
+				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employeeList'">사원 목록으로 가기</button></div>
 			 
 		 	</div>	     			
 	     </div>
@@ -57,6 +57,7 @@
 	              <form method="post" action="/employeeUpdate" class="form-horizontal" th:each="u:${update}">
 	                <div class="card-body">  
 	                	<div class="form-group row">
+	                		<input type="hidden" name="code" th:value="${u.code}">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
 		                    	<div class="col-sm-3">
 		                 			<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
@@ -241,14 +242,14 @@
 	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode">
-		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${u.demgName}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
+		                          <option  th:text="${u.demgName}" th:value="${u.demgCode}"></option>
 	                        	</select>
                         </div>
                         <th:script></th:script>
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${u.PoName}" th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
+		                          <option th:text="${u.PoName}" th:value="${u.poCode}"></option>	                         
 	                        	</select>
                         </div>
                         
@@ -258,26 +259,61 @@
 		                          <option th:each="L :${status}"  th:selected="${L.liName} == ${u.liName}" th:text="${L.liName}" th:value="${L.liCode}"></option>		                      		                          
 	                        	</select>
                         </div>
-		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
-		                    <div class="col-sm-2">
-		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
-		                 	</div>
-		                 <label for="inputEmail3" class="col-sm-1 col-form-label">재직상태</label>
-		                    <div class="col-sm-2">
-		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
-		                 	</div> -->
+		             
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                  <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">변경 부서</label>
+			                    <select class="col-sm-3" name="afterDemgCode">
+		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${u.demgName}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
+	                        	</select>
+                        </div>
+                        <th:script></th:script>
+                       	<div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">변경 직급</label>
+			                    <select class="col-sm-3" name="afterPoCode">
+		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${u.PoName}" th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
+	                        	</select>
+                        </div>
+                        
+                        
+	                 </div>
+	                 
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">인사 이동일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="afterDate">
+
+			                  </div>
+                			</div>
 	                 </div>
 	                 
 	                 
-	                 <!--  아직 여기는 셀렉트 못해오겠음.. -->
 	                  <div class="form-group row">
 	                   	  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">계약형태</label>
-			                   <select class="col-sm-3" name="conType">
-		                          <option value="연봉">연봉</option>
+			                   <select class="col-sm-3" name="conType" th:if="${u.conType == '연봉'}">
+		                          <option value="연봉" selected>연봉</option>
 		                          <option value="시급">시급</option>
 		                          <option value="일급">일급</option>
-	                       	 </select>
+	                       	   </select>
+	                       	   <select class="col-sm-3" name="conType" th:if="${u.conType == '시급'}">
+		                          <option value="연봉">연봉</option>
+		                          <option value="시급" selected>시급</option>
+		                          <option value="일급">일급</option>
+	                       	   </select>
+	                       	   <select class="col-sm-3" name="conType" th:if="${u.conType == '일급'}">
+		                          <option value="연봉">연봉</option>
+		                          <option value="시급">시급</option>
+		                          <option value="일급" selected>일급</option>
+	                       	   </select>
 	                       </div>
 	                  
                        

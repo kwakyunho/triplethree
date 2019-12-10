@@ -163,8 +163,10 @@ public class EmployeeController {
 	  */
 	 @PostMapping("/employeeUpdate")
 	 public String updateEmployee(Employee employee) {
-		 String code = commonService.codeGeneration("EMP_MANAGE");
-		 employee.setCode(code);
+		 
+		 String moveCode = commonService.codeGeneration("PECHANGE");
+		 employee.setMoveCode(moveCode);
+		 employeeService.insertMoveEmployee(employee);
 		 employeeService.updateEmployee(employee);
 		 return "redirect:/employeeList";
 	 }
@@ -190,13 +192,11 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @GetMapping("/employeeMyUpdate")
-	 public String employeeMyUpdate(Model model,Model model1, Model model2,Model model3,HttpSession session) {
+	 public String employeeMyUpdate(Model model,HttpSession session) {
 		 String SID = (String)session.getAttribute("SID");
 		 if(SID != null) {
 			 model.addAttribute("mypage", employeeService.employeeMyPage(SID));
-			 model1.addAttribute("depart", employeeService.selectForDepart());
-			 model2.addAttribute("position", employeeService.selectForPosition());
-			 model3.addAttribute("status", employeeService.selectForStatus());
+			 
 		 }else {
 			 
 		 }

@@ -241,7 +241,7 @@
 	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
 			                    <select class="col-sm-3" name="demgCode" >
-		                          <option  th:text="${m.demgName}"></option>
+		                          <option  th:text="${m.demgName}" th:value="${m.demgCode}"></option>
 		                          
 	                        </select>
                         </div>
@@ -249,14 +249,14 @@
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                           <option  th:text="${m.poName}"></option>                         
+		                           <option  th:text="${m.poName}" th:value="${m.poCode}"></option>                         
 	                        </select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                           <option  th:text="${m.liName}"></option>   		                      		                          
+		                           <option  th:text="${m.liName}" th:value="${m.liCode}"></option>   		                      		                          
 	                        </select>
                         </div>
 		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>

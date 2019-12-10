@@ -36,6 +36,11 @@ public class EmployeeService {
 		  return employeeMapper.selectForStatus();
 	  }
 	 
+	 public int insertMoveEmployee(Employee employee) {
+		 
+		 return employeeMapper.insertMoveEmployee(employee);
+		 }
+	 
 	 public int insertEmployee(Employee employee){
 		  
 		  return employeeMapper.insertEmployee(employee);

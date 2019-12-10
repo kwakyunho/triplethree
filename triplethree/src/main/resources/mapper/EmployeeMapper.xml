@@ -4,12 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.triplethree.mapper.EmployeeMapper">
-
+	
 	<select id="login" parameterType="shop.triplethree.vo.Employee" resultType="shop.triplethree.vo.Employee">
 		SELECT
 			em.CODE as code,
 			em.demgcode as demgCode,
 			de.dename as demgName,
+			em.pocode as poCode,
 			po.poname as poName,
 			em.postcode as postCode,
 			em.addr as addr,
@@ -20,23 +21,16 @@
 			em.emp_num as empNum,
 			em.emp_name as empName,
 			em.password as password
-		FROM (
-			SELECT A.*
-			FROM EMP_MANAGE A
-			INNER JOIN (
-			SELECT emp_num, MAX(writer_day) AS writer_day
-			FROM EMP_MANAGE
-			GROUP BY emp_num) B
-			ON A.writer_day = B.writer_day
-			AND A.emp_num = B.emp_num) AS em
+		FROM 
+			EMP_MANAGE as em
 		
-		LEFT JOIN DEMG AS de
-		ON em.demgcode = de.CODE
-		
-		LEFT JOIN POSISYS AS po
-		ON em.pocode = po.CODE
-		
-		WHERE em.emp_num= #{empNum}
+			LEFT JOIN DEMG AS de
+			ON em.demgcode = de.CODE
+			
+			LEFT JOIN POSISYS AS po
+			ON em.pocode = po.CODE
+			
+			WHERE em.emp_num= #{empNum}
 		<!-- AND em.PASSWORD = #{password} --> 
 	</select>
 	
@@ -112,15 +106,8 @@
 				em.email as email,
 				em.car_presence as carPresence
 				
-			FROM (
-				SELECT A.*
-				FROM EMP_MANAGE A
-				INNER JOIN (
-				SELECT emp_num, MAX(writer_day) AS writer_day
-				FROM EMP_MANAGE
-				GROUP BY emp_num) B
-				ON A.writer_day = B.writer_day
-				AND A.emp_num = B.emp_num) AS em
+			FROM
+				 EMP_MANAGE em
 				
 			LEFT JOIN DEMG AS de
 			ON em.demgcode = de.CODE
@@ -131,8 +118,7 @@
 			LEFT JOIN LIST_MANAGE AS li
 			ON em.li_code = li.code
 							
-										
-				
+														
 	</select>
 	
 	<select id="selectForDetail" parameterType="String" resultType="shop.triplethree.vo.Employee">
@@ -160,15 +146,8 @@
 			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
 			em.writer as writer,
 			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
-		FROM (
-			SELECT A.*
-			FROM EMP_MANAGE A
-			INNER JOIN (
-			SELECT emp_num, MAX(writer_day) AS writer_day
-			FROM EMP_MANAGE
-			GROUP BY emp_num) B
-			ON A.writer_day = B.writer_day
-			AND A.emp_num = B.emp_num) AS em
+		FROM 
+			EMP_MANAGE as em
 			
 			LEFT JOIN DEMG AS de
 			ON em.demgcode = de.CODE
@@ -186,8 +165,11 @@
 	<select id="selectForUpdate" parameterType="String" resultType="shop.triplethree.vo.Employee">
 		
 		SELECT 
+			em.code as code,
 			em.photo as photo,
 			em.signature as signature,
+			em.demgcode as demgCode,
+			em.pocode as poCode,
 			em.emp_num as empNum,
 			em.emp_name as empName,
 			em.password as password,
@@ -208,15 +190,8 @@
 			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
 			em.writer as writer,
 			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
-		FROM (
-			SELECT A.*
-			FROM EMP_MANAGE A
-			INNER JOIN (
-			SELECT emp_num, MAX(writer_day) AS writer_day
-			FROM EMP_MANAGE
-			GROUP BY emp_num) B
-			ON A.writer_day = B.writer_day
-			AND A.emp_num = B.emp_num) AS em
+		FROM 
+			EMP_MANAGE AS em
 			
 			LEFT JOIN DEMG AS de
 			ON em.demgcode = de.CODE
@@ -231,64 +206,72 @@
 		
 	</select>
 	
-	<insert id="updateEmployee" parameterType="shop.triplethree.vo.Employee">
-		INSERT INTO EMP_MANAGE (code, demgcode, pocode, li_code, emp_num, emp_name, password, 
-								postcode,addr,detailaddr,extraaddr, phone, car_presence, email, birth_date, con_type, basic_pay,
-								join_date, photo, signature, writer, writer_day)
+	<insert id="insertMoveEmployee" parameterType="shop.triplethree.vo.Employee">
+		INSERT INTO PECHANGE (code, emp_code, pre_depart, pre_position, af_depart, af_positon, af_date, 
+								writer,writer_day)
 			VALUES (
+					#{moveCode},
 					#{code},
 					#{demgCode},
 					#{poCode},
-					#{liCode},
-					#{empNum},
-					#{empName},
-					#{password},
-					#{postCode},
-			        #{addr}, 
-			        #{detailAddr},
-			        #{extraAddr},
-					#{phone},
-					#{carPresence},
-					#{email},
-					#{birthDate},
-					#{conType},
-					#{basicPay},
-					#{joinDate},
-					#{photo},
-					#{signature},
+					#{afterDemgCode},
+					#{afterPoCode},
+					#{afterDate},
 					#{writer},
 					 NOW())
 			 
-		<if test="retireDate neq null and retireDate neq ''.toString()">
- 				INSERT INTO EMP_MANAGE (code, demgcode, pocode, li_code, emp_num, emp_name, password, 
-								postcode,addr,detailaddr,extraaddr, phone, car_presence, email, birth_date, con_type, basic_pay,
-								join_date, photo, signature, retire_date, writer, writer_day)
-				VALUES (
-						#{code},
-						#{demgCode},
-						#{poCode},
-						#{liCode},
-						#{empNum},
-						#{empName},
-						#{password},
-						#{postCode},
-				        #{addr}, 
-				        #{detailAddr},
-				        #{extraAddr},
-						#{phone},
-						#{carPresence},
-						#{email},
-						#{birthDate},
-						#{conType},
-						#{basicPay},
-						#{joinDate},
-						#{photo},
-						#{signature},
-						#{retireDate},
-						#{writer},
-						 NOW())
- 			</if>
+		
 	</insert>
+	
+	<update id="updateEmployee" parameterType="shop.triplethree.vo.Employee">
+		UPDATE EMP_MANAGE
+			SET
+				demgcode= #{demgCode},
+				pocode= #{poCode},
+				li_code= #{liCode},
+				password=#{password},
+				postcode=#{postCode},
+				addr=#{addr},
+				detailaddr=#{detailAddr},
+				extraaddr=#{extraAddr},
+				phone=#{phone},
+				car_presence=#{carPresence},
+				email=#{email},
+				con_type=#{conType},
+				basic_pay=#{basicPay},
+				photo=#{photo},
+				signature=#{signature},
+				writer=#{writer},
+				writer_day=NOW()
+			WHERE 
+				emp_num= #{empNum}
+			 
+		<if test="retireDate neq null and retireDate neq ''.toString()">
+ 				UPDATE EMP_MANAGE
+					SET
+						demgcode= #{demgCode},
+						pocode= #{poCOde},
+						li_code= #{liCode},
+						password=#{password},
+						postcode=#{postCode},
+						addr=#{addr},
+						detailaddr=#{detailAddr},
+						extraaddr=#{extraAddr},
+						phone=#{phone},
+						car_presence=#{carPresence},
+						email=#{email},
+						con_type=#{conType},
+						basic_pay=#{basicPay},
+						retire_date=#{retireDate},
+						photo=#{photo},
+						signature=#{signature},
+						writer=#{writer},
+						writer_day=NOW()
+					WHERE 
+						emp_num= #{empNum}
+ 			</if>
+	</update>
+	
 	
 	<select id="employeeMyPage" parameterType="String" resultType="shop.triplethree.vo.Employee">
 		
@@ -315,15 +298,8 @@
 			DATE_FORMAT(em.retire_date,'%Y-%m-%d') as retireDate,
 			em.writer as writer,
 			DATE_FORMAT(em.writer_day,'%Y-%m-%d') as writerDay
-		FROM (
-			SELECT A.*
-			FROM EMP_MANAGE A
-			INNER JOIN (
-			SELECT emp_num, MAX(writer_day) AS writer_day
-			FROM EMP_MANAGE
-			GROUP BY emp_num) B
-			ON A.writer_day = B.writer_day
-			AND A.emp_num = B.emp_num) AS em
+		FROM 
+			EMP_MANAGE AS em
 			
 			LEFT JOIN DEMG AS de
 			ON em.demgcode = de.CODE

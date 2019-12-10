@@ -1,11 +1,18 @@
 package shop.triplethree.vo;
 
 public class Employee {
+	//사원관리와 인사이동목록을 이용하기위한 vo 
+	//()는 사욜할 테이블 변수값을 쓰기위함 
 	private String code; //사원관리코드
-	private String demgCode; //부서코드
-	private String demgName; //부서명
-	private String poCode; //직급관리코드
+	private String moveCode; //인사이동목록코드
+	private String demgCode; //부서코드(사원관리) ,변경전부서코드 (인사이동목록) 
+	private String demgName; //부서명 , 
+	private String afterDemgCode;	//변경 후 부서코드 (인사이동목록)
+	private String afterDemgName;	//변경 후 부서명 (인사이동목록)
+	private String poCode; //직급관리코드 (사원관리), 변경전직급코드 (인사이동목록)
 	private String poName; //직급관리코드
+	private String afterPoCode; //변경 후 직급코드 (인사이동목록)
+	private String afterPoName; //변경 후 직급명 (인사이동목록)
 	private String liCode; //목록관리코드로 재직상태 가지고오기 
 	private String liName; //목록명 담는 변수
 	private String empNum; //사원번호
@@ -25,8 +32,11 @@ public class Employee {
 	private String signature;
 	private String conType;
 	private String basicPay;
-	private String writer;
-	private String writerDay;
+	private String writer;	//작성자  (사원관리, 인사이동목록)
+	private String writerDay; //작성일자 (사원관리, 인사이동목록)
+	private String afterDate; //인사이동날짜 (인사이동목록 )
+	private String approver; //승인자(인사이동목록)
+	private String approveDay; //승인일자(인사이동목록)
 	public String getCode() {
 		return code;
 	}
@@ -45,6 +55,18 @@ public class Employee {
 	public void setDemgName(String demgName) {
 		this.demgName = demgName;
 	}
+	public String getAfterDemgCode() {
+		return afterDemgCode;
+	}
+	public void setAfterDemgCode(String afterDemgCode) {
+		this.afterDemgCode = afterDemgCode;
+	}
+	public String getAfterDemgName() {
+		return afterDemgName;
+	}
+	public void setAfterDemgName(String afterDemgName) {
+		this.afterDemgName = afterDemgName;
+	}
 	public String getPoCode() {
 		return poCode;
 	}
@@ -56,6 +78,18 @@ public class Employee {
 	}
 	public void setPoName(String poName) {
 		this.poName = poName;
+	}
+	public String getAfterPoCode() {
+		return afterPoCode;
+	}
+	public void setAfterPoCode(String afterPoCode) {
+		this.afterPoCode = afterPoCode;
+	}
+	public String getAfterPoName() {
+		return afterPoName;
+	}
+	public void setAfterPoName(String afterPoName) {
+		this.afterPoName = afterPoName;
 	}
 	public String getLiCode() {
 		return liCode;
@@ -183,16 +217,46 @@ public class Employee {
 	public void setWriterDay(String writerDay) {
 		this.writerDay = writerDay;
 	}
+	public String getAfterDate() {
+		return afterDate;
+	}
+	public void setAfterDate(String afterDate) {
+		this.afterDate = afterDate;
+	}
+	public String getApprover() {
+		return approver;
+	}
+	public void setApprover(String approver) {
+		this.approver = approver;
+	}
+	public String getApproveDay() {
+		return approveDay;
+	}
+	public void setApproveDay(String approveDay) {
+		this.approveDay = approveDay;
+	}
+	public String getMoveCode() {
+		return moveCode;
+	}
+	public void setMoveCode(String moveCode) {
+		this.moveCode = moveCode;
+	}
 	@Override
 	public String toString() {
-		return "Employee [code=" + code + ", demgCode=" + demgCode + ", demgName=" + demgName + ", poCode=" + poCode
-				+ ", poName=" + poName + ", liCode=" + liCode + ", liName=" + liName + ", empNum=" + empNum
-				+ ", password=" + password + ", empName=" + empName + ", addr=" + addr + ", detailAddr=" + detailAddr
-				+ ", extraAddr=" + extraAddr + ", postCode=" + postCode + ", phone=" + phone + ", email=" + email
-				+ ", carPresence=" + carPresence + ", joinDate=" + joinDate + ", birthDate=" + birthDate + ", photo="
-				+ photo + ", retireDate=" + retireDate + ", signature=" + signature + ", conType=" + conType
-				+ ", basicPay=" + basicPay + ", writer=" + writer + ", writerDay=" + writerDay + "]";
+		return "Employee [code=" + code + ", moveCode=" + moveCode + ", demgCode=" + demgCode + ", demgName=" + demgName
+				+ ", afterDemgCode=" + afterDemgCode + ", afterDemgName=" + afterDemgName + ", poCode=" + poCode
+				+ ", poName=" + poName + ", afterPoCode=" + afterPoCode + ", afterPoName=" + afterPoName + ", liCode="
+				+ liCode + ", liName=" + liName + ", empNum=" + empNum + ", password=" + password + ", empName="
+				+ empName + ", addr=" + addr + ", detailAddr=" + detailAddr + ", extraAddr=" + extraAddr + ", postCode="
+				+ postCode + ", phone=" + phone + ", email=" + email + ", carPresence=" + carPresence + ", joinDate="
+				+ joinDate + ", birthDate=" + birthDate + ", photo=" + photo + ", retireDate=" + retireDate
+				+ ", signature=" + signature + ", conType=" + conType + ", basicPay=" + basicPay + ", writer=" + writer
+				+ ", writerDay=" + writerDay + ", afterDate=" + afterDate + ", approver=" + approver + ", approveDay="
+				+ approveDay + "]";
 	}
+	
+	
+	
 	
 	
 	
