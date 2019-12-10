@@ -14,6 +14,11 @@
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
 	
+	<!--게시글 삭제하기 -->
+	<delete id="deleteBoard" parameterType="String">
+	 	Delete * from BOARD where code=#{code}
+	</delete>
+	
 	<!-- 사원번호(SID)로 사원명 가져오기  -->
 	<select id="getNameByEmpCode" parameterType="String" resultType="String">
 		SELECT

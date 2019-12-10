@@ -50,4 +50,8 @@ public class BoardService {
 		return boardMapper.updateBoard(board);
 	}
 	
+	//게시물 삭제하기
+	public int deleteBoard(String code) {
+		return boardMapper.deleteBoard(code);
+	}
 }

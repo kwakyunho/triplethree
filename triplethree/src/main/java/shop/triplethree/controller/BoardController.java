@@ -24,7 +24,7 @@ public class BoardController {
 	public String selectDetail(@RequestParam(value="code")String code,Model model) {
 		//code로 선택된 글의 정보를 board 에 담아서 보내기
 		model.addAttribute("board", boardservice.getBoardByCode(code));
-		return "/board/boarDetail.html";
+		return "/board/boardDetail.html";
 	}
 	/**
 	  * 게시글 작성폼
@@ -90,6 +90,20 @@ public class BoardController {
 		System.out.println("******boardUpdate 처리****");
 		System.out.println("*************************");
 		boardservice.updateBoard(board);
+		return "redirect:/boardList";
+	}
+	
+	/**
+	 * 글 삭제 처리
+	 * @param board
+	 * */
+	@PostMapping("/boardDelete")
+	public String deleteBoard(@RequestParam(value="code")String code) {
+		System.out.println("***********************");
+		System.out.println("******deleteBoard처리***");
+		System.out.println("***********************");
+		boardservice.deleteBoard(code);
+		
 		return "redirect:/boardList";
 	}
 	

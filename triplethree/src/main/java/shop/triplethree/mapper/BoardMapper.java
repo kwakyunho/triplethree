@@ -20,4 +20,6 @@ public interface BoardMapper {
 	//게시글 수정하기
 	public int updateBoard(Board board);
 	
+	//게시글 수정하기
+	public int deleteBoard(String code);
 }
