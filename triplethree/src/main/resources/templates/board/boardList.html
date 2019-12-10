@@ -10,7 +10,9 @@
 
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
-
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -54,10 +56,8 @@
 	             </thead>
 	             
 	             <tbody>
-	               <tr th:each="b : ${boardList}">
-					<td>
-						<a style="color:#212529" th:href="@{/boardDetail(code=${b.code})}" th:text="${b.boardTitle}"></a>
-					</td>
+	               <tr th:each="b : ${boardList}" class="boardListTable" style="cursor:pointer">
+					<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 					<td th:text="${b.writer}"></td>
 					<td th:text="${b.boardCount}"></td>
 					<td th:text="${b.writerDay}"></td>
@@ -79,15 +79,20 @@
 			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardInsert'" >공지사항 작성하기</a></button>
 	     </div>
 	 </div>
-	 </div>
-			<!-- /.row -->
-		<!-- /.container-fluid -->
-	</th:block>
+ </div>
+<!-- /.row -->
+<!-- /.container-fluid -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.boardListTable').on('click', function(){
+		var boardCode = $(this).children('.boardTitle').attr('id');
+		$(location).attr('href', "/boardDetail?code="+boardCode);
+	});
 	
-	<th:block layout:fragment="customScript">
-	<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-	<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-	
-	</th:block>
-	<script></script>
-	</html>
+});
+</script>
+</th:block>
+</html>
