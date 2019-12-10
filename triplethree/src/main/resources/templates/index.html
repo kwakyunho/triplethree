@@ -103,7 +103,7 @@
 
 <th:block layout:fragment="customScript">
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">	// 세션 사용을 위해서는 스크립트안에 타임리프 인라인을 설정하거나 스크립트부분에 CDATA를 해야함
 
 // 1초마다 현재 날짜 시간 갱신
 setInterval("now()",1000);
@@ -197,6 +197,7 @@ function now(){
 	}
 }
 
+
 // 페이지 오픈이후 상시 대기 스크립트
 $(document).ready(function(){
 	// 우측 상단 클릭함에 따라 근태관리표 보이기/숨기기 전환
@@ -213,63 +214,88 @@ $(document).ready(function(){
 	});
 	
 	
-	var condition = 0;
+	// ajax 호출
 	(function($){
-		$.fn.workTimeEvent = function(conditionValue){
+		$.fn.workTimeEvent = function(sendData, fn){
 			
-			if(conditionValue == 1){
-				
-			var sendData = '{';
-			sendData += '"type" : ' + $('#type').val();
-			sendData += '", complete" : ' + $('#complete').val();
-			sendData += '", page" : ' + $('#page').val();
-			sendData += '}';
-			
-			console.log(sendData);
-			
-			}
-			
-			
-			/* $.ajax({
+			$.ajax({
 				async: true,
-				type : 'POST',
+				type : sendData.ajaxType,
 				data : sendData,
-				url : "/test",
-				dataType : "json",
+				url : sendData.ajaxUrl,
+				dataType : sendData.ajaxDataType,
 				success : function(result) {
-					console.log(result);
+					fn(result);
 				},
 				error : function(error) {
 					//alert("error : " + error);
+					fn('error');
 				}
-			}); */
+			});
+			
 		}
 	}(jQuery));
 	
 	// 페이지 시작시 함수 호출
-	$.fn.workTimeEvent('1');
+	window.onload = function () {
+		var sendData = {};
+		sendData.conditionValue = 1;
+		sendData.ajaxType = 'POST';	// 전송타입
+		sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+		sendData.ajaxDataType = 'json';	// 리턴 타입
 		
-	// 버튼 클릭시 현재 상태 변경하기
-	$('.nowWorkStateList').on('click', function(){
-		$('.nowWorkState').text($(this).text());
-	});
+		sendData.userCode = [[${session.SCODE}]];
+		
+		// 콜백함수
+		$(document).workTimeEvent(sendData, function(result){
+			if(result != 'error'){
+				if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+				if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+			}else{
+				$('#startWorkTime').text('미등록');
+				$('#endWorkTime').text('미등록');
+			}
+		});
+	}
 	
 	// 출근 버튼 클릭
 	$('.startWorkTime').on('click', function(){
 		if($('#startWorkTime').text() == '미등록'){
+			
+			var sendData = {};
+			sendData.conditionValue = 2;
+			sendData.ajaxType = 'POST';	// 전송타입
+			sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+			sendData.ajaxDataType = 'json';	// 리턴 타입
+			
+			sendData.userCode = [[${session.SCODE}]];
+			sendData.userId = [[${session.SID}]];
+			
+			// 콜백함수
+			$(document).workTimeEvent(sendData, function(result){
+				
+			});
+			
 			document.getElementById("startWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 		}
+	});
+	
+	// 버튼 클릭시 현재 상태 변경하기
+	$('.nowWorkStateList').on('click', function(){
+		$('.nowWorkState').text($(this).text());
 	});
 	
 	// 퇴근 버튼 클릭
 	$('.endWorkTime').on('click', function(){
 		if($('#endWorkTime').text() == '미등록' && $('#startWorkTime').text() != '미등록'){
 			if(confirm('퇴근이 확실합니까?')){
+				
 				document.getElementById("endWorkTime").innerHTML = hours + ":" + minutes + ":" + seconds;
 			}
 		}
 	});
 });
+
 </script>
 
 </th:block>

@@ -7,6 +7,7 @@
 
 	<select id="login" parameterType="shop.triplethree.vo.Employee" resultType="shop.triplethree.vo.Employee">
 		SELECT 
+			em.code,
 			em.emp_num as empNum,
 			em.emp_name as empName,
 			em.PASSWORD,

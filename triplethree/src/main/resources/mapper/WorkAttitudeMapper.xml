@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.WorkAttitudeMapper">
+
+	<resultMap type="shop.triplethree.vo.WorkAttitudeVo" id="WorkAttitudeResultMap">
+		<result property="workAttCode" column="code"></result>
+		<result property="userNum" column="emp_code"></result>
+		<result property="day" column="annual"></result>
+		<result property="startWorkTime" column="attendance"></result>
+		<result property="endWorkTime" column="leavework"></result>
+		<result property="startOutSideTime" column="work_outside"></result>
+		<result property="endOutSideTime" column="work_inside"></result>
+		<result property="userId" column="writer"></result>
+		<result property="insertDt" column="writer_day"></result>
+		<result property="adminUpdateYn" column="manage_modi_check"></result>
+		<result property="adminId" column="manage_name"></result>
+		<result property="adminInsertDt" column="manage_date"></result>
+		<result property="coment" column="reason"></result>
+	</resultMap>
+	
+	<select id="selectWorkAttitude" parameterType="map" resultMap="WorkAttitudeResultMap">
+		SELECT IFNULL(attendance, '미등록') AS attendance, IFNULL(leavework, '미등록') AS leavework
+		FROM ABS_MANAGE
+		WHERE emp_code = #{userCode}
+		AND annual = DATE_FORMAT(CURDATE(),'%Y%m%d')
+	</select>
+	
+	<insert id="startInsertWorkAttitude" parameterType="map">
+		INSERT INTO ABS_MANAGE (code, emp_code, annual, attendance, writer, writer_day)
+		VALUES (#{workAttCode}, #{userCode}, DATE_FORMAT(CURDATE(),'%Y%m%d'), now(), #{userId}, now())
+	</insert>
+	
+</mapper>
