@@ -11,16 +11,25 @@ import shop.triplethree.vo.Employee;
 
 @Service
 public class PayService {
+
+	@Autowired
+	private PayMapper payMapper;
 	
-	@Autowired private PayMapper payMapper;  
-	/**급여 대장**/
-	public List<Employee> selectPay(){		  
-		  return payMapper.selectPay();
-	  }
+
+	/** 급여 입력 직급 검색 **/
+	public List<Employee> insertSearchPay(String sk, String sv) {
+		List<Employee> list = payMapper.insertSearchPay(sk, sv);
+		return list;
+	}
 	
-	/**퇴직금  검색 조회**/
-	public List<Employee> selectRetiring(){
+	/** 급여 대장 **/
+	public List<Employee> selectPay() {
+		return payMapper.selectPay();
+	}
+
+	/** 퇴직금 검색 조회 **/
+	public List<Employee> selectRetiring() {
 		return payMapper.selectRetiring();
-				
+
 	}
 }

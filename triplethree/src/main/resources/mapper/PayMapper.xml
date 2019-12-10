@@ -38,4 +38,33 @@
 	left JOIN DEMG AS d ON em.demgcode = d.code 
 	left JOIN POSISYS AS p ON em.pocode  = p.code
 	</select>
+	
+	
+	<!--급여 검색화면 생각중  -->
+	<select id="insertSearchPay" resultType="shop.triplethree.vo.Employee">
+	SELECT
+	em.emp_num as empNum,
+	em.emp_name as empName,
+	p.poname as poName,
+	de.dename as demgName
+	FROM (
+	SELECT em.*
+			FROM EMP_MANAGE em
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) p
+			ON em.writer_day = p.writer_day
+			AND em.emp_num = p.emp_num) em
+	INNER JOIN POSISYS AS p
+	ON em.pocode = p.CODE 
+	
+	LEFT JOIN DEMG de
+	ON em.demgcode = de.CODE
+	<if test="sv != null and sv neq ''.toString()">
+		WHERE 
+			${sk} Like CONCAT('%',#{sv},'%')
+	</if>
+
+	</select>
 </mapper>
