@@ -20,9 +20,10 @@ public class BoardController {
 	/**게시글 상세보기
 	 * @param code
 	 * */
-	@GetMapping("/boardDetail")
-	public String selectDetail(@RequestParam(value="code")String code,Model model) {
+	@PostMapping("/boardDetail")
+	public String selectDetail(@RequestParam(value="code", required = false) String code, Model model) {
 		//code로 선택된 글의 정보를 board 에 담아서 보내기
+		System.out.println("controller - code : " + code);
 		model.addAttribute("board", boardservice.getBoardByCode(code));
 		return "/board/boardDetail.html";
 	}
