@@ -104,6 +104,7 @@
  	<select id="selectUpdate" resultType="shop.triplethree.vo.Schedule" parameterType="String">
  		 SELECT
  			 code AS code
+			,emp_code AS sid
  			,cal_sortation AS sortation
 			,cal_title AS title
 			,cal_start AS start 

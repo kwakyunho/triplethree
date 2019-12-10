@@ -145,22 +145,42 @@
     	    //console.log(code)	  
     	  
     	    // 일정 클릭시 수정&삭제 이벤트 실행
-       		  $('#myModal2').modal('show');
+       		  //$('#myModal2').modal('show');
+       		  
+       		  // 일정 클릭시 수정가능한 일정인지 확인
+       		/*  $.ajax({
+        		  async : true,
+        		  type : 'POST',
+        		  data : {"sid" : sid},
+        		  url : "checkSID",
+        		  datetype : "json",
+        		  success : function(data){
+        			  console.log(data);
+        		  },
+        		  error : function(error){ 
+        		  }
+       		  });*/
        		  
        		  // 일정 클릭시 db조회하여 일치하는 값을 셋팅해준다.
         	  $.ajax({
         		  async : true,
         		  type : 'POST',
-        		  data : {code : code},
+        		  data : {code : code, sid : sid},
         		  url : "selectUpdate",
         		  datetype : "json",
         		  success : function(data){
-       
+        			  console.log(sid);
+        			  console.log(data.sid);
+        			  if(sid == data.sid){
+        				$('#myModal2').modal('show');
         			  // input 창에 data에서 조회한 값을 처리해준다.
         			  $('input[name=title]').attr('value', data.title);
         			  $('input[name=start]').attr('value', data.start);
         			  $('input[name=end]').attr('value', data.end);
         			  $('input[name=code]').attr('value', data.code);
+        			  }else{
+        				  alert('수정할수 없습니다.')
+        			  }
         			  
         		  },
         		  error : function(error){ 
