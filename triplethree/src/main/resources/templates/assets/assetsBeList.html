@@ -37,7 +37,7 @@
 
 	
 <!-- 시설물 등록 시작  -->
-<form th:action="@{assetsBeInsert}" method="post">
+<form th:action="@{#}" method="post" id="formInput">
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -96,7 +96,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="4">
+										<td colspan="4" class="inputBeBtn">
 											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBeBtn">
 										</td>
 									</tr>
@@ -117,7 +117,7 @@
 <!-- 시설물 등록 끝  -->
 
 <!-- 시설물 수정 시작 -->
-<form th:action="@{assetsBeUpdate}" method="post">
+<form th:action="@{#}" method="post" id="formUpdate">
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -181,7 +181,7 @@
 								</div>
 							<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="updateBeBtn">수정하기</button>
+					<button type="button" class="btn btn-primary" id="updateBeBtn">수정하기</button>
 				</div>
 			</div>
 		</div>
@@ -208,6 +208,7 @@
                 </div>
               </div>
               <!-- /.card-header -->
+              <form th:accept="@{#}" method="post" id="deleteForm">
               <div class="card-body table-responsive p-0" style="overflow-y: scroll;">
                 <table class="table table-hover" style="margid:auto; text-align:center;">
                   <thead>
@@ -237,8 +238,8 @@
 						<td class="updateBe">
 							<input type="button" id="updateBeBtn2" value="수정" class="btn btn-block btn-primary">
 						</td>
-						<td>
-							<a th:href="@{assetsBeDelete(code=${a.code})}" class="btn btn-block btn-primary">삭제</a>
+						<td class="deleteBeBtn">
+							<input type="button" id="deleteBe" value="삭제" class="btn btn-block btn-primary">
 						</td>
 					</tr>
                   </thead>
@@ -247,6 +248,7 @@
                   </tbody>
                 </table>
               </div>
+              </form>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

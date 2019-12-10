@@ -40,8 +40,8 @@ public class CompanyService {
 	/**
 	 * 부서정보 삭제 ( 사용 상태만 N 으로 변경 )
 	 * */
-	public int deleteOrganizationChart(String departmentCode) {
-		return companyMapper.deleteOrganizationChart(departmentCode);
+	public int deleteOrganizationChart(Company company) {
+		return companyMapper.deleteOrganizationChart(company);
 	}
 	
 	/**
@@ -83,8 +83,8 @@ public class CompanyService {
 	/**
 	 * 직급정보 삭제 메서드 ( 사용상태만 N 으로 변경 )
 	 * */
-	public int deletePosition(String positionCode) {
-		return companyMapper.deletePosition(positionCode);
+	public int deletePosition(Position position) {
+		return companyMapper.deletePosition(position);
 	}
 
 	/**

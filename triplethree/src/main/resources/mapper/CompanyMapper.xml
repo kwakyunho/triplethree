@@ -75,7 +75,7 @@
 	</select>
 	
 	<!-- 부서정보 삭제 쿼리문 (상태만 N으로 변경) -->
-	<update id="deleteOrganizationChart" parameterType="String">
+	<update id="deleteOrganizationChart" parameterType="shop.triplethree.vo.Company">
 		UPDATE 
 			DEMG AS d 
 		SET 
@@ -149,7 +149,7 @@
 	</select>
 	
 	<!-- 직급정보 삭제 쿼리문 ( 상태만 N으로 변경 ) -->
-	<delete id="deletePosition" parameterType="String">
+	<delete id="deletePosition" parameterType="shop.triplethree.vo.Position">
 		UPDATE 
 			POSISYS AS p
 		SET 

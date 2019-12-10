@@ -73,4 +73,11 @@ public class AssetsService {
 	public int updateCaAssets(Assets assets) {
 		return assetMapper.updateCaAssets(assets);
 	}
+	
+	/**
+	 * 차량 삭제 메서드
+	 */
+	public int deleteCaAssets(Assets assets) {
+		return assetMapper.deleteCaAssets(assets);
+	}
 }

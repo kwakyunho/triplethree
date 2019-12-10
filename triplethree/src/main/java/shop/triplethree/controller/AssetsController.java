@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.triplethree.service.AssetsService;
@@ -55,14 +54,14 @@ public class AssetsController {
 	/**
 	 * 시설물 삭제 메서드
 	 * */
-	@GetMapping("/assetsBeDelete")
-	public String deleteBeAssets(@RequestParam(value="code",required = false) String code, Assets assets, HttpSession session) {
+	@PostMapping("/assetsBeDelete")
+	public String deleteBeAssets(Assets assets, HttpSession session) {
 		//System.out.println("삭제버튼이 클릭되었나요?");
-		//System.out.println("코드가 잘 넘어 왔나요?" + code);
+		
+		System.out.println("코드가 잘 넘어 왔나요?" + assets.getCode());
 		String sid = (String) session.getAttribute("SID");
-		assets.setCode(code);
 		assets.setWriter(sid);
-		assetsService.deleteBeAssets(assets);
+		//assetsService.deleteBeAssets(assets);
 		return "redirect:/assetBeSelect";
 	}
 	
@@ -118,11 +117,18 @@ public class AssetsController {
 	/**
 	 * 차랑 삭제 메서드
 	 * */
-	@GetMapping("/assetsCaDelete")
-	public String deleteCaAssets(@RequestParam(value="code", required = false)String code, Assets assets, HttpSession session) {
-		System.out.println("삭제버튼이 클릭되었나요?");
-		System.out.println("코드가 넘어왔는지 확인해요." + code);
+	
+	@PostMapping("/assetsCaDelete")
+	public String deleteCaAssets(Assets assets, HttpSession session) {
+
+		//System.out.println("코드가 넘어왔는지 확인해요." + assets.getCode());
+		//System.out.println(assets.getCode());
 		
-		return null;
+		// 세션에서 작성자를 가지고와 셋팅
+		String sid = (String) session.getAttribute("SID");
+		assets.setWriter(sid);
+		//System.out.println("세션값을 확인할께요." + sid);
+		assetsService.deleteCaAssets(assets);
+		return "redirect:assetCaSelect";
 	}
 }

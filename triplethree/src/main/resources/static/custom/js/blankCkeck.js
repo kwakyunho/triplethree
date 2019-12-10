@@ -137,6 +137,34 @@ $(document).ready(function(){
 	});
 });
 
+// 부서 등록/수정/삭제 클릭시 실행되는 이벤트
+$(function(){
+	
+	$('.inputDeBtn').click(function(){
+		if(confirm('등록하시겠습니까?')){
+			$('#formInput').attr('action', 'teamNameInsert').submit();	
+		}
+	});	
+	
+	$('#updateBtn').click(function(){
+		if(confirm('수정하시겠습니까?')){
+			$('#formUpdate').attr('action', 'teamNameUpdate').submit();	
+		}
+	});	
+	
+	$('.deleteDeBtn').children('input').on('click', function(){
+		
+		var uri = $(this).parents('.groupListTr');
+		var textValue = uri.children('#departmentCode').text();
+		uri.children('#departmentCode').append('<input type="hidden" id="decode" name="departmentCode">');
+		$('#decode').val(textValue);
+		
+		if(confirm('삭제하시겠습니까?')){
+			$('#deleteForm').attr('action', 'teamNameDelete').submit();
+		 }
+	});
+});
+
 // 직급등록 공란체크
 $(function(){
 	$('#inputPoBtn').click(function(){
@@ -262,5 +290,33 @@ $(document).ready(function(){
 	$('.positionListTr').on('click', function(){
 		var positionNameBe = $(this).children('#positionNameBe').text();
 		$('#positionNameBeUp').val(positionNameBe);
+	});
+});
+
+//직급 등록/수정/삭제 클릭시 실행되는 이벤트
+$(function(){
+	
+	$('.insertPoBtn').click(function(){
+		if(confirm('등록하시겠습니까?')){
+			$('#formInput').attr('action', 'positionInsert').submit();	
+		}
+	});	
+	
+	$('#updatePoBtn').click(function(){
+		if(confirm('수정하시겠습니까?')){
+			$('#formUpdate').attr('action', 'positionUpdate').submit();	
+		}
+	});	
+	
+	$('.deletePoBtn').children('input').on('click', function(){
+		
+		var uri = $(this).parents('.positionListTr');
+		var textValue = uri.children('#positionCode').text();
+		uri.children('#positionCode').append('<input type="hidden" id="decode" name="positionCode">');
+		$('#decode').val(textValue);
+		
+		if(confirm('삭제하시겠습니까?')){
+			$('#deleteForm').attr('action', 'positionListDelete').submit();
+		 }
 	});
 });

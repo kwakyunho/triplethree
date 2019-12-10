@@ -27,7 +27,7 @@
 <!-- /.content-header -->
 
 <!-- 부서등록 시작  -->
-<form th:action="@{teamNameInsert}" method="post">
+<form th:action="@{#}" method="post" id="formInput">
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -65,9 +65,9 @@
 										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="등록사유를 입력해주세요" id="departmentSau" name="departmentSau"></td>
 									</tr>
 									<tr>
-										<td colspan="4">
+										<td colspan="4" class="inputDeBtn">
 											<!-- <button type="button" id="inputBtn" class="btn btn-block btn-primary btn-lg">등록하기</button> -->
-											<input type="submit" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
+											<input type="button" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
 										</td>
 									</tr>
 								</table>
@@ -87,7 +87,7 @@
 <!-- 부서등록 끝  -->
 
 <!-- 부서수정 시작  -->
-<form th:action="@{teamNameUpdate}" method="post">
+<form th:action="@{#}" method="post" id="formUpdate">
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -125,8 +125,8 @@
 										<td><input class="form-control form-control-lg" type="text" style="width:100%; font-size: small;" placeholder="변경사유를 입력해주세요" id="departmentSauUp" name="departmentSau"></td>
 									</tr>
 									<tr>
-										<td colspan="4">
-											<input type="submit" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updateBtn">
+										<td colspan="4" class="updateDeBtn">
+											<input type="button" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updateBtn">
 										</td>
 									</tr>
 								</table>
@@ -167,45 +167,50 @@
 					</div>
 				</div>
 				<!-- /.card-header -->
-				<div class="card-body table-responsive p-0" style="overflow-y: scroll;">
-					<table class="table table-hover small" style="text-align: center;">
-						<thead>
-							<tr>
-								<th>부서관리코드</th>
-								<th>부서명</th>
-								<th>레벨</th>
-								<th>상위부서코드</th>
-								<th>초기등록자</th>
-								<th>작성일자</th>
-								<th>사유</th>
-								<th>승인자</th>
-								<th>승인일자</th>
-								<th>승인상태</th>
-								<th>사용유무</th>
-								<th>삭제</th>
-							</tr>
-							<tr class="groupListTr" th:each="C : ${CompanyList}">	
-								<td id="departmentCode" th:text="${C.departmentCode}"></td>
-								<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
-								<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
-								<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
-								<td id="departmentWriter" th:text="${C.departmentWriter}"></td>
-								<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
-								<td id="departmentSau" th:text="${C.departmentSau}"></td>
-								<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
-								<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
-								<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
-								<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
-								<td><a th:href="@{teamNameDelete(departmentCode=${C.departmentCode})}" class="btn btn-block btn-primary btn-sm">삭제</a></td>								
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-			
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<form th:action="@{#}" method="post" id="deleteForm">
+					<div class="card-body table-responsive p-0" style="overflow-y: scroll;">
+						<table class="table table-hover small" style="text-align: center;">
+							<thead>
+								<tr>
+									<th>부서관리코드</th>
+									<th>부서명</th>
+									<th>레벨</th>
+									<th>상위부서코드</th>
+									<th>초기등록자</th>
+									<th>작성일자</th>
+									<th>사유</th>
+									<th>승인자</th>
+									<th>승인일자</th>
+									<th>승인상태</th>
+									<th>사용유무</th>
+									<th>삭제</th>
+								</tr>
+								<tr class="groupListTr" th:each="C : ${CompanyList}">	
+									<td id="departmentCode" th:text="${C.departmentCode}"></td>
+									<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
+									<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
+									<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
+									<td id="departmentWriter" th:text="${C.departmentWriter}"></td>
+									<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
+									<td id="departmentSau" th:text="${C.departmentSau}"></td>
+									<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
+									<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
+									<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
+									<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
+									<td class="deleteDeBtn">
+										<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deleteDe">
+										<!-- <a th:href="@{teamNameDelete(departmentCode=${C.departmentCode})}" class="btn btn-block btn-primary btn-sm">삭제</a> -->
+									</td>								
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+				
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
 				<!-- /.card-body -->
 			</div>
 			<!-- /.card -->

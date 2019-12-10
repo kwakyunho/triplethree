@@ -109,7 +109,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="4">
+										<td colspan="4" class="insertCarBtn">
 											<input type="button" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inCarBtn">
 										</td>
 									</tr>
@@ -130,7 +130,7 @@
 <!-- 차량 등록 끝  -->
 
 <!-- 차량 수정 시작 -->
-<form th:action="@{assetsCaUpdate}" method="post">
+<form th:action="@{#}" method="post" id="formUpdate">
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -207,7 +207,7 @@
 								</div>
 							<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="updateCarBtn">수정하기</button>
+					<button type="button" class="btn btn-primary" id="updateCarBtn">수정하기</button>
 				</div>
 			</div>
 		</div>
@@ -234,6 +234,7 @@
                 </div>
               </div>
               <!-- /.card-header -->
+              <form th:action="@{#}" method="post" id="deleteForm">
               <div class="card-body table-responsive p-0" style="overflow-y: scroll; overflow-x: scroll;">
                 <table class="table table-hover" style="margid:auto; text-align:center;" >
                   <thead>
@@ -270,12 +271,13 @@
 							<input type="button" id="updateCaBtn" value="수정" class="btn btn-block btn-primary">
 						</td>
 						<td class="deleteCarBtn">
-							<a th:href="@{#}" class="btn btn-block btn-primary">삭제</a>
+							<input type="button" id="deleteCar" value="삭제" class="btn btn-block btn-primary">
 						</td>
 					</tr>
                   </tbody>
                 </table>
               </div>
+              </form>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

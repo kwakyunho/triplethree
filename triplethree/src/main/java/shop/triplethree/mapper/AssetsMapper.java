@@ -32,4 +32,7 @@ public interface AssetsMapper {
 	
 	// 차량 수정 메서드
 	public int updateCaAssets(Assets assets);
+	
+	// 차량 삭제 메서드
+	public int deleteCaAssets(Assets assets);
 }

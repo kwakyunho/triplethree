@@ -27,7 +27,7 @@ public class CompanyController {
 	 * */
 	@GetMapping("/teamNameInsert")
 	public String selectOrganizationChart(Model model1, Model model2)	{
-		System.out.println("리스트 뽑아요");
+		//System.out.println("리스트 뽑아요");
 		
 		model1.addAttribute("CompanyList", companyService.selectOrganizationChart());
 		model2.addAttribute("selectBox", companyMapper.selectBox());
@@ -41,9 +41,9 @@ public class CompanyController {
 	 * */
 	@PostMapping("/teamNameInsert")
 	public String insertOrganizationChart(Company company, HttpSession session) {
-		System.out.println("부서 등록버튼 클릭이 되었나요 ?");
+		//System.out.println("부서 등록버튼 클릭이 되었나요 ?");
 		String sid = (String) session.getAttribute("SID");
-		System.out.println("세션값이 들어왔나요?"+sid);
+		//System.out.println("세션값이 들어왔나요?"+sid);
 		company.setSid(sid);
 		companyService.insertOrganizationChart(company);
 		
@@ -56,23 +56,23 @@ public class CompanyController {
 	 * */
 	@PostMapping("/teamNameUpdate")
 	public String updateOrganizationChart(Company company, HttpSession session) {
-		System.out.println("부서 수정 버튼이 클릭되었나요?");
+		//System.out.println("부서 수정 버튼이 클릭되었나요?");
 		String sid = (String) session.getAttribute("SID");
-		System.out.println("세션값이 들어왔나요 ? " + sid);
+		//System.out.println("세션값이 들어왔나요 ? " + sid);
 		company.setSid(sid);
-		/* companyService.updateOrganizationChart(company); */
+		companyService.updateOrganizationChart(company);
 		return "redirect:/teamNameInsert";
 	}
 	
 	/**
 	 * 부서 삭제
 	 * */
-	@GetMapping("/teamNameDelete")
-	public String deleteOrganizationChart(@RequestParam(value = "departmentCode" ,required = false) String departmentCode) {
-		System.out.println("삭제버튼이 클릭되었나요?");
+	@PostMapping("/teamNameDelete")
+	public String deleteOrganizationChart(Company company) {
+		//System.out.println("삭제버튼이 클릭되었나요?");
 		//System.out.println("값이 정상적으로 넘어왔나요 ? " + departmentCode);
-		
-		companyService.deleteOrganizationChart(departmentCode);
+		//System.out.println(company.getDepartmentCode());
+		companyService.deleteOrganizationChart(company);
 		return "redirect:/teamNameInsert";
 	}
 	
@@ -82,7 +82,7 @@ public class CompanyController {
 	 * */
 	@GetMapping("/positionInsert")
 	public String selectPosition(Model model)	{
-		System.out.println("리스트 뽑아요");
+		//System.out.println("리스트 뽑아요");
 		model.addAttribute("PositionList", companyService.selectPosition());
 		//System.out.println(companyService.selectOrganizationChart());
 		return "/position/position";
@@ -119,11 +119,12 @@ public class CompanyController {
 	/**
 	 * 직급 삭제
 	 * */
-	@GetMapping("/positionListDelete")
-	public String deletePosition(@RequestParam(value = "positionCode", required = false) String positionCode) {
+	@PostMapping("/positionListDelete")
+	public String deletePosition(Position position) {
 		System.out.println("삭제 버튼이 클릭되었나요?");
+		System.out.println(position.getPositionCode());
 		
-		companyService.deletePosition(positionCode);
+		companyService.deletePosition(position);
 		return "redirect:/positionInsert";
 	}
 

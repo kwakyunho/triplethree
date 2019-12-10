@@ -23,7 +23,7 @@ public interface CompanyMapper {
 	public String selectUpCode(String upCode);
 	
 	// 부서 삭제 메서드 ( 사용유무 N 변경 )
-	public int deleteOrganizationChart(String departmentCode);
+	public int deleteOrganizationChart(Company company);
 	
 	// 부서정보 수정 메서드
 	public int updateOrganizationChart(Company company);
@@ -38,7 +38,7 @@ public interface CompanyMapper {
 	public int updatePosition(Position position);
 	
 	// 직급 삭제 메서드 ( 사용유무 N 변경 )
-	public int deletePosition(String positionCode);
+	public int deletePosition(Position position);
 	
 	// 부서명 유효성 검사 메서드
 	public int checkDeName(Company company);

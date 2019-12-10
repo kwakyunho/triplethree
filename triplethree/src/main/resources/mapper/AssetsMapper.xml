@@ -169,4 +169,16 @@
 		WHERE
 			CODE = #{code}
 	</update>
+	
+	<!-- 차량 삭제 쿼리문 (상태만 변경) -->
+	<update id="deleteCaAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			VE_MANAGE
+		SET
+			ve_state = '사용안함'
+			,writer = #{writer}
+			,writer_day = NOW()
+		WHERE
+			CODE = #{code}
+	</update>
 </mapper>

@@ -170,6 +170,33 @@ $("#upName").blur(function() {
 	});
 });
 
+//시설물 관리에서 등록,수정,삭제 버튼 클릭시 발생하는 이벤트
+$(function(){
+	
+	$('.inputBeBtn').click(function(){
+		if(confirm('등록하시겠습니까?')){
+			$('#formInput').attr('action', 'assetsBeInsert').submit();	
+		}
+	});	
+	
+	$('#updateBeBtn').click(function(){
+		if(confirm('수정하시겠습니까?')){
+			$('#formUpdate').attr('action', 'assetsBeUpdate').submit();	
+		}
+	});	
+	
+	$('.deleteBeBtn').children('input').on('click', function(){
+		var uri = $(this).parents('.AssetsListTr');
+		var textValue = uri.children('#upCode').text();
+		uri.children('#upCode').append('<input type="hidden" id="becode" name="code">');
+		$('#becode').val(textValue);
+		
+		if(confirm('삭제하시겠습니까?')){
+			$('#deleteForm').attr('action', 'assetsBeDelete').submit();
+		 }
+	});
+});
+
 // 차량 등록시 공란체크 스크립트
 $(function(){
 	$('#inCarBtn').click(function(){
@@ -247,15 +274,27 @@ $(document).ready(function(){
 // 차량관리에서 등록,수정,삭제 버튼 클릭시 발생하는 이벤트
 $(function(){
 	
-/*	$('#inCarBtn').click(function(){
+	$('.insertCarBtn').click(function(){
 		if(confirm('등록하시겠습니까?')){
 			$('#formInput').attr('action', 'assetsCaInsert').submit();	
 		}
-	});*/	
+	});	
 	
-	$('.deleteCarBtn').click(function(){
+	$('#updateCarBtn').click(function(){
+		if(confirm('수정하시겠습니까?')){
+			$('#formUpdate').attr('action', 'assetsCaUpdate').submit();	
+		}
+	});	
+	
+	$('.deleteCarBtn').children('input').on('click', function(){
+		
+		var uri = $(this).parents('.AssetsListTr');
+		var textValue = uri.children('#upCode').text();
+		uri.children('#upCode').append('<input type="hidden" id="decode" name="code">');
+		$('#decode').val(textValue);
+		
 		if(confirm('삭제하시겠습니까?')){
-			$('#formId').attr('href', 'assetsCaDelete(code=${c.code})').submit();	
+			$('#deleteForm').attr('action', 'assetsCaDelete').submit();
 		 }
 	});
 });
