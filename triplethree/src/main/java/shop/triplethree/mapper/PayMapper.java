@@ -16,7 +16,7 @@ public interface PayMapper {
 	/** 퇴직금 검색조회 ***/
 	public List<Employee> selectRetiring();
 
-	/** 급여 입력 직급 검색 **/
+	/** 급여 입력  검색조건 **/
 	public List<Employee> insertSearchPay(String sk, String sv);
 
 }

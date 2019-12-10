@@ -40,7 +40,7 @@
 	</select>
 	
 	
-	<!--급여 검색화면 생각중  -->
+	<!--급여 화면 검색  -->
 	<select id="insertSearchPay" resultType="shop.triplethree.vo.Employee">
 	SELECT
 	em.emp_num as empNum,

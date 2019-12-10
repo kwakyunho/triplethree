@@ -16,7 +16,7 @@ public class PayService {
 	private PayMapper payMapper;
 	
 
-	/** 급여 입력 직급 검색 **/
+	/** 급여 입력  검색조건 **/
 	public List<Employee> insertSearchPay(String sk, String sv) {
 		List<Employee> list = payMapper.insertSearchPay(sk, sv);
 		return list;
