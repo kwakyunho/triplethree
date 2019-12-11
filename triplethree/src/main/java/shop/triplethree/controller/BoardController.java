@@ -64,6 +64,16 @@ public class BoardController {
 		return "/board/boardList";
 	}
 	
+	/**
+	  * 글 목록 가져오기 
+	  * @param model
+	  * @return
+	  */
+	@PostMapping("/boardList")
+	public String poBoardList(Model model) {
+		model.addAttribute("boardList", boardservice.boardList());
+		return "/board/boardList";
+	}
 	
 	/**
 	  * 선택된 글에 대한 수정할 데이터와 화면 보여주기
@@ -71,14 +81,15 @@ public class BoardController {
 	  * @param model
 	  * @return
 	  */
-	@GetMapping("/boardUpdate")
-	public String boardUpdate(@RequestParam(value="code")String code,Model model) {
-		System.out.println("*************************");
-		System.out.println("boardUpdate 화면 보여주기");
-		System.out.println("#########################");
-		model.addAttribute("board", boardservice.getBoardByCode(code));
-		return "/board/boardUpdate";
-	}
+	
+	  @GetMapping("/boardUpdate")
+  	public String goBoardUpdate(@RequestParam(value="code")String code,Model model) {
+	  System.out.println("*************************");
+	  System.out.println("boardUpdate 화면 보여주기");
+	  System.out.println("#########################"); 
+	  model.addAttribute("board",boardservice.getBoardByCode(code)); //하나 뽑아와서 board 에 담기
+	  return "/board/boardUpdate";
+	  }
 	
 	/**
 	  * 글 수정 처리 
@@ -90,7 +101,7 @@ public class BoardController {
 		System.out.println("*************************");
 		System.out.println("******boardUpdate 처리****");
 		System.out.println("*************************");
-		boardservice.updateBoard(board);
+		boardservice.updateBoard(board); //수정 처리 완료
 		return "redirect:/boardList";
 	}
 	

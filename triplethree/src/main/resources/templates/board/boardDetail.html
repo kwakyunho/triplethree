@@ -35,7 +35,7 @@
 
 	<div class="content" style="align-content: center">
 	 <div class="col-12">
-	     <div class="card">
+	     <div class="card" style="height:400px">
 	     <form class="boardDetailForm">
 	       <div class="card-header">
 	         <h3 class="card-title" th:text="${board.boardTitle}"></h3>
@@ -45,6 +45,7 @@
 	       		<table class="table table-condensed">
 	       			<thead th:text="${board.boardCon}"></thead>
 	       		</table>
+	       		<input type="hidden" name="code" id="hiddenCode" th:id="${board.code}" value="">
 	       	</div>
 	       </div>
 		</form>
@@ -52,13 +53,13 @@
 	     <!-- /.card -->
 	     <div class="row" id="detailBtns">
 	     <div class="col-4">
-			<button type="button" id="backBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardList'">이전 </button>
+			<button type="button" id="backBtn" class="btn btn-block btn-primary btn-lg" >목록</button>
 	     </div>
 	      <div class="col-4">
-			<button type="button" id="updateBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardUpdate'" >수정 </button>
+	      	<a class = "btn btn-block btn-primary btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a>
 	     </div>
-	      <div class="col-4">
-			<button type="button" id="deleteBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardList'" >공지사항 작성하기</a></button>
+	      <div class="col-4" id="deleteBtn">
+				<a class = "btn btn-block btn-primary btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a>
 	     </div>
 	     </div>
 	 </div>
@@ -71,28 +72,15 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('#backBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
-			$('.boardDetailForm').attr('method', 'GET');
-			$('.boardDetailForm').attr('action', '/boardList');
-			$('.boardDetailForm').submit();
-		});
-		
-		$('#updateBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
-			$('.boardDetailForm').attr('method', 'POST');
-			$('.boardDetailForm').attr('action', '/boardUpdate');
-			$('.boardDetailForm').submit();
-		});
-		
-		$('#deleteBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
 			$('.boardDetailForm').attr('method', 'POST');
 			$('.boardDetailForm').attr('action', '/boardList');
 			$('.boardDetailForm').submit();
 		});
-			/* var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-			boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
-			var boardCode = $('.boardTitle').attr('id');	// code id벨류값 추출
-			$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
-			*/
+
+		$('#deleteBtn').on('click',function(){
+			alert('삭제하시겠습니까?');
 		
+		})
 	});
 	</script>
 	</th:block>

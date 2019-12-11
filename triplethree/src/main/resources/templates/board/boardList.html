@@ -46,26 +46,22 @@ tr:hover{background: whitesmoke;}
 				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
 					<thead>
 						<tr>
+							<th>공지</th>
 							<th style="width:500px;">글제목</th>
 							<th>작성자</th>
-							<th style="width:100px;">조회수</th>
+							<!-- <th style="width:100px;">조회수</th> -->
 							<th style="width:100px;">작성일자</th>
-							<!--   <th>수정</th>
-							<th>삭제</th> -->
+							
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="b : ${boardList}" class="boardListTable" style="cursor:pointer">
+							<td>공지</td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
-							<td th:text="${b.boardCount}"></td>
+							<!-- <td th:text="${b.boardCount}"></td> -->
 							<td th:text="${b.writerDay}"></td>
-							<!-- <td>
-								<a th:href="@{/boardUpdate(code=${b.code})}">수정</a>
-							</td>
-							<td>
-								<a th:href="@{/boardDelete(code=${b.code})}">삭제</a>
-							</td> -->
+							
 						</tr>
 					</tbody>
 				</table>
@@ -76,7 +72,7 @@ tr:hover{background: whitesmoke;}
 	     </div>
 	     <!-- /.card -->
 	     <div class="col-4">
-			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardInsert'" >공지사항 작성하기</a></button>
+			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardInsert'" >공지사항 작성하기</button>
 	     </div>
 	 </div>
  </div>
@@ -87,7 +83,7 @@ tr:hover{background: whitesmoke;}
 <th:block layout:fragment="customScript">
 <script type="text/javascript">
 $(document).ready(function(){
-	$('.boardListTable').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
+	$('.boardListTable').on('click', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
 		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
 		
