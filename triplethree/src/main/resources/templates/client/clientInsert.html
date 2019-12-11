@@ -178,7 +178,9 @@
 				  </div><!-- card body -->
 				
 				<div class="card-footer">
-					<button type="submit" class="btn btn-primary">등록하기</button>
+					<button type="button" id="backBtn" class="btn btn-success float-auto">이전으로 </button>
+					<input type="submit" value="거래처등록하기" class="btn btn-success float-right">
+					<!-- <button type="submit" class="btn btn-primary">등록하기</button> -->
 				</div><!--  card footer -->
 				
 				
@@ -194,9 +196,12 @@
 <th:block layout:fragment="customScript">
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
+<script type="text/javascript">
+	$(function(){
+		$('#backBtn').on('click',function(){
+		history.go(-1); 
+		 });
+	});
+</script>
 </th:block>
-
-
 </html>
-
