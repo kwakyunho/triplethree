@@ -163,12 +163,17 @@ public class EmployeeController {
 	  */
 	 @PostMapping("/employeeUpdate")
 	 public String updateEmployee(Employee employee) {
+		
 		 
-		 String moveCode = commonService.codeGeneration("PECHANGE");
-		 employee.setMoveCode(moveCode);
-		 employeeService.insertMoveEmployee(employee);
-		 employeeService.updateEmployee(employee);
-		 return "redirect:/employeeList";
+		 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
+			 String moveCode = commonService.codeGeneration("PECHANGE");
+			 employee.setMoveCode(moveCode);
+			 employeeService.insertMoveEmployee(employee);
+			 employeeService.updateDepNPoEmployee(employee);	//변경부서 업데이트 
+		 }else {
+			 employeeService.updateEmployee(employee);	 
+		 }
+		 return "redirect:/employeeList";	
 	 }
 	 
 	 /**
