@@ -5,12 +5,16 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>타이틀</title>
+	<title>근태현황</title>
 </th:block>
 
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
-
+<style type="text/css">
+tbody tr:hover{background: whitesmoke;}
+</style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -19,13 +23,13 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">화면이름</h1>
+				<h1 class="m-0 text-dark">출퇴근 목록</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/}">근태관리</a></li>
+					<li class="breadcrumb-item">근태현황</li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -36,21 +40,57 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-12">
+				<!-- table start -->
 				<div class="card">
-				알아서 사용하세요
+					<!-- <div class="card-header">
+						<h3 class="card-title">근태 현황</h3>
+					</div> -->
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="workTimeTable" class="table table-bordered">
+						
+							<thead>
+								<tr>
+									<th>순차</th>
+									<th>일자</th>
+									<th>출근시간</th>
+									<th>퇴근시간</th>
+									<th>사원번호</th>
+									<th>부서</th>
+									<th>직급</th>
+									<th>이름</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr>
+									<td>Trident</td>
+									<td>Internet Explorer 4.0</td>
+									<td>Win 95+</td>
+									<td>4</td>
+									<td>X</td>
+									<td>X</td>
+									<td>X</td>
+									<td>X</td>
+								</tr>
+							</tbody>
+							<!-- <tfoot>
+								<tr>
+									<th>Rendering engine</th>
+									<th>Browser</th>
+									<th>Platform(s)</th>
+									<th>Engine version</th>
+									<th>CSS grade</th>
+								</tr>
+							</tfoot> -->
+						</table>
+					</div>
+					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-			<!-- /.card -->
+				<!-- end table -->
 			</div>
-			<!-- /.col-md-6 -->
-			<div class="col-lg-6">
-				<div class="card">
-				알아서 사용하세요
-				</div>
-				<!-- /.card -->
-			</div>
-			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->
 	</div>
@@ -59,8 +99,14 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
+<!-- DataTables -->
+<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#workTimeTable').DataTable();
+  });
+</script>
 </th:block>
 </html>

@@ -37,4 +37,10 @@ public class WorkAttitudeService {
 			return null;
 		}
 	}
+	
+	// 근태목록 리스트 조회
+	public WorkAttitudeVo selectWorkAttitude() {
+		//return workAttMapper.selectWorkAttitude();
+		return null;
+	}
 }

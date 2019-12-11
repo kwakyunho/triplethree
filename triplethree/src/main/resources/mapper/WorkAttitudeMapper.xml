@@ -7,7 +7,7 @@
 
 	<resultMap type="shop.triplethree.vo.WorkAttitudeVo" id="WorkAttitudeResultMap">
 		<result property="workAttCode" column="code"></result>
-		<result property="userNum" column="emp_code"></result>
+		<result property="userCode" column="emp_code"></result>
 		<result property="day" column="annual"></result>
 		<result property="startWorkTime" column="attendance"></result>
 		<result property="endWorkTime" column="leavework"></result>
@@ -43,5 +43,9 @@
 		ON A.code = B.code
 		SET A.leavework = NOW();
 	</update>
+	
+	<!-- <select id="selectWorkAttitude" resultMap="WorkAttitudeResultMap">
+	
+	</select> -->
 	
 </mapper>
