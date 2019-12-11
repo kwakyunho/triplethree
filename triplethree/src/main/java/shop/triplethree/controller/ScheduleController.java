@@ -31,7 +31,7 @@ public class ScheduleController {
 	 * */
 	@PostMapping(value="/companySchedule" , produces = "application/json")
 	public @ResponseBody List<Schedule> selectSchdule(HttpSession session, Schedule schedule) {
-		String scode = (String) session.getAttribute("SCODE");
+		String scode = (String) session.getAttribute("SID");
 		String sdecode = (String) session.getAttribute("SDEMGCODE");
 		System.out.println("세션에서 사원코드가 넘어왔나요?" + scode);
 		System.out.println("세션에서 부서코드가 넘어왔나요 ?" + sdecode);
