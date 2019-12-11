@@ -327,6 +327,7 @@ $(document).ready(function(){
 		}
 	}
 	
+	$('.cateList').off("click");
 	$('.cateList').on("click", cateEvent);
 	
 	$('#submitBtn').click(function(){
@@ -344,8 +345,6 @@ $(document).ready(function(){
 	var useConfig = '';
 	(function($) {
 		$.fn.smallCateEvent = function(input){
-			
-			console.log(input);
 			
 			if(input == 1){
 				condition = 1;
@@ -377,8 +376,6 @@ $(document).ready(function(){
 				url : "updateCateNameConfig",
 				dataType : "json",
 				success : function(result) {
-					// log 출력 test 중
-					console.log(result);
 					
 					if(condition == 1){
 						cateCode = result.cateCode;
