@@ -61,7 +61,7 @@ public class AssetsController {
 		System.out.println("코드가 잘 넘어 왔나요?" + assets.getCode());
 		String sid = (String) session.getAttribute("SID");
 		assets.setWriter(sid);
-		//assetsService.deleteBeAssets(assets);
+		assetsService.deleteBeAssets(assets);
 		return "redirect:/assetBeSelect";
 	}
 	

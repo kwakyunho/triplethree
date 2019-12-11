@@ -179,7 +179,7 @@
         			  $('input[name=end]').attr('value', data.end);
         			  $('input[name=code]').attr('value', data.code);
         			  }else{
-        				  alert('수정할수 없습니다.')
+        				  alert('수정 할 수 없습니다.')
         			  }
         			  
         		  },
