@@ -61,4 +61,7 @@ public interface CompanyMapper {
 	//회사정보 상세보기
 	public Company companyDetail(String company);
 	
+	//회사휴업or폐업유무
+	public int deleteCompany(Company company);
+	
 }

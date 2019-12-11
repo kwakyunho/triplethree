@@ -293,5 +293,14 @@
 		co_name=#{coName}	
 	
 	</select>
-
+	<update id="deleteCompany" parameterType="shop.triplethree.vo.Company">
+	
+		UPDATE 
+			EM_INFO AS em
+		SET 
+			em.yes_or_no  = 'N' 
+			,em.co_reason = '폐업'
+		WHERE 
+			em.code=#{Code}
+	</update>
 </mapper>

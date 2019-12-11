@@ -191,7 +191,7 @@ public class CompanyController {
 		companyService.updateCompany(company);
 		return "redirect:/companyInfo";
 	}
-	
+	/**회사정보 상세보기***/
 	@GetMapping("/companyDetail")
 	public String companyDetail(@RequestParam(value="coName") String coname,Model model) {
 		System.out.println("coName"+coname);
@@ -200,4 +200,13 @@ public class CompanyController {
 		return "company/information/companyDetail";
 	}
 	
+	/**회사휴업 또는 폐업****/
+	@PostMapping("/deleteCompany")
+	public String deleteCompany(Company company) {
+		System.out.println("상태를 변경할꺼야?");
+		System.out.println(company.getCode());
+		
+		companyService.deleteCompany(company);
+		return "redirect:/companyInfo";
+	}
 }

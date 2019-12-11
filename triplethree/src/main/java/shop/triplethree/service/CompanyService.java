@@ -138,4 +138,8 @@ public class CompanyService {
 		
 		return companyMapper.companyDetail(coname);
 	}
+	/**회사정보 휴업또는 폐업****/
+	public int deleteCompany(Company company) {
+		return companyMapper.deleteCompany(company);
+	}
 }

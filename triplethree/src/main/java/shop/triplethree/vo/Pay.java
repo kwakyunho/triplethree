@@ -4,24 +4,24 @@ import java.time.LocalDateTime;
 
 
 public class Pay {
-	private String code;
-	private String empCode;
-	private String deCode;
-	private int basicPay;
-	private int benefit;
-	private int holidayPay;
-	private int overtimePay;
-	private int qualiPay;
-	private int specialPay;
-	private int positionBenefit;
-	private int selfDriPay;
-	private int comPay;
-	private int mealCost;
-	private int childPay;
-	private int deductPay;
-	private String writer;
-	private LocalDateTime writerDay;
-	private LocalDateTime paymentDate;
+	private String code; //급여지급명세서코드
+	private String empCode; //사원관리코드
+	private String deCode; //공제액코드
+	private int basicPay; //기본급
+	private int benefit;	//야간근무수당
+	private int holidayPay; //휴일근무수당
+	private int overtimePay;//연장근무수당
+	private int qualiPay;	//자격수당
+	private int specialPay;//특수근무지수당
+	private int positionBenefit;//직책수당
+	private int selfDriPay;//자가운전보조금
+	private int comPay;		//통신수당
+	private int mealCost;	//식대보조금
+	private int childPay;	//육아수당
+	private int deductPay;	//공제후급여
+	private String writer;	//작성자
+	private LocalDateTime writerDay;	//작성일자
+	private LocalDateTime paymentDate;	//지급일자
 	public String getCode() {
 		return code;
 	}
