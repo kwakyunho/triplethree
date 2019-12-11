@@ -11,6 +11,7 @@
 			CALENDAR
 				(code
 				,emp_code
+				,demgcode
 				,cal_sortation
 				,cal_title
 				,cal_start
@@ -20,7 +21,8 @@
 				,writer_day)
 		VALUES
 			(#{code}
-			,'id001'
+			,#{sid}
+			,#{demgcode}
 			,#{sortation}
 			,#{title}
 			,#{start}
@@ -31,17 +33,56 @@
  	</insert>
  
  	<!-- 일정 조회 쿼리문 -->
- 	<select id="selectSchedule" resultType="shop.triplethree.vo.Schedule">
- 		SELECT
- 			 code
- 			,cal_sortation AS sortation
-			,cal_title AS title
-			,cal_start AS start 
-			,cal_end AS end
-			,color AS color
-			,backgroundColor AS backgroundColor
+ 	<select id="selectSchedule" resultType="shop.triplethree.vo.Schedule" parameterType="shop.triplethree.vo.Schedule">
+		<!-- 부서일정 조회 -->	
+		SELECT 
+			code AS code,
+			cal_sortation AS sortation,
+			cal_title AS title,
+			cal_start AS start ,
+			cal_end AS end,
+			color AS color,
+			backgroundColor AS backgroundColor
 		FROM
 			CALENDAR
+		WHERE
+			demgcode = #{demgcode}
+		AND 
+			cal_sortation = '부서일정'
+			
+			UNION
+		
+		<!-- 개인일정 조회 -->
+		SELECT 
+			code AS code,
+			cal_sortation AS sortation,
+			cal_title AS title,
+			cal_start AS start ,
+			cal_end AS end,
+			color AS color,
+			backgroundColor AS backgroundColor
+		FROM
+			CALENDAR
+		WHERE
+			emp_code = #{sid}
+		AND 
+			cal_sortation = '개인일정'
+			
+			UNION
+			
+		<!-- 전체일정 조회 -->
+		SELECT 
+			code AS code,
+			cal_sortation AS sortation,
+			cal_title AS title,
+			cal_start AS start ,
+			cal_end AS end,
+			color AS color,
+			backgroundColor AS backgroundColor
+		FROM
+			CALENDAR
+		WHERE
+			cal_sortation = '전체일정'	
  	</select>
  	
  	<!-- 일정 수정 쿼리문 -->
@@ -61,8 +102,9 @@
  	
  	<!-- 일정 수정시 화면에 뿌려줄 값 가져오는 쿼리문 -->
  	<select id="selectUpdate" resultType="shop.triplethree.vo.Schedule" parameterType="String">
- 		 		SELECT
- 			 code
+ 		 SELECT
+ 			 code AS code
+			,emp_code AS sid
  			,cal_sortation AS sortation
 			,cal_title AS title
 			,cal_start AS start 

@@ -9,58 +9,86 @@
 		<result column="board_title" property="boardTitle"/>
 		<result column="board_con" property="boardCon"/>
 		<result column="board_count" property="boardCount"/>
+		<result column="board_pw" property="boardPw"/>
+		<result column="writer" property="writer"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
 	
-	<insert id="boardInsert" parameterType="shop.triplethree.vo.Board">
+	<!--게시글 삭제하기 -->
+	<delete id="deleteBoard" parameterType="String">
+	 	Delete * from BOARD where code=#{code}
+	</delete>
+	
+	<!-- 사원번호(SID)로 사원명 가져오기  -->
+	<select id="getNameByEmpCode" parameterType="String" resultType="String">
+		SELECT
+			emp_name
+		FROM EMP_MANAGE
+		WHERE code=#{empCode}
+	</select>
+	
+	<insert id="insertBoard" parameterType="shop.triplethree.vo.Board">
 		Insert into BOARD
 			(code
 			,emp_code
 			,board_title
 			,board_con
 			,board_count
+			,board_pw
 			,writer_day)
 		values
 			(#{code}
 			,#{empCode}
 			,#{boardTitle}
 			,#{boardCon}
-			,#{boardCount}
+			,0
+			,#{boardPw}
 			,NOW());
 	</insert>
-	
+	<!-- 공지사항 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
 	<select id="boardList" resultMap="boardResultMap">
-		Select 
-			code
+		SELECT
+			B.code
 			,emp_code
-			,board_title
+            ,EM.emp_name AS writer
+            ,board_title
 			,board_con
 			,board_count
-			,writer_day 
-		from BOARD
+			,B.writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.emp_num
+		
 	</select>
 	
+	<!--글 정보 하나만 뽑아오기 code로   -->
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
-		Select 
-			code
-			,emp_code
-			,board_title
-			,board_con
-			,board_count
-			,writer_day 
-		from BOARD
-		where code=#{code}
+		SELECT
+			B.code as code
+			,EM.emp_num as empCode
+			,EM.emp_name as writer
+			,board_title as boardTitle
+			,board_con as boardCon
+			,board_count as boardCount
+			,board_pw as boardPw
+			,B.writer_day as writerDay
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.emp_num
+		where B.code=#{code}
+		
 	</select>
 	
-	<update id="boardUpdate" parameterType="shop.triplethree.vo.Board" >
+	<update id="updateBoard" parameterType="shop.triplethree.vo.Board" >
 		update BOARD
 			set
 			code = #{code}
 			,emp_code = #{empCode}
 			,board_title = #{boardTitle}
 			,board_con = #{boardCon}
-			,board_count = #{boardCount}
+			,board_count =#{boardCount}
 			,writer_day = #{writerDay}
+			,board_pw = #{boardPw}
 		where
 			code = #{code}
 	</update>

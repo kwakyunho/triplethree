@@ -19,7 +19,7 @@ public interface ScheduleMapper {
 	public int deleteSchedule(Schedule schedule);
 	
 	// 일정 조회
-	public List<Schedule> selectSchedule();
+	public List<Schedule> selectSchedule(Schedule schedule);
 	
 	//일정 수정시 코드로 내용 뽑아서 뿌려주는 메서드
 	public Schedule selectUpdate(String code);

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.triplethree.mapper.AssetsMapper">
+
+	<resultMap type="shop.triplethree.vo.Assets" id="AssetsResult">
+		<result property="faName" column="fa_name"/>
+		<result property="faLocal" column="fa_local"/>
+		<result property="faSeat" column="fa_seat"/>
+		<result property="faDate" column="fa_date"/>
+		<result property="faImage" column="fa_image"/>
+		<result property="faSt" column="fa_st"/>
+		<result property="faSt" column="ve_state"/>
+		<result property="writer" column="writer"/>
+		<result property="writerDay" column="writer_day"/>
+		<result property="veMake" column="ve_make"/>
+		<result property="veName" column="ve_name"/>
+		<result property="veNunber" column="ve_number"/>
+		<result property="veCc" column="ve_cc"/>
+		<result property="veUse" column="ve_use"/>
+		<result property="veBuy" column="ve_buy"/>
+		<result property="veModelYear" column="ve_model_year"/>
+	</resultMap>
+	
+	<!-- 시설물 조회 쿼리문 -->
+	<select id="selectBeAssets" resultMap="AssetsResult">
+		SELECT
+			code
+			,fa_name
+			,fa_local
+			,fa_seat
+			,fa_date
+			,fa_image
+			,fa_st
+			,writer
+			,writer_day
+		FROM
+			FACILITY_MANAGE	
+	</select>
+	
+	<!-- 시설물 등록 쿼리문 -->
+	<insert id="insertBeAssets" parameterType="shop.triplethree.vo.Assets">
+	INSERT INTO
+		FACILITY_MANAGE 
+			(code
+			,fa_name
+			,fa_local
+			,fa_seat
+			,fa_date
+			,fa_image
+			,fa_st
+			,writer
+			,writer_day)
+		VALUES
+			(#{code}
+			,#{faName}
+			,#{faLocal}
+			,#{faSeat}
+			,#{faDate}
+			,#{faImage}
+			,#{faSt}
+			,#{writer}
+			,NOW());
+	</insert>
+	
+	<!-- 시설물 수정 쿼리문 -->
+	<update id="updateBeAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			FACILITY_MANAGE
+		SET
+			fa_name = #{faName}
+			,fa_local = #{faLocal}
+			,fa_seat = #{faSeat}
+			,fa_date = #{faDate}
+			,fa_image = #{faImage}
+			,fa_st = #{faSt}
+			,writer = #{sid}
+			,writer_day = NOW()
+		WHERE
+			code = #{code}
+	</update>
+	
+	<!-- 시설물 삭제 쿼리문 -->
+	<update id="deleteBeAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			FACILITY_MANAGE
+		SET
+			fa_st = '사용안함'
+			,writer = #{writer}
+			,writer_day = NOW()
+		WHERE
+			code = #{code}
+	</update>
+	
+	<!-- 시설물 등록 / 수정 유효성검사 쿼리문 -->
+	<select id="beNameCheck" parameterType="shop.triplethree.vo.Assets" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			FACILITY_MANAGE
+		WHERE
+			fa_name = #{faName}
+	</select>
+	
+	<!-- 차량 등록 쿼리문 -->
+	<insert id="insertCaAssets" parameterType="shop.triplethree.vo.Assets">
+		INSERT INTO
+			VE_MANAGE
+			(code
+			,ve_make
+			,ve_name
+			,ve_number
+			,ve_cc
+			,ve_use
+			,ve_buy
+			,ve_model_year
+			,ve_state
+			,writer
+			,writer_day)
+		VALUES
+		(#{code}
+		,#{veMake}
+		,#{veName}
+		,#{veNunber}
+		,#{veCc}
+		,#{veUse}
+		,#{veBuy}
+		,#{veModelYear}
+		,#{faSt}
+		,#{writer}
+		,NOW())	
+	</insert>
+	
+	<!-- 차량 리스트 조회 쿼리문 -->
+	<select id="selectCaAssets" resultMap="AssetsResult">
+		SELECT
+			code
+			,ve_make
+			,ve_name
+			,ve_number
+			,ve_cc
+			,ve_use
+			,ve_buy
+			,ve_state
+			,ve_model_year
+			,writer
+			,writer_day
+		FROM
+			VE_MANAGE
+	</select>
+	
+	<!-- 차량 수정 쿼리문 -->
+	<update id="updateCaAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			VE_MANAGE
+		SET
+			ve_make = #{veMake}
+			,ve_name = #{veName}
+			,ve_number = #{veNunber}
+			,ve_cc = #{veCc}
+			,ve_use = #{veUse}
+			,ve_buy = #{veBuy}
+			,ve_state = #{faSt}
+			,ve_model_year = #{veModelYear}
+			,writer = #{writer}
+			,writer_day = NOW()
+		WHERE
+			CODE = #{code}
+	</update>
+	
+	<!-- 차량 삭제 쿼리문 (상태만 변경) -->
+	<update id="deleteCaAssets" parameterType="shop.triplethree.vo.Assets">
+		UPDATE
+			VE_MANAGE
+		SET
+			ve_state = '사용안함'
+			,writer = #{writer}
+			,writer_day = NOW()
+		WHERE
+			CODE = #{code}
+	</update>
+</mapper>

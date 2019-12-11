@@ -1,86 +1,104 @@
-<html><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>~로그인 화면~</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>~로그인 화면~</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- icheck bootstrap -->
+<link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../dist/css/adminlte.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+ 
+<!-- jQuery -->
+<script th:src="@{plugins/jquery/jquery.min.js}"></script>
+
 </head>
+
+<!-- body start-->
 <body class="login-page" style="min-height: 512.391px;">
+
 <div class="login-box">
-  <div class="login-logo">
-    <a>DREAM COME TRUE</br><b>성숙을 넘어 성장으로 TRIPLE 3</b> </a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">사원번호와 패스워드를 입력하세요.</p>
-	  <p class="login-box-msg">인사팀 계정  TT20191202001/pw001</p>
-	  <p class="login-box-msg">전략기획실 계정 TT20191202002/pw002</p>
-      <form action="/login" method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control"  name="empNum" placeholder="사원번호를 입력해주세요." value="TT20191202001">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control"  name="password" placeholder="패스워드를 입력해주세요." value="pw001">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-
-      
-      <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-     
-    </div>
-    <!-- /.login-card-body -->
-  </div>
+	<div class="login-logo">
+		<a>DREAM COME TRUE</br><b>성숙을 넘어 성장으로 TRIPLE 3</b> </a>
+	</div>
+	<!-- /.login-logo -->
+	<div class="card">
+		<div class="card-body login-card-body">
+			<p class="login-box-msg">사원번호와 패스워드를 입력하세요.</p>
+			<button class="btn btn-primary btn-block" id="loginTeam1">인사팀 부장 </button>
+			<button class="btn btn-primary btn-block" id="loginTeam2">전략기획실 차장 </button>
+			<br>
+			<form action="/login" method="post">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사원번호를 입력해주세요." value="">
+					<div class="input-group-append">
+						<div class="input-group-text">
+							<span class="fas fa-envelope"></span>
+						</div>
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<input type="password" class="form-control" id="password" name="password" placeholder="패스워드를 입력해주세요." value="">
+					<div class="input-group-append">
+						<div class="input-group-text">
+							<span class="fas fa-lock"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-8">
+						<div class="icheck-primary">
+							<input type="checkbox" id="remember">
+							<label for="remember">Remember Me</label>
+						</div>
+					</div>
+					<!-- /.col -->
+					<div class="col-4">
+						<button type="submit" class="btn btn-primary btn-block">Login</button>
+					</div>
+					<!-- /.col -->
+				</div>
+			</form>
+			<!-- /.social-auth-links -->
+			<p class="mb-1">
+				<a href="forgot-password.html">I forgot my password</a>
+			</p>
+		</div>
+		<!-- /.login-card-body -->
+	</div>
 </div>
 <!-- /.login-box -->
+</body>
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- 자바 스크립트 -->
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script th:src="@{dist/js/adminlte.min.js}"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#loginTeam1').on('click', function(){
+		$('#empNum').val('TT20191203001');
+		$('#password').val('pw009');
+	});
+	
+	$('#loginTeam2').on('click', function(){
+		$('#empNum').val('TT20191202002');
+		$('#password').val('pw002');
+	});
+});
 
+</script>
 
-</body></html>
+</html>

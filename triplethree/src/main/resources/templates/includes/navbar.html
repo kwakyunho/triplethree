@@ -52,15 +52,16 @@
 							</div>
 							<h3 class="profile-username text-left">
 								<strong>[[${session.SNAME}]]</strong>
-								<a style="margin-left: 0.5rem; font-size: 0.9rem;">[[${session.SPOSI}]]</a>
+								<a style="margin-left: 0.5rem; font-size: 0.9rem;">[[${session.SPONAME}]]</a>
 							</h3>
-							<p class="text-muted text-left">[[${session.SDEPART}]]</p>
+							<p class="text-muted text-left">[[${session.SDEMGNAME}]]</p>
 									<blockquote style="margin-left:auto;">
 										<p class="text-left">[[${session.SADDR}]]</p>
 										<p class="text-left">[[${session.SPHONE}]]</p>
 										<p class="text-left">[[${session.SEMAIL}]]</p>
 									</blockquote>
-							<a href="#" class="btn btn-block btn-outline-info"><b>개인정보 수정</b></a>
+							<a th:href="@{/employeeMyPage}" class="btn btn-block btn-outline-info"><b>개인정보</b></a>
+							<a th:href="@{/employeeMyMoveList}" class="btn btn-block btn-outline-success"><b>인사이동 목록</b></a>
 							<a th:href="@{/logout}" class="btn btn-block btn-outline-danger"><b>로그아웃</b></a>
 						</div>
 					</div>

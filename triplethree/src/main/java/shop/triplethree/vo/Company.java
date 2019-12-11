@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Company {
 
+	private String sid;
 	private String departmentNameBe;
 	private String departmentNameAf;
 	private String departmentLevel;
@@ -16,23 +17,29 @@ public class Company {
 	private String departmentApproDay;
 	private String departmentCode;
 	private String departmentYesNO;
-	private String Code;
-	private String coName;
-	private String coCeoname;
-	private String coPostCode;
-	private String coDetailAddr;
-	private String coExtraAddr;
-	private String coAddr;
-	private String coBin;
-	private String coFax;
-	private String coPhone;
-	private String coEmail;
-	private String coLogo;
-	private String writer;
-	private LocalDateTime writerDay;
-	private String yesOrNo;
-	private String coReason;
+	private String Code; //회사코드
+	private String coName; //회사명
+	private String coCeoname; //대표자명
+	private String coPostCode; //우편번호
+	private String coDetailAddr; //상세주소
+	private String coExtraAddr; //참고주소
+	private String coAddr; //회사주소
+	private String coBin; //사업자등록번호
+	private String coFax; //팩스번호
+	private String coPhone; //회사대표번호
+	private String coEmail; //회사이메일
+	private String coLogo; //회사로고
+	private String writer; //작성자
+	private LocalDateTime writerDay; //작성일자
+	private String yesOrNo; //사용유무
+	private String coReason; //변경사유
 	
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 	public String getDepartmentNameBe() {
 		return departmentNameBe;
 	}
@@ -204,16 +211,15 @@ public class Company {
 	}
 	@Override
 	public String toString() {
-		return "Company [departmentNameBe=" + departmentNameBe + ", departmentNameAf=" + departmentNameAf
-				+ ", departmentLevel=" + departmentLevel + ", departmentUpcode=" + departmentUpcode + ", departmentSau="
-				+ departmentSau + ", departmentWriter=" + departmentWriter + ", departmentWriterDay="
-				+ departmentWriterDay + ", departmentApprover=" + departmentApprover + ", departmentApperverSt="
-				+ departmentApperverSt + ", departmentApproDay=" + departmentApproDay + ", departmentCode="
-				+ departmentCode + ", departmentYesNO=" + departmentYesNO + ", Code=" + Code + ", coName=" + coName
-				+ ", coCeoname=" + coCeoname + ", coPostCode=" + coPostCode + ", coDetailAddr=" + coDetailAddr
-				+ ", coExtraAddr=" + coExtraAddr + ", coAddr=" + coAddr + ", coBin=" + coBin + ", coFax=" + coFax
-				+ ", coPhone=" + coPhone + ", coEmail=" + coEmail + ", coLogo=" + coLogo + ", writer=" + writer
+		return "Company [sid=" + sid + ", departmentNameBe=" + departmentNameBe + ", departmentNameAf="
+				+ departmentNameAf + ", departmentLevel=" + departmentLevel + ", departmentUpcode=" + departmentUpcode
+				+ ", departmentSau=" + departmentSau + ", departmentWriter=" + departmentWriter
+				+ ", departmentWriterDay=" + departmentWriterDay + ", departmentApprover=" + departmentApprover
+				+ ", departmentApperverSt=" + departmentApperverSt + ", departmentApproDay=" + departmentApproDay
+				+ ", departmentCode=" + departmentCode + ", departmentYesNO=" + departmentYesNO + ", Code=" + Code
+				+ ", coName=" + coName + ", coCeoname=" + coCeoname + ", coPostCode=" + coPostCode + ", coDetailAddr="
+				+ coDetailAddr + ", coExtraAddr=" + coExtraAddr + ", coAddr=" + coAddr + ", coBin=" + coBin + ", coFax="
+				+ coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail + ", coLogo=" + coLogo + ", writer=" + writer
 				+ ", writerDay=" + writerDay + ", yesOrNo=" + yesOrNo + ", coReason=" + coReason + "]";
 	}
-
 }

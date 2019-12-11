@@ -28,8 +28,8 @@ public class ScheduleService {
 	/**
 	 * 일정 조회 메서드
 	 * */
-	public List<Schedule> selectSchedule() {
-		return schedulemapper.selectSchedule();
+	public List<Schedule> selectSchedule(Schedule schedule) {
+		return schedulemapper.selectSchedule(schedule);
 	}
 	
 	/**

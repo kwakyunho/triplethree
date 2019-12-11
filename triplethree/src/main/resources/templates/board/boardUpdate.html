@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
-      layout:decorate="~{layouts/default}">
+      layout:decorate="~{layouts/default}"
+      >
 
+
+<!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>index</title>
+	<title>글 수정하기 </title>
 </th:block>
 
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<!-- summernote -->
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
+</th:block>
+
+
 <th:block layout:fragment="customContents">
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">제목 필수 변경</h1>
+				<h1 class="m-0 text-dark">글 수정하기</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
+					<li class="breadcrumb-item">공지사항 작성 </li>
+					<li class="breadcrumb-item"><a th:href="@{/boardList}">공지사항 조회</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -30,21 +40,56 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-12">
 				<div class="card">
-				알아서 사용하세요
+			 <form action="/boardUpdate" method="POST">
+             <div class="card-body" >
+              <div class="form-group row col-sm-12">
+                <label class="col-sm-2 col-form-label">제목 </label>
+                <div class="col-sm-10">
+                	<input type="text" id="inputName" th:value="${board.boardTitle}" name="boardTitle" class="form-control">
+             	 </div>
+              </div>
+              <div class="form-groupb row col-sm-12">
+                <label class="col-sm-2 col-form-label"> 내용 </label>
+                <div class="col-sm-10">
+                	<div class="mb-3">
+                	<textarea class="textarea"  name="boardCon" th:value="${board.boardCon}"
+                          style="width: 100%; height: 500px; font-size: 14px;
+                          line-height: 50px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              		</div>
+             	 </div>
+              	
+             </div>
+      
+             <div class="form-group row col-sm-12">
+	                    <label class="col-sm-2 col-form-label">작성자</label>
+	                    <div class="col-sm-4">
+	                      <input type="text" class="form-control col-12" th:value="${board.writer}" readonly="readonly">
+	                    </div>
+	                    <label class="col-sm-2 col-form-label">비밀번호</label>
+	                    <div class="col-sm-4">
+	                      <input type="password" class="form-control col-12" th:value="${board.boardPw}" name="boardPw" >
+	                    </div>
+             </div>
+                 
+              <div class="row">
+		        <div class="col-12">
+		          <input type="submit" value="수정하기" class="btn btn-success float-right">
+		        </div>
+		      </div>
+            </div>
+            </form>
+            <!-- /.card-body -->
+           
+				</div>
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
-			</div>
+			</div> 
+			
 			<!-- /.col-md-6 -->
-			<div class="col-lg-6">
-				<div class="card">
-				알아서 사용하세요
-				</div>
-				<!-- /.card -->
-			</div>
-			<!-- /.col-md-6 -->
+			
 		</div>
 		<!-- /.row -->
 	</div>
@@ -53,8 +98,14 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+<!-- Summernote -->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<script>
+  $(function () {
+    // Summernote
+    $('.textarea').summernote()
+  })
+</script>
 
 </th:block>
 </html>

@@ -50,15 +50,19 @@ public class EmployeeController {
 				if(em2 != null) {
 					//디비 조회 값이 있을 경우
 					if(em2.getPassword() != null && em2.getPassword().equals(employee.getPassword())) {
-						session.setAttribute("SCODE", em2.getCode());
-						session.setAttribute("SID", em2.getEmpNum());
-						session.setAttribute("SNAME", em2.getEmpName());
-						session.setAttribute("SDEPART", em2.getDemgCode());
-						session.setAttribute("SPOSI", em2.getPoCode());
-						session.setAttribute("SADDR", em2.getAddr());
-						session.setAttribute("SPHONE", em2.getPhone());
-						session.setAttribute("SEMAIL", em2.getEmail());
-						session.setAttribute("SPHOTO", em2.getPhoto());
+						session.setAttribute("SCODE", em2.getCode());	//사원코드
+						session.setAttribute("SID", em2.getEmpNum());	//사원번호(아이디)
+						session.setAttribute("SNAME", em2.getEmpName());	//사원명
+						session.setAttribute("SDEMGCODE", em2.getDemgCode());	//부서코드
+						session.setAttribute("SDEMGNAME", em2.getDemgName());	//부서명
+						session.setAttribute("SPOCODE", em2.getPoCode());	//직급코드
+						session.setAttribute("SPONAME", em2.getPoName());	//직급명
+						session.setAttribute("SEMAIL", em2.getEmail());	//사원 이메일
+						session.setAttribute("SPHONE", em2.getPhone());	//사원 연락처
+						session.setAttribute("SPHOTO", em2.getPhoto());	//사원 사진
+						session.setAttribute("SPOSTCODE", em2.getPostCode());	//사원 우편번호
+						session.setAttribute("SADDR", em2.getAddr());	//사원 주소
+						session.setAttribute("SDTAILADDR", em2.getDetailAddr());	//사원 상세주소
 						return scriptStr2;
 					}else {
 						
@@ -159,10 +163,66 @@ public class EmployeeController {
 	  */
 	 @PostMapping("/employeeUpdate")
 	 public String updateEmployee(Employee employee) {
-		 String code = commonService.codeGeneration("EMP_MANAGE");
-		 employee.setCode(code);
+		 
+		 String moveCode = commonService.codeGeneration("PECHANGE");
+		 employee.setMoveCode(moveCode);
+		 employeeService.insertMoveEmployee(employee);
 		 employeeService.updateEmployee(employee);
 		 return "redirect:/employeeList";
 	 }
-	
+	 
+	 /**
+	  * 로그인한 회원의 기본정보를 보여주는 화면
+	  * @return
+	  */
+	 @GetMapping("/employeeMyPage")
+	 public String employeeMyPage(Model model, HttpSession session) {
+		
+		 String SID = (String)session.getAttribute("SID");
+		 if(SID != null) {
+			 model.addAttribute("mypage", employeeService.employeeMyPage(SID));
+		 }else {
+			 
+		 }
+		 return "/employee/employeeMyPage";
+	 }
+	 
+	 /**
+	  * 로그인한 회원의 기본정보를 수정하는 화면
+	  * @return
+	  */
+	 @GetMapping("/employeeMyUpdate")
+	 public String employeeMyUpdate(Model model,HttpSession session) {
+		 String SID = (String)session.getAttribute("SID");
+		 if(SID != null) {
+			 model.addAttribute("mypage", employeeService.employeeMyPage(SID));
+			 
+		 }else {
+			 
+		 }
+		
+		 
+		 return "/employee/employeeMyUpdate";
+	 }
+	 /**
+	  * 나의 기본정보를 수정처리하는 메서드
+	  * @param employee
+	  * @return
+	  */
+	 @PostMapping("/employeeMyUpdate")
+	 public String employeeMyUpdate(Employee employee) {
+		 String code = commonService.codeGeneration("EMP_MANAGE");
+		 employee.setCode(code);
+		 employeeService.updateEmployee(employee);
+		 return "redirect:/employeeMyPage";
+	 }
+	 
+	 /**
+	  * 로그인한 회원의 인사이동목록을 보여주는 화면
+	  * @return
+	  */
+	 @GetMapping("/employeeMyMoveList")
+	 public String employeeMyMoveList() {
+		 return "/employee/employeeMyMoveList";
+	 }
 }

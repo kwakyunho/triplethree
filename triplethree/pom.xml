@@ -8,6 +8,7 @@
 		<version>2.2.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>shop.triplethree</groupId>
 	<artifactId>triplethree</artifactId>
 	<version>var.0.1</version>
@@ -78,7 +79,7 @@
 		    <version>1.16</version>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
