@@ -63,6 +63,9 @@ public class EmployeeService {
 		  return employeeMapper.updateEmployee(employee);
 	  }
 	  
+	  public int updateDepNPoEmployee(Employee employee) {
+		  return employeeMapper.updateDepNPoEmployee(employee);
+	  }
 	  public Employee employeeMyPage(String SID) {
 		  return employeeMapper.employeeMyPage(SID);
 	  }
