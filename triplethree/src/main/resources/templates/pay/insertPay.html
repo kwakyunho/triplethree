@@ -35,18 +35,18 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-4">
+			<div class="col-5">
 				<div class="card">
 					<div align="center">사원목록</div>						
 							<form action="/insertPay" method="post">
 							<div>
-								<select class="form-control" name="sk">
+								<select class="form-control" name="sk" id="sel">
 									<option value="">검색조건</option> 
 									<option value="emp_num">사원코드</option>						
-									<option value="emp_name">사원명</option>
-									<option value="dename">부서명</option>
+									<option value="emp_name" >사원명</option>
+									<option value="dename" >부서명</option>
 									<option value="poname">직급명</option>																					
-								</select>
+								</select>																							
 							</div>
 							<div>
 								<input class="form-control" type="text" name="sv" 
@@ -58,20 +58,24 @@
 							</div>
   	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
 				 	
-					<tr>			
-						<th>사원번호</th>
-						<th>사원명</th>
-						<th>부서명</th>
-						<th>직급</th>	
+					<tr>
+								
+						<th align="center">사원번호</th>
+						<th align="center">사원명</th>
+						<th align="center">부서명</th>
+						<th align="center">직급</th>
+						<th align="center">급여입력</th>
+							
 												
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						 <tr align="center" th:each="e :${insertSearchPay}">
+						 <tr th:each="e :${insertSearchPay}">
 						 <td th:text="${e.empNum}"></td>
 						 <td th:text="${e.empName}"></td>					 										
 						 <td th:text="${e.demgName}"></td>										
 						 <td th:text="${e.poName}"></td>										
-									
+						 <td><input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary"></td>
+						 			
 						</tr>										
 				</table>
 				</div>
@@ -126,7 +130,7 @@
 				</div>
 				<!-- /.card -->
 			</div>
-			<div class="col-4">
+			<div class="col-3">
 				<div class="card">
 				<table class="table table-bordered table-striped dataTable"role="grid"> 
 					<div align="center">공제액</div>
@@ -170,7 +174,10 @@
 <th:block layout:fragment="customScript">
 <script type="text/javascript">
 $(document).ready(function(){
-	$('').basicPay
+	$('#sel').on('change', function() {
+	    location.href= this.value;
+	});
+	$('#sel').val(location.href);
 }
 
 </script>

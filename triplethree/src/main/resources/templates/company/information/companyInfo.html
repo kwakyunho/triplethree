@@ -40,7 +40,7 @@
 				<div class="card">
 				<form th:action="@{/companyUpdate}">
 	 <div class="card-body table-responsive p-0" style="height: auto;">
-  	 <table class="table table-striped jsgrid-align-center"role="grid" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
+  	 <table class="table table-bordered table-striped dataTable"role="grid" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
    	  <thead>
    	 
 	   	<tr>	
@@ -57,16 +57,16 @@
 	   	<tbody>
 	   	<tr th:each="l:${companyInfo}">
 
-	   		<td th:text="${l.coName}"></td>
-	   		<td th:text="${l.coCeoname}"></td>
-	   		<td th:text="${l.coPhone}"></td>
-	   		<td th:text="${l.coEmail}"></td>	   		   	 	   	
-	   		<td th:text="${l.yesOrNo}"></td> 	   	
+	   		<td align="center" th:text="${l.coName}"></td>
+	   		<td align="center" th:text="${l.coCeoname}"></td>
+	   		<td align="center" th:text="${l.coPhone}"></td>
+	   		<td align="center" th:text="${l.coEmail}"></td>	   		   	 	   	
+	   		<td align="center" th:text="${l.yesOrNo}"></td> 	   	
 		   	
   			 <div id="right-box"class="col-lg-4">	
   		     <td>
-  		     		<div class="input-group-prepend show">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  		     		<div class="input-group-prepend show" >
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                      	 사유를 선택해주세요
                     </font></font></button>
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
@@ -79,7 +79,7 @@
                   </div>  	 	 	 	 	
 			</td>
 			</div>
-			<td><a th:href="@{/companyDetail(coName=${l.coName})}">상세보기</a></td>			 		 
+			<td align="center"><a th:href="@{/companyDetail(coName=${l.coName})}" class="btn btn-primary">상세보기</a></td>			 		 
 	   	</tr>
 	   	</tbody>
   	 </table>

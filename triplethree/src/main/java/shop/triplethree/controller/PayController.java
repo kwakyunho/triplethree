@@ -19,11 +19,21 @@ public class PayController {
 	@Autowired private PayService payService;
 	
 	/**급여등록화면**/
-	@GetMapping("/insertPay")
-	public String insertPay() {
+	@GetMapping("/viewPay")
+	public String viewPay() {
 		
 		return "pay/insertPay";	
 	}
+	/**급여 입력할 사람 선택시**/
+	@GetMapping("/insertPay")
+	public String insertPay() {
+		return "redirect/insertPay";
+	}
+	
+	
+	
+	
+	
 	/**급여 등록 검색**/
 	@PostMapping("/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk

@@ -37,6 +37,7 @@
 	<div class="container-fluid">
 		<div class="row"s>
 			<div class="col-lg-12">
+			
 				<div class="card">
 				<form method="get" th:action="@{/companyInfo}" class="form-horizontal">
 	                <div class="card-body">
@@ -61,7 +62,7 @@
 	   		<label class="col-sm-2 col-form-label">회사주소</label>
 	   		<div class="col-sm-8">	   		
 	   			<input type="text" name="coPostCode" id="sample6_postcode"class="form-control col-4" th:value="${companyDetail.coPostCode}" readonly="readonly"><br>			
-				<input type="text" name="coAddr"id="sample6_address" class="form-control" th:value="${companyDetail.coAddr}" readonly="readonly">
+				<input type="text" name="coAddr"id="sample6_address" class="form-control" th:value="${companyDetail.coAddr}" readonly="readonly"><br>
 				<input type="text" name="coDetailAddr"id="sample6_detailAddress"class="form-control"th:value="${companyDetail.coDetailAddr}" readonly="readonly"><br>
 				<input type="text" name="coExtraAddr"id="sample6_extraAddress" placeholder="참고주소" class="form-control col-sm-4" th:value="${companyDetail.coExtraAddr}" readonly="readonly">
 			
@@ -96,7 +97,7 @@
 					<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
 					<div class="col-xs-4">
 						<img id="logoImgView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
-						<input class="form-control" name="coLogo" id="logoImg" type="file" th:value="${companyDetail.coLogo}" readonly="readonly"/>
+						<input class="form-control" name="coLogo" th:value="${companyDetail.coLogo}" readonly="readonly"/>
 						<span id="imgFail" >로고를 선택해주세요</span>
 					</div>
 				</div>
