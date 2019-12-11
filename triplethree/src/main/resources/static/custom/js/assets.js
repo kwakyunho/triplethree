@@ -13,7 +13,7 @@ $(document).ready(function(){
 		$('#upLocal').val(uri.children('#faLocal').text());
 		$('#upSeat').val(uri.children('#faSeat').text());
 		$('#upDatd').val(uri.children('#faDate').text());
-		$('#upImage').val(uri.children('#faImage').text());
+		//$('#upImage').val(uri.children('#faImage').text());
 		$('#upSt').val(uri.children('#faSt').text());
 		
 		$('#myModal2').modal();
@@ -189,6 +189,7 @@ $(function(){
 	$('.deleteBeBtn').children('input').on('click', function(){
 		var uri = $(this).parents('.AssetsListTr');
 		var textValue = uri.children('#upCode').text();
+		console.log(textValue);
 		uri.children('#upCode').append('<input type="hidden" id="becode" name="code">');
 		$('#becode').val(textValue);
 		

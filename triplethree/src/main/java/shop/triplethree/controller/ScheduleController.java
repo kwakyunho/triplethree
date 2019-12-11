@@ -32,7 +32,7 @@ public class ScheduleController {
 	@PostMapping(value="/companySchedule" , produces = "application/json")
 	public @ResponseBody List<Schedule> selectSchdule(HttpSession session, Schedule schedule) {
 		String scode = (String) session.getAttribute("SCODE");
-		String sdecode = (String) session.getAttribute("SDECODE");
+		String sdecode = (String) session.getAttribute("SDEMGCODE");
 		System.out.println("세션에서 사원코드가 넘어왔나요?" + scode);
 		System.out.println("세션에서 부서코드가 넘어왔나요 ?" + sdecode);
 		session.setAttribute("sid", scode);
@@ -61,7 +61,7 @@ public class ScheduleController {
 		System.out.println(schedule.toString());
 		
 		String scode = (String) session.getAttribute("SCODE");
-		String sdecode = (String) session.getAttribute("SDECODE");
+		String sdecode = (String) session.getAttribute("SDEMGCODE");
 		System.out.println("세션에서 사원코드가 넘어왔나요?" + scode);
 		System.out.println("세션에서 부서코드가 넘어왔나요 ?" + sdecode);
 		
