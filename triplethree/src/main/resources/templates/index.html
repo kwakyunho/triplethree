@@ -17,18 +17,6 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
 	<div class="container-fluid">
-		<div class="row mb-2">
-			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">제목 필수 변경</h1>
-			</div><!-- /.col -->
-			<div class="col-sm-6">
-				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
-					<li class="breadcrumb-item">Dashboard v3</li>
-				</ol>
-			</div><!-- /.col -->
-		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -36,40 +24,67 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-9">
+			<div class="index-page col-lg-5">
 				<div class="card">
-					알아서 사용하세요
+					뭐 넣을지 아직 정하지 못함
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
-			<div class="col-lg-3">
+			<div class="index-page col-lg-5">
+				<div class="card">
+					뭐 넣을지 아직 정하지 못함
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+			<!--  style="visibility: hidden;" -->
+			<div class="col-lg-2 workTimeTool">
 				<div class="card">
 				
 					<!-- Profile Image -->
 					<div class="card card-primary card-outline">
 						<div class="card-body box-profile">
-							<div class="text-left fas fa-align-justify" style="font-size: 30px;"><span> 근태관리</span></div>
+							<div class="text-center strong small" style="font-size: 1.3em;"><strong>근태관리</strong></div>
 							<div class="text-center" style="border-bottom-style: groove; margin-top: 5px;"></div>
 							<div class="text-muted text-center" style="margin-top: 10px;">
 								<span id="nowDay"></span>
 							</div>
 							<div class="profile-username text-center" style="margin-top: -10px;">
-								<span id="nowTime" style="font-size: -webkit-xxx-large;"></span>
+								<span id="nowTime" style="font-size:xx-large;"></span>
 							</div>
-							<ul class="list-group list-group-unbordered mb-3">
+							<ul class="list-group list-group-unbordered mb-3" style="font-size: 0.875em;">
 								<li class="list-group-item">
-									<b>출근시간</b> <a class="float-right">미등록</a>
+									<b>출근시간</b> <a class="float-right" id="startWorkTime" style="font-family:auto;">미등록</a>
 								</li>
 								<li class="list-group-item">
-									<b>퇴근시간</b> <a class="float-right">미등록</a>
+									<b>퇴근시간</b> <a class="float-right" id="endWorkTime" style="font-family:auto;">미등록</a>
 								</li>
 								<li class="list-group-item">
-									<b>근무시간</b> <a class="float-right">미등록</a>
+									<b>근무시간</b> <a class="float-right" id="ingWorkTime" style="font-family:auto;">미등록</a>
 								</li>
 							</ul>
-							<a href="#" class="btn btn-primary btn-block"><b>근무상태변경</b></a>
+							<div class="btn btn-block">
+								<a href="#" class="btn btn-success btn-sm startWorkTime" style="width:45%"><b>출근</b></a>
+								<a href="#" class="btn btn-secondary btn-sm endWorkTime" style="width:45%"><b>퇴근</b></a>
+							</div>
+							
+							<div class="btn-group" style="width:100%;">
+								<button type="button" class="btn btn-default nowWorkState" style="font-size: 0.8rem;">근무중</button>
+								<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+									<span class="sr-only">Toggle Dropdown</span>
+									<div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-start" style="position: absolute; font-size: 0.8rem; will-change: transform; top: 0px; left: 0px; transform: translate3d(-1px, 37px, 0px);">
+										<a class="dropdown-item nowWorkStateList" href="#">근무중</a>
+										<a class="dropdown-item nowWorkStateList" href="#">회의중</a>
+										<a class="dropdown-item nowWorkStateList" href="#">자리비움</a>
+										<a class="dropdown-item nowWorkStateList" href="#">외출</a>
+										<a class="dropdown-item nowWorkStateList" href="#">외근</a>
+									</div>
+								</button>
+							</div>
+							
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -87,17 +102,26 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script type="text/javascript">
 
-<!-- 현재 날짜/시간 출력 -->
+<script type="text/javascript" th:inline="javascript">	// 세션 사용을 위해서는 스크립트안에 타임리프 인라인을 설정하거나 스크립트부분에 CDATA를 해야함
 
+// 1초마다 현재 날짜 시간 갱신
 setInterval("now()",1000);
 function now(){
 	var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
 	var now = new Date();
+	var ingWorkTime = new Date();
+	var oldTime = new Date();
+	var endTime = new Date();
+	years = now.getFullYear();
+	months = now.getMonth();
+	days = now.getDate();
 	hours = now.getHours();
 	minutes = now.getMinutes();
 	seconds = now.getSeconds();
+	
+	//console.log(oldTime.toString());
+	
 	if (hours < 10){
 		hours = "0" + hours;
 	}
@@ -107,9 +131,185 @@ function now(){
 	if (seconds < 10){
 		seconds = "0" + seconds;
 	}
+	
 	document.getElementById("nowDay").innerHTML = st_date;
 	document.getElementById("nowTime").innerHTML = hours + ":" + minutes + ":" + seconds;
+	
+	// 계산
+	var firstOldTime = oldTime.toString().substr(0,16);
+	var middleOldTime = $('#startWorkTime').text();
+	var lastOldTime = oldTime.toString().substr(24,18);
+	var oldTimeText = firstOldTime + middleOldTime + lastOldTime;
+	oldTime = new Date(oldTimeText);
+	
+	var firstEndTime = endTime.toString().substr(0,16);
+	var middleEndTime = $('#endWorkTime').text();
+	var lastEndTime = endTime.toString().substr(24,18);
+	var endTimeText = firstEndTime + middleEndTime + lastEndTime;
+	endTime = new Date(endTimeText);
+	
+	if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() == '미등록'){
+		ingWorkTime = now.getTime() - oldTime.getTime();
+	}else if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() != '미등록'){
+		ingWorkTime = endTime.getTime() - oldTime.getTime();
+	}else{
+		ingWorkTime = new Date();
+	}
+	
+	var ingHours = (ingWorkTime / 1000 / 60 / 60) % 24;
+	var ingMinutes = (ingWorkTime / 1000 / 60) % 60;
+	var ingSeconds = (ingWorkTime / 1000) % 60;
+	
+	// 시간 출력부
+	if(0 <= ingHours && ingHours < 10){
+		ingHours = "0" + Math.floor(ingHours);
+	}else if(ingHours < 0 || isNaN(ingHours)){
+		ingHours = "00";
+	}else{
+		ingHours = Math.floor(ingHours);
+	}
+	
+	// 분 출력부
+	if(0 <= ingMinutes && ingMinutes < 10){
+		ingMinutes = "0" + Math.floor(ingMinutes);
+	}else if(ingMinutes < 0 || isNaN(ingMinutes)){
+		ingMinutes = "00";
+	}else{
+		ingMinutes = Math.floor(ingMinutes);
+	}
+	
+	// 초 출력부
+	if(0 <= ingSeconds && ingSeconds < 10){
+		ingSeconds = "0" + Math.floor(ingSeconds);
+	}else if(ingSeconds < 0 || isNaN(ingSeconds)){
+		ingSeconds = "00";
+	}else{
+		ingSeconds = Math.floor(ingSeconds);
+	}
+	
+	// 출근 퇴근 입력에 따른 출력 분기처리
+	if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() == '미등록'){
+		document.getElementById("ingWorkTime").innerHTML = ingHours + ":" + ingMinutes + ":" + ingSeconds;
+	}else if($('#startWorkTime').text() != '미등록' && $('#endWorkTime').text() != '미등록'){
+		document.getElementById("ingWorkTime").innerHTML = ingHours + ":" + ingMinutes + ":" + ingSeconds;
+	}else{
+		$('#ingWorkTime').text('미등록')
+	}
 }
+
+
+// 페이지 오픈이후 상시 대기 스크립트
+$(document).ready(function(){
+	// 우측 상단 클릭함에 따라 근태관리표 보이기/숨기기 전환
+	$('.nav-link-workTime').on('click', function(){
+		if($('.workTimeTool').attr('hidden') == 'hidden'){
+			$('.workTimeTool').prop('hidden', false);
+			$('.index-page').removeClass('col-lg-6');
+			$('.index-page').addClass('col-lg-5');
+		}else{
+			$('.workTimeTool').prop('hidden', true);
+			$('.index-page').removeClass('col-lg-5');
+			$('.index-page').addClass('col-lg-6');
+		}
+	});
+	
+	
+	// ajax 호출
+	(function($){
+		$.fn.workTimeEvent = function(sendData, fn){
+			
+			$.ajax({
+				async: true,
+				type : sendData.ajaxType,
+				data : sendData,
+				url : sendData.ajaxUrl,
+				dataType : sendData.ajaxDataType,
+				success : function(result) {
+					fn(result);
+				},
+				error : function(error) {
+					//alert("error : " + error);
+					fn('error');
+				}
+			});
+			
+		}
+	}(jQuery));
+	
+	// 페이지 시작시 함수 호출
+	window.onload = function () {
+		var sendData = {};
+		sendData.conditionValue = 1;
+		sendData.ajaxType = 'POST';	// 전송타입
+		sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+		sendData.ajaxDataType = 'json';	// 리턴 타입
+		
+		sendData.userCode = [[${session.SCODE}]];
+		
+		// 콜백함수
+		$(document).workTimeEvent(sendData, function(result){
+			if(result != 'error'){
+				if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+				if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+			}else{
+				$('#startWorkTime').text('미등록');
+				$('#endWorkTime').text('미등록');
+			}
+		});
+	}
+	
+	// 출근 버튼 클릭
+	$('.startWorkTime').on('click', function(){
+		if($('#startWorkTime').text() == '미등록'){
+			
+			var sendData = {};
+			sendData.conditionValue = 2;
+			sendData.ajaxType = 'POST';	// 전송타입
+			sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+			sendData.ajaxDataType = 'json';	// 리턴 타입
+			
+			sendData.userCode = [[${session.SCODE}]];
+			sendData.userId = [[${session.SID}]];
+			
+			// 콜백함수
+			$(document).workTimeEvent(sendData, function(result){
+				if(result != 'error'){
+					if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+					if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+				}
+			});
+		}
+	});
+	
+	// 퇴근 버튼 클릭
+	$('.endWorkTime').on('click', function(){
+		if($('#endWorkTime').text() == '미등록' && $('#startWorkTime').text() != '미등록'){
+			if(confirm('퇴근이 확실합니까?')){
+				
+				var sendData = {};
+				sendData.conditionValue = 3;
+				sendData.ajaxType = 'POST';	// 전송타입
+				sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+				sendData.ajaxDataType = 'json';	// 리턴 타입
+				
+				sendData.userCode = [[${session.SCODE}]];
+				
+				// 콜백함수
+				$(document).workTimeEvent(sendData, function(result){
+					if(result != 'error'){
+						if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+						if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+					}
+				});
+			}
+		}
+	});
+	
+	// 버튼 클릭시 현재 상태 변경하기
+	$('.nowWorkStateList').on('click', function(){
+		$('.nowWorkState').text($(this).text());
+	});
+});
 
 </script>
 

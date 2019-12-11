@@ -132,4 +132,10 @@ public class CompanyService {
 	public int updateCompany(Company company) {
 		return companyMapper.updateCompany(company);
 	}
+	
+	/**회사정보 상세보기****/
+	public Company companyDetail(String coname) {
+		
+		return companyMapper.companyDetail(coname);
+	}
 }

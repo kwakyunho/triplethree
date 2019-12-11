@@ -57,4 +57,8 @@ public interface CompanyMapper {
 	
 	//수정 클릭시 내용 진짜 수정
 	public int updateCompany(Company company);
+	
+	//회사정보 상세보기
+	public Company companyDetail(String company);
+	
 }
