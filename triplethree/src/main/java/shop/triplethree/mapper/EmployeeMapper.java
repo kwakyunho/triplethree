@@ -39,6 +39,9 @@ public interface EmployeeMapper {
 	//수정할 정보를 업데이트하는 메서드
 	public int updateEmployee(Employee employee);
 	
+	//인사이동이랑 같이 사원정보가 변경되면 업데이트하는 메서드
+	public int updateDepNPoEmployee(Employee employee);
+	
 	//마이페이지의 정보를 뿌려줄 메서드
 	public Employee employeeMyPage(String SID);
 	

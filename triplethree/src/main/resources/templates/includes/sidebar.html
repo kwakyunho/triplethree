@@ -4,29 +4,11 @@
 		<!-- Brand Logo -->
 		<a th:href="@{/}" class="brand-link">
 			<img th:src="@{dist/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-			<span class="brand-text font-weight-light">AdminLTE 3</span>
+			<span class="brand-text font-weight-light">Triple Three</span>
 		</a>
 	
 		<!-- Sidebar -->
 		<div class="sidebar">
-			<!-- Sidebar user panel (optional) -->
-			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-				<div class="image">
-					<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-				</div>
-				<div class="info">
-					<!-- <a href="#" class="d-block">Alexander Pierce</a> -->
-					<th:block th:if="${session.SID eq null}" style="text-align: right;">Please Login<a th:href="@{/}"> 로그인</a></th:block>
-					<th:block th:unless="${session.SID eq null}">
-						<label>
-						
-						[[${session.SNAME}]] [[${session.SPONAME}]]님,<br>
-						오늘도 좋은 하루되세요. </label>
-					<!-- 	[[${session.SDEPART}]]부서 입니다.<br>  분기처리는 나중에 ..-->
-						<div><a th:href="@{/logout}" style="text-align: right;">로그아웃</a></div>	
-					</th:block>
-				</div>
-			</div>
 	
 			<!-- Sidebar Menu -->
 			<nav class="mt-2">
@@ -201,12 +183,6 @@
 									<p>시설물 관리</p>
 								</a>
 							</li>
-<!-- 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="fas fa-archive"></i>
-									<p>#.비품관리</p>
-								</a>
-							</li> -->
 							<li class="nav-item">
 								<a th:href="@{assetCaSelect}" class="nav-link">
 									<i class="fas fa-car-side"></i>
@@ -233,12 +209,6 @@
 									<p>#.회의실이용신청</p>
 								</a>
 							</li>
-							<!-- <li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>#.비품이용신청</p>
-								</a>
-							</li> -->
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
@@ -282,13 +252,19 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-table"></i>
-							<p>10.근태관리<i class="fas fa-angle-left right"></i></p>
+							<p>10.근태관리.곽<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
+								<a th:href="@{/kuntaeList}" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>!.근태수정.곽</p>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>#.출퇴근기록부</p>
+									<p>#.출퇴근기록부.곽</p>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -328,43 +304,13 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-address-card"></i>
-							<p>12.!마이페이지<i class="fas fa-angle-left right"></i></p>
-						</a>
-						<ul class="nav nav-treeview">
-							<li class="nav-item">
-								<a th:href="@{/employeeMyPage}" class="nav-link">
-									<i class="fas fa-user-friends"></i>
-									<p>!기본정보.최</p>
-								</a>
-							</li>
-						</ul>
-						<ul class="nav nav-treeview">
-							<li class="nav-item">
-								<a th:href="@{/employeeMyUpdate}" class="nav-link">
-									<i class="fas fa-user-edit"></i>
-									<p>!기본정보수정.최</p>
-								</a>
-							</li>
-						</ul>
-						<ul class="nav nav-treeview">
-							<li class="nav-item">
-								<a th:href="@{/employeeMyMoveList}" class="nav-link">
-									<i class="fas fa-walking"></i>
-									<p>!인사이동 목록.최</p>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="nav-item has-treeview">
-						<a href="#" class="nav-link">
-							<i class="nav-icon fas fa-address-card"></i>
-							<p>13.기본설정<i class="fas fa-angle-left right"></i></p>
+							<p>12.기본설정.곽<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a th:href="@{/documentFormCateInsert}" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
-									<p>카테고리 등록</p>
+									<p>카테고리 등록.곽</p>
 								</a>
 							</li>
 						</ul>
