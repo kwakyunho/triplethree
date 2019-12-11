@@ -16,11 +16,7 @@
 <!-- <link rel="stylesheet" th:href="@{plugins/fullcalendar-interaction/main.min.css}"> -->
 <link rel="stylesheet" th:href="@{plugins/fullcalendar-daygrid/main.min.css}">
 <link rel="stylesheet" th:href="@{plugins/fullcalendar-timegrid/main.min.css}">
-<link rel="stylesheet" th:href="@{plugins/fullcalendar-bootstrap/main.min.css}">
-
-<!-- Bootstrap Color Picker -->
-<link rel="stylesheet" th:href="@{plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css}">
-  
+<link rel="stylesheet" th:href="@{plugins/fullcalendar-bootstrap/main.min.css}">  
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -31,12 +27,13 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>차량 예약 관리</h1>
+						<h1>차량 이용 신청</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Calendar</li>
+							<li class="breadcrumb-item">예약 관리</li>
+							<li class="breadcrumb-item active">차량 이용 신청</li>
 						</ol>
 					</div>
 				</div>
@@ -228,21 +225,6 @@
 <script th:src=@{custom/js/Calender.js}></script>
 <!-- 세션의 사원번호를 저장하는 스크립트 -->
 <script type="text/javascript" th:inline="javascript"> var sid = [[${session.SCODE}]] </script>
-<!-- bootstrap color picker -->
-<script th:src="@{plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js}"></script>
-<!-- 색상선택하는 스크립트 -->
-<script type="text/javascript">
-   //Colorpicker
-   $(function () {
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    });
-   });
-</script>
 <!-- 등록/수정/삭제 버튼 이벤트 -->
 <script type="text/javascript">
 $(function () {
