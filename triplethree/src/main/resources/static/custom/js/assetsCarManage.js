@@ -2,10 +2,8 @@
  * 차량 예약 관리 스크립트
  */
 
-/**
- * 캘린더 이벤트
- */
-  $(function () {
+//달력 스크립트 시작 
+$(function () {
 
     /* initialize the external events
      -----------------------------------------------------------------*/
@@ -220,3 +218,38 @@
       $('#new-event').val('')
     })
   })
+//달력 스크립트 끝 
+  
+// 등록,수정,삭제 버튼 이벤트
+$(function () {
+	  
+	$('#insertBtn').click(function(){
+		  if(confirm('예약 하시겠습니까?')){
+		  $('#formInsert').attr('action', 'companyScheduleInsert').submit();
+		  }
+	});
+	  
+	$('#updateBtn').click(function(){
+		  if(confirm('예약 내용을 수정하시겠습니까?')){
+		  $('#formId').attr('action', 'companyScheduleUpdate').submit();
+		  }
+	});
+	  
+	  $('#deleteBtn').click(function(){
+		  if(confirm('예약을 취소하시겠습니까?')){
+		  $('#formId').attr('action', 'companyScheduleDelet').submit();
+		  }
+	});	 
+});
+ 
+// 시설,차량 셀렉트 박스 클릭에 따른 하위 내용 뿌려주기 위한 스크립트
+$(function(){
+	$('#sortation').change(function(){
+		console.log('값이 변경 되었어요.');
+		
+		// option의 경우 select박스에 속한것으로 children으로 해서 value를 뽑지 않는다.
+		var check = $('#sortation').val();
+		console.log(check);
+		
+	 });
+});

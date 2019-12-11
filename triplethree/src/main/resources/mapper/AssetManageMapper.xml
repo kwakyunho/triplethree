@@ -4,4 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.triplethree.mapper.AssetManageMapper">
 
+<resultMap type="shop.triplethree.vo.AssetsManage" id="AssetsManage">
+	<result property="code" column="code"/>
+	<result property="division" column="division"/>
+	<result property="empCode" column="emp_code"/>
+	<result property="coName" column="co_name"/>
+	<result property="reReq" column="re_req"/>
+	<result property="reStart" column="re_start"/>
+	<result property="reEnd" column="re_end"/>
+	<result property="reCom" column="re_com"/>
+	<result property="reComCheck" column="re_com_check"/>
+	<result property="reCheckName" column="re_check_name"/>
+	<result property="veCode" column="code"/>
+	<result property="veName" column="code"/>
+	<result property="veNumber" column="code"/>
+	<result property="beCode" column="code"/>
+	<result property="beName" column="code"/>
+	<result property="beLocal" column="code"/>
+	<result property="beSeat" column="code"/>
+</resultMap>
+
+<!-- 차량 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
+<select id="selectBox">
+	SELECT
+		a.code
+		,a.ve_name
+		,a.ve_number
+	FROM
+		VE_MANAGE AS a
+	WHERE
+		a.ve_state ='사용가능'
+	AND
+		a.ve_use = '출장용'
+</select>
+
 </mapper>

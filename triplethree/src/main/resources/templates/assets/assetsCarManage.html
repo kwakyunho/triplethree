@@ -61,32 +61,24 @@
 											<div class="card">
 												<table style="text-align: center;">
 													<tr>
-														<td style="width: 150px;">일정 구분</td>
+														<td style="width: 150px;">차량명</td>
 														<td><select class="form-control form-control-lg"
-															style="font-size: medium;" name="sortation">
-																<option value="전체일정">전체일정</option>
-																<option value="부서일정">부서일정</option>
-																<option value="개인일정">개인일정</option>
+															style="font-size: medium;" name="sortation" id="sortation">
+																<option id="op" value="차량">차량</option>
+																<option id="op" value="시설">시설</option>
 														</select></td>
 													</tr>
 													<tr>
-														<td style="width: 150px;">일정명</td>
+														<td style="width: 150px;">사용 시작일</td>
 														<td><input class="form-control form-control-lg inputValue"
-															type="text" style="width: 100%; font-size: small;"
-															placeholder="일정명을 입력해주세요" id="title" name="title">
-														</td>
+															type="datetime-local" style="width: 100%; font-size: small;"
+															id="start" name="start"></td>
 													</tr>
 													<tr>
-														<td style="width: 150px;">일정 시작일</td>
+														<td style="width: 150px;">사용 종료일</td>
 														<td><input class="form-control form-control-lg inputValue"
-															type="date" style="width: 100%; font-size: small;"
-															placeholder="예) 2019-12-01" id="start" name="start"></td>
-													</tr>
-													<tr>
-														<td style="width: 150px;">일정 종료일</td>
-														<td><input class="form-control form-control-lg inputValue"
-															type="date" style="width: 100%; font-size: small;"
-															placeholder="예) 2019-12-01" id="end" name="end"></td>
+															type="datetime-local" style="width: 100%; font-size: small;"
+															id="end" name="end"></td>
 													</tr>
 												</table>
 											</div>
@@ -98,7 +90,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<input type="button" value="일정 등록하기" class="btn btn-primary"
+							<input type="button" value="예약 하기" class="btn btn-primary"
 								id="insertBtn">
 						</div>
 					</form>
@@ -128,33 +120,24 @@
 											<div class="card">
 												<table style="text-align: center;">
 													<tr>
-														<td style="width: 150px;">일정 구분</td>
+														<td style="width: 150px;">차량명</td>
 														<td><select class="form-control form-control-lg"
 															style="font-size: medium;" name="sortation">
-																<option value="전체일정">전체일정</option>
-																<option value="부서일정">부서일정</option>
-																<option value="개인일정">개인일정</option>
+																<option value="차량">차량</option>
+																<option value="시설">시설</option>
 														</select></td>
 													</tr>
 													<tr>
-														<td style="width: 150px;">일정명</td>
-														<td><input class="form-control form-control-lg"
-															type="text" style="width: 100%; font-size: small;"
-															placeholder="일정명을 입력해주세요" id="title" name="title">
-														<input type="hidden" name="code">
-														</td>
+														<td style="width: 150px;">사용 시작일</td>
+														<td><input class="form-control form-control-lg inputValue"
+															type="datetime-local" style="width: 100%; font-size: small;"
+															id="start" name="start"></td>
 													</tr>
 													<tr>
-														<td style="width: 150px;">일정 시작일</td>
-														<td><input class="form-control form-control-lg"
-															type="date" style="width: 100%; font-size: small;"
-															placeholder="예) 2019-12-01" id="start" name="start"></td>
-													</tr>
-													<tr>
-														<td style="width: 150px;">일정 종료일</td>
-														<td><input class="form-control form-control-lg"
-															type="date" style="width: 100%; font-size: small;"
-															placeholder="예) 2019-12-01" id="end" name="end"></td>
+														<td style="width: 150px;">사용 종료일</td>
+														<td><input class="form-control form-control-lg inputValue"
+															type="datetime-local" style="width: 100%; font-size: small;"
+															id="end" name="end"></td>
 													</tr>
 												</table>
 											</div>
@@ -165,8 +148,8 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-							<input type="button" value="일정 수정하기" class="btn btn-primary" id="updateBtn">
-							<input type="button" value="일정 삭제하기" class="btn btn-primary" id="deleteBtn">
+							<input type="button" value="예약 수정하기" class="btn btn-primary" id="updateBtn">
+							<input type="button" value="예약 삭제하기" class="btn btn-primary" id="deleteBtn">
 						</div>
 					</form>
 				</div>
@@ -222,35 +205,8 @@
 <script th:src="@{plugins/fullcalendar-interaction/main.min.js}"></script>
 <script th:src="@{plugins/fullcalendar-bootstrap/main.min.js}"></script>
 <!-- Page specific script -->
-<script th:src=@{custom/js/Calender.js}></script>
+<script th:src=@{custom/js/assetsCarManage.js}></script>
 <!-- 세션의 사원번호를 저장하는 스크립트 -->
 <script type="text/javascript" th:inline="javascript"> var sid = [[${session.SCODE}]] </script>
-<!-- 등록/수정/삭제 버튼 이벤트 -->
-<script type="text/javascript">
-$(function () {
-	
-	$('#insertBtn').click(function(){
-		
-		if(confirm('예약 하시겠습니까?')){
-			$('#formInsert').attr('action', 'companyScheduleInsert').submit();
-		 }
-	});
-	
-	$('#updateBtn').click(function(){
-		
-		if(confirm('예약 내용을 수정하시겠습니까?')){
-			$('#formId').attr('action', 'companyScheduleUpdate').submit();
-		 }
-	});
-	
-	 $('#deleteBtn').click(function(){
-		 
-		 if(confirm('예약을 취소하시겠습니까?')){
-				$('#formId').attr('action', 'companyScheduleDelet').submit();	
-			 }
-	});
-});
-</script>
-
 </th:block>
 </html>
