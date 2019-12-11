@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>상세보기</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">회사상세보기</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item">Dashboard v3</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row"s>
+			<div class="col-lg-12">
+				<div class="card">
+				<form method="get" th:action="@{/companyInfo}" class="form-horizontal">
+	                <div class="card-body">
+	  	<div class="form-group row col-sm-12">
+	   		<label class="col-sm-2 col-form-label">회사코드</label>
+	   			 <div class="col-sm-4">
+	   				 <input type="text" class="form-control"  name="Code" size="10" th:value="${companyDetail.Code}" readonly="readonly">
+   			 	</div>
+	   	</div>
+	    <div class="form-group row col-sm-12">
+	   		<label class="col-sm-2 col-form-label">회사명</label>	
+	   		 <div class="col-sm-4">
+	   			<input type="text" name="coName" size="10" class="form-control col-12" th:value="${companyDetail.coName}" readonly="readonly">
+	   		</div>
+	   		<label class="col-sm-2 col-form-label">대표자명</label>
+	   		 <div class="col-sm-4">
+	   			<input type="text" name="coCeoname" size="10" class="form-control col-12" th:value="${companyDetail.coCeoname}" readonly="readonly">
+	   		</div>	
+	   	</div>	
+	   	
+	    <div class="form-group row col-sm-12">
+	   		<label class="col-sm-2 col-form-label">회사주소</label>
+	   		<div class="col-sm-8">	   		
+	   			<input type="text" name="coPostCode" id="sample6_postcode"class="form-control col-4" th:value="${companyDetail.coPostCode}" readonly="readonly"><br>			
+				<input type="text" name="coAddr"id="sample6_address" class="form-control" th:value="${companyDetail.coAddr}" readonly="readonly">
+				<input type="text" name="coDetailAddr"id="sample6_detailAddress"class="form-control"th:value="${companyDetail.coDetailAddr}" readonly="readonly"><br>
+				<input type="text" name="coExtraAddr"id="sample6_extraAddress" placeholder="참고주소" class="form-control col-sm-4" th:value="${companyDetail.coExtraAddr}" readonly="readonly">
+			
+	   		</div>
+	   	</div>	
+		<div class="form-group row col-sm-12">
+	   		 <label class="col-sm-2 col-form-label" >사업자등록번호</label>
+	   		  <div class="col-sm-4">
+	   			<input type="text" name="coBin" size="30" class="form-control col-12"  th:value="${companyDetail.coBin}" readonly="readonly">
+			  </div>
+		</div>
+		  <div class="form-group row col-12">	  
+   			<label class="col-sm-2 col-form-label">팩스번호</label>
+	   		<div class="col-sm-4">
+		   			<input type="tel" name="coFax"
+		   			size="20" class="form-control col-12" th:value="${companyDetail.coFax}" readonly="readonly">	
+				</div>
+		   			<label class="col-sm-2 col-form-label">회사대표번호</label>
+		   		 <div class="col-sm-4">
+		   			<input type="tel" name="coPhone" 
+		   			size="20" class="form-control col-12" th:value="${companyDetail.coPhone}" readonly="readonly">
+	   		</div>	
+	   		</div>   		
+			<div class="form-group row col-12">	
+	   			<label class="col-sm-2 col-form-label">회사 이메일</label>
+   			 <div class="col-sm-10">	
+	   			<input type="email" name="coEmail"  size="30" class="form-control col-12"th:value="${companyDetail.coEmail}" readonly="readonly">
+				</div>
+   		 	 </div>   		 
+	   			<label class="col-sm-2 col-form-label">회사 로고</label>	
+	   			<div class="form-group">
+					<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
+					<div class="col-xs-4">
+						<img id="logoImgView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
+						<input class="form-control" name="coLogo" id="logoImg" type="file" th:value="${companyDetail.coLogo}" readonly="readonly"/>
+						<span id="imgFail" >로고를 선택해주세요</span>
+					</div>
+				</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<script type="text/javascript">
+						function readURL(input, id) {
+						if (input.files && input.files[0]) {
+							var reader = new FileReader();
+					
+							reader.onload = function(e) {
+								$("#" + id).attr('src', e.target.result);
+							}					
+							reader.readAsDataURL(input.files[0]);
+						}
+					}
+						//이미지 파일 입력 여부 검사
+						$('#logoImg').change(function(){
+							if($('#logoImg').val() == '') { 
+								$('#imgFail').show();
+								$('#logoImg').focus();
+							return false;
+							}else{
+								$('#imgFail').hide();
+								var id = $(this).attr('id');
+								id = id + "View";
+								console.log(id);
+								readURL(this, id);
+							}
+						});				
+					</script>  			
+			 <!--작성자는 나중에 세션걸꺼니까 지울꺼임 지금은 테스트중이니까 살리고  -->
+	   			<label class="col-sm-2 col-form-label">작성자</label>
+	   		<div class="col-sm-4">	
+	   			<input type="text" name="writer" size="5" class="form-control col-6"th:value="${companyDetail.writer}" readonly="readonly">
+			</div>	   		                
+                   </div>  
+	                <!-- /.card-body -->
+					<div class="card-footer">
+	                  <button type="submit" class="btn btn-primary">회사정보 조회로 가기</button>
+	                </div>
+	                
+	              </form>
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div>
+			<!-- /.col-md-6 -->
+			
+			<!-- /.col-md-6 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
+
+</th:block>
+</html>
