@@ -13,7 +13,7 @@
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
 <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" th:href="@{plugins/summernote/summernote-bs4.css}">
 </th:block>
 
 
@@ -41,21 +41,21 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="card" style="height:500px">
+				<div class="card" style="height:700px">
 			 <form action="/boardInsert" method="POST">
              <div class="card-body">
               <div class="form-group row col-sm-12">
                 <label class="col-sm-2 col-form-label">제목 </label>
                 <div class="col-sm-10">
-                	<input type="text" id="inputName" name="boardTitle" placeholder="제목을  " class="form-control">
+                	<input type="text" id="inputName" name="boardTitle" placeholder="제목을 입력해주세요" class="form-control">
              	 </div>
               </div>
               <div class="form-groupb row col-sm-12">
                 <label class="col-sm-2 col-form-label"> 내용 </label>
                 <div class="col-sm-10">
                 	<div class="mb-3">
-                	<textarea class="textarea" placeholder="Place some text here" name="boardCon"
-                          style="width: 100%; height: 400px; font-size: 14px;
+                	<textarea class="textarea" placeholder="내용을 입력해주세요 " name="boardCon"
+                          style="width: 100%; height: 300px; font-size: 14px;
                           line-height: 50px; border: 1px solid #dddddd; padding: 10px;"></textarea>
               		</div>
              	 </div>
@@ -73,8 +73,9 @@
 	                    </div>
              </div>
                  
-              <div class="row">
-		        <div class="col-12">
+              <div class="form-group row col-sm-12">
+              	<div class="col-12">
+		          <button type="button" id="backBtn" class="btn btn-success float-auto" >이전으로 </button>
 		          <input type="submit" value="공지 작성하기" class="btn btn-success float-right">
 		        </div>
 		      </div>
@@ -99,12 +100,17 @@
 
 <th:block layout:fragment="customScript">
 <!-- Summernote -->
-<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<script th:src="@{plugins/summernote/summernote-bs4.min.js}"></script>
 <script>
   $(function () {
     // Summernote
     $('.textarea').summernote()
   })
+  $(function(){
+	 $('#backBtn').on('click',function(){
+		history.go(-1); 
+	 });
+  });
 </script>
 
 </th:block>
