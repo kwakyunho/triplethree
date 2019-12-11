@@ -20,7 +20,7 @@
 					<th:block th:unless="${session.SID eq null}">
 						<label>
 						
-						[[${session.SNAME}]] [[${session.SPOSI}]]님,<br>
+						[[${session.SNAME}]] [[${session.SPONAME}]]님,<br>
 						오늘도 좋은 하루되세요. </label>
 					<!-- 	[[${session.SDEPART}]]부서 입니다.<br>  분기처리는 나중에 ..-->
 						<div><a th:href="@{/logout}" style="text-align: right;">로그아웃</a></div>	
@@ -64,7 +64,7 @@
 							<li class="nav-item">
 								<a th:href="@{/employeeList}" class="nav-link">
 									<i class="nav-icon fas fa-users-cog"></i>
-									<p>!.사원관리</p>
+									<p>!.사원관리.최</p>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -340,13 +340,29 @@
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-address-card"></i>
-							<p>12.#.마이페이지<i class="fas fa-angle-left right"></i></p>
+							<p>12.!마이페이지<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>#.개인정보수정</p>
+								<a th:href="@{/employeeMyPage}" class="nav-link">
+									<i class="fas fa-user-friends"></i>
+									<p>!기본정보.최</p>
+								</a>
+							</li>
+						</ul>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a th:href="@{/employeeMyUpdate}" class="nav-link">
+									<i class="fas fa-user-edit"></i>
+									<p>!기본정보수정.최</p>
+								</a>
+							</li>
+						</ul>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a th:href="@{/employeeMyMoveList}" class="nav-link">
+									<i class="fas fa-walking"></i>
+									<p>!인사이동 목록.최</p>
 								</a>
 							</li>
 						</ul>

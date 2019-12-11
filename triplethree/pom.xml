@@ -79,7 +79,14 @@
 		    <version>1.16</version>
 		</dependency>
 		
+<<<<<<< HEAD
+=======
+		
+
+>>>>>>> refs/heads/develop
 	</dependencies>
+	
+		
 
 	<build>
 		<plugins>

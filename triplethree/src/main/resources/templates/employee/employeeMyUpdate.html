@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>사원 등록</title>
+	<title>기본 정보 수정</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -19,13 +19,12 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">사원 관리 - 사원 등록</h1>
+				<h1 class="m-0 text-dark">기본 정보 수정</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/index">Home</a></li>
-					<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
-					<li class="breadcrumb-item"><a href="/employeeInsert">사원 등록</a></li>
+					<li class="breadcrumb-item"><a href="/employeeMyPage">My Page</a></li>
+					<li class="breadcrumb-item"><a href="/employeeMyUpdate">기본 정보 수정</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -33,45 +32,61 @@
 </div>
 <!-- /.content-header -->
 	<div class="content">
-		<div class="col-md-2">
-		 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employeeList'">사원 조회</button>
-		 </div>
+		 <div class="row">
+              <div class="col-md-12">
+				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employeeMyPage'">기본정보로 가기</button></div>
+			 
+		 	</div>	     			
+	     </div>
+	
 	</div>
+	
  <br>
-
+	
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card card-info">
 	              <div class="card-header">
-	                <h3 class="card-title">사원 정보를 등록해주세요.</h3>
+	                <h3 class="card-title">기본정보를 수정하세요.</h3>
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="post" action="/employeeInsert" class="form-horizontal" enctype="multipart/form-data">
-	                <div class="card-body">                
-	                  <div style="color:red;" >*은 필수로 입력해주시길 바랍니다.</div>
+	              <form method="post" action="/employeeMyUpdate" class="form-horizontal" th:each="m :${mypage}" enctype="multipart/form-data">
+	                <div class="card-body">  
+	                	<div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
+		                    	<div class="col-sm-3">
+		                 			<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+		                 		</div>
+	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
+			                    <div class="col-sm-3">
+			                 		<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+			                 	</div>		
+	               	   </div>
+	                	
+	                  
 	                  <br>
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
 			                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" placeholder="*사원번호는 자동으로 생성됩니다." readonly="readonly" >
+			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${m.empNum}" readonly="readonly" >
 			                 	</div>	
 	                 </div>
 	                  
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원명</label>
 		                    	<div class="col-sm-3">
-		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" placeholder="*사원명을 입력해주세요.">
+		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" th:value="${m.empName}" readonly="readonly">
 		                 		</div>
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
 			                    <div class="col-sm-3">
-			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="*패스워드를 입력해주세요.">
+			                    	<input type="password" class="form-control" name="password" id="exampleInputEmail1" th:value="${m.password}">
 			                 	</div>		
 	                 </div>
 	                 
-	                  <div class="form-group row">
+	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">주소</label>
 			                   <!--  <div class="col-sm-6">
 			                    	<input type="text" class="form-control" name="addr" id="exampleInputEmail1" placeholder="주소를 입력해주세요.">
@@ -80,7 +95,7 @@
 			                 	 -->
 			                 <div class="col-sm-3">
 				                	
-				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control">
+				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${m.postCode}">
 							</div>		
 							 <div class="col-sm-3">
 										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
@@ -92,7 +107,7 @@
 			               
 				             <label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">
-									<input type="text" name="addr"id="sample6_address" placeholder="주소를 입력해주세요." class="form-control">
+									<input type="text" name="addr"id="sample6_address" placeholder="주소를 입력해주세요." class="form-control" th:value="${m.addr}">
 								</div>
 						</div>
 						
@@ -100,14 +115,14 @@
 						<div class="form-group row">	
 							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">	
-									<input type="text" name="detailAddr"id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." class="form-control">
+									<input type="text" name="detailAddr"id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." class="form-control" th:value="${m.detailAddr}">
 								</div>
 						</div>
 						
 						<div class="form-group row">		
 							<label for="inputEmail3" class="col-sm-1 col-form-label"></label>  
 								<div class="col-sm-8">	
-									<input type="text" name="extraAddr"id="sample6_extraAddress" placeholder="참고주소를 입력해주세요." class="form-control col-sm-4">
+									<input type="text" name="extraAddr"id="sample6_extraAddress" placeholder="참고주소를 입력해주세요." class="form-control col-sm-4" th:value="${m.extraAddr}">
 								</div>
 										
 							<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -164,39 +179,45 @@
 	                 </div>
 	                 
 	                 <div class="form-group row">
-                 			 <label for="inputEmail3" class="col-sm-1 col-form-label"> 연락처 </label>
+                 			 <label for="inputEmail3" class="col-sm-1 col-form-label">연락처 </label>
 
 			                 <div class="col-md-6">
 				                  <div class="input-group">
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 				                    </div>					             
-				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" placeholder="*-을 빼고 번호를 입력해주세요.">
+				                     <input type="text" name="phone"  id="MOBILE_NO"  maxlength="13" size="40" th:value="${m.phone}">
 				                  	 </div>				                
 			                 </div>
 			                  <!-- /.input group -->
                		 </div>
                		 
-               		  <div class="form-group row">
+               		  <div class="form-group row" >
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">차량 유무</label>
-			                <div class="col-sm-6">
-			                    <!-- radio -->
-			                    
-			                      <div class="icheck-success d-inline">
-			                         <label><input type="radio" name="carPresence" checked="" id="radioSuccess1" value="Y">Y</label>
+			                <div class="col-sm-6" >
+			                	<th:block th:if="${m.carPresence} eq 'Y'">
+				                	<div class="icheck-success d-inline">
+				                    	<label><input type="radio" name="carPresence"  id="radioSuccess1" value="Y" checked >Y</label>
+				                    </div>
+			                    	<div class="icheck-success d-inline">
+			                    		<label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" >N</label>
+			                    	</div>
+			                	</th:block>
+			                	<th:block th:unless="${m.carPresence} eq 'Y'">
+			                		<div class="icheck-success d-inline">
+			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="Y" >Y</label>
 			                      </div>
 			                      <div class="icheck-success d-inline">
-			                         <label><input type="radio" name="carPresence" checked="" id="radioSuccess1" value="N">N</label>
+			                         <label><input type="radio" name="carPresence"  id="radioSuccess1" value="N" checked >N</label>
 			                      </div>
-			                      
-			                    
-                 			 </div>
+			                	</th:block>
+                 		   </div>
 	                 </div>
 	                 
 	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">이메일</label>
 			                    <div class="col-sm-6">
-			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
+			                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" th:value="${m.email}" >
 			                 	</div>
 	                 </div>
 	                 
@@ -209,64 +230,58 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="birthDate"  placeholder="생년월일을 입력해주세요.">
+									<input type="date" class="form-control" name="birthDate"  th:value="${m.birthDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
 	                 </div>
 	                 
 	                  <div class="form-group row">
-	                   <div class="col-sm-4">
+	                  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
-			                    <select class="col-sm-3" name="demgCode" >
-		                          <option th:each= "C :${depart}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
-		                          
-	                        </select>
+			                    <select class="col-sm-3" name="demgCode">
+		                          <option th:text="${m.demgName}" ></option>
+	                        	</select>
                         </div>
-                        
+                        <th:script></th:script>
                        	<div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
 			                    <select class="col-sm-3" name="poCode">
-		                          <option th:each ="P : ${position}"  th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
-	                        </select>
+		                          <option th:text="${m.PoName}"></option>	                         
+	                        	</select>
                         </div>
                         
                         <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">재직상태</label>
 			                    <select class="col-sm-3" name="liCode">
-		                          <option th:each="L :${status}" th:text="${L.liName}" th:value="${L.liCode}"></option>		                      		                          
-	                        </select>
+		                          <option th:text="${m.liName}"></option>		                      		                          
+	                        	</select>
                         </div>
-		               <!--   <label for="inputEmail3" class="col-sm-1 col-form-label">직급</label>
-		                    <div class="col-sm-2">
-		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
-		                 	</div>
-		                 <label for="inputEmail3" class="col-sm-1 col-form-label">재직상태</label>
-		                    <div class="col-sm-2">
-		                    	<input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="*example@mail.com 형식으로 입력해주세요.">
-		                 	</div> -->
+		              
 	                 </div>
+	                 
+	                  
+	                 
+	                 
 	                 
 	                  <div class="form-group row">
 	                   	  <div class="col-sm-4">
 		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">계약형태</label>
-			                   <select class="col-sm-3" name="conType">
-		                          <option value="연봉">연봉</option>
-		                          <option value="시급">시급</option>
-		                          <option value="일급">일급</option>
-	                        </select>
+			                   <select class="col-sm-3" name="conType" th:value="${m.conType}">
+		                          <option th:value="${m.conType}" th:text="${m.conType}"></option>		                          
+	                       	 </select>
 	                       </div>
 	                  
                        
                        	
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
 		                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="basicPay" id="exampleInputEmail1" placeholder="*기본급여를 입력해주세요.">
+			                    	<input type="text" class="form-control" th:value="${m.basicPay}"  name="basicPay" id="exampleInputEmail1" readonly="readonly">
 			                 </div>
 			                 
-			                 <div class="col-sm-2">
-			                 	 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='#'">급여 등록</button>
-			                 </div>
+			                  <!-- <div class="col-sm-2">
+			                 	 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='#'">급여 수정</button>
+			                 </div> -->
                         
 	                 </div>
 	                 
@@ -279,41 +294,42 @@
 			                        <i class="far fa-calendar-alt"></i>
 			                      </span>
 			                    </div>
-									<input type="date" class="form-control" name="joinDate"  placeholder="*입사일을 입력해주세요.">
+									<input type="date" class="form-control" name="joinDate" th:value="${m.joinDate}" readonly="readonly">
 
 			                  </div>
                 			</div>
 	                 </div>
 	                 
 	                 <div class="form-group row">
-	                    <label for="exampleInputFile" class="col-sm-1 col-form-label">서명올리기</label>
-	                    <div class="col-sm-4">                      
-	                        <input type="file" name="signature" placeholder="Choose file">	                   	                      
-	                    </div>
-	                  </div>
-	                  
-	                
-	                  
-	                  <div class="form-group row">
-	                    <label for="exampleInputFile" class="col-sm-1 col-form-label">서명올리기</label>
-	                    <div class="col-sm-4">	                      
-	                        <input type="file" name="signature" placeholder="Choose file">	                      
-	                    </div>
-	                  </div>
-	                  
-	                  <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">퇴사일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="retireDate"  th:value="${m.retireDate}" readonly="readonly">
+
+			                  </div>
+                			</div>
+	                 </div>
+	                 
+	                 <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">작성자</label>
 		                    	<div class="col-sm-3">
 		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${session.SID}" readonly="readonly">
 		                 		</div>
+	                 				
 	                 </div>
+	                 
 	                  
 	                </div>
 	                <!-- /.card-body -->
-	
-	                <div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">등록하기</button>
+					<div class="card-footer">
+	                  <button type="submit" class="btn btn-primary">수정 하기</button>
 	                </div>
+	                
 	              </form>
 	            </div>
 	           </div>
