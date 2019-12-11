@@ -43,14 +43,11 @@
   	 <table class="table table-striped jsgrid-align-center"role="grid" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
    	  <thead>
    	 
-	   	<tr>
-		
+	   	<tr>	
+
 	   		<td align="center">회사명</td>	
 	   		<td align="center">대표자명</td>	
 	   		<td align="center">회사주소</td>	
-	   		<td align="center">사업자 등록번호</td>	
-	   		<td align="center">팩스번호</td>	
-	   		<td align="center">회사 대표번호</td>	
 	   		<td align="center">회사 이메일</td>		   		   				   		
 	   		<td align="center">상태</td>		   		
 	   		<td align="center">수정</td>		   		
@@ -59,12 +56,9 @@
 	   	</thead>
 	   	<tbody>
 	   	<tr th:each="l:${companyInfo}">
-	
+
 	   		<td th:text="${l.coName}"></td>
 	   		<td th:text="${l.coCeoname}"></td>
-	   		<td th:text="${l.coAddr}"></td>
-	   		<td th:text="${l.coBin}"></td>
-	   		<td th:text="${l.coFax}"></td>
 	   		<td th:text="${l.coPhone}"></td>
 	   		<td th:text="${l.coEmail}"></td>	   		   	 	   	
 	   		<td th:text="${l.yesOrNo}"></td> 	   	
@@ -85,7 +79,7 @@
                   </div>  	 	 	 	 	
 			</td>
 			</div>
-			<td><a href="@{/companyDetail}">상세보기</a></td>			 		 
+			<td><a th:href="@{/companyDetail(coName=${l.coName})}">상세보기</a></td>			 		 
 	   	</tr>
 	   	</tbody>
   	 </table>
