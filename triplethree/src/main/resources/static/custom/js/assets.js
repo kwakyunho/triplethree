@@ -7,7 +7,8 @@ $(document).ready(function(){
 	$('.updateBe').children('input').on('click', function(){
 		var uri = $(this).parents('.AssetsListTr')
 		
-		$('#Code').val(uri.children('#upCode').text());
+		$('#code').val(uri.children('#upCode').text());
+		console.log(uri.children('#upCode').text());
 		$('#upName').val(uri.children('#faName').text());
 		$('#upLocal').val(uri.children('#faLocal').text());
 		$('#upSeat').val(uri.children('#faSeat').text());
