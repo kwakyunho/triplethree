@@ -79,6 +79,7 @@
 		
 	</select>
 	
+	<!-- count 나중에 넣어주기 -->
 	<update id="updateBoard" parameterType="shop.triplethree.vo.Board" >
 		update BOARD
 			set
@@ -86,7 +87,6 @@
 			,emp_code = #{empCode}
 			,board_title = #{boardTitle}
 			,board_con = #{boardCon}
-			,board_count =#{boardCount}
 			,writer_day = #{writerDay}
 			,board_pw = #{boardPw}
 		where
