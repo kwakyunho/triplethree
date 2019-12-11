@@ -41,11 +41,11 @@ public class BoardService {
 	//게시물  가져오기
 	public Board getBoardByCode(String code) {
 		Board board = boardMapper.getBoardByCode(code);
-		System.out.println("board 안이다"+board.toString());
+		System.out.println("**board 안이다 수정화면으로 보여주기** "+board.toString());
 		return	board;
 	}
 	
-	//게시물 수정하기
+	//게시물 수정처리
 	public int updateBoard(Board board) {
 		return boardMapper.updateBoard(board);
 	}
