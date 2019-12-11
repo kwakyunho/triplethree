@@ -36,6 +36,11 @@ public class EmployeeService {
 		  return employeeMapper.selectForStatus();
 	  }
 	 
+	 public int insertMoveEmployee(Employee employee) {
+		 
+		 return employeeMapper.insertMoveEmployee(employee);
+		 }
+	 
 	 public int insertEmployee(Employee employee){
 		  
 		  return employeeMapper.insertEmployee(employee);
@@ -56,6 +61,10 @@ public class EmployeeService {
 	  
 	  public int updateEmployee(Employee employee) {
 		  return employeeMapper.updateEmployee(employee);
+	  }
+	  
+	  public Employee employeeMyPage(String SID) {
+		  return employeeMapper.employeeMyPage(SID);
 	  }
 	 
 }

@@ -37,38 +37,40 @@ public class ClientController {
 		model.addAttribute("liCode", clientService.getLicodeList());
 		model.addAttribute("liCode2", clientService.getLicode2List());
 		model.addAttribute("client", clientService.getClientBycode(code));
-		return "/client/clientEdit";
+		return "/client/clientUpdate";
 	}
 	
-	//거래처 정보 수정
+	/**거래처 정보 수정처리
+	 * @param client
+	 * @return 
+	 * */
 	@PostMapping("/clientUpdate")
 	public String clientUpdate(Client client) {
-		clientService.clientUpdate(client);
+		clientService.updateClient(client);
 		return "redirect:/clientList";
 	}
 	
 	//거래처 정보삭제(상태변경)
 	@GetMapping("/clientDelete")
-	public String clientDelete(@RequestParam(value="code")String code,Model model) {
+	public String deleteClient(@RequestParam(value="code")String code,Model model) {
 		System.out.println(code + "<--삭제  할 거래처 code");
-		clientService.clientDelete(code);
+		clientService.deleteClient(code);
 		return "redirect:/clientList";
 	}
 
 	//거래처 정보등록 화면이동 (거래처 상태가지고감)
 	@GetMapping("/clientInsert")
-	public String clientInsert(Model model) {
+	public String insertClient(Model model) {
 		model.addAttribute("liCode", clientService.getLicodeList());
 		return "/client/clientInsert";
 	}
 	
 	//거래처 정보 입력
 	@PostMapping("/clientInsert")
-	public String clientInsert(Client client) {
+	public String insertClient(Client client) {
 		System.out.println(client + "<-client");
 		//코드생성 메서드 호출
 		clientService.createClientCode(client);
-		
 		return "redirect:/clientList";
 	}
 	
