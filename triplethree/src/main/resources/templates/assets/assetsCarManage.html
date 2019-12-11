@@ -91,32 +91,6 @@
 															type="date" style="width: 100%; font-size: small;"
 															placeholder="예) 2019-12-01" id="end" name="end"></td>
 													</tr>
-													<tr>
-														<td colspan="2">
-															<div class="card card-info">
-																<div class="card-body">
-																	<!-- Color Picker -->
-																	<div class="form-group">
-																		<label>일정 색상을 지정해주세요.</label>
-																		<input type="text" class="form-control my-colorpicker1 colorpicker-element" name="backgroundColor" data-colorpicker-id="1" data-original-title="" title="" aria-describedby="popover216356">
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td colspan="2">
-															<div class="card card-info">
-																<div class="card-body">
-																	<!-- Color Picker -->
-																	<div class="form-group">
-																		<label>글씨 색상을 지정해주세요.</label>
-																		<input type="text" class="form-control my-colorpicker1 colorpicker-element" name="color" data-colorpicker-id="1" data-original-title="" title="" aria-describedby="popover216356">
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
 												</table>
 											</div>
 										</div>
@@ -184,32 +158,6 @@
 														<td><input class="form-control form-control-lg"
 															type="date" style="width: 100%; font-size: small;"
 															placeholder="예) 2019-12-01" id="end" name="end"></td>
-													</tr>
-													<tr>
-														<td colspan="2">
-															<div class="card card-info">
-																<div class="card-body">
-																	<!-- Color Picker -->
-																	<div class="form-group">
-																		<label>일정 색상을 지정해주세요.</label>
-																		<input type="text" class="form-control my-colorpicker1 colorpicker-element" name="backgroundColor" data-colorpicker-id="1" data-original-title="" title="" aria-describedby="popover216356">
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td colspan="2">
-															<div class="card card-info">
-																<div class="card-body">
-																	<!-- Color Picker -->
-																	<div class="form-group">
-																		<label>글씨 색상을 지정해주세요.</label>
-																		<input type="text" class="form-control my-colorpicker1 colorpicker-element" name="color" data-colorpicker-id="1" data-original-title="" title="" aria-describedby="popover216356">
-																	</div>
-																</div>
-															</div>
-														</td>
 													</tr>
 												</table>
 											</div>
@@ -301,21 +249,21 @@ $(function () {
 	
 	$('#insertBtn').click(function(){
 		
-		if(confirm('일정을 등록하시겠습니까?')){
+		if(confirm('예약 하시겠습니까?')){
 			$('#formInsert').attr('action', 'companyScheduleInsert').submit();
 		 }
 	});
 	
 	$('#updateBtn').click(function(){
 		
-		if(confirm('수정내용이 확실한가요?')){
+		if(confirm('예약 내용을 수정하시겠습니까?')){
 			$('#formId').attr('action', 'companyScheduleUpdate').submit();
 		 }
 	});
 	
 	 $('#deleteBtn').click(function(){
 		 
-		 if(confirm('삭제하시겠습니까?')){
+		 if(confirm('예약을 취소하시겠습니까?')){
 				$('#formId').attr('action', 'companyScheduleDelet').submit();	
 			 }
 	});
