@@ -179,7 +179,7 @@
 		WHERE
 			P.poname = #{positionNameBe}
 	</select>
-	
+	<!--회사정봉 등록  -->
 	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
 	INSERT INTO
 	EM_INFO
@@ -201,6 +201,7 @@
 		,now()
 	)
 	</insert>
+	<!--회사 정보 조회  -->
 	<select id="selectCompany" resultType="shop.triplethree.vo.Company">
 	select
 		code AS Code
@@ -222,6 +223,8 @@
 	FROM 
 		EM_INFO
 	</select>
+	
+	<!--회사 정보 수정클릭시 화면 보여주기  -->
 	<select id="updateCompanySelect" resultType="shop.triplethree.vo.Company">
 	select
 		code AS Code
@@ -246,6 +249,7 @@
 		code=#{Code}	
 	
 	</select>
+	<!--회사정보 수정  -->
 	<update id="updateCompany" parameterType="shop.triplethree.vo.Company">
 		UPDATE EM_INFO
 	SET
@@ -264,4 +268,6 @@
 	where
 		code=#{Code}
 	</update>
+	
+
 </mapper>

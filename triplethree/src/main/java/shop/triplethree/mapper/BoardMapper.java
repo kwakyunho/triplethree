@@ -9,7 +9,7 @@ import shop.triplethree.vo.Board;
 @Mapper
 public interface BoardMapper {
 	//게시글 작성하기
-	public int boardInsert(Board board);
+	public int insertBoard(Board board);
 	
 	//게시글정보 목록으로 가져오기
 	public List<Board> boardList();
@@ -18,5 +18,8 @@ public interface BoardMapper {
 	public Board getBoardByCode(String code);
 	
 	//게시글 수정하기
-	public Board boardUpdate(Board board);
+	public int updateBoard(Board board);
+	
+	//게시글 수정하기
+	public int deleteBoard(String code);
 }

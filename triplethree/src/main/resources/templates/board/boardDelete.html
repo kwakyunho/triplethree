@@ -7,7 +7,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>글 수정하기 </title>
+	<title>게시글 삭제 </title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -24,7 +24,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">글 수정하기</h1>
+				<h1 class="m-0 text-dark">게시판 관리 - 공지사항 </h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -42,52 +42,57 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-			 <form action="/boardUpdate" method="POST">
-             <div class="card-body" >
-              <div class="form-group row col-sm-12">
-                <label class="col-sm-2 col-form-label">제목 </label>
-                <div class="col-sm-10">
-                	<input type="text" id="inputName" th:value="${board.boardTitle}" name="boardTitle" class="form-control">
-             	 </div>
+			
+            <form method = "post" action="/boardDelete">
+             <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">글 코드 </label>
+                <input type="text" id="inputName"th:value = ${code} readonlly = "readonly" class="form-control">
               </div>
-              <div class="form-groupb row col-sm-12">
-                <label class="col-sm-2 col-form-label"> 내용 </label>
-                <div class="col-sm-10">
-                	<div class="mb-3">
-                	<textarea class="textarea"  name="boardCon" th:value="${board.boardCon}"
-                          style="width: 100%; height: 500px; font-size: 14px;
-                          line-height: 50px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              		</div>
-             	 </div>
-              	
+              
+              <div class="form-group">
+                <label for="inputName">공지사항 제목 </label>
+                <input type="text" id="inputName" th:value = ${boardTitle} readonlly = "readonly" class="form-control">
+              </div>
+            	  
+              	<div class="row">
+              
+      			</div>
+      		
+              <div class="form-group">
+                <label for="inputDescription">공지사항 내용 </label>
+             
+              <div class="mb-3">
+                <textarea class="textarea" placeholder="Place some text here"
+                          style="width: 100%; height: 500px; font-size: 14px; line-height: 50px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              </div>	
              </div>
-      
+             
              <div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">작성자</label>
 	                    <div class="col-sm-4">
-	                      <input type="text" class="form-control col-12" th:value="${board.writer}" readonly="readonly">
-	                    </div>
-	                    <label class="col-sm-2 col-form-label">비밀번호</label>
-	                    <div class="col-sm-4">
-	                      <input type="password" class="form-control col-12" th:value="${board.boardPw}" name="boardPw" >
+	                      <input type="text" class="form-control col-12" name="writer" th:value="${session.SID}" readonly="readonly">
 	                    </div>
              </div>
-                 
+             
+              <div class="mb-3">
+              		<label class="col-sm-2 col-form-label">비밀번호 </label>
+					<input type="password" name="boardPw">
+              </div>
+             
               <div class="row">
 		        <div class="col-12">
-		          <input type="submit" value="수정하기" class="btn btn-success float-right">
+		          <input type="submit" value="삭제 하기"name = "boardPw" class="btn btn-success float-right">
 		        </div>
 		      </div>
             </div>
             </form>
             <!-- /.card-body -->
-           
 				</div>
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
-			</div> 
-			
+			</div>
 			<!-- /.col-md-6 -->
 			
 		</div>
@@ -106,6 +111,5 @@
     $('.textarea').summernote()
   })
 </script>
-
 </th:block>
 </html>

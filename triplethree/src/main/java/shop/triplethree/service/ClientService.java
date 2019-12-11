@@ -18,8 +18,9 @@ public class ClientService {
 		String code = commonService.codeGeneration("ACC_MANAGE");
 		client.setCode(code);
 		System.out.println(code + " : 생성된 코드");
-		client.setWriter("id007");//세션에서 가져올 값 : 작성자 세팅
-		return clientMapper.clientInsert(client);
+		//작성자 세션값 세팅
+		client.setWriter("${session.SID}");	
+		return clientMapper.insertClient(client);
 	}
 	//거래처 리스트 가져오기
 	public List<Client> getClientList(){
@@ -49,14 +50,14 @@ public class ClientService {
 	}
 	
 	//거래처 정보 수정하기
-	public int clientUpdate(Client client) {
+	public int updateClient(Client client) {
 		
-		return clientMapper.clientUpdate(client);
+		return clientMapper.updateClient(client);
 	}
 	
 	//거래처 삭제하기
-	public int clientDelete(String code) {
-		return  clientMapper.clientDelete(code);
+	public int deleteClient(String code) {
+		return  clientMapper.deleteClient(code);
 	}
 	
 }

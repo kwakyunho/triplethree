@@ -4,5 +4,67 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.triplethree.mapper.PayMapper">
+
+		<!--급여 대장 클릭시 사원리스트  -->
+	<select id="selectPay" resultType="shop.triplethree.vo.Employee">		
+	SELECT  
+			A.emp_num as empNum,
+			A.emp_name as empName,
+			B.dename as demgName,
+			C.poname as poName
+	FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) A
+		
+		LEFT JOIN DEMG B
+		ON A.demgcode = B.CODE
+		
+		LEFT JOIN POSISYS C
+		ON A.pocode = C.CODE
+				
+	</select>
 	
+	<!--퇴직금 검색쿼리문짜야험  -->
+	<select id="selectRetiring" resultType="shop.triplethree.vo.Employee">	
+		SELECT 
+	em.retire_date
+	FROM EMP_MANAGE AS em
+	left JOIN DEMG AS d ON em.demgcode = d.code 
+	left JOIN POSISYS AS p ON em.pocode  = p.code
+	</select>
+	
+	
+	<!--급여 화면 검색  -->
+	<select id="insertSearchPay" resultType="shop.triplethree.vo.Employee">
+	SELECT
+	em.emp_num as empNum,
+	em.emp_name as empName,
+	p.poname as poName,
+	de.dename as demgName
+	FROM (
+	SELECT em.*
+			FROM EMP_MANAGE em
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) p
+			ON em.writer_day = p.writer_day
+			AND em.emp_num = p.emp_num) em
+	INNER JOIN POSISYS AS p
+	ON em.pocode = p.CODE 
+	
+	LEFT JOIN DEMG de
+	ON em.demgcode = de.CODE
+	<if test="sv != null and sv neq ''.toString()">
+		WHERE 
+			${sk} Like CONCAT('%',#{sv},'%')
+	</if>
+
+	</select>
 </mapper>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>타이틀</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">게시판 관리</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">공지사항</li>
+					<li class="breadcrumb-item"><a th:href="@{/boardInsert}">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+	<div class="content" style="align-content: center">
+	 <div class="col-12">
+	     <div class="card">
+	     <form class="boardDetailForm">
+	       <div class="card-header">
+	         <h3 class="card-title" th:text="${board.boardTitle}"></h3>
+	       </div>
+	       <div>
+	       	<div class="card-body">
+	       		<table class="table table-condensed">
+	       			<thead th:text="${board.boardCon}"></thead>
+	       		</table>
+	       	</div>
+	       </div>
+		</form>
+	     </div>
+	     <!-- /.card -->
+	     <div class="row" id="detailBtns">
+	     <div class="col-4">
+			<button type="button" id="backBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardList'">이전 </button>
+	     </div>
+	      <div class="col-4">
+			<button type="button" id="updateBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardUpdate'" >수정 </button>
+	     </div>
+	      <div class="col-4">
+			<button type="button" id="deleteBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardList'" >공지사항 작성하기</a></button>
+	     </div>
+	     </div>
+	 </div>
+	 </div>
+			<!-- /.row -->
+		<!-- /.container-fluid -->
+	</th:block>
+	
+	<th:block layout:fragment="customScript">
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#backBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
+			$('.boardDetailForm').attr('method', 'GET');
+			$('.boardDetailForm').attr('action', '/boardList');
+			$('.boardDetailForm').submit();
+		});
+		
+		$('#updateBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
+			$('.boardDetailForm').attr('method', 'POST');
+			$('.boardDetailForm').attr('action', '/boardUpdate');
+			$('.boardDetailForm').submit();
+		});
+		
+		$('#deleteBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
+			$('.boardDetailForm').attr('method', 'POST');
+			$('.boardDetailForm').attr('action', '/boardList');
+			$('.boardDetailForm').submit();
+		});
+			/* var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
+			boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+			var boardCode = $('.boardTitle').attr('id');	// code id벨류값 추출
+			$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
+			*/
+		
+	});
+	</script>
+	</th:block>
+	<script></script>
+	</html>

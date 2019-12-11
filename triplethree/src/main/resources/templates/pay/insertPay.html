@@ -27,24 +27,52 @@
 </div>
 <!-- /.content-header -->
 
+
+
+
+
+</script>
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-4">
 				<div class="card">
+					<div align="center">사원목록</div>						
+							<form action="/insertPay" method="post">
+							<div>
+								<select class="form-control" name="sk">
+									<option value="">검색조건</option> 
+									<option value="emp_num">사원코드</option>						
+									<option value="emp_name">사원명</option>
+									<option value="dename">부서명</option>
+									<option value="poname">직급명</option>																					
+								</select>
+							</div>
+							<div>
+								<input class="form-control" type="text" name="sv" 
+										 placeholder="검색어를 입력하세요"/>
+							 </div>
+							 <div>
+								<button type="submit"id="searchBtn" class="btn btn-block bg-gradient-primary">Search</button>					
+							</form>										
+							</div>
   	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
 				 	
-					<tr><div align="center">사원목록</div>
-						<th>사원코드</th>
+					<tr>			
+						<th>사원번호</th>
 						<th>사원명</th>
-						<th>직급</th>
+						<th>부서명</th>
+						<th>직급</th>	
+												
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						<tr>
-							<td>사원코드1</td>
-							<td>사원명1</td>
-							<td>직급1</td>											
-						</tr>						
+						 <tr align="center" th:each="e :${insertSearchPay}">
+						 <td th:text="${e.empNum}"></td>
+						 <td th:text="${e.empName}"></td>					 										
+						 <td th:text="${e.demgName}"></td>										
+						 <td th:text="${e.poName}"></td>										
+									
+						</tr>										
 				</table>
 				</div>
 				<!-- /.card -->
@@ -124,14 +152,13 @@
 						<input type="text" name="deductHap" class="form-control"></td></tr>
 				</table>
 				</div>
-				<div align="center">
-				<form th:action="@{/payList}" method="post">
-				<div class="col-4">					
-					<input type="submit" name="paylist" value="급여 지급액 등록"></div>
-				</form>
-				</div>
+			
+				<button type="button" value="급여지급" class="col-12" align="center">							
+					<a th:href="@{/payList}" class="nav-link">급여 지급액 등록</a>
+				</button>				
+				
 				<!-- /.card -->
-			</div>
+			
 			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->
@@ -141,6 +168,12 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<script type="text/javascript">
+$(document).ready(function(){
+	$('').basicPay
+}
+
+</script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
 

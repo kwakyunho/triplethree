@@ -33,6 +33,14 @@ public interface EmployeeMapper {
 	//수정할 정보를 뿌려줄 테이터를 찾는 메서드
 	public Employee selectForUpdate(String empNum);
 	
+	//인사이동변경사항을 인사이동목록테이블에 insert하는 메서드
+	public int insertMoveEmployee(Employee employee);
+	
 	//수정할 정보를 업데이트하는 메서드
 	public int updateEmployee(Employee employee);
+	
+	//마이페이지의 정보를 뿌려줄 메서드
+	public Employee employeeMyPage(String SID);
+	
+	
 }
