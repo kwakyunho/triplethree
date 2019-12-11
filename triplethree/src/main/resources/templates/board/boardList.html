@@ -49,7 +49,7 @@ tr:hover{background: whitesmoke;}
 							<th>공지</th>
 							<th style="width:500px;">글제목</th>
 							<th>작성자</th>
-							<!-- <th style="width:100px;">조회수</th> -->
+							<th style="width:100px;">조회수</th>
 							<th style="width:100px;">작성일자</th>
 							
 						</tr>
@@ -59,7 +59,7 @@ tr:hover{background: whitesmoke;}
 							<td>공지</td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
-							<!-- <td th:text="${b.boardCount}"></td> -->
+							<td th:text="${b.boardCount}"></td>
 							<td th:text="${b.writerDay}"></td>
 							
 						</tr>
@@ -86,10 +86,8 @@ $(document).ready(function(){
 	$('.boardListTable').on('click', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
 		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
-		
-		var boardCode = $('.boardTitle').attr('id');	// code id벨류값 추출
+		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
-		
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.boardListForm').attr('action', '/boardDetail');	// 액션 경로 정의
 		$('.boardListForm').submit();	// 전송

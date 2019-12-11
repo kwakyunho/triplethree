@@ -22,4 +22,8 @@ public interface BoardMapper {
 	
 	//게시글 수정하기
 	public int deleteBoard(String code);
+	
+	//게시글 조회수 증가하기
+	public int updateCnt(String code);
+	
 }
