@@ -12836,6 +12836,25 @@ body.text-sm .control-sidebar {
   margin-left: 0;
 }
 
+.dropdown-menu-md {
+  max-width: 220px;
+  min-width: 200px;
+  padding: 0;
+}
+
+.dropdown-menu-md .dropdown-divider {
+  margin: 0;
+}
+
+.dropdown-menu-md .dropdown-item {
+  padding: 0.3rem 0.8rem;
+}
+
+.dropdown-menu-md p {
+  margin: 0;
+  white-space: normal;
+}
+
 .dropdown-menu-lg {
   max-width: 300px;
   min-width: 280px;
