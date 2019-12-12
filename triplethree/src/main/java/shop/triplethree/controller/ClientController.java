@@ -42,6 +42,7 @@ public class ClientController {
 								String code,Model model) {
 		System.out.println(code + "<--수정 할 거래처 code");
 		model.addAttribute("liCode", clientService.getLicodeList());
+		System.out.println(clientService.getLicodeList().toString() + "liCode 안입니다 ##");
 		model.addAttribute("liCode2", clientService.getLicode2List());
 		model.addAttribute("client", clientService.getClientBycode(code));
 		return "/client/clientUpdate";

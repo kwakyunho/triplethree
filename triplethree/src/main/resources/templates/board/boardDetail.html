@@ -10,7 +10,7 @@
 
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
-
+	
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -24,8 +24,8 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/boardInsert}">공지사항 작성</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/boardList}" style="color:#28a745;">공지사항 목록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -51,16 +51,18 @@
 		</form>
 	     </div>
 	     <!-- /.card -->
-	     <div class="row" id="detailBtns">
-	     <div class="col-4">
-			<button type="button" id="backBtn" class="btn btn-block btn-primary btn-lg" >목록</button>
-	     </div>
-	      <div class="col-4">
-	      	<a class = "btn btn-block btn-primary btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a>
-	     </div>
-	      <div class="col-4" id="deleteBtn">
-				<a class = "btn btn-block btn-primary btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a>
-	     </div>
+	     <div class="col-12">
+	     	<div class="row" id="detailBtns">
+			     <div class="col-4">
+					<button type="button" id="backBtn" class="btn btn-block btn-success btn-lg" >목록</button>
+			     </div>
+			      <div class="col-4">
+			      	<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a>
+			     </div>
+			      <div class="col-4" id="deleteBtn">
+						<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a>
+			     </div>
+		     </div>
 	     </div>
 	 </div>
 	 </div>

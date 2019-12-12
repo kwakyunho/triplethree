@@ -26,11 +26,14 @@ tr:hover{background: whitesmoke;}
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/boardInsert}">공지사항 작성</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a href="#" style="color:#28a745;">Dashboard v3</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
+		<div class="col-4" >
+			<button type="button" class="btn btn-success" onclick="location.href='/boardInsert'" >공지사항 작성하기</button>
+	     </div>
 	</div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -39,9 +42,10 @@ tr:hover{background: whitesmoke;}
 	 <div class="col-12">
 	     <div class="card">
 	       <div class="card-header">
-	         <h3 class="card-title">공지사항 글 목록</h3>
+	         <h3 class="card-title">공지사항       </h3>
 	       </div>
-		<div class="card-body table-responsive p-0" style="height:700px;">
+	       
+		<div class="card-body table-responsive p-0" style="height:500px;">
 			<form class="boardListForm">
 				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
 					<thead>
@@ -71,9 +75,7 @@ tr:hover{background: whitesmoke;}
 	        <!-- /.card-body -->
 	     </div>
 	     <!-- /.card -->
-	     <div class="col-4" >
-			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardInsert'" >공지사항 작성하기</button>
-	     </div>
+	     
 	 </div>
  </div>
 <!-- /.row -->

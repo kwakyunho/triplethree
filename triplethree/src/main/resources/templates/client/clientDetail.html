@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>타이틀</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h3 class="m-0 text-dark">거래처 상세보기</h3>
+			</div>
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">거래처 상세보기</li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList}" style="color:#28a745">거래처 목록이동</a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="content">
+	<div class="container-fluid" th:each="c:${client}">
+				<div class="callout callout-info" style="border-left-color: #28a745">
+					<div class="col-12">
+						<h4 ><i class="fas fa-building" th:text="${c.accName}"></i></h4>
+					</div>
+					
+					<div class="col-12">
+						<p th:text="|${client.accAddr} ${client.accDetailAddr} ${client.accExtraAddr} 우편번호  ${client.accPostcode} |"></p>
+					</div>
+            	</div>
+            	
+				<div class="card">
+					<div class="card-header">
+						<div class="card-body p-0">
+							<table class="table table-condensed">
+								<tbody>
+									<tr>
+										<th >거래처종류</th>
+										<th th:text="${client.liCodeStr}"></th>
+										<th >거래여부</th>
+										<th th:text="${client.liCode2Str}"></th>
+									</tr>
+									<tr>
+										
+									</tr>
+									<tr>
+										<th>거래처 전화번호</th>
+										<th th:text="${client.accPhone}"></th>
+										<th>거래처 팩스번호</th>
+										<th th:text="${client.accFax}"></th>
+									</tr>
+									<tr>
+										<th>대표자 이름</th>
+										<th th:text="${client.accCeoName}"></th>
+										<th>대표자 전화번호</th>
+										<th th:text="${client.repreNumber}"></th>
+									</tr>
+									<tr>
+										<th>사업자 번호</th>
+										<th th:text="${client.accBln}"></th>
+										<th>이메일</th>
+										<th th:text="${client.accEmail}"></th>
+									</tr>
+									
+									
+								</tbody>
+							</table>
+						
+						</div>
+					</div>
+					
+				</div><!-- ./card -->
+				     	<div class="col-lg-12">
+						     <div class="row" id="detailBtns">
+						     	<div class="col-4">
+						     		<button type="button" id="backBtn" class="btn btn-block btn-success btn-lg" >목록</button>
+						     	</div>
+						     	<div class="col-4">
+						     		<a class="btn btn-block btn-success btn-lg" style="color:#ffffff;"  th:href="@{/clientUpdate(code=${client.code})}" >수정</a>
+						     	</div>
+						     	<div class="col-4" id="deleteBtn">
+						     		<a class="btn btn-block btn-success btn-lg" style="color:#ffffff;"  th:href="@{/clientDelete(code=${client.code})}">삭제</a>
+						     	</div>
+				     		</div>
+						</div>
+			     </div><!-- /.container-fluid -->
+</section>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script th:src="@{custom/js/clientCheck.js}"></script>
+
+</th:block>
+</html>

@@ -43,19 +43,18 @@
 	<!-- 거래처 항목구분(거래처구분 리스트 ) 가져오기 -->
 	<select id="getLicodeList" resultType="shop.triplethree.vo.Client">
 		select
-			s_section as liCode
-			,code as code
+			s_section as liCodeStr
+			,code as liCode
 		FROM
 			LIST_MANAGE
 		WHERE m_section='거래처구분'
-		
 	</select>
 	
 	<!-- 거래처 상태 가져오기 -->
 	<select id="getLicode2List" resultType="shop.triplethree.vo.Client">
 		select
-			s_section as liCode2
-			,code as code
+			s_section as liCode2Str
+			,code as liCode2
 		FROM
 			LIST_MANAGE
 		WHERE m_section='거래처상태'
@@ -70,6 +69,7 @@
 			, A.acc_name as acc_name
 			, A.acc_ceo_name as acc_ceo_name
 			, A.acc_addr
+			, A.acc_postcode
 			, A.acc_bln
 			, A.acc_fax 
 			, A.acc_phone
@@ -91,11 +91,14 @@
 	<select id="getClientBycode" parameterType="String" resultMap="clientResultMap">
 		SELECT
 				A.code
-				, B.s_section as li_code
-				, C.s_section as li_code2
+				, B.s_section as liCodeStr
+				, C.s_section as liCode2Str
 				, A.acc_name as acc_name
 				, A.acc_ceo_name as acc_ceo_name
 				,A.acc_addr
+				,A.acc_detailaddr
+				,A.acc_postcode
+				,A.acc_extraaddr
 				,A.acc_bln
 				,A.acc_fax 
 				,A.acc_phone

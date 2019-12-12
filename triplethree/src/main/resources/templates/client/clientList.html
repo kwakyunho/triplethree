@@ -26,7 +26,7 @@ tr:hover{background: whitesmoke;}
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">거래처 전체 리스트</li>
-					<li class="breadcrumb-item"><a th:href="@{/clientList2}">거래처(거래중) 목록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList2}"  style="color:#28a745;">거래처(거래중) 목록</a></li>
 					
 				</ol>
 			</div><!-- /.col -->
@@ -41,7 +41,7 @@ tr:hover{background: whitesmoke;}
        <div class="card-header">
          <h3 class="card-title">거래처 정보 리스트 ( 컬럼 늘리는거는 나중에 주석 풀어요 )</h3>
        </div><!--  /.card-header -->
-       <div class="card-body table-responsive p-0" style="height: 700px;" >
+       <div class="card-body table-responsive p-0" style="height: 500px;" >
        <form class="clientListForm">
          <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
              <thead>
@@ -51,7 +51,7 @@ tr:hover{background: whitesmoke;}
 	                 <th>거래여부</th>
 	                 <th>거래처명</th>
 	                 <th>대표자명</th>
-	                 <th>거래처번호</th>
+	                 <th>거래처 전화번호</th>
 	                 <!--   <th>사업장주소</th>
 	                 <th>사업자등록번호</th>
 	                 <th>팩스번호</th>
@@ -62,8 +62,8 @@ tr:hover{background: whitesmoke;}
 	                 <th>승인자</th>
 	                 <th>승인일</th>
 	                 <th>승인상태</th> -->
-	                 <th>수정</th>
-	                 <th>삭제</th>
+	                 <!-- <th>수정</th>
+	                 <th>삭제</th> -->
                </tr>
              </thead>
              <tbody>
@@ -84,13 +84,13 @@ tr:hover{background: whitesmoke;}
 						<td th:text="${c.approver}"></td>
 						<td th:text="${c.approDay}"></td>
 						<td th:text="${c.approverSt}"></td> -->
-						<td>
 						<!-- /modifyMember?memberId="값"&memberPw="값" -->
+						<!-- <td>
 						<a th:href="@{/clientUpdate(code=${c.code})}">수정</a>
 						</td>
 						<td>
 						<a th:href="@{/clientDelete(code=${c.code})}">삭제</a>
-						</td>
+						</td> -->
 					</tr>
           	</tbody>
        	</table>
@@ -114,7 +114,7 @@ $(document).ready(function(){
 		var clientCode = clientUrl.attr('id');
 		$('input[name=code]').val(clientCode);
 		$('.clientListForm').attr('method','POST');
-		$('.clientListForm').attr('action','/clientDetail');
+		$('.clientListForm').attr('action','/clientDetail'); // 나중에 detail 로 수정
 		$('.clientListForm').submit();
 		
 	});

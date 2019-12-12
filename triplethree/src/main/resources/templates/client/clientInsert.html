@@ -17,8 +17,8 @@
 			</div><!-- /.col -->
 			<div class="col-sm-12">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a th:href="@{/clientList}">거래처관리</a></li>
 					<li class="breadcrumb-item">거래처등록</li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList}" style="color:#28a745;" >거래처목록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -30,7 +30,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<form role="form" class="form-horozontal" action="/clientInsert" method="post">
+				<form role="form" id="formInput" class="form-horozontal" action="/clientInsert" method="post">
 				<div class="card card-primary">
 				
 				   <div class="card-body">
@@ -44,7 +44,7 @@
 				   		<label class="col-sm-2 col-form-label">거래처종류</label>
 				   		 <div class="col-sm-4">
 					   		 <select class="form-control" name="liCode" >
-					   		 	<option th:each="l :${liCode}" th:value="${l.code}" th:text="${l.liCode}"></option>
+					   		 	<option th:each="l :${liCode}" th:value="${l.liCode}" th:text="${l.liCodeStr}"></option>
 				   		 	</select>
 				  		 </div>
 				   </div>
@@ -179,8 +179,8 @@
 				
 				<div class="card-footer">
 					<button type="button" id="backBtn" class="btn btn-success float-auto">이전으로 </button>
-					<input type="submit" value="거래처등록하기" class="btn btn-success float-right">
-					<!-- <button type="submit" class="btn btn-primary">등록하기</button> -->
+					<!-- <input type="submit" value="거래처등록하기" class="btn btn-success float-right"> -->
+					<button type="submit" id="insertBtn" class="btn btn-success float-right">등록하기</button>
 				</div><!--  card footer -->
 				
 				
@@ -194,14 +194,6 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-<script type="text/javascript">
-	$(function(){
-		$('#backBtn').on('click',function(){
-		history.go(-1); 
-		 });
-	});
-</script>
+<script th:src="@{custom/js/clientCheck.js}"></script>
 </th:block>
 </html>
