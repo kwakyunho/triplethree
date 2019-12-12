@@ -1,5 +1,6 @@
 package shop.triplethree.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,6 +19,6 @@ public interface WorkAttitudeMapper {
 	public int endUpdateWorkAttitude(Map<String, String> json);
 	
 	// 근태목록 리스트 조회
-	public WorkAttitudeVo selectWorkAttitude();
+	public List<WorkAttitudeVo> selectWorkAttitudeList();
 	
 }

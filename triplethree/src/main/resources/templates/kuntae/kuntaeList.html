@@ -48,7 +48,7 @@ tbody tr:hover{background: whitesmoke;}
 					</div> -->
 					<!-- /.card-header -->
 					<div class="card-body">
-						<table id="workTimeTable" class="table table-bordered">
+						<table id="workTimeTable" class="table table-bordered" style="text-align: center;">
 						
 							<thead>
 								<tr>
@@ -64,15 +64,15 @@ tbody tr:hover{background: whitesmoke;}
 							</thead>
 							
 							<tbody>
-								<tr>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-									<td>X</td>
-									<td>X</td>
-									<td>X</td>
-									<td>X</td>
+								<tr class="workAttListTable" th:each="W, index : ${WorkAttitudeVoList}">
+									<td class="workAttListTableNum" th:text="${index.index+1}"></td>
+									<td th:text="${W.day}"></td>
+									<td th:text="${W.startWorkTime}"></td>
+									<td th:text="${W.endWorkTime}"></td>
+									<td th:text="${W.userId}"></td>
+									<td th:text="${W.demgName}"></td>
+									<td th:text="${W.poName}"></td>
+									<td th:text="${W.userName}"></td>
 								</tr>
 							</tbody>
 							<!-- <tfoot>
@@ -96,17 +96,106 @@ tbody tr:hover{background: whitesmoke;}
 	</div>
 	<!-- /.container-fluid -->
 </div>
+
+<!-- 모달 사용 시작 -->
+<div class="modal fade" id="workAttListModal" tabindex="-1" role="dialog" aria-labelledby="workAttListModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="workAttCode"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="float:left;">
+				<form style="font-size: 1.0rem;">
+					<div class="form-group col-md-6" style="float:left;" id="day">
+						<label for="recipient-name" class="col-form-label">일자</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="demgName">
+						<label for="recipient-name" class="col-form-label">부서명</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="poName">
+						<label for="recipient-name" class="col-form-label">직급명</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="userName">
+						<label for="recipient-name" class="col-form-label">사원명</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="startWorkTime">
+						<label for="recipient-name" class="col-form-label">출근시간</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="endWorkTime">
+						<label for="recipient-name" class="col-form-label">퇴근시간</label>
+						<input type="time">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary sendBtn">Send message</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 모달 사용 종료 -->
 </th:block>
 
 <th:block layout:fragment="customScript">
 <!-- DataTables -->
 <script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+
 <!-- page script -->
 <script>
   $(function () {
     $('#workTimeTable').DataTable();
   });
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+$(document).ready(function(){
+	 var table = $('#workTimeTable').DataTable();
+     
+    $('#workTimeTable tbody').on('click', 'tr', function () {
+		
+		var workAttData = {};
+		workAttData = [[${WorkAttitudeVoList}]];
+		
+		var num = $(this).children('.workAttListTableNum').text() - 1;
+		
+		var workAttCode = workAttData[num].workAttCode;
+		var day = workAttData[num].day;
+		var userCode = workAttData[num].userCode;
+		var demgName = workAttData[num].demgName;
+		var poName = workAttData[num].poName;
+		var userName = workAttData[num].userName;
+		var startWorkTime = workAttData[num].startWorkTime;
+		var endWorkTime = workAttData[num].endWorkTime;
+		var startOutSideTime = workAttData[num].startOutSideTime;
+		var endOutSideTime = workAttData[num].endOutSideTime;
+		var userId = workAttData[num].userId;
+		var adminId = workAttData[num].adminId;
+		var adminInsertDt = workAttData[num].adminInsertDt;
+		var coment = workAttData[num].coment;
+		
+		$('#workAttListModal').modal('show');
+		
+		$('.text-muted').remove();
+		
+		$('#workAttCode').text(workAttCode);
+		$('#day').append('<p class="text-muted">' + day + '</p>');
+		$('#demgName').append('<p class="text-muted">' + demgName + '</p>');
+		$('#poName').append('<p class="text-muted">' + poName + '</p>');
+		$('#userName').append('<p class="text-muted">' + userName + '</p>');
+		$('#startWorkTime').append('<p class="text-muted">' + startWorkTime + '</p>');
+		$('#endWorkTime').append('<p class="text-muted">' + endWorkTime + '</p>');
+		
+	});
+	
+	$('.sendBtn').on('click', function(){
+		//<input type="text" class="form-control">
+	});
+});
 </script>
 </th:block>
 </html>

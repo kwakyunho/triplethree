@@ -1,5 +1,6 @@
 package shop.triplethree.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,7 @@ public class WorkAttitudeService {
 	}
 	
 	// 근태목록 리스트 조회
-	public WorkAttitudeVo selectWorkAttitude() {
-		//return workAttMapper.selectWorkAttitude();
-		return null;
+	public List<WorkAttitudeVo> selectWorkAttitudeList() {
+		return workAttMapper.selectWorkAttitudeList();
 	}
 }

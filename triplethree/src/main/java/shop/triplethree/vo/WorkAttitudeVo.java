@@ -6,6 +6,7 @@ public class WorkAttitudeVo {
 	private String userCode;	// 사원코드
 	private String demgName;	//부서명
 	private String poName;	//직급명
+	private String userName;	//사원명
 	private String day;	// 일자
 	private String startWorkTime;	// 출근시간
 	private String endWorkTime;	// 퇴근시간
@@ -41,6 +42,12 @@ public class WorkAttitudeVo {
 	}
 	public void setPoName(String poName) {
 		this.poName = poName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getDay() {
 		return day;
@@ -112,9 +119,9 @@ public class WorkAttitudeVo {
 	@Override
 	public String toString() {
 		return "WorkAttitudeVo [workAttCode=" + workAttCode + ", userCode=" + userCode + ", demgName=" + demgName
-				+ ", poName=" + poName + ", day=" + day + ", startWorkTime=" + startWorkTime + ", endWorkTime="
-				+ endWorkTime + ", startOutSideTime=" + startOutSideTime + ", endOutSideTime=" + endOutSideTime
-				+ ", userId=" + userId + ", insertDt=" + insertDt + ", adminUpdateYn=" + adminUpdateYn + ", adminId="
-				+ adminId + ", adminInsertDt=" + adminInsertDt + ", coment=" + coment + "]";
+				+ ", poName=" + poName + ", userName=" + userName + ", day=" + day + ", startWorkTime=" + startWorkTime
+				+ ", endWorkTime=" + endWorkTime + ", startOutSideTime=" + startOutSideTime + ", endOutSideTime="
+				+ endOutSideTime + ", userId=" + userId + ", insertDt=" + insertDt + ", adminUpdateYn=" + adminUpdateYn
+				+ ", adminId=" + adminId + ", adminInsertDt=" + adminInsertDt + ", coment=" + coment + "]";
 	}
 }
