@@ -63,7 +63,8 @@ $(function () {
       header    : {
         left  : 'prev,next today',
         center: 'title',
-        right : 'dayGridMonth'
+        //right : 'dayGridMonth'
+        right : ''
       },
       
       editable  : true,
@@ -83,7 +84,7 @@ $(function () {
     		  async : true,
     		  type : 'POST',
     		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
-    		  url : "companySchedule",
+    		  url : "assetsManageCaSelect",
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
@@ -92,24 +93,30 @@ $(function () {
     				  for(var i=0; i < data.length; i++){
     					  var dataObj = data[i];
     					  var code = dataObj.code;    
-    					  var sortation = dataObj.sortation;
+    					  //var sortation = dataObj.sortation;
     					  //console.log(sortation);
-    					  var start = dataObj.start;
-    					  var end = moment(dataObj.end).add(1,'day').format('YYYY-MM-DD');
-    					  var title = (sortation +'\n'+ dataObj.title);
-    					  var color = dataObj.color;
-    					  var backgroundColor = dataObj.backgroundColor;
+    					  var start = dataObj.reStart;
+    					  var end = moment(dataObj.reEnd);
+    					  //var end = moment(dataObj.reEnd).add(1,'day').format('YYYY-MM-DD');
+    					  var name = (dataObj.deName+'\-'+dataObj.empName+'\n예약차량:'+dataObj.veName+'\n'+'예약시작:'+moment(start).format('A.HH시mm분')+'\n예약끝:'+moment(end).format('A.HH시mm분'));
+    					  var color = 'white';
+    					  var backgroundColor = 'black';
     					  //console.log(code);
+    					  //console.log(start);
+    					  //console.log(end);
+    					  //console.log(name);
+    					  //console.log(color);
+    					  //console.log(backgroundColor);
     					  var dateObject = {
-    						  	  id				: code,
-    							  title 			: title,
-    							  start 			: new Date(start),
-    							  end 				: new Date(end),
-		    					  allDay         	: true,
-		    					  editable			: false,
-		    					  className			: 'calendarDayClickEv',
-		    					  textColor			: color,
-		    			          backgroundColor	: backgroundColor
+    						  	  id				: code
+    							  ,title 			: name
+    							  ,start 			: new Date(start)
+    							  ,end 				: new Date(end)
+		    					  ,allDay         	: true
+		    					  ,editable			: false
+		    					  ,className		: 'calendarDayClickEv'
+		    					  ,textColor		: color
+		    			          ,backgroundColor	: backgroundColor
     					  }; 
     					  dateArray.push(dateObject);
     				  }    
@@ -145,20 +152,22 @@ $(function () {
         		  async : true,
         		  type : 'POST',
         		  data : {code : code, sid : sid},
-        		  url : "selectUpdate",
+        		  url : "selectCarUpdate",
         		  datetype : "json",
         		  success : function(data){
-        			  console.log(sid);
-        			  console.log(data.sid);
-        			  if(sid == data.sid){
+        			  //console.log(code);
+        			  //console.log(sid);
+        			  //console.log(data.empCode);
+        			  //console.log(data.reStart);
+        			  //console.log(data.reEnd);
+        			  if(sid == data.empCode){
         				$('#myModal2').modal('show');
         			  // input 창에 data에서 조회한 값을 처리해준다.
-        			  $('input[name=title]').attr('value', data.title);
-        			  $('input[name=start]').attr('value', data.start);
-        			  $('input[name=end]').attr('value', data.end);
-        			  $('input[name=code]').attr('value', data.code);
+        			  $('input[name=reStart]').attr('value', moment(data.reStart).format("HH-mm"));
+        			  $('input[name=reEnd]').attr('value', data.reEnd);
+        			  $('input[name=code]').attr('value', data.code)
         			  }else{
-        				  alert('수정 할 수 없습니다.')
+        				  alert('본인 예약만 수정 할 수 있습니다.')
         			  }
         			  
         		  },
@@ -225,30 +234,29 @@ $(function () {
 	  
 	$('#insertBtn').click(function(){
 		  if(confirm('예약 하시겠습니까?')){
-		  $('#formInsert').attr('action', 'companyScheduleInsert').submit();
+		  $('#formInsert').attr('action', 'assetsManageCaInsert').submit();
 		  }
 	});
 	  
 	$('#updateBtn').click(function(){
 		  if(confirm('예약 내용을 수정하시겠습니까?')){
-		  $('#formId').attr('action', 'companyScheduleUpdate').submit();
+		  $('#formUpdateId').attr('action', 'assetsManageCaUpdate').submit();
 		  }
 	});
 	  
 	  $('#deleteBtn').click(function(){
 		  if(confirm('예약을 취소하시겠습니까?')){
-		  $('#formId').attr('action', 'companyScheduleDelet').submit();
+		  $('#formId').attr('action', 'assetsManageCaDelete').submit();
 		  }
 	});	 
 });
  
 // 시설,차량 셀렉트 박스 클릭에 따른 하위 내용 뿌려주기 위한 스크립트
 $(function(){
-	$('#sortation').change(function(){
+	$('#veCode').change(function(){
 		console.log('값이 변경 되었어요.');
-		
 		// option의 경우 select박스에 속한것으로 children으로 해서 value를 뽑지 않는다.
-		var check = $('#sortation').val();
+		var check = $('#veCode').val();
 		console.log(check);
 		
 	 });

@@ -62,23 +62,25 @@
 												<table style="text-align: center;">
 													<tr>
 														<td style="width: 150px;">차량명</td>
-														<td><select class="form-control form-control-lg"
-															style="font-size: medium;" name="sortation" id="sortation">
-																<option id="op" value="차량">차량</option>
-																<option id="op" value="시설">시설</option>
-														</select></td>
+														<td>
+															<select class="form-control form-control-lg"
+																style="font-size: medium;" name="veCode" id="veCode">
+																	<option th:each="s : ${selectBox}" th:text="${s.veName}" th:value="${s.veCode}"></option>
+															</select>
+														</td>
+
 													</tr>
 													<tr>
 														<td style="width: 150px;">사용 시작일</td>
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
-															id="start" name="start"></td>
+															id="reStart" name="reStart"></td>
 													</tr>
 													<tr>
 														<td style="width: 150px;">사용 종료일</td>
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
-															id="end" name="end"></td>
+															id="reEnd" name="reEnd"></td>
 													</tr>
 												</table>
 											</div>
@@ -104,13 +106,13 @@
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form th:action="@{#}" method="post" id="formId">
+					<form th:action="@{#}" method="post" id="formUpdateId">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">일정 수정하기</h4>
+							<h4 class="modal-title" id="myModalLabel">예약 수정하기</h4>
 						</div>
 						<div class="modal-body">
 							<div class="content">
@@ -121,23 +123,26 @@
 												<table style="text-align: center;">
 													<tr>
 														<td style="width: 150px;">차량명</td>
-														<td><select class="form-control form-control-lg"
-															style="font-size: medium;" name="sortation">
-																<option value="차량">차량</option>
-																<option value="시설">시설</option>
-														</select></td>
+														<td>
+															<select class="form-control form-control-lg"
+																style="font-size: medium;" name="veCode" id="veCode">
+																	<option th:each="s : ${selectBox}" th:text="${s.veName}" th:value="${s.veCode}"></option>
+															</select>
+															<input type="hidden" name="code">
+														</td>
+
 													</tr>
 													<tr>
 														<td style="width: 150px;">사용 시작일</td>
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
-															id="start" name="start"></td>
+															id="reStart" name="reStart"></td>
 													</tr>
 													<tr>
 														<td style="width: 150px;">사용 종료일</td>
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
-															id="end" name="end"></td>
+															id="reEnd" name="reEnd"></td>
 													</tr>
 												</table>
 											</div>
@@ -207,6 +212,6 @@
 <!-- Page specific script -->
 <script th:src=@{custom/js/assetsCarManage.js}></script>
 <!-- 세션의 사원번호를 저장하는 스크립트 -->
-<script type="text/javascript" th:inline="javascript"> var sid = [[${session.SCODE}]] </script>
+<script type="text/javascript" th:inline="javascript"> var sid = [[${session.SID}]] </script>
 </th:block>
 </html>

@@ -4,7 +4,9 @@ public class AssetsManage {
 
 	private String code; // 예약관리코드
 	private String division; // 시설,차량구분
-	private String empCode; //사원관리코드(예약자)
+	private String empCode; // 사원관리코드(예약자)
+	private String empName; // 예약자명
+	private String deName; // 부서명
 	private String coName; // 시설,차량 관리코드
 	private String reReq; // 신청일자(작성일)
 	private String reStart; // 사용시작일
@@ -20,6 +22,18 @@ public class AssetsManage {
 	private String beLocal; // 시설위치
 	private String beSeat; // 수용인원
 	
+	public String getDeName() {
+		return deName;
+	}
+	public void setDeName(String deName) {
+		this.deName = deName;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
 	public String getCode() {
 		return code;
 	}
@@ -122,13 +136,12 @@ public class AssetsManage {
 	public void setBeSeat(String beSeat) {
 		this.beSeat = beSeat;
 	}
-	
 	@Override
 	public String toString() {
-		return "AssetsManage [code=" + code + ", division=" + division + ", empCode=" + empCode + ", coName=" + coName
-				+ ", reReq=" + reReq + ", reStart=" + reStart + ", reEnd=" + reEnd + ", reCom=" + reCom
-				+ ", reComCheck=" + reComCheck + ", reCheckName=" + reCheckName + ", veCode=" + veCode + ", veName="
-				+ veName + ", veNumber=" + veNumber + ", beCode=" + beCode + ", beName=" + beName + ", beLocal="
-				+ beLocal + ", beSeat=" + beSeat + "]";
+		return "AssetsManage [code=" + code + ", division=" + division + ", empCode=" + empCode + ", empName=" + empName
+				+ ", deName=" + deName + ", coName=" + coName + ", reReq=" + reReq + ", reStart=" + reStart + ", reEnd="
+				+ reEnd + ", reCom=" + reCom + ", reComCheck=" + reComCheck + ", reCheckName=" + reCheckName
+				+ ", veCode=" + veCode + ", veName=" + veName + ", veNumber=" + veNumber + ", beCode=" + beCode
+				+ ", beName=" + beName + ", beLocal=" + beLocal + ", beSeat=" + beSeat + "]";
 	}
 }

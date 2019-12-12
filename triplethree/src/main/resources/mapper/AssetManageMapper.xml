@@ -16,26 +16,99 @@
 	<result property="reComCheck" column="re_com_check"/>
 	<result property="reCheckName" column="re_check_name"/>
 	<result property="veCode" column="code"/>
-	<result property="veName" column="code"/>
-	<result property="veNumber" column="code"/>
+	<result property="veName" column="ve_name"/>
+	<result property="veNumber" column="ve_number"/>
 	<result property="beCode" column="code"/>
-	<result property="beName" column="code"/>
-	<result property="beLocal" column="code"/>
-	<result property="beSeat" column="code"/>
+	<result property="beName" column="fa_name"/>
+	<result property="beLocal" column="fa_local"/>
+	<result property="beSeat" column="fa_seat"/>
 </resultMap>
 
 <!-- 차량 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
-<select id="selectBox">
+<select id="selectBox" resultMap="AssetsManage">
 	SELECT
-		a.code
-		,a.ve_name
-		,a.ve_number
+		code
+		,ve_name
+		,ve_number
 	FROM
-		VE_MANAGE AS a
+		VE_MANAGE
 	WHERE
-		a.ve_state ='사용가능'
+		ve_state ='사용가능'
 	AND
-		a.ve_use = '출장용'
+		ve_use = '출장용'
 </select>
 
+<!-- 차량 예약 등록 쿼리문  -->
+<insert id="insertCarManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	INSERT INTO
+		RESER_MANAGE
+		(code
+		,division
+		,emp_code
+		,co_name
+		,re_req
+		,re_start
+		,re_end)
+		VALUES
+		(#{code}
+		,'차량'
+		,#{empCode}
+		,#{veCode}
+		,NOW()
+		,#{reStart}
+		,#{reEnd})
+</insert>
+
+<!-- 달력에 차량 예약 현황 보여줄 쿼리문 -->
+<select id="selectCarManageAsset" parameterType="shop.triplethree.vo.AssetsManage" resultMap="AssetsManage">		
+	SELECT
+		r.code
+		,r.co_name
+		,r.emp_code
+		,r.re_start
+		,r.re_end
+		,e.emp_name AS empName
+		,v.ve_name
+		,d.dename AS deName
+	FROM
+		RESER_MANAGE AS r
+	LEFT JOIN
+		EMP_MANAGE AS e
+	ON
+		r.emp_code = e.emp_num 
+	LEFT JOIN
+		VE_MANAGE AS v
+	ON	
+		r.co_name = v.code
+	LEFT join
+		DEMG	AS d
+	ON 
+		e.demgcode = d.code
+</select>
+
+<!-- 차량 일정 수정시 모달에 뿌려줄 값을 찾는 쿼리문 -->
+<select id="selectCarUpdate" parameterType="String" resultMap="AssetsManage">
+	SELECT
+		r.code
+		,r.re_start
+		,r.re_end
+		,r.emp_code
+	FROM 
+		RESER_MANAGE AS r
+	WHERE
+		r.CODE = #{code}
+</select>
+
+<!-- 차량 일정 수정 쿼리문 -->
+<update id="updateCarManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	UPDATE
+		RESER_MANAGE AS r
+	SET
+		r.co_name = #{veCode}
+		,r.re_req = NOW()
+		,r.re_start = #{reStart}
+		,r.re_end = #{reEnd}
+	WHERE
+		r.CODE = #{code}
+</update>
 </mapper>

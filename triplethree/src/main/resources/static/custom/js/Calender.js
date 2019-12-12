@@ -61,7 +61,8 @@
       header    : {
         left  : 'prev,next today',
         center: 'title',
-        right : 'dayGridMonth'
+        //right : 'dayGridMonth'
+        right : ''
       },
       
       /*구글캘린더 추가 시작*/
