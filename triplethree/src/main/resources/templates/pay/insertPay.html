@@ -38,7 +38,7 @@
 			<div class="col-5">
 				<div class="card">
 					<div align="center">사원목록</div>						
-							<form action="/insertPay" method="post">
+						<form action="/insertPay" method="post" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
 									<option value="">검색조건</option> 
@@ -65,18 +65,21 @@
 						<th align="center">부서명</th>
 						<th align="center">직급</th>
 						<th align="center">급여입력</th>
+
 							
 												
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						 <tr th:each="e :${insertSearchPay}">
-						 <td th:text="${e.empNum}"></td>
-						 <td th:text="${e.empName}"></td>					 										
-						 <td th:text="${e.demgName}"></td>										
-						 <td th:text="${e.poName}"></td>										
-						 <td><input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary"></td>
-						 			
-						</tr>										
+					<tr class="insertPay" th:each="e :${insertSearchPay}">
+						<td id="empNum"th:text="${e.empNum}"></td>		
+						<td id="empName"th:text="${e.empName}"></td>					 										
+						<td id="demgName"th:text="${e.demgName}"></td>										
+						<td id="poName"th:text="${e.poName}"></td>															
+							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
+						<td>
+							<input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary choiceBtn">
+						</td>
+					</tr>										
 				</table>
 				</div>
 				<!-- /.card -->
@@ -92,7 +95,7 @@
 						<th>지급금액</th>
 					</tr>
 					<tr><td>기본급</td>
-						<td><input type="text" name="basicPay" class="form-control col-12"></td></tr>
+						<td><input type="text" id="basicPay" name="basicPay" class="form-control col-12"></td></tr>
 					<tr><td>야간근무수당</td>								
 						<td><input type="text" name="benefit" class=" form-control col-12"></td></tr>									
 					<tr><td>휴일근무수당</td>				
@@ -182,7 +185,10 @@ $(document).ready(function(){
 
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
+<script th:src="@{custom/js/Pay.js}"></script>
+<script type="text/javascript"th:inline="javascript">
+var insertSearchPay=[[${insertSearchPay}]];
+console.log(insertSearchPay);
+</script>
 </th:block>
 </html>

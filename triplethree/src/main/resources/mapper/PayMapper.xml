@@ -46,7 +46,8 @@
 	em.emp_num as empNum,
 	em.emp_name as empName,
 	p.poname as poName,
-	de.dename as demgName
+	de.dename as demgName,
+	em.basic_pay AS basicPay
 	FROM (
 	SELECT em.*
 			FROM EMP_MANAGE em

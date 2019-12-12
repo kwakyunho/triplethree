@@ -25,14 +25,8 @@ public class PayController {
 		return "pay/insertPay";	
 	}
 	/**급여 입력할 사람 선택시**/
-	@GetMapping("/insertPay")
-	public String insertPay() {
-		return "redirect/insertPay";
-	}
-	
-	
-	
-	
+
+
 	
 	/**급여 등록 검색**/
 	@PostMapping("/insertPay")
@@ -42,6 +36,7 @@ public class PayController {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
+		
 		return "pay/insertPay";	
 	}
 	
