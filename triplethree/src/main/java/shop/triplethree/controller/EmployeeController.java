@@ -229,4 +229,14 @@ public class EmployeeController {
 	 public String employeeMyMoveList() {
 		 return "/employee/employeeMyMoveList";
 	 }
+	 
+	 /**
+	  * 모든 회원의 인사이동 목록을 보여주고 승인처리하는 화면 
+	  * @return
+	  */
+	 @GetMapping("/employeeAllMoveList")
+	 public String employeeAllMoveList() {
+		 return "/employee/employeeAllMoveList";
+	 }
+	 
 }

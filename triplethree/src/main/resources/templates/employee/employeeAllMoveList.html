@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>사원 목록</title>
+	<title>전체사원 인사이동 목록</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -17,14 +17,14 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">사원 관리 - 사원 조회</h1>
+					<h1 class="m-0 text-dark">사원 관리 - 전체사원 인사이동 목록</h1>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/index">Home</a></li>
 						<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
-						<li class="breadcrumb-item">사원 조회</li>
+						<li class="breadcrumb-item"><a href="/employeeMyMoveList">전체사원 인사이동 목록</a></li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -40,12 +40,9 @@
 		<div class="row" style="margin-left:auto;">
 			<div class="col-2">
 				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/employeeInsert'">사원 등록</button>
+					onclick="location.href='/employeeList'">사원 목록으로 가기</button>
 			</div>
-			<div class="col-2">	
-				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/employeeAllMoveList'">인사이동 목록으로 가기 </button>
-			</div>
+			
 		</div>
 		</div>
 		<br>	
@@ -74,41 +71,36 @@
 	                      <th>사원명</th>
 	                      <th>부서</th>
 	                      <th>직급</th>
-	                      <th>이메일</th>
-	                      <th>차량유무</th>
+	                      <th>변경부서</th>
+	                      <th>변경직급</th>
 	                      <th>재직상태</th>
-	                      <th>상세보기</th>
-	                      <th>수정</th>
-	                      <th>삭제(재직상태변경)</th>
+	                      <th>승인자</th>
+	                      <th>승인일자</th>
+	                      
                     </tr>
-                    <tr th:each="e :${emList}">
-						<td th:text="${e.empNum}"></td>
-						<td th:text="${e.empName}"></td>
-						<td th:text="${e.demgName}"></td>
-						<td th:text="${e.poName}"></td>
-						<td th:text="${e.email}"></td>
-						<td th:text="${e.carPresence}"></td>
-						<td th:text="${e.liName}"></td>
-						<td>
+                    <tr >
+						<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+						<!-- <td>
 							<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
 						</td>
 						<td>
-							<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
+							<a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
 							<a th:href="@{/employeeUpdate(empNum=${e.empNum})}">수정</a>
-						</td>
-						<td>
-							<a th:href="@{/}">삭제</a>
-						</td>
+						</td> -->
+						
 					</tr>
                   </thead>
                   <tbody>
-                   <!--  <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr> -->
+                   
                    
                   </tbody>
                 </table>
