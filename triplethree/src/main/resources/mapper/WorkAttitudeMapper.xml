@@ -6,8 +6,12 @@
 <mapper namespace="shop.triplethree.mapper.WorkAttitudeMapper">
 
 	<resultMap type="shop.triplethree.vo.WorkAttitudeVo" id="WorkAttitudeResultMap">
+		<result property="listNum" column="num"></result>
 		<result property="workAttCode" column="code"></result>
-		<result property="userNum" column="emp_code"></result>
+		<result property="userCode" column="emp_code"></result>
+		<result property="demgName" column="dename"></result>
+		<result property="poName" column="poname"></result>
+		<result property="userName" column="emp_name"></result>
 		<result property="day" column="annual"></result>
 		<result property="startWorkTime" column="attendance"></result>
 		<result property="endWorkTime" column="leavework"></result>
@@ -43,5 +47,19 @@
 		ON A.code = B.code
 		SET A.leavework = NOW();
 	</update>
+	
+	<select id="selectWorkAttitudeList" resultMap="WorkAttitudeResultMap">
+		SELECT A.*, C.dename, D.poname, B.emp_name
+		FROM ABS_MANAGE A
+		
+		LEFT JOIN EMP_MANAGE B
+		ON A.emp_code = B.code
+		
+		LEFT JOIN DEMG C
+		ON B.demgcode = C.code
+		
+		LEFT JOIN POSISYS D
+		ON B.pocode = D.code;
+	</select>
 	
 </mapper>
