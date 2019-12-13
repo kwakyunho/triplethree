@@ -115,6 +115,7 @@ public class BoardController {
 		System.out.println("***********************");
 		System.out.println("******deleteBoard처리***");
 		System.out.println("***********************");
+		System.out.println(code + "code가 넘어왔니???");
 		boardservice.deleteBoard(code);
 		
 		return "redirect:/boardList";
