@@ -46,8 +46,6 @@ public interface CompanyMapper {
 	// 직급명 유효성 검사 메서드
 	public int checkPoName(Position position);
 	
-    //회사정보 등록	
-	public int insertCompany(Company company);
 	
 	//회사정보 조회
 	public List<Company> selectCompany();
@@ -63,5 +61,8 @@ public interface CompanyMapper {
 	
 	//회사휴업or폐업유무
 	public int deleteCompany(Company company);
+	
+	//회사정보코드 자동생성 및 정보등록
+	public int insertCompany(Company company);
 	
 }

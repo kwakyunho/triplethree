@@ -129,10 +129,18 @@
 						});				
 					</script>  			
 			 <!--작성자는 나중에 세션걸꺼니까 지울꺼임 지금은 테스트중이니까 살리고  -->
-	   			<label class="col-sm-2 col-form-label">작성자</label>
-	   		<div class="col-sm-4">	
-	   			<input type="text" name="writer" size="5" class="form-control col-6"th:value="${companyDetail.writer}" readonly="readonly">
-			</div>	   		                
+	   		
+			  <div class="form-group row col-12">	  
+   			   			<label class="col-sm-2 col-form-label">작성자</label>
+	   		<div class="col-sm-4">
+		   			<input type="text" name="writer" size="5" class="form-control col-6"th:value="${companyDetail.writer}" readonly="readonly">
+				</div>
+		   			<label class="col-sm-2 col-form-label">현재상태</label>
+		   		 <div class="col-sm-4">
+		   			<input type="tel" name="coPhone" 
+		   			size="20" class="form-control col-12" th:value="${companyDetail.coReason}" readonly="readonly">
+	   		</div>	
+	   		</div> 	   		                
                    </div>  
 	                <!-- /.card-body -->
 					<div class="card-footer">

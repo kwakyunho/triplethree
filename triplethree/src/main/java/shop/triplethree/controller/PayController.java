@@ -24,9 +24,9 @@ public class PayController {
 		
 		return "pay/insertPay";	
 	}
-	/**급여 입력할 사람 선택시**/
-
-
+	
+	
+	
 	
 	/**급여 등록 검색**/
 	@PostMapping("/insertPay")

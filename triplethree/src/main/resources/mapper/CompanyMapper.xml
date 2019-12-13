@@ -180,7 +180,7 @@
 			P.poname = #{positionNameBe}
 	</select>
 	<!--회사정봉 등록  -->
-	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+	<!-- <insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
 	INSERT INTO
 	EM_INFO
 		(code,co_name,co_ceoname,co_postcode,co_addr,co_detailaddr,co_extraaddr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
@@ -199,8 +199,8 @@
 		,#{coLogo}
 		,#{writer}
 		,now()
-	)
-	</insert>
+	) 
+	</insert>-->
 	<!--회사 정보 조회  -->
 	<select id="selectCompany" resultType="shop.triplethree.vo.Company">
 	select
@@ -301,6 +301,40 @@
 			em.yes_or_no  = 'N' 
 			,em.co_reason = '폐업'
 		WHERE 
-			em.code=#{Code}
+			em.co_name=#{coName}
 	</update>
+	
+		<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+		INSERT INTO
+			EM_INFO(
+				code
+				,co_name
+				,co_ceoname
+				,co_postcode
+				,co_addr
+				,co_detailaddr
+				,co_extraaddr
+				,co_bln
+				,co_fax
+				,co_phone
+				,co_email
+				,co_logo
+				,writer
+				,writer_day)
+		VALUES
+			(#{Code}
+			,#{coName}
+			,#{coCeoname}
+			,#{coPostCode}
+			,#{coAddr}
+			,#{coDetailAddr}
+			,#{coExtraAddr}
+			,#{coBin}
+			,#{coFax}
+			,#{coPhone}
+			,#{coEmail}
+			,#{coLogo}
+			,#{sid}
+			,NOW())
+	</insert>
 </mapper>

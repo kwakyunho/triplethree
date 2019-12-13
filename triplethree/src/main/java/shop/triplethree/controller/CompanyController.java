@@ -20,7 +20,13 @@ public class CompanyController {
 
 	@Autowired private CompanyService companyService;
 	@Autowired private CompanyMapper companyMapper;
-
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 메뉴에서 부서관리탭을 누르고 들어올때 실행
 	 * 리스트를 불러옴
@@ -160,12 +166,18 @@ public class CompanyController {
 		System.out.println("회사정보입력화면");
 		return "company/information/companyInsert";	
 	}
-	/**회사정보 입력처리**/
+	/**회사정보 입력처리 및 코드생성**/
+
 	@PostMapping("/companyInsert")
-	public String insertCompany(Company company) {
+	public String insertCompany(Company company, HttpSession session) {
+
+		String sid = (String) session.getAttribute("SID");
+		
+		company.setSid(sid);
 		companyService.insertCompany(company);
-		System.out.println(company.toString()+"company");
-		return "redirect:/";
+		
+		
+		return "redirect:";
 	}
 	
 	/**회사정보 조회**/
