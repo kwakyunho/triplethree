@@ -21,7 +21,7 @@ public class BoardController {
 	 * @param code
 	 * */
 	@PostMapping("/boardDetail")
-	public String selectDetail(@RequestParam(value="code", required = false) String code, Model model) {
+	public String goToDetail(@RequestParam(value="code", required = false) String code, Model model) {
 		//code로 선택된 글의 정보를 board 에 담아서 보내기
 		System.out.println("controller - code : " + code);
 		model.addAttribute("board", boardservice.getBoardByCode(code));
@@ -61,7 +61,8 @@ public class BoardController {
 	@GetMapping("/boardList")
 	public String boardList(Model model) {
 		model.addAttribute("boardList", boardservice.boardList());
-		return "/board/boardList";
+		
+		return "/boARD/boardList";
 	}
 	
 	/**
@@ -114,6 +115,7 @@ public class BoardController {
 		System.out.println("***********************");
 		System.out.println("******deleteBoard처리***");
 		System.out.println("***********************");
+		System.out.println(code + "code가 넘어왔니???");
 		boardservice.deleteBoard(code);
 		
 		return "redirect:/boardList";

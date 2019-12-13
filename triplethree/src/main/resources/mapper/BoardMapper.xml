@@ -13,7 +13,10 @@
 		<result column="writer" property="writer"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
-	
+	<!-- 조회수 증가  -->
+	<update id="updateCnt" parameterType="String">
+		update BOARD set board_count = board_count + 1 where code=#{code}
+	</update>
 	<!--게시글 삭제하기 -->
 	<delete id="deleteBoard" parameterType="String">
 	 	Delete from BOARD where code=#{code}
