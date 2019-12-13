@@ -110,7 +110,7 @@ public class BoardController {
 	 * 글 삭제 처리
 	 * @param board
 	 * */
-	@PostMapping("/boardDelete")
+	@GetMapping("/boardDelete")
 	public String deleteBoard(@RequestParam(value="code")String code) {
 		System.out.println("***********************");
 		System.out.println("******deleteBoard처리***");
