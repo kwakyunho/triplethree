@@ -294,32 +294,5 @@
     });
    });
 </script>
-<!-- 등록/수정/삭제 버튼 이벤트 -->
-<script type="text/javascript">
-$(function () {
-	
-	$('#insertBtn').click(function(){
-		
-		if(confirm('일정을 등록하시겠습니까?')){
-			$('#formInsert').attr('action', 'companyScheduleInsert').submit();
-		 }
-	});
-	
-	$('#updateBtn').click(function(){
-		
-		if(confirm('수정내용이 확실한가요?')){
-			$('#formId').attr('action', 'companyScheduleUpdate').submit();
-		 }
-	});
-	
-	 $('#deleteBtn').click(function(){
-		 
-		 if(confirm('삭제하시겠습니까?')){
-				$('#formId').attr('action', 'companyScheduleDelet').submit();	
-			 }
-	});
-});
-</script>
-
 </th:block>
 </html>

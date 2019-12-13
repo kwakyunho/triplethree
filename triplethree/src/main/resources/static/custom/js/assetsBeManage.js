@@ -1,5 +1,5 @@
 /**
- * 차량 예약 관리 스크립트
+ * 시설물 예약 관리 스크립트
  */
 
 //달력 스크립트 시작 
@@ -294,10 +294,10 @@ $(function () {
  
 // 시설,차량 셀렉트 박스 클릭에 따른 하위 내용 뿌려주기 위한 스크립트
 $(function(){
-	$('#veCode').change(function(){
+	$('#beCode').change(function(){
 		//console.log('값이 변경 되었어요.');
 		// option의 경우 select박스에 속한것으로 children으로 해서 value를 뽑지 않는다.
-		var check = $('#veCode').val();
+		var check = $('#beCode').val();
 		//console.log(check);
 	 });
 });

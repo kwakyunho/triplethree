@@ -11,9 +11,9 @@ public class AssetManageService {
 
 	@Autowired private AssetManageMapper assetManageMapper;
 	
-	// select Box 값 뿌리기위한 메서드
-	public List<AssetsManage> selectBox(){
-		return assetManageMapper.selectBox();
+	// 차량 select Box 값 뿌리기위한 메서드
+	public List<AssetsManage> selectCarBox(){
+		return assetManageMapper.selectCarBox();
 	}
 	
 	// 차량 예약 등록 메서드
@@ -34,5 +34,15 @@ public class AssetManageService {
 	// 차량 예약 수정 메서드
 	public int updateCarManageAsset(AssetsManage assetsManage) {
 		return assetManageMapper.updateCarManageAsset(assetsManage);
+	}
+	
+	// 차량 예약 삭제 메서드
+	public int deleteCarManageAsset(String code) {
+		return assetManageMapper.deleteCarManageAsset(code);
+	}
+	
+	// 시설물 select Box 값 뿌리기위한 메서드
+	public List<AssetsManage> selectBeBox(){
+		return assetManageMapper.selectBeBox();
 	}
 }

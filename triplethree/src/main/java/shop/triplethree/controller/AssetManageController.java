@@ -29,7 +29,7 @@ public class AssetManageController {
 	public String selectCarManageAsset(Model model) {
 		//System.out.println("차량 예약 신청이 클릭되었나요?");
 		//System.out.println(assetManageService.selectBox());
-		model.addAttribute("selectBox", assetManageService.selectBox());
+		model.addAttribute("selectCarBox", assetManageService.selectCarBox());
 		return "/assets/assetsCarManage";
 	}
 	
@@ -74,7 +74,7 @@ public class AssetManageController {
 	 * */
 	@PostMapping("/assetsManageCaUpdate")
 	public String updateCarManageAsset(AssetsManage assetsManage) {
-		System.out.println("어떤 값이 들어 있나요?" + assetsManage);
+		//System.out.println("어떤 값이 들어 있나요?" + assetsManage);
 		assetManageService.updateCarManageAsset(assetsManage);
 		return "redirect:/assetsManageCaSelect";
 	}
@@ -82,8 +82,23 @@ public class AssetManageController {
 	/**
 	 * 차량 예약 삭제 메서드
 	 * */
-	@GetMapping("/assetsManageCaDelete")
-	public String deleteCarManageAsset () {
-		return null;
+	@PostMapping("/assetsManageCaDelete")
+	public String deleteCarManageAsset(String code) {
+		//System.out.println("삭제 버튼이 클릭되었어요.");
+		//System.out.println("삭제하는 값을 확인해 볼께요" + code);
+		assetManageService.deleteCarManageAsset(code);
+		return "redirect:/assetsManageCaSelect";
+	}
+	
+	/**
+	 * 메뉴에서 시설물 예약 눌렸을때 실행
+	 * 예약 리스트를 보여줌
+	 * 모달에 사용 가능한 시설만 셀렉트 박스로 뿌려줌.
+	 * */
+	@GetMapping("/assetsManageBeSelect")
+	public String electBeManageAsset (Model model) {
+		System.out.println("시설물예약이 클릭되었어요.");
+		model.addAttribute("selectBeBox", assetManageService.selectBeBox());
+		return "/assets/assetsBeManage";
 	}
 }
