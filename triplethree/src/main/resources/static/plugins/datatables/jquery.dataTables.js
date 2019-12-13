@@ -11366,7 +11366,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sFirst": "First",
+				"sFirst": "처음",
 	
 	
 				/**
@@ -11389,7 +11389,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sLast": "Last",
+				"sLast": "마지막",
 	
 	
 				/**
@@ -11412,7 +11412,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "다음",
 	
 	
 				/**
@@ -11435,7 +11435,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "이전"
 			},
 	
 			/**
@@ -11490,7 +11490,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "[ _START_ - _END_ ]  [ total . _TOTAL_ ]",
 	
 	
 			/**
@@ -11511,7 +11511,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "[ 0 - 0 ]  [ total . 0 ]",
 	
 	
 			/**
@@ -11651,7 +11651,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "목록수  _MENU_",
 	
 	
 			/**
@@ -11675,7 +11675,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			"sLoadingRecords": "잠시 기다려주세요(Loading)...",
 	
 	
 			/**
@@ -11696,7 +11696,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": "잠시 기다려주세요(Processing)...",
 	
 	
 			/**
@@ -11731,7 +11731,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "검색:",
 	
 	
 			/**
@@ -11789,7 +11789,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "일치하는 검색 결과가 없습니다."
 		},
 	
 	
