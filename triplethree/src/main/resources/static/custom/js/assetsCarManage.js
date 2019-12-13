@@ -85,7 +85,7 @@ $(function () {
         left  : 'prev,next today',
         center: 'title',
         //right : 'dayGridMonth'
-        right : ''
+        right : 'dayGridMonth,dayGridWeek,dayGridDay'
       },
       
       editable  : true,

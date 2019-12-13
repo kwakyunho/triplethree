@@ -70,7 +70,7 @@
         left  : 'prev,next today',
         center: 'title',
         //right : 'dayGridMonth'
-        right : ''
+        right : 'dayGridMonth,dayGridWeek,dayGridDay'
       },
       
       /*구글캘린더 추가 시작*/
