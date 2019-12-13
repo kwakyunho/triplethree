@@ -83,7 +83,7 @@
 		 FROM ACC_MANAGE as A
 			LEFT JOIN LIST_MANAGE as B
 			on	A.li_code = B.code
-			LEFT JOIN LIST_MANAGE C
+			LEFT JOIN LIST_MANAGE as C
 			 on	A.li_code2 = C.code
 	</select>
 	

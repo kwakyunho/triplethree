@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>타이틀</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">게시판 관리</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">공지사항</li>
+					<li class="breadcrumb-item"><a th:href="@{/freeBoardInsert}" style="color:#28a745;">자유게시판 작성</a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		<div class="col-4" >
+			<button type="button" class="btn btn-success" onclick="location.href='/boardInsert'" >글작성하기</button>
+	     </div>
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+	<div class="content" style="align-content: center">
+	 <div class="col-12">
+	     <div class="card">
+	       <div class="card-header">
+	         <h3 class="card-title">공지사항       </h3>
+	       </div>
+	       
+		<div class="card-body table-responsive p-0" style="height:500px;">
+			<form class="boardListForm">
+				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
+					<thead>
+						<tr>
+							<th>공지</th>
+							<th style="width:500px;">글제목</th>
+							<th>작성자</th>
+							<th style="width:100px;">조회수</th>
+							<th style="width:100px;">작성일자</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="b : ${boardList}" class="boardListTable" style="cursor:pointer">
+							<td>공지</td>
+							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
+							<td th:text="${b.writer}"></td>
+							<td th:text="${b.boardCount}"></td>
+							<td th:text="${b.writerDay}"></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</form>
+	           	<!-- /.table -->
+        </div>
+	        <!-- /.card-body -->
+	     </div>
+	     <!-- /.card -->
+	     
+	 </div>
+ </div>
+<!-- /.row -->
+<!-- /.container-fluid -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.boardListTable').on('click', function(){	
+		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
+		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
+		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
+		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
+		$('.boardListForm').attr('action', '/boardDetail');	// 액션 경로 정의
+		$('.boardListForm').submit();	// 전송
+	});
+});
+</script>
+</th:block>
+</html>

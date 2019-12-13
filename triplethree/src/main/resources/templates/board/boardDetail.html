@@ -45,7 +45,7 @@
 	       		<table class="table table-condensed">
 	       			<thead th:text="${board.boardCon}"></thead>
 	       		</table>
-	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}" th:text="${board.code}">
+	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
 	       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
 	       	</div>
 	       </div>
@@ -108,11 +108,23 @@
 			var inputPw = prompt('비밀번호를 입력하세요');
 			console.log(inputPw + ': 이것은 입력 비밀번호');
 			if(dbPw==inputPw){
+				$(function(){
+					$(document).Toasts('create', {
+				        class: 'bg-success', 
+				        title: '게시글 삭제',
+				        subtitle: 'success',
+				        sticky : true,
+				        body: '게시글 삭제가 완료되었습니다'
+				      });
+					delay(5000);
+				});
 				$('.boardDetailForm').attr('method', 'POST');
 				$('.boardDetailForm').attr('action', '/boardDelete');
 				$('.boardDetailForm').submit();
+				
 			}else{
 				alert('비밀번호가 일치하지 않습니다');
+				
 				return;
 			}
 		}else{   //취소

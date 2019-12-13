@@ -2,11 +2,28 @@
  * 거래처 스크립트 모아놓은 것 
  */
 // 모든곳의 이전 버튼 뒤로가기 
+
 $(function(){
 		$('#backBtn').on('click',function(){
 		history.go(-1); 
 		 });
 	});
+
+//거래처 상세보기에서 수정 삭제 가는 부분
+$(function(){
+	$('#updateBtn').on('click',function(){
+		$('.clientDetailForm').attr('action','/clientUpdate');
+		$('.clientDetailForm').attr('method','GET');
+		$('.clientDetailForm').submit();
+		
+	});
+	$('#deleteBtn').on('click',function(){
+		$('.clientDetailForm').attr('action','/clientDelete');
+		$('.clientDetailForm').attr('method','GET');
+		$('.clientDetailForm').submit();	
+	});
+	
+});
 
 // 거래처 등록 시 공란 체크 스크립트
 $(function(){
@@ -83,8 +100,4 @@ $(function(){
 
 });
 
-//거래처 상세보기에서 수정 삭제 가는 부분
-$(function(){
-	
-});
 
