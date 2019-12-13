@@ -85,7 +85,7 @@ $(function () {
         left  : 'prev,next today',
         center: 'title',
         //right : 'dayGridMonth'
-        right : ''
+        right : 'dayGridMonth,dayGridWeek,dayGridDay'
       },
       
       editable  : true,
@@ -105,7 +105,7 @@ $(function () {
     		  async : true,
     		  type : 'POST',
     		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
-    		  url : "assetsManageCaSelect",
+    		  url : "assetsManageBeSelect",
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
@@ -119,9 +119,9 @@ $(function () {
     					  var start = dataObj.reStart;
     					  var end = moment(dataObj.reEnd);
     					  //var end = moment(dataObj.reEnd).add(1,'day').format('YYYY-MM-DD');
-    					  var name = (dataObj.deName+'\-'+dataObj.empName+'\n예약차량:'+dataObj.veName+'\n'+'예약시작:'+moment(start).format('A.HH시mm분')+'\n예약끝:'+moment(end).format('A.HH시mm분'));
+    					  var name = (dataObj.deName+'\-'+dataObj.empName+'\n예약시설:'+dataObj.beName+'\n'+'예약시작:'+moment(start).format('A.HH시mm분')+'\n예약끝:'+moment(end).format('A.HH시mm분'));
     					  var color = 'white';
-    					  var backgroundColor = 'black';
+    					  var backgroundColor = 'green';
     					  //console.log(code);
     					  //console.log(start);
     					  //console.log(end);
@@ -257,7 +257,7 @@ $(function () {
 	// 등록 버튼 이벤트
 	$('#insertBtn').click(function(){
 		if(confirm('예약 하시겠습니까?')){
-			$('#formInsert').attr('action', 'assetsManageCaInsert').submit();
+			$('#formInsert').attr('action', 'assetsManageBeInsert').submit();
 		}
 	});
 	
@@ -269,7 +269,7 @@ $(function () {
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('예약 내용을 수정하시겠습니까?')){
-				$('#formUpdateId').attr('action', 'assetsManageCaUpdate').submit();
+				$('#formUpdateId').attr('action', 'assetsManageBeUpdate').submit();
 			}
 		}
 	});
@@ -286,7 +286,7 @@ $(function () {
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('예약을 취소하시겠습니까?')){
-				$('#formUpdateId').attr('action', 'assetsManageCaDelete').submit();
+				$('#formUpdateId').attr('action', 'assetsManageBeDelete').submit();
 			}
 		}
 	});	 

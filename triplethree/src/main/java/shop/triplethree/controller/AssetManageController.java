@@ -34,7 +34,7 @@ public class AssetManageController {
 	}
 	
 	/**
-	 * 달력에 예약 일정 뿌려주는 메서드
+	 * 달력에 차량 예약 일정 뿌려주는 메서드
 	 * */
 	@PostMapping(value="/assetsManageCaSelect", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectCarManageAsset(AssetsManage assetsManage){
@@ -97,8 +97,54 @@ public class AssetManageController {
 	 * */
 	@GetMapping("/assetsManageBeSelect")
 	public String electBeManageAsset (Model model) {
-		System.out.println("시설물예약이 클릭되었어요.");
+		//System.out.println("시설물예약이 클릭되었어요.");
 		model.addAttribute("selectBeBox", assetManageService.selectBeBox());
 		return "/assets/assetsBeManage";
+	}
+	
+	/**
+	 * 달력에 시설물 예약 일정 뿌려주는 메서드
+	 * */
+	@PostMapping(value="/assetsManageBeSelect", produces = "application/json")
+	public @ResponseBody List<AssetsManage> selectBeManageAsset(AssetsManage assetsManage){
+		//System.out.println("일정을 찾아주세요.");
+		return assetManageService.selectBeManageAsset(assetsManage);
+	}
+	
+	/**
+	 * 시설물 예약 신청 메서드
+	 * */
+	@PostMapping("/assetsManageBeInsert")
+	public String insertBeManageAsset(AssetsManage assetsManage, HttpSession session) {
+		System.out.println("등록버튼이 눌렸어요.");
+		// 예약 관리 코드를 생성하는 메서드
+		String code = commonService.codeGeneration("RESER_MANAGE");
+		assetsManage.setCode(code);
+		// 세션의 사원번호를 가져오는 메서드
+		String sid = (String) session.getAttribute("SID");
+		assetsManage.setEmpCode(sid);
+		assetManageService.insertBeManageAsset(assetsManage);
+		return "redirect:assetsManageBeSelect";
+	}
+	
+	/**
+	 * 시설물 예약 수정 메서드
+	 * */
+	@PostMapping("/assetsManageBeUpdate")
+	public String updateBeManageAsset(AssetsManage assetsManage) {
+		System.out.println("시설물 수정 버튼이 클릭되었어요.");
+		assetManageService.updateBeManageAsset(assetsManage);
+		return "redirect:assetsManageBeSelect";
+	}
+	
+	/**
+	 * 시설물 예약 삭제 메서드
+	 * */
+	@PostMapping("/assetsManageBeDelete")
+	public String deleteBeManageAsset(String code) {
+		//System.out.println("삭제버튼이 클릭되었어요.");
+		//System.out.println("코드값을 확인해 볼께요." + code);
+		assetManageService.deleteBeManageAsset(code);
+		return "redirect:assetsManageBeSelect";
 	}
 }

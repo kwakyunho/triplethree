@@ -45,4 +45,24 @@ public class AssetManageService {
 	public List<AssetsManage> selectBeBox(){
 		return assetManageMapper.selectBeBox();
 	}
+	
+	// 시설물 예약 등록 메서드
+	public int insertBeManageAsset(AssetsManage assetsManage) {
+		return assetManageMapper.insertBeManageAsset(assetsManage);
+	}
+	
+	// 달력에 시설물예약 현황 보여주는 메서드
+	public List<AssetsManage> selectBeManageAsset(AssetsManage assetsManage){
+		return assetManageMapper.selectBeManageAsset(assetsManage);
+	}
+	
+	// 시설물 예약 수정 메서드
+	public int updateBeManageAsset(AssetsManage assetsManage) {
+		return assetManageMapper.updateBeManageAsset(assetsManage);
+	}
+	
+	// 시설물 예약 삭제 메서드
+	public int deleteBeManageAsset(String code) {
+		return assetManageMapper.deleteBeManageAsset(code);
+	}
 }

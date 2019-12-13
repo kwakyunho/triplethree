@@ -263,7 +263,7 @@
 			//console.log(today);
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
-			if(confirm('예약 내용을 수정하시겠습니까?')){
+			if(confirm('일정 내용을 수정하시겠습니까?')){
 				$('#formId').attr('action', 'companyScheduleUpdate').submit();
 			}
 		}
@@ -280,7 +280,7 @@
 			//console.log(today);
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
-			if(confirm('예약을 취소하시겠습니까?')){
+			if(confirm('일정을 취소하시겠습니까?')){
 				$('#formId').attr('action', 'companyScheduleDelet').submit();
 			}
 		}

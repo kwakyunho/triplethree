@@ -18,7 +18,7 @@ public interface AssetManageMapper {
 	// 달력에 차량 예약 현황 보여주는 메서드
 	public List<AssetsManage> selectCarManageAsset(AssetsManage assetsManage); 
 	
-	// 수정시 모달에 값을 뿌려줄 메서드
+	// 차량 예약 수정시 모달에 값을 뿌려줄 메서드
 	public AssetsManage selectCarUpdate(String code);
 	
 	// 차량 예약 일정 수정 메서드
@@ -29,4 +29,16 @@ public interface AssetManageMapper {
 	
 	// 시설물 관련 select box에 뿌려줄 데이터 조회 메서드
 	public List<AssetsManage> selectBeBox();
+	
+	// 달력에 시설물예약 현황 보여주는 메서드
+	public List<AssetsManage> selectBeManageAsset(AssetsManage assetsManage);
+	
+	// 시설물 예약 등록 메서드
+	public int insertBeManageAsset(AssetsManage assetsManage);
+	
+	// 시설물 예약 수정 메서드
+	public int updateBeManageAsset(AssetsManage assetsManage);
+	
+	// 시설물 예약 삭제 메서드
+	public int deleteBeManageAsset(String code);
 }

@@ -84,6 +84,8 @@
 		DEMG	AS d
 	ON 
 		e.demgcode = d.code
+	WHERE
+		r.division = '차량'
 </select>
 
 <!-- 차량 일정 수정시 모달에 뿌려줄 값을 찾는 쿼리문 -->
@@ -130,4 +132,75 @@
 	WHERE
 		f.fa_st = '사용가능'
 </select>
+
+<!-- 시설물 예약 등록 쿼리문 -->
+<insert id="insertBeManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	INSERT INTO
+		RESER_MANAGE
+		(code
+		,division
+		,emp_code
+		,co_name
+		,re_req
+		,re_start
+		,re_end)
+	VALUES
+		(#{code}
+		,'시설'
+		,#{empCode}
+		,#{beCode}
+		,NOW()
+		,#{reStart}
+		,#{reEnd})
+</insert>
+
+<!-- 달력에 시설물 예약 현황 보여줄 쿼리문  -->
+<select id="selectBeManageAsset" parameterType="shop.triplethree.vo.AssetsManage" resultMap="AssetsManage">
+	SELECT
+		r.code
+		,r.co_name
+		,r.emp_code
+		,r.re_start
+		,r.re_end
+		,e.emp_name AS empName
+		,f.fa_name
+		,d.dename AS deName
+	FROM
+		RESER_MANAGE AS r
+	LEFT JOIN
+		EMP_MANAGE AS e
+	ON
+		r.emp_code = e.emp_num 
+	LEFT JOIN
+		FACILITY_MANAGE AS f
+	ON	
+		r.co_name = f.code
+	LEFT join
+		DEMG	AS d
+	ON 
+		e.demgcode = d.CODE
+	WHERE
+		r.division = '시설'
+</select>
+
+<!-- 시설물 예약 수정 쿼리문 -->
+<update id="updateBeManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	UPDATE
+		RESER_MANAGE
+	SET
+		co_name = #{beCode}
+		,re_req = NOW()
+		,re_start = #{reStart}
+		,re_end = #{reEnd}
+	WHERE
+		code = #{code} 
+</update>
+
+<!-- 시설물 예약 삭제 쿼리문 -->
+<delete id="deleteBeManageAsset" parameterType="String">
+	DELETE FROM
+		RESER_MANAGE
+	WHERE
+		code = #{code}
+</delete>
 </mapper>

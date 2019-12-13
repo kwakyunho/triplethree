@@ -12,7 +12,6 @@ $(document).ready(function(){
 		$('#upName').val(uri.children('#faName').text());
 		$('#upLocal').val(uri.children('#faLocal').text());
 		$('#upSeat').val(uri.children('#faSeat').text());
-		$('#upDatd').val(uri.children('#faDate').text());
 		//$('#upImage').val(uri.children('#faImage').text());
 		$('#upSt').val(uri.children('#faSt').text());
 		
@@ -26,7 +25,6 @@ $(function(){
 		var nameCheck = $('input[name=faName]');
 		var localCheck = $('input[name=faLocal]');
 		var seatCheck = $('input[name=faSeat]');
-		var dateCheck = $('input[name=faDate]');
 		var stCheck = $('input[name=faSt]');
 		var imageCheck = $('input[name=faImage]');
 		
@@ -43,11 +41,6 @@ $(function(){
 		if(seatCheck.val() == ""){
 			alert('수용인원을 입력해주세요');
 			seatCheck.focus();
-			return false;
-		}
-		if(dateCheck.val() == ""){
-			alert('이용날짜를 선택해주세요.');
-			dateCheck.focus();
 			return false;
 		}
 		if(stCheck.val() == ""){
@@ -70,7 +63,6 @@ $(function(){
 		var nameCheck = $('input[id=upName]');
 		var localCheck = $('input[id=upLocal]');
 		var seatCheck = $('input[id=upSeat]');
-		var dateCheck = $('input[id=upDatd]');
 		var stCheck = $('input[id=upSt]');
 		var imageCheck = $('input[id=upImage]');
 		
@@ -87,11 +79,6 @@ $(function(){
 		if(seatCheck.val() == ""){
 			alert('수용인원을 입력해주세요');
 			seatCheck.focus();
-			return false;
-		}
-		if(dateCheck.val() == ""){
-			alert('이용날짜를 선택해주세요.');
-			dateCheck.focus();
 			return false;
 		}
 		if(stCheck.val() == ""){
