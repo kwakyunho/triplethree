@@ -25,9 +25,7 @@ public class PayController {
 		return "pay/insertPay";	
 	}
 	
-	
-	
-	
+
 	/**급여 등록 검색**/
 	@PostMapping("/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk
@@ -44,6 +42,7 @@ public class PayController {
 	@GetMapping("/selectPay")
 	public String selectPay(Model model) {
 		 model.addAttribute("selectPay", payService.selectPay());
+		 model.addAttribute("payInsert", payService.payInsert());
 		return "pay/selectPay";	
 	}
 	
