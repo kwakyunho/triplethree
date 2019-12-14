@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 public class Client {
 	private String code;
-	private String liCode;
-	private String liCode2;
+	private String liCode;//거래처종류 code 담기
+	private String liCodeStr; //거래처종류 text
+	private String liCode2;//거래상태
+	private String liCode2Str;//거래상태종류 text
 	private String accName;
 	private String accCeoName;
 	private String accPostcode; //우편번호
@@ -20,6 +22,18 @@ public class Client {
 	private String writer;
 	
 	
+	public String getLiCodeStr() {
+		return liCodeStr;
+	}
+	public void setLiCodeStr(String liCodeStr) {
+		this.liCodeStr = liCodeStr;
+	}
+	public String getLiCode2Str() {
+		return liCode2Str;
+	}
+	public void setLiCode2Str(String liCode2Str) {
+		this.liCode2Str = liCode2Str;
+	}
 	public String getAccPostcode() {
 		return accPostcode;
 	}
