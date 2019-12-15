@@ -34,7 +34,7 @@ public class PayController {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
-		
+		 model.addAttribute("payInsert", payService.payInsert());
 		return "pay/insertPay";	
 	}
 	

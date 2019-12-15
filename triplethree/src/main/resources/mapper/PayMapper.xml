@@ -29,6 +29,7 @@
 		ON A.pocode = C.CODE
 				
 	</select>
+	<!--급여대장  -->
 	<select id="payInsert"  resultType="shop.triplethree.vo.Pay">
 		SELECT  
 			A.emp_num as empNum,
@@ -40,7 +41,7 @@
 			p.holiday_pay AS holidayPay,
 			p.overtime_pay AS overtimePay,
 			p.position_benefit AS positionBenefit,
-			p.self_dri_pay AS selfDriDay,
+			p.self_dri_pay AS selfDriPay,
 			p.com_pay AS comPay,
 			p.meal_cost AS mealCost,
 			p.child_pay AS childPay

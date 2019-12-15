@@ -69,27 +69,32 @@
 						<th>직책수당</th>						
 						<th>국민연금</th>
 						<th>건강보험</th>
-						<th>장기용야보험</th>
+						<th>장기요양보험</th>
 						<th>고용보험</th>
 						<th>소득세</th>
 						<th>지방소득세</th>
 						<th>공제액 계</th>
 						<th>차인지급액</th>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						  <tr th:each="e :${selectPay}"> 
-					 	 
-						 <td th:text="${e.empNum}"></td>
+						 <tr th:each="e :${selectPay}"> 
+					 	
+						 <td th:text="${e.empNum}"></td>						 
 						 <td th:text="${e.empName}"></td>
 						 <td th:text="${e.demgName}"></td>										
 						 <td th:text="${e.poName}"></td>										
 						 <td th:text="${p.basicPay}"></td>										
-						 <td th:text="${p.beneFit}"></td>										
+						 <td th:text="${p.selfDriPay}"></td>										
+						 <td th:text="${p.comPay}"></td>										
+						 <td th:text="${p.mealCost}"></td>										
+						 <td th:text="${p.beneFit}"></td>
+						 <td>과세계산</td>
+						 <td>비과세계산</td>
+						 <td>지급액계산</td>
+					</tr>
+					<tr>										
 						 <td th:text="${p.holidayPay}"></td>										
 						 <td th:text="${p.overtimePay}"></td>										
 						 <td th:text="${p.positionBenefit}"></td>										
-						 <td th:text="${p.selfDriDay}"></td>										
-						 <td th:text="${p.comPay}"></td>										
-						 <td th:text="${p.mealCost}"></td>										
 						 <td th:text="${p.childPay}"></td>										
 						</tr>						
 				</table>
@@ -98,78 +103,8 @@
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-4 -->
-			<div class="col-4">
-				<div class="card">
-					<table class="table table-bordered table-striped dataTable"role="grid">
-								<div align="center">지급액</div>
-							<tr>
-								<th>급여항목</th>	
-								<th>지급금액</th>
-							</tr>
-							<tr><td>기본급</td>
-								<td><input type="text" name="basicPay" class="form-control col-12"></td></tr>
-							<tr><td>야간근무수당</td>								
-								<td><input type="text" name="benefit" class=" form-control col-12"></td></tr>									
-							<tr><td>휴일근무수당</td>				
-								<td><input type="text" name="holidayPay" class="form-control col-12"></td></tr>					
-							<tr><td>연장근무수당</td>					
-								<td><input type="text" name="overtimePay" class="form-control col-12"></td></tr>					
-							<tr><td>자격수당</td>				
-								<td><input type="text" name="qualiPay" class="form-control col-12"></td></tr>													
-							<tr><td>직책수당</td>			
-								<td><input type="text" name="positionBenefit" class="form-control col-12"></td></tr>					
-							<tr><td>자가운전보조금</td>				
-								<td><input type="text" name="selfDriPay" class="form-control col-12"></td></tr>					
-							<tr><td>통신수당</td>				
-								<td><input type="text" name="comPay" class="form-control col-12"></td></tr>					
-							<tr><td>식대</td>					
-								<td><input type="text" name="mealCost" class="form-control col-12"></td></tr>					
-							<tr><td>육아수당</td>								
-								<td><input type="text" name="childPay" class="form-control col-12"></td></tr>											
-								<tr>
-		                    		<td align="left">과세 :
-		                    		</td><td align="right"><input type="text" class="form-control col-12"></td>
-		                    	</tr>
-		                    	<tr>	
-		                    		<td align="left">비과세 :</td>
-		                    		<td align="right"><input type="text" class="form-control col-12"></td>
-		                    	</tr>
-		                    	<tr>	
-		                    		<td align="left">지급액 계 :</td>
-		                    		<td align="right"><input type="text" class="form-control col-12"></td>
-		                		</tr>               										
-					</table>
-				</div>
-				<!-- /.card -->
-			</div>
-			<div class="col-4">
-				<div class="card">
-				<table class="table table-bordered table-striped dataTable"role="grid"> 
-					<div align="center">공제액</div>
-					<tr>
-						<th>공제항목</th>					
-						<th>공제금액</th>					
-					</tr>
-					<tr><td>국민연금</td>
-						<td><input type="text" name="nationPer" class="form-control col-12"></td></tr>
-					<tr><td>건강보험</td>
-						<td><input type="text" name="healthPer" class="form-control col-12"></td></tr>
-					<tr><td>장기요양보험</td>
-						<td><input type="text" name="longCare" class="form-control col-12"></td></tr>
-					<tr><td>고용보험</td>
-						<td><input type="text" name="inseurPer" class="form-control col-12"></td></tr>
-					<tr><td>소득세</td>
-						<td><input type="text" name="incomePer" class="form-control col-12"></td></tr>
-					<tr><td>지방소득세</td>
-						<td><input type="text" name="residentTax" class="form-control col-12"></td></tr>
-					<tr><td>공제액 계</td>
-						<td><input type="text" name="deductHap" class="form-control col-12"></td></tr>
-						<tr><td colspan="2" align="left">차인지급액 :
-						<input type="text" name="deductHap" class="form-control"></td></tr>
-				</table>
-				</div>				
-				<!-- /.card -->
-			</div>
+			
+			
 			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->

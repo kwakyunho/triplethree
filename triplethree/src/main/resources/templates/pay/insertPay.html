@@ -56,7 +56,7 @@
 								<button type="submit"id="searchBtn" class="btn btn-block bg-gradient-primary">Search</button>					
 							</form>										
 							</div>
-  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
+  	 			<table class="table table-bordered table-striped dataTable"role="grid" th:each="p :${payInsert}">  	   	 
 				 	
 					<tr>
 								
@@ -76,6 +76,8 @@
 						<td id="demgName"th:text="${e.demgName}"></td>										
 						<td id="poName"th:text="${e.poName}"></td>															
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
+							<input class="mealCost" type="hidden" th:value="${p.mealCost}">													
+															
 						<td>
 							<input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary choiceBtn">
 						</td>
@@ -97,21 +99,21 @@
 					<tr><td>기본급</td>
 						<td><input type="text" id="basicPay" name="basicPay" class="form-control col-12"></td></tr>
 					<tr><td>야간근무수당</td>								
-						<td><input type="text" name="benefit" class=" form-control col-12"></td></tr>									
+						<td><input type="text" id="benefit"name="benefit" class=" form-control col-12"></td></tr>									
 					<tr><td>휴일근무수당</td>				
-						<td><input type="text" name="holidayPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="holidayPay"name="holidayPay" class="form-control col-12"></td></tr>					
 					<tr><td>연장근무수당</td>					
-						<td><input type="text" name="overtimePay" class="form-control col-12"></td></tr>																	
+						<td><input type="text" id="overtimePay"name="overtimePay" class="form-control col-12"></td></tr>																							
 					<tr><td>직책수당</td>			
-						<td><input type="text" name="positionBenefit" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="positionBenefit"name="positionBenefit" class="form-control col-12"></td></tr>					
 					<tr><td>자가운전보조금</td>				
-						<td><input type="text" name="selfDriPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="selfDriPay"name="selfDriPay" class="form-control col-12"></td></tr>					
 					<tr><td>통신수당</td>				
-						<td><input type="text" name="comPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="comPay"name="comPay" class="form-control col-12"></td></tr>					
 					<tr><td>식대</td>					
-						<td><input type="text" name="mealCost" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="mealCost"name="mealCost" class="form-control col-12"></td></tr>					
 					<tr><td>육아수당</td>								
-						<td><input type="text" name="childPay" class="form-control col-12"></td></tr>
+						<td><input type="text" id="childPay"name="childPay" class="form-control col-12"></td></tr>
 												
 						<tr>
                     		<td align="left">과세 :
@@ -171,6 +173,7 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<!--검색조건  -->
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#sel').on('change', function() {
