@@ -36,6 +36,7 @@ public class ScheduleController {
 		System.out.println("세션에서 사원코드가 넘어왔나요?" + scode);
 		System.out.println("세션에서 부서코드가 넘어왔나요 ?" + sdecode);
 		session.setAttribute("sid", scode);
+		session.setAttribute("sdeCode", sdecode);
 		
 		schedule.setSid(scode);
 		schedule.setDemgcode(sdecode);

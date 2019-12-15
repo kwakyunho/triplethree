@@ -213,6 +213,7 @@ $(function () {
         			  success : function(data){
         				 //console.log(data);
         				if(data.length > 0){
+        					$('#veCodeUp option').remove();
         				 for(var i = 0; i < data.length; i++){
         					 //console.log(data[i].veName);
         					 $('#veCodeUp').append("<option value="+data[i].code+">"+data[i].veName+"</option>");
@@ -226,6 +227,7 @@ $(function () {
         						  datetype : "json",
         						  success : function(data){
         							 //console.log(data);
+        							  $('#veCodeUp option').remove();
         							 for(var i = 0; i < data.length; i++){
         								 //console.log(data[i].veName);
         								 $('#veCodeUp').append("<option value="+data[i].code+">"+data[i].veName+"</option>");

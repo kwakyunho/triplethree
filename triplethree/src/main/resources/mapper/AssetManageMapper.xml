@@ -67,7 +67,7 @@
 		AND
 			v.ve_use = '출장용'
 		AND
-		NOT	v.code = (SELECT
+		NOT	v.code = ANY(SELECT
 			r.co_name
 		FROM
 			RESER_MANAGE AS r
@@ -173,6 +173,14 @@
 
 <!-- 시설물 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
 <select id="selectBeBox" parameterType="String" resultMap="AssetsManage">
+		<!-- SELECT
+			f.code
+			,f.fa_name
+		FROM
+			FACILITY_MANAGE AS f
+		WHERE
+			f.fa_st = '사용가능' -->
+			
 		SELECT
 			f.code
 			,f.fa_name
@@ -180,6 +188,25 @@
 			FACILITY_MANAGE AS f
 		WHERE
 			f.fa_st = '사용가능'
+		AND
+			f.code IN (SELECT	
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		and
+			r.division = '시설')
 </select>
 
 <select id="selectBeBox2" parameterType="String" resultMap="AssetsManage">
@@ -191,7 +218,7 @@
 		WHERE
 			f.fa_st = '사용가능'
 		AND
-		NOT	f.code = (SELECT	
+		NOT	f.code = ANY(SELECT	
 			r.co_name
 		FROM
 			RESER_MANAGE AS r
