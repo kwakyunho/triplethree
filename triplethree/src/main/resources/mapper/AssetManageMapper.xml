@@ -25,17 +25,66 @@
 </resultMap>
 
 <!-- 차량 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
-<select id="selectCarBox" resultMap="AssetsManage">
-	SELECT
-		code
-		,ve_name
-		,ve_number
-	FROM
-		VE_MANAGE
-	WHERE
-		ve_state ='사용가능'
-	AND
-		ve_use = '출장용'
+<select id="selectCarBox" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			v.code
+			,v.ve_name
+		FROM
+			VE_MANAGE AS v
+		WHERE
+			v.ve_state = '사용가능'
+		AND
+			v.ve_use = '출장용'
+		AND
+			v.code IN(SELECT
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.division = '차량')
+</select>
+
+<select id="selectCarBox2" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			v.code
+			,v.ve_name
+		FROM
+			VE_MANAGE AS v
+		WHERE
+			v.ve_state = '사용가능'
+		AND
+			v.ve_use = '출장용'
+		AND
+		NOT	v.code = (SELECT
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.division = '차량')
 </select>
 
 <!-- 차량 예약 등록 쿼리문  -->
@@ -123,14 +172,43 @@
 </delete>
 
 <!-- 시설물 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
-<select id="selectBeBox" resultMap="AssetsManage">
-	SELECT
-		f.code
-		,f.fa_name
-	FROM
-		FACILITY_MANAGE AS f
-	WHERE
-		f.fa_st = '사용가능'
+<select id="selectBeBox" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			f.code
+			,f.fa_name
+		FROM
+			FACILITY_MANAGE AS f
+		WHERE
+			f.fa_st = '사용가능'
+</select>
+
+<select id="selectBeBox2" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			f.code
+			,f.fa_name
+		FROM
+			FACILITY_MANAGE AS f
+		WHERE
+			f.fa_st = '사용가능'
+		AND
+		NOT	f.code = (SELECT	
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		and
+			r.division = '시설')
 </select>
 
 <!-- 시설물 예약 등록 쿼리문 -->

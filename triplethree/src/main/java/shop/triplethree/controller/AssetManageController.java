@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,14 +22,38 @@ public class AssetManageController {
 	/**
 	 * 메뉴에서 차량 예약 눌렸을때 실행
 	 * 예약 리스트를 보여줌
-	 * 모달에 사용 가능한 차량만 셀렉트 박스로 뿌려줌.
 	 * */
 	@GetMapping("/assetsManageCaSelect")
-	public String selectCarManageAsset(Model model) {
-		//System.out.println("차량 예약 신청이 클릭되었나요?");
-		//System.out.println(assetManageService.selectBox());
-		model.addAttribute("selectCarBox", assetManageService.selectCarBox());
+	public String selectCarManageAsset() {
 		return "/assets/assetsCarManage";
+	}
+	
+	/**
+	 * 차량 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 차량 뿌려주는 메서드
+	 * */
+	@PostMapping(value="/selectCarBox", produces = "application/json")
+	public @ResponseBody List<AssetsManage> selectCarBox(String star, String end) {
+		String time = ":00";
+		String startday = star.replace("T", " ");
+		String endday = end.replace("T", " ");
+		String startDay = startday.concat(time);
+		String endDay = endday.concat(time);
+		System.out.println(startDay +"\n"+ endDay);
+		return assetManageService.selectCarBox(startDay, endDay);
+	}
+	
+	/**
+	 * 차량 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 차량 뿌려주는 메서드
+	 * */
+	@PostMapping(value="/selectCarBox2", produces = "application/json")
+	public @ResponseBody List<AssetsManage> selectCarBox2(String star, String end) {
+		String time = ":00";
+		String startday = star.replace("T", " ");
+		String endday = end.replace("T", " ");
+		String startDay = startday.concat(time);
+		String endDay = endday.concat(time);
+		System.out.println(startDay +"\n"+ endDay);
+		return assetManageService.selectCarBox2(startDay, endDay);
 	}
 	
 	/**
@@ -38,6 +61,7 @@ public class AssetManageController {
 	 * */
 	@PostMapping(value="/assetsManageCaSelect", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectCarManageAsset(AssetsManage assetsManage){
+		//System.out.println(assetsManage);
 		//List<AssetsManage> list = assetManageService.selectCarManageAsset(assetsManage);
 		//System.out.println("달력에 뿌려줄 값이에요"+list.toString());
 		return assetManageService.selectCarManageAsset(assetsManage);
@@ -93,13 +117,38 @@ public class AssetManageController {
 	/**
 	 * 메뉴에서 시설물 예약 눌렸을때 실행
 	 * 예약 리스트를 보여줌
-	 * 모달에 사용 가능한 시설만 셀렉트 박스로 뿌려줌.
 	 * */
 	@GetMapping("/assetsManageBeSelect")
-	public String electBeManageAsset (Model model) {
-		//System.out.println("시설물예약이 클릭되었어요.");
-		model.addAttribute("selectBeBox", assetManageService.selectBeBox());
+	public String electBeManageAsset () {
 		return "/assets/assetsBeManage";
+	}
+	
+	/**
+	 * 시설물 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 시설물 뿌려주는 메서드
+	 * */
+	@PostMapping(value="/selectBeBox", produces = "application/json")
+	public @ResponseBody List<AssetsManage> selectBeBox(String star, String end) {
+		String time = ":00";
+		String startday = star.replace("T", " ");
+		String endday = end.replace("T", " ");
+		String startDay = startday.concat(time);
+		String endDay = endday.concat(time);
+		System.out.println(startDay +"\n"+ endDay);
+		return assetManageService.selectBeBox(startDay, endDay);
+	}
+	
+	/**
+	 * 시설물 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 시설물 뿌려주는 메서드
+	 * */
+	@PostMapping(value="/selectBeBox2", produces = "application/json")
+	public @ResponseBody List<AssetsManage> selectBeBox2(String star, String end) {
+		String time = ":00";
+		String startday = star.replace("T", " ");
+		String endday = end.replace("T", " ");
+		String startDay = startday.concat(time);
+		String endDay = endday.concat(time);
+		System.out.println(startDay +"\n"+ endDay);
+		return assetManageService.selectBeBox2(startDay, endDay);
 	}
 	
 	/**

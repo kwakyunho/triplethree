@@ -61,16 +61,6 @@
 											<div class="card">
 												<table style="text-align: center;">
 													<tr>
-														<td style="width: 150px;">차량명</td>
-														<td>
-															<select class="form-control form-control-lg"
-																style="font-size: medium;" name="veCode" id="veCode">
-																	<option th:each="s : ${selectCarBox}" th:text="${s.veName}" th:value="${s.veCode}"></option>
-															</select>
-														</td>
-
-													</tr>
-													<tr>
 														<td style="width: 150px;">사용 시작일</td>
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
@@ -81,6 +71,15 @@
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
 															id="reEnd" name="reEnd"></td>
+													</tr>
+													<tr>
+														<td style="width: 150px;">차량명</td>
+														<td>
+															<select class="form-control form-control-lg"
+																style="font-size: medium;" name="veCode" id="veCode">
+																	<!-- <option th:each="s : ${selectCarBox}" th:text="${s.veName}" th:value="${s.veCode}"></option> -->
+															</select>
+														</td>
 													</tr>
 												</table>
 											</div>
@@ -122,18 +121,6 @@
 											<div class="card">
 												<table style="text-align: center;">
 													<tr>
-														<p class="text-danger" style="text-align: center;">* 예약 수정시 차량명과 예약일을 꼭 확인해주세요.</p>
-														<td style="width: 150px;">차량명</td>
-														<td>
-															<select class="form-control form-control-lg"
-																style="font-size: medium;" name="veCode" id="veCodeUp">
-																	<option th:each="s : ${selectCarBox}" th:text="${s.veName}" th:value="${s.veCode}"></option>
-															</select>
-															<input type="hidden" name="code" id="hiddenCode">
-														</td>
-
-													</tr>
-													<tr>
 														<td style="width: 150px;">사용 시작일</td>
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
@@ -144,6 +131,18 @@
 														<td><input class="form-control form-control-lg inputValue"
 															type="datetime-local" style="width: 100%; font-size: small;"
 															id="reEndUp" name="reEnd"></td>
+													</tr>
+													<tr>
+														<p class="text-danger" style="text-align: center;">* 예약 수정시 차량명과 예약일을 꼭 확인해주세요.</p>
+														<td style="width: 150px;">차량명</td>
+														<td>
+															<select class="form-control form-control-lg"
+																style="font-size: medium;" name="veCode" id="veCodeUp">
+																	<!-- <option th:each="s : ${selectCarBox}" th:text="${s.veName}" th:value="${s.veCode}"></option> -->
+															</select>
+															<input type="hidden" name="code" id="hiddenCode">
+														</td>
+
 													</tr>
 												</table>
 											</div>

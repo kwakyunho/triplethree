@@ -10,7 +10,8 @@ import shop.triplethree.vo.AssetsManage;
 public interface AssetManageMapper {
 
 	// 차량 관련 select box에 뿌려줄 데이터 조회 메서드
-	public List<AssetsManage> selectCarBox();
+	public List<AssetsManage> selectCarBox(String startDay, String endDay);
+	public List<AssetsManage> selectCarBox2(String startDay, String endDay);
 	
 	// 차량 예약 등록 쿼리문
 	public int insertCarManageAsset(AssetsManage assetsManage);
@@ -28,7 +29,8 @@ public interface AssetManageMapper {
 	public int deleteCarManageAsset(String code);
 	
 	// 시설물 관련 select box에 뿌려줄 데이터 조회 메서드
-	public List<AssetsManage> selectBeBox();
+	public List<AssetsManage> selectBeBox(String startDay, String endDay);
+	public List<AssetsManage> selectBeBox2(String startDay, String endDay);
 	
 	// 달력에 시설물예약 현황 보여주는 메서드
 	public List<AssetsManage> selectBeManageAsset(AssetsManage assetsManage);

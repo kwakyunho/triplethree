@@ -196,6 +196,50 @@ $(function () {
         		  error : function(error){ 
         		  }
         	  });
+        	  
+        	  // 일정 수정시 날짜 변하는것에 따라 예약 가능한 차량 보여주는 스크립트
+        		$('#reEndUp').change(function(){
+        			var star = $('#reStartUp').val();
+        			var end = $('#reEndUp').val();
+        			//console.log(star);
+        			//console.log(end);
+        			$('#veCodeUp option').remove();
+        	  	  $.ajax({
+        			  async : true,
+        			  type : 'POST',
+        			  data : {star : star, end : end},
+        			  url : "selectCarBox2",
+        			  datetype : "json",
+        			  success : function(data){
+        				 //console.log(data);
+        				if(data.length > 0){
+        				 for(var i = 0; i < data.length; i++){
+        					 //console.log(data[i].veName);
+        					 $('#veCodeUp').append("<option value="+data[i].code+">"+data[i].veName+"</option>");
+        				 }
+        				}else{
+        				  	  $.ajax({
+        						  async : true,
+        						  type : 'POST',
+        						  data : {star : star, end : end},
+        						  url : "selectCarBox",
+        						  datetype : "json",
+        						  success : function(data){
+        							 //console.log(data);
+        							 for(var i = 0; i < data.length; i++){
+        								 //console.log(data[i].veName);
+        								 $('#veCodeUp').append("<option value="+data[i].code+">"+data[i].veName+"</option>");
+        							 }
+        						  },
+        						  error : function(error){ 
+        						  }
+        					  });
+        				}
+        			  },
+        			  error : function(error){ 
+        			  }
+        		  });
+        		});
         },
       
         // 일정 빈공간 클릭시 발생하는 이벤트
@@ -290,14 +334,58 @@ $(function () {
 			}
 		}
 	});	 
-});
- 
-// 시설,차량 셀렉트 박스 클릭에 따른 하위 내용 뿌려주기 위한 스크립트
-$(function(){
+	
+	// 시설,차량 셀렉트 박스 클릭에 따른 하위 내용 뿌려주기 위한 스크립트
 	$('#veCode').change(function(){
 		//console.log('값이 변경 되었어요.');
 		// option의 경우 select박스에 속한것으로 children으로 해서 value를 뽑지 않는다.
 		var check = $('#veCode').val();
 		//console.log(check);
 	 });
+	
+	// 차량 예약시 일정 선택 후 셀렉트 박스에 예약 가능한 차량 목록이 뜰수 있도록 하는 스크립트
+	$('#reEnd').change(function(){
+		var star = $('#reStart').val();
+		var end = $('#reEnd').val();
+		//console.log(star);
+		//console.log(end);
+		 $('#veCode option').remove();
+  	  $.ajax({
+		  async : true,
+		  type : 'POST',
+		  data : {star : star, end : end},
+		  url : "selectCarBox2",
+		  datetype : "json",
+		  success : function(data){
+			 //console.log(data);
+			 // data 길이가 0보다 큰경우 아래를 진행
+			 if(data.length > 0){
+			 for(var i = 0; i < data.length; i++){
+				 //console.log(data[i].veName);
+				 $('#veCode').append("<option value="+data[i].code+">"+data[i].veName+"</option>");
+			 }
+			 // data 길이가 0보자 작은경우 아래를 진행
+			}else{
+				$.ajax({
+					  async : true,
+					  type : 'POST',
+					  data : {star : star, end : end},
+					  url : "selectCarBox",
+					  datetype : "json",
+					  success : function(data){
+						 //console.log(data);
+						 for(var i = 0; i < data.length; i++){
+							 //console.log(data[i].veName);
+							 $('#veCode').append("<option value="+data[i].code+">"+data[i].veName+"</option>");
+						 }
+					  },
+					  error : function(error){ 
+					  }
+				  });
+			}
+		  },
+		  error : function(error){ 
+		  }
+	  });
+	});
 });
