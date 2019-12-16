@@ -45,12 +45,13 @@
 			
 		</div>
 		</div>
-		<br>	
+		<br>
+		
 		<div class="container-fluid">
 			<div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">사원 조회 목록</h3>
+                <h3 class="card-title"><b>승인 대기중 인사이동 목록</b></h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -63,54 +64,135 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover" style="margid:auto; text-align:center;">
+             <form id="approForm" method="post" action = "/employeeAllMoveList">	
+              <div class="card-body table-responsive p-0" >
+                <table id="approTable"class="table table-hover"  style="margid:auto; text-align:center;">
                   <thead>
-                    <tr>
-	                      <th>사원번호</th>
-	                      <th>사원명</th>
-	                      <th>부서</th>
-	                      <th>직급</th>
-	                      <th>변경부서</th>
-	                      <th>변경직급</th>
-	                      <th>재직상태</th>
-	                      <th>승인자</th>
-	                      <th>승인일자</th>
-	                      
-                    </tr>
-                    <tr >
-						<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-							<td ></td>
-						<!-- <td>
-							<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
-						</td>
-						<td>
-							<a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
-							<a th:href="@{/employeeUpdate(empNum=${e.empNum})}">수정</a>
-						</td> -->
-						
-					</tr>
-                  </thead>
-                  <tbody>
-                   
-                   
+	                    <tr>
+	                    	  <th>인사이동코드</th> 
+		                      <th>사원코드</th>
+		                      <th>사원명</th>
+		                      <th>이전부서</th>
+		                      <th>이전직급</th>
+		                      <th>변경부서</th>
+		                      <th>변경직급</th>
+		                      <th>인사이동날짜</th>
+		                      <th>작성자</th>
+		                      <th>작성일자</th>
+		                      <th>승인</th>
+		                      
+		                      
+	                    </tr>
+                    </thead>
+                     <tbody >
+                     	
+	                    <tr  th:each="am :${AllMove}">
+								<td class="approTd" th:text="${am.moveCode}" th:id="${am.moveCode}"></td>
+								<td th:text="${am.code}"></td>
+								<td th:text="${am.empName}"></td>
+								<td th:text="${am.demgName}"></td>
+								<td th:text="${am.poName}"></td>
+								<td th:text="${am.afterDemgName}"></td>
+								<td th:text="${am.afterPoName}"></td>
+								<td th:text="${am.afterDate}"></td>
+								<td th:text="${am.writer}"></td>
+								<td th:text="${am.writerDay}"></td>
+							    <td>															    
+							    	<button type="button" class="btn btn-block btn-outline-success btn-sm" id="approCheck" >승인하기</button>
+							    </td>
+							    <td>
+								<a th:href="@{/employeeAllMoveList(approver=${session.SID})}" id="approCheck">승인하기</a>
+								</td>
+							
+							
+						</tr>
+                 		                   
                   </tbody>
                 </table>
               </div>
+             </form>
+              
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
 		</div>
+	
 		<!-- /.container-fluid -->
+		
+		<div class="container-fluid">
+			<div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><b>승인완료 인사이동 목록</b></h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" >
+                <table class="table table-hover" style="margid:auto; text-align:center;">
+                  <thead>
+	                    <tr>
+	                    	  <th>인사이동코드</th> 
+		                      <th>사원코드</th>
+		                      <th>사원명</th>
+		                      <th>이전부서</th>
+		                      <th>이전직급</th>
+		                      <th>변경부서</th>
+		                      <th>변경직급</th>
+		                      <th>인사이동날짜</th>
+		                      <th>작성자</th>
+		                      <th>작성일자</th>
+		                      <th>승인자</th>
+		                      <th>승인일자</th>
+		                      
+	                    </tr>
+                    </thead>
+                     <tbody>
+	                    <tr th:each="amo :${AllMoveOk}">
+								<td th:text="${amo.moveCode}" style="width:50px;"></td>
+								<td th:text="${amo.code}" style="width:50px;"></td>
+								<td th:text="${amo.empName}"></td>
+								<td th:text="${amo.demgName}"></td>
+								<td th:text="${amo.poName}"></td>
+								<td th:text="${amo.afterDemgName}"></td>
+								<td th:text="${amo.afterPoName}"></td>
+								<td th:text="${amo.afterDate}"></td>
+								<td th:text="${amo.writer}"></td>
+								<td th:text="${amo.writerDay}"></td>
+								<td th:text="${amo.approverName}"></td>
+								<td th:text="${amo.approveDay}"></td>
+							<!-- <td>
+								<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
+							</td>
+							<td>
+								<a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
+								<a th:href="@{/employeeUpdate(empNum=${e.empNum})}">수정</a>
+							</td> -->
+							
+						</tr>
+                 
+                 
+                   
+                   
+                  </tbody>
+                </table>
+              </div>
+              
+              
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+		</div>
 	</div>
 </th:block>
 
@@ -124,6 +206,7 @@
 	<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
 	<script>
+	$(document).ready(function(){
 		$(function() {
 			$("#example1").DataTable();
 			$('#example2').DataTable({
@@ -135,6 +218,25 @@
 				"autoWidth" : false,
 			});
 		});
+		
+		$('#approTable tbody').on('click','tr',function(){
+			var code=$(this).children('.approTd'); //하위요소 변수 저장
+			code.append('<input type="hidden" name="moveCode" val="">')
+			var moveCode= code.attr('id');
+			if(confirm('승인 하시겠습니까?') == true){
+				var moveCode= code.attr('id');
+				console.log(moveCode);
+				$('input[name=moveCode]').val(moveCode);
+				$('#approForm').submit();
+				
+				alert('승인이 완료되었습니다.');
+			}else{
+				return alert('승인이 취소되었습니다.');
+			}
+			
+			
+		});
+	});
 	</script>
 </th:block>
 </html>

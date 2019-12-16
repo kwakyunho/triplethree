@@ -33,9 +33,11 @@ public class Employee {
 	private String conType;
 	private String basicPay;
 	private String writer;	//작성자  (사원관리, 인사이동목록)
+	private String writerName; //작성자 이름 (인사이동목록)
 	private String writerDay; //작성일자 (사원관리, 인사이동목록)
 	private String afterDate; //인사이동날짜 (인사이동목록 )
 	private String approver; //승인자(인사이동목록)
+	private String approverName; //승인자 이름 (인사이동목록)
 	private String approveDay; //승인일자(인사이동목록)
 	public String getCode() {
 		return code;
@@ -241,6 +243,18 @@ public class Employee {
 	public void setMoveCode(String moveCode) {
 		this.moveCode = moveCode;
 	}
+	public String getWriterName() {
+		return writerName;
+	}
+	public void setWriterName(String writerName) {
+		this.writerName = writerName;
+	}
+	public String getApproverName() {
+		return approverName;
+	}
+	public void setApproverName(String approverName) {
+		this.approverName = approverName;
+	}
 	@Override
 	public String toString() {
 		return "Employee [code=" + code + ", moveCode=" + moveCode + ", demgCode=" + demgCode + ", demgName=" + demgName
@@ -251,9 +265,26 @@ public class Employee {
 				+ postCode + ", phone=" + phone + ", email=" + email + ", carPresence=" + carPresence + ", joinDate="
 				+ joinDate + ", birthDate=" + birthDate + ", photo=" + photo + ", retireDate=" + retireDate
 				+ ", signature=" + signature + ", conType=" + conType + ", basicPay=" + basicPay + ", writer=" + writer
-				+ ", writerDay=" + writerDay + ", afterDate=" + afterDate + ", approver=" + approver + ", approveDay="
-				+ approveDay + "]";
+				+ ", writerName=" + writerName + ", writerDay=" + writerDay + ", afterDate=" + afterDate + ", approver="
+				+ approver + ", approverName=" + approverName + ", approveDay=" + approveDay + ", getCode()="
+				+ getCode() + ", getDemgCode()=" + getDemgCode() + ", getDemgName()=" + getDemgName()
+				+ ", getAfterDemgCode()=" + getAfterDemgCode() + ", getAfterDemgName()=" + getAfterDemgName()
+				+ ", getPoCode()=" + getPoCode() + ", getPoName()=" + getPoName() + ", getAfterPoCode()="
+				+ getAfterPoCode() + ", getAfterPoName()=" + getAfterPoName() + ", getLiCode()=" + getLiCode()
+				+ ", getLiName()=" + getLiName() + ", getEmpNum()=" + getEmpNum() + ", getPassword()=" + getPassword()
+				+ ", getEmpName()=" + getEmpName() + ", getAddr()=" + getAddr() + ", getDetailAddr()=" + getDetailAddr()
+				+ ", getExtraAddr()=" + getExtraAddr() + ", getPostCode()=" + getPostCode() + ", getPhone()="
+				+ getPhone() + ", getEmail()=" + getEmail() + ", getCarPresence()=" + getCarPresence()
+				+ ", getJoinDate()=" + getJoinDate() + ", getBirthDate()=" + getBirthDate() + ", getPhoto()="
+				+ getPhoto() + ", getRetireDate()=" + getRetireDate() + ", getSignature()=" + getSignature()
+				+ ", getConType()=" + getConType() + ", getBasicPay()=" + getBasicPay() + ", getWriter()=" + getWriter()
+				+ ", getWriterDay()=" + getWriterDay() + ", getAfterDate()=" + getAfterDate() + ", getApprover()="
+				+ getApprover() + ", getApproveDay()=" + getApproveDay() + ", getMoveCode()=" + getMoveCode()
+				+ ", getWriterName()=" + getWriterName() + ", getApproverName()=" + getApproverName() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
+	
+	
 	
 	
 	

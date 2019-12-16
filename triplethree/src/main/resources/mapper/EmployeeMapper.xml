@@ -380,4 +380,160 @@
 			
 		
 	</select>
+	
+	<select id="employeeMyMoveList" parameterType="String" resultType="shop.triplethree.vo.Employee">
+		SELECT 
+			pe.code as moveCode,
+			pe.emp_code as code,
+			em.emp_name as empName,
+			pe.pre_depart as demgCode,
+			de.dename as demgName,
+			pe.pre_position as poCode,
+			po.poname as poName,
+			pe.af_depart as afterDemgCode,
+			de2.dename as afterDemgName,
+			pe.af_positon as afterPoCode,
+			po2.poname as afterPoName,
+			DATE_FORMAT(pe.af_date,'%Y-%m-%d') as afterDate,
+			pe.writer as writer,
+	      em2.emp_name as writerName,
+	      DATE_FORMAT(pe.writer_day,'%Y-%m-%d') as writerDay,
+	    	pe.approver as approver,
+	   	em3.emp_num as approverName,
+	      DATE_FORMAT(pe.appro_day,'%Y-%m-%d') as approveDay
+
+		FROM PECHANGE pe
+
+		LEFT JOIN EMP_MANAGE em
+		ON pe.emp_code = em.CODE
+
+		LEFT JOIN DEMG de
+		ON pe.pre_depart = de.CODE
+
+		LEFT JOIN POSISYS po
+		ON pe.pre_position = po.CODE
+
+		LEFT JOIN DEMG de2
+		ON pe.af_depart = de2.CODE
+
+		LEFT JOIN POSISYS po2
+		ON pe.af_positon = po2.CODE
+		
+		LEFT JOIN EMP_MANAGE em3
+		ON pe.approver = em3.emp_num
+
+		LEFT JOIN EMP_MANAGE em2
+		ON pe.writer = em2.emp_num
+
+		WHERE pe.emp_code = #{SCODE} AND pe.approver IS NOT null
+		
+			
+	</select>
+	<select id="employeeAllMoveList" resultType="shop.triplethree.vo.Employee">
+		SELECT 
+			pe.code as moveCode,
+			pe.emp_code as code,
+			em.emp_name as empName,
+			pe.pre_depart as demgCode,
+			de.dename as demgName,
+			pe.pre_position as poCode,
+			po.poname as poName,
+			pe.af_depart as afterDemgCode,
+			de2.dename as afterDemgName,
+			pe.af_positon as afterPoCode,
+			po2.poname as afterPoName,
+			DATE_FORMAT(pe.af_date,'%Y-%m-%d') as afterDate,
+			pe.writer as writer,
+		    em2.emp_name as writerName,
+		    DATE_FORMAT(pe.writer_day,'%Y-%m-%d') as writerDay
+			<!-- pe.approver as approver,
+			em3.emp_num as approverName,
+		    pe.appro_day as approveDay
+		    -->
+		
+		FROM PECHANGE pe
+		
+		LEFT JOIN EMP_MANAGE em
+		ON pe.emp_code = em.CODE
+		
+		LEFT JOIN DEMG de
+		ON pe.pre_depart = de.CODE
+		
+		LEFT JOIN POSISYS po
+		ON pe.pre_position = po.CODE
+		
+		LEFT JOIN DEMG de2
+		ON pe.af_depart = de2.CODE
+		
+		LEFT JOIN POSISYS po2
+		ON pe.af_positon = po2.CODE
+		
+		LEFT JOIN EMP_MANAGE em2
+		ON pe.writer = em2.emp_num
+		
+		WHERE pe.approver IS null
+		
+			
+	</select>
+	
+	<select id="employeeAllMoveListOk" resultType="shop.triplethree.vo.Employee">
+		SELECT 
+			pe.code as moveCode,
+			pe.emp_code as code,
+			em.emp_name as empName,
+			pe.pre_depart as demgCode,
+			de.dename as demgName,
+			pe.pre_position as poCode,
+			po.poname as poName,
+			pe.af_depart as afterDemgCode,
+			de2.dename as afterDemgName,
+			pe.af_positon as afterPoCode,
+			po2.poname as afterPoName,
+			DATE_FORMAT(pe.af_date,'%Y-%m-%d') as afterDate,
+			pe.writer as writer,
+		    em2.emp_name as writerName,
+		    DATE_FORMAT(pe.writer_day,'%Y-%m-%d') as writerDay,
+			pe.approver as approver,
+			em3.emp_num as approverName,
+		    DATE_FORMAT(pe.appro_day,'%Y-%m-%d') as approveDay
+		    
+		
+		FROM PECHANGE pe
+		
+		LEFT JOIN EMP_MANAGE em
+		ON pe.emp_code = em.CODE
+		
+		LEFT JOIN DEMG de
+		ON pe.pre_depart = de.CODE
+		
+		LEFT JOIN POSISYS po
+		ON pe.pre_position = po.CODE
+		
+		LEFT JOIN DEMG de2
+		ON pe.af_depart = de2.CODE
+		
+		LEFT JOIN POSISYS po2
+		ON pe.af_positon = po2.CODE
+		
+		LEFT JOIN EMP_MANAGE em2
+		ON pe.writer = em2.emp_num
+		
+		LEFT JOIN EMP_MANAGE em3
+		ON pe.approver = em3.emp_num
+		
+		WHERE pe.approver IS not null
+		
+			
+	</select>
+		
+	<update id="updateMoveList" parameterType="shop.triplethree.vo.Employee">
+		UPDATE PECHANGE
+		SET
+			approver=#{approver},
+			appro_day=NOW()
+		WHERE 
+			CODE = #{moveCode}					
+			
+			
+	</update>
 </mapper>
