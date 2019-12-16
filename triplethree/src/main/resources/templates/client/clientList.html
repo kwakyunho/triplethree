@@ -81,7 +81,7 @@ tr:hover{background: whitesmoke;}
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
 	$('.clientListTable').on('click',function(){
 		var clientUrl = $(this).children('.clientCode');
@@ -93,6 +93,8 @@ $(document).ready(function(){
 		$('.clientListForm').submit();
 	});
 });
+
+console.log([[${code}]]);
 </script>
 </th:block>
 </html>

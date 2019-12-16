@@ -53,13 +53,14 @@ public class ClientController {
 	 * @return 
 	 * */
 	@PostMapping("/clientUpdate")
-	public String clientUpdate(Client client) {
+	public String clientUpdate(Client client, Model model) {
 		clientService.updateClient(client);
+		model.addAttribute("code", client.getCode());
 		return "redirect:/clientList";
 	}
 	
 	//거래처 정보삭제(상태변경)
-	@GetMapping("/clientDelete")
+	@PostMapping("/ClientDelete")
 	public String deleteClient(@RequestParam(value="code")String code,Model model) {
 		System.out.println(code + "<--삭제  할 거래처 code");
 		clientService.deleteClient(code);
@@ -67,7 +68,7 @@ public class ClientController {
 	}
 
 	//거래처 정보등록 화면이동 (거래처 상태가지고감)
-	@GetMapping("/clientInsert")
+	@PostMapping("/goClientInsert")
 	public String insertClient(Model model) {
 		model.addAttribute("liCode", clientService.getLicodeList());
 		return "/client/clientInsert";
