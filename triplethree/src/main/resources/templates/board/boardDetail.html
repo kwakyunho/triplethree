@@ -38,10 +38,17 @@
 	     <div class="card">
 	     <form class="boardDetailForm">
 	       <div class="card-header">
-	         <h3 class="card-title" th:text="${board.boardTitle}"></h3>
+                <h4 th:text="|[공지] ${board.boardTitle}|"></h4>
+                <h6 style="color:#6c757d;">
+                	<span style="float:left; padding-right:5px;" th:text="|작성자 : ${board.poname}|"></span>
+                	<span style="float:left; padding-right:20px;" th:text="|${board.writer}|"></span>
+                	<span style="float:left; padding-right:20px;" th:text="|작성일자 : ${board.writerDay}|"></span>
+                	<span style="float:left;" th:text="|조회수 : ${board.boardCount}|"></span>
+                </h6>
 	       </div>
 	       <div>
-	       	<div class="card-body"  style="white-space:nowrap;">
+	       	<div class="card-body">
+	       		
 	       		<table class="table table-condensed" >
 	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>

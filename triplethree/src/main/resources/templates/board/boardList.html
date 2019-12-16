@@ -61,7 +61,7 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b,index : ${boardList}" style="cursor:pointer">
+						<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>

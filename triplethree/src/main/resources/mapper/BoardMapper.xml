@@ -52,32 +52,36 @@
 	<select id="boardList" resultMap="boardResultMap">
 		SELECT
 			B.code
-			,emp_code
-            ,EM.emp_name AS writer
-            ,board_title
+			,emp_code 
+			,PO.poname AS poname
+         	,EM.emp_name AS writer
+         	,board_title
 			,board_con
-			,board_count
+			,board_count 
 			,date_format(B.writer_day,'%Y-%m-%d') as writer_day
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.emp_num
-		
+		LEFT JOIN POSISYS AS PO
+		ON	EM.pocode = PO.code
 	</select>
 	
 	<!--글 정보 하나만 뽑아오기 code로   -->
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
 		SELECT
 			B.code as code
-			,EM.emp_num as empCode
-			,EM.emp_name as writer
-			,board_title as boardTitle
-			,board_con as boardCon
-			,board_count as boardCount
-			,board_pw as boardPw
+			,emp_code
+			,PO.poname AS poname
+         	,EM.emp_name AS writer
+         	,board_title AS boardTitle
+			,board_con AS boardCon
+			,board_count AS boardCount
 			,date_format(B.writer_day,'%Y-%m-%d') as writerDay
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.emp_num
+		LEFT JOIN POSISYS AS PO
+		ON	EM.pocode = PO.code
 		where B.code=#{code}
 		
 	</select>
