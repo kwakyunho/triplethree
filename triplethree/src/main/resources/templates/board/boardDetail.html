@@ -35,15 +35,22 @@
 
 	<div class="content" style="align-content: center">
 	 <div class="col-12">
-	     <div class="card" style="height:400px">
+	     <div class="card">
 	     <form class="boardDetailForm">
 	       <div class="card-header">
-	         <h3 class="card-title" th:text="${board.boardTitle}"></h3>
+                <h4 th:text="|[공지] ${board.boardTitle}|"></h4>
+                <h6 style="color:#6c757d;">
+                	<span style="float:left; padding-right:5px;" th:text="|작성자 : ${board.poname}|"></span>
+                	<span style="float:left; padding-right:20px;" th:text="|${board.writer}|"></span>
+                	<span style="float:left; padding-right:20px;" th:text="|작성일자 : ${board.writerDay}|"></span>
+                	<span style="float:left;" th:text="|조회수 : ${board.boardCount}|"></span>
+                </h6>
 	       </div>
 	       <div>
 	       	<div class="card-body">
-	       		<table class="table table-condensed">
-	       			<thead th:text="${board.boardCon}"></thead>
+	       		
+	       		<table class="table table-condensed" >
+	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>
 	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
 	       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
@@ -55,14 +62,14 @@
 	     <div class="col-12">
 	     	<div class="row" id="detailBtns">
 			     <div class="col-4">
-						<button type="button" id="backBtn" class="btn btn-block btn-success btn-lg" >목록</button>
+						<button type="button" id="backBtn" class="btn btn-block btn-success btn-lg">목록</button>
 			     </div>
 			      <div class="col-4">
-			      		<button type="button" id="updateBtn" class="btn btn-block btn-success btn-lg" >수정</button>
+			      		<button type="button" id="updateBtn" class="btn btn-block btn-success btn-lg">수정</button>
 			      		<!-- <a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a> -->
 			     </div>
 			      <div class="col-4">
-			      		<button type="button" id="deleteBtn" class="btn btn-block btn-success btn-lg" >삭제</button>
+			      		<button type="button" id="deleteBtn" class="btn btn-block btn-success btn-lg">삭제</button>
 					<!-- 	<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a> -->
 			     </div>
 		     </div>
@@ -74,8 +81,9 @@
 	</th:block>
 	
 	<th:block layout:fragment="customScript">
-	
 	<script type="text/javascript">
+	
+	
 	$(document).ready(function(){
 		$('#backBtn').on('click', function(){	
 			$('.boardDetailForm').attr('method', 'POST');
@@ -87,11 +95,11 @@
 	//console.log(dbPw + ': 이것은 boardPw');
 	$('#updateBtn').on('click',function(){
 			if (confirm("수정하시겠습니까") == true){  //확인
-				var inputPw = prompt('비밀번호를 입력하세요');
+				var inputPw = prompt('비밀번호를 입력하세요(1111)');
 				if(dbPw==inputPw){
 					alert('수정화면으로 이동합니다');
-					$('.boardDetailForm').attr('method', 'GET');
-					$('.boardDetailForm').attr('action', '/boardUpdate');
+					$('.boardDetailForm').attr('method', 'POST');
+					$('.boardDetailForm').attr('action', '/goBoardUpdate');
 					$('.boardDetailForm').submit();
 				}else{
 					alert('비밀번호가 일치하지 않습니다');

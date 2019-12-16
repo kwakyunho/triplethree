@@ -2,7 +2,8 @@ package shop.triplethree.vo;
 
 public class Board {
 	private String code;
-	private String empCode;
+	private String empCode; //사원코드
+	private String poname; //직급명
 	private String writer;
 	private String boardTitle;
 	private String boardCon;
@@ -11,6 +12,12 @@ public class Board {
 	private String boardPw;
 
 	
+	public String getPoname() {
+		return poname;
+	}
+	public void setPoname(String poname) {
+		this.poname = poname;
+	}
 	public String getWriter() {
 		return writer;
 	}

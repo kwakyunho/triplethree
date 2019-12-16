@@ -12,20 +12,21 @@ $(function(){
 //거래처 상세보기에서 수정 삭제 가는 부분
 $(function(){
 	$('#updateBtn').on('click',function(){
-		$('.clientDetailForm').attr('action','/clientUpdate');
-		$('.clientDetailForm').attr('method','GET');
+		alert('수정화면으로 이동합니다');
+		$('.clientDetailForm').attr('action','/goClientInsert');
+		$('.clientDetailForm').attr('method','POST');
 		$('.clientDetailForm').submit();
 		
 	});
 	$('#deleteBtn').on('click',function(){
-		$('.clientDetailForm').attr('action','/clientDelete');
-		$('.clientDetailForm').attr('method','GET');
+		$('.clientDetailForm').attr('action','/goClientInsert');
+		$('.clientDetailForm').attr('method','POST');
 		$('.clientDetailForm').submit();	
 	});
 	
 });
 
-// 거래처 등록 시 공란 체크 스크립트
+// 거래처 등록&수정 시 공란 체크 스크립트
 $(function(){
 	$('#insertBtn').click(function(){
 		var accNameCheck = $('input[name=accName]');

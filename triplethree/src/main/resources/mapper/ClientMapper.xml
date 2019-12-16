@@ -19,6 +19,7 @@
 		<result column="repre_number" property="repreNumber"/>
 		<result column="acc_phone" property="accPhone"/>
 		<result column="acc_email" property="accEmail"/>
+		<result column="emp_code" property="writer"/>
 	</resultMap>
 	
 	<!--거래처 인서트 하기 전에 PK코드의 앞부분코드 가져오기  -->
@@ -76,7 +77,7 @@
 			, A.repre_number
 			, A.acc_email
 			, A.writer
-			, A.writer_day
+			,date_format(A.writer_day,'%Y-%m-%d') as writer_day
 			, A.approver
 			, A.appro_day
 			, A.approver_st
@@ -105,7 +106,7 @@
 				,A.repre_number
 				,A.acc_email
 				,A.writer
-				,A.writer_day
+				,date_format(A.writer_day,'%Y-%m-%d') as writer_day
 				,A.approver
 				,A.appro_day
 				,A.approver_st
@@ -182,7 +183,7 @@
 			 , #{repreNumber}
 			 , #{accPhone}
 			 , #{accEmail}
-			 , #{writer}
+			 , #{empCode}
 			 , now());
 	</insert>
 	
@@ -201,7 +202,7 @@
 			,A.repre_number
 			,A.acc_email
 			,A.writer
-			,A.writer_day
+			,date_format(A.writer_day,'%Y-%m-%d') as writer_day
 			,A.approver
 			,A.appro_day
 			,A.approver_st
