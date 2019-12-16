@@ -8,6 +8,11 @@ $(function(){
 		$('#mealCost').val(mealCost.html('input').val());
 	
 		//.children('input[type="hidden"]').val();
+		var basicPay=document.getElementById("basicPay");
+		var mealCost=document.getElementById("mealCost");
+		var sum1=document.getElementById("sum1");
+		var add=parseInt(basicPay.value)+parseInt(mealCost.value);
+		sum1.value =add;
 	});
 	
 });
