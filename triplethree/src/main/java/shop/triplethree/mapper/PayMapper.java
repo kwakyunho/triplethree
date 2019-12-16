@@ -20,5 +20,7 @@ public interface PayMapper {
 
 	/** 급여 입력  검색조건 **/
 	public List<Employee> insertSearchPay(String sk, String sv);
-
+	
+	/**급여 입력***/
+	public int insertPay(Pay pay);
 }

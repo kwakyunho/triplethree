@@ -2,6 +2,8 @@ package shop.triplethree.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import shop.triplethree.service.EmployeeService;
 import shop.triplethree.service.PayService;
 import shop.triplethree.vo.Company;
 import shop.triplethree.vo.Employee;
+import shop.triplethree.vo.Pay;
 
 @Controller
 public class PayController {
@@ -27,7 +30,7 @@ public class PayController {
 	
 
 	/**급여 등록 검색**/
-	@PostMapping("/insertPay")
+	@GetMapping("/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk
 								 ,@RequestParam(value="sv") String sv
 								 ,Model model) {
@@ -36,6 +39,11 @@ public class PayController {
 		model.addAttribute("insertSearchPay", list);
 		 model.addAttribute("payInsert", payService.payInsert());
 		return "pay/insertPay";	
+	}
+	/***급여 등록하기*****/
+	@PostMapping("/selectPay")
+	public String insertPay(Pay pay, HttpSession session) {
+		return "pay/selectPay";
 	}
 	
 	/** 급여대장** */

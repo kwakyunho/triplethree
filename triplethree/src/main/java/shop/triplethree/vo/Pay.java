@@ -20,8 +20,36 @@ public class Pay {
 	private String writer;	//작성자
 	private LocalDateTime writerDay;	//작성일자
 	private LocalDateTime paymentDate;	//지급일자
+	private String empNum;	//사원코드	
+	private String empName;	//사원이름
+	private String poName;	//직책	
+	private String demgName;	//부서명
 	public String getCode() {
 		return code;
+	}
+	public String getEmpNum() {
+		return empNum;
+	}
+	public void setEmpNum(String empNum) {
+		this.empNum = empNum;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getPoName() {
+		return poName;
+	}
+	public void setPoName(String poName) {
+		this.poName = poName;
+	}
+	public String getDemgName() {
+		return demgName;
+	}
+	public void setDemgName(String demgName) {
+		this.demgName = demgName;
 	}
 	public void setCode(String code) {
 		this.code = code;
@@ -119,11 +147,11 @@ public class Pay {
 	@Override
 	public String toString() {
 		return "Pay [code=" + code + ", empCode=" + empCode + ", deCode=" + deCode + ", basicPay=" + basicPay
-				+ ", benefit=" + beneFit + ", holidayPay=" + holidayPay + ", overtimePay=" + overtimePay + ", qualiPay="
-				 + ", specialPay=" + ", positionBenefit=" + positionBenefit + ", selfDriPay="
-				+ selfDriPay + ", comPay=" + comPay + ", mealCost=" + mealCost + ", childPay=" + childPay
-				+ ", deductPay=" + deductPay + ", writer=" + writer + ", writerDay=" + writerDay + ", paymentDate="
-				+ paymentDate + "]";
+				+ ", beneFit=" + beneFit + ", holidayPay=" + holidayPay + ", overtimePay=" + overtimePay
+				+ ", positionBenefit=" + positionBenefit + ", selfDriPay=" + selfDriPay + ", comPay=" + comPay
+				+ ", mealCost=" + mealCost + ", childPay=" + childPay + ", deductPay=" + deductPay + ", writer="
+				+ writer + ", writerDay=" + writerDay + ", paymentDate=" + paymentDate + ", empNum=" + empNum
+				+ ", empName=" + empName + ", poName=" + poName + ", demgName=" + demgName + "]";
 	}
 	
 	

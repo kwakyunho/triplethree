@@ -29,7 +29,7 @@
 		ON A.pocode = C.CODE
 				
 	</select>
-	<!--급여대장  -->
+	<!-- 급여대장   -->
 	<select id="payInsert"  resultType="shop.triplethree.vo.Pay">
 		SELECT  
 			A.emp_num as empNum,
@@ -76,13 +76,14 @@
 	
 	
 	<!--급여 화면 검색  -->
-	<select id="insertSearchPay" resultType="shop.triplethree.vo.Employee">
+	<select id="insertSearchPay" resultType="shop.triplethree.vo.Pay">
 	SELECT
 	em.emp_num as empNum,
 	em.emp_name as empName,
 	p.poname as poName,
 	de.dename as demgName,
-	em.basic_pay AS basicPay
+	pay.basic_pay AS basicPay,
+	pay.meal_cost AS mealCost
 	FROM (
 	SELECT em.*
 			FROM EMP_MANAGE em
@@ -97,10 +98,31 @@
 	
 	LEFT JOIN DEMG de
 	ON em.demgcode = de.CODE
+	inner join PAY_BILL as pay
+	on em.code=pay.emp_code
 	<if test="sv != null and sv neq ''.toString()">
 		WHERE 
 			${sk} Like CONCAT('%',#{sv},'%')
 	</if>
 
 	</select>
+	<!--급여입력  -->
+	<update id="insertPay" parameterType="shop.triplethree.vo.Pay">		
+	UPDATE PAY_BILL 
+	SET 
+		basic_pay=#{basicPay},
+		benefit=#{beneFit},
+		holiday_pay=#{holidayPay},
+		overtime_pay=#{overtimePay},
+		position_benefit=#{positionBenefit}, 
+		self_dri_pay=#{selfDriPay}, 
+		com_pay=#{comPay}, 
+		meal_cost=#{mealCost}, 
+		child_pay=#{childPay}, 
+		deduct_pay=#{deductPay}, 
+		writer=#{writer},
+		writer_day=NOW(),
+		payment_date=CURTIME()
+	WHERE emp_code=#{empCode}
+	</update>
 </mapper>

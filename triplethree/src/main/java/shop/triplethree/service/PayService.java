@@ -23,7 +23,7 @@ public class PayService {
 		return list;
 	}
 	
-	/** 급여 대장 **/
+	/** 급여 대장  selectPay,payInsert**/
 	public List<Employee> selectPay() {
 		return payMapper.selectPay();
 	}
@@ -35,5 +35,10 @@ public class PayService {
 	public List<Employee> selectRetiring() {
 		return payMapper.selectRetiring();
 
+	}
+	
+	
+	public int insertPay(Pay pay) {
+		return 0;
 	}
 }

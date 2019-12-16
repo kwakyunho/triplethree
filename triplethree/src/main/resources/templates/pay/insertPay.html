@@ -38,7 +38,7 @@
 			<div class="col-5">
 				<div class="card">
 					<div align="center">사원목록</div>						
-						<form action="/insertPay" method="post" id="insertPayForm">
+						<form action="/insertPay" method="get" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
 									<option value="">검색조건</option> 
@@ -56,7 +56,7 @@
 								<button type="submit"id="searchBtn" class="btn btn-block bg-gradient-primary">Search</button>					
 							</form>										
 							</div>
-  	 			<table class="table table-bordered table-striped dataTable"role="grid" th:each="p :${payInsert}">  	   	 
+  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
 				 	
 					<tr>
 								
@@ -76,7 +76,7 @@
 						<td id="demgName"th:text="${e.demgName}"></td>										
 						<td id="poName"th:text="${e.poName}"></td>															
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
-							<input class="mealCost" type="hidden" th:value="${p.mealCost}">													
+							<input class="mealCost" type="hidden" th:value="${e.mealCost}">													
 															
 						<td>
 							<input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary choiceBtn">
@@ -157,11 +157,11 @@
 						<input type="text" name="deductHap" class="form-control"></td></tr>
 				</table>
 				</div>
-			
-				<button type="button" value="급여지급" class="col-12" align="center">							
-					<a th:href="@{/selectPay}" class="nav-link">급여 지급액 등록</a>
+			<form action="/selectPay" method="post">
+				<button type="submit" value="급여지급" class="col-12" align="center">							
+					급여 지급액 등록
 				</button>				
-
+			</form>
 			
 
 				<!-- /.card -->
