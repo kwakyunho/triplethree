@@ -87,7 +87,7 @@
 	//console.log(dbPw + ': 이것은 boardPw');
 	$('#updateBtn').on('click',function(){
 			if (confirm("수정하시겠습니까") == true){  //확인
-				var inputPw = prompt('비밀번호를 입력하세요');
+				var inputPw = prompt('비밀번호를 입력하세요(1111)');
 				if(dbPw==inputPw){
 					alert('수정화면으로 이동합니다');
 					$('.boardDetailForm').attr('method', 'GET');

@@ -57,7 +57,7 @@
             ,board_title
 			,board_con
 			,board_count
-			,B.writer_day
+			,date_format(B.writer_day,'%Y-%m-%d') as writer_day
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.emp_num
@@ -74,7 +74,7 @@
 			,board_con as boardCon
 			,board_count as boardCount
 			,board_pw as boardPw
-			,B.writer_day as writerDay
+			,date_format(B.writer_day,'%Y-%m-%d') as writerDay
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.emp_num

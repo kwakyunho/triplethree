@@ -19,43 +19,12 @@ public class Client {
 	private String repreNumber;
 	private String accPhone;
 	private String accEmail;
-	private String writer;
-	
-	
-	public String getLiCodeStr() {
-		return liCodeStr;
-	}
-	public void setLiCodeStr(String liCodeStr) {
-		this.liCodeStr = liCodeStr;
-	}
-	public String getLiCode2Str() {
-		return liCode2Str;
-	}
-	public void setLiCode2Str(String liCode2Str) {
-		this.liCode2Str = liCode2Str;
-	}
-	public String getAccPostcode() {
-		return accPostcode;
-	}
-	public void setAccPostcode(String accPostcode) {
-		this.accPostcode = accPostcode;
-	}
-	public String getAccDetailAddr() {
-		return accDetailAddr;
-	}
-	public void setAccDetailAddr(String accDetailAddr) {
-		this.accDetailAddr = accDetailAddr;
-	}
-	public String getAccExtraAddr() {
-		return accExtraAddr;
-	}
-	public void setAccExtraAddr(String accExtraAddr) {
-		this.accExtraAddr = accExtraAddr;
-	}
+	private String empCode;	//작성자
 	private LocalDateTime writerDay;
 	private String approver;
 	private String approDay;
 	private String approverSt;
+	
 	public String getCode() {
 		return code;
 	}
@@ -68,11 +37,23 @@ public class Client {
 	public void setLiCode(String liCode) {
 		this.liCode = liCode;
 	}
+	public String getLiCodeStr() {
+		return liCodeStr;
+	}
+	public void setLiCodeStr(String liCodeStr) {
+		this.liCodeStr = liCodeStr;
+	}
 	public String getLiCode2() {
 		return liCode2;
 	}
 	public void setLiCode2(String liCode2) {
 		this.liCode2 = liCode2;
+	}
+	public String getLiCode2Str() {
+		return liCode2Str;
+	}
+	public void setLiCode2Str(String liCode2Str) {
+		this.liCode2Str = liCode2Str;
 	}
 	public String getAccName() {
 		return accName;
@@ -86,11 +67,29 @@ public class Client {
 	public void setAccCeoName(String accCeoName) {
 		this.accCeoName = accCeoName;
 	}
+	public String getAccPostcode() {
+		return accPostcode;
+	}
+	public void setAccPostcode(String accPostcode) {
+		this.accPostcode = accPostcode;
+	}
 	public String getAccAddr() {
 		return accAddr;
 	}
 	public void setAccAddr(String accAddr) {
 		this.accAddr = accAddr;
+	}
+	public String getAccDetailAddr() {
+		return accDetailAddr;
+	}
+	public void setAccDetailAddr(String accDetailAddr) {
+		this.accDetailAddr = accDetailAddr;
+	}
+	public String getAccExtraAddr() {
+		return accExtraAddr;
+	}
+	public void setAccExtraAddr(String accExtraAddr) {
+		this.accExtraAddr = accExtraAddr;
 	}
 	public String getAccBln() {
 		return accBln;
@@ -122,11 +121,13 @@ public class Client {
 	public void setAccEmail(String accEmail) {
 		this.accEmail = accEmail;
 	}
-	public String getWriter() {
-		return writer;
+	
+	
+	public String getEmpCode() {
+		return empCode;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
 	}
 	public LocalDateTime getWriterDay() {
 		return writerDay;
@@ -151,14 +152,6 @@ public class Client {
 	}
 	public void setApproverSt(String approverSt) {
 		this.approverSt = approverSt;
-	}
-	@Override
-	public String toString() {
-		return "Client [code=" + code + ", liCode=" + liCode + ", liCode2=" + liCode2 + ", accName=" + accName
-				+ ", accCeoName=" + accCeoName + ", accAddr=" + accAddr + ", accBln=" + accBln + ", accFax=" + accFax
-				+ ", repreNumber=" + repreNumber + ", accPhone=" + accPhone + ", accEmail=" + accEmail + ", writer="
-				+ writer + ", writerDay=" + writerDay + ", approver=" + approver + ", approDay=" + approDay
-				+ ", approverSt=" + approverSt + "]";
 	}
 	
 	

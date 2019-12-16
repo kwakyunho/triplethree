@@ -32,7 +32,7 @@
 			<div class="col-lg-12">
 				<form role="form" id="formInput" class="form-horozontal" action="/clientInsert" method="post">
 				<div class="card card-primary">
-				
+					
 				   <div class="card-body">
 				   <div class="form-group row col-sm-12">
 				   		<label class="col-sm-2 col-form-label">거래처코드</label>
@@ -171,7 +171,8 @@
                  <div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">작성자</label>
 	                    <div class="col-sm-4">
-	                      <input type="text" class="form-control col-12" name="empCode" th:value="${session.SID}" readonly="readonly">
+	                   		<input type="hidden"  name="empCode" th:value="${session.SID}" >
+	                      	<input type="text" class="form-control col-12" th:value="${session.SNAME}" readonly="readonly">
 	                    </div>
                  </div>
                  

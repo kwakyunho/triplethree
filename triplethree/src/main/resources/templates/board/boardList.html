@@ -52,7 +52,7 @@ tr:hover{background: whitesmoke;}
 				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
 					<thead>
 						<tr>
-							<th>공지</th>
+							<th>순차</th>
 							<th style="width:500px;">글제목</th>
 							<th>작성자</th>
 							<th style="width:100px;">조회수</th>
@@ -61,8 +61,8 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b : ${boardList}" style="cursor:pointer">
-							<td>공지</td>
+						<tr th:each="b,index : ${boardList}" style="cursor:pointer">
+							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
 							<td th:text="${b.boardCount}"></td>
