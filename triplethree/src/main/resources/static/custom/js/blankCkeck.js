@@ -131,9 +131,16 @@ $("#departmentNameAf").blur(function() {
 //리스트에서 부서명 클릭시 변경전 부서명 input 박스에 값이 들어가는 스크립트
 $(document).ready(function(){
 	$('.groupListTr').on('click', function(){
-		var departmentCode = $(this).children('#departmentCode').text();
-		var departmentNameBe = $(this).children('#departmentNameBe').text();
-		$('#departmentNameBeUp').val(departmentNameBe);
+		var uri = $(this);
+		var check = uri.children('#departmentYesNO').text();
+		console.log(check);
+		if(check == 'Y'){
+			var departmentCode = $(this).children('#departmentCode').text();
+			var departmentNameBe = $(this).children('#departmentNameBe').text();
+			$('#departmentNameBeUp').val(departmentNameBe);
+		}else{
+			alert('사용하지 않는 부서는 수정 할 수 없습니다.');
+		}
 	});
 });
 
@@ -288,8 +295,15 @@ $("#positionNameAfUp").blur(function() {
 //리스트에서 직급명 클릭시 변경전 직급명 input 박스에 값이 들어가는 스크립트
 $(document).ready(function(){
 	$('.positionListTr').on('click', function(){
-		var positionNameBe = $(this).children('#positionNameBe').text();
-		$('#positionNameBeUp').val(positionNameBe);
+		var uri = $(this);
+		var check = uri.children('#positionYesNO').text();
+		console.log(check);
+		if(check == 'Y'){
+			var positionNameBe = $(this).children('#positionNameBe').text();
+			$('#positionNameBeUp').val(positionNameBe);
+		}else{
+			alert('사용하지 않는 직급은 수정 할 수 없습니다.');
+		}
 	});
 });
 
@@ -309,7 +323,6 @@ $(function(){
 	});	
 	
 	$('.deletePoBtn').children('input').on('click', function(){
-		
 		var uri = $(this).parents('.positionListTr');
 		var textValue = uri.children('#positionCode').text();
 		uri.children('#positionCode').append('<input type="hidden" id="decode" name="positionCode">');

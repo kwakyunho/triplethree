@@ -36,7 +36,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Calendar</li>
+							<li class="breadcrumb-item active">일정</li>
 						</ol>
 					</div>
 				</div>
@@ -156,6 +156,7 @@
 											<div class="card">
 												<table style="text-align: center;">
 													<tr>
+														<p class="text-danger" style="text-align: center;">* 일정 수정시 일정 구분과 시작과 종료일을 꼭 확인해주세요.</p>
 														<td style="width: 150px;">일정 구분</td>
 														<td><select class="form-control form-control-lg"
 															style="font-size: medium;" name="sortation">
@@ -278,7 +279,7 @@
 <!-- Page specific script -->
 <script th:src=@{custom/js/Calender.js}></script>
 <!-- 세션의 사원번호를 저장하는 스크립트 -->
-<script type="text/javascript" th:inline="javascript"> var sid = [[${session.SID}]] </script>
+<script type="text/javascript" th:inline="javascript"> var sid = [[${session.SID}]]; var demgcode = [[${session.SDEMGCODE}]]; </script>
 <!-- bootstrap color picker -->
 <script th:src="@{plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js}"></script>
 <!-- 색상선택하는 스크립트 -->
@@ -294,32 +295,5 @@
     });
    });
 </script>
-<!-- 등록/수정/삭제 버튼 이벤트 -->
-<script type="text/javascript">
-$(function () {
-	
-	$('#insertBtn').click(function(){
-		
-		if(confirm('일정을 등록하시겠습니까?')){
-			$('#formInsert').attr('action', 'companyScheduleInsert').submit();
-		 }
-	});
-	
-	$('#updateBtn').click(function(){
-		
-		if(confirm('수정내용이 확실한가요?')){
-			$('#formId').attr('action', 'companyScheduleUpdate').submit();
-		 }
-	});
-	
-	 $('#deleteBtn').click(function(){
-		 
-		 if(confirm('삭제하시겠습니까?')){
-				$('#formId').attr('action', 'companyScheduleDelet').submit();	
-			 }
-	});
-});
-</script>
-
 </th:block>
 </html>

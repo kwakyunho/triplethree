@@ -35,18 +35,18 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-4">
+			<div class="col-5">
 				<div class="card">
 					<div align="center">사원목록</div>						
-							<form action="/insertPay" method="post">
+						<form action="/insertPay" method="post" id="insertPayForm">
 							<div>
-								<select class="form-control" name="sk">
+								<select class="form-control" name="sk" id="sel">
 									<option value="">검색조건</option> 
 									<option value="emp_num">사원코드</option>						
-									<option value="emp_name">사원명</option>
-									<option value="dename">부서명</option>
+									<option value="emp_name" >사원명</option>
+									<option value="dename" >부서명</option>
 									<option value="poname">직급명</option>																					
-								</select>
+								</select>																							
 							</div>
 							<div>
 								<input class="form-control" type="text" name="sv" 
@@ -56,23 +56,32 @@
 								<button type="submit"id="searchBtn" class="btn btn-block bg-gradient-primary">Search</button>					
 							</form>										
 							</div>
-  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
+  	 			<table class="table table-bordered table-striped dataTable"role="grid" th:each="p :${payInsert}">  	   	 
 				 	
-					<tr>			
-						<th>사원번호</th>
-						<th>사원명</th>
-						<th>부서명</th>
-						<th>직급</th>	
+					<tr>
+								
+						<th align="center">사원번호</th>
+						<th align="center">사원명</th>
+						<th align="center">부서명</th>
+						<th align="center">직급</th>
+						<th align="center">급여입력</th>
+
+							
 												
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						 <tr align="center" th:each="e :${insertSearchPay}">
-						 <td th:text="${e.empNum}"></td>
-						 <td th:text="${e.empName}"></td>					 										
-						 <td th:text="${e.demgName}"></td>										
-						 <td th:text="${e.poName}"></td>										
-									
-						</tr>										
+					<tr class="insertPay" th:each="e :${insertSearchPay}">
+						<td id="empNum"th:text="${e.empNum}"></td>		
+						<td id="empName"th:text="${e.empName}"></td>					 										
+						<td id="demgName"th:text="${e.demgName}"></td>										
+						<td id="poName"th:text="${e.poName}"></td>															
+							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
+							<input class="mealCost" type="hidden" th:value="${p.mealCost}">													
+															
+						<td>
+							<input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary choiceBtn">
+						</td>
+					</tr>										
 				</table>
 				</div>
 				<!-- /.card -->
@@ -88,27 +97,23 @@
 						<th>지급금액</th>
 					</tr>
 					<tr><td>기본급</td>
-						<td><input type="text" name="basicPay" class="form-control col-12"></td></tr>
+						<td><input type="text" id="basicPay" name="basicPay" class="form-control col-12"></td></tr>
 					<tr><td>야간근무수당</td>								
-						<td><input type="text" name="benefit" class=" form-control col-12"></td></tr>									
+						<td><input type="text" id="benefit"name="benefit" class=" form-control col-12"></td></tr>									
 					<tr><td>휴일근무수당</td>				
-						<td><input type="text" name="holidayPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="holidayPay"name="holidayPay" class="form-control col-12"></td></tr>					
 					<tr><td>연장근무수당</td>					
-						<td><input type="text" name="overtimePay" class="form-control col-12"></td></tr>					
-					<tr><td>자격수당</td>				
-						<td><input type="text" name="qualiPay" class="form-control col-12"></td></tr>					
-					<tr><td>특수근무지수당</td>				
-						<td><input type="text" name="specialPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="overtimePay"name="overtimePay" class="form-control col-12"></td></tr>																							
 					<tr><td>직책수당</td>			
-						<td><input type="text" name="positionBenefit" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="positionBenefit"name="positionBenefit" class="form-control col-12"></td></tr>					
 					<tr><td>자가운전보조금</td>				
-						<td><input type="text" name="selfDriPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="selfDriPay"name="selfDriPay" class="form-control col-12"></td></tr>					
 					<tr><td>통신수당</td>				
-						<td><input type="text" name="comPay" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="comPay"name="comPay" class="form-control col-12"></td></tr>					
 					<tr><td>식대</td>					
-						<td><input type="text" name="mealCost" class="form-control col-12"></td></tr>					
+						<td><input type="text" id="mealCost"name="mealCost" class="form-control col-12"></td></tr>					
 					<tr><td>육아수당</td>								
-						<td><input type="text" name="childPay" class="form-control col-12"></td></tr>
+						<td><input type="text" id="childPay"name="childPay" class="form-control col-12"></td></tr>
 												
 						<tr>
                     		<td align="left">과세 :
@@ -120,13 +125,13 @@
                     	</tr>
                     	<tr>	
                     		<td align="left">지급액 계 :</td>
-                    		<td align="right"><input type="text" class="form-control col-12"></td>
+                    		<td align="right"><input type="text" id="sum1" class="form-control col-12"></td>
                 		</tr>               										
 				</table>
 				</div>
 				<!-- /.card -->
 			</div>
-			<div class="col-4">
+			<div class="col-3">
 				<div class="card">
 				<table class="table table-bordered table-striped dataTable"role="grid"> 
 					<div align="center">공제액</div>
@@ -154,9 +159,11 @@
 				</div>
 			
 				<button type="button" value="급여지급" class="col-12" align="center">							
-					<a th:href="@{/payList}" class="nav-link">급여 지급액 등록</a>
+					<a th:href="@{/selectPay}" class="nav-link">급여 지급액 등록</a>
 				</button>				
-				
+
+			
+
 				<!-- /.card -->
 			
 			<!-- /.col-md-6 -->
@@ -168,14 +175,21 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<!--검색조건  -->
 <script type="text/javascript">
 $(document).ready(function(){
-	$('').basicPay
+	$('#sel').on('change', function() {
+	    location.href= this.value;
+	});
+	$('#sel').val(location.href);
 }
 
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
+<script th:src="@{custom/js/Pay.js}"></script>
+<script type="text/javascript"th:inline="javascript">
+var insertSearchPay=[[${insertSearchPay}]];
+console.log(insertSearchPay);
+</script>
 </th:block>
 </html>

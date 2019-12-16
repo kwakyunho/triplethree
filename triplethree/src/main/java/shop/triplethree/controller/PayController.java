@@ -19,11 +19,13 @@ public class PayController {
 	@Autowired private PayService payService;
 	
 	/**급여등록화면**/
-	@GetMapping("/insertPay")
-	public String insertPay() {
+	@GetMapping("/viewPay")
+	public String viewPay() {
 		
 		return "pay/insertPay";	
 	}
+	
+
 	/**급여 등록 검색**/
 	@PostMapping("/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk
@@ -32,6 +34,7 @@ public class PayController {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
+		 model.addAttribute("payInsert", payService.payInsert());
 		return "pay/insertPay";	
 	}
 	
@@ -39,6 +42,7 @@ public class PayController {
 	@GetMapping("/selectPay")
 	public String selectPay(Model model) {
 		 model.addAttribute("selectPay", payService.selectPay());
+		 model.addAttribute("payInsert", payService.payInsert());
 		return "pay/selectPay";	
 	}
 	

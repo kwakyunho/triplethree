@@ -27,13 +27,13 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>차량 이용 신청</h1>
+						<h1>시설물 이용 신청</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item">예약 관리</li>
-							<li class="breadcrumb-item active">차량 이용 신청</li>
+							<li class="breadcrumb-item active">시설물 이용 신청</li>
 						</ol>
 					</div>
 				</div>
@@ -51,7 +51,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">차량 예약 하기</h4>
+							<h4 class="modal-title" id="myModalLabel">시설물 예약 하기</h4>
 						</div>
 						<div class="modal-body">
 							<div class="content">
@@ -73,13 +73,14 @@
 															id="reEnd" name="reEnd"></td>
 													</tr>
 													<tr>
-														<td style="width: 150px;">차량명</td>
+														<td style="width: 150px;">예약 시설명</td>
 														<td>
 															<select class="form-control form-control-lg"
-																style="font-size: medium;" name="veCode" id="veCode">
-																	<!-- <option th:each="s : ${selectCarBox}" th:text="${s.veName}" th:value="${s.veCode}"></option> -->
+																style="font-size: medium;" name="beCode" id="beCode">
+																	<!-- <option th:each="s : ${selectBeBox}" th:text="${s.beName}" th:value="${s.beCode}"></option> -->
 															</select>
 														</td>
+
 													</tr>
 												</table>
 											</div>
@@ -133,16 +134,15 @@
 															id="reEndUp" name="reEnd"></td>
 													</tr>
 													<tr>
-														<p class="text-danger" style="text-align: center;">* 예약 수정시 차량명과 예약일을 꼭 확인해주세요.</p>
-														<td style="width: 150px;">차량명</td>
+														<p class="text-danger" style="text-align: center;">* 수정시 예약 시설물과 예약일을 꼭 확인해주세요.</p>
+														<td style="width: 150px;">예약 시설물</td>
 														<td>
 															<select class="form-control form-control-lg"
-																style="font-size: medium;" name="veCode" id="veCodeUp">
-																	<!-- <option th:each="s : ${selectCarBox}" th:text="${s.veName}" th:value="${s.veCode}"></option> -->
+																style="font-size: medium;" name="beCode" id="beCodeUp">
+																	<!-- <option th:each="s : ${selectBeBox}" th:text="${s.beName}" th:value="${s.beCode}"></option> -->
 															</select>
 															<input type="hidden" name="code" id="hiddenCode">
 														</td>
-
 													</tr>
 												</table>
 											</div>
@@ -210,7 +210,7 @@
 <script th:src="@{plugins/fullcalendar-interaction/main.min.js}"></script>
 <script th:src="@{plugins/fullcalendar-bootstrap/main.min.js}"></script>
 <!-- Page specific script -->
-<script th:src=@{custom/js/assetsCarManage.js}></script>
+<script th:src=@{custom/js/assetsBeManage.js}></script>
 <!-- 세션의 사원번호를 저장하는 스크립트 -->
 <script type="text/javascript" th:inline="javascript"> var sid = [[${session.SID}]] </script>
 </th:block>

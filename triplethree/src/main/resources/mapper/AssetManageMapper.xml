@@ -4,4 +4,351 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.triplethree.mapper.AssetManageMapper">
 
+<resultMap type="shop.triplethree.vo.AssetsManage" id="AssetsManage">
+	<result property="code" column="code"/>
+	<result property="division" column="division"/>
+	<result property="empCode" column="emp_code"/>
+	<result property="coName" column="co_name"/>
+	<result property="reReq" column="re_req"/>
+	<result property="reStart" column="re_start"/>
+	<result property="reEnd" column="re_end"/>
+	<result property="reCom" column="re_com"/>
+	<result property="reComCheck" column="re_com_check"/>
+	<result property="reCheckName" column="re_check_name"/>
+	<result property="veCode" column="code"/>
+	<result property="veName" column="ve_name"/>
+	<result property="veNumber" column="ve_number"/>
+	<result property="beCode" column="code"/>
+	<result property="beName" column="fa_name"/>
+	<result property="beLocal" column="fa_local"/>
+	<result property="beSeat" column="fa_seat"/>
+</resultMap>
+
+<!-- 차량 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
+<select id="selectCarBox" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			v.code
+			,v.ve_name
+		FROM
+			VE_MANAGE AS v
+		WHERE
+			v.ve_state = '사용가능'
+		AND
+			v.ve_use = '출장용'
+		AND
+			v.code IN(SELECT
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.division = '차량')
+</select>
+
+<select id="selectCarBox2" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			v.code
+			,v.ve_name
+		FROM
+			VE_MANAGE AS v
+		WHERE
+			v.ve_state = '사용가능'
+		AND
+			v.ve_use = '출장용'
+		AND
+		NOT	v.code = ANY(SELECT
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.division = '차량')
+</select>
+
+<!-- 차량 예약 등록 쿼리문  -->
+<insert id="insertCarManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	INSERT INTO
+		RESER_MANAGE
+		(code
+		,division
+		,emp_code
+		,co_name
+		,re_req
+		,re_start
+		,re_end)
+		VALUES
+		(#{code}
+		,'차량'
+		,#{empCode}
+		,#{veCode}
+		,NOW()
+		,#{reStart}
+		,#{reEnd})
+</insert>
+
+<!-- 달력에 차량 예약 현황 보여줄 쿼리문 -->
+<select id="selectCarManageAsset" parameterType="shop.triplethree.vo.AssetsManage" resultMap="AssetsManage">		
+	SELECT
+		r.code
+		,r.co_name
+		,r.emp_code
+		,r.re_start
+		,r.re_end
+		,e.emp_name AS empName
+		,v.ve_name
+		,d.dename AS deName
+	FROM
+		RESER_MANAGE AS r
+	LEFT JOIN
+		EMP_MANAGE AS e
+	ON
+		r.emp_code = e.emp_num 
+	LEFT JOIN
+		VE_MANAGE AS v
+	ON	
+		r.co_name = v.code
+	LEFT join
+		DEMG	AS d
+	ON 
+		e.demgcode = d.code
+	WHERE
+		r.division = '차량'
+</select>
+
+<!-- 차량 일정 수정시 모달에 뿌려줄 값을 찾는 쿼리문 -->
+<select id="selectCarUpdate" parameterType="String" resultMap="AssetsManage">
+	SELECT
+		r.code
+		,r.re_start
+		,r.re_end
+		,r.emp_code
+	FROM 
+		RESER_MANAGE AS r
+	WHERE
+		r.CODE = #{code}
+</select>
+
+<!-- 차량 일정 수정 쿼리문 -->
+<update id="updateCarManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	UPDATE
+		RESER_MANAGE AS r
+	SET
+		r.co_name = #{veCode}
+		,r.re_req = NOW()
+		,r.re_start = #{reStart}
+		,r.re_end = #{reEnd}
+	WHERE
+		r.CODE = #{code}
+</update>
+
+<!-- 차량 예약 삭제 쿼리문 -->
+<delete id="deleteCarManageAsset" parameterType="String">
+	DELETE FROM
+		RESER_MANAGE
+	WHERE
+		code = #{code}
+</delete>
+
+<!-- 시설물 예약시 셀렉트 박스에 뿌려줄 내용 조회 쿼리문 -->
+<select id="selectBeBox" parameterType="String" resultMap="AssetsManage">
+		<!-- SELECT
+			f.code
+			,f.fa_name
+		FROM
+			FACILITY_MANAGE AS f
+		WHERE
+			f.fa_st = '사용가능' -->
+			
+		SELECT
+			f.code
+			,f.fa_name
+		FROM
+			FACILITY_MANAGE AS f
+		WHERE
+			f.fa_st = '사용가능'
+		AND
+			f.code IN (SELECT	
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		NOT BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		and
+			r.division = '시설')
+</select>
+
+<select id="selectBeBox2" parameterType="String" resultMap="AssetsManage">
+		SELECT
+			f.code
+			,f.fa_name
+		FROM
+			FACILITY_MANAGE AS f
+		WHERE
+			f.fa_st = '사용가능'
+		AND
+		NOT	f.code = ANY(SELECT	
+			r.co_name
+		FROM
+			RESER_MANAGE AS r
+		WHERE
+			r.re_start
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		AND
+			r.re_end
+		BETWEEN
+			#{startDay}
+		AND
+			#{endDay}
+		and
+			r.division = '시설')
+</select>
+
+<!-- 시설물 예약 등록 쿼리문 -->
+<insert id="insertBeManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	INSERT INTO
+		RESER_MANAGE
+		(code
+		,division
+		,emp_code
+		,co_name
+		,re_req
+		,re_start
+		,re_end)
+	VALUES
+		(#{code}
+		,'시설'
+		,#{empCode}
+		,#{beCode}
+		,NOW()
+		,#{reStart}
+		,#{reEnd})
+</insert>
+
+<!-- 달력에 시설물 예약 현황 보여줄 쿼리문  -->
+<select id="selectBeManageAsset" parameterType="shop.triplethree.vo.AssetsManage" resultMap="AssetsManage">
+	SELECT
+		r.code
+		,r.co_name
+		,r.emp_code
+		,r.re_start
+		,r.re_end
+		,e.emp_name AS empName
+		,f.fa_name
+		,d.dename AS deName
+	FROM
+		RESER_MANAGE AS r
+	LEFT JOIN
+		EMP_MANAGE AS e
+	ON
+		r.emp_code = e.emp_num 
+	LEFT JOIN
+		FACILITY_MANAGE AS f
+	ON	
+		r.co_name = f.code
+	LEFT join
+		DEMG	AS d
+	ON 
+		e.demgcode = d.CODE
+	WHERE
+		r.division = '시설'
+</select>
+
+<!-- 시설물 예약 수정 쿼리문 -->
+<update id="updateBeManageAsset" parameterType="shop.triplethree.vo.AssetsManage">
+	UPDATE
+		RESER_MANAGE
+	SET
+		co_name = #{beCode}
+		,re_req = NOW()
+		,re_start = #{reStart}
+		,re_end = #{reEnd}
+	WHERE
+		code = #{code} 
+</update>
+
+<!-- 시설물 예약 삭제 쿼리문 -->
+<delete id="deleteBeManageAsset" parameterType="String">
+	DELETE FROM
+		RESER_MANAGE
+	WHERE
+		code = #{code}
+</delete>
+
+<!-- 이용 내역 조회 쿼리문 -->
+<select id="assetsManageListSelect" parameterType="String" resultMap="AssetsManage">
+	SELECT
+		r.code
+		,r.division
+		,r.emp_code
+		,r.co_name
+		,r.re_start
+		,r.re_end
+		,e.emp_name AS empName
+		,v.ve_name
+		,f.fa_name
+		,r.re_com_check
+	FROM
+		RESER_MANAGE AS r
+	LEFT JOIN
+		EMP_MANAGE AS e
+	ON
+		r.emp_code = e.emp_num
+	LEFT JOIN
+		VE_MANAGE AS v
+	ON
+		r.co_name = v.CODE
+	LEFT JOIN
+		FACILITY_MANAGE AS f
+	ON
+		r.co_name = f.code
+	WHERE
+		r.emp_code = #{sid}
+</select>
+
+<!-- 이용 내역에서 반납 클릭시 실행되는 쿼리문 -->
+<update id="ReturnCarManageAsset" parameterType="String">
+	UPDATE
+		RESER_MANAGE AS r
+	SET
+		r.re_com_check = 'Y'
+		,r.re_com = NOW()
+		,r.re_check_name = #{sid}
+	WHERE
+		r.CODE = #{code}
+</update>
 </mapper>

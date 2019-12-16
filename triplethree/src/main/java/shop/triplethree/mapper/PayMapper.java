@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import shop.triplethree.vo.Employee;
+import shop.triplethree.vo.Pay;
 
 @Mapper
 public interface PayMapper {
@@ -12,6 +13,7 @@ public interface PayMapper {
 
 	/** 급여대장 **/
 	public List<Employee> selectPay();
+	public List<Pay> payInsert();
 
 	/** 퇴직금 검색조회 ***/
 	public List<Employee> selectRetiring();
