@@ -28,21 +28,6 @@
 	
 	<!-- 부서정보 리스트 쿼리문 -->
 	<select id="selectOrganizationChart" resultType="shop.triplethree.vo.Company">
-	<!-- 	SELECT
-			code AS departmentCode
-			,dename AS departmentNameBe
-			,level AS departmentLevel
-			,updamgcode AS departmentUpcode
-			,writer AS departmentWriter
-			,writer_day AS departmentWriterDay
-			,approver AS departmentApprover
-			,approver_st AS departmentApperverSt
-			,appro_day AS departmentApproDay
-			,reason AS departmentSau
-			,yes_or_no AS departmentYesNO
-		FROM
-			DEMG -->
-			
 		SELECT
 			d.code AS departmentCode
 			,d.dename AS departmentNameBe
@@ -158,20 +143,6 @@
 	
 	<!-- 직급정보 리스트 쿼리문 -->
 	<select id="selectPosition" resultType="shop.triplethree.vo.Position">
-<!-- 		SELECT
-			code AS positionCode
-			,poname AS positionNameBe
-			,level AS positionLevel
-			,writer AS positionWriter
-			,writer_day AS positionWriterDay
-			,approver AS positionApprover
-			,approver_st AS positionApperverSt
-			,appro_day AS positionApproDay
-			,reason AS positionSau
-			,yes_or_no AS positionYesNO
-		FROM 
-			POSISYS -->
-			
 		SELECT
 			p.code AS positionCode
 			,p.poname AS positionNameBe

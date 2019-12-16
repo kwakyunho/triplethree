@@ -6,16 +6,21 @@
 $(document).ready(function(){
 	$('.updateBe').children('input').on('click', function(){
 		var uri = $(this).parents('.AssetsListTr')
-		
-		$('#code').val(uri.children('#upCode').text());
-		console.log(uri.children('#upCode').text());
-		$('#upName').val(uri.children('#faName').text());
-		$('#upLocal').val(uri.children('#faLocal').text());
-		$('#upSeat').val(uri.children('#faSeat').text());
-		//$('#upImage').val(uri.children('#faImage').text());
-		$('#upSt').val(uri.children('#faSt').text());
-		
-		$('#myModal2').modal();
+		var check = uri.children('#faSt').text();
+		//console.log(check);
+		if(check=='사용가능'){
+			$('#code').val(uri.children('#upCode').text());
+			console.log(uri.children('#upCode').text());
+			$('#upName').val(uri.children('#faName').text());
+			$('#upLocal').val(uri.children('#faLocal').text());
+			$('#upSeat').val(uri.children('#faSeat').text());
+			//$('#upImage').val(uri.children('#faImage').text());
+			$('#upSt').val(uri.children('#faSt').text());
+			
+			$('#myModal2').modal();
+		}else{
+			alert('사용하지 않는 시설은 수정 할 수 없습니다.');
+		}
 	});
 });
 
@@ -98,7 +103,7 @@ $(function(){
 $("#inName").blur(function() {
 	
 	var name = $('#inName').val();
-	console.log(name + " <- 시설명이에요.");
+	//console.log(name + " <- 시설명이에요.");
 	
 		$.ajax({
 			type 		: 'POST',
@@ -130,7 +135,7 @@ $("#inName").blur(function() {
 $("#upName").blur(function() {
 	
 	var name = $('#upName').val();
-	console.log(name + " <- 시설명이에요.");
+	//console.log(name + " <- 시설명이에요.");
 	
 		$.ajax({
 			type 		: 'POST',
@@ -176,13 +181,19 @@ $(function(){
 	$('.deleteBeBtn').children('input').on('click', function(){
 		var uri = $(this).parents('.AssetsListTr');
 		var textValue = uri.children('#upCode').text();
-		console.log(textValue);
-		uri.children('#upCode').append('<input type="hidden" id="becode" name="code">');
-		$('#becode').val(textValue);
-		
-		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', 'assetsBeDelete').submit();
-		 }
+		//console.log(textValue);
+		var check = uri.children('#faSt').text();
+		//console.log(check);
+		if(check=='사용가능'){
+			uri.children('#upCode').append('<input type="hidden" id="becode" name="code">');
+			$('#becode').val(textValue);
+			
+			if(confirm('삭제하시겠습니까?')){
+				$('#deleteForm').attr('action', 'assetsBeDelete').submit();
+			}
+		}else{
+			alert('사용하지 않는 시설은 삭제 할 수 없습니다.');
+		}
 	});
 });
 
@@ -245,18 +256,23 @@ $(function(){
 $(document).ready(function(){
 	$('.updateCar').children('input').on('click', function(){
 		var uri = $(this).parents('.AssetsListTr')
-		
-		$('#code').val(uri.children('#upCode').text());
-		$('#upVeMake').val(uri.children('#veMake').text());
-		$('#upVeName').val(uri.children('#veName').text());
-		$('#upVeNunber').val(uri.children('#veNunber').text());
-		$('#upVeCc').val(uri.children('#veCc').text());
-		$('#upVeUse').val(uri.children('#veUse').text());
-		$('#upVeBuy').val(uri.children('#veBuy').text());
-		$('#upVeModelYear').val(uri.children('#veModelYear').text());
-		$('#upFaSt').val(uri.children('#faSt').text());
-		
-		$('#myModal2').modal();
+		var check = uri.children('#faSt').text();
+		//console.log(check);
+		if(check == '사용가능'){
+			$('#code').val(uri.children('#upCode').text());
+			$('#upVeMake').val(uri.children('#veMake').text());
+			$('#upVeName').val(uri.children('#veName').text());
+			$('#upVeNunber').val(uri.children('#veNunber').text());
+			$('#upVeCc').val(uri.children('#veCc').text());
+			$('#upVeUse').val(uri.children('#veUse').text());
+			$('#upVeBuy').val(uri.children('#veBuy').text());
+			$('#upVeModelYear').val(uri.children('#veModelYear').text());
+			$('#upFaSt').val(uri.children('#faSt').text());
+			
+			$('#myModal2').modal();	
+		}else{
+			alert('사용하지 않는 차량은 수정 할 수 없습니다.');
+		}
 	});
 });
 
@@ -279,12 +295,82 @@ $(function(){
 		
 		var uri = $(this).parents('.AssetsListTr');
 		var textValue = uri.children('#upCode').text();
-		uri.children('#upCode').append('<input type="hidden" id="decode" name="code">');
-		$('#decode').val(textValue);
+		var check = uri.children('#faSt').text();
+		//console.log(check);
+		if(check =='사용가능'){
+			uri.children('#upCode').append('<input type="hidden" id="decode" name="code">');
+			$('#decode').val(textValue);
+			
+			if(confirm('삭제하시겠습니까?')){
+				$('#deleteForm').attr('action', 'assetsCaDelete').submit();
+			}
+		}else{
+			alert('사용하지 않는 차량은 삭제 할 수 없습니다.');
+		}
+	});
+});
+
+//차량등록 유효성 검사(1 = 중복 / 0 != 중복)
+$("#inVeNunber").blur(function() {
+	
+	var name = $('#inVeNunber').val();
+	//console.log(name + " <- 시설명이에요.");
+	
+		$.ajax({
+			type 		: 'POST',
+		data 		: {'veNunber': name},
+		url 		: "carNameCheck",
+		datatype	: 'json',
 		
-		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', 'assetsCaDelete').submit();
-		 }
+			success : function(data) {
+			console.log("1 = 중복o / 0 = 중복x : "+ data);							
+			
+			if (data == 1) {
+			// 1 : 아이디가 중복되는 문구
+			$('#name_checkCar').text('사용중인 차량번호 입니다.');
+			$('#name_checkCar').css('color', 'red');
+			$('#reg_submit').attr('disabled', true);
+				} 
+			// 0: 아이디가 중복되지 않을때 문구
+			else {
+			$('#name_checkCar').text('사용가능한 차량번호 입니다.');
+			$('#name_checkCar').css('color', 'green')	          					
+				}
+			}, error : function() {
+				console.log("실패");
+			}
+	});
+});
+
+//차량수정 유효성 검사(1 = 중복 / 0 != 중복)
+$("#upVeNunber").blur(function() {
+	
+	var name = $('#upVeNunber').val();
+	//console.log(name + " <- 시설명이에요.");
+	
+		$.ajax({
+			type 		: 'POST',
+		data 		: {'veNunber': name},
+		url 		: "carNameCheck",
+		datatype	: 'json',
+		
+			success : function(data) {
+			console.log("1 = 중복o / 0 = 중복x : "+ data);							
+			
+			if (data == 1) {
+			// 1 : 아이디가 중복되는 문구
+			$('#name_checkCarUp').text('사용중인 차량번호 입니다.');
+			$('#name_checkCarUp').css('color', 'red');
+			$('#reg_submit').attr('disabled', true);
+				} 
+			// 0: 아이디가 중복되지 않을때 문구
+			else {
+			$('#name_checkCarUp').text('사용가능한 차량번호 입니다.');
+			$('#name_checkCarUp').css('color', 'green')	          					
+				}
+			}, error : function() {
+				console.log("실패");
+			}
 	});
 });
 

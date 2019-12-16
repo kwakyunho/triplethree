@@ -110,6 +110,8 @@ public class AssetsController {
 		//System.out.println("무엇이 담겨있나요?" + assets);
 		String sid = (String) session.getAttribute("SID");
 		assets.setWriter(sid);
+		String cc = assets.getVeCc();
+		assets.setVeCc(cc+"CC");
 		assetsService.updateCaAssets(assets);
 		return "redirect:assetCaSelect";
 	}
@@ -117,7 +119,6 @@ public class AssetsController {
 	/**
 	 * 차랑 삭제 메서드
 	 * */
-	
 	@PostMapping("/assetsCaDelete")
 	public String deleteCaAssets(Assets assets, HttpSession session) {
 
@@ -130,5 +131,16 @@ public class AssetsController {
 		//System.out.println("세션값을 확인할께요." + sid);
 		assetsService.deleteCaAssets(assets);
 		return "redirect:assetCaSelect";
+	}
+	
+	/**
+	 * 차량 등록/수정 유효성 검사
+	 * */
+	@PostMapping(value="/carNameCheck", produces = "application/json")
+	public @ResponseBody int carNameCheck (String veNunber, Assets assets) {
+		System.out.println("차량번호가 제대로 들어왔나요?" + veNunber);
+		//System.out.println("시설명이 있는지 확인해 볼께요.");
+		assets.setVeNunber(veNunber);
+		return assetsService.carNameCheck(assets);
 	}
 }

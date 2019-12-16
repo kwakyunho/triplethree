@@ -27,16 +27,26 @@
 	<!-- 시설물 조회 쿼리문 -->
 	<select id="selectBeAssets" resultMap="AssetsResult">
 		SELECT
-			code
-			,fa_name
-			,fa_local
-			,fa_seat
-			,fa_image
-			,fa_st
-			,writer
-			,writer_day
+			f.code
+			,f.fa_name
+			,f.fa_local
+			,f.fa_seat
+			,f.fa_image
+			,f.fa_st
+			,f.writer
+			,f.writer_day
+			,e.emp_name AS empName
+			,D.dename AS deName
 		FROM
-			FACILITY_MANAGE	
+			FACILITY_MANAGE AS f
+		LEFT JOIN
+			EMP_MANAGE AS e
+		ON 
+			f.writer = e.emp_num
+		LEFT JOIN
+			DEMG AS D
+		ON
+			D.CODE = e.demgcode
 	</select>
 	
 	<!-- 시설물 등록 쿼리문 -->
@@ -70,7 +80,6 @@
 			fa_name = #{faName}
 			,fa_local = #{faLocal}
 			,fa_seat = #{faSeat}
-			,fa_date = #{faDate}
 			,fa_image = #{faImage}
 			,fa_st = #{faSt}
 			,writer = #{sid}
@@ -99,6 +108,8 @@
 			FACILITY_MANAGE
 		WHERE
 			fa_name = #{faName}
+		AND
+			fa_st = '사용가능'
 	</select>
 	
 	<!-- 차량 등록 쿼리문 -->
@@ -133,19 +144,29 @@
 	<!-- 차량 리스트 조회 쿼리문 -->
 	<select id="selectCaAssets" resultMap="AssetsResult">
 		SELECT
-			code
-			,ve_make
-			,ve_name
-			,ve_number
-			,ve_cc
-			,ve_use
-			,ve_buy
-			,ve_state
-			,ve_model_year
-			,writer
-			,writer_day
+			v.code
+			,v.ve_make
+			,v.ve_name
+			,v.ve_number
+			,v.ve_cc
+			,v.ve_use
+			,v.ve_buy
+			,v.ve_state
+			,v.ve_model_year
+			,v.writer
+			,v.writer_day
+			,e.emp_name AS empName
+			,D.dename AS deName
 		FROM
-			VE_MANAGE
+			VE_MANAGE AS v
+		LEFT JOIN
+			EMP_MANAGE AS e
+		ON 
+			v.writer = e.emp_num
+		LEFT JOIN
+			DEMG AS D
+		ON
+			D.CODE = e.demgcode
 	</select>
 	
 	<!-- 차량 수정 쿼리문 -->
@@ -178,4 +199,16 @@
 		WHERE
 			CODE = #{code}
 	</update>
+	
+	<!-- 차량 등록 / 수정 유효성검사 쿼리문 -->
+	<select id="carNameCheck" parameterType="shop.triplethree.vo.Assets" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			VE_MANAGE
+		WHERE
+			ve_number = #{veNunber}
+		AND
+			ve_state = '사용가능'
+	</select>
 </mapper>

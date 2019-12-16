@@ -35,4 +35,7 @@ public interface AssetsMapper {
 	
 	// 차량 삭제 메서드
 	public int deleteCaAssets(Assets assets);
+	
+	// 차량 등록/수정 유효성 검사 메서드
+	public int carNameCheck(Assets assets);
 }

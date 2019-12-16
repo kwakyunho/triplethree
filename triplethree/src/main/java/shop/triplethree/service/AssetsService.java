@@ -80,4 +80,11 @@ public class AssetsService {
 	public int deleteCaAssets(Assets assets) {
 		return assetMapper.deleteCaAssets(assets);
 	}
+	
+	/**
+	 * 차량 등록/수정 유효성 검사 메서드
+	 * */
+	public int carNameCheck(Assets assets) {
+		return assetMapper.carNameCheck(assets);
+	}
 }

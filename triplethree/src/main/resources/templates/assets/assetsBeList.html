@@ -9,6 +9,10 @@
 </th:block>
 
 <!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
 
 
 <th:block layout:fragment="customContents">
@@ -78,7 +82,7 @@
 										<td style="width:150px;">상태</td>
 										<td>
 											<input class="form-control form-control-lg" type="text" style="width:100%; 
-											font-size: small;" placeholder="에)사용가능 , 수리중" id="inSt" name="faSt">
+											font-size: small;" placeholder="에)사용가능 OR 사용안함" id="inSt" name="faSt">
 										</td>
 									</tr>
 									<tr>
@@ -153,7 +157,7 @@
 											<td style="width:150px;">상태</td>
 											<td>
 												<input class="form-control form-control-lg updateValue" type="text" style="width:100%; 
-												font-size: small;" placeholder="에)사용가능 , 수리중" id="upSt" name="faSt">
+												font-size: small;" placeholder="에)사용가능 OR 사용안함" id="upSt" name="faSt">
 											</td>
 										</tr>
 										<tr>										
@@ -176,75 +180,69 @@
 <!-- 시설물 수정 끝-->
 
 <!-- 시설물 리스트 시작 -->
-	<div class="content">
-		<div class="container-fluid">
-			<div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">시설물 목록</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <form th:action="@{#}" method="post" id="deleteForm">
-              <div class="card-body table-responsive p-0" style="overflow-y: scroll;">
-                <table class="table table-hover" style="margid:auto; text-align:center;">
-                  <thead>
-                    <tr>
-	                      <th>시설물 관리코드</th>
-	                      <th>시설물명</th>
-	                      <th>위치</th>
-	                      <th>수용인원</th>
-	                      <th>이미지</th>
-	                      <th>상태</th>
-	                      <th>작성자</th>
-	                      <th>작성일자</th>
-	                      <th>수정</th>
-	                      <th>삭제</th>
-                    </tr>
-                    <tr th:each="a :${AssetsList}" class="AssetsListTr">
-						<td id="upCode" th:text="${a.code}"></td>
-						<td id="faName" th:text="${a.faName}"></td>
-						<td id="faLocal"  th:text="${a.faLocal}"></td>
-						<td id="faSeat"  th:text="${a.faSeat}"></td>
-						<td id="faImage"  th:text="${a.faImage}"></td>
-						<td id="faSt"  th:text="${a.faSt}"></td>
-						<td id="writer"  th:text="${a.writer}"></td>
-						<td id="writerDay"  th:text="${a.writerDay}"></td>
-						<td class="updateBe">
-							<input type="button" id="updateBeBtn2" value="수정" class="btn btn-block btn-primary">
-						</td>
-						<td class="deleteBeBtn">
-							<input type="button" id="deleteBe" value="삭제" class="btn btn-block btn-primary">
-						</td>
-					</tr>
-                  </thead>
-                  <tbody>
-                   
-                  </tbody>
-                </table>
-              </div>
-              </form>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
+<div class="content" style="align-content: center">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">시설물 목록</h3>
+			</div>
+			<div class="card-body">
+				<form th:action="@{#}" method="post" id="deleteForm">
+					<table class="table table-hover"  style="white-space:nowrap; overflow:auto;  width:100%; height:auto; text-align: center;" id="boardListTable">
+						<thead>
+							<tr>
+								<th>시설물 관리코드</th>
+								<th>시설물명</th>
+								<th>위치</th>
+								<th>수용인원</th>
+								<th>이미지</th>
+								<th>상태</th>
+								<th>작성자</th>
+								<th>작성일자</th>
+								<th>수정</th>
+								<th>삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="a :${AssetsList}" class="AssetsListTr">
+								<td id="upCode" th:text="${a.code}"></td>
+								<td id="faName" th:text="${a.faName}"></td>
+								<td id="faLocal"  th:text="${a.faLocal}"></td>
+								<td id="faSeat"  th:text="${a.faSeat}"></td>
+								<td id="faImage"  th:text="${a.faImage}"></td>
+								<td id="faSt"  th:text="${a.faSt}"></td>
+								<td id="writer"  th:text="${a.deName+'-'+a.empName}"></td>
+								<td id="writerDay"  th:text="${a.writerDay}"></td>
+								<td class="updateBe">
+									<input type="button" id="updateBeBtn2" value="수정" class="btn btn-block btn-primary">
+								</td>
+								<td class="deleteBeBtn">
+									<input type="button" id="deleteBe" value="삭제" class="btn btn-block btn-primary">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			<!-- /.table -->
+			</div>
+		<!-- /.card-body -->
 		</div>
-		<!-- /.container-fluid -->
+	<!-- /.card -->
 	</div>
+</div>
 </th:block>
 <!-- 시설물 리스트 끝 -->
 
 <th:block layout:fragment="customScript">
 <!-- 자산관리에 해당하는 모든 스크립트 -->
 <script th:src="@{custom/js/assets.js}"></script>
+<!-- DataTables -->
+<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script>
+  $(function () {
+    $('#boardListTable').DataTable();
+  });
+</script>
 </th:block>
 </html>

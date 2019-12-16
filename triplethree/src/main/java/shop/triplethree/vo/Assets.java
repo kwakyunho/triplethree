@@ -19,7 +19,21 @@ public class Assets {
 	private String veUse; // Car 사용 용도
 	private String veBuy; // Car 구입연도
 	private String veModelYear; // Car 차량연식
+	private String empName;
+	private String deName;
 	
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getDeName() {
+		return deName;
+	}
+	public void setDeName(String deName) {
+		this.deName = deName;
+	}
 	public String getSid() {
 		return sid;
 	}
@@ -122,12 +136,12 @@ public class Assets {
 	public void setVeModelYear(String veModelYear) {
 		this.veModelYear = veModelYear;
 	}
-	
 	@Override
 	public String toString() {
 		return "Assets [sid=" + sid + ", code=" + code + ", faName=" + faName + ", faLocal=" + faLocal + ", faSeat="
 				+ faSeat + ", faDate=" + faDate + ", faImage=" + faImage + ", faSt=" + faSt + ", writer=" + writer
 				+ ", writerDay=" + writerDay + ", veMake=" + veMake + ", veName=" + veName + ", veNunber=" + veNunber
-				+ ", veCc=" + veCc + ", veUse=" + veUse + ", veBuy=" + veBuy + ", veModelYear=" + veModelYear + "]";
+				+ ", veCc=" + veCc + ", veUse=" + veUse + ", veBuy=" + veBuy + ", veModelYear=" + veModelYear
+				+ ", empName=" + empName + ", deName=" + deName + "]";
 	}
 }
