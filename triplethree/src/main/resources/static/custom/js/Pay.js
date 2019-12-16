@@ -33,10 +33,15 @@ $(function(){
 		var mealCost=document.getElementById("mealCost");//식대
 		
 		var sum1=document.getElementById("sum1");
+		var sum2=document.getElementById("sum2");
+		var sum3=document.getElementById("sum3");
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
-		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(selfDriPay.value)
-		+parseInt(comPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;
+		var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+		sum2.value=add2;
+		var add3=add+add2;
+		sum3.value=add3;
 	})
 	
 });
