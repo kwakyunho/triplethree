@@ -14,7 +14,11 @@
 tbody tr:hover{background: whitesmoke;}
 </style>
 <!-- DataTables -->
-<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+
+<!-- daterange picker -->
+<link rel="stylesheet" th:href="@{/plugins/daterangepicker/daterangepicker.css}">
+
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -121,18 +125,26 @@ tbody tr:hover{background: whitesmoke;}
 					<div class="form-group col-md-6" style="float:left;" id="userName">
 						<label for="recipient-name" class="col-form-label">사원명</label>
 					</div>
-					<div class="form-group col-md-6" style="float:left;" id="startWorkTime">
-						<label for="recipient-name" class="col-form-label">출근시간</label>
+					<div class="form-group col-md-12" style="float:left;" id="workTime">
+						<label for="recipient-name" class="col-form-label">출퇴근시간</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="far fa-clock"></i></span>
+							</div>
+							<input type="text" class="form-control float-right" id="startEndWorkTime">
+						</div>
 					</div>
-					<div class="form-group col-md-6" style="float:left;" id="endWorkTime">
-						<label for="recipient-name" class="col-form-label">퇴근시간</label>
-						<input type="time">
+					<div class="form-group col-md-12" style="float:left;" id="coment">
+						<label for="recipient-name" class="col-form-label">수정 사유</label>
+						<div class="input-group">
+								<input type="text" class="form-control" name="coment" placeholder="사유">
+						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary sendBtn">Send message</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary sendBtn">수정</button>
 			</div>
 		</div>
 	</div>
@@ -142,20 +154,43 @@ tbody tr:hover{background: whitesmoke;}
 
 <th:block layout:fragment="customScript">
 <!-- DataTables -->
-<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
-<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 
-<!-- page script -->
-<script>
-  $(function () {
-    $('#workTimeTable').DataTable();
-  });
-</script>
+
+<!-- InputMask -->
+<script th:src="@{/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/plugins/inputmask/min/jquery.inputmask.bundle.min.js}"></script>
+<!-- date-range-picker -->
+<script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
 
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
-	 var table = $('#workTimeTable').DataTable();
-     
+	// 테이블 페이징 처리를 위한 JS홏ㄹ
+	$('#workTimeTable').DataTable();
+	
+	// ajax 호출
+	(function($){
+		$.fn.workTimeEvent = function(sendData, fn){
+			
+			$.ajax({
+				async: true,
+				type : sendData.ajaxType,
+				data : sendData,
+				url : sendData.ajaxUrl,
+				dataType : sendData.ajaxDataType,
+				success : function(result) {
+					fn(result);
+				},
+				error : function(error) {
+					//alert("error : " + error);
+					fn('error');
+				}
+			});
+		}
+	}(jQuery));
+    
+	// 세션 값 가져와 테이블에 데이터 뿌리기
     $('#workTimeTable tbody').on('click', 'tr', function () {
 		
 		var workAttData = {};
@@ -164,6 +199,7 @@ $(document).ready(function(){
 		var num = $(this).children('.workAttListTableNum').text() - 1;
 		
 		var workAttCode = workAttData[num].workAttCode;
+		var oldDay = null;
 		var day = workAttData[num].day;
 		var userCode = workAttData[num].userCode;
 		var demgName = workAttData[num].demgName;
@@ -184,16 +220,93 @@ $(document).ready(function(){
 		
 		$('#workAttCode').text(workAttCode);
 		$('#day').append('<p class="text-muted">' + day + '</p>');
+		oldDay = day;	// 일자가 변경되기 때문에 복사해놓는다.
 		$('#demgName').append('<p class="text-muted">' + demgName + '</p>');
 		$('#poName').append('<p class="text-muted">' + poName + '</p>');
 		$('#userName').append('<p class="text-muted">' + userName + '</p>');
-		$('#startWorkTime').append('<p class="text-muted">' + startWorkTime + '</p>');
-		$('#endWorkTime').append('<p class="text-muted">' + endWorkTime + '</p>');
 		
-	});
-	
-	$('.sendBtn').on('click', function(){
-		//<input type="text" class="form-control">
+		$('#startEndWorkTime').val(startWorkTime + ' - ' + endWorkTime);
+		
+		// 출퇴근 null일때 처리방법
+		if(startWorkTime == null) startWorkTime = day.concat('08:00:00');
+		if(endWorkTime == null) endWorkTime = startWorkTime.substr(0,11).concat('18:00:00');
+		
+		//인풋박스 기간 및 시간 설정
+		$('#startEndWorkTime').daterangepicker({
+			timePicker: true,
+			timePickerIncrement: 1,	// 분 간격 설정
+			startDate: moment(startWorkTime),
+			endDate: moment(endWorkTime)
+		});
+		
+		// dateRangePicker에서 확인버튼 클릭시 발생 이벤트
+		// 시작날짜 변경되면 ('#day').text() 를 변경한다.
+		$('.okBtn').on('click', function(){
+			if(startWorkTime.substr(0,11) != day) day = $('.drp-selected').text().substr(0,11);
+			$('#day').children('p').text(day);
+		});
+		
+		// 수정 버튼 클릭시 발생 이벤트
+		$('.sendBtn').on('click', function(){
+			
+			var sendData = {};
+			
+			sendData.ajaxType = 'POST';	// 전송타입
+			sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+			sendData.ajaxDataType = 'json';	// 리턴 타입
+			
+			sendData.workAttCode = workAttCode;
+			sendData.day = day;
+			sendData.userCode = userCode;
+			sendData.startWorkTime = $('input[id=startEndWorkTime]').val().substr(0,19);
+			sendData.endWorkTime = $('input[id=startEndWorkTime]').val().substr(22,19);
+			sendData.adminId = [[${session.SCODE}]];
+			sendData.coment = $('input[name=coment]').val();
+			
+			// 공란 체크
+			if($('input[name=coment]').val() == ''){
+				alert('누락된 값이 있습니다.');
+			}else{
+				// 내용 수정되는 조건
+				if(day == oldDay){
+					if(confirm('내용수정이 맞습니까?')){
+						sendData.conditionValue = 5;
+						// 콜백함수
+						$(document).workTimeEvent(sendData, function(result){
+							if(result != 'error'){
+								if(result.startWorkTime != null) {
+									alert('이미 등록된 정보가 있습니다.');
+								}else {
+									console.log('result data : ' + result.startWorkTime)
+								}
+							}else{
+							}
+						});
+					}
+					
+				// 내용이 새롭게 등록되는 조건
+				}else{
+					if(confirm('일자가 변경되었습니다. 새롭게 등록하시나요?')){
+						sendData.conditionValue = 4;
+						// 콜백함수
+						$(document).workTimeEvent(sendData, function(result){
+							if(result != 'error'){
+								if(result.startWorkTime != null) {
+									alert('이미 등록된 정보가 있어 새롭게 등록하지 못합니다.');
+								}else {
+									console.log('result data : ' + result.startWorkTime)
+								}
+								//if(result.startWorkTime != '미등록') $('#startWorkTime').text(result.startWorkTime.substr(11,8));
+								//if(result.endWorkTime != '미등록') $('#endWorkTime').text(result.endWorkTime.substr(11,8));
+							}else{
+								//$('#startWorkTime').text('미등록');
+								//$('#endWorkTime').text('미등록');
+							}
+						});
+					}
+				}
+			}
+		});
 	});
 });
 </script>
