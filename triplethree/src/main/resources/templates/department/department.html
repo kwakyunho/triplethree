@@ -7,6 +7,12 @@
 	<title>index</title>
 </th:block>
 
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
+
 <th:block layout:fragment="customContents">
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -145,85 +151,72 @@
 </form>
 <!-- 부서수정 끝  -->
 
-
-
-<!-- 부서 조회 시작  -->
-	<div class="row">
-		<div class="col-12">
-			<div class="card">
-				<div class="card-header">
-					<h3 class="card-title">부서 리스트</h3>
-					<div class="card-tools">
-						<div class="input-group input-group-sm" style="width: 150px;">
-							<input type="text" name="table_search"
-								class="form-control float-right" placeholder="Search">
-
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-default">
-									<i class="fas fa-search"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /.card-header -->
-				<form th:action="@{#}" method="post" id="deleteForm">
-					<div class="card-body table-responsive p-0" style="overflow-y: scroll;">
-						<table class="table table-hover small" style="text-align: center;">
-							<thead>
-								<tr>
-									<th>부서관리코드</th>
-									<th>부서명</th>
-									<th>레벨</th>
-									<th>상위부서코드</th>
-									<th>초기등록자</th>
-									<th>작성일자</th>
-									<th>사유</th>
-									<th>승인자</th>
-									<th>승인일자</th>
-									<th>승인상태</th>
-									<th>사용유무</th>
-									<th>삭제</th>
-								</tr>
-								<tr class="groupListTr" th:each="C : ${CompanyList}">	
-									<td id="departmentCode" th:text="${C.departmentCode}"></td>
-									<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
-									<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
-									<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
-									<td id="departmentWriter" th:text="${C.departmentWriter}"></td>
-									<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
-									<td id="departmentSau" th:text="${C.departmentSau}"></td>
-									<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
-									<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
-									<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
-									<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
-									<td class="deleteDeBtn">
-										<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deleteDe">
-										<!-- <a th:href="@{teamNameDelete(departmentCode=${C.departmentCode})}" class="btn btn-block btn-primary btn-sm">삭제</a> -->
-									</td>								
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-				
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</form>
-				<!-- /.card-body -->
+<!-- 부서조회 시작 -->	
+<div class="content" style="align-content: center">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">부서 리스트</h3>
 			</div>
-			<!-- /.card -->
+			<div class="card-body">
+				<form th:action="@{#}" method="post" id="deleteForm">
+					<table class="table table-hover small" style="white-space:nowrap; overflow:auto;  width:100%; height:auto; text-align: center;" id="boardListTable">
+						<thead>
+							<tr>
+								<th>부서관리코드</th>
+								<th>부서명</th>
+								<th>레벨</th>
+								<th>상위부서코드</th>
+								<th>초기등록자</th>
+								<th>작성일자</th>
+								<th>사유</th>
+								<th>승인자</th>
+								<th>승인일자</th>
+								<th>승인상태</th>
+								<th>사용유무</th>
+								<th>삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="groupListTr" th:each="C : ${CompanyList}">	
+								<td id="departmentCode" th:text="${C.departmentCode}"></td>
+								<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
+								<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
+								<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
+								<td id="departmentWriter" th:text="${C.deName +'-'+ C.empName}"></td>
+								<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
+								<td id="departmentSau" th:text="${C.departmentSau}"></td>
+								<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
+								<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
+								<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
+								<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
+								<td class="deleteDeBtn">
+									<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deleteDe">
+								</td>								
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			<!-- /.table -->
+			</div>
+		<!-- /.card-body -->
 		</div>
+	<!-- /.card -->
 	</div>
+</div>
 <!-- 부서 조회 끝 -->
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
 <!-- 공란 / 유효성검사 체크 스크립트-->       	         
-<script th:src="@{custom/js/blankCkeck.js}"></script>	         
+<script th:src="@{custom/js/blankCkeck.js}"></script>
+<!-- DataTables -->
+<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script>
+  $(function () {
+    $('#boardListTable').DataTable();
+  });
+</script>        
 </th:block>
 </html>
