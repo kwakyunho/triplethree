@@ -56,6 +56,9 @@
 				   		 	</select>
 				  		 </div>
 				   </div>
+				 <!--   <div class="form-group row col-sm-12">
+				   	<p style="color:#dc3545;">*수정 시 종류와 거래처 상태를 확인해주세요!*</p>
+				   </div> -->
                   	<div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">거래처명</label>
 	                    <div class="col-sm-4">
@@ -182,7 +185,7 @@
 				  </div><!-- card body -->
 				  
 				<div class="card-footer">
-					<button type="submit" id="insertBtn" class="btn btn-success float-right">수정하기</button>
+					<button type="submit" id="updateSubmit" class="btn btn-success float-right">수정하기</button>
 				</div><!--  card footer -->
 				
 				</form>
@@ -191,13 +194,87 @@
 			</div><!-- /.row -->
 		</div>
 	</div><!-- /.container-fluid -->
-</div>
 <div class="col-sm-2"></div>
 </th:block>
+
 
 <th:block layout:fragment="customScript">
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-<script th:src="@{custom/js/clientCheck.js}"></script>
+<script>
+$(function(){
+	$('#updateSubmit').click(function(){
+		
+		var accNameCheck = $('input[name=accName]');
+		var accCeoNameCheck = $('input[name=accCeoName]');
+		var accPhoneCheck = $('input[name=accPhone]');
+		var repreNumberCheck = $('input[name=repreNumber]');
+		var accEmailCheck = $('input[name=accEmail]');
+		var accFaxCheck = $('input[name=accFax]');
+		var accPostcodeCheck = $('input[name=accPostcode]');
+		var accBlnCheck = $('input[name=accBln]');
+		var accAddrCheck = $('input[name=accAddr]');
+		var accDetailAddrCheck = $('input[name=accDetailAddr]');
+		var accExtraAddrCheck = $('input[name=accExtraAddr]');
+		
+		if(accNameCheck.val() == ""){
+			alert('회사이름을 입력해주세요.');
+			accNameCheck.focus();
+			return false;
+		}else if(accCeoNameCheck.val() == ""){
+			alert('대표자명을 입력해주세요');
+			accCeoNameCheck.focus();
+			return false;
+		}
+		else if(accPhoneCheck.val() == ""){
+			alert('거래처 전화번호를 입력해주세요');
+			accPhoneCheck.focus();
+			return false;
+		}
+		else if(repreNumberCheck.val() == ""){
+			alert('대표자 번호를 입력해주세요.');
+			repreNumberCheck.focus();
+			return false;
+		}
+		else if(accEmailCheck.val() == ""){
+			alert('이메일을 입력해주세요');
+			accEmailCheck.focus();
+			return false;
+		}
+		else if(accFaxCheck.val() == ""){
+			alert('팩스번호를 입력해주세요.');
+			accFaxCheck.focus();
+			return false;
+		}
+		else if(accBlnCheck.val() == ""){
+			alert('사업자번호를 입력해주세요.');
+			accBlnCheck.focus();
+			return false;
+		}
+		else if(accPostcodeCheck.val() == ""){
+			alert('우편번호를 입력해주세요.');
+			accPostcodeCheck.focus();
+			return false;
+		}
+		else if(accAddrCheck.val() == ""){
+			alert('주소를 입력해주세요.');
+			accAddrCheck.focus();
+			return false;
+		}
+		else if(accDetailAddrCheck.val() == ""){
+			alert('상세주소를 입력해주세요.');
+			accDetailAddrCheck.focus();
+			return false;
+		}
+		else if(accExtraAddr.val() == ""){
+			alert('참고주소를 입력해주세요.');
+			accExtraAddr.focus();
+			return false;
+		}else{
+		alert('나와주겠니?');
+		}
+	});
+});
+</script>
 </th:block>
 </html>

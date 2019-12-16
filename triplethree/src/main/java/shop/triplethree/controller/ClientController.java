@@ -37,7 +37,7 @@ public class ClientController {
 	}
 		
 	//거래처 정보 수정화면 이동
-	@GetMapping("/clientUpdate")
+	@PostMapping("/goClientUpdate")
 	public String clientUpdate(@RequestParam(value="code")
 								String code,Model model) {
 		System.out.println(code + "<--수정 할 거래처 code");
@@ -60,7 +60,7 @@ public class ClientController {
 	}
 	
 	//거래처 정보삭제(상태변경)
-	@PostMapping("/ClientDelete")
+	@PostMapping("/clientDelete")
 	public String deleteClient(@RequestParam(value="code")String code,Model model) {
 		System.out.println(code + "<--삭제  할 거래처 code");
 		clientService.deleteClient(code);

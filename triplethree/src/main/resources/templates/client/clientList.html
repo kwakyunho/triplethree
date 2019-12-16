@@ -13,6 +13,8 @@
 <style type="text/css">
 tr:hover{background: whitesmoke;}
 </style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -26,7 +28,7 @@ tr:hover{background: whitesmoke;}
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">거래처 전체 리스트</li>
-					<li class="breadcrumb-item"><a th:href="@{/clientList2}"  style="color:#28a745;">거래처(거래중) 목록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList2}"  style="color:#28a745;">거래중인 거래처목록</a></li>
 					
 				</ol>
 			</div><!-- /.col -->
@@ -44,7 +46,7 @@ tr:hover{background: whitesmoke;}
        
        <div class="card-body">
        <form class="clientListForm">
-         <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto; height:auto; width:100%; height:auto;">
+         <table id="clientListTable" class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto; height:auto; width:100%; height:auto;">
              <thead>
              
 	           		<tr>
@@ -58,7 +60,7 @@ tr:hover{background: whitesmoke;}
                </tr>
              </thead>
              <tbody>
-	               <tr aclass="clientListTable" style="cursor:pointer" th:each="c , index : ${client}">
+	               <tr style="cursor:pointer" th:each="c , index : ${client}">
 	               		<td th:text="${index.index+1}"></td>
 						<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
 						<td th:text="${c.liCode}"></td>
@@ -81,9 +83,20 @@ tr:hover{background: whitesmoke;}
 </th:block>
 
 <th:block layout:fragment="customScript">
+
+<!-- DataTables -->
+<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script>
+  $(function () {
+    $('#clientListTable').DataTable();
+  });
+</script>
+
 <script type="text/javascript" th:inline="javascript">
+//거래처 datail 화면으로 이동하기 
 $(document).ready(function(){
-	$('.clientListTable').on('click',function(){
+	$('#clientListTable tbody').on('click','tr',function(){
 		var clientUrl = $(this).children('.clientCode');
 		clientUrl.append('<input type="hidden" name="code" val="">');
 		var clientCode = clientUrl.attr('id');
@@ -93,6 +106,7 @@ $(document).ready(function(){
 		$('.clientListForm').submit();
 	});
 });
+
 
 console.log([[${code}]]);
 </script>
