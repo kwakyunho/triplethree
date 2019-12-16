@@ -32,9 +32,9 @@ $(function(){
 		var childPay=document.getElementById("childPay");//육아수당
 		var mealCost=document.getElementById("mealCost");//식대
 		
-		var sum1=document.getElementById("sum1");
-		var sum2=document.getElementById("sum2");
-		var sum3=document.getElementById("sum3");
+		var sum1=document.getElementById("sum1"); //과세
+		var sum2=document.getElementById("sum2"); //비과세
+		var sum3=document.getElementById("sum3"); //지급액 계
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;

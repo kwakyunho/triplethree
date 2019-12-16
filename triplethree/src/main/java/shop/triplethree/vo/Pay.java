@@ -24,7 +24,71 @@ public class Pay {
 	private String empName;	//사원이름
 	private String poName;	//직책	
 	private String demgName;	//부서명
-	public String getCode() {
+	private int inseurPer; //고용보험공제비율
+	private int incomePer; //소득세공제비율
+	private int nationPer; //국민연금공제비율
+	private int healthPer; //건보료공제비율
+	private int residentTax;	//주민세공제비율
+	private int longCare;	//장기요양공제비율
+	private int industrialPer;	//산재보험비율
+	private int securityPer;	//고용안정비율
+	private LocalDateTime year;	//적용연도
+
+	public int getInseurPer() {
+		return inseurPer;
+	}
+	public void setInseurPer(int inseurPer) {
+		this.inseurPer = inseurPer;
+	}
+	public int getIncomePer() {
+		return incomePer;
+	}
+	public void setIncomePer(int incomePer) {
+		this.incomePer = incomePer;
+	}
+	public int getNationPer() {
+		return nationPer;
+	}
+	public void setNationPer(int nationPer) {
+		this.nationPer = nationPer;
+	}
+	public int getHealthPer() {
+		return healthPer;
+	}
+	public void setHealthPer(int healthPer) {
+		this.healthPer = healthPer;
+	}
+	public int getResidentTax() {
+		return residentTax;
+	}
+	public void setResidentTax(int residentTax) {
+		this.residentTax = residentTax;
+	}
+	public int getLongCare() {
+		return longCare;
+	}
+	public void setLongCare(int longCare) {
+		this.longCare = longCare;
+	}
+	public int getIndustrialPer() {
+		return industrialPer;
+	}
+	public void setIndustrialPer(int industrialPer) {
+		this.industrialPer = industrialPer;
+	}
+	public int getSecurityPer() {
+		return securityPer;
+	}
+	public void setSecurityPer(int securityPer) {
+		this.securityPer = securityPer;
+	}
+	public LocalDateTime getYear() {
+		return year;
+	}
+	public void setYear(LocalDateTime year) {
+		this.year = year;
+	}
+	public String getCode() {		
 		return code;
 	}
 	public String getEmpNum() {
@@ -151,7 +215,10 @@ public class Pay {
 				+ ", positionBenefit=" + positionBenefit + ", selfDriPay=" + selfDriPay + ", comPay=" + comPay
 				+ ", mealCost=" + mealCost + ", childPay=" + childPay + ", deductPay=" + deductPay + ", writer="
 				+ writer + ", writerDay=" + writerDay + ", paymentDate=" + paymentDate + ", empNum=" + empNum
-				+ ", empName=" + empName + ", poName=" + poName + ", demgName=" + demgName + "]";
+				+ ", empName=" + empName + ", poName=" + poName + ", demgName=" + demgName + ", inseurPer=" + inseurPer
+				+ ", incomePer=" + incomePer + ", nationPer=" + nationPer + ", healthPer=" + healthPer
+				+ ", residentTax=" + residentTax + ", longCare=" + longCare + ", industrialPer=" + industrialPer
+				+ ", securityPer=" + securityPer + ", year=" + year + "]";
 	}
 	
 	

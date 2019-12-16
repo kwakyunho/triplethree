@@ -60,5 +60,10 @@ public class PayController {
 		System.out.println("퇴직금 등록화면");
 		return "pay/selectRetiring";
 	}
+	/**공제액 설정화면 이동****/
+	@GetMapping("/insertDeduct")
+	public String insertDeduct() {
+		return "/pay/insertDeduct";
+	}
 	
 }
