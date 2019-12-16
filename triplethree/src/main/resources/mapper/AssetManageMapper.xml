@@ -308,4 +308,47 @@
 	WHERE
 		code = #{code}
 </delete>
+
+<!-- 이용 내역 조회 쿼리문 -->
+<select id="assetsManageListSelect" parameterType="String" resultMap="AssetsManage">
+	SELECT
+		r.code
+		,r.division
+		,r.emp_code
+		,r.co_name
+		,r.re_start
+		,r.re_end
+		,e.emp_name AS empName
+		,v.ve_name
+		,f.fa_name
+		,r.re_com_check
+	FROM
+		RESER_MANAGE AS r
+	LEFT JOIN
+		EMP_MANAGE AS e
+	ON
+		r.emp_code = e.emp_num
+	LEFT JOIN
+		VE_MANAGE AS v
+	ON
+		r.co_name = v.CODE
+	LEFT JOIN
+		FACILITY_MANAGE AS f
+	ON
+		r.co_name = f.code
+	WHERE
+		r.emp_code = #{sid}
+</select>
+
+<!-- 이용 내역에서 반납 클릭시 실행되는 쿼리문 -->
+<update id="ReturnCarManageAsset" parameterType="String">
+	UPDATE
+		RESER_MANAGE AS r
+	SET
+		r.re_com_check = 'Y'
+		,r.re_com = NOW()
+		,r.re_check_name = #{sid}
+	WHERE
+		r.CODE = #{code}
+</update>
 </mapper>

@@ -43,4 +43,10 @@ public interface AssetManageMapper {
 	
 	// 시설물 예약 삭제 메서드
 	public int deleteBeManageAsset(String code);
+	
+	// 시설/차량 이용 내역 조회 메서드
+	public List<AssetsManage> assetsManageListSelect(String sid);
+	
+	// 이용 내역 조회에서 반납 버튼 클릭시 실행되는 메서드
+	public int ReturnCarManageAsset(String code, String sid);
 }

@@ -1,6 +1,7 @@
 package shop.triplethree.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.triplethree.mapper.AssetManageMapper;
@@ -74,5 +75,15 @@ public class AssetManageService {
 	// 시설물 예약 삭제 메서드
 	public int deleteBeManageAsset(String code) {
 		return assetManageMapper.deleteBeManageAsset(code);
+	}
+	
+	// 예약 내역 조회 메서드
+	public List<AssetsManage> assetsManageListSelect(String sid){
+		return assetManageMapper.assetsManageListSelect(sid);
+	}
+	
+	// 이용 내역 조회에서 반납 버튼 클릭시 실행되는 메서드
+	public int ReturnCarManageAsset(String code, String sid) {
+		return assetManageMapper.ReturnCarManageAsset(code, sid);
 	}
 }

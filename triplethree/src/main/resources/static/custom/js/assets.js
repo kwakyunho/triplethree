@@ -287,3 +287,26 @@ $(function(){
 		 }
 	});
 });
+
+// 이용 내역 조회 반납 스크립트
+$(function(){
+
+	$('.updateListBtn').children('input').on('click',function(){
+		
+		var uri = $(this).parents('.AssetsUpdateList');
+		var textValue = uri.children('#code').val();
+		var check = uri.children('#checkYN').val();
+		//console.log(textValue);
+		//console.log(check);
+		if(check =='N'){
+			uri.children('#code').append('<input type="hidden" id="decode" name="code">');
+			$('#decode').val(textValue);
+		
+			if(confirm('반납 하시겠습니까?')){
+				$('#formUpdateList').attr('action', 'assetsManageCaReturn').submit();
+			}
+		}else{
+			alert('이미 반납 되었습니다.');
+		}
+	});
+});

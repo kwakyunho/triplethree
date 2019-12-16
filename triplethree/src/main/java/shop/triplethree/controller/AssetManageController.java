@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -119,7 +120,7 @@ public class AssetManageController {
 	 * 예약 리스트를 보여줌
 	 * */
 	@GetMapping("/assetsManageBeSelect")
-	public String electBeManageAsset () {
+	public String selectBeManageAsset () {
 		return "/assets/assetsBeManage";
 	}
 	
@@ -195,5 +196,32 @@ public class AssetManageController {
 		//System.out.println("코드값을 확인해 볼께요." + code);
 		assetManageService.deleteBeManageAsset(code);
 		return "redirect:assetsManageBeSelect";
+	}
+	
+	/**
+	 * 이용 내역 조회 버튼 클릭시 실행
+	 * 이용 내역 조회
+	 * */
+	@GetMapping("/assetsManageList")
+	public String assetsManageListSelect(HttpSession session, Model model, Model model2) {
+		String sid = (String) session.getAttribute("SID");
+		//System.out.println("세션값이 넘어왔나요?" + sid);
+		List<AssetsManage> List = assetManageService.assetsManageListSelect(sid);
+		System.out.println("값 확인" + List);
+		model.addAttribute("List", List);
+		model2.addAttribute("input", "<input type='button' value='반납' class='btn btn-block btn-primary btn-mg'>");
+		return "/assets/assetsManageList";
+	}
+	
+	/**
+	 * 이용 내역 조회에서 반납 버튼 클릭시 실행되는 메서드
+	 * */
+	@PostMapping("/assetsManageCaReturn")
+	public String ReturnCarManageAsset(String code, HttpSession session) {
+		//System.out.println("반납 할래요.");
+		//System.out.println("반납 하려는 예약코드를 확인 할께요" + code);
+		String sid = (String) session.getAttribute("SID");
+		assetManageService.ReturnCarManageAsset(code, sid);
+		return "redirect:assetsManageList";
 	}
 }
