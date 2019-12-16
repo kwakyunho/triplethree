@@ -35,15 +35,15 @@
 
 	<div class="content" style="align-content: center">
 	 <div class="col-12">
-	     <div class="card" style="height:400px">
+	     <div class="card">
 	     <form class="boardDetailForm">
 	       <div class="card-header">
 	         <h3 class="card-title" th:text="${board.boardTitle}"></h3>
 	       </div>
 	       <div>
-	       	<div class="card-body">
-	       		<table class="table table-condensed">
-	       			<thead th:text="${board.boardCon}"></thead>
+	       	<div class="card-body"  style="white-space:nowrap;">
+	       		<table class="table table-condensed" >
+	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>
 	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
 	       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
@@ -74,8 +74,9 @@
 	</th:block>
 	
 	<th:block layout:fragment="customScript">
-	
 	<script type="text/javascript">
+	
+	
 	$(document).ready(function(){
 		$('#backBtn').on('click', function(){	
 			$('.boardDetailForm').attr('method', 'POST');
@@ -90,8 +91,8 @@
 				var inputPw = prompt('비밀번호를 입력하세요(1111)');
 				if(dbPw==inputPw){
 					alert('수정화면으로 이동합니다');
-					$('.boardDetailForm').attr('method', 'GET');
-					$('.boardDetailForm').attr('action', '/boardUpdate');
+					$('.boardDetailForm').attr('method', 'POST');
+					$('.boardDetailForm').attr('action', '/goBoardUpdate');
 					$('.boardDetailForm').submit();
 				}else{
 					alert('비밀번호가 일치하지 않습니다');

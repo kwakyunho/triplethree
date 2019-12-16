@@ -47,18 +47,18 @@ tr:hover{background: whitesmoke;}
          <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto; height:auto; width:100%; height:auto;">
              <thead>
              
-           		<tr>
-	                 <th>순차</th>
-	                 <th>거래처관리코드</th>
-	                 <th>거래처종류</th>
-	                 <th>거래여부</th>
-	                 <th>거래처명</th>
-	                 <th>대표자명</th>
-	                 <th>거래처 전화번호</th>
+	           		<tr>
+		                 <th>순차</th>
+		                 <th>거래처관리코드</th>
+		                 <th>거래처종류</th>
+		                 <th>거래여부</th>
+		                 <th>거래처명</th>
+		                 <th>대표자명</th>
+		                 <th>거래처 전화번호</th>
                </tr>
              </thead>
              <tbody>
-	               <tr class="clientListTable" style="cursor:pointer" th:each="c , index : ${client}">
+	               <tr aclass="clientListTable" style="cursor:pointer" th:each="c , index : ${client}">
 	               		<td th:text="${index.index+1}"></td>
 						<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
 						<td th:text="${c.liCode}"></td>

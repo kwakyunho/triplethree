@@ -68,7 +68,7 @@ public class ClientController {
 	}
 
 	//거래처 정보등록 화면이동 (거래처 상태가지고감)
-	@PostMapping("/goClientInsert")
+	@GetMapping("/clientInsert")
 	public String insertClient(Model model) {
 		model.addAttribute("liCode", clientService.getLicodeList());
 		return "/client/clientInsert";

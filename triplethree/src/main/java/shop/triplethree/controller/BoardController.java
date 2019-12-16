@@ -25,7 +25,7 @@ public class BoardController {
 		//code로 선택된 글의 정보를 board 에 담아서 보내기
 		System.out.println("controller - code : " + code);
 		model.addAttribute("board", boardservice.getBoardByCode(code));
-		return "/board/boardDetail.html";
+		return "/board/boardDetail";
 	}
 	/**
 	  * 게시글 작성폼
@@ -83,7 +83,7 @@ public class BoardController {
 	  * @return
 	  */
 	
-	  @GetMapping("/boardUpdate")
+	  @PostMapping("/goBoardUpdate")
   	public String goBoardUpdate(@RequestParam(value="code")String code,Model model) {
 	  System.out.println("*************************");
 	  System.out.println("boardUpdate 화면 보여주기");
@@ -95,12 +95,12 @@ public class BoardController {
 	/**
 	  * 글 수정 처리 
 	  * @param board
-	  * @return
+	  * @return board
 	  */
 	@PostMapping("/boardUpdate")
 	public String boardUpdate(Board board) {
 		System.out.println("*************************");
-		System.out.println("******boardUpdate 처리****");
+		System.out.println("******board Update 처리****");
 		System.out.println("*************************");
 		boardservice.updateBoard(board); //수정 처리 완료
 		return "redirect:/boardList";
@@ -109,13 +109,14 @@ public class BoardController {
 	/**
 	 * 글 삭제 처리
 	 * @param board
+	 * board에 글의 code 를 담아서 삭제함 
 	 * */
 	@GetMapping("/boardDelete")
 	public String deleteBoard(@RequestParam(value="code")String code) {
 		System.out.println("***********************");
-		System.out.println("******deleteBoard처리***");
+		System.out.println("******delete Board처리***");
 		System.out.println("***********************");
-		System.out.println(code + "code가 넘어왔니???");
+		System.out.println(code + "삭제할 code가 넘어왔니???");
 		boardservice.deleteBoard(code);
 		
 		return "redirect:/boardList";
