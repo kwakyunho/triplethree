@@ -21,6 +21,13 @@ public class ClientController {
 			model.addAttribute("client", clientService.getClientList());
 			return "/client/clientList";
 		}
+	//거레처 정보 상세보기
+	@PostMapping("/clientDetail")
+	public String goToDetail(@RequestParam(value="code",required=false)String code, Model model){
+		System.out.println("controller의 거래처 코드" + code);
+		model.addAttribute("client",clientService.getClientBycode(code));
+		return "/client/clientDetail";
+	}
 		
 	//거래중 거래처 정보조회 리스트
 	@GetMapping("/clientList2")
@@ -35,6 +42,7 @@ public class ClientController {
 								String code,Model model) {
 		System.out.println(code + "<--수정 할 거래처 code");
 		model.addAttribute("liCode", clientService.getLicodeList());
+		System.out.println(clientService.getLicodeList().toString() + "liCode 안입니다 ##");
 		model.addAttribute("liCode2", clientService.getLicode2List());
 		model.addAttribute("client", clientService.getClientBycode(code));
 		return "/client/clientUpdate";

@@ -13,10 +13,13 @@
 		<result column="writer" property="writer"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
-	
+	<!-- 조회수 증가  -->
+	<update id="updateCnt" parameterType="String">
+		update BOARD set board_count = board_count + 1 where code=#{code}
+	</update>
 	<!--게시글 삭제하기 -->
 	<delete id="deleteBoard" parameterType="String">
-	 	Delete * from BOARD where code=#{code}
+	 	Delete from BOARD where code=#{code}
 	</delete>
 	
 	<!-- 사원번호(SID)로 사원명 가져오기  -->
@@ -79,6 +82,7 @@
 		
 	</select>
 	
+	<!-- count 나중에 넣어주기 -->
 	<update id="updateBoard" parameterType="shop.triplethree.vo.Board" >
 		update BOARD
 			set
@@ -86,7 +90,6 @@
 			,emp_code = #{empCode}
 			,board_title = #{boardTitle}
 			,board_con = #{boardCon}
-			,board_count =#{boardCount}
 			,writer_day = #{writerDay}
 			,board_pw = #{boardPw}
 		where

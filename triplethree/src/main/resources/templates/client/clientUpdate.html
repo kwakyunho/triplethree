@@ -18,8 +18,8 @@
 			<div class="col-sm-12">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a>거래처수정</a> </li>
-					<li class="breadcrumb-item"><a th:href="@{/clientInsert}">거래처등록</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/clientList}">거래처목록 </a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientInsert}"  style="color:#28a745;">거래처등록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList}"  style="color:#28a745;">거래처목록 </a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -46,13 +46,13 @@
 				   		<label class="col-sm-2 col-form-label">거래처종류</label>
 				   		 <div class="col-sm-4">
 					   		 <select class="form-control"  th:value="${liCode}" name="liCode">
-				   		 		<option th:each="l :${liCode}" th:value="${l.code}" th:text="${l.liCode}"></option>
+				   		 		<option th:each="l :${liCode}" th:value="${l.liCode}" th:text="${l.liCodeStr}"></option>
 				   		 	</select>
 				  		 </div>
 				  		 <label class="col-sm-2 col-form-label">거래처 상태변경 </label>
 				   		 <div class="col-sm-4">
 					   		 <select class="form-control" th:value="${liCode2}" name="liCode2">
-				   		 		<option th:each="ll :${liCode2}"  th:selected="${client.liCode2}" th:text="${ll.liCode2}"></option>
+				   		 		<option th:each="ll :${liCode2}"  th:value="${ll.liCode2}" th:text="${ll.liCode2Str}"></option>
 				   		 	</select>
 				  		 </div>
 				   </div>
@@ -182,7 +182,7 @@
 				  </div><!-- card body -->
 				  
 				<div class="card-footer">
-					<button type="submit" class="btn btn-primary">수정하기</button>
+					<button type="submit" id="editBtn" class="btn btn-success float-right">수정하기</button>
 				</div><!--  card footer -->
 				
 				</form>
@@ -198,6 +198,6 @@
 <th:block layout:fragment="customScript">
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
+<script th:src="@{custom/js/clientCheck.js}"></script>
 </th:block>
 </html>

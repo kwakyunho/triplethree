@@ -13,8 +13,6 @@
 <style type="text/css">
 tr:hover{background: whitesmoke;}
 </style>
-<!-- DataTables -->
-<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -28,13 +26,12 @@ tr:hover{background: whitesmoke;}
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
-					<li class="breadcrumb-item"><a href="#" style="color:#28a745;">Dashboard v3</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/freeBoardInsert}" style="color:#28a745;">자유게시판 작성</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 		<div class="col-4" >
-			<button type="button" class="btn btn-success" onclick="location.href='/boardInsert'" >공지사항 작성하기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='/boardInsert'" >글작성하기</button>
 	     </div>
 	</div><!-- /.container-fluid -->
 </div>
@@ -47,9 +44,9 @@ tr:hover{background: whitesmoke;}
 	         <h3 class="card-title">공지사항       </h3>
 	       </div>
 	       
-		<div class="card-body">
+		<div class="card-body table-responsive p-0" style="height:500px;">
 			<form class="boardListForm">
-				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
+				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
 					<thead>
 						<tr>
 							<th>공지</th>
@@ -61,7 +58,7 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b : ${boardList}" style="cursor:pointer">
+						<tr th:each="b : ${boardList}" class="boardListTable" style="cursor:pointer">
 							<td>공지</td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
@@ -85,20 +82,9 @@ tr:hover{background: whitesmoke;}
 </th:block>
 
 <th:block layout:fragment="customScript">
-
-<!-- DataTables -->
-<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
-<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-<script>
-  $(function () {
-    $('#boardListTable').DataTable();
-  });
-</script>
-
-
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#boardListTable tbody').on('click', 'tr', function(){	
+	$('.boardListTable').on('click', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
 		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출

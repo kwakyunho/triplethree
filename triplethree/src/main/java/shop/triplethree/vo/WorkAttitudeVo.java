@@ -3,7 +3,10 @@ package shop.triplethree.vo;
 public class WorkAttitudeVo {
 	
 	private String workAttCode;	// 근태관리코드
-	private String userNum;	// 사원관리코드
+	private String userCode;	// 사원코드
+	private String demgName;	//부서명
+	private String poName;	//직급명
+	private String userName;	//사원명
 	private String day;	// 일자
 	private String startWorkTime;	// 출근시간
 	private String endWorkTime;	// 퇴근시간
@@ -22,11 +25,29 @@ public class WorkAttitudeVo {
 	public void setWorkAttCode(String workAttCode) {
 		this.workAttCode = workAttCode;
 	}
-	public String getUserNum() {
-		return userNum;
+	public String getUserCode() {
+		return userCode;
 	}
-	public void setUserNum(String userNum) {
-		this.userNum = userNum;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+	public String getDemgName() {
+		return demgName;
+	}
+	public void setDemgName(String demgName) {
+		this.demgName = demgName;
+	}
+	public String getPoName() {
+		return poName;
+	}
+	public void setPoName(String poName) {
+		this.poName = poName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getDay() {
 		return day;
@@ -97,10 +118,10 @@ public class WorkAttitudeVo {
 	
 	@Override
 	public String toString() {
-		return "WorkAttitudeVo [workAttCode=" + workAttCode + ", userNum=" + userNum + ", day=" + day
-				+ ", startWorkTime=" + startWorkTime + ", endWorkTime=" + endWorkTime + ", startOutSideTime="
-				+ startOutSideTime + ", endOutSideTime=" + endOutSideTime + ", userId=" + userId + ", insertDt="
-				+ insertDt + ", adminUpdateYn=" + adminUpdateYn + ", adminId=" + adminId + ", adminInsertDt="
-				+ adminInsertDt + ", coment=" + coment + "]";
+		return "WorkAttitudeVo [workAttCode=" + workAttCode + ", userCode=" + userCode + ", demgName=" + demgName
+				+ ", poName=" + poName + ", userName=" + userName + ", day=" + day + ", startWorkTime=" + startWorkTime
+				+ ", endWorkTime=" + endWorkTime + ", startOutSideTime=" + startOutSideTime + ", endOutSideTime="
+				+ endOutSideTime + ", userId=" + userId + ", insertDt=" + insertDt + ", adminUpdateYn=" + adminUpdateYn
+				+ ", adminId=" + adminId + ", adminInsertDt=" + adminInsertDt + ", coment=" + coment + "]";
 	}
 }

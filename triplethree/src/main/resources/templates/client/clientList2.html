@@ -4,8 +4,16 @@
       layout:decorate="~{layouts/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>거래처관리</title>
+	<title>거래중 거래처목록 </title>
 </th:block>
+<!-- 사용자 CSS -->
+
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
+</th:block>
+
 
 <th:block layout:fragment="customContents">
 <!-- Content Header (Page header) -->
@@ -51,19 +59,19 @@
                  <th>거래여부</th>
                  <th>거래처명</th>
                  <th>대표자명</th>
-                  <!--   <th>사업장주소</th>
+                 <th>거래처번호</th>
                  <th>사업자등록번호</th>
+                  <!--   <th>사업장주소</th>
                  <th>팩스번호</th>
                  <th>대표자번호</th>
-                 <th>거래처번호</th>
                  <th>이메일</th>
              	 <th>등록자</th>
                  <th>등록일</th>
                  <th>승인자</th>
                  <th>승인일</th>
-                 <th>승인상태</th> -->
+                 <th>승인상태</th> 
                  <th>수정</th>
-                 <th>삭제</th>
+                 <th>삭제</th>-->
                </tr>
              </thead>
              <tbody>
@@ -73,24 +81,24 @@
 				<td th:text="${c.liCode2}"></td>
 				<td th:text="${c.accName}"></td>
 				<td th:text="${c.accCeoName}"></td>
-				<!--<td th:text="${c.accAddr}"></td>
+				<td th:text="${c.accPhone}"></td>
 				<td th:text="${c.accBln}"></td>
+				<!--	<td th:text="${c.accAddr}"></td>
 				<td th:text="${c.accFax}"></td>
 				<td th:text="${c.repreNumber}"></td>
-				<td th:text="${c.accPhone}"></td>
 				<td th:text="${c.accEmail}"></td>
 				<td th:text="${c.writer}"></td>
 				<td th:text="${c.writerDay}"></td>
 				<td th:text="${c.approver}"></td>
 				<td th:text="${c.approDay}"></td>
-				<td th:text="${c.approverSt}"></td> -->
+				<td th:text="${c.approverSt}"></td> 
 				<td>
-				<!-- /modifyMember?memberId="값"&memberPw="값" -->
+				/modifyMember?memberId="값"&memberPw="값"
 				<a th:href="@{/clientUpdate(code=${c.code})}">수정</a>
 				</td>
 				<td>
 				<a th:href="@{/clientDelete(code=${c.code})}">삭제</a>
-				</td>
+				</td> -->
 			</tr>
             </tbody>
            	</table>
@@ -100,8 +108,8 @@
      <!-- /.card -->
    </div>
  </div>
-		</div>
-		</div>
+		<!-- </div>
+		</div> -->
 		<!-- /.row -->
 	</div>
 	<!-- /.container-fluid -->

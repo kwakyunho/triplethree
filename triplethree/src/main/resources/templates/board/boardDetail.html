@@ -10,7 +10,7 @@
 
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
-
+	
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -24,8 +24,8 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/boardInsert}">공지사항 작성</a></li>
-					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/boardList}" style="color:#28a745;">공지사항 목록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -35,7 +35,7 @@
 
 	<div class="content" style="align-content: center">
 	 <div class="col-12">
-	     <div class="card">
+	     <div class="card" style="height:400px">
 	     <form class="boardDetailForm">
 	       <div class="card-header">
 	         <h3 class="card-title" th:text="${board.boardTitle}"></h3>
@@ -45,21 +45,27 @@
 	       		<table class="table table-condensed">
 	       			<thead th:text="${board.boardCon}"></thead>
 	       		</table>
+	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
+	       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
 	       	</div>
 	       </div>
 		</form>
 	     </div>
 	     <!-- /.card -->
-	     <div class="row" id="detailBtns">
-	     <div class="col-4">
-			<button type="button" id="backBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardList'">이전 </button>
-	     </div>
-	      <div class="col-4">
-			<button type="button" id="updateBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardUpdate'" >수정 </button>
-	     </div>
-	      <div class="col-4">
-			<button type="button" id="deleteBtn" class="btn btn-block btn-primary btn-lg" onclick="location.href='/boardList'" >공지사항 작성하기</a></button>
-	     </div>
+	     <div class="col-12">
+	     	<div class="row" id="detailBtns">
+			     <div class="col-4">
+						<button type="button" id="backBtn" class="btn btn-block btn-success btn-lg" >목록</button>
+			     </div>
+			      <div class="col-4">
+			      		<button type="button" id="updateBtn" class="btn btn-block btn-success btn-lg" >수정</button>
+			      		<!-- <a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a> -->
+			     </div>
+			      <div class="col-4">
+			      		<button type="button" id="deleteBtn" class="btn btn-block btn-success btn-lg" >삭제</button>
+					<!-- 	<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a> -->
+			     </div>
+		     </div>
 	     </div>
 	 </div>
 	 </div>
@@ -68,33 +74,68 @@
 	</th:block>
 	
 	<th:block layout:fragment="customScript">
+	
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$('#backBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
-			$('.boardDetailForm').attr('method', 'GET');
-			$('.boardDetailForm').attr('action', '/boardList');
-			$('.boardDetailForm').submit();
-		});
-		
-		$('#updateBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
-			$('.boardDetailForm').attr('method', 'POST');
-			$('.boardDetailForm').attr('action', '/boardUpdate');
-			$('.boardDetailForm').submit();
-		});
-		
-		$('#deleteBtn').on('click', function(){	// 공지사항 tr클릭시 발생 이벤트
+		$('#backBtn').on('click', function(){	
 			$('.boardDetailForm').attr('method', 'POST');
 			$('.boardDetailForm').attr('action', '/boardList');
 			$('.boardDetailForm').submit();
 		});
-			/* var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-			boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
-			var boardCode = $('.boardTitle').attr('id');	// code id벨류값 추출
-			$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
-			*/
+		
+	var dbPw = $('#boardPw').val(); //게시글 비밀번호
+	//console.log(dbPw + ': 이것은 boardPw');
+	$('#updateBtn').on('click',function(){
+			if (confirm("수정하시겠습니까") == true){  //확인
+				var inputPw = prompt('비밀번호를 입력하세요');
+				if(dbPw==inputPw){
+					alert('수정화면으로 이동합니다');
+					$('.boardDetailForm').attr('method', 'GET');
+					$('.boardDetailForm').attr('action', '/boardUpdate');
+					$('.boardDetailForm').submit();
+				}else{
+					alert('비밀번호가 일치하지 않습니다');
+					return;
+				}
+			}else{   //취소
+			    return;
+			}
+	
+	});
+		
+	$('#deleteBtn').on('click',function(){
+		if (confirm("정말 삭제하시겠습니까??") == true){  //확인
+			var inputPw = prompt('비밀번호를 입력하세요');
+			console.log(inputPw + ': 이것은 입력 비밀번호');
+			if(dbPw==inputPw){
+				$(function(){
+					$(document).Toasts('create', {
+				        class: 'bg-success', 
+				        title: '게시글 삭제',
+				        subtitle: 'success',
+				        sticky : true,
+				        body: '게시글 삭제가 완료되었습니다'
+				      });
+					delay(5000);
+				});
+				$('.boardDetailForm').attr('method', 'POST');
+				$('.boardDetailForm').attr('action', '/boardDelete');
+				$('.boardDetailForm').submit();
+				
+			}else{
+				alert('비밀번호가 일치하지 않습니다');
+				
+				return;
+			}
+		}else{   //취소
+		    return;
+		}
+	
+	})
 		
 	});
 	</script>
+	
 	</th:block>
 	<script></script>
 	</html>

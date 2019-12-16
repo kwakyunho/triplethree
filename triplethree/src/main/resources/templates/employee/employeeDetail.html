@@ -35,7 +35,11 @@
 	<div class="content">
 		 <div class="row">
               <div class="col-md-12">
-				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/'">사원 수정</button></div>
+				 <div class="col-md-2" id="updateBtn">
+				 	<!-- <button type="button" class="btn btn-block bg-gradient-primary"  onclick="location.href='/employeeUpdate()'">사원 수정</button> -->
+				 	<input type="hidden" value="넣을값">
+				 	<a class="btn btn-block bg-gradient-primary" th:href="@{/employeeUpdate(empNum=${detail.empNum})}">수정</a>
+				 </div>
 			 
 		 	</div>	     			
 	     </div>
@@ -54,7 +58,7 @@
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="get" action="/employeeList" class="form-horizontal" th:each="d :${detail}">
+	              <form method="get" action="/employeeList" class="form-horizontal" th:each="d :${detail}" id="formEmployee">
 	                <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
@@ -72,7 +76,7 @@
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
 			                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${d.empNum}" readonly="readonly" >
+			                    	<input type="text" class="form-control" name="empNum" id="empNum" th:value="${d.empNum}" readonly="readonly" >
 			                 	</div>	
 	                 </div>
 	                  
@@ -382,6 +386,12 @@
 		         })
 		   });
 	
+		  
+		
+			   
+		  
+		   
+		   
 		});
 </script>
 

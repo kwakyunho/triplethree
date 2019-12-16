@@ -47,6 +47,10 @@
               <div class="form-group row col-sm-12">
                 <label class="col-sm-2 col-form-label">제목 </label>
                 <div class="col-sm-10">
+                	<input type="hidden" name="code" th:value="${board.code}">
+                	<input type="hidden" name="empCode" th:value="${board.empCode}">
+                	<input type="hidden" name="writerDay" th:value="${board.writerDay}">
+                	<input type="hidden" name="boardCount" th:value="${board.boardCount}">
                 	<input type="text" id="inputName" th:value="${board.boardTitle}" name="boardTitle" class="form-control">
              	 </div>
               </div>
@@ -71,14 +75,12 @@
 	                    <div class="col-sm-4">
 	                      <input type="password" class="form-control col-12" th:value="${board.boardPw}" name="boardPw" >
 	                    </div>
-             </div>
-                 
-              <div class="row">
-		        <div class="col-12">
-		          <input type="submit" value="수정하기" class="btn btn-success float-right">
-		        </div>
+		      	       <div class="col-12">
+		      	       		<br>
+				          		<input type="submit" value="수정하기" class="btn btn-success float-right">
+			       		</div>
+         		</div>
 		      </div>
-            </div>
             </form>
             <!-- /.card-body -->
            
@@ -94,11 +96,9 @@
 		<!-- /.row -->
 	</div>
 	<!-- /.container-fluid -->
-</div>
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- Summernote -->
 <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
 <script>
   $(function () {

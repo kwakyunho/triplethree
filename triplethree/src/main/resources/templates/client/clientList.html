@@ -2,9 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
       layout:decorate="~{layouts/default}">
-
+      
+<!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
 	<title>거래처관리</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -18,7 +26,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">거래처 전체 리스트</li>
-					<li class="breadcrumb-item"><a th:href="@{/clientList2}">거래처(거래중) 목록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/clientList2}"  style="color:#28a745;">거래처(거래중) 목록</a></li>
 					
 				</ol>
 			</div><!-- /.col -->
@@ -27,89 +35,89 @@
 </div>
 <!-- /.content-header -->
 
-<div class="content">
+<div class="content" style="align-content: center">
    <div class="col-12">
      <div class="card">
        <div class="card-header">
          <h3 class="card-title">거래처 정보 리스트 ( 컬럼 늘리는거는 나중에 주석 풀어요 )</h3>
-       </div>
-       <!-- /.card-header -->
-      <!--  <div class="card-body" style="height:100px;">
-		<form action="/clientList" method="post">
-			<input type="text" name="accName">
-			<button type="submit">검색하기</button>
-		</form>       
-       </div> -->
-       <div class="card-body table-responsive p-0" style="height: 550px;" >
-       
-         <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:500px; height:150px;">
+       </div><!--  /.card-header -->
+       <div class="card-body table-responsive p-0" style="height: 500px;" >
+       <form class="clientListForm">
+         <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
              <thead>
-               <tr>
-                 <th>거래처관리코드</th>
-                 <th>거래처종류</th>
-                 <th>거래여부</th>
-                 <th>거래처명</th>
-                 <th>대표자명</th>
-                  <!--   <th>사업장주소</th>
-                 <th>사업자등록번호</th>
-                 <th>팩스번호</th>
-                 <th>대표자번호</th>
-                 <th>거래처번호</th>
-                 <th>이메일</th>
-             	 <th>등록자</th>
-                 <th>등록일</th>
-                 <th>승인자</th>
-                 <th>승인일</th>
-                 <th>승인상태</th> -->
-                 <th>수정</th>
-                 <th>삭제</th>
+           		<tr>
+	                 <th>거래처관리코드</th>
+	                 <th>거래처종류</th>
+	                 <th>거래여부</th>
+	                 <th>거래처명</th>
+	                 <th>대표자명</th>
+	                 <th>거래처 전화번호</th>
+	                 <!--   <th>사업장주소</th>
+	                 <th>사업자등록번호</th>
+	                 <th>팩스번호</th>
+	                 <th>대표자번호</th>
+	                 <th>이메일</th>
+	             	 <th>등록자</th>
+	                 <th>등록일</th>
+	                 <th>승인자</th>
+	                 <th>승인일</th>
+	                 <th>승인상태</th> -->
+	                 <!-- <th>수정</th>
+	                 <th>삭제</th> -->
                </tr>
              </thead>
              <tbody>
-               <tr th:each="c : ${client}">
-				<td th:text="${c.code}"></td>
-				<td th:text="${c.liCode}"></td>
-				<td th:text="${c.liCode2}"></td>
-				<td th:text="${c.accName}"></td>
-				<td th:text="${c.accCeoName}"></td>
-				<!--<td th:text="${c.accAddr}"></td>
-				<td th:text="${c.accBln}"></td>
-				<td th:text="${c.accFax}"></td>
-				<td th:text="${c.repreNumber}"></td>
-				<td th:text="${c.accPhone}"></td>
-				<td th:text="${c.accEmail}"></td>
-				<td th:text="${c.writer}"></td>
-				<td th:text="${c.writerDay}"></td>
-				<td th:text="${c.approver}"></td>
-				<td th:text="${c.approDay}"></td>
-				<td th:text="${c.approverSt}"></td> -->
-				<td>
-				<!-- /modifyMember?memberId="값"&memberPw="값" -->
-				<a th:href="@{/clientUpdate(code=${c.code})}">수정</a>
-				</td>
-				<td>
-				<a th:href="@{/clientDelete(code=${c.code})}">삭제</a>
-				</td>
-			</tr>
-            </tbody>
-           	</table>
-         </div>
+	               <tr class="clientListTable" style="cursor:pointer" th:each="c : ${client}">
+						<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
+						<td th:text="${c.liCode}"></td>
+						<td th:text="${c.liCode2}"></td>
+						<td th:text="${c.accName}"></td>
+						<td th:text="${c.accCeoName}"></td>
+						<td th:text="${c.accPhone}"></td>
+						<!--<td th:text="${c.accAddr}"></td>
+						<td th:text="${c.accBln}"></td>
+						<td th:text="${c.accFax}"></td>
+						<td th:text="${c.repreNumber}"></td>
+						<td th:text="${c.accEmail}"></td>
+						<td th:text="${c.writer}"></td>
+						<td th:text="${c.writerDay}"></td>
+						<td th:text="${c.approver}"></td>
+						<td th:text="${c.approDay}"></td>
+						<td th:text="${c.approverSt}"></td> -->
+						<!-- /modifyMember?memberId="값"&memberPw="값" -->
+						<!-- <td>
+						<a th:href="@{/clientUpdate(code=${c.code})}">수정</a>
+						</td>
+						<td>
+						<a th:href="@{/clientDelete(code=${c.code})}">삭제</a>
+						</td> -->
+					</tr>
+          	</tbody>
+       	</table>
+       	</form>
+        </div>
          <!-- /.card-body -->
      </div>
      <!-- /.card -->
    </div>
  </div>
-		</div>
-		</div>
 		<!-- /.row -->
-	</div>
 	<!-- /.container-fluid -->
-</div>
 </th:block>
 
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{dist/js/pages/dashboard3.js}"></script> -->
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.clientListTable').on('click',function(){
+		var clientUrl = $(this).children('.clientCode');
+		clientUrl.append('<input type="hidden" name="code" val="">');
+		var clientCode = clientUrl.attr('id');
+		$('input[name=code]').val(clientCode);
+		$('.clientListForm').attr('method','POST');
+		$('.clientListForm').attr('action','/clientDetail'); // 나중에 detail 로 수정
+		$('.clientListForm').submit();
+	});
+});
+</script>
 </th:block>
 </html>

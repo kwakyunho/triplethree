@@ -13,7 +13,7 @@
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
 <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" th:href="@{plugins/summernote/summernote-bs4.css}">
 </th:block>
 
 
@@ -29,7 +29,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항 작성 </li>
-					<li class="breadcrumb-item"><a th:href="@{/boardList}">공지사항 조회</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/boardList}"  style="color:#28a745;">공지사항 조회</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -41,21 +41,21 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="card">
-			 <form action="/boardInsert" method="POST">
+				<div class="card" style="height:600px">
+			 <form action="/boardInsert" method="POST" class="boardInsertForm">
              <div class="card-body">
               <div class="form-group row col-sm-12">
                 <label class="col-sm-2 col-form-label">제목 </label>
                 <div class="col-sm-10">
-                	<input type="text" id="inputName" name="boardTitle" placeholder="제목을 입력하세요 " class="form-control">
+                	<input type="text" id="inputName" name="boardTitle" placeholder="제목을 입력해주세요" class="form-control">
              	 </div>
               </div>
               <div class="form-groupb row col-sm-12">
                 <label class="col-sm-2 col-form-label"> 내용 </label>
                 <div class="col-sm-10">
                 	<div class="mb-3">
-                	<textarea class="textarea" placeholder="Place some text here" name="boardCon"
-                          style="width: 100%; height: 500px; font-size: 14px;
+                	<textarea class="textarea" placeholder="내용을 입력해주세요 " name="boardCon"
+                          style="width: 100%; height: 300px; font-size: 14px;
                           line-height: 50px; border: 1px solid #dddddd; padding: 10px;"></textarea>
               		</div>
              	 </div>
@@ -63,7 +63,7 @@
              </div>
       
              <div class="form-group row col-sm-12">
-	                    <label class="col-sm-2 col-form-label">작성자</label>
+	                    <label class="col-sm-2 ine-height: 50px;  col-form-label">작성자</label>
 	                    <div class="col-sm-4">
 	                      <input type="text" class="form-control col-12" th:value=${session.SNAME} readonly="readonly">
 	                    </div>
@@ -73,9 +73,11 @@
 	                    </div>
              </div>
                  
-              <div class="row">
-		        <div class="col-12">
-		          <input type="submit" value="공지 작성하기" class="btn btn-success float-right">
+              <div class="form-group row col-sm-12">
+              	<div class="col-12">
+		          <button type="button" id="backBtn" class="btn btn-success float-auto" >이전으로 </button>
+		          <button type="button" id="insertBoard" class="btn btn-success float-right " >공지 작성하기 </button>
+		         <!--  <input type="submit" value="공지 작성하기" class="btn btn-success float-right"> -->
 		        </div>
 		      </div>
             </div>
@@ -99,12 +101,43 @@
 
 <th:block layout:fragment="customScript">
 <!-- Summernote -->
-<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<script th:src="@{plugins/summernote/summernote-bs4.min.js}"></script>
 <script>
   $(function () {
     // Summernote
     $('.textarea').summernote()
+    
   })
+  $(function(){
+	 $('#backBtn').on('click',function(){
+		history.go(-1); 
+	 });
+  });
+  $(function(){
+		 $('#insertBoard').on('click',function(){
+			 var boardTitle = $('input[name=boardTitle]').val();
+			 var boardCon = $('input[name=boardCon]').val();
+			 var boardPw = $('input[name=boardPw]').val();
+			 
+			 if(boardTitle == ""){
+				 alert('제목을 입력해주세요');
+				 boardTitle.focus();
+				 return false;
+			 }
+			 if(boardCon == ""){
+				 alert('내용을 입력해주세요');
+				 boardCon.focus();
+				 return false;
+			 }
+			 if(boardPw == ""){
+				 alert('비밀번호를 입력해주세요');
+				 boardPw.focus();
+				 return false;
+			 }
+			 
+			 $('.boardInsertForm').submit();
+		 });
+	  });
 </script>
 
 </th:block>

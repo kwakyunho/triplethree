@@ -224,33 +224,39 @@
 	</insert>
 	
 	<update id="updateEmployee" parameterType="shop.triplethree.vo.Employee">
-		UPDATE EMP_MANAGE
-			SET
-				demgcode= #{demgCode},
-				pocode= #{poCode},
-				li_code= #{liCode},
-				password=#{password},
-				postcode=#{postCode},
-				addr=#{addr},
-				detailaddr=#{detailAddr},
-				extraaddr=#{extraAddr},
-				phone=#{phone},
-				car_presence=#{carPresence},
-				email=#{email},
-				con_type=#{conType},
-				basic_pay=#{basicPay},
-				photo=#{photo},
-				signature=#{signature},
-				writer=#{writer},
-				writer_day=NOW()
-			WHERE 
-				emp_num= #{empNum}
+							
+			
+			UPDATE EMP_MANAGE
+				SET
+					demgcode= #{demgCode},
+					pocode= #{poCode},
+					li_code= #{liCode},
+					password=#{password},
+					postcode=#{postCode},
+					addr=#{addr},
+					detailaddr=#{detailAddr},
+					extraaddr=#{extraAddr},
+					phone=#{phone},
+					car_presence=#{carPresence},
+					email=#{email},
+					con_type=#{conType},
+					basic_pay=#{basicPay},
+					photo=#{photo},
+					signature=#{signature},
+					writer=#{writer},
+					writer_day=NOW()
+				WHERE 
+					emp_num= #{empNum}
+			
 			 
+		
 		<if test="retireDate neq null and retireDate neq ''.toString()">
+ 						
+ 				
  				UPDATE EMP_MANAGE
 					SET
 						demgcode= #{demgCode},
-						pocode= #{poCOde},
+						pocode= #{poCode},
 						li_code= #{liCode},
 						password=#{password},
 						postcode=#{postCode},
@@ -268,8 +274,65 @@
 						writer=#{writer},
 						writer_day=NOW()
 					WHERE 
-						emp_num= #{empNum}
- 			</if>
+						emp_num= #{empNum}		
+ 			
+		</if>	
+	</update>
+	
+	<update id="updateDepNPoEmployee" parameterType="shop.triplethree.vo.Employee">
+							
+			
+			UPDATE EMP_MANAGE
+				SET
+					demgcode= #{demgCode},
+					pocode= #{poCode},
+					li_code= #{liCode},
+					password=#{password},
+					postcode=#{postCode},
+					addr=#{addr},
+					detailaddr=#{detailAddr},
+					extraaddr=#{extraAddr},
+					phone=#{phone},
+					car_presence=#{carPresence},
+					email=#{email},
+					con_type=#{conType},
+					basic_pay=#{basicPay},
+					photo=#{photo},
+					signature=#{signature},
+					writer=#{writer},
+					writer_day=NOW()
+				WHERE 
+					emp_num= #{empNum}
+			
+			 
+		
+		<if test="retireDate neq null and retireDate neq ''.toString()">
+ 						
+ 				
+ 				UPDATE EMP_MANAGE
+					SET
+						demgcode= #{demgCode},
+						pocode= #{poCode},
+						li_code= #{liCode},
+						password=#{password},
+						postcode=#{postCode},
+						addr=#{addr},
+						detailaddr=#{detailAddr},
+						extraaddr=#{extraAddr},
+						phone=#{phone},
+						car_presence=#{carPresence},
+						email=#{email},
+						con_type=#{conType},
+						basic_pay=#{basicPay},
+						retire_date=#{retireDate},
+						photo=#{photo},
+						signature=#{signature},
+						writer=#{writer},
+						writer_day=NOW()
+					WHERE 
+						emp_num= #{empNum}		
+ 			
+		</if>	
 	</update>
 	
 	
@@ -289,8 +352,11 @@
 			em.car_presence as carPresence,
 			em.email as email,
 			date_format(em.birth_date,'%Y-%m-%d') as birthDate,
+			em.demgcode as demgCode,
 			de.dename as demgName,
+			em.pocode as poCode,
 			po.poname as poName,
+			em.li_code as liCode,
 			li.s_section as liName,
 			em.con_type as conType,
 			em.basic_pay as basicPay,

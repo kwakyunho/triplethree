@@ -41,11 +41,17 @@ public class BoardService {
 	//게시물  가져오기
 	public Board getBoardByCode(String code) {
 		Board board = boardMapper.getBoardByCode(code);
-		System.out.println("board 안이다"+board.toString());
+		System.out.println("****수정화면으로 잘 넘어왔니?***** "+board.toString());
+		System.out.println(board.getBoardCount() + " : 원래 카운트");
+		updateCnt(code);
+		System.out.println(board.getBoardCount() + ": updateCnt 메서드 실행 후 카운트 " );
 		return	board;
 	}
-	
-	//게시물 수정하기
+	//게시물 조회수 올리기
+	public int updateCnt(String code) {
+		return boardMapper.updateCnt(code);
+	}
+	//게시물 수정처리
 	public int updateBoard(Board board) {
 		return boardMapper.updateBoard(board);
 	}
