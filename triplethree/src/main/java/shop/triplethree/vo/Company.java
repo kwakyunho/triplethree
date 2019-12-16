@@ -17,6 +17,8 @@ public class Company {
 	private String departmentApproDay;
 	private String departmentCode;
 	private String departmentYesNO;
+	private String empName;
+	private String deName;
 	private String Code; //회사코드
 	private String coName; //회사명
 	private String coCeoname; //대표자명
@@ -34,6 +36,18 @@ public class Company {
 	private String yesOrNo; //사용유무
 	private String coReason; //변경사유
 	
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getDeName() {
+		return deName;
+	}
+	public void setDeName(String deName) {
+		this.deName = deName;
+	}
 	public String getSid() {
 		return sid;
 	}
@@ -216,10 +230,11 @@ public class Company {
 				+ ", departmentSau=" + departmentSau + ", departmentWriter=" + departmentWriter
 				+ ", departmentWriterDay=" + departmentWriterDay + ", departmentApprover=" + departmentApprover
 				+ ", departmentApperverSt=" + departmentApperverSt + ", departmentApproDay=" + departmentApproDay
-				+ ", departmentCode=" + departmentCode + ", departmentYesNO=" + departmentYesNO + ", Code=" + Code
-				+ ", coName=" + coName + ", coCeoname=" + coCeoname + ", coPostCode=" + coPostCode + ", coDetailAddr="
-				+ coDetailAddr + ", coExtraAddr=" + coExtraAddr + ", coAddr=" + coAddr + ", coBin=" + coBin + ", coFax="
-				+ coFax + ", coPhone=" + coPhone + ", coEmail=" + coEmail + ", coLogo=" + coLogo + ", writer=" + writer
-				+ ", writerDay=" + writerDay + ", yesOrNo=" + yesOrNo + ", coReason=" + coReason + "]";
+				+ ", departmentCode=" + departmentCode + ", departmentYesNO=" + departmentYesNO + ", empName=" + empName
+				+ ", deName=" + deName + ", Code=" + Code + ", coName=" + coName + ", coCeoname=" + coCeoname
+				+ ", coPostCode=" + coPostCode + ", coDetailAddr=" + coDetailAddr + ", coExtraAddr=" + coExtraAddr
+				+ ", coAddr=" + coAddr + ", coBin=" + coBin + ", coFax=" + coFax + ", coPhone=" + coPhone + ", coEmail="
+				+ coEmail + ", coLogo=" + coLogo + ", writer=" + writer + ", writerDay=" + writerDay + ", yesOrNo="
+				+ yesOrNo + ", coReason=" + coReason + "]";
 	}
 }
