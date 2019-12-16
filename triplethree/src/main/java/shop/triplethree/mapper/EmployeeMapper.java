@@ -45,5 +45,16 @@ public interface EmployeeMapper {
 	//마이페이지의 정보를 뿌려줄 메서드
 	public Employee employeeMyPage(String SID);
 	
+	//나의 세션코드를 이용해서 인사이동정보를 찾는 메서드
+	public List<Employee> employeeMyMoveList(String SCODE);
+	
+	//모든 사원의 인사이동목록을 보여주는 메서드 (승인대기중)
+	public List<Employee> employeeAllMoveList();
+	
+	//모든 사원의 인사이동목록을 보여주는 메서드 (승인완료)
+	public List<Employee> employeeAllMoveListOk();
+	
+	//사원의 인사이동목록을 승인해서 승인자와 승인일자를 업데이트하는 메서드
+	public int updateMoveList(Employee employee);
 	
 }

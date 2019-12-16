@@ -69,5 +69,19 @@ public class EmployeeService {
 	  public Employee employeeMyPage(String SID) {
 		  return employeeMapper.employeeMyPage(SID);
 	  }
+	  public List<Employee> employeeMyMoveList(String SCODE) {
+		  return employeeMapper.employeeMyMoveList(SCODE);
+	  }
+	  
+	  public List<Employee> employeeAllMoveList() {
+		  return employeeMapper.employeeAllMoveList();
+	  }
+	  
+	  public List<Employee> employeeAllMoveListOk(){
+		  return employeeMapper.employeeAllMoveListOk();
+	  }
 	 
+	  public int updateMoveList(Employee employee) {
+		  return employeeMapper.updateMoveList(employee);
+	  }
 }
