@@ -39,58 +39,33 @@ tr:hover{background: whitesmoke;}
    <div class="col-12">
      <div class="card">
        <div class="card-header">
-         <h3 class="card-title">거래처 정보 리스트 ( 컬럼 늘리는거는 나중에 주석 풀어요 )</h3>
+         <h3 class="card-title">전체 거래처 리스트</h3>
        </div><!--  /.card-header -->
-       <div class="card-body table-responsive p-0" style="height: 500px;" >
+       
+       <div class="card-body">
        <form class="clientListForm">
-         <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
+         <table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto; height:auto; width:100%; height:auto;">
              <thead>
-           		<tr>
-	                 <th>거래처관리코드</th>
-	                 <th>거래처종류</th>
-	                 <th>거래여부</th>
-	                 <th>거래처명</th>
-	                 <th>대표자명</th>
-	                 <th>거래처 전화번호</th>
-	                 <!--   <th>사업장주소</th>
-	                 <th>사업자등록번호</th>
-	                 <th>팩스번호</th>
-	                 <th>대표자번호</th>
-	                 <th>이메일</th>
-	             	 <th>등록자</th>
-	                 <th>등록일</th>
-	                 <th>승인자</th>
-	                 <th>승인일</th>
-	                 <th>승인상태</th> -->
-	                 <!-- <th>수정</th>
-	                 <th>삭제</th> -->
+             
+	           		<tr>
+		                 <th>순차</th>
+		                 <th>거래처관리코드</th>
+		                 <th>거래처종류</th>
+		                 <th>거래여부</th>
+		                 <th>거래처명</th>
+		                 <th>대표자명</th>
+		                 <th>거래처 전화번호</th>
                </tr>
              </thead>
              <tbody>
-	               <tr class="clientListTable" style="cursor:pointer" th:each="c : ${client}">
+	               <tr aclass="clientListTable" style="cursor:pointer" th:each="c , index : ${client}">
+	               		<td th:text="${index.index+1}"></td>
 						<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
 						<td th:text="${c.liCode}"></td>
 						<td th:text="${c.liCode2}"></td>
 						<td th:text="${c.accName}"></td>
 						<td th:text="${c.accCeoName}"></td>
 						<td th:text="${c.accPhone}"></td>
-						<!--<td th:text="${c.accAddr}"></td>
-						<td th:text="${c.accBln}"></td>
-						<td th:text="${c.accFax}"></td>
-						<td th:text="${c.repreNumber}"></td>
-						<td th:text="${c.accEmail}"></td>
-						<td th:text="${c.writer}"></td>
-						<td th:text="${c.writerDay}"></td>
-						<td th:text="${c.approver}"></td>
-						<td th:text="${c.approDay}"></td>
-						<td th:text="${c.approverSt}"></td> -->
-						<!-- /modifyMember?memberId="값"&memberPw="값" -->
-						<!-- <td>
-						<a th:href="@{/clientUpdate(code=${c.code})}">수정</a>
-						</td>
-						<td>
-						<a th:href="@{/clientDelete(code=${c.code})}">삭제</a>
-						</td> -->
 					</tr>
           	</tbody>
        	</table>
@@ -106,7 +81,7 @@ tr:hover{background: whitesmoke;}
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
 	$('.clientListTable').on('click',function(){
 		var clientUrl = $(this).children('.clientCode');
@@ -118,6 +93,8 @@ $(document).ready(function(){
 		$('.clientListForm').submit();
 	});
 });
+
+console.log([[${code}]]);
 </script>
 </th:block>
 </html>
