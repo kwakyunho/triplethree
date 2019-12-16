@@ -2,6 +2,14 @@
  * 캘린더 이벤트
  */
   $(function () {
+	  
+	  var selectEndTime = null;
+		
+	var test = new Date();
+	var today = new Date();
+	var day = new Date().toISOString().substr(0, 10).replace('T', '');
+	
+	today = day;
 
     /* initialize the external events
      -----------------------------------------------------------------*/
@@ -61,7 +69,8 @@
       header    : {
         left  : 'prev,next today',
         center: 'title',
-        right : 'dayGridMonth'
+        //right : 'dayGridMonth'
+        right : 'dayGridMonth,dayGridWeek,dayGridDay'
       },
       
       /*구글캘린더 추가 시작*/
@@ -169,15 +178,33 @@
         		  url : "selectUpdate",
         		  datetype : "json",
         		  success : function(data){
-        			  console.log(sid);
-        			  console.log(data.sid);
-        			  if(sid == data.sid){
-        				$('#myModal2').modal('show');
-        			  // input 창에 data에서 조회한 값을 처리해준다.
-        			  $('input[name=title]').attr('value', data.title);
-        			  $('input[name=start]').attr('value', data.start);
-        			  $('input[name=end]').attr('value', data.end);
-        			  $('input[name=code]').attr('value', data.code);
+        			  //console.log(demgcode);
+        			  //console.log(data.demgcode);
+        			  //console.log(data.sid);
+        			  if(demgcode == data.demgcode && data.sortation == '부서일정'){
+							$('#myModal2').modal('show');
+							// input 창에 data에서 조회한 값을 처리해준다.
+							$('input[name=title]').attr('value', data.title);
+							$('input[name=start]').attr('value', data.start);
+							$('input[name=end]').attr('value', data.end);
+							selectEndTime = data.end;	// 예약종료시간 경과후 삭제 불가능을 위한 변수 값 대입
+							$('input[name=code]').attr('value', data.code);
+        			  }else if(sid == data.sid && data.sortation == '개인일정'){
+							$('#myModal2').modal('show');
+							// input 창에 data에서 조회한 값을 처리해준다.
+							$('input[name=title]').attr('value', data.title);
+							$('input[name=start]').attr('value', data.start);
+							$('input[name=end]').attr('value', data.end);
+							selectEndTime = data.end;	// 예약종료시간 경과후 삭제 불가능을 위한 변수 값 대입
+							$('input[name=code]').attr('value', data.code);
+        			  }else if(sid == data.sid && data.sortation == '전체일정'){
+							$('#myModal2').modal('show');
+							// input 창에 data에서 조회한 값을 처리해준다.
+							$('input[name=title]').attr('value', data.title);
+							$('input[name=start]').attr('value', data.start);
+							$('input[name=end]').attr('value', data.end);
+							selectEndTime = data.end;	// 예약종료시간 경과후 삭제 불가능을 위한 변수 값 대입
+							$('input[name=code]').attr('value', data.code);
         			  }else{
         				  alert('수정 할 수 없습니다.')
         			  }
@@ -238,4 +265,41 @@
       //Remove event from text input
       $('#new-event').val('')
     })
-  })
+    
+	// 등록 버튼 이벤트
+	$('#insertBtn').click(function(){
+		if(confirm('예약 하시겠습니까?')){
+			$('#formInsert').attr('action', 'companyScheduleInsert').submit();
+		}
+	});
+	
+	// 수정 버튼 이벤트
+	$('#updateBtn').click(function(){
+		if(today > selectEndTime){
+			alert('지난 일정은 수정 할 수 없습니다.')
+			//console.log(today);
+			//console.log('selectEndTime : ' + selectEndTime)
+		}else{
+			if(confirm('일정 내용을 수정하시겠습니까?')){
+				$('#formId').attr('action', 'companyScheduleUpdate').submit();
+			}
+		}
+	});
+	  
+	// 삭제 버튼 이벤트
+	$('#deleteBtn').click(function(){
+		//console.log($('#hiddenCode').val());
+		//console.log(today);
+		//console.log('selectEndTime : ' + selectEndTime)
+		
+		if(today > selectEndTime){
+			alert('지난 일정은 삭제 할 수 없습니다.')
+			//console.log(today);
+			//console.log('selectEndTime : ' + selectEndTime)
+		}else{
+			if(confirm('일정을 취소하시겠습니까?')){
+				$('#formId').attr('action', 'companyScheduleDelet').submit();
+			}
+		}
+	});	 
+});

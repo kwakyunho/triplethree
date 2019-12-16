@@ -31,7 +31,6 @@
 			,fa_name
 			,fa_local
 			,fa_seat
-			,fa_date
 			,fa_image
 			,fa_st
 			,writer
@@ -48,7 +47,6 @@
 			,fa_name
 			,fa_local
 			,fa_seat
-			,fa_date
 			,fa_image
 			,fa_st
 			,writer
@@ -58,7 +56,6 @@
 			,#{faName}
 			,#{faLocal}
 			,#{faSeat}
-			,#{faDate}
 			,#{faImage}
 			,#{faSt}
 			,#{writer}

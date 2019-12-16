@@ -7,6 +7,12 @@
 	<title>index</title>
 </th:block>
 
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
+
 <th:block layout:fragment="customContents">
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -133,29 +139,16 @@
 
 
 <!-- 직급 조회 시작  -->
-	<div class="row">
-		<div class="col-12">
-			<div class="card">
-				<div class="card-header">
-					<h3 class="card-title">직급 리스트</h3>
-					<div class="card-tools">
-						<div class="input-group input-group-sm" style="width: 150px;">
-							<input type="text" name="table_search"
-								class="form-control float-right" placeholder="Search">
-
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-default">
-									<i class="fas fa-search"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /.card-header -->
+<div class="content" style="align-content: center">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">직급 리스트</h3>
+			</div>
+			<div class="card-body">
 				<form th:action="@{#}" method="post" id="deleteForm">
-					<div class="card-body table-responsive p-0" style="overflow-y: scroll;">
-						<table class="table table-hover small" style="text-align: center;">
-							<thead>
+					<table class="table table-hover small" style="white-space:nowrap; overflow:auto;  width:100%; height:auto; text-align: center;" id="boardListTable">
+						<thead>
 								<tr>
 									<th>직급관리코드</th>
 									<th>직급명</th>
@@ -169,35 +162,33 @@
 									<th>사용유무</th>
 									<th>삭제</th>
 								</tr>
-								<tr class="positionListTr" th:each="P : ${PositionList}">	
-									<td id="positionCode" th:text="${P.positionCode}"></td>
-									<td id="positionNameBe" th:text="${P.positionNameBe}"></td>
-									<td id="positionLevel" th:text="${P.positionLevel}"></td>
-									<td id="positionWriter" th:text="${P.positionWriter}"></td>
-									<td id="positionWriterDay" th:text="${P.positionWriterDay}"></td>
-									<td id="positionSau" th:text="${P.positionSau}"></td>
-									<td id="positionApprover" th:text="${P.positionApprover}"></td>
-									<td id="positionApproDay" th:text="${P.positionApproDay}"></td>
-									<td id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
-									<td id="positionYesNO" th:text="${P.positionYesNO}"></td>
-									<td class="deletePoBtn">
-										<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deletePoBtn">
-									</td>								
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-				
-								</tr>
-							</tbody>
-						</table>
-					</div>
+						</thead>
+						<tbody>
+							<tr class="positionListTr" th:each="P : ${PositionList}">	
+								<td id="positionCode" th:text="${P.positionCode}"></td>
+								<td id="positionNameBe" th:text="${P.positionNameBe}"></td>
+								<td id="positionLevel" th:text="${P.positionLevel}"></td>
+								<td id="positionWriter" th:text="${P.deName +'-'+P.empName}"></td>
+								<td id="positionWriterDay" th:text="${P.positionWriterDay}"></td>
+								<td id="positionSau" th:text="${P.positionSau}"></td>
+								<td id="positionApprover" th:text="${P.positionApprover}"></td>
+								<td id="positionApproDay" th:text="${P.positionApproDay}"></td>
+								<td id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
+								<td id="positionYesNO" th:text="${P.positionYesNO}"></td>
+								<td class="deletePoBtn">
+									<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deletePoBtn">
+								</td>								
+							</tr>
+						</tbody>
+					</table>
 				</form>
-				<!-- /.card-body -->
+			<!-- /.table -->
 			</div>
-			<!-- /.card -->
+		<!-- /.card-body -->
 		</div>
+	<!-- /.card -->
 	</div>
+</div>
 <!-- 직급 조회 끝 -->
 </th:block>
 
@@ -207,9 +198,13 @@
 
 <!-- 공란 체크 스크립트-->       	         
 <script th:src="@{custom/js/blankCkeck.js}"></script>	
+<!-- DataTables -->
+<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 <script>
-	
-</script>
-
+  $(function () {
+    $('#boardListTable').DataTable();
+  });
+</script> 
 </th:block>
 </html>
