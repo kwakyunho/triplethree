@@ -101,14 +101,7 @@ public class CompanyService {
 		return companyMapper.checkPoName(position);
 	}
 	
-	/**
-	 * 회사정보 등록
-	 * */
-	public int insertCompany(Company company) {
-		System.out.println(company+"<--company");
-		return companyMapper.insertCompany(company);
-	}
-	
+
 	/**
 	 * 회사 정보 조회
 	 * */
@@ -138,4 +131,19 @@ public class CompanyService {
 		
 		return companyMapper.companyDetail(coname);
 	}
+	/**회사정보 휴업또는 폐업****/
+	public int deleteCompany(Company company) {
+		return companyMapper.deleteCompany(company);
+	}
+	
+	/**회사 코드 자동 생성 및 정보등록**/
+	public int insertCompany (Company company) {
+	
+	String code = commonService.codeGeneration("EM_INFO");
+	company.setCode(code);
+	
+	System.out.println("회사코드는 ? "+ company.getCode());
+	
+	return companyMapper.insertCompany(company);
+}
 }

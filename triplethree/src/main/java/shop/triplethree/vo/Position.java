@@ -14,7 +14,21 @@ public class Position {
 	private String positionApperverSt;
 	private String positionApproDay;
 	private String positionYesNO;
+	private String empName;
+	private String deName;
 	
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getDeName() {
+		return deName;
+	}
+	public void setDeName(String deName) {
+		this.deName = deName;
+	}
 	public String getSid() {
 		return sid;
 	}
@@ -93,6 +107,7 @@ public class Position {
 				+ ", positionNameAf=" + positionNameAf + ", positionLevel=" + positionLevel + ", positionSau="
 				+ positionSau + ", positionWriter=" + positionWriter + ", positionWriterDay=" + positionWriterDay
 				+ ", positionApprover=" + positionApprover + ", positionApperverSt=" + positionApperverSt
-				+ ", positionApproDay=" + positionApproDay + ", positionYesNO=" + positionYesNO + "]";
+				+ ", positionApproDay=" + positionApproDay + ", positionYesNO=" + positionYesNO + ", empName=" + empName
+				+ ", deName=" + deName + "]";
 	}
 }

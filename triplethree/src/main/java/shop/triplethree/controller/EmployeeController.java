@@ -226,7 +226,35 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @GetMapping("/employeeMyMoveList")
-	 public String employeeMyMoveList() {
+	 public String employeeMyMoveList(HttpSession session,Model model) {
+		 String SCODE=(String)session.getAttribute("SCODE");
+		 model.addAttribute("MyMove", employeeService.employeeMyMoveList(SCODE));
 		 return "/employee/employeeMyMoveList";
 	 }
+	 
+	 /**
+	  * 모든 회원의 인사이동 목록을 보여주고 승인처리하는 화면 
+	  * @return
+	  */
+	 @GetMapping("/employeeAllMoveList")
+	 public String employeeAllMoveList(Model model,Model model2) {
+		 model.addAttribute("AllMove", employeeService.employeeAllMoveList());
+		 model2.addAttribute("AllMoveOk", employeeService.employeeAllMoveListOk());
+		 return "/employee/employeeAllMoveList";
+	 }
+	 
+	 /**
+	  * 승인하기 받은 승인자 번호로 인사이동목록에 업데이트 하는 메서드
+	  * @param employee, session
+	  * @return
+	  */
+	 @PostMapping("/employeeAllMoveList")
+	 public String employeeAllMoveList(Employee employee, HttpSession session) {
+		 String SID = (String)session.getAttribute("SID");
+		 employee.setApprover(SID);
+		 System.out.println(employee.getMoveCode() + " :이동코드");
+		 employeeService.updateMoveList(employee);
+		 return "redirect:/employeeAllMoveList";
+	 }
+	 
 }

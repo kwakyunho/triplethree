@@ -28,7 +28,7 @@
 	
 	<!-- 부서정보 리스트 쿼리문 -->
 	<select id="selectOrganizationChart" resultType="shop.triplethree.vo.Company">
-		SELECT
+	<!-- 	SELECT
 			code AS departmentCode
 			,dename AS departmentNameBe
 			,level AS departmentLevel
@@ -41,7 +41,32 @@
 			,reason AS departmentSau
 			,yes_or_no AS departmentYesNO
 		FROM
-			DEMG
+			DEMG -->
+			
+		SELECT
+			d.code AS departmentCode
+			,d.dename AS departmentNameBe
+			,d.level AS departmentLevel
+			,d.updamgcode AS departmentUpcode
+			,d.writer AS departmentWriter
+			,d.writer_day AS departmentWriterDay
+			,d.approver AS departmentApprover
+			,d.approver_st AS departmentApperverSt
+			,d.appro_day AS departmentApproDay
+			,d.reason AS departmentSau
+			,d.yes_or_no AS departmentYesNO
+			,e.emp_name AS empName
+			,D.dename AS deName
+		FROM
+			DEMG AS d
+		LEFT JOIN
+			EMP_MANAGE AS e
+		ON 
+			d.writer = e.emp_num
+		LEFT JOIN
+			DEMG AS D
+		ON
+			D.CODE = e.demgcode
 	</select>
 	
 	<!-- 부서등록시 상위부서 selectbox 리스트 쿼리문 -->
@@ -133,7 +158,7 @@
 	
 	<!-- 직급정보 리스트 쿼리문 -->
 	<select id="selectPosition" resultType="shop.triplethree.vo.Position">
-		SELECT
+<!-- 		SELECT
 			code AS positionCode
 			,poname AS positionNameBe
 			,level AS positionLevel
@@ -145,7 +170,31 @@
 			,reason AS positionSau
 			,yes_or_no AS positionYesNO
 		FROM 
-			POSISYS
+			POSISYS -->
+			
+		SELECT
+			p.code AS positionCode
+			,p.poname AS positionNameBe
+			,p.level AS positionLevel
+			,p.writer AS positionWriter
+			,p.writer_day AS positionWriterDay
+			,p.approver AS positionApprover
+			,p.approver_st AS positionApperverSt
+			,p.appro_day AS positionApproDay
+			,p.reason AS positionSau
+			,p.yes_or_no AS positionYesNO
+			,e.emp_name AS empName
+			,D.dename AS deName
+		FROM 
+			POSISYS AS p
+		LEFT JOIN
+			EMP_MANAGE AS e
+		ON 
+			p.writer = e.emp_num
+		LEFT JOIN
+			DEMG AS D
+		ON
+			D.CODE = e.demgcode
 	</select>
 	
 	<!-- 직급정보 삭제 쿼리문 ( 상태만 N으로 변경 ) -->
@@ -167,7 +216,8 @@
 			DEMG AS D
 		WHERE
 			D.dename = #{departmentNameBe}
-		
+		AND
+			yes_or_no = 'Y'
 	</select>
 	
 	<!-- 직급명 유효성 검사진행 -->
@@ -178,9 +228,11 @@
 			POSISYS AS P
 		WHERE
 			P.poname = #{positionNameBe}
+		AND
+			yes_or_no = 'Y'
 	</select>
 	<!--회사정봉 등록  -->
-	<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+	<!-- <insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
 	INSERT INTO
 	EM_INFO
 		(code,co_name,co_ceoname,co_postcode,co_addr,co_detailaddr,co_extraaddr,co_bln,co_fax,co_phone,co_email,co_logo,writer,writer_day)
@@ -199,8 +251,8 @@
 		,#{coLogo}
 		,#{writer}
 		,now()
-	)
-	</insert>
+	) 
+	</insert>-->
 	<!--회사 정보 조회  -->
 	<select id="selectCompany" resultType="shop.triplethree.vo.Company">
 	select
@@ -293,5 +345,48 @@
 		co_name=#{coName}	
 	
 	</select>
-
+	<update id="deleteCompany" parameterType="shop.triplethree.vo.Company">
+	
+		UPDATE 
+			EM_INFO AS em
+		SET 
+			em.yes_or_no  = 'N' 
+			,em.co_reason = '폐업'
+		WHERE 
+			em.co_name=#{coName}
+	</update>
+	
+		<insert id="insertCompany" parameterType="shop.triplethree.vo.Company">
+		INSERT INTO
+			EM_INFO(
+				code
+				,co_name
+				,co_ceoname
+				,co_postcode
+				,co_addr
+				,co_detailaddr
+				,co_extraaddr
+				,co_bln
+				,co_fax
+				,co_phone
+				,co_email
+				,co_logo
+				,writer
+				,writer_day)
+		VALUES
+			(#{Code}
+			,#{coName}
+			,#{coCeoname}
+			,#{coPostCode}
+			,#{coAddr}
+			,#{coDetailAddr}
+			,#{coExtraAddr}
+			,#{coBin}
+			,#{coFax}
+			,#{coPhone}
+			,#{coEmail}
+			,#{coLogo}
+			,#{sid}
+			,NOW())
+	</insert>
 </mapper>

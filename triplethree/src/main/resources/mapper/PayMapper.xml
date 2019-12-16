@@ -29,6 +29,41 @@
 		ON A.pocode = C.CODE
 				
 	</select>
+	<!--급여대장  -->
+	<select id="payInsert"  resultType="shop.triplethree.vo.Pay">
+		SELECT  
+			A.emp_num as empNum,
+			A.emp_name as empName,
+			B.dename as demgName,
+			C.poname as poName,
+			p.basic_pay AS basicPay,
+			p.benefit AS beneFit,
+			p.holiday_pay AS holidayPay,
+			p.overtime_pay AS overtimePay,
+			p.position_benefit AS positionBenefit,
+			p.self_dri_pay AS selfDriPay,
+			p.com_pay AS comPay,
+			p.meal_cost AS mealCost,
+			p.child_pay AS childPay
+	FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) A
+		
+		LEFT JOIN DEMG B
+		ON A.demgcode = B.CODE
+		
+		LEFT JOIN POSISYS C
+		ON A.pocode = C.CODE
+		inner JOIN PAY_BILL AS p
+		ON A.CODE = p.emp_code
+
+	</select>
 	
 	<!--퇴직금 검색쿼리문짜야험  -->
 	<select id="selectRetiring" resultType="shop.triplethree.vo.Employee">	
@@ -46,7 +81,8 @@
 	em.emp_num as empNum,
 	em.emp_name as empName,
 	p.poname as poName,
-	de.dename as demgName
+	de.dename as demgName,
+	em.basic_pay AS basicPay
 	FROM (
 	SELECT em.*
 			FROM EMP_MANAGE em
