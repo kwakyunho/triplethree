@@ -37,12 +37,6 @@
 	</select>
 	
 	<insert id="startInsertWorkAttitude" parameterType="map">
-		<selectKey keyProperty="code" resultType="String" order="AFTER">
-			SELECT code
-			FROM ABS_MANAGE
-			WHERE code = #{workAttCode}
-		</selectKey>
-		
 		<if test="conditionValue eq 2">
 			INSERT INTO ABS_MANAGE (code, emp_code, annual, attendance, writer, writer_day)
 			VALUES (#{workAttCode}, #{userCode}, DATE_FORMAT(CURDATE(),'%Y%m%d'), now(), #{userId}, now())
@@ -78,5 +72,15 @@
 		LEFT JOIN POSISYS D
 		ON B.pocode = D.code;
 	</select>
+	
+	<update id="adminUpdateWorkAttitude" parameterType="map">
+		UPDATE ABS_MANAGE A
+		INNER JOIN (
+			SELECT *
+			FROM ABS_MANAGE
+			WHERE CODE = #{workAttCode}) B
+		ON A.code = B.code
+		SET A.attendance = #{startWorkTime}, A.leavework = #{endWorkTime}, A.manage_modi_check = 'Y', A.manage_name = #{adminId}, A.manage_date = NOW(), A.reason = #{coment}
+	</update>
 	
 </mapper>

@@ -18,28 +18,10 @@ public class WorkAttitudeController {
 	
 	
 	@Autowired private WorkAttitudeService workAttService;
-	@PostMapping(value = "/selectWorkAttitude", produces = "application/json")
-	public @ResponseBody WorkAttitudeVo selectWorkAttitude(@RequestParam Map<String, String> json){
+	@PostMapping(value = "/WorkAttitude", produces = "application/json")
+	public @ResponseBody WorkAttitudeVo WorkAttitude(@RequestParam Map<String, String> json){
 		
-		return workAttService.selectWorkAttitude(json);
-	}
-	
-	@PostMapping(value = "/startInsertWorkAttitude", produces = "application/json")
-	public @ResponseBody WorkAttitudeVo startInsertWorkAttitude(@RequestParam Map<String, String> json){
-		
-		return workAttService.startInsertWorkAttitude(json);
-	}
-	
-	@PostMapping(value = "/endUpdateWorkAttitude", produces = "application/json")
-	public @ResponseBody WorkAttitudeVo endUpdateWorkAttitude(@RequestParam Map<String, String> json){
-		
-		return workAttService.endUpdateWorkAttitude(json);
-	}
-	
-	@PostMapping(value = "/adminInsertWorkAttitude", produces = "application/json")
-	public @ResponseBody WorkAttitudeVo adminInsertWorkAttitude(@RequestParam Map<String, String> json){
-		
-		return workAttService.adminInsertWorkAttitude(json);
+		return workAttService.WorkAttitude(json);
 	}
 	
 	// 근태목록 리스트 조회

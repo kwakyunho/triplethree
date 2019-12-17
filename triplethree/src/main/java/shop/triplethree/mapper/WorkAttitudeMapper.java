@@ -13,12 +13,15 @@ public interface WorkAttitudeMapper {
 	public WorkAttitudeVo selectWorkAttitude(Map<String, String> json);
 	
 	// 출근시간 입력
-	public String startInsertWorkAttitude(Map<String, String> json);
+	public int startInsertWorkAttitude(Map<String, String> json);
 	
 	// 출근시간 입력
 	public int endUpdateWorkAttitude(Map<String, String> json);
 	
 	// 근태목록 리스트 조회
 	public List<WorkAttitudeVo> selectWorkAttitudeList();
+	
+	// 관리자기능 : 근태시간 수정
+	public int adminUpdateWorkAttitude(Map<String, String> json);
 	
 }
