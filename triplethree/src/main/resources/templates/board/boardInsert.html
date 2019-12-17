@@ -107,12 +107,14 @@
     // Summernote
     $('.textarea').summernote()
     
-  })
+  });
+  //뒤로가기(목록) 버튼 눌렀을 때 
   $(function(){
 	 $('#backBtn').on('click',function(){
 		history.go(-1); 
 	 });
   });
+  
   $(function(){
 		 $('#insertBoard').on('click',function(){
 			 var boardTitle = $('input[name=boardTitle]').val();
