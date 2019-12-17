@@ -322,6 +322,7 @@
 		,v.ve_name
 		,f.fa_name
 		,r.re_com_check
+		,r.re_com
 	FROM
 		RESER_MANAGE AS r
 	LEFT JOIN

@@ -389,7 +389,7 @@ $(function(){
 			$('#decode').val(textValue);
 		
 			if(confirm('반납 하시겠습니까?')){
-				$('#formUpdateList').attr('action', '/admin/assets/assetsManageCaReturn').submit();
+				$('#formUpdateList').attr('action', '/assets/assetsManageCaReturn').submit();
 			}
 		}else{
 			alert('이미 반납 되었습니다.');

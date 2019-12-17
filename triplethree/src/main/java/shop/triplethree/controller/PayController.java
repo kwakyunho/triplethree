@@ -19,7 +19,7 @@ public class PayController {
 	@Autowired private PayService payService;
 	
 	/**급여등록화면**/
-	@GetMapping("/viewPay")
+	@GetMapping("/admin/pay/viewPay")
 	public String viewPay() {
 		
 		return "pay/insertPay";	
@@ -27,7 +27,7 @@ public class PayController {
 	
 
 	/**급여 등록 검색**/
-	@PostMapping("/insertPay")
+	@PostMapping("/admin/pay/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk
 								 ,@RequestParam(value="sv") String sv
 								 ,Model model) {
@@ -39,7 +39,7 @@ public class PayController {
 	}
 	
 	/** 급여대장** */
-	@GetMapping("/selectPay")
+	@GetMapping("/pay/selectPay")
 	public String selectPay(Model model) {
 		 model.addAttribute("selectPay", payService.selectPay());
 		 model.addAttribute("payInsert", payService.payInsert());
@@ -47,7 +47,7 @@ public class PayController {
 	}
 	
 	/**퇴직금 등록화면**/
-	@GetMapping("/selectRetiring")
+	@GetMapping("/pay/selectRetiring")
 	public String selectRetiring() {
 		System.out.println("퇴직금 등록화면");
 		return "pay/selectRetiring";
