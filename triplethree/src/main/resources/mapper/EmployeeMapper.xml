@@ -284,8 +284,8 @@
 			
 			UPDATE EMP_MANAGE
 				SET
-					demgcode= #{demgCode},
-					pocode= #{poCode},
+					demgcode= #{afterDemgCode},
+					pocode= #{afterPoCode},
 					li_code= #{liCode},
 					password=#{password},
 					postcode=#{postCode},
@@ -311,8 +311,8 @@
  				
  				UPDATE EMP_MANAGE
 					SET
-						demgcode= #{demgCode},
-						pocode= #{poCode},
+						demgcode= #{afterDemgCode},
+						pocode= #{afterPoCode},
 						li_code= #{liCode},
 						password=#{password},
 						postcode=#{postCode},
