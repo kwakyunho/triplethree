@@ -73,6 +73,7 @@
 			,emp_code
 			,PO.poname AS poname
          	,EM.emp_name AS writer
+         	,board_pw AS boardPw
          	,board_title AS boardTitle
 			,board_con AS boardCon
 			,board_count AS boardCount

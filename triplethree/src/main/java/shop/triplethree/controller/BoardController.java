@@ -62,7 +62,7 @@ public class BoardController {
 	public String boardList(Model model) {
 		model.addAttribute("boardList", boardservice.boardList());
 		
-		return "/boARD/boardList";
+		return "/board/boardList";
 	}
 	
 	/**

@@ -32,7 +32,7 @@ public class ClientController {
 	//거래중 거래처 정보조회 리스트
 	@GetMapping("/clientList2")
 	public String clientList2(Model model) {
-		model.addAttribute("client", clientService.getClientList2());
+		model.addAttribute("client2", clientService.getClientList2());
 		return "/client/clientList2";
 	}
 		

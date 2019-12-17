@@ -46,9 +46,8 @@ tr:hover{background: whitesmoke;}
        
        <div class="card-body">
        <form class="clientListForm">
-         <table id="clientListTable" class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto; height:auto; width:100%; height:auto;">
+         <table id="clientListTable" class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto; width:100%; height:auto;">
              <thead>
-             
 	           		<tr>
 		                 <th>순차</th>
 		                 <th>거래처관리코드</th>
@@ -57,7 +56,7 @@ tr:hover{background: whitesmoke;}
 		                 <th>거래처명</th>
 		                 <th>대표자명</th>
 		                 <th>거래처 전화번호</th>
-               </tr>
+               		</tr>
              </thead>
              <tbody>
 	               <tr style="cursor:pointer" th:each="c , index : ${client}">
@@ -98,7 +97,7 @@ tr:hover{background: whitesmoke;}
 $(document).ready(function(){
 	$('#clientListTable tbody').on('click','tr',function(){
 		var clientUrl = $(this).children('.clientCode');
-		clientUrl.append('<input type="hidden" name="code" val="">');
+		clientUrl.append('<input type="hidden" name="code" value="">');
 		var clientCode = clientUrl.attr('id');
 		$('input[name=code]').val(clientCode);
 		$('.clientListForm').attr('method','POST');

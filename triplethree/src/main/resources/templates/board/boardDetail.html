@@ -24,8 +24,8 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/boardList}" style="color:#28a745;">공지사항 목록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a th:href="@{boardList}" style="color:#28a745;">공지사항 목록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -52,8 +52,8 @@
 	       		<table class="table table-condensed" >
 	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>
-	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
-	       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
+		       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
+		       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
 	       	</div>
 	       </div>
 		</form>
@@ -90,31 +90,29 @@
 			$('.boardDetailForm').attr('action', '/boardList');
 			$('.boardDetailForm').submit();
 		});
-		
-	var dbPw = $('#boardPw').val(); //게시글 비밀번호
-	//console.log(dbPw + ': 이것은 boardPw');
-	$('#updateBtn').on('click',function(){
-			if (confirm("수정하시겠습니까") == true){  //확인
-				var inputPw = prompt('비밀번호를 입력하세요(1111)');
-				if(dbPw==inputPw){
-					alert('수정화면으로 이동합니다');
-					$('.boardDetailForm').attr('method', 'POST');
-					$('.boardDetailForm').attr('action', '/goBoardUpdate');
-					$('.boardDetailForm').submit();
-				}else{
-					alert('비밀번호가 일치하지 않습니다');
-					return;
-				}
-			}else{   //취소
-			    return;
-			}
 	
+	$('#updateBtn').on('click',function(){
+		var dbPw = $('#boardPw').val();
+		if(confirm('수정하시겠습니까?')){
+			var inputPw = prompt('비밀번호를 입력하세요(1111)');
+			if(inputPw==dbPw){
+				alert('수정화면으로 이동합니다');
+				$('.boardDetailForm').attr('method', 'POST');
+				$('.boardDetailForm').attr('action', '/goBoardUpdate');
+				$('.boardDetailForm').submit();
+			}else{
+				alert('비밀번호가 일치하지 않습니다');
+				return;
+			}
+		}else{
+			return;
+		}
 	});
-		
+	
 	$('#deleteBtn').on('click',function(){
-		if (confirm("정말 삭제하시겠습니까??") == true){  //확인
+		if (confirm("정말 삭제하시겠습니까??")){  //확인
+			var dbPw = $('#boardPw').val();
 			var inputPw = prompt('비밀번호를 입력하세요');
-			console.log(inputPw + ': 이것은 입력 비밀번호');
 			if(dbPw==inputPw){
 				$(function(){
 					$(document).Toasts('create', {
