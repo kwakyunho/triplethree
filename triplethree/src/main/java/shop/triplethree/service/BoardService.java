@@ -48,7 +48,7 @@ public class BoardService {
 		System.out.println(board.getBoardCount() + ": updateCnt 메서드 실행 후 카운트 " );
 		return	board;
 	}
-	//게시물 가져오면서 작성자 바꾸기
+	//게시물 가져오면서 작성자 바꾸기(다시 수정해보기)
 	public Board getBoardForUpdate(String code,HttpSession session) {
 		Board board = boardMapper.getBoardForUpdate(code);
 		board.setWriter((String)session.getAttribute("SNAME"));
