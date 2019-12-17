@@ -45,10 +45,11 @@ $(function(){
 		var comPay=document.getElementById("comPay");//통신수당
 		var childPay=document.getElementById("childPay");//육아수당
 		var mealCost=document.getElementById("mealCost");//식대
-		
+		var nationPer=document.getElementById("nationPer"); //국민연금비율
 		var sum1=document.getElementById("sum1"); //과세
 		var sum2=document.getElementById("sum2"); //비과세
 		var sum3=document.getElementById("sum3"); //지급액 계
+		
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;
@@ -56,6 +57,13 @@ $(function(){
 		sum2.value=add2;
 		var add3=add+add2;
 		sum3.value=add3;
-	})
 	
-});
+		
+		//국민연금 계산 소득월액*요율(9%)/2
+		var nation1=parseFloat(nationPer.value)*parseInt(sum1.value);
+		var nation=Math.ceil(nation1/2);
+		console.log(nation);
+		nationPer.value=Math.floor(nation/10)*10;﻿//예를 들어 10으로 나누면 100.5 floor 함수로 소수점을 버리면 100, 다시 10을 곱하면 1000
+	
+		});	
+	});
