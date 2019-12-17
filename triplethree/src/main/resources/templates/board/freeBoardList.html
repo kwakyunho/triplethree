@@ -26,12 +26,12 @@ tr:hover{background: whitesmoke;}
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/freeBoardInsert}" style="color:#28a745;">자유게시판 작성</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/freeBoardInsert}" style="color:#28a745;">자유게시판 작성</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 		<div class="col-4" >
-			<button type="button" class="btn btn-success" onclick="location.href='/boardInsert'" >글작성하기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='/board/boardInsert'" >글작성하기</button>
 	     </div>
 	</div><!-- /.container-fluid -->
 </div>
@@ -90,7 +90,7 @@ $(document).ready(function(){
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
-		$('.boardListForm').attr('action', '/boardDetail');	// 액션 경로 정의
+		$('.boardListForm').attr('action', '/board/boardDetail');	// 액션 경로 정의
 		$('.boardListForm').submit();	// 전송
 	});
 });

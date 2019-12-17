@@ -97,7 +97,7 @@ public class EmployeeController {
 	   * 사원등록을 누르면 employee로 이동하는 메서드 
 	   * @return employee/employeeInsert
 	   */
-	 @GetMapping("/employeeInsert")
+	 @GetMapping("/employee/employeeInsert")
 	 public String insertEmployee(Model model1, Model model2,Model model3) {
 		 model1.addAttribute("depart", employeeService.selectForDepart());
 		 model2.addAttribute("position", employeeService.selectForPosition());
@@ -110,21 +110,21 @@ public class EmployeeController {
 	  * @param employee
 	  * @return /employee/employeeList
 	  */
-	 @PostMapping("/employeeInsert")
+	 @PostMapping("/employee/employeeInsert")
 	 public String insertEmployee(Employee employee) {
 		 String code = commonService.codeGeneration("EMP_MANAGE");
 		 employee.setCode(code);
 		 System.out.println(employee.getCode() + "<-생성된 코드");
 		 
 		 employeeService.insertEmployee(employee);
-		 return "redirect:/employeeList";
+		 return "redirect:/employee/employeeList";
 	 }
 	 
 	/**
 	 * 사원 조회를 누르면 사원조회하는 화면으로 이동
 	 * @return employee/employeeList
 	 */
-	 @GetMapping("/employeeList")
+	 @GetMapping("/employee/employeeList")
 	 public String selectEmployee(Model model) {
 		 model.addAttribute("emList", employeeService.selectEmployee());
 		 return "/employee/employeeList";
@@ -135,7 +135,7 @@ public class EmployeeController {
 	  * @param model
 	  * @return
 	  */
-	 @GetMapping("/employeeDetail")
+	 @GetMapping("/employee/employeeDetail")
 	 public String detailEmployee(@RequestParam(value="empNum")String empNum, Model model) {
 		 model.addAttribute("detail",employeeService.selectForDetail(empNum));
 		 return "/employee/employeeDetail";
@@ -146,7 +146,7 @@ public class EmployeeController {
 	  * @param model
 	  * @return
 	  */
-	 @GetMapping("/employeeUpdate")
+	 @GetMapping("/employee/employeeUpdate")
 	 public String updateEmployee(@RequestParam(value="empNum")String empNum, Model model,Model model1, Model model2,Model model3) {
 		 model.addAttribute("update", employeeService.selectForUpdate(empNum));
 		 model1.addAttribute("depart", employeeService.selectForDepart());
@@ -160,7 +160,7 @@ public class EmployeeController {
 	  * @param employee
 	  * @return
 	  */
-	 @PostMapping("/employeeUpdate")
+	 @PostMapping("/employee/employeeUpdate")
 	 public String updateEmployee(Employee employee) {
 		
 		 
@@ -172,14 +172,14 @@ public class EmployeeController {
 		 }else {
 			 employeeService.updateEmployee(employee);	 
 		 }
-		 return "redirect:/employeeList";	
+		 return "redirect:/employee/employeeList";	
 	 }
 	 
 	 /**
 	  * 로그인한 회원의 기본정보를 보여주는 화면
 	  * @return
 	  */
-	 @GetMapping("/employeeMyPage")
+	 @GetMapping("/employee/employeeMyPage")
 	 public String employeeMyPage(Model model, HttpSession session) {
 		
 		 String SID = (String)session.getAttribute("SID");
@@ -195,7 +195,7 @@ public class EmployeeController {
 	  * 로그인한 회원의 기본정보를 수정하는 화면
 	  * @return
 	  */
-	 @GetMapping("/employeeMyUpdate")
+	 @GetMapping("/employee/employeeMyUpdate")
 	 public String employeeMyUpdate(Model model,HttpSession session) {
 		 String SID = (String)session.getAttribute("SID");
 		 if(SID != null) {
@@ -213,12 +213,12 @@ public class EmployeeController {
 	  * @param employee
 	  * @return
 	  */
-	 @PostMapping("/employeeMyUpdate")
+	 @PostMapping("/employee/employeeMyUpdate")
 	 public String employeeMyUpdate(Employee employee) {
 		 String code = commonService.codeGeneration("EMP_MANAGE");
 		 employee.setCode(code);
 		 employeeService.updateEmployee(employee);
-		 return "redirect:/employeeMyPage";
+		 return "redirect:/employee/employeeMyPage";
 	 }
 	 
 	 /**
@@ -236,7 +236,7 @@ public class EmployeeController {
 	  * 모든 회원의 인사이동 목록을 보여주고 승인처리하는 화면 
 	  * @return
 	  */
-	 @GetMapping("/employeeAllMoveList")
+	 @GetMapping("/admin/employee/employeeAllMoveList")
 	 public String employeeAllMoveList(Model model,Model model2) {
 		 model.addAttribute("AllMove", employeeService.employeeAllMoveList());
 		 model2.addAttribute("AllMoveOk", employeeService.employeeAllMoveListOk());
@@ -248,13 +248,13 @@ public class EmployeeController {
 	  * @param employee, session
 	  * @return
 	  */
-	 @PostMapping("/employeeAllMoveList")
+	 @PostMapping("/admin/employee/employeeAllMoveList")
 	 public String employeeAllMoveList(Employee employee, HttpSession session) {
 		 String SID = (String)session.getAttribute("SID");
 		 employee.setApprover(SID);
 		 System.out.println(employee.getMoveCode() + " :이동코드");
 		 employeeService.updateMoveList(employee);
-		 return "redirect:/employeeAllMoveList";
+		 return "redirect:/employee/employeeAllMoveList";
 	 }
 	 
 }

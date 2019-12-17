@@ -31,7 +31,7 @@ public class CompanyController {
 	 * 메뉴에서 부서관리탭을 누르고 들어올때 실행
 	 * 리스트를 불러옴
 	 * */
-	@GetMapping("/teamNameInsert")
+	@GetMapping("/admin/department/teamNameInsert")
 	public String selectOrganizationChart(Model model1, Model model2)	{
 		//System.out.println("리스트 뽑아요");
 		
@@ -45,7 +45,7 @@ public class CompanyController {
 	 * 부서등록화면에서 등록하기 버튼을 클릭시 실행
 	 * db 에 부서를 등록함
 	 * */
-	@PostMapping("/teamNameInsert")
+	@PostMapping("/department/teamNameInsert")
 	public String insertOrganizationChart(Company company, HttpSession session) {
 		//System.out.println("부서 등록버튼 클릭이 되었나요 ?");
 		String sid = (String) session.getAttribute("SID");
@@ -60,7 +60,7 @@ public class CompanyController {
 	/**
 	 * 부서수정
 	 * */
-	@PostMapping("/teamNameUpdate")
+	@PostMapping("/department/teamNameUpdate")
 	public String updateOrganizationChart(Company company, HttpSession session) {
 		//System.out.println("부서 수정 버튼이 클릭되었나요?");
 		String sid = (String) session.getAttribute("SID");
@@ -73,7 +73,7 @@ public class CompanyController {
 	/**
 	 * 부서 삭제
 	 * */
-	@PostMapping("/teamNameDelete")
+	@PostMapping("/department/teamNameDelete")
 	public String deleteOrganizationChart(Company company) {
 		//System.out.println("삭제버튼이 클릭되었나요?");
 		//System.out.println("값이 정상적으로 넘어왔나요 ? " + departmentCode);
@@ -86,7 +86,7 @@ public class CompanyController {
 	 * 메뉴에서 직급 관리 테이블 클릭시 실행
 	 * 리스트를 불러옴
 	 * */
-	@GetMapping("/positionInsert")
+	@GetMapping("/position/positionInsert")
 	public String selectPosition(Model model)	{
 		//System.out.println("리스트 뽑아요");
 		model.addAttribute("PositionList", companyService.selectPosition());
@@ -98,7 +98,7 @@ public class CompanyController {
 	 * 직급등록 화면에서 등록하기 버튼 클릭시 실행
 	 * db에 직급을 등록함
 	 * */
-	@PostMapping("/positionInsert")
+	@PostMapping("/position/positionInsert")
 	public String insertPosition(Position position, HttpSession session) {
 		System.out.println("직급 등록 버튼이 클릭되었나요?");
 		System.out.println(position.toString());
@@ -112,7 +112,7 @@ public class CompanyController {
 	/**
 	 * 직급 수정
 	 * */
-	@PostMapping("/positionUpdate")
+	@PostMapping("/position/positionUpdate")
 	public String updatePosition(Position position, HttpSession session) {
 		System.out.println("직급 수정 버튼이 클릭되었나요?");
 		String sid = (String) session.getAttribute("SID");
@@ -125,7 +125,7 @@ public class CompanyController {
 	/**
 	 * 직급 삭제
 	 * */
-	@PostMapping("/positionListDelete")
+	@PostMapping("/position/positionListDelete")
 	public String deletePosition(Position position) {
 		System.out.println("삭제 버튼이 클릭되었나요?");
 		System.out.println(position.getPositionCode());
@@ -137,7 +137,7 @@ public class CompanyController {
 	/**
 	 * 부서 등록/수정 유효성 검사 메서드
 	 * */
-	@PostMapping(value="/deNameCheck" , produces = "application/json")
+	@PostMapping(value="/department/deNameCheck" , produces = "application/json")
 	public @ResponseBody int deNameCheck(String title, Company company) {
 		System.out.println("부서명이 제대로 전달 되었나요? "+ title);
 		System.out.println("부서명이 있는지 확인해볼께요.");
@@ -150,7 +150,7 @@ public class CompanyController {
 	/**
 	 * 직급 등록/수정 유효성 검사 메서드
 	 * */
-	@PostMapping(value = "/poNameCheck", produces = "application/json")
+	@PostMapping(value = "/position/poNameCheck", produces = "application/json")
 	public @ResponseBody int poNameCheck(String name, Position position) {
 		System.out.println("직급명이 제대로 전달 되었나요 ? " + name);
 		System.out.println("직급명이 있는지 확인해볼께요.");
@@ -161,14 +161,14 @@ public class CompanyController {
 	}
 	
 	/**회사정보 입력화면**/
-	@GetMapping("/companyInsert")
+	@GetMapping("/admin/company/companyInsert")
 	public String insertCompany() {
 		System.out.println("회사정보입력화면");
 		return "company/information/companyInsert";	
 	}
 	/**회사정보 입력처리 및 코드생성**/
 
-	@PostMapping("/companyInsert")
+	@PostMapping("/company/companyInsert")
 	public String insertCompany(Company company, HttpSession session) {
 
 		String sid = (String) session.getAttribute("SID");
@@ -181,14 +181,14 @@ public class CompanyController {
 	}
 	
 	/**회사정보 조회**/
-	@GetMapping("/companyInfo")
+	@GetMapping("/company/companyInfo")
 	public String selectCompany(Model model) {
 		model.addAttribute("companyInfo", companyService.selectCompany());
 		System.out.println(model+"<--model");
 		return "company/information/companyInfo";
 	}
 	/**회사정보 수정 클릭시 화면 보여주기**/
-	@GetMapping("/companyUpdate")
+	@GetMapping("/company/companyUpdate")
 	public String updateCompanySelect(@RequestParam(value="Code") String code,Model model) {
 		System.out.println("Code"+code);
 		//companyService.updateCompanySelect(code);
@@ -198,13 +198,14 @@ public class CompanyController {
 	}
 	
 	/**회사정보 진짜 수정클릭시 내용변경**/
-	@PostMapping("companyUpdate")
+	@PostMapping("/company/companyUpdate")
 	public String updateCompany(Company company) {
+		System.out.println("여기오냐?");
 		companyService.updateCompany(company);
-		return "redirect:/companyInfo";
+		return "redirect:/company/companyInfo";
 	}
 	/**회사정보 상세보기***/
-	@GetMapping("/companyDetail")
+	@GetMapping("/company/companyDetail")
 	public String companyDetail(@RequestParam(value="coName") String coname,Model model) {
 		System.out.println("coName"+coname);
 		model.addAttribute("companyDetail", companyService.companyDetail(coname));
@@ -219,6 +220,6 @@ public class CompanyController {
 		System.out.println(company.getCode());
 		
 		companyService.deleteCompany(company);
-		return "redirect:/companyInfo";
+		return "redirect:/company/companyInfo";
 	}
 }

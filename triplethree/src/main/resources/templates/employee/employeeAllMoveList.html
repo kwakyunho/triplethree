@@ -23,8 +23,8 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/index">Home</a></li>
-						<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
-						<li class="breadcrumb-item"><a href="/employeeMyMoveList">전체사원 인사이동 목록</a></li>
+						<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
+						<li class="breadcrumb-item"><a href="/employee/employeeMyMoveList">전체사원 인사이동 목록</a></li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -40,7 +40,7 @@
 		<div class="row" style="margin-left:auto;">
 			<div class="col-2">
 				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/employeeList'">사원 목록으로 가기</button>
+					onclick="location.href='/employee/employeeList'">사원 목록으로 가기</button>
 			</div>
 			
 		</div>
@@ -64,7 +64,7 @@
                 </div>
               </div>
               <!-- /.card-header -->
-             <form id="approForm" method="post" action = "/employeeAllMoveList">	
+             <form id="approForm" method="post" action = "/employee/employeeAllMoveList">	
               <div class="card-body table-responsive p-0" >
                 <table id="approTable"class="table table-hover"  style="margid:auto; text-align:center;">
                   <thead>
@@ -101,7 +101,7 @@
 							    	<button type="button" class="btn btn-block btn-outline-success btn-sm" id="approCheck" >승인하기</button>
 							    </td>
 							    <td>
-								<a th:href="@{/employeeAllMoveList(approver=${session.SID})}" id="approCheck">승인하기</a>
+								<a th:href="@{/employee/employeeAllMoveList(approver=${session.SID})}" id="approCheck">승인하기</a>
 								</td>
 							
 							
@@ -198,12 +198,12 @@
 
 <th:block layout:fragment="customScript">
 
-	<script src="../../plugins/jquery/jquery.min.js"></script>
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 
 
 
-	<script src="../../plugins/datatables/jquery.dataTables.js"></script>
-	<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+	<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+	<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 
 	<script>
 	$(document).ready(function(){

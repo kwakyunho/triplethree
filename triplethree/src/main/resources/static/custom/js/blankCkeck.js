@@ -73,7 +73,7 @@ $("#inputTitle").blur(function() {
 		$.ajax({
 		type 		: 'POST',
 		data 		: {'title': title},
-		url 		: "deNameCheck",
+		url 		: "department/deNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -105,7 +105,7 @@ $("#departmentNameAf").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'title': title},
-		url 		: "deNameCheck",
+		url 		: "department/deNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -237,7 +237,7 @@ $("#positionNameBeIn").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "poNameCheck",
+		url 		: "position/poNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -269,7 +269,7 @@ $("#positionNameAfUp").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "poNameCheck",
+		url 		: "position/poNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {

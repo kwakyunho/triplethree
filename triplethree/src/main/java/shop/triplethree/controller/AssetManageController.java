@@ -24,7 +24,7 @@ public class AssetManageController {
 	 * 메뉴에서 차량 예약 눌렸을때 실행
 	 * 예약 리스트를 보여줌
 	 * */
-	@GetMapping("/assetsManageCaSelect")
+	@GetMapping("/assets/assetsManageCaSelect")
 	public String selectCarManageAsset() {
 		return "/assets/assetsCarManage";
 	}
@@ -32,7 +32,7 @@ public class AssetManageController {
 	/**
 	 * 차량 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 차량 뿌려주는 메서드
 	 * */
-	@PostMapping(value="/selectCarBox", produces = "application/json")
+	@PostMapping(value="/assets/selectCarBox", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectCarBox(String star, String end) {
 		String time = ":00";
 		String startday = star.replace("T", " ");
@@ -46,7 +46,7 @@ public class AssetManageController {
 	/**
 	 * 차량 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 차량 뿌려주는 메서드
 	 * */
-	@PostMapping(value="/selectCarBox2", produces = "application/json")
+	@PostMapping(value="/assets/selectCarBox2", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectCarBox2(String star, String end) {
 		String time = ":00";
 		String startday = star.replace("T", " ");
@@ -60,7 +60,7 @@ public class AssetManageController {
 	/**
 	 * 달력에 차량 예약 일정 뿌려주는 메서드
 	 * */
-	@PostMapping(value="/assetsManageCaSelect", produces = "application/json")
+	@PostMapping(value="/assets/assetsManageCaSelect", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectCarManageAsset(AssetsManage assetsManage){
 		//System.out.println(assetsManage);
 		//List<AssetsManage> list = assetManageService.selectCarManageAsset(assetsManage);
@@ -71,7 +71,7 @@ public class AssetManageController {
 	/**
 	 * 차량 예약 신청 메서드
 	 * */
-	@PostMapping("/assetsManageCaInsert")
+	@PostMapping("/assets/assetsManageCaInsert")
 	public String insertCarManageAsset (AssetsManage assetsManage, HttpSession session) {
 		//System.out.println("값을 확인해 볼께요." + assetsManage);
 		// 예약 관리 코드를 생성하는 메서드
@@ -82,13 +82,13 @@ public class AssetManageController {
 		assetsManage.setEmpCode(sid);
 		// 차량 예약 등록 메서드
 		assetManageService.insertCarManageAsset(assetsManage);
-		return "redirect:/assetsManageCaSelect";
+		return "redirect:/assets/assetsManageCaSelect";
 	}
 	
 	/**
 	 * 차량 예약 수정시 화면에 뿌려줄 값을 찾는 메서드
 	 * */
-	@PostMapping(value="/selectCarUpdate", produces = "application/json")
+	@PostMapping(value="/assets/selectCarUpdate", produces = "application/json")
 	public @ResponseBody AssetsManage selectCarUpdate(String code) {
 		//System.out.println("값이 넘어왔나요?" + code);
 		return assetManageService.selectCarUpdate(code);
@@ -97,29 +97,29 @@ public class AssetManageController {
 	/**
 	 * 차량 예약 수정 메서드
 	 * */
-	@PostMapping("/assetsManageCaUpdate")
+	@PostMapping("/assets/assetsManageCaUpdate")
 	public String updateCarManageAsset(AssetsManage assetsManage) {
 		//System.out.println("어떤 값이 들어 있나요?" + assetsManage);
 		assetManageService.updateCarManageAsset(assetsManage);
-		return "redirect:/assetsManageCaSelect";
+		return "redirect:/assets/assetsManageCaSelect";
 	}
 	
 	/**
 	 * 차량 예약 삭제 메서드
 	 * */
-	@PostMapping("/assetsManageCaDelete")
+	@PostMapping("/assets/assetsManageCaDelete")
 	public String deleteCarManageAsset(String code) {
 		//System.out.println("삭제 버튼이 클릭되었어요.");
 		//System.out.println("삭제하는 값을 확인해 볼께요" + code);
 		assetManageService.deleteCarManageAsset(code);
-		return "redirect:/assetsManageCaSelect";
+		return "redirect:/assets/assetsManageCaSelect";
 	}
 	
 	/**
 	 * 메뉴에서 시설물 예약 눌렸을때 실행
 	 * 예약 리스트를 보여줌
 	 * */
-	@GetMapping("/assetsManageBeSelect")
+	@GetMapping("/assets/assetsManageBeSelect")
 	public String selectBeManageAsset () {
 		return "/assets/assetsBeManage";
 	}
@@ -127,7 +127,7 @@ public class AssetManageController {
 	/**
 	 * 시설물 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 시설물 뿌려주는 메서드
 	 * */
-	@PostMapping(value="/selectBeBox", produces = "application/json")
+	@PostMapping(value="/assets/selectBeBox", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectBeBox(String star, String end) {
 		String time = ":00";
 		String startday = star.replace("T", " ");
@@ -141,7 +141,7 @@ public class AssetManageController {
 	/**
 	 * 시설물 예약시 일정 선택하면 셀렉트 박스에 사용 가능한 시설물 뿌려주는 메서드
 	 * */
-	@PostMapping(value="/selectBeBox2", produces = "application/json")
+	@PostMapping(value="/assets/selectBeBox2", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectBeBox2(String star, String end) {
 		String time = ":00";
 		String startday = star.replace("T", " ");
@@ -155,7 +155,7 @@ public class AssetManageController {
 	/**
 	 * 달력에 시설물 예약 일정 뿌려주는 메서드
 	 * */
-	@PostMapping(value="/assetsManageBeSelect", produces = "application/json")
+	@PostMapping(value="/assets/assetsManageBeSelect", produces = "application/json")
 	public @ResponseBody List<AssetsManage> selectBeManageAsset(AssetsManage assetsManage){
 		//System.out.println("일정을 찾아주세요.");
 		return assetManageService.selectBeManageAsset(assetsManage);
@@ -164,7 +164,7 @@ public class AssetManageController {
 	/**
 	 * 시설물 예약 신청 메서드
 	 * */
-	@PostMapping("/assetsManageBeInsert")
+	@PostMapping("/assets/assetsManageBeInsert")
 	public String insertBeManageAsset(AssetsManage assetsManage, HttpSession session) {
 		System.out.println("등록버튼이 눌렸어요.");
 		// 예약 관리 코드를 생성하는 메서드
@@ -174,35 +174,35 @@ public class AssetManageController {
 		String sid = (String) session.getAttribute("SID");
 		assetsManage.setEmpCode(sid);
 		assetManageService.insertBeManageAsset(assetsManage);
-		return "redirect:assetsManageBeSelect";
+		return "redirect:/assets/assetsManageBeSelect";
 	}
 	
 	/**
 	 * 시설물 예약 수정 메서드
 	 * */
-	@PostMapping("/assetsManageBeUpdate")
+	@PostMapping("/assets/assetsManageBeUpdate")
 	public String updateBeManageAsset(AssetsManage assetsManage) {
 		System.out.println("시설물 수정 버튼이 클릭되었어요.");
 		assetManageService.updateBeManageAsset(assetsManage);
-		return "redirect:assetsManageBeSelect";
+		return "redirect:/assets/assetsManageBeSelect";
 	}
 	
 	/**
 	 * 시설물 예약 삭제 메서드
 	 * */
-	@PostMapping("/assetsManageBeDelete")
+	@PostMapping("/assets/assetsManageBeDelete")
 	public String deleteBeManageAsset(String code) {
 		//System.out.println("삭제버튼이 클릭되었어요.");
 		//System.out.println("코드값을 확인해 볼께요." + code);
 		assetManageService.deleteBeManageAsset(code);
-		return "redirect:assetsManageBeSelect";
+		return "redirect:/assets/assetsManageBeSelect";
 	}
 	
 	/**
 	 * 이용 내역 조회 버튼 클릭시 실행
 	 * 이용 내역 조회
 	 * */
-	@GetMapping("/assetsManageList")
+	@GetMapping("/assets/assetsManageList")
 	public String assetsManageListSelect(HttpSession session, Model model, Model model2) {
 		String sid = (String) session.getAttribute("SID");
 		//System.out.println("세션값이 넘어왔나요?" + sid);
@@ -216,12 +216,12 @@ public class AssetManageController {
 	/**
 	 * 이용 내역 조회에서 반납 버튼 클릭시 실행되는 메서드
 	 * */
-	@PostMapping("/assetsManageCaReturn")
+	@PostMapping("/assets/assetsManageCaReturn")
 	public String ReturnCarManageAsset(String code, HttpSession session) {
 		//System.out.println("반납 할래요.");
 		//System.out.println("반납 하려는 예약코드를 확인 할께요" + code);
 		String sid = (String) session.getAttribute("SID");
 		assetManageService.ReturnCarManageAsset(code, sid);
-		return "redirect:assetsManageList";
+		return "redirect:/assets/assetsManageList";
 	}
 }

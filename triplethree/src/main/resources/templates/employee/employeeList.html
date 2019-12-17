@@ -23,7 +23,7 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/index">Home</a></li>
-						<li class="breadcrumb-item"><a href="/employeeList">사원 관리</a></li>
+						<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
 						<li class="breadcrumb-item">사원 조회</li>
 					</ol>
 				</div>
@@ -40,11 +40,11 @@
 		<div class="row" style="margin-left:auto;">
 			<div class="col-2">
 				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/employeeInsert'">사원 등록</button>
+					onclick="location.href='/employee/employeeInsert'">사원 등록</button>
 			</div>
 			<div class="col-2">	
 				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/employeeAllMoveList'">인사이동 목록으로 가기 </button>
+					onclick="location.href='/admin/employee/employeeAllMoveList'">인사이동 목록으로 가기 </button>
 			</div>
 		</div>
 		</div>
@@ -90,11 +90,11 @@
 						<td th:text="${e.carPresence}"></td>
 						<td th:text="${e.liName}"></td>
 						<td>
-							<a th:href="@{/employeeDetail(empNum=${e.empNum})}">상세보기</a>
+							<a th:href="@{/employee/employeeDetail(empNum=${e.empNum})}">상세보기</a>
 						</td>
 						<td>
 							<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
-							<a th:href="@{/employeeUpdate(empNum=${e.empNum})}">수정</a>
+							<a th:href="@{/employee/employeeUpdate(empNum=${e.empNum})}">수정</a>
 						</td>
 						<td>
 							<a th:href="@{/}">삭제</a>
@@ -124,12 +124,12 @@
 
 <th:block layout:fragment="customScript">
 
-	<script src="../../plugins/jquery/jquery.min.js"></script>
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 
 
 
-	<script src="../../plugins/datatables/jquery.dataTables.js"></script>
-	<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+	<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+	<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 
 	<script>
 		$(function() {

@@ -108,7 +108,7 @@ $("#inName").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "beNameCheck",
+		url 		: "/admin/assets/beNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -140,7 +140,7 @@ $("#upName").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "beNameCheck",
+		url 		: "/admin/assets/beNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -319,7 +319,7 @@ $("#inVeNunber").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'veNunber': name},
-		url 		: "carNameCheck",
+		url 		: "/admin/assets/carNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -351,7 +351,7 @@ $("#upVeNunber").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'veNunber': name},
-		url 		: "carNameCheck",
+		url 		: "/admin/assets/carNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -389,7 +389,7 @@ $(function(){
 			$('#decode').val(textValue);
 		
 			if(confirm('반납 하시겠습니까?')){
-				$('#formUpdateList').attr('action', 'assetsManageCaReturn').submit();
+				$('#formUpdateList').attr('action', '/admin/assets/assetsManageCaReturn').submit();
 			}
 		}else{
 			alert('이미 반납 되었습니다.');

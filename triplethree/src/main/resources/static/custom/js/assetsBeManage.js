@@ -105,7 +105,7 @@ $(function () {
     		  async : true,
     		  type : 'POST',
     		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
-    		  url : "assetsManageBeSelect",
+    		  url : "/assets/assetsManageBeSelect",
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
@@ -173,7 +173,7 @@ $(function () {
         		  async : true,
         		  type : 'POST',
         		  data : {code : code, sid : sid},
-        		  url : "selectCarUpdate",
+        		  url : "/assets/selectCarUpdate",
         		  datetype : "json",
         		  success : function(data){
         			  //console.log(code);
@@ -208,11 +208,12 @@ $(function () {
         			  async : true,
         			  type : 'POST',
         			  data : {star : star, end : end},
-        			  url : "selectBeBox2",
+        			  url : "/assets/selectBeBox2",
         			  datetype : "json",
         			  success : function(data){
         				 //console.log(data);
         				 // data 길이가 0보다 큰경우 아래를 진행
+        				  $('#beCodeUp option').remove();
         				 if(data.length > 0){
         				 for(var i = 0; i < data.length; i++){
         					 //console.log(data[i].veName);
@@ -224,9 +225,10 @@ $(function () {
         						  async : true,
         						  type : 'POST',
         						  data : {star : star, end : end},
-        						  url : "selectBeBox",
+        						  url : "/assets/selectBeBox",
         						  datetype : "json",
         						  success : function(data){
+        							  $('#beCodeUp option').remove();
         							 //console.log(data);
         							 for(var i = 0; i < data.length; i++){
         								 //console.log(data[i].veName);
@@ -303,7 +305,7 @@ $(function () {
 	// 등록 버튼 이벤트
 	$('#insertBtn').click(function(){
 		if(confirm('예약 하시겠습니까?')){
-			$('#formInsert').attr('action', 'assetsManageBeInsert').submit();
+			$('#formInsert').attr('action', '/assets/assetsManageBeInsert').submit();
 		}
 	});
 	
@@ -315,7 +317,7 @@ $(function () {
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('예약 내용을 수정하시겠습니까?')){
-				$('#formUpdateId').attr('action', 'assetsManageBeUpdate').submit();
+				$('#formUpdateId').attr('action', '/assets/assetsManageBeUpdate').submit();
 			}
 		}
 	});
@@ -332,7 +334,7 @@ $(function () {
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('예약을 취소하시겠습니까?')){
-				$('#formUpdateId').attr('action', 'assetsManageBeDelete').submit();
+				$('#formUpdateId').attr('action', '/assets/assetsManageBeDelete').submit();
 			}
 		}
 	});	 
@@ -356,11 +358,12 @@ $(function () {
 		  async : true,
 		  type : 'POST',
 		  data : {star : star, end : end},
-		  url : "selectBeBox2",
+		  url : "/assets/selectBeBox2",
 		  datetype : "json",
 		  success : function(data){
 			 //console.log(data);
 			 // data 길이가 0보다 큰경우 아래를 진행
+			  $('#beCodeUp option').remove();
 			 if(data.length > 0){
 			 for(var i = 0; i < data.length; i++){
 				 //console.log(data[i].veName);
@@ -372,10 +375,11 @@ $(function () {
 					  async : true,
 					  type : 'POST',
 					  data : {star : star, end : end},
-					  url : "selectBeBox",
+					  url : "/assets/selectBeBox",
 					  datetype : "json",
 					  success : function(data){
 						 //console.log(data);
+						  $('#beCodeUp option').remove();
 						 for(var i = 0; i < data.length; i++){
 							 //console.log(data[i].beName);
 							 $('#beCode').append("<option value="+data[i].code+">"+data[i].beName+"</option>");

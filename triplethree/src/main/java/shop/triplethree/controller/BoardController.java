@@ -20,7 +20,7 @@ public class BoardController {
 	/**게시글 상세보기
 	 * @param code
 	 * */
-	@PostMapping("/boardDetail")
+	@PostMapping("/board/boardDetail")
 	public String goToDetail(@RequestParam(value="code", required = false) String code, Model model) {
 		//code로 선택된 글의 정보를 board 에 담아서 보내기
 		System.out.println("controller - code : " + code);
@@ -32,7 +32,7 @@ public class BoardController {
 	  * @param session
 	  * @return
 	  */
-	@GetMapping("/boardInsert")
+	@GetMapping("/board/boardInsert")
 	public String insertBoard(HttpSession session) {
 		
 		return "/board/boardInsert";
@@ -44,12 +44,12 @@ public class BoardController {
 	  * @param session
 	  * @return
 	  */
-	@PostMapping("/boardInsert")
+	@PostMapping("/board/boardInsert")
 	public String insertBoard(Board board,HttpSession session){
 		board = boardService.createBoardCode(session,board);
 		boardService.insertBoard(board);
 		System.out.println(board.toString() + "작성하기 폼에서 들어온 값들 ");
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	
@@ -58,7 +58,7 @@ public class BoardController {
 	  * @param model
 	  * @return
 	  */
-	@GetMapping("/boardList")
+	@GetMapping("/board/boardList")
 	public String boardList(Model model) {
 		model.addAttribute("boardList", boardservice.boardList());
 		
@@ -70,7 +70,7 @@ public class BoardController {
 	  * @param model
 	  * @return
 	  */
-	@PostMapping("/boardList")
+	@PostMapping("/board/boardList")
 	public String poBoardList(Model model) {
 		model.addAttribute("boardList", boardservice.boardList());
 		return "/board/boardList";
@@ -83,7 +83,7 @@ public class BoardController {
 	  * @return
 	  */
 	
-	  @PostMapping("/goBoardUpdate")
+	  @PostMapping("/board/goBoardUpdate")
   	public String goBoardUpdate(@RequestParam(value="code")String code,Model model) {
 	  System.out.println("*************************");
 	  System.out.println("boardUpdate 화면 보여주기");
@@ -97,13 +97,13 @@ public class BoardController {
 	  * @param board
 	  * @return board
 	  */
-	@PostMapping("/boardUpdate")
+	@PostMapping("/board/boardUpdate")
 	public String boardUpdate(Board board) {
 		System.out.println("*************************");
 		System.out.println("******board Update 처리****");
 		System.out.println("*************************");
 		boardservice.updateBoard(board); //수정 처리 완료
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class BoardController {
 	 * @param board
 	 * board에 글의 code 를 담아서 삭제함 
 	 * */
-	@GetMapping("/boardDelete")
+	@GetMapping("/board/boardDelete")
 	public String deleteBoard(@RequestParam(value="code")String code) {
 		System.out.println("***********************");
 		System.out.println("******delete Board처리***");
@@ -119,7 +119,7 @@ public class BoardController {
 		System.out.println(code + "삭제할 code가 넘어왔니???");
 		boardservice.deleteBoard(code);
 		
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	

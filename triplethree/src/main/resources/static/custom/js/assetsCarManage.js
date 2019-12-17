@@ -105,7 +105,7 @@ $(function () {
     		  async : true,
     		  type : 'POST',
     		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
-    		  url : "assetsManageCaSelect",
+    		  url : "/assets/assetsManageCaSelect",
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
@@ -173,7 +173,7 @@ $(function () {
         		  async : true,
         		  type : 'POST',
         		  data : {code : code, sid : sid},
-        		  url : "selectCarUpdate",
+        		  url : "/assets/selectCarUpdate",
         		  datetype : "json",
         		  success : function(data){
         			  //console.log(code);
@@ -208,7 +208,7 @@ $(function () {
         			  async : true,
         			  type : 'POST',
         			  data : {star : star, end : end},
-        			  url : "selectCarBox2",
+        			  url : "/assets/selectCarBox2",
         			  datetype : "json",
         			  success : function(data){
         				 //console.log(data);
@@ -223,7 +223,7 @@ $(function () {
         						  async : true,
         						  type : 'POST',
         						  data : {star : star, end : end},
-        						  url : "selectCarBox",
+        						  url : "/assets/selectCarBox",
         						  datetype : "json",
         						  success : function(data){
         							 //console.log(data);
@@ -356,7 +356,7 @@ $(function () {
 		  async : true,
 		  type : 'POST',
 		  data : {star : star, end : end},
-		  url : "selectCarBox2",
+		  url : "/assets/selectCarBox2",
 		  datetype : "json",
 		  success : function(data){
 			 //console.log(data);
@@ -372,7 +372,7 @@ $(function () {
 					  async : true,
 					  type : 'POST',
 					  data : {star : star, end : end},
-					  url : "selectCarBox",
+					  url : "/assets/selectCarBox",
 					  datetype : "json",
 					  success : function(data){
 						 //console.log(data);

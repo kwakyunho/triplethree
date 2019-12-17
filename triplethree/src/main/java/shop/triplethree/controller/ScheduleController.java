@@ -21,7 +21,7 @@ public class ScheduleController {
 	/**
 	 * 일정 조회 메서드
 	 * */
-	@GetMapping(value="/companySchedule")
+	@GetMapping(value="/calender/companySchedule")
 	public String selectSchedule() {
 		return "calender/Calender";
 	}
@@ -29,7 +29,7 @@ public class ScheduleController {
 	/**
 	 * 일정 조회 메서드
 	 * */
-	@PostMapping(value="/companySchedule" , produces = "application/json")
+	@PostMapping(value="/calender/companySchedule" , produces = "application/json")
 	public @ResponseBody List<Schedule> selectSchdule(HttpSession session, Schedule schedule) {
 		String scode = (String) session.getAttribute("SID");
 		String sdecode = (String) session.getAttribute("SDEMGCODE");
@@ -56,7 +56,7 @@ public class ScheduleController {
 	/**
 	 * 일정 등록 메서드
 	 * */
-	@PostMapping("/companyScheduleInsert")
+	@PostMapping("/calender/companyScheduleInsert")
 	public String insertSchedule(Schedule schedule, HttpSession session) {
 		
 		System.out.println(schedule.toString());
@@ -76,7 +76,7 @@ public class ScheduleController {
 	/**
 	 * 일정 수정 메서드
 	 * */
-	@PostMapping("/companyScheduleUpdate")
+	@PostMapping("/calender/companyScheduleUpdate")
 	public String Schedule(Schedule schedule) {
 		System.out.println(schedule.toString());
 		System.out.println("수정 버튼이 눌렸어요.");
@@ -88,7 +88,7 @@ public class ScheduleController {
 	/**
 	 * 일정 수정시 화면에 값을 뿌려주기 위한 메서드
 	 * */
-	@PostMapping(value="/selectUpdate" , produces = "application/json")
+	@PostMapping(value="/calender/selectUpdate" , produces = "application/json")
 	public @ResponseBody Schedule selectUpdate(String code, HttpSession session){
 		System.out.println("일정이 클릭되었나요?");
 		System.out.println("값을 확인해봐요" + code);
@@ -101,7 +101,7 @@ public class ScheduleController {
 	/**
 	 * 일정 삭제 메서드
 	 * */
-	@PostMapping("/companyScheduleDelet")
+	@PostMapping("/calender/companyScheduleDelet")
 	public String deleteSchedule(Schedule schedule) {
 		System.out.println("삭제버튼이 클릭되었나요?");
 		System.out.println(schedule.toString());
@@ -110,7 +110,7 @@ public class ScheduleController {
 		return "redirect:companySchedule";
 	}
 	
-	@PostMapping(value="/checkSID",produces = "application/json")
+	@PostMapping(value="/calender/checkSID",produces = "application/json")
 	public @ResponseBody String checkSID(HttpSession session) {
 		String sid = (String) session.getAttribute("SID");
 		System.out.println("세션값 확인" + sid);

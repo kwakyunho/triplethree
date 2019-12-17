@@ -19,7 +19,7 @@ public class AssetsController {
 	/**
 	 * 시설물 리스트 조회 메서드
 	 * */
-	@GetMapping("/assetBeSelect")
+	@GetMapping("/admin/assets/assetBeSelect")
 	public String selectBeAssets(Model model) {
 		//System.out.println("시설물 관리가 클릭 되었나요?");
 		model.addAttribute("AssetsList", assetsService.selectBeAssets()); 
@@ -29,32 +29,32 @@ public class AssetsController {
 	/**
 	 * 시설물 등록 메서드
 	 * */
-	@PostMapping("/assetsBeInsert")
+	@PostMapping("/admin/assets/assetsBeInsert")
 	public String insertBeAssets(Assets assets, HttpSession session) {
 		//System.out.println("시설물 등록 버튼이 클릭 되었나요?");
 		String sid = (String) session.getAttribute("SID");
 		assets.setWriter(sid);
 		assetsService.insertBeAssets(assets);
 		//"redirect:/assetBeSelect";
-		return "redirect:/assetBeSelect";
+		return "redirect:/admin/assets/assetBeSelect";
 	}
 	
 	/**
 	 * 시설물 수정 메서드
 	 * */
-	@PostMapping("/assetsBeUpdate")
+	@PostMapping("/admin/assets/assetsBeUpdate")
 	public String updateBeAssets(Assets assets, HttpSession session) {
 		//System.out.println("시설물 수정 버튼이 클릭 되었나요?");
 		String sid = (String) session.getAttribute("SID");
 		assets.setSid(sid);
 		assetsService.updateBeAssets(assets);
-		return "redirect:/assetBeSelect";
+		return "redirect:/admin/assets/assetBeSelect";
 	}
 	
 	/**
 	 * 시설물 삭제 메서드
 	 * */
-	@PostMapping("/assetsBeDelete")
+	@PostMapping("/admin/assets/assetsBeDelete")
 	public String deleteBeAssets(Assets assets, HttpSession session) {
 		//System.out.println("삭제버튼이 클릭되었나요?");
 		
@@ -62,13 +62,13 @@ public class AssetsController {
 		String sid = (String) session.getAttribute("SID");
 		assets.setWriter(sid);
 		assetsService.deleteBeAssets(assets);
-		return "redirect:/assetBeSelect";
+		return "redirect:/admin/assets/assetBeSelect";
 	}
 	
 	/**
 	 * 시설물 등록/수정 유효성 검사
 	 * */
-	@PostMapping(value="/beNameCheck", produces = "application/json")
+	@PostMapping(value="/admin/assets/beNameCheck", produces = "application/json")
 	public @ResponseBody int beNameChekc (String name, Assets assets) {
 		//System.out.println("시설명이 제대로 들어왔나요?" + name);
 		//System.out.println("시설명이 있는지 확인해 볼께요.");
@@ -79,7 +79,7 @@ public class AssetsController {
 	/**
 	 * 차량 리스트 조회 메서드
 	 * */
-	@GetMapping("/assetCaSelect")
+	@GetMapping("/admin/assets/assetCaSelect")
 	public String selectCaAssets(Model model) {
 		//System.out.println("차량 관리가 클릭 되었나요?");
 		model.addAttribute("carList", assetsService.selectCaAssets());
@@ -89,7 +89,7 @@ public class AssetsController {
 	/**
 	 * 차량 등록 메서드
 	 * */
-	@PostMapping("/assetsCaInsert")
+	@PostMapping("/admin/assets/assetsCaInsert")
 	public String insertCaAssets(Assets assets, HttpSession session) {
 		String cc = assets.getVeCc();
 		String sid = (String) session.getAttribute("SID");
@@ -98,13 +98,13 @@ public class AssetsController {
 		//System.out.println("차량cc 확인" + assets.getVeCc());
 		//System.out.println("차량등록 버튼이 클릭되었나요?");
 		assetsService.insertCaAssets(assets);
-		return "redirect:assetCaSelect";
+		return "redirect:/admin/assets/assetCaSelect";
 	}
 	
 	/**
 	 * 차량 수정 메서드
 	 * */
-	@PostMapping("/assetsCaUpdate")
+	@PostMapping("/admin/assets/assetsCaUpdate")
 	public String updateCaAssets(Assets assets, HttpSession session) {
 		//System.out.println("차량 수정버튼이 클릭되었나요?");
 		//System.out.println("무엇이 담겨있나요?" + assets);
@@ -113,13 +113,13 @@ public class AssetsController {
 		String cc = assets.getVeCc();
 		assets.setVeCc(cc+"CC");
 		assetsService.updateCaAssets(assets);
-		return "redirect:assetCaSelect";
+		return "redirect:/admin/assets/assetCaSelect";
 	}
 	
 	/**
 	 * 차랑 삭제 메서드
 	 * */
-	@PostMapping("/assetsCaDelete")
+	@PostMapping("/admin/assets/assetsCaDelete")
 	public String deleteCaAssets(Assets assets, HttpSession session) {
 
 		//System.out.println("코드가 넘어왔는지 확인해요." + assets.getCode());
@@ -130,13 +130,13 @@ public class AssetsController {
 		assets.setWriter(sid);
 		//System.out.println("세션값을 확인할께요." + sid);
 		assetsService.deleteCaAssets(assets);
-		return "redirect:assetCaSelect";
+		return "redirect:/admin/assets/assetCaSelect";
 	}
 	
 	/**
 	 * 차량 등록/수정 유효성 검사
 	 * */
-	@PostMapping(value="/carNameCheck", produces = "application/json")
+	@PostMapping(value="/admin/assets/carNameCheck", produces = "application/json")
 	public @ResponseBody int carNameCheck (String veNunber, Assets assets) {
 		System.out.println("차량번호가 제대로 들어왔나요?" + veNunber);
 		//System.out.println("시설명이 있는지 확인해 볼께요.");

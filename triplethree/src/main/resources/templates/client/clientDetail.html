@@ -24,7 +24,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">거래처 상세보기</li>
-					<li class="breadcrumb-item"><a th:href="@{/clientList}" style="color:#28a745">거래처 목록이동</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/client/clientList}" style="color:#28a745">거래처 목록이동</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -110,8 +110,8 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script th:src="@{plugins/toastr/toastr.min.js}"></script>
-<script th:src="@{custom/js/clientCheck.js}"></script>
+<script th:src="@{/plugins/toastr/toastr.min.js}"></script>
+<script th:src="@{/custom/js/clientCheck.js}"></script>
 
 
 </th:block>

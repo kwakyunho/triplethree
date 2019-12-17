@@ -12,11 +12,11 @@
 <th:block layout:fragment="customCss">
 
 <!-- fullCalendar -->
-<link rel="stylesheet" th:href="@{plugins/fullcalendar/main.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/fullcalendar/main.min.css}">
 <!-- <link rel="stylesheet" th:href="@{plugins/fullcalendar-interaction/main.min.css}"> -->
-<link rel="stylesheet" th:href="@{plugins/fullcalendar-daygrid/main.min.css}">
-<link rel="stylesheet" th:href="@{plugins/fullcalendar-timegrid/main.min.css}">
-<link rel="stylesheet" th:href="@{plugins/fullcalendar-bootstrap/main.min.css}">  
+<link rel="stylesheet" th:href="@{/plugins/fullcalendar-daygrid/main.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/fullcalendar-timegrid/main.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/fullcalendar-bootstrap/main.min.css}">  
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -203,14 +203,14 @@
 <th:block layout:fragment="customScript">
 
 <!-- fullCalendar 2.2.5 -->
-<script th:src="@{plugins/moment/moment.min.js}"></script>
-<script th:src="@{plugins/fullcalendar/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-daygrid/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-timegrid/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-interaction/main.min.js}"></script>
-<script th:src="@{plugins/fullcalendar-bootstrap/main.min.js}"></script>
+<script th:src="@{/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/plugins/fullcalendar/main.min.js}"></script>
+<script th:src="@{/plugins/fullcalendar-daygrid/main.min.js}"></script>
+<script th:src="@{/plugins/fullcalendar-timegrid/main.min.js}"></script>
+<script th:src="@{/plugins/fullcalendar-interaction/main.min.js}"></script>
+<script th:src="@{/plugins/fullcalendar-bootstrap/main.min.js}"></script>
 <!-- Page specific script -->
-<script th:src=@{custom/js/assetsCarManage.js}></script>
+<script th:src=@{/custom/js/assetsCarManage.js}></script>
 <!-- 세션의 사원번호를 저장하는 스크립트 -->
 <script type="text/javascript" th:inline="javascript"> var sid = [[${session.SID}]] </script>
 </th:block>

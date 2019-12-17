@@ -39,7 +39,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-				<form th:action="@{/companyUpdate}" id="deleteForm" method="post">
+				<form th:action="@{/company/companyUpdate}" id="deleteForm" method="post">
 	 <div class="card-body table-responsive p-0" style="height: auto;">
   	 <table class="table table-bordered table-striped dataTable"role="grid" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
    	  <thead>
@@ -74,14 +74,14 @@
                      	 수정하시겠습니까
                     </font></font></button>
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
-                      <a class="dropdown-item" th:href="@{/companyUpdate(Code=${l.Code})}">네</a>	                                             
-                      <a class="dropdown-item" th:href="@{/companyInfo}">아니오</a>	                                             
+                      <a class="dropdown-item" th:href="@{/company/companyUpdate(Code=${l.Code})}">네</a>	                                             
+                      <a class="dropdown-item" th:href="@{/company/companyInfo}">아니오</a>	                                             
                       <div class="dropdown-divider"></div>              
                     </div>  
                   </div>  	 	 	 	 	
 			</td>
 			</div>
-			<td align="center"><a th:href="@{/companyDetail(coName=${l.coName})}" class="btn btn-primary">상세보기</a></td>			 		 
+			<td align="center"><a th:href="@{/company/companyDetail(coName=${l.coName})}" class="btn btn-primary">상세보기</a></td>			 		 
 	   	</tr>
 	   	</tbody>
   	 </table>
@@ -105,7 +105,7 @@
 
 <th:block layout:fragment="customScript">
 <!--상태유무 스크립트  -->
-<script th:src="@{custom/js/Company.js}"></script>
+<script th:src="@{/custom/js/Company.js}"></script>
 
 </th:block>
 

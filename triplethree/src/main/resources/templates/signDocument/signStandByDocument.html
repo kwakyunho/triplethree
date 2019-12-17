@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>결재 대기 문서</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">결재 대기 문서</h1>
+			</div>
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">Home</li>
+					<li class="breadcrumb-item active">결재 대기 문서</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div class="content" style="align-content: center">
+	 <div class="col-12">
+	     <div class="card">
+			<div class="card-body">
+				<form class="boardListForm">
+					<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
+						<thead>
+							<tr>
+								<th style="width:100px;">기안일</th>
+								<th style="width:100px;">결재양식</th>
+								<th style="width:500px;">제목</th>
+								<th style="width:100px;">첨부</th>
+								<th style="width:100px;">기안자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>기안일올꺼에요</td>
+								<td>결재양식올꺼에요</td>
+								<td>제목이올꺼에요</td>
+								<td>첨부파일이올꺼에요</td>
+								<td>기안자가올꺼에요</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+	        </div>
+	     </div>
+	 </div>
+ </div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- DataTables -->
+<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script>
+  $(function () {
+    $('#boardListTable').DataTable();
+  });
+</script>
+</th:block>
+</html>

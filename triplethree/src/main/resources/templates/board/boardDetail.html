@@ -24,8 +24,8 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/boardList}" style="color:#28a745;">공지사항 목록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/boardList}" style="color:#28a745;">공지사항 목록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -87,7 +87,7 @@
 	$(document).ready(function(){
 		$('#backBtn').on('click', function(){	
 			$('.boardDetailForm').attr('method', 'POST');
-			$('.boardDetailForm').attr('action', '/boardList');
+			$('.boardDetailForm').attr('action', '/board/boardList');
 			$('.boardDetailForm').submit();
 		});
 		
@@ -99,7 +99,7 @@
 				if(dbPw==inputPw){
 					alert('수정화면으로 이동합니다');
 					$('.boardDetailForm').attr('method', 'POST');
-					$('.boardDetailForm').attr('action', '/goBoardUpdate');
+					$('.boardDetailForm').attr('action', '/board/goBoardUpdate');
 					$('.boardDetailForm').submit();
 				}else{
 					alert('비밀번호가 일치하지 않습니다');
@@ -127,7 +127,7 @@
 					delay(5000);
 				});
 				$('.boardDetailForm').attr('method', 'POST');
-				$('.boardDetailForm').attr('action', '/boardDelete');
+				$('.boardDetailForm').attr('action', '/board/boardDelete');
 				$('.boardDetailForm').submit();
 				
 			}else{

@@ -13,7 +13,7 @@
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
 <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="@{/plugins/summernote/summernote-bs4.css}">
 </th:block>
 
 
@@ -29,7 +29,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항 작성 </li>
-					<li class="breadcrumb-item"><a th:href="@{/boardList}">공지사항 조회</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/boardList}">공지사항 조회</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -43,7 +43,7 @@
 			<div class="col-lg-12">
 				<div class="card">
 			
-            <form method = "post" action="/boardDelete">
+            <form method = "post" action="/board/boardDelete">
              <div class="card-body">
               <div class="form-group">
                 <label for="inputName">글 코드 </label>
@@ -104,7 +104,7 @@
 
 <th:block layout:fragment="customScript">
 <!-- Summernote -->
-<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<script th:src="@{/plugins/summernote/summernote-bs4.min.js}"></script>
 <script>
   $(function () {
     // Summernote

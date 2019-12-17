@@ -3,7 +3,7 @@
 	<aside class="main-sidebar elevation-4 sidebar-light-navy" th:fragment="sidebarFragment">
 		<!-- Brand Logo -->
 		<a th:href="@{/}" class="brand-link">
-			<img th:src="@{dist/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+			<img th:src="@{/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 			<span class="brand-text font-weight-light">Triple Three</span>
 		</a>
 	
@@ -22,35 +22,35 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{/companyInsert}" class="nav-link">
+								<a th:href="@{/admin/company/companyInsert}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
 									<p>!.회사정보등록.황</p>
 								</a>
-								<a th:href="@{/companyInfo}" class="nav-link">
+								<a th:href="@{/company/companyInfo}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
 									<p>!.회사정보리스트.황</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{teamNameInsert}" class="nav-link">
+								<a th:href="@{/admin/department/teamNameInsert}" class="nav-link">
 									<i class="nav-icon fas fa-network-wired"></i>
 									<p>부서관리.정</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{positionInsert}" class="nav-link">
+								<a th:href="@{/admin/position/positionInsert}" class="nav-link">
 									<i class="nav-icon fas fa-users"></i>
 									<p>직급관리.정</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{/employeeList}" class="nav-link">
+								<a th:href="@{/employee/employeeList}" class="nav-link">
 									<i class="nav-icon fas fa-users-cog"></i>
 									<p>!.사원관리.최</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{/employeeAllMoveList}" class="nav-link">
+								<a th:href="@{/admin/employee/employeeAllMoveList}" class="nav-link">
 									<i class="nav-icon fas fa-clipboard-list"></i>
 									<p>!.인사이동이력.최</p>
 								</a>
@@ -64,7 +64,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{/clientInsert}" class="nav-link">
+								<a th:href="@{/admin/client/clientInsert}" class="nav-link">
 									<i class="nav-icon fas fa-edit"></i>
 									<p>거래처정보등록</p>
 								</a>
@@ -72,7 +72,7 @@
 						</ul>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{/clientList}" class="nav-link">
+								<a th:href="@{/client/clientList}" class="nav-link">
 									<i class="nav-icon fas fa-clipboard-list"></i>
 									<p>!.거래처조회</p>
 								</a>
@@ -80,13 +80,13 @@
 						</ul>
 					</li>
 					<li class="nav-item has-treeview">
-						<a th:href="@{/boardList}" class="nav-link">
+						<a th:href="@{/board/boardList}" class="nav-link">
 							<i class="nav-icon fas fa-copy"></i>
 							<p>3.게시판관리.김<i class="fas fa-angle-left right"></i></p>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{/boardList}" class="nav-link">
+								<a th:href="@{/board/boardList}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
 									<p>공지게시판</p>
 								</a>
@@ -112,7 +112,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{companySchedule}" class="nav-link">
+								<a th:href="@{/calender/companySchedule}" class="nav-link">
 									<i class="far fa-calendar-alt"></i>
 									<p>일정.정</p>
 								</a>
@@ -134,25 +134,19 @@
 							<li class="nav-item">
 								<a th:href="@{#}" class="nav-link">
 									<i class="nav-icon fas fa-edit"></i>
-									<p>#.기안할문서</p>
+									<p>#.새 결재 진행</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>#.결재대기함</p>
+								<a th:href="@{/signDocument/signStandByDocument}" class="nav-link">
+									<i class="fas fa-file-signature"></i>
+									<p>!.결재 대기 문서</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>#.반려문서함</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a th:href="@{#}" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>#.결재완료함</p>
+								<a th:href="@{/signDocument/signDocumentSearch}" class="nav-link">
+									<i class="fas fa-file-alt"></i>
+									<p>!.결재 문서함</p>
 								</a>
 							</li>
 						</ul>
@@ -178,13 +172,13 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{assetBeSelect}" class="nav-link">
+								<a th:href="@{/admin/assets/assetBeSelect}" class="nav-link">
 									<i class="fas fa-building"></i>
 									<p>시설물 관리.정</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{assetCaSelect}" class="nav-link">
+								<a th:href="@{/admin/assets/assetCaSelect}" class="nav-link">
 									<i class="fas fa-car-side"></i>
 									<p>보유차량관리.정</p>
 								</a>
@@ -198,19 +192,19 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{assetsManageBeSelect}" class="nav-link">
+								<a th:href="@{/assets/assetsManageBeSelect}" class="nav-link">
 									<i class="fas fa-building"></i>
 									<p>회의실이용신청.정</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{assetsManageCaSelect}" class="nav-link">
+								<a th:href="@{/assets/assetsManageCaSelect}" class="nav-link">
 									<i class="fas fa-car-side"></i>
 									<p>차량이용신청.정</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{assetsManageList}" class="nav-link">
+								<a th:href="@{/assets/assetsManageList}" class="nav-link">
 									<i class="fas fa-calendar-check"></i>
 									<p>이용내역조회.정</p>
 								</a>
@@ -224,7 +218,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a th:href="@{/viewPay}" class="nav-link">										
+								<a th:href="@{/admin/pay/viewPay}" class="nav-link">										
 									<i class="fas fa-coins"></i>			
 									<p>!.급여 지급액 등록.황</p>
 								</a>
@@ -236,13 +230,13 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{/selectRetiring}" class="nav-link">
+								<a th:href="@{/pay/selectRetiring}" class="nav-link">
 									<i class="fab fa-amazon-pay"></i>
 									<p>!.퇴직금조회.황</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href="@{/selectPay}" class="nav-link">
+								<a th:href="@{/pay/selectPay}" class="nav-link">
 									<i class="nav-icon fas fa-file-invoice-dollar"></i>
 									<p>!.급여대장.황</p>
 								</a>

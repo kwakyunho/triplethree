@@ -96,7 +96,7 @@
     		  async : true,
     		  type : 'POST',
     		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
-    		  url : "companySchedule",
+    		  url : "calender/companySchedule",
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
@@ -175,7 +175,7 @@
         		  async : true,
         		  type : 'POST',
         		  data : {code : code, sid : sid},
-        		  url : "selectUpdate",
+        		  url : "calender/selectUpdate",
         		  datetype : "json",
         		  success : function(data){
         			  //console.log(demgcode);
