@@ -86,8 +86,8 @@
                     </thead>
                      <tbody >
                      	
-	                    <tr  th:each="am :${AllMove}">
-								<td class="approTd" th:text="${am.moveCode}" th:id="${am.moveCode}"></td>
+	                    <tr  th:each="am :${AllMove}" class="approTr">
+								<td class="approTd" th:text="${am.moveCode}"></td>
 								<td th:text="${am.code}"></td>
 								<td th:text="${am.empName}"></td>
 								<td th:text="${am.demgName}"></td>
@@ -95,14 +95,14 @@
 								<td th:text="${am.afterDemgName}"></td>
 								<td th:text="${am.afterPoName}"></td>
 								<td th:text="${am.afterDate}"></td>
-								<td th:text="${am.writer}"></td>
+								<td th:text="${am.writerName}"></td>
 								<td th:text="${am.writerDay}"></td>
-							    <td>															    
-							    	<button type="button" class="btn btn-block btn-outline-success btn-sm" id="approCheck" >승인하기</button>
+							    <td class="approTrInput">	
+							    	<button type="button" class="btn btn-block btn-outline-success btn-sm approCheck" th:value="${am.moveCode}" >승인하기</button>
 							    </td>
-							    <td>
+							    <!-- <td>
 								<a th:href="@{/employeeAllMoveList(approver=${session.SID})}" id="approCheck">승인하기</a>
-								</td>
+								</td> -->
 							
 							
 						</tr>
@@ -166,7 +166,7 @@
 								<td th:text="${amo.afterDemgName}"></td>
 								<td th:text="${amo.afterPoName}"></td>
 								<td th:text="${amo.afterDate}"></td>
-								<td th:text="${amo.writer}"></td>
+								<td th:text="${amo.writerName}"></td>
 								<td th:text="${amo.writerDay}"></td>
 								<td th:text="${amo.approverName}"></td>
 								<td th:text="${amo.approveDay}"></td>
@@ -218,13 +218,14 @@
 				"autoWidth" : false,
 			});
 		});
-		
-		$('#approTable tbody').on('click','tr',function(){
+	/* 	
+		$('.approTr').on('click','#approCheck',function(){
 			var code=$(this).children('.approTd'); //하위요소 변수 저장
 			code.append('<input type="hidden" name="moveCode" val="">')
 			var moveCode= code.attr('id');
+			
 			if(confirm('승인 하시겠습니까?') == true){
-				var moveCode= code.attr('id');
+				
 				console.log(moveCode);
 				$('input[name=moveCode]').val(moveCode);
 				$('#approForm').submit();
@@ -234,6 +235,21 @@
 				return alert('승인이 취소되었습니다.');
 			}
 			
+			
+		}); */
+		
+		$('.approCheck').on('click',function(){
+			var code=$(this).val(); //하위요소 버튼테그 벨류값 저장
+			if(confirm('승인 하시겠습니까?')){
+			var code = $(this).val()
+			$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="moveCode" value=' + code + '>');
+			$('#approForm').submit();
+			
+			alert('승인이 완료되었습니다.');
+		}else{
+			return alert('승인이 취소되었습니다.');
+		}
+						
 			
 		});
 	});
