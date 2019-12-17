@@ -59,17 +59,21 @@ $(function(){
 		sum2.value=add2;
 		var add3=add+add2;
 		sum3.value=add3;
-	
-		
+			
 		//국민연금 계산 소득월액*요율(9%)/2
 		//최대치 최저치 있으니까 나중에 참고
 		var nation1=parseFloat(nationPer.value)*parseInt(sum1.value);
 		var nation=Math.ceil(nation1/2);
 		console.log(nation);
 		nationPer.value=Math.floor(nation/10)*10;﻿//예를 들어 10으로 나누면 100.5 floor 함수로 소수점을 버리면 100, 다시 10을 곱하면 1000
-		var nationPer=nationPer.value;
-		if (sum1 >= 4680000){
-			nationPer==218700
+		
+		
+		if (add > 4680000){
+			alert("국민연금 최대치 218700");
+			nationPer.value==218700;
+		}else if (add < 310000){
+			alert("국민연금 최저지0");
+			nationPer.value==0;
 		}
 		
 		//건강보험 계산 
@@ -90,8 +94,7 @@ $(function(){
 		var inseurper=parseFloat(inseurPer.value)*parseInt(sum1.value);
 		var inseur=Math.ceil(inseurper/2);
 		console.log(inseur);
-		inseurPer.value=Math.floor(inseur/10)*10;
-		
+		inseurPer.value=Math.floor(inseur/10)*10;		
 		});	
 	
 	});
