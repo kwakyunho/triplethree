@@ -84,11 +84,11 @@ public class BoardController {
 	  */
 	
 	  @PostMapping("/goBoardUpdate")
-  	public String goBoardUpdate(@RequestParam(value="code")String code,Model model) {
+  	public String goBoardUpdate(@RequestParam(value="code")String code,Model model,HttpSession session) {
 	  System.out.println("*************************");
 	  System.out.println("boardUpdate 화면 보여주기");
 	  System.out.println("#########################"); 
-	  model.addAttribute("board",boardservice.getBoardByCode(code)); //하나 뽑아와서 board 에 담기
+	  model.addAttribute("board",boardservice.getBoardForUpdate(code,session)); //하나 뽑아와서 board 에 담기
 	  return "/board/boardUpdate";
 	  }
 	
@@ -111,7 +111,7 @@ public class BoardController {
 	 * @param board
 	 * board에 글의 code 를 담아서 삭제함 
 	 * */
-	@GetMapping("/boardDelete")
+	@PostMapping("/boardDelete")
 	public String deleteBoard(@RequestParam(value="code")String code) {
 		System.out.println("***********************");
 		System.out.println("******delete Board처리***");

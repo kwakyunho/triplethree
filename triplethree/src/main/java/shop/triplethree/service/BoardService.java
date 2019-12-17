@@ -3,6 +3,7 @@ package shop.triplethree.service;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,11 +42,18 @@ public class BoardService {
 	//게시물  가져오기
 	public Board getBoardByCode(String code) {
 		Board board = boardMapper.getBoardByCode(code);
-		System.out.println("****수정화면으로 잘 넘어왔니?***** "+board.toString());
+		System.out.println("****board 안이다***** "+board.toString());
 		System.out.println(board.getBoardCount() + " : 원래 카운트");
 		updateCnt(code);
 		System.out.println(board.getBoardCount() + ": updateCnt 메서드 실행 후 카운트 " );
 		return	board;
+	}
+	//게시물 가져오면서 작성자 바꾸기
+	public Board getBoardForUpdate(String code,HttpSession session) {
+		Board board = boardMapper.getBoardForUpdate(code);
+		board.setWriter((String)session.getAttribute("SNAME"));
+		board.setEmpCode((String)session.getAttribute("SID"));
+		return board;
 	}
 	//게시물 조회수 올리기
 	public int updateCnt(String code) {

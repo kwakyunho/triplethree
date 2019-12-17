@@ -114,7 +114,7 @@
 			var dbPw = $('#boardPw').val();
 			var inputPw = prompt('비밀번호를 입력하세요');
 			if(dbPw==inputPw){
-				$(function(){
+				 $(function(){
 					$(document).Toasts('create', {
 				        class: 'bg-success', 
 				        title: '게시글 삭제',
@@ -126,7 +126,7 @@
 				});
 				$('.boardDetailForm').attr('method', 'POST');
 				$('.boardDetailForm').attr('action', '/boardDelete');
-				$('.boardDetailForm').submit();
+				$('.boardDetailForm').submit(); 
 				
 			}else{
 				alert('비밀번호가 일치하지 않습니다');
