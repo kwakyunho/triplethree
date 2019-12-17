@@ -23,4 +23,7 @@ public interface PayMapper {
 	
 	/**급여 입력***/
 	public int insertPay(Pay pay);
+	
+	/***공제액화면****/
+	public List<Pay> insertDeduct();
 }

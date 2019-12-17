@@ -132,4 +132,20 @@
 		payment_date=CURTIME()
 	WHERE emp_code=#{empCode}
 	</update>
+	<!-- 공제액 화면 -->
+	<select id="insertDeduct" resultType="shop.triplethree.vo.Pay">
+	SELECT
+		de.insur_per AS inseurPer,
+		de.income_per AS incomePer,
+		de.nation_per AS nationPer,
+		de.health_per AS healthPer,
+		de.long_care AS longCare,
+		de.resident_tax AS residenTax,
+		de.long_care AS alongCare,
+		de.YEAR AS year
+	FROM
+		DEDUCT_MANAGE AS de
+
+	</select>
+	
 </mapper>

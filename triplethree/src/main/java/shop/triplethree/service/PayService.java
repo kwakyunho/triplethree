@@ -37,8 +37,8 @@ public class PayService {
 
 	}
 	
-	
-	public int insertPay(Pay pay) {
-		return 0;
+	/**공제액 화면***/
+	public List<Pay> insertDeduct(){
+		return payMapper.insertDeduct();
 	}
 }

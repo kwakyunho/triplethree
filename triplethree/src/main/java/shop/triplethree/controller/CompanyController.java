@@ -20,12 +20,7 @@ public class CompanyController {
 
 	@Autowired private CompanyService companyService;
 	@Autowired private CompanyMapper companyMapper;
-	
-	
-	
-	
-	
-	
+
 	
 	/**
 	 * 메뉴에서 부서관리탭을 누르고 들어올때 실행

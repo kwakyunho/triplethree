@@ -39,28 +39,32 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<table class="table table-bordered table-striped dataTable"role="grid"> 
-					<tr>
-						<th>연도</th>
-						<th>국민연금</th>
-						<th>건강보험료</th>
-						<th>장기요양보험료</th>
-						<th>고용보험</th>
-						<th>소득세</th>
-						<th>지방소득세</th>										
-					</tr>
-					<tr>					
-						<th>2015</th>
-						<th>9%</th>
-						<th>6.24%</th>
-						<th>6.24%*7.38%</th>
-						<th>0.65%</th>
-						<th>소득세</th>
-						<th>지방소득세</th>
-					</tr>
-				
-		
-				</table>
+				<form action="#" method="post">
+					<table class="table table-bordered table-striped dataTable"role="grid"> 
+					<div class="card" align="right" style="font-size: 1.5em;">단위:%</div>
+						<tr>
+							<th>연도</th>
+							<th>국민연금</th>
+							<th>건강보험료</th>
+							<th> 장기요양보험료</th>
+							<th>고용보험</th>				
+							<th>소득세</th>
+							<th>지방소득세</th>										
+						</tr>
+						<tr th:each="d:${insertDeduct}">									
+							<th id="year" th:text="${d.year}">연도</th>
+							<th id="nationPer" th:text="${d.nationPer}">국민연금</th>
+							<th id="healthPer" th:text="${d.healthPer}">건강보험료</th>
+							<th id="longCare" th:text="${d.longCare}"> 장기요양보험료</th>
+							<th id="inseurPer" th:text="${d.inseurPer}">고용보험</th>				
+							<th id="incomePer" th:text="${d.incomePer}">소득세</th>
+							<th id="residentTax" th:text="${d.residentTax}">지방소득세</th>
+						</tr>	
+					</table>
+				</form>					
+					<div align="center">
+							<input type="submit" name="Deduct" value="공제액등록" class="btn bg-gradient-primary"/>
+					</div>
 				<!-- /.card -->
 			<!-- /.card -->
 			</div>		

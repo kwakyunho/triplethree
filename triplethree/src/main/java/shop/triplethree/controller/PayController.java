@@ -37,7 +37,8 @@ public class PayController {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
-		 model.addAttribute("payInsert", payService.payInsert());
+		model.addAttribute("payInsert", payService.payInsert());
+		
 		return "pay/insertPay";	
 	}
 	/***급여 등록하기*****/
@@ -62,7 +63,8 @@ public class PayController {
 	}
 	/**공제액 설정화면 이동****/
 	@GetMapping("/insertDeduct")
-	public String insertDeduct() {
+	public String insertDeduct(Model model) {
+		model.addAttribute("insertDeduct", payService.insertDeduct());
 		return "/pay/insertDeduct";
 	}
 	
