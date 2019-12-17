@@ -32,13 +32,13 @@ public class PayController {
 	/**급여 등록 검색**/
 	@GetMapping("/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk
-								 ,@RequestParam(value="sv") String sv
+								 ,@RequestParam(value="sv") String sv								
 								 ,Model model) {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
 		model.addAttribute("payInsert", payService.payInsert());
-		
+		model.addAttribute("insertDeduct", payService.insertDeduct());
 		return "pay/insertPay";	
 	}
 	/***급여 등록하기*****/

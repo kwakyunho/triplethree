@@ -9,8 +9,15 @@ $(function(){
 		var positionBenefit = $(this).parents('.insertPay').children('.positionBenefit');		
 		var selfDriPay = $(this).parents('.insertPay').children('.selfDriPay');		
 		var comPay = $(this).parents('.insertPay').children('.comPay');		
-		var mealCost = $(this).parents('.insertPay').children('.mealCost');		
 		var childPay = $(this).parents('.insertPay').children('.childPay');		
+		var mealCost = $(this).parents('.insertPay').children('.mealCost');		
+		var nationPer = $(this).parents('.insertPay').children('.nationPer');		
+		var healthPer = $(this).parents('.insertPay').children('.healthPer');		
+		var longCare = $(this).parents('.insertPay').children('.longCare');		
+		var inseurPer = $(this).parents('.insertPay').children('.inseurPer');		
+		var incomePer = $(this).parents('.insertPay').children('.incomePer');		
+		var residentTax = $(this).parents('.insertPay').children('.residentTax');		
+		
 		$('#basicPay').val(basicPay.html('input').val());
 		$('#beneFit').val(beneFit.html('input').val());
 		$('#holidayPay').val(holidayPay.html('input').val());
@@ -20,7 +27,14 @@ $(function(){
 		$('#comPay').val(comPay.html('input').val());
 		$('#childPay').val(childPay.html('input').val());
 		$('#mealCost').val(mealCost.html('input').val());
-	
+		$('#nationPer').val(nationPer.html('input').val());
+		$('#healthPer').val(healthPer.html('input').val());
+		$('#longCare').val(longCare.html('input').val());
+		$('#longCare').val(longCare.html('input').val());
+		$('#inseurPer').val(inseurPer.html('input').val());
+		$('#incomePer').val(incomePer.html('input').val());
+		$('#residentTax').val(residentTax.html('input').val());
+
 		//.children('input[type="hidden"]').val();
 		var basicPay=document.getElementById("basicPay"); //기본급
 		var beneFit=document.getElementById("beneFit");	  //야간근무수당
