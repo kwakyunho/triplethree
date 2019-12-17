@@ -18,7 +18,7 @@ public class BasicSetController {
 	
 	@Autowired private BasicSetService basicSetService;
 	
-	@GetMapping("/documentFormCateInsert")
+	@GetMapping("/admin/documentFormCateInsert")
 	public String insertListName(Model model) {
 		model.addAttribute("largeCateNameList", basicSetService.selectLargeCateNameList());
 		return "/documentFormCate/cateInsert";

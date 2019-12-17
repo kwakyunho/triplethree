@@ -25,7 +25,7 @@ public class WorkAttitudeController {
 	}
 	
 	// 근태목록 리스트 조회
-	@GetMapping("/kuntaeList")
+	@GetMapping("/admin/workAttitude/kuntaeList")
 	public String selectWorkAttitudeList(Model model) {
 		model.addAttribute("WorkAttitudeVoList", workAttService.selectWorkAttitudeList());
 		return "/kuntae/kuntaeList";
