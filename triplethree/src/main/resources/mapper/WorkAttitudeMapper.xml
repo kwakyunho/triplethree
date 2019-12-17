@@ -37,12 +37,18 @@
 	</select>
 	
 	<insert id="startInsertWorkAttitude" parameterType="map">
+		<selectKey keyProperty="code" resultType="String" order="AFTER">
+			SELECT code
+			FROM ABS_MANAGE
+			WHERE code = #{workAttCode}
+		</selectKey>
+		
 		<if test="conditionValue eq 2">
 			INSERT INTO ABS_MANAGE (code, emp_code, annual, attendance, writer, writer_day)
 			VALUES (#{workAttCode}, #{userCode}, DATE_FORMAT(CURDATE(),'%Y%m%d'), now(), #{userId}, now())
 		</if>
 		
-		<if test="conditionValue eq 4">
+		<if test="conditionValue eq 5">
 			INSERT INTO ABS_MANAGE (code, emp_code, annual, attendance, leavework, writer, writer_day, manage_modi_check, manage_name, manage_date, reason)
 			VALUES (#{workAttCode}, #{userCode}, #{day}, #{startWorkTime}, #{endWorkTime}, #{userId}, now(), 'Y', #{adminId}, now(), #{coment})
 		</if>

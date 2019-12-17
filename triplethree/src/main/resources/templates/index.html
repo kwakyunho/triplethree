@@ -241,7 +241,7 @@ $(document).ready(function(){
 		var sendData = {};
 		sendData.conditionValue = 1;
 		sendData.ajaxType = 'POST';	// 전송타입
-		sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+		sendData.ajaxUrl = '/selectWorkAttitude';	// 호출 주소
 		sendData.ajaxDataType = 'json';	// 리턴 타입
 		
 		sendData.userCode = [[${session.SCODE}]];
@@ -265,7 +265,7 @@ $(document).ready(function(){
 			var sendData = {};
 			sendData.conditionValue = 2;
 			sendData.ajaxType = 'POST';	// 전송타입
-			sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+			sendData.ajaxUrl = '/startInsertWorkAttitude';	// 호출 주소
 			sendData.ajaxDataType = 'json';	// 리턴 타입
 			
 			sendData.userCode = [[${session.SCODE}]];
@@ -289,7 +289,7 @@ $(document).ready(function(){
 				var sendData = {};
 				sendData.conditionValue = 3;
 				sendData.ajaxType = 'POST';	// 전송타입
-				sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+				sendData.ajaxUrl = '/endUpdateWorkAttitude';	// 호출 주소
 				sendData.ajaxDataType = 'json';	// 리턴 타입
 				
 				sendData.userCode = [[${session.SCODE}]];
