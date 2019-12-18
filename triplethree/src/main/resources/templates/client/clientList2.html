@@ -38,72 +38,67 @@ tr:hover{background: whitesmoke;}
 <!-- /.content-header -->
 
 <div class="content" style="align-content: center">
-   <div class="col-12">
-     <div class="card">
-       <div class="card-header">
-         <h3 class="card-title">거래중 거래처</h3>
-       </div>  <!-- /.card-header -->
-       
-       <div class="card-body">
-      	<form class="clientListForm" >
-         <table id="clientListTable" class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
-             <thead>
-	               	<tr>
-	               		<th>순차</th>	
-		                <th>거래처관리코드</th>
-		                <th>거래처종류</th>
-		                <th>거래여부</th>
-		                <th>거래처명</th>
-		                <th>대표자명</th>
-		                <th>거래처 전화번호</th>
-	               </tr>
-             </thead>
-           	<tbody>
-           	  	<tr style="cursor:pointer" th:each="c , index : ${client2}">
-					<td th:text="${index.index+1}"></td>
-					<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
-					<td th:text="${c.liCode}"></td>
-					<td th:text="${c.liCode2}"></td>
-					<td th:text="${c.accName}"></td>
-					<td th:text="${c.accCeoName}"></td>
-					<td th:text="${c.accPhone}"></td>
-				</tr>
-            </tbody>
-           	</table>
-			</form>
-        	 </div>
-         <!-- /.card-body -->
-     </div>
-     <!-- /.card -->
-   </div>
- </div>
-		<!-- /.row -->
-	<!-- /.container-fluid -->
+	<div class="col-12">
+   		<div class="card">
+			<div class="card-header">
+		         <h3 class="card-title">거래중 거래처</h3>
+			</div>  <!-- /.card-header -->
+		       
+			<div class="card-body">
+				<form class="clientListForm" >
+					<table id="clientListTable" class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;">
+						<thead>
+							<tr>
+								<th>순차</th>	
+								<th>거래처관리코드</th>
+								<th>거래처종류</th>
+								<th>거래여부</th>
+								<th>거래처명</th>
+								<th>대표자명</th>
+								<th>거래처 전화번호</th>
+							</tr>
+						</thead>
+						<tbody>
+						  	<tr style="cursor:pointer" th:each="c , index : ${client2}">
+								<td th:text="${index.index+1}"></td>
+								<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
+								<td th:text="${c.liCode}"></td>
+								<td th:text="${c.liCode2}"></td>
+								<td th:text="${c.accName}"></td>
+								<td th:text="${c.accCeoName}"></td>
+								<td th:text="${c.accPhone}"></td>
+							</tr>
+				        </tbody>
+					</table>
+				</form>
+			</div>	 <!-- /.card-body -->
+    	 </div>		<!-- /.card -->
+   </div>		<!--./col-12 -->
+</div>		<!-- /.contents -->
 </th:block>
-
 <th:block layout:fragment="customScript">
 
 <!-- DataTables -->
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 <script>
-  $(function () {
-    $('#clientListTable').DataTable();
-  });
+$(function(){
+ 	 $('#clientListTable').DataTable();
+});
 </script>
 
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
-	$('#clientListTable tbody').on('click','tr',function(){
-		var clientUrl = $(this).children('.clientCode');
-		clientUrl.append('<input type="hidden" name="code" value="">');
-		var clientCode = clientUrl.attr('id');
-		console.log(clientCode);
-		$('input[name=code]').val(clientCode);
-		$('.clientListForm').attr('method','POST');
-		$('.clientListForm').attr('action','/clientDetail'); // 나중에 detail 로 수정
-		$('.clientListForm').submit();
-	});
+		$('#clientListTable tbody').on('click','tr',function(){
+			var clientUrl = $(this).children('.clientCode');
+			clientUrl.append('<input type="hidden" name="code" value="">');
+			var clientCode = clientUrl.attr('id');
+			console.log(clientCode);
+			$('input[name=code]').val(clientCode);
+			$('.clientListForm').attr('method','POST');
+			$('.clientListForm').attr('action','/clientDetail'); // 나중에 detail 로 수정
+			$('.clientListForm').submit();
+		});
 });
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
