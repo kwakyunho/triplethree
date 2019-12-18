@@ -128,9 +128,9 @@
 			 acc_name	= #{accName},
 			 acc_ceo_name	= #{accCeoName},
 			 acc_addr	= #{accAddr},
-			 acc_postcode	= #{accPostcode},
 			 acc_detailaddr	= #{accDetailAddr},
 			 acc_extraaddr	= #{accExtraAddr},
+			 acc_postcode	= #{accPostcode},
 			 acc_bln	= #{accBln},
 			 acc_fax	= #{accFax},
 			 repre_number	= #{repreNumber},
@@ -162,6 +162,9 @@
 			,acc_name
 			,acc_ceo_name
 			,acc_addr
+			,acc_detailaddr
+			,acc_extraaddr
+			,acc_postcode
 			,acc_bln
 			,acc_fax
 			,repre_number
@@ -178,6 +181,9 @@
 			 , #{accName}
 			 , #{accCeoName}
 			 , #{accAddr}
+			 , #{accDetailAddr}
+			 , #{accExtraAddr}
+			 , #{accPostcode}
 			 , #{accBln}
 			 , #{accFax}
 			 , #{repreNumber}
