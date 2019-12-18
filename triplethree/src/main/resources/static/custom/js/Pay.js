@@ -85,7 +85,6 @@ $(function(){
 		console.log(health);
 		healthPer.value=Math.floor(health/10)*10;
 		
-		var healthPer=healthPer.value;
 		if(add > 99250000){
 			alert("기준소득월액 99,250,000원이상은 건강보험료 최대납부액은 대상자입니다");
 			$('#healthPer').val(3205770);
@@ -93,18 +92,22 @@ $(function(){
 			alert("기준소득월액 280,000원이하는 건강보험료 최저납부액이 0원입니다");
 			$('#healthPer').val(0);
 		}
+		var healthPer=healthPer.value;
 		
 		//장기요양보험 계산		
-		var longCare1=healthPer*parseFloat(longCare.value);
-		var long=Math.ceil(longCare1/2);
+		var longCare1=parseInt(healthPer)*parseFloat(longCare.value);
+		var long=Math.ceil(longCare1);
 		console.log(long);
 		longCare.value=Math.floor(long/10)*10;
-		
-		/*if(healthPer >= 3205770){		
-			#('#longCare').val(272810);
-		}else if(healthPer <=280000){
-			#('#longCare').val(760);
-		};*/
+		var longCare=longCare.value;
+		//장기요양 최저치 알아봐야 함
+		if(healthPer >= 3205770){
+				alert("잘나오냐");		
+			('#longCare').val(272810);
+		}else if(healthPer <=9040){
+			alert("최저치");
+			//#('#longCare').val(0);
+		}
 	
 		//고용보험 계산
 		var inseurper=parseFloat(inseurPer.value)*parseInt(sum1.value);
@@ -113,7 +116,7 @@ $(function(){
 		inseurPer.value=Math.floor(inseur/10)*10;
 		
 		//공제액 합 계산 진행중		
-		var add4=parseInt(nationPer)+parseInt(healthPer);
+		var add4=parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare);
 		sum4.value =add4;
 		});	
 	

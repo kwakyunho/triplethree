@@ -35,7 +35,7 @@
 				사원명 : <input type="text" name="empName">
 				부서: <input type="text" name="demgCode">
 				직급 : <input type="text" name="poCode">
-				<input type="submit" value="조회하기">
+				<input type="submit"  class="btn btn-success" value="조회하기">
 				</div>
 			</form>
 		</div>
@@ -46,7 +46,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
-  	 			<table class="table table-bordered table-striped"role="grid" th:each="p :${payInsert}">  	   	 
+  	 			<table class="table table-bordered table-striped"role="grid">  	   	 
 				 	
 					<tr><div align="center">사원목록</div>
 						<th>사원번호</th>
@@ -76,12 +76,12 @@
 						<th>공제액 계</th>
 						<th>차인지급액</th>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						 <tr th:each="e :${selectPay}"> 
+						 <tr th:each="p :${payInsert}"> 
 					 	
-						 <td th:text="${e.empNum}"></td>						 
-						 <td th:text="${e.empName}"></td>
-						 <td th:text="${e.demgName}"></td>										
-						 <td th:text="${e.poName}"></td>										
+						 <td th:text="${p.empNum}"></td>						 
+						 <td th:text="${p.empName}"></td>
+						 <td th:text="${p.demgName}"></td>										
+						 <td th:text="${p.poName}"></td>										
 						 <td th:text="${p.basicPay}"></td>										
 						 <td th:text="${p.selfDriPay}"></td>										
 						 <td th:text="${p.comPay}"></td>										
@@ -91,7 +91,7 @@
 						 <td>비과세계산</td>
 						 <td>지급액계산</td>
 					</tr>
-					<tr>										
+					<tr th:each="p :${payInsert}">										
 						 <td th:text="${p.holidayPay}"></td>										
 						 <td th:text="${p.overtimePay}"></td>										
 						 <td th:text="${p.positionBenefit}"></td>										

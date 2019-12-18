@@ -67,12 +67,12 @@
 	   		<td align="center" id="coEmail"th:text="${l.coEmail}"></td>	   		   	 	   	
 	   		<td align="center" id="yesOrNo"th:text="${l.yesOrNo}"></td> 	   	
 		   	<td class="deleteCoBtn">
-				<input type="button" value="폐업" class="btn btn-block btn-primary btn-sm" id="deleteCoBtn">
+				<input type="button" value="폐업" class="btn btn-success" id="deleteCoBtn">
 			</td>	
   			 <div id="right-box"class="col-lg-4">	
   		     <td>
   		     		<div class="input-group-prepend show" >
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    <button type="button" class="btn btn-success" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                      	 수정하시겠습니까
                     </font></font></button>
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
@@ -83,7 +83,7 @@
                   </div>  	 	 	 	 	
 			</td>
 			</div>
-			<td align="center"><a th:href="@{/company/companyDetail(coName=${l.coName})}" class="btn btn-primary">상세보기</a></td>			 		 
+			<td align="center"><a th:href="@{/company/companyDetail(coName=${l.coName})}" class="btn btn-success">상세보기</a></td>			 		 
 	   	</tr>
 	   	</tbody>
   	 </table>
