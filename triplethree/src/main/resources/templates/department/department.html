@@ -179,17 +179,17 @@
 						</thead>
 						<tbody>
 							<tr class="groupListTr" th:each="C : ${CompanyList}">	
-								<td id="departmentCode" th:text="${C.departmentCode}"></td>
-								<td id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
-								<td id="departmentLevel" th:text="${C.departmentLevel}"></td>
-								<td id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
-								<td id="departmentWriter" th:text="${C.deName +'-'+ C.empName}"></td>
-								<td id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
-								<td id="departmentSau" th:text="${C.departmentSau}"></td>
-								<td id="departmentApprover" th:text="${C.departmentApprover}"></td>
-								<td id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
-								<td id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
-								<td id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
+								<td class="groupListTd" id="departmentCode" th:text="${C.departmentCode}"></td>
+								<td class="groupListTd" id="departmentNameBe" th:text="${C.departmentNameBe}"></td>
+								<td class="groupListTd" id="departmentLevel" th:text="${C.departmentLevel}"></td>
+								<td class="groupListTd" id="departmentUpcode" th:text="${C.departmentUpcode}"></td>
+								<td class="groupListTd" id="departmentWriter" th:text="${C.deName +'-'+ C.empName}"></td>
+								<td class="groupListTd" id="departmentWriterDay" th:text="${C.departmentWriterDay}"></td>
+								<td class="groupListTd" id="departmentSau" th:text="${C.departmentSau}"></td>
+								<td class="groupListTd" id="departmentApprover" th:text="${C.departmentApprover}"></td>
+								<td class="groupListTd" id="departmentApproDay" th:text="${C.departmentApproDay}"></td>
+								<td class="groupListTd" id="departmentApperverSt" th:text="${C.departmentApperverSt}"></td>
+								<td class="groupListTd" id="departmentYesNO" th:text="${C.departmentYesNO}"></td>
 								<td class="deleteDeBtn">
 									<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deleteDe">
 								</td>								
