@@ -172,7 +172,7 @@ public class CompanyController {
 		companyService.insertCompany(company);
 		
 		
-		return "redirect:";
+		return "redirect:/company/companyInfo";
 	}
 	
 	/**회사정보 조회**/
