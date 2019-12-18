@@ -37,7 +37,7 @@ public class PayController {
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
 		model.addAttribute("payInsert", payService.payInsert());
-		odel.addAttribute("insertDeduct", payService.insertDeduct());
+		model.addAttribute("insertDeduct", payService.insertDeduct());
 		return "pay/insertPay";	
 	}
 	/***급여 등록하기*****/
