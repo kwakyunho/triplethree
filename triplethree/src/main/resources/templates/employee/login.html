@@ -29,7 +29,10 @@
 
 <div class="login-box">
 	<div class="login-logo">
-		<a>DREAM COME TRUE</br><b>성숙을 넘어 성장으로 TRIPLE 3</b> </a>
+		<a>DREAM COME TRUE</br>
+			<b>성숙을 넘어 성장으로 TRIPLE 3</b><br/>
+			<span style="font-size: 1.5rem; color: darkred;">※ 배포일자 : 2019-12-18※</span>
+		</a>
 	</div>
 	<!-- /.login-logo -->
 	<div class="card">
@@ -38,7 +41,7 @@
 			<button class="btn btn-primary btn-block" id="loginTeam1">인사팀 부장 </button>
 			<button class="btn btn-primary btn-block" id="loginTeam2">전략기획실 차장 </button>
 			<br>
-			<form action="/login" method="post">
+			<form id ="loginForm" action="/login" method="post">
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사원번호를 입력해주세요." value="TT20191203001">
 					<div class="input-group-append">
@@ -91,11 +94,13 @@ $(document).ready(function(){
 	$('#loginTeam1').on('click', function(){
 		$('#empNum').val('TT20191203001');
 		$('#password').val('pw009');
+		$('#loginForm').submit();
 	});
 	
 	$('#loginTeam2').on('click', function(){
 		$('#empNum').val('TT20191202002');
 		$('#password').val('pw002');
+		$('#loginForm').submit();
 	});
 });
 

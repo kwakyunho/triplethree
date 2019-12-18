@@ -14,7 +14,11 @@
 tbody tr:hover{background: whitesmoke;}
 </style>
 <!-- DataTables -->
-<link rel="stylesheet" th:href="@{plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+
+<!-- daterange picker -->
+<link rel="stylesheet" th:href="@{/plugins/daterangepicker/daterangepicker.css}">
+
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -67,8 +71,8 @@ tbody tr:hover{background: whitesmoke;}
 								<tr class="workAttListTable" th:each="W, index : ${WorkAttitudeVoList}">
 									<td class="workAttListTableNum" th:text="${index.index+1}"></td>
 									<td th:text="${W.day}"></td>
-									<td th:text="${W.startWorkTime}"></td>
-									<td th:text="${W.endWorkTime}"></td>
+									<td class="wStartWorkTime" th:text="${W.startWorkTime}"></td>
+									<td class="wEndWorkTime" th:text="${W.endWorkTime}"></td>
 									<td th:text="${W.userId}"></td>
 									<td th:text="${W.demgName}"></td>
 									<td th:text="${W.poName}"></td>
@@ -121,18 +125,26 @@ tbody tr:hover{background: whitesmoke;}
 					<div class="form-group col-md-6" style="float:left;" id="userName">
 						<label for="recipient-name" class="col-form-label">사원명</label>
 					</div>
-					<div class="form-group col-md-6" style="float:left;" id="startWorkTime">
-						<label for="recipient-name" class="col-form-label">출근시간</label>
+					<div class="form-group col-md-12" style="float:left;" id="workTime">
+						<label for="recipient-name" class="col-form-label">출퇴근시간</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="far fa-clock"></i></span>
+							</div>
+							<input type="text" class="form-control float-right" id="startEndWorkTime">
+						</div>
 					</div>
-					<div class="form-group col-md-6" style="float:left;" id="endWorkTime">
-						<label for="recipient-name" class="col-form-label">퇴근시간</label>
-						<input type="time">
+					<div class="form-group col-md-12" style="float:left;" id="coment">
+						<label for="recipient-name" class="col-form-label">수정 사유</label>
+						<div class="input-group">
+								<input type="text" class="form-control" name="coment" placeholder="사유">
+						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary sendBtn">Send message</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary sendBtn">수정</button>
 			</div>
 		</div>
 	</div>
@@ -142,35 +154,63 @@ tbody tr:hover{background: whitesmoke;}
 
 <th:block layout:fragment="customScript">
 <!-- DataTables -->
-<script th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
-<script th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 
-<!-- page script -->
-<script>
-  $(function () {
-    $('#workTimeTable').DataTable();
-  });
-</script>
+
+<!-- InputMask -->
+<script th:src="@{/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/plugins/inputmask/min/jquery.inputmask.bundle.min.js}"></script>
+<!-- date-range-picker -->
+<script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
 
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
-	 var table = $('#workTimeTable').DataTable();
-     
-    $('#workTimeTable tbody').on('click', 'tr', function () {
+	// 테이블 페이징 처리를 위한 JS홏ㄹ
+	$('#workTimeTable').DataTable();
+	
+	// ajax 호출
+	(function($){
+		$.fn.workTimeEvent = function(sendData, fn){
+			
+			$.ajax({
+				async: true,
+				type : sendData.ajaxType,
+				data : sendData,
+				url : sendData.ajaxUrl,
+				dataType : sendData.ajaxDataType,
+				success : function(result) {
+					fn(result);
+				},
+				error : function(error) {
+					//alert("error : " + error);
+					fn('error');
+				}
+			});
+		}
+	}(jQuery));
+    
+	// 세션 값 가져와 테이블에 데이터 뿌리기
+    var workTimeEvent = $('#workTimeTable tbody').on('click', 'tr', function () {
 		
 		var workAttData = {};
 		workAttData = [[${WorkAttitudeVoList}]];
-		
-		var num = $(this).children('.workAttListTableNum').text() - 1;
+		var clickModal = $(this);
+		var num = clickModal.children('.workAttListTableNum').text() - 1;
 		
 		var workAttCode = workAttData[num].workAttCode;
+		var oldDay = null;
 		var day = workAttData[num].day;
 		var userCode = workAttData[num].userCode;
 		var demgName = workAttData[num].demgName;
 		var poName = workAttData[num].poName;
 		var userName = workAttData[num].userName;
-		var startWorkTime = workAttData[num].startWorkTime;
-		var endWorkTime = workAttData[num].endWorkTime;
+		
+		// 수정에 따라 페이지가 새로고침되는게 아니라 jquery로 변화되기때문에 표에 있는 값을 변수에 대입한다.
+		var startWorkTime = clickModal.children('.wStartWorkTime').text();
+		var endWorkTime = clickModal.children('.wEndWorkTime').text();
+		//var startWorkTime = workAttData[num].startWorkTime;
+		//var endWorkTime = workAttData[num].endWorkTime;
 		var startOutSideTime = workAttData[num].startOutSideTime;
 		var endOutSideTime = workAttData[num].endOutSideTime;
 		var userId = workAttData[num].userId;
@@ -178,22 +218,107 @@ $(document).ready(function(){
 		var adminInsertDt = workAttData[num].adminInsertDt;
 		var coment = workAttData[num].coment;
 		
+		// 모달 띄우기 전에 인풋에 적혀있는 값 초기화하기
+		$('input[name=coment]').val('');
+		
 		$('#workAttListModal').modal('show');
 		
 		$('.text-muted').remove();
 		
 		$('#workAttCode').text(workAttCode);
 		$('#day').append('<p class="text-muted">' + day + '</p>');
+		oldDay = day;	// 일자가 변경되기 때문에 복사해놓는다.
 		$('#demgName').append('<p class="text-muted">' + demgName + '</p>');
 		$('#poName').append('<p class="text-muted">' + poName + '</p>');
 		$('#userName').append('<p class="text-muted">' + userName + '</p>');
-		$('#startWorkTime').append('<p class="text-muted">' + startWorkTime + '</p>');
-		$('#endWorkTime').append('<p class="text-muted">' + endWorkTime + '</p>');
 		
-	});
-	
-	$('.sendBtn').on('click', function(){
-		//<input type="text" class="form-control">
+		$('#startEndWorkTime').val(startWorkTime + ' - ' + endWorkTime);
+		
+		// 출퇴근 null일때 처리방법
+		if(startWorkTime == '') startWorkTime = day.concat('08:00:00');
+		if(endWorkTime == '') endWorkTime = startWorkTime.substr(0,11).concat('18:00:00');
+		
+		//인풋박스 기간 및 시간 설정
+		$('#startEndWorkTime').daterangepicker({
+			timePicker: true,
+			timePickerIncrement: 1,	// 분 간격 설정
+			startDate: moment(startWorkTime),
+			endDate: moment(endWorkTime)
+		});
+		
+		// dateRangePicker에서 확인버튼 클릭시 발생 이벤트
+		// 시작날짜 변경되면 ('#day').text() 를 변경한다.
+		$('.okBtn').on('click', function(){
+			if(startWorkTime.substr(0,11) != day) day = $('.drp-selected').text().substr(0,10);
+			$('#day').children('p').text(day);
+		});
+		
+		// 수정 버튼 클릭시 발생 이벤트
+		$('.sendBtn').one('click', function(){
+			
+			var sendData = {};
+			
+			sendData.ajaxType = 'POST';	// 전송타입
+			sendData.ajaxUrl = '/WorkAttitude';	// 호출 주소
+			sendData.ajaxDataType = 'json';	// 리턴 타입
+			
+			sendData.workAttCode = workAttCode;
+			sendData.day = day;
+			sendData.userCode = userCode;
+			sendData.userId = userId;
+			sendData.startWorkTime = $('input[id=startEndWorkTime]').val().substr(0,19);
+			sendData.endWorkTime = $('input[id=startEndWorkTime]').val().substr(22,19);
+			sendData.adminId = [[${session.SCODE}]];
+			sendData.coment = $('input[name=coment]').val();
+			
+			// 공란 체크
+			if($('input[name=coment]').val() == ''){
+				alert('누락된 값이 있습니다.');
+				$('#workAttListModal').modal('hide');
+			}else{
+				// 내용 수정되는 조건
+				if(day.substr(0,10) == oldDay.substr(0,10)){
+					if(confirm('내용수정이 맞습니까?')){
+						sendData.conditionValue = 4;
+						// 콜백함수
+						$(document).workTimeEvent(sendData, function(result){
+							if(result != 'error'){
+								
+								startWorkTime = result.startWorkTime
+								endWorkTime = result.endWorkTime
+								
+								clickModal.children('.wStartWorkTime').text(result.startWorkTime)
+								clickModal.children('.wEndWorkTime').text(result.endWorkTime)
+								
+								$('#workAttListModal').modal('hide');
+							}
+						});
+					}else{
+						$('#workAttListModal').modal('hide');
+					}
+					
+				// 내용이 새롭게 등록되는 조건
+				}else{
+					if(day.substr(0,10) != oldDay.substr(0,10)){
+						if(confirm('일자가 변경되었습니다. 새롭게 등록하시나요?')){
+							sendData.conditionValue = 5;
+							// 콜백함수
+							$(document).workTimeEvent(sendData, function(result){
+								if(result != 'error'){
+									if(result.startWorkTime != null) {
+										alert('이미 등록된 정보가 있어 새롭게 등록하지 못합니다.');
+										$('#workAttListModal').modal('hide');
+									}else {
+										alert('정상 등록 되었습니다.');
+										location.reload();
+									}
+								}
+							});
+						}
+					}
+				}
+			}
+		});
 	});
 });
 </script>

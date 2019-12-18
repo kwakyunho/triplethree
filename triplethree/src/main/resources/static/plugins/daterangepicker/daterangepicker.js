@@ -47,10 +47,10 @@
         this.showWeekNumbers = false;
         this.showISOWeekNumbers = false;
         this.showCustomRangeLabel = true;
-        this.timePicker = false;
-        this.timePicker24Hour = false;
+        this.timePicker = true;
+        this.timePicker24Hour = true;
         this.timePickerIncrement = 1;
-        this.timePickerSeconds = false;
+        this.timePickerSeconds = true;
         this.linkedCalendars = true;
         this.autoUpdateInput = true;
         this.alwaysShowCalendars = false;
@@ -70,14 +70,19 @@
 
         this.locale = {
             direction: 'ltr',
-            format: moment.localeData().longDateFormat('L'),
+            //format: moment.localeData().longDateFormat('L'),
+            format: 'YYYY-MM-DD HH:mm:ss',
             separator: ' - ',
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
+            //applyLabel: 'Apply',
+            applyLabel: '확인',
+            //cancelLabel: 'Cancel',
+            cancelLabel: '취소',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.weekdaysMin(),
-            monthNames: moment.monthsShort(),
+            //daysOfWeek: moment.weekdaysMin(),
+            daysOfWeek: ['일', '월', '화', '수', '목', '금', '토', '일'],
+            //monthNames: moment.monthsShort(),
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             firstDay: moment.localeData().firstDayOfWeek()
         };
 
@@ -112,7 +117,7 @@
                 '<div class="drp-buttons">' +
                     '<span class="drp-selected"></span>' +
                     '<button class="cancelBtn" type="button"></button>' +
-                    '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                    '<button class="okBtn applyBtn" disabled="disabled" type="button"></button> ' +
                 '</div>' +
             '</div>';
 
@@ -635,7 +640,7 @@
             var lastYear = moment(firstDay).subtract(1, 'month').year();
             var daysInLastMonth = moment([lastYear, lastMonth]).daysInMonth();
             var dayOfWeek = firstDay.day();
-
+            
             //initialize a 6 rows x 7 columns array for the calendar
             var calendar = [];
             calendar.firstDay = firstDay;
@@ -704,7 +709,7 @@
                 html += '<th></th>';
             }
 
-            var dateHtml = this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" YYYY");
+            var dateHtml = calendar[1][1].format("YYYY년 ") + this.locale.monthNames[calendar[1][1].month()];
 
             if (this.showDropdowns) {
                 var currentMonth = calendar[1][1].month();
