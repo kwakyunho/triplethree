@@ -13,7 +13,7 @@
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
 <!-- summernote -->
-  <link rel="stylesheet" href="@{/plugins/summernote/summernote-bs4.css}">
+  <link rel="stylesheet" th:href="@{/plugins/summernote/summernote-bs4.css}">
 </th:block>
 
 
@@ -94,12 +94,26 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script src="@{/plugins/summernote/summernote-bs4.min.js}"></script>
+<script th:src="@{/plugins/summernote/summernote-bs4.min.js}"></script>
 <script>
   $(function () {
     // Summernote
     $('.textarea').summernote()
   })
+  
+$(document).ready(function(){
+	$('#updateSubmit').on('click', function(){
+		$(document).Toasts('create', {
+	        class: 'bg-success', 
+	        title: '게시글 수정',
+	        sticky : true,
+	        body: '게시글 수정이 완료되었습니다'
+	    });
+		$('.boardUpdateForm').attr('method', 'POST');
+		$('.boardUpdateForm').attr('action', '/admin/board/boardUpdate');
+		$('.boardUpdateForm').submit();
+	});
+});
 </script>
 
 </th:block>

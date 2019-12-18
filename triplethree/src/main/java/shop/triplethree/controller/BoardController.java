@@ -111,7 +111,7 @@ public class BoardController {
 	 * @param board
 	 * board에 글의 code 를 담아서 삭제함 
 	 * */
-	@GetMapping("/admin/board/boardDelete")
+	@PostMapping("/admin/board/boardDelete")
 	public String deleteBoard(@RequestParam(value="code")String code) {
 		System.out.println("***********************");
 		System.out.println("******delete Board처리***");
