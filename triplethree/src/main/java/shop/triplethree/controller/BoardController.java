@@ -32,7 +32,7 @@ public class BoardController {
 	  * @param session
 	  * @return
 	  */
-	@GetMapping("/board/boardInsert")
+	@GetMapping("/admin/board/boardInsert")
 	public String insertBoard(HttpSession session) {
 		
 		return "/board/boardInsert";
@@ -44,7 +44,7 @@ public class BoardController {
 	  * @param session
 	  * @return
 	  */
-	@PostMapping("/board/boardInsert")
+	@PostMapping("/admin/board/boardInsert")
 	public String insertBoard(Board board,HttpSession session){
 		board = boardService.createBoardCode(session,board);
 		boardService.insertBoard(board);
@@ -62,7 +62,7 @@ public class BoardController {
 	public String boardList(Model model) {
 		model.addAttribute("boardList", boardservice.boardList());
 		
-		return "/boARD/boardList";
+		return "/board/boardList";
 	}
 	
 	/**
@@ -83,12 +83,12 @@ public class BoardController {
 	  * @return
 	  */
 	
-	  @PostMapping("/board/goBoardUpdate")
-  	public String goBoardUpdate(@RequestParam(value="code")String code,Model model) {
+	@PostMapping("/admin/board/goBoardUpdate")
+  	public String goBoardUpdate(@RequestParam(value="code")String code,Model model,HttpSession session) {
 	  System.out.println("*************************");
 	  System.out.println("boardUpdate 화면 보여주기");
 	  System.out.println("#########################"); 
-	  model.addAttribute("board",boardservice.getBoardByCode(code)); //하나 뽑아와서 board 에 담기
+	  model.addAttribute("board",boardservice.getBoardForUpdate(code,session)); //하나 뽑아와서 board 에 담기
 	  return "/board/boardUpdate";
 	  }
 	
@@ -97,7 +97,7 @@ public class BoardController {
 	  * @param board
 	  * @return board
 	  */
-	@PostMapping("/board/boardUpdate")
+	@PostMapping("/admin/board/boardUpdate")
 	public String boardUpdate(Board board) {
 		System.out.println("*************************");
 		System.out.println("******board Update 처리****");
@@ -111,7 +111,7 @@ public class BoardController {
 	 * @param board
 	 * board에 글의 code 를 담아서 삭제함 
 	 * */
-	@GetMapping("/board/boardDelete")
+	@GetMapping("/admin/board/boardDelete")
 	public String deleteBoard(@RequestParam(value="code")String code) {
 		System.out.println("***********************");
 		System.out.println("******delete Board처리***");

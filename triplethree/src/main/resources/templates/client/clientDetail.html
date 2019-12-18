@@ -47,8 +47,7 @@
 	            	</div>
 	            	
 					<div class="card">
-						<div class="card-header">
-							<div class="card-body p-0">
+							<div class="card-body">
 								
 									<table class="table table-condensed">
 										<tbody>
@@ -110,9 +109,28 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-<script th:src="@{/plugins/toastr/toastr.min.js}"></script>
-<script th:src="@{/custom/js/clientCheck.js}"></script>
 
+<script>
+$(function(){
+	$('#updateBtn').on('click',function(){
+		alert('수정화면으로 이동합니다');
+		$('.clientDetailForm').attr('action','/admin/client/goClientUpdate');
+		$('.clientDetailForm').attr('method','POST');
+		$('.clientDetailForm').submit();
+		
+	});
+	$('#deleteBtn').on('click',function(){
+		var delcon = confirm('삭제하시겠습니까?');
+		if(delcon == true){
+			$('.clientDetailForm').attr('action','/admin/client/clientDelete');
+			$('.clientDetailForm').attr('method','POST');
+			$('.clientDetailForm').submit();	
+		}else{
+			return false;
+		}
+	});
+});
+</script>
 
 </th:block>
 </html>

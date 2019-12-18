@@ -73,6 +73,7 @@
 			,emp_code
 			,PO.poname AS poname
          	,EM.emp_name AS writer
+         	,board_pw AS boardPw
          	,board_title AS boardTitle
 			,board_con AS boardCon
 			,board_count AS boardCount
@@ -84,6 +85,17 @@
 		ON	EM.pocode = PO.code
 		where B.code=#{code}
 		
+	</select>
+	<select id="getBoardForUpdate" parameterType="String" resultType="shop.triplethree.vo.Board">
+		SELECT
+			B.code as code
+         	,board_pw AS boardPw
+         	,board_title AS boardTitle
+			,board_con AS boardCon
+			,board_count AS boardCount
+			,date_format(B.writer_day,'%Y-%m-%d') as writerDay
+ 		FROM BOARD AS B
+		where B.code=#{code}
 	</select>
 	
 	<!-- count 나중에 넣어주기 -->
@@ -99,6 +111,7 @@
 		where
 			code = #{code}
 	</update>
+	
 
 
 

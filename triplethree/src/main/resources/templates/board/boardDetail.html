@@ -52,8 +52,8 @@
 	       		<table class="table table-condensed" >
 	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>
-	       		<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
-	       		<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
+	       			<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
+	       			<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
 	       	</div>
 	       </div>
 		</form>
@@ -90,16 +90,14 @@
 			$('.boardDetailForm').attr('action', '/board/boardList');
 			$('.boardDetailForm').submit();
 		});
-		
-	var dbPw = $('#boardPw').val(); //게시글 비밀번호
-	//console.log(dbPw + ': 이것은 boardPw');
 	$('#updateBtn').on('click',function(){
-			if (confirm("수정하시겠습니까") == true){  //확인
+		var dbPw = $('#boardPw').val();
+			if (confirm("수정하시겠습니까?")){  //확인
 				var inputPw = prompt('비밀번호를 입력하세요(1111)');
 				if(dbPw==inputPw){
 					alert('수정화면으로 이동합니다');
 					$('.boardDetailForm').attr('method', 'POST');
-					$('.boardDetailForm').attr('action', '/board/goBoardUpdate');
+					$('.boardDetailForm').attr('action', '/admin/board/goBoardUpdate');
 					$('.boardDetailForm').submit();
 				}else{
 					alert('비밀번호가 일치하지 않습니다');
@@ -107,14 +105,13 @@
 				}
 			}else{   //취소
 			    return;
-			}
-	
+			}	
 	});
 		
 	$('#deleteBtn').on('click',function(){
-		if (confirm("정말 삭제하시겠습니까??") == true){  //확인
+		if (confirm("정말 삭제하시겠습니까??")){  //확인
+			var dbPw = $('#boardPw').val();
 			var inputPw = prompt('비밀번호를 입력하세요');
-			console.log(inputPw + ': 이것은 입력 비밀번호');
 			if(dbPw==inputPw){
 				$(function(){
 					$(document).Toasts('create', {
@@ -127,7 +124,7 @@
 					delay(5000);
 				});
 				$('.boardDetailForm').attr('method', 'POST');
-				$('.boardDetailForm').attr('action', '/board/boardDelete');
+				$('.boardDetailForm').attr('action', '/admin/board/boardDelete');
 				$('.boardDetailForm').submit();
 				
 			}else{

@@ -32,12 +32,12 @@ public class ClientController {
 	//거래중 거래처 정보조회 리스트
 	@GetMapping("/client/clientList2")
 	public String clientList2(Model model) {
-		model.addAttribute("client", clientService.getClientList2());
+		model.addAttribute("client2", clientService.getClientList2());
 		return "/client/clientList2";
 	}
 		
 	//거래처 정보 수정화면 이동
-	@GetMapping("/admin/client/clientUpdate")
+	@PostMapping("/admin/client/goClientUpdate")
 	public String clientUpdate(@RequestParam(value="code")
 								String code,Model model) {
 		System.out.println(code + "<--수정 할 거래처 code");
@@ -60,7 +60,7 @@ public class ClientController {
 	}
 	
 	//거래처 정보삭제(상태변경)
-	@PostMapping("/client/ClientDelete")
+	@PostMapping("/admin/client/clientDelete")
 	public String deleteClient(@RequestParam(value="code")String code,Model model) {
 		System.out.println(code + "<--삭제  할 거래처 code");
 		clientService.deleteClient(code);
