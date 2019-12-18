@@ -254,7 +254,7 @@ public class EmployeeController {
 		 employee.setApprover(SID);
 		 System.out.println(employee.getMoveCode() + " :이동코드");
 		 employeeService.updateMoveList(employee);
-		 return "redirect:/employee/employeeAllMoveList";
+		 return "redirect:/admin/employee/employeeAllMoveList";
 	 }
 	 
 }
