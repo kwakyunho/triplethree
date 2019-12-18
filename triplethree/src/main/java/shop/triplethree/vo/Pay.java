@@ -1,6 +1,8 @@
 package shop.triplethree.vo;
 
 import java.time.LocalDateTime;
+import java.time.Year;
+import java.util.Date;
 
 
 public class Pay {
@@ -20,6 +22,18 @@ public class Pay {
 	private String writer;	//작성자
 	private LocalDateTime writerDay;	//작성일자
 	private LocalDateTime paymentDate;	//지급일자
+	private String empNum;	//사원코드	
+	private String empName;	//사원이름
+	private String poName;	//직책	
+	private String demgName;	//부서명
+	private Double inseurPer; //고용보험공제비율
+	private Double incomePer; //소득세공제비율
+	private Double nationPer; //국민연금공제비율
+	private Double healthPer; //건보료공제비율
+	private Double residentTax;	//지방소득세공제비율
+	private Double longCare;	//장기요양공제비율
+	private Double industrialPer;	//산재보험비율	
+	private Year year;	//적용연도
 	public String getCode() {
 		return code;
 	}
@@ -116,16 +130,91 @@ public class Pay {
 	public void setPaymentDate(LocalDateTime paymentDate) {
 		this.paymentDate = paymentDate;
 	}
+	public String getEmpNum() {
+		return empNum;
+	}
+	public void setEmpNum(String empNum) {
+		this.empNum = empNum;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getPoName() {
+		return poName;
+	}
+	public void setPoName(String poName) {
+		this.poName = poName;
+	}
+	public String getDemgName() {
+		return demgName;
+	}
+	public void setDemgName(String demgName) {
+		this.demgName = demgName;
+	}
+	public Double getInseurPer() {
+		return inseurPer;
+	}
+	public void setInseurPer(Double inseurPer) {
+		this.inseurPer = inseurPer;
+	}
+	public Double getIncomePer() {
+		return incomePer;
+	}
+	public void setIncomePer(Double incomePer) {
+		this.incomePer = incomePer;
+	}
+	public Double getNationPer() {
+		return nationPer;
+	}
+	public void setNationPer(Double nationPer) {
+		this.nationPer = nationPer;
+	}
+	public Double getHealthPer() {
+		return healthPer;
+	}
+	public void setHealthPer(Double healthPer) {
+		this.healthPer = healthPer;
+	}
+	public Double getResidentTax() {
+		return residentTax;
+	}
+	public void setResidentTax(Double residentTax) {
+		this.residentTax = residentTax;
+	}
+	public Double getLongCare() {
+		return longCare;
+	}
+	public void setLongCare(Double longCare) {
+		this.longCare = longCare;
+	}
+	public Double getIndustrialPer() {
+		return industrialPer;
+	}
+	public void setIndustrialPer(Double industrialPer) {
+		this.industrialPer = industrialPer;
+	}
+	public Year getYear() {
+		return year;
+	}
+	public void setYear(Year year) {
+		this.year = year;
+	}
 	@Override
 	public String toString() {
 		return "Pay [code=" + code + ", empCode=" + empCode + ", deCode=" + deCode + ", basicPay=" + basicPay
-				+ ", benefit=" + beneFit + ", holidayPay=" + holidayPay + ", overtimePay=" + overtimePay + ", qualiPay="
-				 + ", specialPay=" + ", positionBenefit=" + positionBenefit + ", selfDriPay="
-				+ selfDriPay + ", comPay=" + comPay + ", mealCost=" + mealCost + ", childPay=" + childPay
-				+ ", deductPay=" + deductPay + ", writer=" + writer + ", writerDay=" + writerDay + ", paymentDate="
-				+ paymentDate + "]";
+				+ ", beneFit=" + beneFit + ", holidayPay=" + holidayPay + ", overtimePay=" + overtimePay
+				+ ", positionBenefit=" + positionBenefit + ", selfDriPay=" + selfDriPay + ", comPay=" + comPay
+				+ ", mealCost=" + mealCost + ", childPay=" + childPay + ", deductPay=" + deductPay + ", writer="
+				+ writer + ", writerDay=" + writerDay + ", paymentDate=" + paymentDate + ", empNum=" + empNum
+				+ ", empName=" + empName + ", poName=" + poName + ", demgName=" + demgName + ", inseurPer=" + inseurPer
+				+ ", incomePer=" + incomePer + ", nationPer=" + nationPer + ", healthPer=" + healthPer
+				+ ", residentTax=" + residentTax + ", longCare=" + longCare + ", industrialPer=" + industrialPer
+				+ ", year=" + year + "]";
 	}
-	
+
 	
 	
 }

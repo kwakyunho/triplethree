@@ -38,7 +38,7 @@
 			<div class="col-5">
 				<div class="card">
 					<div align="center">사원목록</div>						
-						<form action="/admin/pay/insertPay" method="post" id="insertPayForm">
+						<form action="/admin/pay/insertPay" method="get" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
 									<option value="">검색조건</option> 
@@ -56,7 +56,7 @@
 								<button type="submit"id="searchBtn" class="btn btn-block bg-gradient-primary">Search</button>					
 							</form>										
 							</div>
-  	 			<table class="table table-bordered table-striped dataTable"role="grid" th:each="p :${payInsert}">  	   	 
+  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
 				 	
 					<tr>
 								
@@ -76,7 +76,20 @@
 						<td id="demgName"th:text="${e.demgName}"></td>										
 						<td id="poName"th:text="${e.poName}"></td>															
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
-							<input class="mealCost" type="hidden" th:value="${p.mealCost}">													
+							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
+							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
+							<input class="overtimePay" type="hidden" th:value="${e.overtimePay}">													
+							<input class="positionBenefit" type="hidden" th:value="${e.positionBenefit}">													
+							<input class="selfDriPay" type="hidden" th:value="${e.selfDriPay}">													
+							<input class="comPay" type="hidden" th:value="${e.comPay}">													
+							<input class="childPay" type="hidden" th:value="${e.childPay}">													
+							<input class="mealCost" type="hidden" th:value="${e.mealCost}">																																	
+							<input class="nationPer" type="hidden" th:value="${e.nationPer}">																																	
+							<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
+							<input class="longCare" type="hidden" th:value="${e.longCare}">																																	
+							<input class="inseurPer" type="hidden" th:value="${e.inseurPer}">																																	
+							<input class="incomePer" type="hidden" th:value="${e.incomePer}">																																	
+							<input class="residentTax" type="hidden" th:value="${e.residentTax}">																																			
 															
 						<td>
 							<input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary choiceBtn">
@@ -99,7 +112,7 @@
 					<tr><td>기본급</td>
 						<td><input type="text" id="basicPay" name="basicPay" class="form-control col-12"></td></tr>
 					<tr><td>야간근무수당</td>								
-						<td><input type="text" id="benefit"name="benefit" class=" form-control col-12"></td></tr>									
+						<td><input type="text" id="beneFit"name="beneFit" class=" form-control col-12"></td></tr>									
 					<tr><td>휴일근무수당</td>				
 						<td><input type="text" id="holidayPay"name="holidayPay" class="form-control col-12"></td></tr>					
 					<tr><td>연장근무수당</td>					
@@ -117,50 +130,52 @@
 												
 						<tr>
                     		<td align="left">과세 :
-                    		</td><td align="right"><input type="text" class="form-control col-12"></td>
+                    		</td><td align="right"><input type="text" id="sum1" class="form-control col-12"></td>
                     	</tr>
                     	<tr>	
                     		<td align="left">비과세 :</td>
-                    		<td align="right"><input type="text" class="form-control col-12"></td>
+                    		<td align="right"><input type="text" id="sum2" class="form-control col-12"></td>
                     	</tr>
                     	<tr>	
                     		<td align="left">지급액 계 :</td>
-                    		<td align="right"><input type="text" id="sum1" class="form-control col-12"></td>
+                    		<td align="right"><input type="text" id="sum3" class="form-control col-12"></td>
                 		</tr>               										
 				</table>
 				</div>
 				<!-- /.card -->
 			</div>
-			<div class="col-3">
+			<div class="col-3"  id="deduct">
 				<div class="card">
-				<table class="table table-bordered table-striped dataTable"role="grid"> 
+				<table class="table table-bordered table-striped dataTable"role="grid">
 					<div align="center">공제액</div>
 					<tr>
 						<th>공제항목</th>					
 						<th>공제금액</th>					
 					</tr>
 					<tr><td>국민연금</td>
-						<td><input type="text" name="nationPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="nationPer" id="nationPer" class="form-control col-12"></td></tr>
 					<tr><td>건강보험</td>
-						<td><input type="text" name="healthPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="healthPer"  id="healthPer" class="form-control col-12"></td></tr>
 					<tr><td>장기요양보험</td>
-						<td><input type="text" name="longCare" class="form-control col-12"></td></tr>
+						<td><input type="text" name="longCare" id="longCare" class="form-control col-12"></td></tr>
 					<tr><td>고용보험</td>
-						<td><input type="text" name="inseurPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12"></td></tr>
 					<tr><td>소득세</td>
-						<td><input type="text" name="incomePer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="incomePer" id="incomePer" class="form-control col-12"></td></tr>
 					<tr><td>지방소득세</td>
-						<td><input type="text" name="residentTax" class="form-control col-12"></td></tr>
+						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12"></td></tr>
 					<tr><td>공제액 계</td>
-						<td><input type="text" name="deductHap" class="form-control col-12"></td></tr>
+						<td><input type="text" id="deductHap" class="form-control col-12"></td></tr>
 						<tr><td colspan="2" align="left">차인지급액 :
-						<input type="text" name="deductHap" class="form-control"></td></tr>
+						<input type="text" name="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>
 				</div>
 			
-				<button type="button" value="급여지급" class="col-12" align="center">							
-					<a th:href="@{/pay/selectPay}" class="nav-link">급여 지급액 등록</a>
+				<form action="/admin/pay/selectPay" method="post">
+				<button type="submit" value="급여지급" class="col-12" align="center">							
+					급여 지급액 등록
 				</button>				
+			</form>			
 
 			
 
