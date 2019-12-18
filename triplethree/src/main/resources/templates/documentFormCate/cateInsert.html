@@ -288,7 +288,7 @@ $(document).ready(function(){
 				async: true,
 				type : 'POST',
 				data : {'largeCateName': largeCateName, 'middleCateName': middleCateName},
-				url : "selectCateNameList",
+				url : "/admin/selectCateNameList",
 				dataType : "json",
 				success : function(result) {
 					
@@ -373,7 +373,7 @@ $(document).ready(function(){
 				async: true,
 				type : 'POST',
 				data : {'condition' : condition, 'cateCode' : cateCode, 'smallCateName': smallCateName, 'useConfig' : useConfig},
-				url : "updateCateNameConfig",
+				url : "/admin/updateCateNameConfig",
 				dataType : "json",
 				success : function(result) {
 					
