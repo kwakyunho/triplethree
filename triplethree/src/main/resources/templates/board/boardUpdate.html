@@ -16,9 +16,7 @@
 <link rel="stylesheet" th:href="@{/plugins/summernote/summernote-bs4.css}">
 </th:block>
 
-
 <th:block layout:fragment="customContents">
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
 	<div class="container-fluid">
@@ -96,6 +94,7 @@
 <script>
   $(function(){
     // Summernote
+<<<<<<< HEAD
     $('.textarea').summernote();
   });
 </script>
@@ -114,6 +113,23 @@ $(document).ready(function(){
 		$('.boardUpdateForm').attr('action', '/admin/board/boardUpdate');
 		$('.boardUpdateForm').submit();
 		});
+=======
+    $('.textarea').summernote()
+  })
+  
+$(document).ready(function(){
+	$('#updateSubmit').on('click', function(){
+		$(document).Toasts('create', {
+	        class: 'bg-success', 
+	        title: '게시글 수정',
+	        sticky : true,
+	        body: '게시글 수정이 완료되었습니다'
+	    });
+		$('.boardUpdateForm').attr('method', 'POST');
+		$('.boardUpdateForm').attr('action', '/admin/board/boardUpdate');
+		$('.boardUpdateForm').submit();
+	});
+>>>>>>> refs/heads/develop
 });
 </script>
 

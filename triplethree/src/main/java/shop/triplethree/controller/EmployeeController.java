@@ -225,7 +225,7 @@ public class EmployeeController {
 	  * 로그인한 회원의 인사이동목록을 보여주는 화면
 	  * @return
 	  */
-	 @GetMapping("/employeeMyMoveList")
+	 @GetMapping("/employee/employeeMyMoveList")
 	 public String employeeMyMoveList(HttpSession session,Model model) {
 		 String SCODE=(String)session.getAttribute("SCODE");
 		 model.addAttribute("MyMove", employeeService.employeeMyMoveList(SCODE));

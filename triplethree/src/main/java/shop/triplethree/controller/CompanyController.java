@@ -81,7 +81,7 @@ public class CompanyController {
 	 * 메뉴에서 직급 관리 테이블 클릭시 실행
 	 * 리스트를 불러옴
 	 * */
-	@GetMapping("/position/positionInsert")
+	@GetMapping("/admin/position/positionInsert")
 	public String selectPosition(Model model)	{
 		//System.out.println("리스트 뽑아요");
 		model.addAttribute("PositionList", companyService.selectPosition());
@@ -209,7 +209,7 @@ public class CompanyController {
 	}
 	
 	/**회사휴업 또는 폐업****/
-	@PostMapping("/deleteCompany")
+	@PostMapping("/company/deleteCompany")
 	public String deleteCompany(Company company) {
 		System.out.println("상태를 변경할꺼야?");
 		System.out.println(company.getCode());

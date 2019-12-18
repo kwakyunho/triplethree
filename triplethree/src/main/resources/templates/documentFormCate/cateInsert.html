@@ -11,8 +11,8 @@
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
 <!-- jsGrid -->
-<link rel="stylesheet" th:href="@{plugins/jsgrid/jsgrid.min.css}">
-<link rel="stylesheet" th:href="@{plugins/jsgrid/jsgrid-theme.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/jsgrid/jsgrid.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/jsgrid/jsgrid-theme.min.css}">
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -25,7 +25,7 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a th:href="@{/documentFormCateInsert}">카테고리 등록</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/admin/documentFormCateInsert}">카테고리 등록</a></li>
 					<li class="breadcrumb-item">기본설정</li>
 				</ol>
 			</div><!-- /.col -->
