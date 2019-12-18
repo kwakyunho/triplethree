@@ -129,6 +129,7 @@ $("#departmentNameAf").blur(function() {
 });
 
 //리스트에서 부서명 클릭시 변경전 부서명 input 박스에 값이 들어가는 스크립트
+
 $(document).ready(function(){
 	$('.groupListTr').on('click', function(){
 		var uri = $(this);
@@ -163,12 +164,19 @@ $(function(){
 		
 		var uri = $(this).parents('.groupListTr');
 		var textValue = uri.children('#departmentCode').text();
-		uri.children('#departmentCode').append('<input type="hidden" id="decode" name="departmentCode">');
-		$('#decode').val(textValue);
+		var check = uri.children('#departmentYesNO').text();
+		console.log(check);
 		
-		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', '/admin/department/teamNameDelete').submit();
-		 }
+		if(check =='Y'){
+			uri.children('#departmentCode').append('<input type="hidden" id="decode" name="departmentCode">');
+			$('#decode').val(textValue);
+			
+			if(confirm('삭제하시겠습니까?')){
+				$('#deleteForm').attr('action', '/admin/department/teamNameDelete').submit();
+			 }
+		}else{
+			alert('사용하지 않는 부서는 삭제 할 수 없습니다.');
+		}
 	});
 });
 
