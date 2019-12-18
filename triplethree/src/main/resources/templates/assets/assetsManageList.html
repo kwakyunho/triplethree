@@ -49,6 +49,7 @@ tr:hover{background: whitesmoke;}
 				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
 					<thead>
 						<tr>
+							<th>순차</th>
 							<th>시설/차량명</th>
 							<th>예약자</th>
 							<th>사용 시작일</th>
@@ -59,6 +60,7 @@ tr:hover{background: whitesmoke;}
 					</thead>
 					<tbody>
 						<tr th:each="l : ${List}" style="cursor:pointer" class="AssetsUpdateList">
+							<td th:text="${index}"></td> <!-- 숫자 나올수 있도록 해야함. -->
 							<td th:if="${l.veName eq null}" th:text="${l.beName}" id="beName"></td>
 							<td th:if="${l.beName eq null}" th:text="${l.veName}" id="veName"></td>
 							<input type="hidden" id="code" th:value="${l.code}">

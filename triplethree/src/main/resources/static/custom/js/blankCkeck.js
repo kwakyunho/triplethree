@@ -73,7 +73,7 @@ $("#inputTitle").blur(function() {
 		$.ajax({
 		type 		: 'POST',
 		data 		: {'title': title},
-		url 		: "department/deNameCheck",
+		url 		: "/admin/department/deNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -105,7 +105,7 @@ $("#departmentNameAf").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'title': title},
-		url 		: "department/deNameCheck",
+		url 		: "/admin/department/deNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -149,13 +149,13 @@ $(function(){
 	
 	$('.inputDeBtn').click(function(){
 		if(confirm('등록하시겠습니까?')){
-			$('#formInput').attr('action', 'teamNameInsert').submit();	
+			$('#formInput').attr('action', '/admin/department/teamNameInsert').submit();	
 		}
 	});	
 	
 	$('#updateBtn').click(function(){
 		if(confirm('수정하시겠습니까?')){
-			$('#formUpdate').attr('action', 'teamNameUpdate').submit();	
+			$('#formUpdate').attr('action', '/admin/department/teamNameUpdate').submit();	
 		}
 	});	
 	
@@ -167,7 +167,7 @@ $(function(){
 		$('#decode').val(textValue);
 		
 		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', 'teamNameDelete').submit();
+			$('#deleteForm').attr('action', '/admin/department/teamNameDelete').submit();
 		 }
 	});
 });
@@ -237,7 +237,7 @@ $("#positionNameBeIn").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "position/poNameCheck",
+		url 		: "/admin/position/poNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -269,7 +269,7 @@ $("#positionNameAfUp").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "position/poNameCheck",
+		url 		: "/admin/position/poNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -312,13 +312,13 @@ $(function(){
 	
 	$('.insertPoBtn').click(function(){
 		if(confirm('등록하시겠습니까?')){
-			$('#formInput').attr('action', 'positionInsert').submit();	
+			$('#formInput').attr('action', '/admin/position/positionInsert').submit();	
 		}
 	});	
 	
 	$('#updatePoBtn').click(function(){
 		if(confirm('수정하시겠습니까?')){
-			$('#formUpdate').attr('action', 'positionUpdate').submit();	
+			$('#formUpdate').attr('action', '/admin/position/positionUpdate').submit();	
 		}
 	});	
 	
@@ -329,7 +329,7 @@ $(function(){
 		$('#decode').val(textValue);
 		
 		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', 'positionListDelete').submit();
+			$('#deleteForm').attr('action', '/admin/position/positionListDelete').submit();
 		 }
 	});
 });

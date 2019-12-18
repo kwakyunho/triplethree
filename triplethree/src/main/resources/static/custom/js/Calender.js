@@ -96,7 +96,7 @@
     		  async : true,
     		  type : 'POST',
     		  data : {'startDate' : getStartStr, 'endDate' : getEndStr},
-    		  url : "calender/companySchedule",
+    		  url : "/calender/companySchedule",
     		  datetype : "json",
     		  success : function(data){
     			  if(data != undefined && data.length > 0){
@@ -175,7 +175,7 @@
         		  async : true,
         		  type : 'POST',
         		  data : {code : code, sid : sid},
-        		  url : "calender/selectUpdate",
+        		  url : "/calender/selectUpdate",
         		  datetype : "json",
         		  success : function(data){
         			  //console.log(demgcode);
@@ -269,7 +269,7 @@
 	// 등록 버튼 이벤트
 	$('#insertBtn').click(function(){
 		if(confirm('예약 하시겠습니까?')){
-			$('#formInsert').attr('action', 'companyScheduleInsert').submit();
+			$('#formInsert').attr('action', '/calender/companyScheduleInsert').submit();
 		}
 	});
 	
@@ -281,7 +281,7 @@
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('일정 내용을 수정하시겠습니까?')){
-				$('#formId').attr('action', 'companyScheduleUpdate').submit();
+				$('#formId').attr('action', '/calender/companyScheduleUpdate').submit();
 			}
 		}
 	});
@@ -298,7 +298,7 @@
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('일정을 취소하시겠습니까?')){
-				$('#formId').attr('action', 'companyScheduleDelet').submit();
+				$('#formId').attr('action', '/calender/companyScheduleDelet').submit();
 			}
 		}
 	});	 
