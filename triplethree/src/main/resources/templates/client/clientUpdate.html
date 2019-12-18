@@ -267,6 +267,12 @@ $(function(){
 			accExtraAddr.focus();
 			return false;
 		}	
+			$(document).Toasts('create', {
+		        class: 'bg-success', 
+		        title: '거래처 정보 수정',
+		        sticky : true,
+		        body: '정보 수정이 완료되었습니다'
+		      });
 			$('.clientUpdateForm').attr('method','POST');
 			$('.clientUpdateForm').attr('action','/clientUpdate');
 			$('.clientUpdateForm').submit();

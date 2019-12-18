@@ -137,6 +137,12 @@
 				 return false;
 			 }
 			 
+			 $(document).Toasts('create', {
+			        class: 'bg-success', 
+			        title: 'INSERT SUCCESS',
+			        sticky : true,
+			        body: '공지글 등록이 완료되었습니다'
+			      });
 			 $('.boardInsertForm').submit();
 		 });
 	  });

@@ -75,7 +75,9 @@
 	                    <div class="col-sm-4">
 	                      <input type="password" class="form-control col-12" th:value="${board.boardPw}" name="boardPw" >
 	                    </div>
-                  
+             </div> 
+          </div> 
+             </form>
 		      	       <div class="col-12">
 		      	       		<br>
 		      	       		
@@ -85,16 +87,14 @@
 		       			
          			</div>
        			</div>
-       		</form>
+       		
 	      </div>
             
             <!-- /.card-body -->
            
 				</div>
-				</div>
 				<!-- /.card -->
 			<!-- /.card -->
-			</div> 
 			</div> <!-- contents -->
 			
 		
@@ -112,6 +112,7 @@
     $('.textarea').summernote()
   })
 </script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 		$('#updateSubmit').on('click', function(){
@@ -122,12 +123,10 @@ $(document).ready(function(){
 		        body: '게시글 수정이 완료되었습니다'
 		      });
 		$('.boardUpdateForm').attr('method', 'POST');
-		$('.boardUpdateForm').attr('action', '/boardList');
+		$('.boardUpdateForm').attr('action', '/boardUpdate');
 		$('.boardUpdateForm').submit();
 	});
 });
-
-			
 			
 </script>
 </th:block>
