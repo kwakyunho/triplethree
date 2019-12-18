@@ -38,7 +38,7 @@
 			<div class="col-5">
 				<div class="card">
 					<div align="center">사원목록</div>						
-						<form action="/admin/pay/insertPay" method="get" id="insertPayForm">
+						<form action="/admin/pay/insertPay" method="post" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
 									<option value="">검색조건</option> 
@@ -196,8 +196,8 @@ $(document).ready(function(){
 	$('#sel').on('change', function() {
 	    location.href= this.value;
 	});
-	$('#sel').val(location.href);
-});
+	//$('#sel').val(location.href);
+}
 
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
