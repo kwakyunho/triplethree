@@ -93,10 +93,9 @@ $(document).ready(function(){
 			var clientUrl = $(this).children('.clientCode');
 			clientUrl.append('<input type="hidden" name="code" value="">');
 			var clientCode = clientUrl.attr('id');
-			console.log(clientCode);
 			$('input[name=code]').val(clientCode);
 			$('.clientListForm').attr('method','POST');
-			$('.clientListForm').attr('action','/clientDetail'); // 나중에 detail 로 수정
+			$('.clientListForm').attr('action','/client/clientDetail'); // 나중에 detail 로 수정
 			$('.clientListForm').submit();
 		});
 });
