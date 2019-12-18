@@ -117,9 +117,9 @@
 	on d.code=pay.de_code
 	<if test="sv != null and sv neq ''.toString()">
 		WHERE 
-			${sk} Like CONCAT('%',#{sv},'%')
+			${sk} Like CONCAT('%',#{sv},'%')					
 	</if>
-
+		
 	</select>
 	<!--급여입력  -->
 	<update id="insertPay" parameterType="shop.triplethree.vo.Pay">		

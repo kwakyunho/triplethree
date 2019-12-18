@@ -41,7 +41,7 @@
 						<form action="/admin/pay/insertPay" method="post" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
-									<option value="">검색조건</option> 
+								<!--<option value=''>검색조건</option> 모든값을 가져올 수 있지 않을까  -->
 									<option value="emp_num">사원코드</option>						
 									<option value="emp_name" >사원명</option>
 									<option value="dename" >부서명</option>
@@ -88,7 +88,7 @@
 							<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
 							<input class="longCare" type="hidden" th:value="${e.longCare}">																																	
 							<input class="inseurPer" type="hidden" th:value="${e.inseurPer}">																																	
-							<input class="incomePer" type="hidden" th:value="${e.incomePer}">																																	
+							<input class="inCode" type="hidden" th:value="${e.inCode}">																																	
 							<input class="residentTax" type="hidden" th:value="${e.residentTax}">																																			
 															
 						<td>
@@ -161,11 +161,11 @@
 					<tr><td>고용보험</td>
 						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12"></td></tr>
 					<tr><td>소득세</td>
-						<td><input type="text" name="incomePer" id="incomePer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="inCode" id="incomePer" class="form-control col-12"></td></tr>
 					<tr><td>지방소득세</td>
 						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12"></td></tr>
 					<tr><td>공제액 계</td>
-						<td><input type="text" id="deductHap" class="form-control col-12"></td></tr>
+						<td><input type="text" id="sum4" class="form-control col-12"></td></tr>
 						<tr><td colspan="2" align="left">차인지급액 :
 						<input type="text" name="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>

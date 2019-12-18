@@ -6,6 +6,8 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
 	<title>회사정보</title>
 </th:block>
 
@@ -41,7 +43,7 @@
 				<div class="card">
 				<form th:action="@{/company/companyUpdate}" id="deleteForm" method="post">
 	 <div class="card-body table-responsive p-0" style="height: auto;">
-  	 <table class="table table-bordered table-striped dataTable"role="grid" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
+  	 <table class="table table-bordered table-striped dataTable"role="grid" id="workTimeTable" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
    	  <thead>
    	 
 	   	<tr>	
@@ -104,7 +106,16 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<!-- DataTables -->
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+$(document).ready(function(){
+	// 테이블 페이징 처리를 위한 JS홏ㄹ
+	$('#workTimeTable').DataTable();
+});
 <!--상태유무 스크립트  -->
+</script>
 <script th:src="@{/custom/js/Company.js}"></script>
 
 </th:block>

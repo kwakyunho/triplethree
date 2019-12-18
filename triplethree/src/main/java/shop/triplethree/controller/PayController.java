@@ -41,7 +41,7 @@ public class PayController {
 		return "pay/insertPay";	
 	}
 	/***급여 등록하기*****/
-	@PostMapping("/pay/selectPay")
+	@PostMapping("/admin/pay/selectPay")
 	public String insertPay(Pay pay, HttpSession session) {
 		return "pay/selectPay";
 	}

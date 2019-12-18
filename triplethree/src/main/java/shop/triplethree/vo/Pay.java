@@ -27,15 +27,24 @@ public class Pay {
 	private String poName;	//직책	
 	private String demgName;	//부서명
 	private Double inseurPer; //고용보험공제비율
-	private Double incomePer; //소득세공제비율
+	private int inCode; //소득세
+	private int residentTax;
 	private Double nationPer; //국민연금공제비율
 	private Double healthPer; //건보료공제비율
-	private Double residentTax;	//지방소득세공제비율
 	private Double longCare;	//장기요양공제비율
 	private Double industrialPer;	//산재보험비율	
 	private Year year;	//적용연도
 	public String getCode() {
 		return code;
+	}
+	public int getResidentTax() {
+		return residentTax;
+	}
+	public void setResidentTax(int residentTax) {
+		this.residentTax = residentTax;
+	}
+	public void setInCode(int inCode) {
+		this.inCode = inCode;
 	}
 	public void setCode(String code) {
 		this.code = code;
@@ -45,6 +54,9 @@ public class Pay {
 	}
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
+	}
+	public int getInCode() {
+		return inCode;
 	}
 	public String getDeCode() {
 		return deCode;
@@ -160,12 +172,6 @@ public class Pay {
 	public void setInseurPer(Double inseurPer) {
 		this.inseurPer = inseurPer;
 	}
-	public Double getIncomePer() {
-		return incomePer;
-	}
-	public void setIncomePer(Double incomePer) {
-		this.incomePer = incomePer;
-	}
 	public Double getNationPer() {
 		return nationPer;
 	}
@@ -178,12 +184,7 @@ public class Pay {
 	public void setHealthPer(Double healthPer) {
 		this.healthPer = healthPer;
 	}
-	public Double getResidentTax() {
-		return residentTax;
-	}
-	public void setResidentTax(Double residentTax) {
-		this.residentTax = residentTax;
-	}
+
 	public Double getLongCare() {
 		return longCare;
 	}
@@ -210,9 +211,8 @@ public class Pay {
 				+ ", mealCost=" + mealCost + ", childPay=" + childPay + ", deductPay=" + deductPay + ", writer="
 				+ writer + ", writerDay=" + writerDay + ", paymentDate=" + paymentDate + ", empNum=" + empNum
 				+ ", empName=" + empName + ", poName=" + poName + ", demgName=" + demgName + ", inseurPer=" + inseurPer
-				+ ", incomePer=" + incomePer + ", nationPer=" + nationPer + ", healthPer=" + healthPer
-				+ ", residentTax=" + residentTax + ", longCare=" + longCare + ", industrialPer=" + industrialPer
-				+ ", year=" + year + "]";
+				+ ", inCode=" + inCode + ", residentTax=" + residentTax + ", nationPer=" + nationPer + ", healthPer="
+				+ healthPer + ", longCare=" + longCare + ", industrialPer=" + industrialPer + ", year=" + year + "]";
 	}
 
 	
