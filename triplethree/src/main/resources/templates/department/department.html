@@ -11,6 +11,14 @@
 <th:block layout:fragment="customCss">
 <!-- DataTables -->
 <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+
+<style>
+.stylegreenBtn{
+	background-color: #006633;
+	border-color: #006633;
+}
+</style>
+
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -23,8 +31,8 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">부서관리</a></li>
+					<li class="breadcrumb-item"><a href="#" style="color:#006633;">Home</a></li>
+					<li class="breadcrumb-item active">부서관리</li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -42,13 +50,13 @@
 				<div style="align-self:center; width:90%;">
 					<div id="accordion1">
 						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
-						<div class="card card-primary small" style="margin-top: 15px;">
+						<div class="card card-primary small" style="margin-top: 15px; background-color: #006633;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 부서 등록 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false" style="color: white;"> 부서 등록 하기 </a>
 								</h4>
 							</div>
-							<div id="collapseOne1" class="panel-collapse in collapse" style="">
+							<div id="collapseOne1" class="panel-collapse in collapse" style="background-color: white;">
 							<div class="card-body" style="text-align: -webkit-center;">
 								<table style="text-align: center;">
 									<tr>
@@ -73,7 +81,7 @@
 									<tr>
 										<td colspan="4" class="inputDeBtn">
 											<!-- <button type="button" id="inputBtn" class="btn btn-block btn-primary btn-lg">등록하기</button> -->
-											<input type="button" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputBtn">
+											<input type="button" value="등록하기" class="btn btn-primary btn-lg stylegreenBtn" id="inputBtn">
 										</td>
 									</tr>
 								</table>
@@ -102,13 +110,13 @@
 				<div style="align-self:center; width:90%;">
 					<div id="accordion2">
 						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
-						<div class="card card-primary small" style="margin-top: 15px;">
+						<div class="card card-primary small" style="margin-top: 15px; background-color: #006633;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false"> 부서 수정 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false" style="color:white;"> 부서 수정 하기 </a>
 								</h4>
 							</div>
-							<div id="collapseOne2" class="panel-collapse in collapse" style="">
+							<div id="collapseOne2" class="panel-collapse in collapse" style="background-color: white;">
 							<div class="card-body" style="text-align: -webkit-center;">
 								<table style="text-align: center;">
 									<tr>
@@ -132,7 +140,7 @@
 									</tr>
 									<tr>
 										<td colspan="4" class="updateDeBtn">
-											<input type="button" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updateBtn">
+											<input type="button" value="수정하기" class="btn btn-primary btn-lg stylegreenBtn" id="updateBtn">
 										</td>
 									</tr>
 								</table>
