@@ -75,7 +75,7 @@ div.sign_type1 table {width: 100%;}
 					<div>
 						<!-- 전자결재 툴바 시작 -->
 						<div>
-							<span>툴바 들어갈 자리</span>
+							<span><i class="fas fa-sign-in-alt">결재요청</i></span>
 						</div>
 						<!-- 전자결재 툴바 끝 -->
 						<!-- 전자결재 레이아웃 시작 -->
@@ -192,7 +192,7 @@ div.sign_type1 table {width: 100%;}
 	<tbody>
 		<tr>
 			<td class="sign_type1_td_codMainName"><b style="color: red;">*</b> 휴가 종류</td>
-			<td class="sign_type1_td_codMainValue">
+			<td class="sign_type1_td_codMainValue abcd">
 				<span data-selectval="연차">연차</span>
 			</td>
 		</tr>
@@ -211,7 +211,7 @@ div.sign_type1 table {width: 100%;}
 	</tbody>
 </table>
 
-<span>
+<span style="display: block; text-align: left;">
 	<br><strong>[당일 반차 신청시]</strong>
 		시작일만 오전/오후 체크<br>
 	<strong>[예비군/민방위 신청시]</strong>
@@ -220,7 +220,6 @@ div.sign_type1 table {width: 100%;}
 		증빙서류 스캔하여&nbsp;파일 첨부 (예: 청첩장 등본 등)<br>&nbsp;<br>&nbsp;<br>
 	<br>
 </span>
-
 
 										
 										
@@ -244,7 +243,7 @@ div.sign_type1 table {width: 100%;}
 </div>
 </th:block>
 
-<th:block layout:fragment="customScript" th:inline="javascript">
+<th:block layout:fragment="customScript">
 <!-- ajax 호출 -->
 <script th:src="@{/custom/js/ajaxCall.js}"></script>
 <!--
@@ -253,5 +252,14 @@ div.sign_type1 table {width: 100%;}
  * sendData.ajaxUrl = '/ajax';	// 호출 주소
  * sendData.ajaxDataType = 'json';	// 리턴 타입
 -->
+
+<script type="text/javascript" th:inline="javascript">
+$(document).ready(function(){
+	$('.abcd').on('click', function(){
+		var a = prompt('입력하세요','');
+		$(this).children('span').text(a);
+	});
+});
+</script>
 </th:block>
 </html>
