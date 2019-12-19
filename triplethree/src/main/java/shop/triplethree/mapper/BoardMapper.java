@@ -37,8 +37,11 @@ public interface BoardMapper {
 	//게시글 수정위한 내용
 	public Board getBoardForUpdate(String code);	
 	
-	//게시글 수정하기
+	//전게시글 수정하기
 	public int updateBoard(Board board);
+	
+	//부게시글 수정하기
+	public int updateDepartBoard(Board board);
 	
 	//게시글 삭제하기
 	public int deleteBoard(String code);

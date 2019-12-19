@@ -86,10 +86,15 @@ public class BoardService {
 	public int updateCnt(String code) {
 		return boardMapper.updateCnt(code);
 	}
-	//게시물 수정처리
+	//전사 게시물 수정처리
 	public int updateBoard(Board board) {
 		return boardMapper.updateBoard(board);
 	}
+	//부서 게시물 수정처리
+	public int updateDepartBoard(Board board) {
+		return boardMapper.updateDepartBoard(board);
+	}
+	
 	
 	//게시물 삭제하기
 	public int deleteBoard(String code) {

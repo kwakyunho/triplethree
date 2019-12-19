@@ -156,8 +156,8 @@
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
 		SELECT
 			B.code as code
-			,emp_code
-			,B.li_code AS liCode
+			,emp_code as empCode
+			,B.li_code as liCode
 			,PO.poname AS poname
          	,EM.emp_name AS writer
          	,board_pw AS boardPw
@@ -170,8 +170,9 @@
 		ON	B.emp_code = EM.emp_num
 		LEFT JOIN POSISYS AS PO
 		ON	EM.pocode = PO.code
+		LEFT JOIN LIST_MANAGE AS LM
+		ON	B.li_code = LM.code
 		where B.code=#{code}
-		
 	</select>
 	
 	<select id="getBoardForUpdate" parameterType="String" resultType="shop.triplethree.vo.Board">
@@ -188,6 +189,20 @@
 	
 	<!-- count 나중에 넣어주기 -->
 	<update id="updateBoard" parameterType="shop.triplethree.vo.Board" >
+		update BOARD
+			set
+			code = #{code}
+			,emp_code = #{empCode}
+			,board_title = #{boardTitle}
+			,board_con = #{boardCon}
+			,writer_day = #{writerDay}
+			,board_pw = #{boardPw}
+		where
+			code = #{code}
+	</update>
+	
+	<!-- 부서게시판 업데이트 처리  -->
+	<update id="updateDepartBoard" parameterType="shop.triplethree.vo.Board" >
 		update BOARD
 			set
 			code = #{code}

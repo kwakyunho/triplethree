@@ -37,14 +37,38 @@ tr:hover{background: whitesmoke;}
 </div>
 <!-- /.content-header -->
 
+<!-- 부서게시판 수정하는 모달  -->
+<div class="modal fade" id="modalUpdate" style="padding-right: 15px;" aria-modal="true">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <h4 class="modal-title">수정하는 모달 </h4>
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <span aria-hidden="true">×</span>
+	      </button>
+	    </div>
+	    <div class="modal-body">
+	      <p>나와라 얍 </p>
+	    </div>
+	    <div class="modal-footer justify-content-between">
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      <button type="button" class="btn btn-primary">Save changes</button>
+	    </div>
+	  </div>
+	  <!-- /.modal-content -->
+	</div>
+        <!-- /.modal-dialog -->
+</div>
+
+<!-- 부서게시판 전체 리스트 -->
 <div class="content" style="align-content: center">
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">
-					<h5 style="margin-top: 0.5rem;">부서게시판  </h5>
+					<h5 style="margin-top: 0.5rem;">부서게시판 </h5>
 				</div>
-				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/admin/board/boardInsert'" >글쓰기</button>
+				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/board/departBoardInsert'" >글쓰기</button>
 			</div>
 	       
 		<div class="card-body">
@@ -57,17 +81,24 @@ tr:hover{background: whitesmoke;}
 							<th>작성자</th>
 							<th style="width:100px;">조회수</th>
 							<th style="width:100px;">작성일자</th>
+							<th>수정</th>
+							<th>삭제</th>
 							
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b ,index : ${departBoardList}" style="cursor:pointer">
+						<tr th:each="b ,index : ${departBoardList}" class="departBoardListTr" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
 							<td th:text="${b.boardCount}"></td>
 							<td th:text="${b.writerDay}"></td>
-							
+							<td class="upBtnTd">
+								<input type="button" id="upBtnList" value="수정" class="btn btn-block btn-outline-success btn-xs">
+							</td>
+							<td class="delBtnTd">
+								<input type="button" id="delBtnList" value="삭제" class="btn btn-block btn-outline-success btn-xs">
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -80,13 +111,20 @@ tr:hover{background: whitesmoke;}
 	     
 	 </div>
  </div>
- 
- 
 <!-- /.row -->
 <!-- /.container-fluid -->
 </th:block>
 
 <th:block layout:fragment="customScript">
+<script>
+$(document).ready(function(){
+	$('.upBtnTd').on('click', 'input', function(){
+		alert('ok');
+	}
+	//$('#modalUpdate').modal();
+}
+
+</script>
 
 <!-- DataTables -->
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
@@ -99,17 +137,17 @@ tr:hover{background: whitesmoke;}
 
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#boardListTable tbody').on('click', 'tr', function(){	
-		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
-		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
-		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
-		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
-		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
-		$('.boardListForm').submit();	// 전송
-	});
-});
+	/* $(document).ready(function(){
+		$('#boardListTable tbody').on('click', 'tr', function(){	
+			var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
+			boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+			var boardCode = boardUrl.attr('id');	// code id벨류값 추출
+			$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
+			$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
+			$('.boardListForm').attr('action', '/board/boardDetail');	// 액션 경로 정의
+			$('.boardListForm').submit();	// 전송
+		});
+	}); */
 </script>
 </th:block>
 </html>

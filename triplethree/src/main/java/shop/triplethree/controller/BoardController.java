@@ -165,7 +165,21 @@ public class BoardController {
 		boardService.updateBoard(board); // 수정 처리 완료
 		return "redirect:/board/boardList";
 	}
-
+	
+	/**
+	 * 부서게시판 글 수정 처리
+	 * @param board
+	 * @return board
+	 */
+	@PostMapping("/board/departBoardUpdate")
+	public String updateDepartBoard(Board board) {
+		System.out.println("*************************");
+		System.out.println("***departBoard Update 처리**");
+		System.out.println("*************************");
+		boardService.updateDepartBoard(board); // 수정 처리 완료
+		return "redirect:/board/departBoardUpdate";
+	}
+	
 	/**
 	 * 글 삭제 처리
 	 * @param board board에 글의 code 를 담아서 삭제함

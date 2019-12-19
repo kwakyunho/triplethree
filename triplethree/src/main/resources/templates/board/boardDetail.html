@@ -54,7 +54,7 @@
                 </h6>
 	       </div>
 	       <div>
-	       	<div class="card-body">
+	       	<div class="card-body" style="min-height:500px;">
 	       		<table class="table table-condensed" >
 	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>
@@ -65,21 +65,21 @@
 		</form>
 	     </div>
 	     <!-- /.card -->
-	     <div class="col-12">
+	     <!-- <div class="col-12">
 	     	<div class="row" id="detailBtns">
-			     <!-- <div class="col-4">
+			     <div class="col-4">
 						<button type="button" id="backBtn" class="btn btn-block btn-success btn-lg">목록</button>
-			     </div> -->
+			     </div>
 			      <div class="col-4">
 			      		<button type="button" id="updateBtn" class="btn btn-block btn-success btn-lg">수정</button>
-			      		<!-- <a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a> -->
+			      		<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardUpdate(code=${board.code})}">수정</a>
 			     </div>
 			      <div class="col-4">
 			      		<button type="button" id="deleteBtn" class="btn btn-block btn-success btn-lg">삭제</button>
-					<!-- 	<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a> -->
+						<a class = "btn btn-block btn-success btn-lg" style="color: #ffffff" th:href="@{/boardDelete(code=${board.code})}">삭제</a>
 			     </div>
 		     </div>
-	     </div>
+	     </div> -->
 	 </div>
 	 </div>
 			<!-- /.row -->
@@ -88,7 +88,11 @@
 	
 	<th:block layout:fragment="customScript">
 	<script type="text/javascript">
-	
+	$(document).ready(function(){
+	//liCode 비교해서 cate고리 따라서 보여주는 앞 태그 변경해주기
+	//cardHeader
+		
+	});
 	
 	$(document).ready(function(){
 		$('#backBtn').on('click', function(){	
@@ -117,7 +121,7 @@
 	$('#deleteBtn').on('click',function(){
 		if (confirm("정말 삭제하시겠습니까??")){  //확인
 			var dbPw = $('#boardPw').val();
-			var inputPw = prompt('비밀번호를 입력하세요');
+			var inputPw = prompt('비밀번호를 입력하세요(1111)');
 			if(dbPw==inputPw){
 				$(function(){
 					$(document).Toasts('create', {
@@ -127,7 +131,7 @@
 				        sticky : true,
 				        body: '게시글 삭제가 완료되었습니다'
 				      });
-					delay(1000);
+					document.delay(1000);
 				});
 				$('.boardDetailForm').attr('method', 'POST');
 				$('.boardDetailForm').attr('action', '/admin/board/boardDelete');
