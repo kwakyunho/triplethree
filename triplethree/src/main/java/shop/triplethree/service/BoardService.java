@@ -33,7 +33,7 @@ public class BoardService {
 		return board;
 	}
 	
-	//게시물 목록 가져오기
+	//공지사항 목록 가져오기
 	public List<Board> boardList() {
 		List<Board> list = boardMapper.boardList();
 		return boardMapper.boardList();
