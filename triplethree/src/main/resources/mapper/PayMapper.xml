@@ -120,7 +120,7 @@
 		
 	</select>
 	<!--급여입력  -->
-	<update id="insertPay" parameterType="shop.triplethree.vo.Pay">		
+	<update id="updatePay" parameterType="shop.triplethree.vo.Pay">		
 	UPDATE PAY_BILL 
 	SET 
 		basic_pay=#{basicPay},
@@ -132,7 +132,6 @@
 		com_pay=#{comPay}, 
 		meal_cost=#{mealCost}, 
 		child_pay=#{childPay}, 
-		deduct_pay=#{deductPay}, 
 		writer=#{writer},
 		writer_day=NOW(),
 		payment_date=CURTIME()
@@ -141,14 +140,13 @@
 	<!-- 공제액 화면 -->
 	<select id="insertDeduct" resultType="shop.triplethree.vo.Pay">
 	SELECT
-		de.insur_per AS inseurPer,
-		de.nation_per AS nationPer,
-		de.health_per AS healthPer,
-		de.long_care AS longCare,
+		de.insur_per*100 AS inseurPer,
+		de.nation_per*100 AS nationPer,
+		Round(de.health_per*100,2) AS healthPer,
+		Round(de.long_care*100,2) AS longCare,
 		de.YEAR AS year
 	FROM
 		DEDUCT_MANAGE AS de
-
 	</select>
 	
 </mapper>

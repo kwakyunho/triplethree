@@ -1,4 +1,4 @@
-//급여 선택시 기본급,식대 추가
+
 $(function(){
 	
 	$('.choiceBtn').on('click', function(){
@@ -17,7 +17,8 @@ $(function(){
 		var inseurPer = $(this).parents('.insertPay').children('.inseurPer');		
 		var inCode = $(this).parents('.insertPay').children('.inCode');		//소득세
 		var residentTax = $(this).parents('.insertPay').children('.residentTax'); //지방소득세		
-		
+		var empName = $(this).parents('.insertPay').children('.empName')
+			console.log(empName);
 		$('#basicPay').val(basicPay.html('input').val());
 		$('#beneFit').val(beneFit.html('input').val());
 		$('#holidayPay').val(holidayPay.html('input').val());
@@ -33,7 +34,12 @@ $(function(){
 		$('#inseurPer').val(inseurPer.html('input').val());
 		$('#inCode').val(inCode.html('input').val());
 		$('#residentTax').val(residentTax.html('input').val());
-
+		
+		
+		var empName=document.getElementById("empName").innerHTML;
+			alert('선택된 사원명은 : '+empName +'입니다');
+			console.log(empName);
+			
 		//.children('input[type="hidden"]').val();
 		var basicPay=document.getElementById("basicPay"); //기본급
 		var beneFit=document.getElementById("beneFit");	  //야간근무수당
@@ -55,11 +61,14 @@ $(function(){
 		var sum4=document.getElementById("sum4"); //공제액 계
 		var deductHap=document.getElementById("deductHap"); //차인지급액
 		
+		//과세
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;
+		//비과세
 		var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
 		sum2.value=add2;
+		//지급액계
 		var add3=add+add2;
 		sum3.value=add3;
 			
@@ -79,7 +88,7 @@ $(function(){
 			alert("기준소득월액 310,000원이하는 국민연금 최저납부액이 0원입니다");
 			$('#nationPer').val(0);
 		}
-	
+		
 		//건강보험 계산 
 		var health1=parseFloat(healthPer.value)*parseInt(sum1.value);
 		var health=Math.ceil(health1/2);
@@ -122,9 +131,11 @@ $(function(){
 		//차인지급액
 		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
 		deductHap.value=deductHap1;
-	
-	
-	});	
-	
+		
+		
+		});	
 	
 	});
+
+
+	

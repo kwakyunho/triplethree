@@ -52,10 +52,10 @@
 						</tr>
 						<tr th:each="d:${insertDeduct}">									
 							<th id="year" th:text="${d.year}">연도</th>
-							<th id="nationPer" th:text="${d.nationPer}">국민연금</th>
-							<th id="healthPer" th:text="${d.healthPer}">건강보험료</th>
-							<th id="longCare" th:text="${d.longCare}"> 장기요양보험료</th>
-							<th id="inseurPer" th:text="${d.inseurPer}">고용보험</th>				
+							<th name="nationPer"id="nationPer" th:text="${d.nationPer}">국민연금</th>
+							<th name="healthPer"id="healthPer" th:text="${d.healthPer}">건강보험료</th>
+							<th name="longCare"id="longCare" th:text="${d.longCare}"> 장기요양보험료</th>
+							<th name="inseurPer"id="inseurPer" th:text="${d.inseurPer}">고용보험</th>				
 							
 						</tr>	
 					</table>
@@ -77,7 +77,7 @@
 
 <th:block layout:fragment="customScript">
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{/dist/js/pages/dashboard3.js}"></script> -->
+<!-- <script th:src="@{/custom/js/Deduct.js}"></script> -->
 
 </th:block>
 </html>

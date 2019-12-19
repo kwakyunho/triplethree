@@ -48,33 +48,30 @@
 									<option value="poname">직급명</option>																					
 								</select>																							
 							</div>
-							<div>
+							 <div>
 								<input class="form-control" type="text" name="sv" 
 										 placeholder="검색어를 입력하세요"/>
 							 </div>
 							 <div>
 								<button type="submit"id="searchBtn" class="btn btn-block btn btn-success">Search</button>					
-							</form>										
 							</div>
-  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
-				 	
-					<tr>
-								
+							</form>										
+  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 				 	
+					<tr>								
+						
 						<th align="center">사원번호</th>
 						<th align="center">사원명</th>
 						<th align="center">부서명</th>
 						<th align="center">직급</th>
-						<th align="center">급여입력</th>
-
-							
-												
+						<th align="center">급여입력</th>																
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-					<tr class="insertPay" th:each="e :${insertSearchPay}">
-						<td id="empNum"th:text="${e.empNum}"></td>		
+					<tr class="insertPay" th:each="e :${insertSearchPay}">											
+						<td class="empNum"id="empNum"th:text="${e.empNum}"></td>		
 						<td id="empName"th:text="${e.empName}"></td>					 										
 						<td id="demgName"th:text="${e.demgName}"></td>										
 						<td id="poName"th:text="${e.poName}"></td>															
+							<input class="empName" type="hidden" th:value="${e.empName}">													
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
 							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
 							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
@@ -92,7 +89,7 @@
 							<input class="residentTax" type="hidden" th:value="${e.residentTax}">																																			
 															
 						<td>
-							<input type="button" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn ">
+							<input type="button" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn">
 						</td>
 					</tr>										
 				</table>
@@ -153,19 +150,19 @@
 						<th>공제금액</th>					
 					</tr>
 					<tr><td>국민연금</td>
-						<td><input type="text" name="nationPer" id="nationPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="nationPer" id="nationPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>건강보험</td>
-						<td><input type="text" name="healthPer"  id="healthPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="healthPer"  id="healthPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>장기요양보험</td>
-						<td><input type="text" name="longCare" id="longCare" class="form-control col-12"></td></tr>
+						<td><input type="text" name="longCare" id="longCare" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>고용보험</td>
-						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>소득세</td>
-						<td><input type="text" name="inCode" id="incomePer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="inCode" id="incomePer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>지방소득세</td>
-						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12"></td></tr>
+						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>공제액 계</td>
-						<td><input type="text" id="sum4" class="form-control col-12"></td></tr>
+						<td><input type="text" id="sum4" class="form-control col-12" readonly="readonly"></td></tr>
 						<tr><td colspan="2" align="left">차인지급액 :
 						<input type="text" id="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>

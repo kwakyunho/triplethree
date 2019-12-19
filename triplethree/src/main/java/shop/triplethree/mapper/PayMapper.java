@@ -21,8 +21,8 @@ public interface PayMapper {
 	/** 급여 입력  검색조건 **/
 	public List<Employee> insertSearchPay(String sk, String sv);
 	
-	/**급여 입력***/
-	public int insertPay(Pay pay);
+	/**급여  지급액입력***/
+	public int updatePay(Pay pay);
 	
 	/***공제액화면****/
 	public List<Pay> insertDeduct();
