@@ -320,9 +320,53 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @PostMapping("/employee/employeeMyUpdate")
-	 public String employeeMyUpdate(Employee employee) {
-		 String code = commonService.codeGeneration("EMP_MANAGE");
-		 employee.setCode(code);
+	 public String employeeMyUpdate(@RequestParam("image") MultipartFile[] file,Employee employee) {
+		 Path rootLocation = Paths.get(uploadPath);
+		 try {			
+				
+				String filePath = null;
+				String filePath2 = null;			
+				
+				for(int i =0; i < file.length; i++) {
+					
+					String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+					InputStream inputStream = file[i].getInputStream();
+					System.out.println(inputStream + "<--inputStream");
+					
+					if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+						
+							//테이블에 사진주소
+							Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+						
+							if(i == 0) {
+								filePath = "/img/" + originFileName;
+							}else {
+								filePath2 = "/img/" + originFileName;
+							}
+							
+						}
+						
+				}
+					System.out.println(filePath + "<- 1");
+					System.out.println(filePath2 + "<- 2");
+					
+					employee.setPhoto(filePath);
+					employee.setSignature(filePath2);
+					employeeService.updateEmployee(employee);	
+				} catch (IOException e) {
+					e.printStackTrace();
+					
+					for(int i =0; i < file.length; i++) {
+						String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+						try {
+							Files.delete(rootLocation.resolve(originFileName));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					
+				}
+		 
 		 employeeService.updateEmployee(employee);
 		 return "redirect:/employee/employeeMyPage";
 	 }

@@ -70,7 +70,7 @@
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
 		                 		<div class="col-sm-3" th:if="${u.photo} eq null">
-		                 			<img id="photoView" class="img-responsive" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:100px; height:100px;"/>
+		                 			<img id="photoView" class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:100px; height:100px;"/>
 									<input class="form-control" name="image" id="photo" type="file"/>
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
@@ -102,6 +102,7 @@
 									}
 								});	
 								
+							
 								
 								</script>	
 		                 		
@@ -109,13 +110,13 @@
 	                 		
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
 			                    <div class="col-sm-3" th:if="${u.signature} neq null">
-			                 		<img   id="signatureView" th:src="${u.signature}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
+			                 		<img   id="signatureView" th:src="${u.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
 			                 		<!--원래쓰던애 <img id="signatureView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
 									<input class="form-control" name="image" id="signature" type="file"/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>
 			                 	<div class="col-sm-3" th:if="${u.signature} eq null">
-			                 		<img id="signatureView" class="img-circle elevation-2" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:100px; height:100px;"/>
+			                 		<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:100px; height:100px;"/>
 									<input class="form-control" name="image" id="signature" type="file"/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>		
@@ -146,7 +147,7 @@
 										}
 									});	
 									
-									
+								
 									</script>
 	               	   </div>
 	                	
@@ -434,7 +435,7 @@
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
                  	
-                 	<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
+                 	<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" >
                   		<div class="card-body"> 
                   		<div class="form-group row">
 	                  <div class="col-sm-4">
@@ -504,7 +505,7 @@
                   
 	                 
 	                 <div class="card-footer">
-	                  <button type="submit" class="btn btn-success">변경 하기</button>
+	                  <button type="submit" class="btn btn-success" id="moveCheckBtn">변경 하기</button>
 	                </div>
 	                 
                   	</form>
@@ -547,6 +548,9 @@
 					 // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함 
 		             }
 		         })
+		         
+		        
+		         
 		   });
 	
 		});

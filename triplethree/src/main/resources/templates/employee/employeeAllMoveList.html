@@ -226,9 +226,21 @@
 			var afterPoCode = demgArray[num].afterPoCode;
 			var inputInsertUrl = $(this).parents('.approTr').children('.approTrInput');
 			
-			inputInsertUrl.children('input[name="moveCode"]').remove();
-			inputInsertUrl.append('<input type="hidden" name="moveCode" value=' + code + '>');
-			
+			if(confirm('승인 하시겠습니까?')){
+				inputInsertUrl.children('input[name="code"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="code" value=' + code + '>');
+				inputInsertUrl.children('input[name="moveCode"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="moveCode" value=' + moveCode + '>');
+				inputInsertUrl.children('input[name="afterDemgCode"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="afterDemgCode" value=' + afterDemgCode + '>');
+				inputInsertUrl.children('input[name="afterPoCode"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="afterPoCode" value=' + afterPoCode + '>');
+				$('#approForm').submit();
+				alert('승인이 완료되었습니다.');
+				
+			}else {
+				return alert('승인이 취소되었습니다.');				
+			}
 		});
 	
 		

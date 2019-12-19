@@ -229,8 +229,6 @@
 			
 			UPDATE EMP_MANAGE
 				SET
-					demgcode= #{demgCode},
-					pocode= #{poCode},
 					li_code= #{liCode},
 					password=#{password},
 					postcode=#{postCode},
