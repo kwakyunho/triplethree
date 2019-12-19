@@ -92,10 +92,8 @@
 	pay.meal_cost AS mealCost,
 	pay.child_pay AS childPay,
 	d.insur_per AS inseurPer,
-	d.income_per AS incomePer,
 	d.nation_per AS nationPer,
 	d.health_per AS healthPer,
-	d.resident_tax AS residentTax,
 	d.long_care AS longCare
 	FROM (
 	SELECT em.*
@@ -144,12 +142,9 @@
 	<select id="insertDeduct" resultType="shop.triplethree.vo.Pay">
 	SELECT
 		de.insur_per AS inseurPer,
-		de.income_per AS incomePer,
 		de.nation_per AS nationPer,
 		de.health_per AS healthPer,
 		de.long_care AS longCare,
-		de.resident_tax AS residenTax,
-		de.long_care AS alongCare,
 		de.YEAR AS year
 	FROM
 		DEDUCT_MANAGE AS de

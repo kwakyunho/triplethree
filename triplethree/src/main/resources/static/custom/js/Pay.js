@@ -53,6 +53,7 @@ $(function(){
 		var sum2=document.getElementById("sum2"); //비과세
 		var sum3=document.getElementById("sum3"); //지급액 계
 		var sum4=document.getElementById("sum4"); //공제액 계
+		var deductHap=document.getElementById("deductHap"); //차인지급액
 		
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
@@ -94,6 +95,12 @@ $(function(){
 		}
 		var healthPer=healthPer.value;
 		
+		//고용보험 계산
+		var inseurper=parseFloat(inseurPer.value)*parseInt(sum1.value);
+		var inseur=Math.ceil(inseurper/2);
+		console.log(inseur);
+		inseurPer.value=Math.floor(inseur/10)*10;
+		
 		//장기요양보험 계산		
 		var longCare1=parseInt(healthPer)*parseFloat(longCare.value);
 		var long=Math.ceil(longCare1);
@@ -101,23 +108,23 @@ $(function(){
 		longCare.value=Math.floor(long/10)*10;
 		var longCare=longCare.value;
 		//장기요양 최저치 알아봐야 함
-		if(healthPer >= 3205770){
-				alert("잘나오냐");		
+		if(healthPer >= 3205770){	
 			('#longCare').val(272810);
 		}else if(healthPer <=9040){
 			alert("최저치");
 			//#('#longCare').val(0);
 		}
 	
-		//고용보험 계산
-		var inseurper=parseFloat(inseurPer.value)*parseInt(sum1.value);
-		var inseur=Math.ceil(inseurper/2);
-		console.log(inseur);
-		inseurPer.value=Math.floor(inseur/10)*10;
-		
 		//공제액 합 계산 진행중		
 		var add4=parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare);
 		sum4.value =add4;
-		});	
+		
+		//차인지급액
+		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
+		deductHap.value=deductHap1;
+	
+	
+	});	
+	
 	
 	});
