@@ -65,7 +65,6 @@ public class BoardService {
 		return list;
 	}
 	
-	
 	//게시물  가져오기
 	public Board getBoardByCode(String code) {
 		Board board = boardMapper.getBoardByCode(code);
@@ -94,7 +93,6 @@ public class BoardService {
 	public int updateDepartBoard(Board board) {
 		return boardMapper.updateDepartBoard(board);
 	}
-	
 	
 	//게시물 삭제하기
 	public int deleteBoard(String code) {
