@@ -35,6 +35,11 @@ div.sign_type1 table {width: 100%;}
 .sign_type1_td_name {background: rgb(221, 221, 221); padding: 3px !important; border: 1px solid black; border-image: none; width: 80px; height: 22px; text-align: center; font-weight: bold; vertical-align: middle;}
 .sign_type1_td_value {padding: 3px !important; border: 1px solid black; border-image: none; width: 120px; height: 22px; text-align: left; vertical-align: middle;}
 .sign_type1_tb_sign {padding: 0px !important; border: 0px currentColor !important; border-image: none !important; width: 500px; text-align: right; vertical-align: top !important;}
+
+.sign_type1_td_codMainName {background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;}
+.sign_type1_td_codMainValue {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;}
+.sign_type1_td_codMaintext {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;}
+
 </style>
 
 </th:block>
@@ -46,7 +51,7 @@ div.sign_type1 table {width: 100%;}
 		<div class="row mb-2">
 			<div class="col-sm-6">
 				
-				<h1 class="m-0 text-dark">화면이동</h1>
+				<h1 class="m-0 text-dark">전자결재문서양식</h1>
 
 			</div><!-- /.col -->
 			<div class="col-sm-6">
@@ -87,7 +92,7 @@ div.sign_type1 table {width: 100%;}
 <table>
 	<tbody>
 		<tr>
-			<td class="sign_type1_title" colspan="2">결근 사유서</td>
+			<td class="sign_type1_title" colspan="2">휴가 신청서</td>
 		</tr>
 		<tr>
 			<td>
@@ -174,7 +179,49 @@ div.sign_type1 table {width: 100%;}
 			</td>
 		</tr>
 	</tbody>
-</table>										
+</table>
+
+
+
+<!-- 휴가 신청 --> 
+<table>
+	<colgroup> 
+		<col width="120">
+		<col width="680">
+	</colgroup>
+	<tbody>
+		<tr>
+			<td class="sign_type1_td_codMainName"><b style="color: red;">*</b> 휴가 종류</td>
+			<td class="sign_type1_td_codMainValue">
+				<span data-selectval="연차">연차</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="sign_type1_td_codMainName"><b style="color: red;">*</b> 휴가 기간</td>
+			<td class="sign_type1_td_codMainValue">
+				<span data-selectval="2019-12-19(목) ~ 2019-12-19(목)  사용일수: 1일">2019-12-19(목) ~ 2019-12-19(목) <strong>사용일수:</strong> 1일</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="sign_type1_td_codMainName" style="height: 80px;"><b style="color: red;">*</b> 휴가 사유</td>
+			<td class="sign_type1_td_codMainValue">
+				<span data-select="개인사정">개인사정</span>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<span>
+	<br><strong>[당일 반차 신청시]</strong>
+		시작일만 오전/오후 체크<br>
+	<strong>[예비군/민방위 신청시]</strong>
+		통지서 스캔하여 파일 첨부<br>
+	<strong>[경조휴가 신청시]</strong>
+		증빙서류 스캔하여&nbsp;파일 첨부 (예: 청첩장 등본 등)<br>&nbsp;<br>&nbsp;<br>
+	<br>
+</span>
+
+
 										
 										
 										
