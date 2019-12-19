@@ -228,7 +228,7 @@ public class EmployeeController {
 			 String moveCode = commonService.codeGeneration("PECHANGE");
 			 employee.setMoveCode(moveCode);
 			 employeeService.insertMoveEmployee(employee);
-			 employeeService.updateDepNPoEmployee(employee);	//변경부서 업데이트 
+			
 		 }else {
 			 try {			
 					
@@ -350,7 +350,8 @@ public class EmployeeController {
 	 }
 	 
 	 /**
-	  * 승인하기 받은 승인자 번호로 인사이동목록에 업데이트 하는 메서드
+	  * 승인하기 받은 승인자 번호로 인사이동목록에 업데이트 하고 
+	  * 승인받은 정보가 사원정보에 같이 업데이트 되는 메서드	  
 	  * @param employee, session
 	  * @return
 	  */
@@ -359,7 +360,9 @@ public class EmployeeController {
 		 String SID = (String)session.getAttribute("SID");
 		 employee.setApprover(SID);
 		 System.out.println(employee.getMoveCode() + " :이동코드");
+		 System.out.println(employee.getCode() + " :사원코드확인");
 		 employeeService.updateMoveList(employee);
+		 employeeService.updateDepNPoEmployee(employee);
 		 return "redirect:/admin/employee/employeeAllMoveList";
 	 }
 	 

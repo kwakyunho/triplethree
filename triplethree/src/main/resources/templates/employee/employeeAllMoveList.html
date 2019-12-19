@@ -86,18 +86,19 @@
                     </thead>
                      <tbody >
                      	
-	                    <tr  th:each="am :${AllMove}"  class="approTr">
-								<td class="approTd" th:text="${am.moveCode}"></td>
+	                    <tr th:each="am, index :${AllMove}"  class="approTr">
+								<td th:text="${am.moveCode}"></td>
 								<td th:text="${am.code}"></td>
 								<td th:text="${am.empName}"></td>
 								<td th:text="${am.demgName}"></td>
 								<td th:text="${am.poName}"></td>
-								<td th:text="${am.afterDemgName}"></td>
+								<td th:text="${am.afterDemgName}" ></td>
 								<td th:text="${am.afterPoName}"></td>
 								<td th:text="${am.afterDate}"></td>
 								<td th:text="${am.writerName}"></td>
 								<td th:text="${am.writerDay}"></td>
 							    <td class="approTrInput">															    
+									<input type="hidden" th:value="${index.count}">
 							    	<button type="button" class="btn btn-block btn-outline-success btn-sm approCheck" th:value="${am.moveCode}">승인하기</button>
 							    </td>
 						</tr>
@@ -193,15 +194,13 @@
 
 <th:block layout:fragment="customScript">
 
-	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 
-
-
-	<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
-	<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-
-	<script>
+<script type="text/javascript" th:inline="javascript">
 	$(document).ready(function(){
+		
 		$(function() {
 			$("#example1").DataTable();
 			$('#example2').DataTable({
@@ -214,21 +213,53 @@
 			});
 		});
 		
-		$('.approCheck').on('click',function(){
+		
+		var demgArray = [[${AllMove}]];
+		console.log(demgArray[0]);
+		
+		$('.approTr').on('click', 'button', function(){
+			var num = $(this).parents('.approTr').find('input[type=hidden]').val() - 1;
+			
+			var code = demgArray[num].code;
+			var moveCode = demgArray[num].moveCode;
+			var afterDemgCode = demgArray[num].afterDemgCode;
+			var afterPoCode = demgArray[num].afterPoCode;
+			var inputInsertUrl = $(this).parents('.approTr').children('.approTrInput');
+			
+			inputInsertUrl.children('input[name="moveCode"]').remove();
+			inputInsertUrl.append('<input type="hidden" name="moveCode" value=' + code + '>');
+			
+		});
+	
+		
+		/* $('.approCheck').on('click',function(){
 			var code=$(this).val(); //하위요소 버튼테그 벨류값 저장
 			if(confirm('승인 하시겠습니까?')){
-			var code = $(this).val()
-			$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="moveCode" value=' + code + '>');
-			$('#approForm').submit();
-			
-			alert('승인이 완료되었습니다.');
+				//인사이동관리코드 가지고 값 넣기
+				var code = $(this).val()
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="moveCode" value=' + code + '>');
+				//사원관리코드 가지고 값 넣기 
+				var EmpCode = $(this).parents('.approTr').children('.approTdCode').text();
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="code" value=' + EmpCode + '>');
+				//변경부서코드 가지고 값 넣기 
+				var DemgCode= $(this).parents('.approTr').children('#hiddenAfterDemgCode').val();
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="afterDemgCode" value=' + DemgCode + '>');
+				//변경직급코드 가지고 값 넣기
+				var PoCode = $(this).parents('.approTr').children('.approTdPo').find('input[type=hidden]').val();
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="afterPoCode" value=' + PoCode + '>');
+				console.log(DemgCode);
+				console.log(PoCode);
+			//	$('#approForm').submit();
+				
+				alert('승인이 완료되었습니다.');
 		}else{
 			return alert('승인이 취소되었습니다.');
 		}
 						
 			
-		});
+		}); */
+		
 	});
-	</script>
+</script>
 </th:block>
 </html>
