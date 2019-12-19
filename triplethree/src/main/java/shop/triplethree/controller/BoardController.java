@@ -39,7 +39,6 @@ public class BoardController {
 	 */
 	@GetMapping("/admin/board/boardInsert")
 	public String insertBoard(HttpSession session) {
-
 		return "/board/boardInsert";
 	}
 

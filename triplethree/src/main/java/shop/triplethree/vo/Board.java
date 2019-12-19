@@ -10,8 +10,15 @@ public class Board {
 	private String boardCount;
 	private String writerDay;
 	private String boardPw;
+	private String licode; //게시판종류
 
 	
+	public String getLicode() {
+		return licode;
+	}
+	public void setLicode(String licode) {
+		this.licode = licode;
+	}
 	public String getPoname() {
 		return poname;
 	}
