@@ -27,7 +27,7 @@ public class BasicSetController {
 	@PostMapping("/documentFormCateInsert")
 	public String insertListName(CateNameList cateNameList) {
 		basicSetService.insertListName(cateNameList);
-		return "redirect:/documentFormCateInsert";
+		return "redirect:/admin/documentFormCateInsert";
 	}
 	
 	@PostMapping(value="/admin/selectCateNameList", produces="application/json")
