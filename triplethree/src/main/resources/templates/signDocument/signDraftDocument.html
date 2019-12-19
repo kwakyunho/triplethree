@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>결재 문서함</title>
+	<title>기안 문서함</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -18,17 +18,16 @@ tr:hover{background: whitesmoke;}
 </th:block>
 
 <th:block layout:fragment="customContents">
-<!-- Content Header (Page header) -->
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">결재 문서함</h1>
+				<h1 class="m-0 text-dark">기안 문서함</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">Home</li>
-					<li class="breadcrumb-item active">결재 문서함</li>
+					<li class="breadcrumb-item active">기안 문서함</li>
 				</ol>
 			</div>
 		</div>
@@ -36,27 +35,26 @@ tr:hover{background: whitesmoke;}
 </div>
 <div>
 	<div class="card">
-		<div class="card-header p-2 checkVal">
+		<div class="card-header p-2 ajaxValCheck">
 			<ul class="nav nav-pills">
-				<li class="nav-item">
-					<a class="nav-link" href="#starting" data-toggle="tab">진행</a>
+				<li class="nav-item ajaxVal">
+					<a class="nav-link" href="#starting" data-toggle="tab" id="Starting">진행</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#end" data-toggle="tab">완료</a>
+				<li class="nav-item ajaxVal">
+					<a class="nav-link" href="#end" data-toggle="tab" id="End">완료</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#return" data-toggle="tab">반려</a>
+				<li class="nav-item ajaxVal">
+					<a class="nav-link" href="#return" data-toggle="tab" id="Return">반려</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#all" data-toggle="tab">전체</a>
+				<li class="nav-item ajaxVal">
+					<a class="nav-link" href="#all" data-toggle="tab" id="All">전체</a>
 				</li>
 			</ul>
 		</div>
-		<!-- /.card-header -->
+		
 		<div>
 			<div class="tab-content">
 				<div class="tab-pane" id="starting">
-					<!-- Post -->
 					<div class="content" style="align-content: center">
 						<div class="col-12">
 							<div class="card">
@@ -67,6 +65,7 @@ tr:hover{background: whitesmoke;}
 											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
 											<thead>
 												<tr>
+													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
 													<th style="width: 100px;">완료일</th>
 													<th style="width: 100px;">결재양식</th>
@@ -78,15 +77,16 @@ tr:hover{background: whitesmoke;}
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1기안일올꺼에요</td>
-													<td>1완료일올꺼에요</td>
-													<td>1결재양식올꺼에요</td>
-													<td>1제목이올꺼에요</td>
-													<td>1첨부파일이올꺼에요</td>
-													<td>1기안자가올꺼에요</td>
-													<td>1문서번호가올꺼에요</td>
-													<td>1결재상태가올꺼에요</td>
+												<tr th:if="${s.signState eq 'N'}" th:each="s, index : ${selectAll}">
+													<td calss="selectAllTd" th:text="${index.count}"></td>
+													<td calss="selectAllTd" th:text="${s.writerDay}"></td>
+													<td calss="selectAllTd" th:text="${s.signEndDay}"></td>
+													<td calss="selectAllTd" th:text="${s.docTitle}"></td>
+													<td calss="selectAllTd" th:text="${s.docName}"></td>
+													<td>4첨부파일이올꺼에요</td>
+													<td calss="selectAllTd" th:text="${s.deName +'-'+ s.poName +'-'+ s.empName}"></td>
+													<td calss="selectAllTd" th:text="${s.docFormCode}"></td>
+													<td th:if="${s.signState eq 'N'}" th:utext="${starting}" style="text-align: center;"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -95,13 +95,9 @@ tr:hover{background: whitesmoke;}
 							</div>
 						</div>
 					</div>
-					<!-- /.post -->
-
 
 				</div>
-				<!-- /.tab-pane -->
 				<div class="tab-pane" id="end">
-					<!-- The timeline -->
 					<div class="content" style="align-content: center">
 						<div class="col-12">
 							<div class="card">
@@ -113,6 +109,7 @@ tr:hover{background: whitesmoke;}
 											id="boardListTable">
 											<thead>
 												<tr>
+													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
 													<th style="width: 100px;">완료일</th>
 													<th style="width: 100px;">결재양식</th>
@@ -124,15 +121,16 @@ tr:hover{background: whitesmoke;}
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>2기안일올꺼에요</td>
-													<td>2완료일올꺼에요</td>
-													<td>2결재양식올꺼에요</td>
-													<td>2제목이올꺼에요</td>
-													<td>2첨부파일이올꺼에요</td>
-													<td>2기안자가올꺼에요</td>
-													<td>2문서번호가올꺼에요</td>
-													<td>2결재상태가올꺼에요</td>
+												<tr th:each="s, index : ${selectAll}" th:if="${s.signState eq 'Y'}">
+													<td calss="selectAllTd" th:text="${index.index+1}"></td>
+													<td calss="selectAllTd" th:text="${s.writerDay}"></td>
+													<td calss="selectAllTd" th:text="${s.signEndDay}"></td>
+													<td calss="selectAllTd" th:text="${s.docTitle}"></td>
+													<td calss="selectAllTd" th:text="${s.docName}"></td>
+													<td>4첨부파일이올꺼에요</td>
+													<td calss="selectAllTd" th:text="${s.deName +'-'+ s.poName +'-'+ s.empName}"></td>
+													<td calss="selectAllTd" th:text="${s.docFormCode}"></td>
+													<td th:if="${s.signState eq 'Y'}" th:utext="${end}" style="text-align: center;"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -142,11 +140,8 @@ tr:hover{background: whitesmoke;}
 						</div>
 					</div>
 				</div>
-				<!-- /.tab-pane -->
 				
-									<!-- /.tab-pane -->
 				<div class="tab-pane" id="return">
-					<!-- The timeline -->
 					<div class="content" style="align-content: center">
 						<div class="col-12">
 							<div class="card">
@@ -187,7 +182,6 @@ tr:hover{background: whitesmoke;}
 						</div>
 					</div>
 				</div>
-				<!-- /.tab-pane -->
 
 				<div class="tab-pane active" id="all">
 					<div class="content" style="align-content: center">
@@ -201,6 +195,7 @@ tr:hover{background: whitesmoke;}
 											id="boardListTable">
 											<thead>
 												<tr>
+													<th style="width: 10x;">순차</th>
 													<th style="width: 100px;">기안일</th>
 													<th style="width: 100px;">완료일</th>
 													<th style="width: 100px;">결재양식</th>
@@ -212,15 +207,18 @@ tr:hover{background: whitesmoke;}
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>4기안일올꺼에요</td>
-													<td>4완료일올꺼에요</td>
-													<td>4결재양식올꺼에요</td>
-													<td>4제목이올꺼에요</td>
+												<tr th:each="s, index : ${selectAll}" class="selectAllTr">
+													<td calss="selectAllTd" th:text="${index.count}"></td>
+													<td calss="selectAllTd" th:text="${s.writerDay}"></td>
+													<td calss="selectAllTd" th:text="${s.signEndDay}"></td>
+													<td calss="selectAllTd" th:text="${s.docTitle}"></td>
+													<td calss="selectAllTd" th:text="${s.docName}"></td>
 													<td>4첨부파일이올꺼에요</td>
-													<td>4기안자가올꺼에요</td>
-													<td>4문서번호가올꺼에요</td>
-													<td>4결재상태가올꺼에요</td>
+													<td calss="selectAllTd" th:text="${s.deName +'-'+ s.poName +'-'+ s.empName}"></td>
+													<td calss="selectAllTd" th:text="${s.docFormCode}"></td>
+													<!-- <td calss="selectAllTd" th:text="${s.signState}" id="signState"></td> -->
+													<td th:if="${s.signState eq 'N'}" th:utext="${starting}" style="text-align: center;"></td>
+													<td th:if="${s.signState eq 'Y'}" th:utext="${end}" style="text-align: center;"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -230,13 +228,9 @@ tr:hover{background: whitesmoke;}
 						</div>
 					</div>
 				</div>
-				<!-- /.tab-pane -->
 			</div>
-			<!-- /.tab-content -->
 		</div>
-		<!-- /.card-body -->
 	</div>
-	<!-- /.nav-tabs-custom -->
 </div>
 </th:block>
 
@@ -249,5 +243,7 @@ tr:hover{background: whitesmoke;}
     $('.dateTablePaging').DataTable();
   });
 </script>
+<!-- 전자결재 관련 스크립트 -->
+<script th:src="@{/custom/js/signDocument.js}"></script>
 </th:block>
 </html>

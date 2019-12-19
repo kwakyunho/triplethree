@@ -4,4 +4,58 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="shop.triplethree.mapper.SignDocumentMapper">
  	
+ 	<resultMap type="shop.triplethree.vo.SignDocument" id="signDocument">
+ 		<result property="code" column="code"/>
+ 		<result property="empCode" column="emp_code"/>
+ 		<result property="docFormCode" column="doc_form_code"/>
+ 		<result property="docTitle" column="doc_title"/>
+ 		<result property="docName" column="doc_name"/>
+ 		<result property="docCon" column="doc_con"/>
+ 		<result property="docBego" column="doc_bego"/>
+ 		<result property="writerDay" column="writer_day"/>
+ 		<result property="signEndDay" column="sign_end_day"/>
+ 		<result property="startDate" column="start_date"/>
+ 		<result property="endDate" column="end_date"/>
+ 		<result property="signState" column="sign_state"/>
+ 		<result property="signCheck" column="sign_check"/>
+ 	</resultMap>
+ 	
+ 	<!-- 기안문서함에서 상단메뉴 텝 클릭에 따라 값을 뿌려주는 쿼리문 -->
+ 	<select id="selectDraftDocument" parameterType="String" resultMap="signDocument">
+ 		SELECT
+			s.writer_day
+			,s.sign_end_day
+			,s.doc_title
+			,s.doc_name
+			,d.dename
+			,p.poname
+			,e.emp_name
+			,s.doc_form_code
+			,s.sign_state
+		FROM
+			SIG_DOC AS s
+		LEFT JOIN
+			EMP_MANAGE AS e
+		ON 
+			s.emp_code = e.emp_num
+		LEFT JOIN
+			DEMG AS d
+		ON
+			e.demgcode = d.CODE
+		LEFT JOIN
+			POSISYS AS p
+		ON
+			e.pocode = p.CODE
+		WHERE
+			s.emp_code = #{sid}
+		<if test="valCheck eq 'End'">
+		AND
+			s.sign_state = 'Y'
+		</if>
+		<if test="valCheck eq 'Starting'">
+		AND
+			s.sign_state = 'N'
+		</if>
+ 	</select>
+ 	
  </mapper>
