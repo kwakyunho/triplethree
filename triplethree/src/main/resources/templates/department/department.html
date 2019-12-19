@@ -11,6 +11,12 @@
 <th:block layout:fragment="customCss">
 <!-- DataTables -->
 <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+<style>
+#accordion1 div .aria-expanded:false{
+	background-color: green;
+}
+
+</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
