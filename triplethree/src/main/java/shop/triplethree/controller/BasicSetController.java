@@ -24,7 +24,7 @@ public class BasicSetController {
 		return "/documentFormCate/cateInsert";
 	}
 	
-	@PostMapping("/documentFormCateInsert")
+	@PostMapping("/admin/documentFormCateInsert")
 	public String insertListName(CateNameList cateNameList) {
 		basicSetService.insertListName(cateNameList);
 		return "redirect:/admin/documentFormCateInsert";
