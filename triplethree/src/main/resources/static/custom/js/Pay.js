@@ -17,8 +17,12 @@ $(function(){
 		var inseurPer = $(this).parents('.insertPay').children('.inseurPer');		
 		var inCode = $(this).parents('.insertPay').children('.inCode');		//소득세
 		var residentTax = $(this).parents('.insertPay').children('.residentTax'); //지방소득세		
-		var empName = $(this).parents('.insertPay').children('.empName')
+		var empName = $(this).parents('.insertPay').children('.empName');
 			console.log(empName);
+		//var empName=document.getElementById("empName").innerHTML;
+			//alert('선택된 사원명은 : '+empName +'입니다');
+		alert('선택된 사원명은 : '+empName.text()+'입니다');
+			
 		$('#basicPay').val(basicPay.html('input').val());
 		$('#beneFit').val(beneFit.html('input').val());
 		$('#holidayPay').val(holidayPay.html('input').val());
@@ -36,9 +40,6 @@ $(function(){
 		$('#residentTax').val(residentTax.html('input').val());
 		
 		
-		var empName=document.getElementById("empName").innerHTML;
-			alert('선택된 사원명은 : '+empName +'입니다');
-			console.log(empName);
 			
 		//.children('input[type="hidden"]').val();
 		var basicPay=document.getElementById("basicPay"); //기본급
@@ -120,7 +121,7 @@ $(function(){
 		if(healthPer >= 3205770){	
 			('#longCare').val(272810);
 		}else if(healthPer <=9040){
-			alert("최저치");
+			
 			//#('#longCare').val(0);
 		}
 	

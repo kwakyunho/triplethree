@@ -36,12 +36,11 @@ public class PayController {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
-		model.addAttribute("payInsert", payService.payInsert());
-		model.addAttribute("insertDeduct", payService.insertDeduct());
+	
 		return "pay/insertPay";	
 	}
 	/***급여 등록하기지만 수정으로 처리해줘야함*****/
-	@PostMapping("/admin/pay/selectPay")
+	@GetMapping("/admin/pay/selectPay")
 	public String updatePay(Pay pay, HttpSession session) {
 		String sid = (String) session.getAttribute("SID");
 		System.out.println("세션값이 들어왔나요?" + sid);
