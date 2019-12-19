@@ -78,6 +78,8 @@
 	<!--급여 화면 검색  -->
 	<select id="insertSearchPay" resultType="shop.triplethree.vo.Pay">
 	SELECT
+	pay.code as code,
+	em.code as empCode,
 	em.emp_num as empNum,
 	em.emp_name as empName,
 	p.poname as poName,

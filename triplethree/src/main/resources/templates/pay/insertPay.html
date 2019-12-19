@@ -66,12 +66,14 @@
 						<th align="center">급여입력</th>																
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-					<tr class="insertPay" th:each="e :${insertSearchPay}">											
+					<tr class="insertPay" th:each="e :${insertSearchPay}">
+																
+								
 						<td class="empNum" th:text="${e.empNum}"></td>		
 						<td class="empName" th:text="${e.empName}"></td>					 										
 						<td id="demgName" th:text="${e.demgName}"></td>										
 						<td id="poName" th:text="${e.poName}"></td>															
-																			
+							<input class="empCode" id="empCode" name="empCode"type="hidden" th:value="${e.empCode}">													
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
 							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
 							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													

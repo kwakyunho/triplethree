@@ -22,7 +22,7 @@ public interface PayMapper {
 	public List<Employee> insertSearchPay(String sk, String sv);
 	
 	/**급여  지급액입력***/
-	public int updatePay(Pay pay);
+	public int updatePay(Pay apy);
 	
 	/***공제액화면****/
 	public List<Pay> insertDeduct();

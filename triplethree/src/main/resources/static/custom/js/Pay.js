@@ -19,6 +19,8 @@ $(function(){
 		var residentTax = $(this).parents('.insertPay').children('.residentTax'); //지방소득세		
 		var empName = $(this).parents('.insertPay').children('.empName');
 			console.log(empName);
+		var empCode = $(this).parents('.insertPay').children('.empCode');
+			console.log(empCode);
 		//var empName=document.getElementById("empName").innerHTML;
 			//alert('선택된 사원명은 : '+empName +'입니다');
 		alert('선택된 사원명은 : '+empName.text()+'입니다');
@@ -38,6 +40,7 @@ $(function(){
 		$('#inseurPer').val(inseurPer.html('input').val());
 		$('#inCode').val(inCode.html('input').val());
 		$('#residentTax').val(residentTax.html('input').val());
+		
 		
 		
 			
@@ -61,6 +64,7 @@ $(function(){
 		var sum3=document.getElementById("sum3"); //지급액 계
 		var sum4=document.getElementById("sum4"); //공제액 계
 		var deductHap=document.getElementById("deductHap"); //차인지급액
+	
 		
 		//과세
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
@@ -82,7 +86,7 @@ $(function(){
 		
 		var nationPer=nationPer.value;
 		if (add > 4860000){
-			alert("기준소득월액 4,860,000원이상은 국민연금 최대납부액은 대상자입니다");
+			alert("기준소득월액 4,860,000원이상은 국민연금 최대납부액 대상자입니다");
 			$('#nationPer').val(218700);
 		
 		}else if (add < 310000){
@@ -119,13 +123,13 @@ $(function(){
 		var longCare=longCare.value;
 		//장기요양 최저치 알아봐야 함
 		if(healthPer >= 3205770){	
-			('#longCare').val(272810);
+			$('#longCare').val(272810);
 		}else if(healthPer <=9040){
 			
 			//#('#longCare').val(0);
 		}
 	
-		//공제액 합 계산 진행중		
+		//공제액 합 		
 		var add4=parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare);
 		sum4.value =add4;
 		
