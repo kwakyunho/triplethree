@@ -73,7 +73,7 @@ $("#inputTitle").blur(function() {
 		$.ajax({
 		type 		: 'POST',
 		data 		: {'title': title},
-		url 		: "department/deNameCheck",
+		url 		: "/admin/department/deNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -105,7 +105,7 @@ $("#departmentNameAf").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'title': title},
-		url 		: "department/deNameCheck",
+		url 		: "/admin/department/deNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -129,6 +129,7 @@ $("#departmentNameAf").blur(function() {
 });
 
 //리스트에서 부서명 클릭시 변경전 부서명 input 박스에 값이 들어가는 스크립트
+
 $(document).ready(function(){
 	$('.groupListTr').on('click', function(){
 		var uri = $(this);
@@ -149,13 +150,13 @@ $(function(){
 	
 	$('.inputDeBtn').click(function(){
 		if(confirm('등록하시겠습니까?')){
-			$('#formInput').attr('action', 'teamNameInsert').submit();	
+			$('#formInput').attr('action', '/admin/department/teamNameInsert').submit();	
 		}
 	});	
 	
 	$('#updateBtn').click(function(){
 		if(confirm('수정하시겠습니까?')){
-			$('#formUpdate').attr('action', 'teamNameUpdate').submit();	
+			$('#formUpdate').attr('action', '/admin/department/teamNameUpdate').submit();	
 		}
 	});	
 	
@@ -163,12 +164,19 @@ $(function(){
 		
 		var uri = $(this).parents('.groupListTr');
 		var textValue = uri.children('#departmentCode').text();
-		uri.children('#departmentCode').append('<input type="hidden" id="decode" name="departmentCode">');
-		$('#decode').val(textValue);
+		var check = uri.children('#departmentYesNO').text();
+		console.log(check);
 		
-		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', 'teamNameDelete').submit();
-		 }
+		if(check =='Y'){
+			uri.children('#departmentCode').append('<input type="hidden" id="decode" name="departmentCode">');
+			$('#decode').val(textValue);
+			
+			if(confirm('삭제하시겠습니까?')){
+				$('#deleteForm').attr('action', '/admin/department/teamNameDelete').submit();
+			 }
+		}else{
+			alert('사용하지 않는 부서는 삭제 할 수 없습니다.');
+		}
 	});
 });
 
@@ -237,7 +245,7 @@ $("#positionNameBeIn").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "position/poNameCheck",
+		url 		: "/admin/position/poNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -269,7 +277,7 @@ $("#positionNameAfUp").blur(function() {
 		$.ajax({
 			type 		: 'POST',
 		data 		: {'name': name},
-		url 		: "position/poNameCheck",
+		url 		: "/admin/position/poNameCheck",
 		datatype	: 'json',
 		
 			success : function(data) {
@@ -312,13 +320,13 @@ $(function(){
 	
 	$('.insertPoBtn').click(function(){
 		if(confirm('등록하시겠습니까?')){
-			$('#formInput').attr('action', 'positionInsert').submit();	
+			$('#formInput').attr('action', '/admin/position/positionInsert').submit();	
 		}
 	});	
 	
 	$('#updatePoBtn').click(function(){
 		if(confirm('수정하시겠습니까?')){
-			$('#formUpdate').attr('action', 'positionUpdate').submit();	
+			$('#formUpdate').attr('action', '/admin/position/positionUpdate').submit();	
 		}
 	});	
 	
@@ -329,7 +337,7 @@ $(function(){
 		$('#decode').val(textValue);
 		
 		if(confirm('삭제하시겠습니까?')){
-			$('#deleteForm').attr('action', 'positionListDelete').submit();
+			$('#deleteForm').attr('action', '/admin/position/positionListDelete').submit();
 		 }
 	});
 });

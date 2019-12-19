@@ -40,7 +40,7 @@ public class CompanyController {
 	 * 부서등록화면에서 등록하기 버튼을 클릭시 실행
 	 * db 에 부서를 등록함
 	 * */
-	@PostMapping("/department/teamNameInsert")
+	@PostMapping("/admin/department/teamNameInsert")
 	public String insertOrganizationChart(Company company, HttpSession session) {
 		//System.out.println("부서 등록버튼 클릭이 되었나요 ?");
 		String sid = (String) session.getAttribute("SID");
@@ -49,32 +49,32 @@ public class CompanyController {
 		companyService.insertOrganizationChart(company);
 		
 		//System.out.println(company.toString());
-		return "redirect:/teamNameInsert";
+		return "redirect:/admin/department/teamNameInsert";
 	}
 	
 	/**
 	 * 부서수정
 	 * */
-	@PostMapping("/department/teamNameUpdate")
+	@PostMapping("/admin/department/teamNameUpdate")
 	public String updateOrganizationChart(Company company, HttpSession session) {
 		//System.out.println("부서 수정 버튼이 클릭되었나요?");
 		String sid = (String) session.getAttribute("SID");
 		//System.out.println("세션값이 들어왔나요 ? " + sid);
 		company.setSid(sid);
 		companyService.updateOrganizationChart(company);
-		return "redirect:/teamNameInsert";
+		return "redirect:/admin/department/teamNameInsert";
 	}
 	
 	/**
 	 * 부서 삭제
 	 * */
-	@PostMapping("/department/teamNameDelete")
+	@PostMapping("/admin/department/teamNameDelete")
 	public String deleteOrganizationChart(Company company) {
 		//System.out.println("삭제버튼이 클릭되었나요?");
 		//System.out.println("값이 정상적으로 넘어왔나요 ? " + departmentCode);
 		//System.out.println(company.getDepartmentCode());
 		companyService.deleteOrganizationChart(company);
-		return "redirect:/teamNameInsert";
+		return "redirect:/admin/department/teamNameInsert";
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class CompanyController {
 	 * 직급등록 화면에서 등록하기 버튼 클릭시 실행
 	 * db에 직급을 등록함
 	 * */
-	@PostMapping("/position/positionInsert")
+	@PostMapping("/admin/position/positionInsert")
 	public String insertPosition(Position position, HttpSession session) {
 		System.out.println("직급 등록 버튼이 클릭되었나요?");
 		System.out.println(position.toString());
@@ -101,38 +101,38 @@ public class CompanyController {
 		System.out.println("세션값이 들어왔나요?" + sid);
 		position.setSid(sid);
 		companyService.insertPosition(position); 
-		return "redirect:/positionInsert";
+		return "redirect:/admin/position/positionInsert";
 	}
 	
 	/**
 	 * 직급 수정
 	 * */
-	@PostMapping("/position/positionUpdate")
+	@PostMapping("/admin/position/positionUpdate")
 	public String updatePosition(Position position, HttpSession session) {
 		System.out.println("직급 수정 버튼이 클릭되었나요?");
 		String sid = (String) session.getAttribute("SID");
 		System.out.println("세션값이 들어왔나요?" + sid);
 		position.setSid(sid);
 		companyService.updatePosition(position); 
-		return "redirect:/positionInsert";
+		return "redirect:/admin/position/positionInsert";
 	}
 	
 	/**
 	 * 직급 삭제
 	 * */
-	@PostMapping("/position/positionListDelete")
+	@PostMapping("/admin/position/positionListDelete")
 	public String deletePosition(Position position) {
 		System.out.println("삭제 버튼이 클릭되었나요?");
 		System.out.println(position.getPositionCode());
 		
 		companyService.deletePosition(position);
-		return "redirect:/positionInsert";
+		return "redirect:/admin/position/positionInsert";
 	}
 
 	/**
 	 * 부서 등록/수정 유효성 검사 메서드
 	 * */
-	@PostMapping(value="/department/deNameCheck" , produces = "application/json")
+	@PostMapping(value="/admin/department/deNameCheck" , produces = "application/json")
 	public @ResponseBody int deNameCheck(String title, Company company) {
 		System.out.println("부서명이 제대로 전달 되었나요? "+ title);
 		System.out.println("부서명이 있는지 확인해볼께요.");
@@ -145,7 +145,7 @@ public class CompanyController {
 	/**
 	 * 직급 등록/수정 유효성 검사 메서드
 	 * */
-	@PostMapping(value = "/position/poNameCheck", produces = "application/json")
+	@PostMapping(value = "/admin/position/poNameCheck", produces = "application/json")
 	public @ResponseBody int poNameCheck(String name, Position position) {
 		System.out.println("직급명이 제대로 전달 되었나요 ? " + name);
 		System.out.println("직급명이 있는지 확인해볼께요.");

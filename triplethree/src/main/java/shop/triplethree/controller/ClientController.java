@@ -15,7 +15,7 @@ import shop.triplethree.vo.Client;
 public class ClientController {
 	@Autowired
 	private ClientService clientService;
-	//거래처 정보조회 리스트
+	//거래처 전체 정보조회 리스트
 		@GetMapping("/client/clientList")
 		public String clientList(Model model) {
 			model.addAttribute("client", clientService.getClientList());
@@ -56,7 +56,7 @@ public class ClientController {
 	public String clientUpdate(Client client, Model model) {
 		clientService.updateClient(client);
 		model.addAttribute("code", client.getCode());
-		return "redirect:/client/clientList";
+		return "redirect:/client/clientList2";
 	}
 	
 	//거래처 정보삭제(상태변경)
@@ -64,7 +64,7 @@ public class ClientController {
 	public String deleteClient(@RequestParam(value="code")String code,Model model) {
 		System.out.println(code + "<--삭제  할 거래처 code");
 		clientService.deleteClient(code);
-		return "redirect:/client/clientList";
+		return "redirect:/client/clientList2";
 	}
 
 	//거래처 정보등록 화면이동 (거래처 상태가지고감)
@@ -79,7 +79,7 @@ public class ClientController {
 	public String insertClient(Client client) {
 		System.out.println("## clientInsert Code 생성 ##");
 		clientService.createClientCode(client); //코드생성 메서드 createClientCode
-		return "redirect:/client/clientList";
+		return "redirect:/client/clientList2";
 	}
 	
 	
