@@ -121,7 +121,8 @@
 	</select>
 	<!--급여입력  -->
 	<update id="updatePay" parameterType="shop.triplethree.vo.Pay">		
-	UPDATE PAY_BILL 
+	UPDATE 
+		PAY_BILL 
 	SET 
 		basic_pay=#{basicPay},
 		benefit=#{beneFit},
@@ -135,7 +136,8 @@
 		writer=#{writer},
 		writer_day=NOW(),
 		payment_date=CURTIME()
-	WHERE emp_code=#{empCode}
+	WHERE 
+		emp_code=#{empCode}
 	</update>
 	<!-- 공제액 화면 -->
 	<select id="insertDeduct" resultType="shop.triplethree.vo.Pay">

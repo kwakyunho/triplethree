@@ -41,9 +41,10 @@ public class PayController {
 	}
 	/***급여 등록하기지만 수정으로 처리해줘야함*****/
 	@GetMapping("/admin/pay/selectPay")
-	public String updatePay(Pay pay, HttpSession session) {
-		String sid = (String) session.getAttribute("SID");
-		System.out.println("세션값이 들어왔나요?" + sid);
+	public String updatePay(Pay pay) {
+		//System.out.println("pay==>"+pay);
+		//String sid = (String) session.getAttribute("SID");
+		//System.out.println("세션값이 들어왔나요?" + sid);
 		payService.updatePay(pay);
 		return "pay/selectPay";
 	}
