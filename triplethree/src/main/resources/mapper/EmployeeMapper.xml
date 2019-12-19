@@ -98,6 +98,7 @@
 	
 	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
 			SELECT
+				em.code as code,
 				em.emp_num as empNum,
 				em.emp_name as empName,
 				de.dename as demgName,

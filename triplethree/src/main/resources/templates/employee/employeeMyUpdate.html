@@ -23,8 +23,8 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/employee/employeeMyPage">My Page</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeMyUpdate">기본 정보 수정</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeMyPage" style="color: #28a745;">My Page</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeMyUpdate" style="color: #28a745;">기본 정보 수정</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -34,7 +34,7 @@
 	<div class="content">
 		 <div class="row">
               <div class="col-md-12">
-				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employee/employeeMyPage'">기본정보로 가기</button></div>
+				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-success" onclick="location.href='/employee/employeeMyPage'">기본정보로 가기</button></div>
 			 
 		 	</div>	     			
 	     </div>
@@ -98,7 +98,7 @@
 				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${m.postCode}">
 							</div>		
 							 <div class="col-sm-3">
-										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
+										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-success" value="우편번호 찾기">									
 									
 							 </div>	
 			           </div>     	
@@ -327,7 +327,7 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">수정 하기</button>
+	                  <button type="submit" class="btn btn-success">수정 하기</button>
 	                </div>
 	                
 	              </form>
