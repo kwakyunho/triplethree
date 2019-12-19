@@ -33,11 +33,38 @@ public class BoardService {
 		return board;
 	}
 	
-	//공지사항 목록 가져오기
+	//전사게시판 카테고리 가져오기
+	public List<Board> selectBCate() {
+		return boardMapper.selectBCate();
+	}
+	
+	//부서게시판 카테고리 가져오기
+	public List<Board> selectDBCate() {
+		return boardMapper.selectDBCate();
+	}
+	
+	//전사게시판 게시글 목록
 	public List<Board> boardList() {
 		List<Board> list = boardMapper.boardList();
-		return boardMapper.boardList();
+		return list;
 	}
+	
+	//전사게시판 공지사항 목록 
+	public List<Board> boardList1() {
+		List<Board> list = boardMapper.boardList1();
+		return list;
+	}
+	//전사게시판 전사소식 목록
+	public List<Board> boardList2() {
+		List<Board> list = boardMapper.boardList1();
+		return list;
+	}
+	//부서게시판 전체목록
+	public List<Board> departBoardList() {
+		List<Board> list = boardMapper.departBoardList();
+		return list;
+	}
+	
 	
 	//게시물  가져오기
 	public Board getBoardByCode(String code) {

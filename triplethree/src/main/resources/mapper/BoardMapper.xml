@@ -11,6 +11,7 @@
 		<result column="board_count" property="boardCount"/>
 		<result column="board_pw" property="boardPw"/>
 		<result column="writer" property="writer"/>
+		<result column="li_code" property="liCode"/>
 		<result column="writer_day" property="writerDay"/>
 	</resultMap>
 	<!-- 조회수 증가  -->
@@ -30,6 +31,26 @@
 		WHERE code=#{empCode}
 	</select>
 	
+	<!--전사게시판 카테고리 가져오기 -->
+	<select id="selectBCate" parameterType="String" resultType="shop.triplethree.vo.Board">
+			select
+				s_section as liCodeStr
+				,code as liCode
+			FROM
+				LIST_MANAGE
+			WHERE m_section='전사게시판'
+	</select>
+	
+	<!--부서게시판 카테고리 가져오기 -->
+	<select id="selectDBCate" parameterType="String" resultType="shop.triplethree.vo.Board">
+			select
+				s_section as liCodeStr
+				,code as liCode
+			FROM
+				LIST_MANAGE
+			WHERE m_section='부서게시판'
+	</select>
+	
 	<insert id="insertBoard" parameterType="shop.triplethree.vo.Board">
 		Insert into BOARD
 			(code
@@ -38,6 +59,7 @@
 			,board_con
 			,board_count
 			,board_pw
+			,li_code
 			,writer_day)
 		values
 			(#{code}
@@ -46,13 +68,16 @@
 			,#{boardCon}
 			,0
 			,#{boardPw}
+			,#{liCode}
 			,NOW());
 	</insert>
-	<!-- 공지사항 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
+	
+	<!-- 전사게시판 글 다가져오기 -->
 	<select id="boardList" resultMap="boardResultMap">
 		SELECT
 			B.code
-			,emp_code 
+			,B.li_code
+			,emp_code
 			,PO.poname AS poname
          	,EM.emp_name AS writer
          	,board_title
@@ -64,6 +89,67 @@
 		ON	B.emp_code = EM.emp_num
 		LEFT JOIN POSISYS AS PO
 		ON	EM.pocode = PO.code
+		WHERE B.li_code = 'LIS-20191219000001' or B.li_code = 'LIS-20191219000002'
+	</select>
+	
+	<!-- 전사공지사항 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
+	<select id="boardList1" resultMap="boardResultMap">
+		SELECT
+			B.code
+			,B.li_code
+			,emp_code
+			,PO.poname AS poname
+         	,EM.emp_name AS writer
+         	,board_title
+			,board_con
+			,board_count 
+			,date_format(B.writer_day,'%Y-%m-%d') as writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.emp_num
+		LEFT JOIN POSISYS AS PO
+		ON	EM.pocode = PO.code
+		WHERE B.li_code = 'LIS-20191219000001'
+	</select>
+	
+	<!-- 전사소식 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
+	<select id="boardList2" resultMap="boardResultMap">
+		SELECT
+			B.code
+			,B.li_code
+			,emp_code
+			,PO.poname AS poname
+         	,EM.emp_name AS writer
+         	,board_title
+			,board_con
+			,board_count 
+			,date_format(B.writer_day,'%Y-%m-%d') as writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.emp_num
+		LEFT JOIN POSISYS AS PO
+		ON	EM.pocode = PO.code
+		WHERE B.li_code = 'LIS-20191219000002'
+	</select>
+	
+	<!-- 부서소식 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
+	<select id="departBoardList" resultMap="boardResultMap">
+		SELECT
+			B.code
+			,B.li_code
+			,emp_code
+			,PO.poname AS poname
+         	,EM.emp_name AS writer
+         	,board_title
+			,board_con
+			,board_count 
+			,date_format(B.writer_day,'%Y-%m-%d') as writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.emp_num
+		LEFT JOIN POSISYS AS PO
+		ON	EM.pocode = PO.code
+		WHERE B.li_code = 'LIS-20191219000003' or B.li_code = 'LIS-20191219000004' or B.li_code = 'LIS-20191219000005' or B.li_code = 'LIS-20191219000006'
 	</select>
 	
 	<!--글 정보 하나만 뽑아오기 code로   -->
@@ -71,6 +157,7 @@
 		SELECT
 			B.code as code
 			,emp_code
+			,B.li_code AS liCode
 			,PO.poname AS poname
          	,EM.emp_name AS writer
          	,board_pw AS boardPw
@@ -86,6 +173,7 @@
 		where B.code=#{code}
 		
 	</select>
+	
 	<select id="getBoardForUpdate" parameterType="String" resultType="shop.triplethree.vo.Board">
 		SELECT
 			B.code as code

@@ -10,14 +10,21 @@ public class Board {
 	private String boardCount;
 	private String writerDay;
 	private String boardPw;
-	private String licode; //게시판종류
+	private String liCode; //카테고리코드
+	private String liCodeStr; //코드이름
 
 	
-	public String getLicode() {
-		return licode;
+	public String getLiCode() {
+		return liCode;
 	}
-	public void setLicode(String licode) {
-		this.licode = licode;
+	public void setLiCode(String liCode) {
+		this.liCode = liCode;
+	}
+	public String getLiCodeStr() {
+		return liCodeStr;
+	}
+	public void setLiCodeStr(String liCodeStr) {
+		this.liCodeStr = liCodeStr;
 	}
 	public String getPoname() {
 		return poname;

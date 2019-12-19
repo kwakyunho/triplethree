@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>부서게시판</title>
+	<title>공지사항 목록</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -23,12 +23,12 @@ tr:hover{background: whitesmoke;}
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">부서게시판</h1>
+				<h1 class="m-0 text-dark">전사게시판</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a th:href="@{/board/boardList}" style="color:#28a745;">전사게시판</a></li>
-					<li class="breadcrumb-item">부서게시판</li>
+					<li class="breadcrumb-item"><a>전사게시판</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/departBoardList}" style="color:#28a745;" >부서별게시판</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -37,14 +37,16 @@ tr:hover{background: whitesmoke;}
 </div>
 <!-- /.content-header -->
 
-<div class="content" style="align-content: center">
+<!-- 전사소식 시작 -->
+ 
+ <div class="content" style="align-content: center">
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">
-					<h5 style="margin-top: 0.5rem;">부서게시판 </h5>
+					<h5 style="margin-top: 0.5rem;">전사소식</h5>
 				</div>
-				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/board/departBoardInsert'" >글쓰기</button>
+				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/admin/board/boardInsert'">글쓰기</button>
 			</div>
 	       
 		<div class="card-body">
@@ -61,12 +63,13 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b ,index : ${departBoardList}" style="cursor:pointer">
+						<tr th:each="b ,index : ${boardList2}" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
 							<td th:text="${b.boardCount}"></td>
 							<td th:text="${b.writerDay}"></td>
+							
 						</tr>
 					</tbody>
 				</table>

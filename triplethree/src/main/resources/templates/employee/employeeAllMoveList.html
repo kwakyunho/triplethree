@@ -88,7 +88,7 @@
                      	
 	                    <tr  th:each="am :${AllMove}"  class="approTr">
 								<td class="approTd" th:text="${am.moveCode}"></td>
-								<td th:text="${am.code}"></td>
+								<td class="approTd2" th:text="${am.code}"></td>
 								<td th:text="${am.empName}"></td>
 								<td th:text="${am.demgName}"></td>
 								<td th:text="${am.poName}"></td>
@@ -219,8 +219,9 @@
 			if(confirm('승인 하시겠습니까?')){
 			var code = $(this).val()
 			$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="moveCode" value=' + code + '>');
+			var empCode = $(this).parents('.approTr').children('.approTd2').text();
+			$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="code" value=' + empCode + '>');
 			$('#approForm').submit();
-			
 			alert('승인이 완료되었습니다.');
 		}else{
 			return alert('승인이 취소되었습니다.');
