@@ -91,6 +91,8 @@ $(function(){
 			stCheck.focus();
 			return false;
 		}
+		
+		
 		/*if(imageCheck.val() == ""){
 			alert('이미지를 삽입해주세요.');
 			imageCheck.focus();
@@ -106,7 +108,7 @@ $("#inName").blur(function() {
 	//console.log(name + " <- 시설명이에요.");
 	
 		$.ajax({
-			type 		: 'POST',
+		type 		: 'POST',
 		data 		: {'name': name},
 		url 		: "/admin/assets/beNameCheck",
 		datatype	: 'json',
@@ -269,7 +271,7 @@ $(document).ready(function(){
 			$('#upVeModelYear').val(uri.children('#veModelYear').text());
 			$('#upFaSt').val(uri.children('#faSt').text());
 			
-			$('#myModal2').modal();	
+			$('#myModal2').modal('show');	
 		}else{
 			alert('사용하지 않는 차량은 수정 할 수 없습니다.');
 		}
