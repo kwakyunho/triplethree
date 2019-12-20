@@ -53,9 +53,21 @@ public class SignDocumentController {
 	@PostMapping(value="/signDocument/selectDraftDocument",produces = "application/json")
 	public @ResponseBody List<SignDocument> selectDraftDocument(String valCheck,HttpSession session) {
 		//System.out.println(valCheck);
+
+		// 리턴을 위한 변수를 선언
+		List<SignDocument> selectList = null; 
 		String sid = (String) session.getAttribute("SID");
+		/*
+		 * if("Return".equals(valCheck)) { selectList =
+		 * signDocumentService.selectDraftDocument(valCheck,sid); //selectList =
+		 * signDocumentService.selectDraftDocumentReturn(valCheck, sid);
+		 * System.out.println("값확인"+selectList.toString()); }else { selectList =
+		 * signDocumentService.selectDraftDocument(valCheck,sid);
+		 * System.out.println("값확인"+selectList.toString()); }
+		 */
 		//System.out.println(signDocumentService.selectDraftDocument(valCheck,sid));
-		List<SignDocument> selectList = signDocumentService.selectDraftDocument(valCheck,sid);
+		selectList = signDocumentService.selectDraftDocument(valCheck,sid);
+		System.out.println("값확인"+selectList.toString());
 		return selectList;
 	}
 }

@@ -5,7 +5,7 @@
 $(function(){
 	$('.ajaxVal').one('click', function(){
 		var valCheck = $(this).children('a').prop('id');
-		//console.log(valCheck);
+		console.log(valCheck);
 		var code = null; // 작성된 결재문서관리코드
 		var writerDay = null; // 작성일자
 		var signEndDay = null; // 결재완료일
@@ -17,7 +17,14 @@ $(function(){
 		var docFormCode = null; // 문서양식관리코드
 		var signState = null; // 전자결재상태
 		var str = null; // 테이블로 뿌리기 위해 필요한 변수
+		//var uri = null; // ajax 경로 설정을 위한 변수
 		
+		//if(valCheck == 'Return'){
+		//	uri = "";
+		//}else{
+		//	uri = "/signDocument/selectDraftDocument";
+		//}
+		//console.log(uri);
 		// 기안문서의 상태를 구분하여 상태에 맞는 문서를 가져옴
 		$.ajax({
 			type 		: 'POST',
@@ -44,11 +51,9 @@ $(function(){
 							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 							str += '<td>'+data[i].docFormCode+'</td>'
 										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success">진행중</span></td>';
+											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
 										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary">완료</span></td>';
-										}else{
-											str += '<td><span class="btn bg-gradient-danger">반려</span</td>';
+											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
 										}								
 							str += '</tr>'
 						});
@@ -70,11 +75,9 @@ $(function(){
 							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 							str += '<td>'+data[i].docFormCode+'</td>'
 										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success">진행중</span></td>';
+											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
 										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary">완료</span></td>';
-										}else{
-											str += '<td><span class="btn bg-gradient-danger">반려</span</td>';
+											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
 										}								
 							str += '</tr>'
 						});
@@ -96,16 +99,35 @@ $(function(){
 							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 							str += '<td>'+data[i].docFormCode+'</td>'
 										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success">진행중</span></td>';
+											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
 										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary">완료</span></td>';
-										}else{
-											str += '<td><span class="btn bg-gradient-danger">반려</span</td>';
+											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
 										}								
 							str += '</tr>'
 						});
 						$('#selectStartingTr').append(str);
 						$('.dateTablePagingStarting').DataTable();
+						
+					}else if(valCheck =='Return'){
+						$.each(data, function(i){
+							str += '<td>'+[i+1]+'</td>'
+							str += '<td>'+data[i].writerDay+'</td>'
+							if(data[i].reDocDate == null){
+								str += '<td></td>';
+							}else{
+								str += '<td>'+data[i].reDocDate+'</td>'
+							};
+							str	+= '<td>'+data[i].docTitle+'</td>'
+							str += '<td>'+data[i].docName+'</td>'
+							str += '<td>'+'첨부파일 자리에요'+'</td>'
+							str += '<td>'+data[i].comments+'</td>'
+							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+							str += '<td>'+data[i].docFormCode+'</td>'
+							str += '<td><span class="btn bg-gradient-danger" style=" font-size: small;">반려</span</td>'							
+							str += '</tr>'
+						});
+						$('#selectReturnTr').append(str);
+						$('.dateTablePagingReturn').DataTable();	
 					}
 					//$('.dateTablePaging').DataTable();
 				}, error : function() {

@@ -21,4 +21,8 @@ public class SignDocumentService {
 	public List<SignDocument> selectDraftDocument(String valCheck,String sid){
 		return signDocumentMapper.selectDraftDocument(valCheck,sid);
 	}
+	public List<SignDocument> selectDraftDocumentReturn(String valCheck, String sid){
+		System.out.println(1);
+		return signDocumentMapper.selectDraftDocumentReturn(valCheck, sid);
+	}
 }

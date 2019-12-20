@@ -19,7 +19,35 @@ public class SignDocument {
 	private String signState; // 전자결재상태
 	private String signCheck; // 접수완료체크
 	private String valCheck; // 상단 메뉴 벨류값 저장
+	private String accCode; // 결재라인누적관리코드
+	private String docFormCdoe; // 문서양식관리코드
+	private String reDocDate; // 반려일
+	private String comments; // 코멘트
 	
+	public String getAccCode() {
+		return accCode;
+	}
+	public void setAccCode(String accCode) {
+		this.accCode = accCode;
+	}
+	public String getDocFormCdoe() {
+		return docFormCdoe;
+	}
+	public void setDocFormCdoe(String docFormCdoe) {
+		this.docFormCdoe = docFormCdoe;
+	}
+	public String getReDocDate() {
+		return reDocDate;
+	}
+	public void setReDocDate(String reDocDate) {
+		this.reDocDate = reDocDate;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	public String getValCheck() {
 		return valCheck;
 	}
@@ -128,6 +156,7 @@ public class SignDocument {
 				+ docTitle + ", docName=" + docName + ", docCon=" + docCon + ", docBego=" + docBego + ", writerDay="
 				+ writerDay + ", signEndDay=" + signEndDay + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", empName=" + empName + ", poName=" + poName + ", deName=" + deName + ", signState=" + signState
-				+ ", signCheck=" + signCheck + ", valCheck=" + valCheck + "]";
+				+ ", signCheck=" + signCheck + ", valCheck=" + valCheck + ", accCode=" + accCode + ", docFormCdoe="
+				+ docFormCdoe + ", reDocDate=" + reDocDate + ", comments=" + comments + "]";
 	}
 }
