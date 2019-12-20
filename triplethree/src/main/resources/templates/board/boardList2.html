@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>공지사항 목록</title>
+	<title>전사게시판</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -28,7 +28,7 @@ tr:hover{background: whitesmoke;}
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a>전사게시판</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/board/departBoardList}" style="color:#28a745;" >부서별게시판</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/departBoardList}" style="color:#28a745;" >부서게시판</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -37,21 +37,23 @@ tr:hover{background: whitesmoke;}
 </div>
 <!-- /.content-header -->
 
-<!-- 전사소식 시작 -->
- 
- <div class="content" style="align-content: center">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<div class="card-title">
-					<h5 style="margin-top: 0.5rem;">전사소식</h5>
-				</div>
-				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/admin/board/boardInsert'">글쓰기</button>
-			</div>
-	       
-		<div class="card-body">
-			<form class="boardListForm">
-				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+		 <div class="col-md-12">
+			<div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">전사공지</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">전사소식</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+					<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
+	                <div class="card-body">  
+	                	<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
 					<thead>
 						<tr>
 							<th>순차</th>
@@ -63,7 +65,7 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b ,index : ${boardList2}" style="cursor:pointer">
+						<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
@@ -73,17 +75,30 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</tbody>
 				</table>
-			</form>
-	           	<!-- /.table -->
-        </div>
-	        <!-- /.card-body -->
-	     </div>
-	     <!-- /.card -->
-	     
-	 </div>
- </div>
-<!-- /.row -->
-<!-- /.container-fluid -->
+	                 
+
+	                </div>
+	              </form>
+                </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="timeline">
+                    <!-- The timeline -->
+                 	
+                 	<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" >
+                  		<div class="card-body"> 
+                  		<div class="form-group row">
+	               				fsefsef
+		                </div>
+		              </div>
+                  	</form>
+                  </div>
+ 				</div>
+		  	</div>
+           </div>
+		  </div>
+		</div>
+	</div>
+</div>
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -106,7 +121,7 @@ $(document).ready(function(){
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
-		$('.boardListForm').attr('action', '/board/boardDetail');	// 액션 경로 정의
+		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
 		$('.boardListForm').submit();	// 전송
 	});
 });

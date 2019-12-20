@@ -83,7 +83,7 @@
 	</insert>
 	
 	<!-- 전사게시판 글 다가져오기 -->
-	<select id="boardList" resultMap="boardResultMap">
+	<select id="selectBoardList" resultMap="boardResultMap">
 		SELECT
 			B.code
 			,B.li_code
@@ -103,7 +103,7 @@
 	</select>
 	
 	<!-- 전사공지사항 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
-	<select id="boardList1" resultMap="boardResultMap">
+	<select id="selectNoticeList" resultMap="boardResultMap">
 		SELECT
 			B.code
 			,B.li_code
@@ -123,7 +123,7 @@
 	</select>
 	
 	<!-- 전사소식 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
-	<select id="boardList2" resultMap="boardResultMap">
+	<select id="selectNewsList" resultMap="boardResultMap">
 		SELECT
 			B.code
 			,B.li_code

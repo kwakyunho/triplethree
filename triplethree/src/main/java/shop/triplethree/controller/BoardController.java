@@ -19,6 +19,7 @@ public class BoardController {
 
 	/**
 	 * 게시글 상세보기
+	 * 
 	 * @param code
 	 */
 	@PostMapping("/board/boardDetail")
@@ -31,28 +32,31 @@ public class BoardController {
 
 	/**
 	 * 전사게시판 글쓰기로 이동
+	 * 
 	 * @param session
 	 * @return
 	 */
 	@GetMapping("/admin/board/boardInsert")
-	public String insertBoard(HttpSession session,Model model) {
+	public String insertBoard(HttpSession session, Model model) {
 		model.addAttribute("liCate", boardService.selectBCate());
 		return "/board/boardInsert";
 	}
-	
+
 	/**
 	 * 부서게시판 글쓰기로 이동
+	 * 
 	 * @param session
 	 * @return
 	 */
 	@GetMapping("/board/departBoardInsert")
-	public String insertDepartBoard(HttpSession session,Model model) {
+	public String insertDepartBoard(HttpSession session, Model model) {
 		model.addAttribute("liCate", boardService.selectDBCate());
 		return "/board/departBoardInsert";
 	}
 
 	/**
 	 * 게시물 insert 처리
+	 * 
 	 * @param board
 	 * @param session
 	 * @return
@@ -64,9 +68,10 @@ public class BoardController {
 		System.out.println(board.toString() + "작성하기 폼에서 들어온 값들 ");
 		return "redirect:/board/boardList";
 	}
-	
+
 	/**
 	 * 부서게시물 insert 처리
+	 * 
 	 * @param board
 	 * @param session
 	 * @return
@@ -80,54 +85,60 @@ public class BoardController {
 	}
 
 	/**
-	 * 전사게시판 전체목록 가져오기(GET)
+	 * 전사게시판 목록 가져오기(GET) (전사게시판 전체 / 전사공지 / 전사소식)
+	 * 
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("/board/boardList")
 	public String boardList(Model model) {
-		model.addAttribute("boardList", boardService.boardList());
+		model.addAttribute("boardList", boardService.selectBoardList());
+		model.addAttribute("noticeList", boardService.selectNoticeList());
+		model.addAttribute("newsList", boardService.selectNewsList());
 		System.out.println("*****전사게시판 전체목록 SELECT*****");
 		return "/board/boardList";
 	}
-	
+
 	/**
 	 * 전사게시판 공지사항 목록 가져오기(GET)
+	 * 
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/board/boardList1")
-	public String boardList1(Model model) {
-		model.addAttribute("boardList1", boardService.boardList1());
+	@GetMapping("/board/noticeList")
+	public String selectNoticeList(Model model) {
+		model.addAttribute("noticeList", boardService.selectNoticeList());
 		System.out.println("*****전사게시판 공지사항 SELECT*****");
-		return "/board/boardList";
+		return "redirect:/board/boardList";
 	}
-	
+
 	/**
 	 * 전사게시판 공지사항 목록 가져오기(GET)
+	 * 
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/board/boardList2")
-	public String boardList2(Model model) {
-		model.addAttribute("boardList2", boardService.boardList2());
+	@GetMapping("/board/newsList")
+	public String selectNewsList(Model model) {
+		model.addAttribute("newsList", boardService.selectNewsList());
 		System.out.println("*****전사게시판 전사소식 SELECT*****");
-		return "/board/boardList2";
+		return "redirect:/board/boardList";
 	}
 
 	/**
 	 * 글 목록 가져오기(POST)
+	 * 
 	 * @param model
 	 * @return
-	 */
-	@PostMapping("/board/boardList")
-	public String poBoardList(Model model) {
-		  model.addAttribute("boardList", boardService.boardList());
-		  return "/board/boardList";
-	}
-		 
+	 *//*
+		 * @PostMapping("/board/boardList") public String poBoardList(Model model) {
+		 * model.addAttribute("boardList", boardService.boardList()); return
+		 * "/board/boardList"; }
+		 */
+
 	/**
 	 * 부서게시판 이동
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -139,6 +150,7 @@ public class BoardController {
 
 	/**
 	 * 선택된 글에 대한 수정할 데이터와 화면 보여주기
+	 * 
 	 * @param code
 	 * @param model
 	 * @return
@@ -152,9 +164,10 @@ public class BoardController {
 		model.addAttribute("board", boardService.getBoardForUpdate(code, session)); // 하나 뽑아와서 board 에 담기
 		return "/board/boardUpdate";
 	}
-	
+
 	/**
 	 * 선택된 글에 대한 수정할 데이터와 화면 보여주기(부서게시판의 글일경우)
+	 * 
 	 * @param code
 	 * @param model
 	 * @return
@@ -182,10 +195,10 @@ public class BoardController {
 		boardService.updateBoard(board); // 수정 처리 완료
 		return "redirect:/board/boardList";
 	}
-	
-	
+
 	/**
 	 * 부서게시판 글 수정 처리
+	 * 
 	 * @param board
 	 * @return board
 	 */
@@ -197,9 +210,10 @@ public class BoardController {
 		boardService.updateDepartBoard(board); // 수정 처리 완료
 		return "redirect:/board/departBoardList";
 	}
-	
+
 	/**
 	 * 글 삭제 처리
+	 * 
 	 * @param board board에 글의 code 를 담아서 삭제함
 	 */
 	@PostMapping("/admin/board/boardDelete")

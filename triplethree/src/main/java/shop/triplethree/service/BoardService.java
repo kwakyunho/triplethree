@@ -44,20 +44,20 @@ public class BoardService {
 		return boardMapper.selectDBCate();
 	}
 	
-	//전사게시판 게시글 목록
-	public List<Board> boardList() {
-		List<Board> list = boardMapper.boardList();
+	//전사게시판 게시글 (공지사항 + 전사소식) 목록
+	public List<Board> selectBoardList() {
+		List<Board> list = boardMapper.selectBoardList();
 		return list;
 	}
 	
 	//전사게시판 공지사항 목록 
-	public List<Board> boardList1() {
-		List<Board> list = boardMapper.boardList1();
+	public List<Board> selectNoticeList() {
+		List<Board> list = boardMapper.selectNoticeList();
 		return list;
 	}
 	//전사게시판 전사소식 목록
-	public List<Board> boardList2() {
-		List<Board> list = boardMapper.boardList1();
+	public List<Board> selectNewsList() {
+		List<Board> list = boardMapper.selectNewsList();
 		return list;
 	}
 	//부서게시판 전체목록

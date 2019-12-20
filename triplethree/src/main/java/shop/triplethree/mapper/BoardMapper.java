@@ -12,13 +12,13 @@ public interface BoardMapper {
 	public int insertBoard(Board board);
 	
 	//전사게시판 게시글 목록으로 가져오기
-	public List<Board> boardList();
+	public List<Board> selectBoardList();
 	
 	//전사게시판 공지사항 목록으로 가져오기
-	public List<Board> boardList1();
+	public List<Board> selectNoticeList();
 	
-	//전사게시판 공지사항 목록으로 가져오기
-	public List<Board> boardList2();
+	//전사게시판 전사소식 목록으로 가져오기
+	public List<Board> selectNewsList();
 	
 	//부서게시판 전체가져오기
 	public List<Board> departBoardList();
