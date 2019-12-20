@@ -125,7 +125,9 @@ public class EmployeeController {
 	 public String insertEmployee(@RequestParam("image") MultipartFile[] file,Employee employee) {
 		 String code = commonService.codeGeneration("EMP_MANAGE");
 		 employee.setCode(code);
-		 System.out.println(employee.getCode() + "<-생성된 코드");
+		// System.out.println(employee.getCode() + "<-생성된 코드");
+		 String payCode = commonService.codeGeneration("PAY_BILL");
+		 employee.setPayCode(payCode);
 		 
 		 Path rootLocation = Paths.get(uploadPath);
 		 try {			
@@ -158,7 +160,9 @@ public class EmployeeController {
 					
 					employee.setPhoto(filePath);
 					employee.setSignature(filePath2);
-					 employeeService.insertEmployee(employee);
+					employeeService.insertEmployee(employee);
+					
+					employeeService.insertBasicPay(employee);
 				} catch (IOException e) {
 					e.printStackTrace();
 					

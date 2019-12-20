@@ -41,6 +41,11 @@ public class EmployeeService {
 		 return employeeMapper.insertMoveEmployee(employee);
 		 }
 	 
+	 public int insertBasicPay(Employee employee) {
+		 
+		 return employeeMapper.insertBasicPay(employee);
+	 }
+	 
 	 public int insertEmployee(Employee employee){
 		  
 		  return employeeMapper.insertEmployee(employee);

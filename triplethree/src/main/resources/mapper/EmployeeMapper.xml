@@ -96,6 +96,18 @@
 			)
 	</insert>
 	
+	<insert id="insertBasicPay" parameterType="shop.triplethree.vo.Employee">
+		INSERT INTO PAY_BILL (code, emp_code, basic_pay, writer,writer_day)
+			VALUES (
+					#{payCode},
+					#{code},
+					#{basicPay},
+					#{writer},
+					 NOW())
+			 
+		
+	</insert>
+	
 	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
 			SELECT
 				em.code as code,
