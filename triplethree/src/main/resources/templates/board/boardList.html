@@ -38,62 +38,86 @@ tr:hover{background: whitesmoke;}
 <!-- /.content-header -->
 
 <div class="content" style="align-content: center">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<ul class="nav nav-pills">
-					<li class="nav-item">
-						<a></a>
-					</li>
-					
-				
-				
-				
-				
-				</ul>
+	<div class="card">
+		<div class="card-header p-2">
+			<ul class="nav nav-pills">
+				<li class="nav-item"><a class="nav-link active" href="#companyNotice" data-toggle="tab">전사공지</a></li>
+				<li class="nav-item"><a class="nav-link" href="#companyNews" data-toggle="tab">전사소식</a></li>
+	            <li style="margin-left: auto;"><button type="button" class="btn btn-success" onclick="location.href='/admin/board/boardInsert'" >글쓰기</button></li>
+            </ul>
+		</div>
 				<!-- <div class="card-title">
 					<h5 style="margin-top: 0.5rem;">공지사항 </h5>
 				</div>
 				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/admin/board/boardInsert'" >글쓰기</button> -->
-			</div>
 	       
+	<div class="active tab-pane" id="companyNotice">
 		<div class="card-body">
-			<form class="boardListForm">
-				<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
-					<thead>
-						<tr>
-							<th>순차</th>
-							<th style="width:500px;">글제목</th>
-							<th>작성자</th>
-							<th style="width:100px;">조회수</th>
-							<th style="width:100px;">작성일자</th>
-							
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
-							<td th:text="${index.index+1}"></td>
-							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
-							<td th:text="${b.writer}"></td>
-							<td th:text="${b.boardCount}"></td>
-							<td th:text="${b.writerDay}"></td>
-							
-						</tr>
-					</tbody>
-				</table>
-			</form>
+			<div class="tab-content">
+					<form class="boardListForm">
+						<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
+							<thead>
+								<tr>
+									<th>순차</th>
+									<th style="width:500px;">글제목</th>
+									<th>작성자</th>
+									<th style="width:100px;">조회수</th>
+									<th style="width:100px;">작성일자</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
+									<td th:text="${index.index+1}"></td>
+									<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
+									<td th:text="${b.writer}"></td>
+									<td th:text="${b.boardCount}"></td>
+									<td th:text="${b.writerDay}"></td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</form>
 	           	<!-- /.table -->
-        </div>
-	        <!-- /.card-body -->
-	     </div>
+				</div>	<!-- /.tab-pane -->
+		<div class="active tab-pane" id="companyNews">
+		<div class="card-body">
+			<div class="tab-content">
+					<form class="boardListForm">
+						<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
+							<thead>
+								<tr>
+									<th>순차</th>
+									<th style="width:500px;">글제목</th>
+									<th>작성자</th>
+									<th style="width:100px;">조회수</th>
+									<th style="width:100px;">작성일자</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
+									<td th:text="${index.index+1}"></td>
+									<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
+									<td th:text="${b.writer}"></td>
+									<td th:text="${b.boardCount}"></td>
+									<td th:text="${b.writerDay}"></td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+		<!-- /.tab-content -->
 	     <!-- /.card -->
-	     
-	 </div>
- </div>
- 
- 
-<!-- /.row -->
-<!-- /.container-fluid -->
+ 			</div>
+		<!-- /.card-body -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.content -->
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -103,6 +127,7 @@ tr:hover{background: whitesmoke;}
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 <script>
   $(function () {
+    $('#boardListTable').DataTable();
     $('#boardListTable').DataTable();
   });
 </script>
