@@ -67,13 +67,13 @@
 						<th align="center">급여입력</th>																
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-					<tr class="insertPay" th:each="e :${insertSearchPay}">																							
+					<tr class="insertPay" th:each="e,index :${insertSearchPay}">																							
 						
 						<td class="empNum" th:text="${e.empNum}"></td>		
 						<td class="empName" th:text="${e.empName}"></td>					 										
 						<td id="demgName" th:text="${e.demgName}"></td>										
 						<td id="poName" th:text="${e.poName}"></td>															
-							<input class="empCode" id="empCode" name="empCode"type="hidden" th:value="${e.empCode}">													
+							<input id="code" class="empCode" type="hidden" th:value="${e.empCode}">														
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
 							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
 							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
@@ -91,7 +91,7 @@
 							<input class="residentTax" type="hidden" th:value="${e.residentTax}">																																			
 															
 						<td>
-							<input type="button" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn">
+							<input type="button" id="choice" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn">
 						</td>
 					</tr>										
 				</table>
@@ -169,8 +169,10 @@
 						<input type="text" id="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>
 				</div>
-					<form th:action="@{/admin/pay/selectPay}" method="get">
-						<button type="button" value="급여지급액등록"  class="col-12 btn btn-success" id="check11"></button>
+					<form th:action="@{/admin/pay/selectPay}" method="post">
+					    <input id="empCode" name="empCode" type="hidden" value="ggg">					    
+						<button type="submit" value="급여지급액등록"  class="col-12 btn btn-success" id="check11">급여지급액등록</button>				
+									
 					</form>
 														
 					<!-- <a th:href="@{/admin/pay/selectPay(pay=${e.empCode})}" class="col-12 btn btn-success">급여지급액 등록</a>	 -->											
@@ -193,17 +195,17 @@ $(document).ready(function(){
 	})
 	//$('#sel').val(location.href);
 }
-
 </script>
 <script type="text/javascript">
 //값 넘기기
 $(function(){
 	$('#check11').click(function(){
 		alert('클릭');
-	var check = $('.empCode').val();
+	var check = $('#empCode').val();
 	console.log('값확인'+check);
 	});
 });
+
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <script th:src="@{/custom/js/Pay.js}"></script>

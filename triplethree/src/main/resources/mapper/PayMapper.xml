@@ -8,6 +8,7 @@
 		<!--급여 대장 클릭시 사원리스트  -->
 	<select id="selectPay" resultType="shop.triplethree.vo.Employee">		
 	SELECT  
+			A.code as empCode,
 			A.emp_num as empNum,
 			A.emp_name as empName,
 			B.dename as demgName,
@@ -32,6 +33,7 @@
 	<!-- 급여대장   -->
 	<select id="payInsert"  resultType="shop.triplethree.vo.Pay">
 		SELECT  
+			A.code as empCode,
 			A.emp_num as empNum,
 			A.emp_name as empName,
 			B.dename as demgName,
