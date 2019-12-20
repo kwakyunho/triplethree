@@ -137,7 +137,7 @@
 		child_pay=#{childPay}, 
 		writer=#{writer},
 		writer_day=NOW(),
-		payment_date=CURTIME()
+		payment_date=NOW()
 	WHERE 
 		emp_code=#{empCode}
 	</update>

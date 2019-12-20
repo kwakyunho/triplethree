@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.triplethree.service.EmployeeService;
 import shop.triplethree.service.PayService;
@@ -41,14 +42,17 @@ public class PayController {
 	}
 	/***급여 등록하기지만 수정으로 처리해줘야함*****/
 	@GetMapping("/admin/pay/selectPay")
-	public String updatePay(Pay pay) {
-	
-		payService.updatePay(pay);
+	public @ResponseBody String updatePay(Pay pay, Model model) {
+		 model.addAttribute("selectPay", payService.selectPay());
+		 model.addAttribute("payInsert", payService.payInsert());
+		
+		 payService.updatePay(pay);
+		 System.out.println(pay+"<--pay");
 		return "pay/selectPay";
 	}
 	/** 급여대장** */
 	@GetMapping("/pay/selectPay")
-	public String selectPay(Model model) {
+	public String selectPay(Model model) {		
 		 model.addAttribute("selectPay", payService.selectPay());
 		 model.addAttribute("payInsert", payService.payInsert());
 		return "pay/selectPay";	

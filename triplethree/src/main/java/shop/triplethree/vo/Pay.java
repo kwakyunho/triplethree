@@ -22,7 +22,7 @@ public class Pay {
 	private String writer;	//작성자
 	private LocalDateTime writerDay;	//작성일자
 	private LocalDateTime paymentDate;	//지급일자
-	private String empNum;	//사원코드	
+	private String empNum;	//사원번호	
 	private String empName;	//사원이름
 	private String poName;	//직책	
 	private String demgName;	//부서명
