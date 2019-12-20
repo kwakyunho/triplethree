@@ -29,8 +29,6 @@ public interface BoardMapper {
 	//부서게시판 카테고리 가져오기
 	public List<Board> selectDBCate();
 	
-	
-	
 	//게시글 정보 하나만 가져오기 (for detail)
 	public Board getBoardByCode(String code);
 	

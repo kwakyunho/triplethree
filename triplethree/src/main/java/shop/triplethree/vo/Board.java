@@ -7,13 +7,26 @@ public class Board {
 	private String writer;
 	private String boardTitle;
 	private String boardCon;
-	private String boardCount;
+	private int boardCount;
 	private String writerDay;
 	private String boardPw;
 	private String liCode; //카테고리코드
-	private String liCodeStr; //코드이름
+	private String liCodeMStr; //게시판 이름
+	public String getLiCodeMStr() {
+		return liCodeMStr;
+	}
+	public void setLiCodeMStr(String liCodeMStr) {
+		this.liCodeMStr = liCodeMStr;
+	}
+	private String liCodeStr; //카테고리상세 이름
 
 	
+	public int getBoardCount() {
+		return boardCount;
+	}
+	public void setBoardCount(int boardCount) {
+		this.boardCount = boardCount;
+	}
 	public String getLiCode() {
 		return liCode;
 	}
@@ -69,12 +82,7 @@ public class Board {
 	public void setBoardCon(String boardCon) {
 		this.boardCon = boardCon;
 	}
-	public String getBoardCount() {
-		return boardCount;
-	}
-	public void setBoardCount(String boardCount) {
-		this.boardCount = boardCount;
-	}
+	
 	public String getWriterDay() {
 		return writerDay;
 	}

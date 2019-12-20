@@ -36,7 +36,7 @@ public class BoardController {
 	 */
 	@GetMapping("/admin/board/boardInsert")
 	public String insertBoard(HttpSession session,Model model) {
-		model.addAttribute("liCode", boardService.selectBCate());
+		model.addAttribute("liCate", boardService.selectBCate());
 		return "/board/boardInsert";
 	}
 	
@@ -47,7 +47,7 @@ public class BoardController {
 	 */
 	@GetMapping("/board/departBoardInsert")
 	public String insertDepartBoard(HttpSession session,Model model) {
-		model.addAttribute("liCode", boardService.selectDBCate());
+		model.addAttribute("liCate", boardService.selectDBCate());
 		return "/board/departBoardInsert";
 	}
 
@@ -148,8 +148,25 @@ public class BoardController {
 		System.out.println("*************************");
 		System.out.println("boardUpdate 화면 보여주기");
 		System.out.println("#########################");
+		model.addAttribute("liCate", boardService.selectBCate());
 		model.addAttribute("board", boardService.getBoardForUpdate(code, session)); // 하나 뽑아와서 board 에 담기
 		return "/board/boardUpdate";
+	}
+	
+	/**
+	 * 선택된 글에 대한 수정할 데이터와 화면 보여주기(부서게시판의 글일경우)
+	 * @param code
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/board/goBoardUpdate")
+	public String goDepartBoardUpdate(@RequestParam(value = "code") String code, Model model, HttpSession session) {
+		System.out.println("*************************");
+		System.out.println("departBoardUpdate 화면 보여주기");
+		System.out.println("#########################");
+		model.addAttribute("liCate", boardService.selectDBCate());
+		model.addAttribute("board", boardService.getBoardForUpdate(code, session)); // 하나 뽑아와서 board 에 담기
+		return "/board/departBoardUpdate";
 	}
 
 	/**
@@ -166,6 +183,7 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
+	
 	/**
 	 * 부서게시판 글 수정 처리
 	 * @param board
@@ -177,7 +195,7 @@ public class BoardController {
 		System.out.println("***departBoard Update 처리**");
 		System.out.println("*************************");
 		boardService.updateDepartBoard(board); // 수정 처리 완료
-		return "redirect:/board/departBoardUpdate";
+		return "redirect:/board/departBoardList";
 	}
 	
 	/**

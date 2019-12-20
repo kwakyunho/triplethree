@@ -24,7 +24,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item"><a th:href="@{/board/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/admin/board/boardInsert}" style="color:#28a745;">공지사항 작성</a></li>
 					<li class="breadcrumb-item"><a th:href="@{/board/boardList}" style="color:#28a745;">공지사항 목록</a></li>
 				</ol>
 			</div><!-- /.col -->
@@ -37,8 +37,8 @@
 	 <div class="col-12">
 	     <div class="card">
 	     <form class="boardDetailForm">
-	       <div class="card-header">
-                <h4 th:text="|[공지] ${board.boardTitle}|">
+	       <div class="card-header" th:each="b:${board}">
+                <h4 th:text="|[${board.liCodeStr}] ${board.boardTitle}|">
                 </h4>
                 <div style="float:right">
 	                <i class="fas fa-edit" style="padding-right:5px;cursor:pointer;"id="updateBtn" >수정</i>
@@ -87,12 +87,13 @@
 	</th:block>
 	
 	<th:block layout:fragment="customScript">
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
 	$(document).ready(function(){
 	//liCode 비교해서 cate고리 따라서 보여주는 앞 태그 변경해주기
-	//cardHeader
-		
-	});
+	//cardHeader 수정
+		var board = [[${board}]];
+		var liCode = board.liCode;
+		var liCodeMStr = board.liCodeMStr;
 	
 	$(document).ready(function(){
 		$('#backBtn').on('click', function(){	
@@ -105,9 +106,19 @@
 			if (confirm("수정하시겠습니까?")){  //확인
 				var inputPw = prompt('비밀번호를 입력하세요(1111)');
 				if(dbPw==inputPw){
-					alert('수정화면으로 이동합니다');
+					$(document).Toasts('create', {
+				        class: 'bg-success', 
+				        title: 'password matched',
+				        subtitle: 'success',
+				        sticky : true,
+				        body: '수정화면으로 이동합니다'
+				      });
 					$('.boardDetailForm').attr('method', 'POST');
-					$('.boardDetailForm').attr('action', '/admin/board/goBoardUpdate');
+					if(liCodeMStr=='전사게시판'){
+						$('.boardDetailForm').attr('action', '/admin/board/goBoardUpdate');
+					}else if(liCodeMStr=='부서게시판'){
+						$('.boardDetailForm').attr('action', '/board/goBoardUpdate');
+					}
 					$('.boardDetailForm').submit();
 				}else{
 					alert('비밀번호가 일치하지 않습니다');
@@ -148,6 +159,7 @@
 	
 	})
 		
+	});
 	});
 	</script>
 	
