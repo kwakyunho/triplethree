@@ -221,15 +221,18 @@ public class EmployeeController {
 	  */
 	 @PostMapping("/employee/employeeUpdate")
 	 public String updateEmployee(@RequestParam("image") MultipartFile[] file,Employee employee) {
-		 	Path rootLocation = Paths.get(uploadPath);
-		 
-		 
-		 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
-			 String moveCode = commonService.codeGeneration("PECHANGE");
-			 employee.setMoveCode(moveCode);
-			 employeeService.insertMoveEmployee(employee);
-			
+		 	//System.out.println("DemgCode : " + employee.getDemgCode());
+		 	//System.out.println("AfterDemgCode : " + employee.getAfterDemgCode());
+		    Path rootLocation = Paths.get(uploadPath);
+		 if(employee.getAfterDemgCode() != null || employee.getAfterPoCode() != null) {
+			 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
+				 System.out.println("변경하기거든?");
+				 String moveCode = commonService.codeGeneration("PECHANGE");
+				 employee.setMoveCode(moveCode);
+				 employeeService.insertMoveEmployee(employee);
+			 }
 		 }else {
+			 System.out.println("수정하기거든?");
 			 try {			
 					
 					String filePath = null;
@@ -274,10 +277,8 @@ public class EmployeeController {
 						}
 						
 					}
-			 
-			 
-			 
 		 }
+		
 		 return "redirect:/employee/employeeList";	
 	 }
 	 
