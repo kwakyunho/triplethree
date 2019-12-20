@@ -5,6 +5,7 @@ public class Employee {
 	//()는 사욜할 테이블 변수값을 쓰기위함 
 	private String code; //사원관리코드
 	private String moveCode; //인사이동목록코드
+	private String payCode;	//급여관리코드
 	private String demgCode; //부서코드(사원관리) ,변경전부서코드 (인사이동목록) 
 	private String demgName; //부서명 , 
 	private String afterDemgCode;	//변경 후 부서코드 (인사이동목록)
@@ -31,7 +32,7 @@ public class Employee {
 	private String retireDate;
 	private String signature;
 	private String conType;
-	private String basicPay;
+	private int basicPay;
 	private String writer;	//작성자  (사원관리, 인사이동목록)
 	private String writerName; //작성자 이름 (인사이동목록)
 	private String writerDay; //작성일자 (사원관리, 인사이동목록)
@@ -201,10 +202,11 @@ public class Employee {
 	public void setConType(String conType) {
 		this.conType = conType;
 	}
-	public String getBasicPay() {
+	
+	public int getBasicPay() {
 		return basicPay;
 	}
-	public void setBasicPay(String basicPay) {
+	public void setBasicPay(int basicPay) {
 		this.basicPay = basicPay;
 	}
 	public String getWriter() {
@@ -255,40 +257,26 @@ public class Employee {
 	public void setApproverName(String approverName) {
 		this.approverName = approverName;
 	}
+	public String getPayCode() {
+		return payCode;
+	}
+	public void setPayCode(String payCode) {
+		this.payCode = payCode;
+	}
 	@Override
 	public String toString() {
-		return "Employee [code=" + code + ", moveCode=" + moveCode + ", demgCode=" + demgCode + ", demgName=" + demgName
-				+ ", afterDemgCode=" + afterDemgCode + ", afterDemgName=" + afterDemgName + ", poCode=" + poCode
-				+ ", poName=" + poName + ", afterPoCode=" + afterPoCode + ", afterPoName=" + afterPoName + ", liCode="
-				+ liCode + ", liName=" + liName + ", empNum=" + empNum + ", password=" + password + ", empName="
-				+ empName + ", addr=" + addr + ", detailAddr=" + detailAddr + ", extraAddr=" + extraAddr + ", postCode="
-				+ postCode + ", phone=" + phone + ", email=" + email + ", carPresence=" + carPresence + ", joinDate="
-				+ joinDate + ", birthDate=" + birthDate + ", photo=" + photo + ", retireDate=" + retireDate
-				+ ", signature=" + signature + ", conType=" + conType + ", basicPay=" + basicPay + ", writer=" + writer
-				+ ", writerName=" + writerName + ", writerDay=" + writerDay + ", afterDate=" + afterDate + ", approver="
-				+ approver + ", approverName=" + approverName + ", approveDay=" + approveDay + ", getCode()="
-				+ getCode() + ", getDemgCode()=" + getDemgCode() + ", getDemgName()=" + getDemgName()
-				+ ", getAfterDemgCode()=" + getAfterDemgCode() + ", getAfterDemgName()=" + getAfterDemgName()
-				+ ", getPoCode()=" + getPoCode() + ", getPoName()=" + getPoName() + ", getAfterPoCode()="
-				+ getAfterPoCode() + ", getAfterPoName()=" + getAfterPoName() + ", getLiCode()=" + getLiCode()
-				+ ", getLiName()=" + getLiName() + ", getEmpNum()=" + getEmpNum() + ", getPassword()=" + getPassword()
-				+ ", getEmpName()=" + getEmpName() + ", getAddr()=" + getAddr() + ", getDetailAddr()=" + getDetailAddr()
-				+ ", getExtraAddr()=" + getExtraAddr() + ", getPostCode()=" + getPostCode() + ", getPhone()="
-				+ getPhone() + ", getEmail()=" + getEmail() + ", getCarPresence()=" + getCarPresence()
-				+ ", getJoinDate()=" + getJoinDate() + ", getBirthDate()=" + getBirthDate() + ", getPhoto()="
-				+ getPhoto() + ", getRetireDate()=" + getRetireDate() + ", getSignature()=" + getSignature()
-				+ ", getConType()=" + getConType() + ", getBasicPay()=" + getBasicPay() + ", getWriter()=" + getWriter()
-				+ ", getWriterDay()=" + getWriterDay() + ", getAfterDate()=" + getAfterDate() + ", getApprover()="
-				+ getApprover() + ", getApproveDay()=" + getApproveDay() + ", getMoveCode()=" + getMoveCode()
-				+ ", getWriterName()=" + getWriterName() + ", getApproverName()=" + getApproverName() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "Employee [code=" + code + ", moveCode=" + moveCode + ", payCode=" + payCode + ", demgCode=" + demgCode
+				+ ", demgName=" + demgName + ", afterDemgCode=" + afterDemgCode + ", afterDemgName=" + afterDemgName
+				+ ", poCode=" + poCode + ", poName=" + poName + ", afterPoCode=" + afterPoCode + ", afterPoName="
+				+ afterPoName + ", liCode=" + liCode + ", liName=" + liName + ", empNum=" + empNum + ", password="
+				+ password + ", empName=" + empName + ", addr=" + addr + ", detailAddr=" + detailAddr + ", extraAddr="
+				+ extraAddr + ", postCode=" + postCode + ", phone=" + phone + ", email=" + email + ", carPresence="
+				+ carPresence + ", joinDate=" + joinDate + ", birthDate=" + birthDate + ", photo=" + photo
+				+ ", retireDate=" + retireDate + ", signature=" + signature + ", conType=" + conType + ", basicPay="
+				+ basicPay + ", writer=" + writer + ", writerName=" + writerName + ", writerDay=" + writerDay
+				+ ", afterDate=" + afterDate + ", approver=" + approver + ", approverName=" + approverName
+				+ ", approveDay=" + approveDay + "]";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

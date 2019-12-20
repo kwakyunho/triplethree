@@ -1,19 +1,27 @@
 package shop.triplethree.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.triplethree.service.CommonService;
 import shop.triplethree.service.EmployeeService;
@@ -24,6 +32,9 @@ public class EmployeeController {
 		
 	@Autowired private CommonService commonService; 
 	@Autowired private EmployeeService employeeService;
+	
+	@Value("${file.upload.path}")
+	private String uploadPath;
 	  
 	  /**
 	   * 로그인 입력값을 받아서 Db와 조회해서 입력값있으면 로그인 그렇지 않으면 다시 로그인페이지 
@@ -111,12 +122,64 @@ public class EmployeeController {
 	  * @return /employee/employeeList
 	  */
 	 @PostMapping("/employee/employeeInsert")
-	 public String insertEmployee(Employee employee) {
+	 public String insertEmployee(@RequestParam("image") MultipartFile[] file,Employee employee) {
 		 String code = commonService.codeGeneration("EMP_MANAGE");
 		 employee.setCode(code);
-		 System.out.println(employee.getCode() + "<-생성된 코드");
+		// System.out.println(employee.getCode() + "<-생성된 코드");
+		 String payCode = commonService.codeGeneration("PAY_BILL");
+		 employee.setPayCode(payCode);
 		 
-		 employeeService.insertEmployee(employee);
+		 Path rootLocation = Paths.get(uploadPath);
+		 try {			
+				
+				String filePath = null;
+				String filePath2 = null;			
+				
+				for(int i =0; i < file.length; i++) {
+					
+					String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+					InputStream inputStream = file[i].getInputStream();
+					System.out.println(inputStream + "<--inputStream");
+					
+					if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+						
+							//테이블에 사진주소
+							Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+						
+							if(i == 0) {
+								filePath = "/img/" + originFileName;
+							}else {
+								filePath2 = "/img/" + originFileName;
+							}
+							
+						}
+						
+				}
+					System.out.println(filePath + "<- 1");
+					System.out.println(filePath2 + "<- 2");
+					
+					employee.setPhoto(filePath);
+					employee.setSignature(filePath2);
+					employeeService.insertEmployee(employee);
+					
+					employeeService.insertBasicPay(employee);
+				} catch (IOException e) {
+					e.printStackTrace();
+					
+					for(int i =0; i < file.length; i++) {
+						String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+						try {
+							Files.delete(rootLocation.resolve(originFileName));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					
+				}
+					
+					
+		 
+		
 		 return "redirect:/employee/employeeList";
 	 }
 	 
@@ -161,18 +224,72 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @PostMapping("/employee/employeeUpdate")
-	 public String updateEmployee(Employee employee) {
-		
+	 public String updateEmployee(@RequestParam("image") MultipartFile[] file,Employee employee) {
+		  
+		 	Path rootLocation = Paths.get(uploadPath);
 		 
-		 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
-			 String moveCode = commonService.codeGeneration("PECHANGE");
-			 employee.setMoveCode(moveCode);
-			 employeeService.insertMoveEmployee(employee);
-			 employeeService.updateDepNPoEmployee(employee);	//변경부서 업데이트 
-		 }else {
-			 employeeService.updateEmployee(employee);	 
-		 }
+			 try {			
+					
+					String filePath = null;
+					String filePath2 = null;			
+					
+					for(int i =0; i < file.length; i++) {
+						
+						String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+						InputStream inputStream = file[i].getInputStream();
+						System.out.println(inputStream + "<--inputStream");
+						
+						if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+							
+								//테이블에 사진주소
+								Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+							
+								if(i == 0) {
+									filePath = "/img/" + originFileName;
+								}else {
+									filePath2 = "/img/" + originFileName;
+								}
+								
+							}
+							
+					}
+						System.out.println(filePath + "<- 1");
+						System.out.println(filePath2 + "<- 2");
+						
+						employee.setPhoto(filePath);
+						employee.setSignature(filePath2);
+						employeeService.updateEmployee(employee);	
+					} catch (IOException e) {
+						e.printStackTrace();
+						
+						for(int i =0; i < file.length; i++) {
+							String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+							try {
+								Files.delete(rootLocation.resolve(originFileName));
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+						
+					}
+		 
+		
 		 return "redirect:/employee/employeeList";	
+	 }
+	 
+	 @PostMapping("/employee/employeeMoveUpdate")
+	 public String updateMoveEmployee(Employee employee) {
+		 	//System.out.println("DemgCode : " + employee.getDemgCode());
+		 	//System.out.println("AfterDemgCode : " + employee.getAfterDemgCode());
+		 if(employee.getAfterDemgCode() != null || employee.getAfterPoCode() != null) {
+			 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
+				 System.out.println("변경하기거든?");
+				 String moveCode = commonService.codeGeneration("PECHANGE");
+				 employee.setMoveCode(moveCode);
+				 employeeService.insertMoveEmployee(employee);
+			 }
+		 }
+		 return "redirect:/admin/employee/employeeAllMoveList";	
 	 }
 	 
 	 /**
@@ -214,9 +331,53 @@ public class EmployeeController {
 	  * @return
 	  */
 	 @PostMapping("/employee/employeeMyUpdate")
-	 public String employeeMyUpdate(Employee employee) {
-		 String code = commonService.codeGeneration("EMP_MANAGE");
-		 employee.setCode(code);
+	 public String employeeMyUpdate(@RequestParam("image") MultipartFile[] file,Employee employee) {
+		 Path rootLocation = Paths.get(uploadPath);
+		 try {			
+				
+				String filePath = null;
+				String filePath2 = null;			
+				
+				for(int i =0; i < file.length; i++) {
+					
+					String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+					InputStream inputStream = file[i].getInputStream();
+					System.out.println(inputStream + "<--inputStream");
+					
+					if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+						
+							//테이블에 사진주소
+							Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+						
+							if(i == 0) {
+								filePath = "/img/" + originFileName;
+							}else {
+								filePath2 = "/img/" + originFileName;
+							}
+							
+						}
+						
+				}
+					System.out.println(filePath + "<- 1");
+					System.out.println(filePath2 + "<- 2");
+					
+					employee.setPhoto(filePath);
+					employee.setSignature(filePath2);
+					employeeService.updateEmployee(employee);	
+				} catch (IOException e) {
+					e.printStackTrace();
+					
+					for(int i =0; i < file.length; i++) {
+						String originFileName = StringUtils.cleanPath(file[i].getOriginalFilename());
+						try {
+							Files.delete(rootLocation.resolve(originFileName));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					
+				}
+		 
 		 employeeService.updateEmployee(employee);
 		 return "redirect:/employee/employeeMyPage";
 	 }
@@ -244,7 +405,8 @@ public class EmployeeController {
 	 }
 	 
 	 /**
-	  * 승인하기 받은 승인자 번호로 인사이동목록에 업데이트 하는 메서드
+	  * 승인하기 받은 승인자 번호로 인사이동목록에 업데이트 하고 
+	  * 승인받은 정보가 사원정보에 같이 업데이트 되는 메서드	  
 	  * @param employee, session
 	  * @return
 	  */
@@ -253,7 +415,9 @@ public class EmployeeController {
 		 String SID = (String)session.getAttribute("SID");
 		 employee.setApprover(SID);
 		 System.out.println(employee.getMoveCode() + " :이동코드");
+		 System.out.println(employee.getCode() + " :사원코드확인");
 		 employeeService.updateMoveList(employee);
+		 employeeService.updateDepNPoEmployee(employee);
 		 return "redirect:/admin/employee/employeeAllMoveList";
 	 }
 	 

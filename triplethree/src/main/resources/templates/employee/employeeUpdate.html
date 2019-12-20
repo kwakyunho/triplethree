@@ -23,9 +23,9 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/index">Home</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeUpdate">사원 수정</a></li>
+					<li class="breadcrumb-item"><a href="/index" style="color: #28a745;">Home</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeList" style="color: #28a745;">사원 관리</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeUpdate" style="color: #28a745;">사원 수정</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -35,7 +35,7 @@
 	<div class="content">
 		 <div class="row">
               <div class="col-md-12">
-				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employee/employeeList'">사원 목록으로 가기</button></div>
+				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-success" onclick="location.href='/employee/employeeList'">사원 목록으로 가기</button></div>
 			 
 		 	</div>	     			
 	     </div>
@@ -47,26 +47,108 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-12">
-				<div class="card card-info">
-	              <div class="card-header">
-	                <h3 class="card-title">사원 수정페이지 입니다.</h3>
-	              </div>
-	              <!-- /.card-header -->
-	              <!-- form start -->
-	              <form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
+		 <div class="col-md-12">
+			<div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">사원 수정</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">인사이동변경</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+                   	
+						<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
 	                <div class="card-body">  
 	                	<div class="form-group row">
-	                		
-	                		<input type="hidden" name="code" th:value="${u.code}">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
-		                    	<div class="col-sm-3">
-		                 			<img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+		                    	<div class="col-sm-3" th:if="${u.photo} neq null">
+		                 			<img  id="photoView" th:src="${u.photo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
+		                 			<!--원래쓰던애 <img id="photoView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
+									<input class="form-control" name="image" id="photo" type="file"/>
+									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
+		                 		<div class="col-sm-3" th:if="${u.photo} eq null">
+		                 			<img id="photoView" class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:100px; height:100px;"/>
+									<input class="form-control" name="image" id="photo" type="file"/>
+									<span id="imgFail">사진을 선택해주세요</span>	
+		                 		</div>
+		                 		
+		                 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			                  <script type="text/javascript">
+								function readURL(input, id) {
+									if (input.files && input.files[0]) {
+										var reader = new FileReader();
+								
+										reader.onload = function(e) {
+											$("#" + id).attr('src', e.target.result);
+										}					
+										reader.readAsDataURL(input.files[0]);
+									}
+								}
+									//이미지 파일 입력 여부 검사
+									$('#photo').change(function(){
+										if($('#photo').val() == '') { 
+											$('#imgFail').show();
+											$('#photo').focus();
+										return false;
+										}else{
+											$('#imgFail').hide();
+											var id = $(this).attr('id');
+											id = id + "View";
+											console.log(id);
+											readURL(this, id);
+									}
+								});	
+								
+							
+								
+								</script>	
+		                 		
+		                 	
+	                 		
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
-			                    <div class="col-sm-3">
-			                 		<img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+			                    <div class="col-sm-3" th:if="${u.signature} neq null">
+			                 		<img   id="signatureView" th:src="${u.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
+			                 		<!--원래쓰던애 <img id="signatureView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
+									<input class="form-control" name="image" id="signature" type="file"/>
+									<span id="imgFail">서명을 선택해주세요</span>
+			                 	</div>
+			                 	<div class="col-sm-3" th:if="${u.signature} eq null">
+			                 		<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:100px; height:100px;"/>
+									<input class="form-control" name="image" id="signature" type="file"/>
+									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>		
+	               	 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				                  <script type="text/javascript">
+									function readURL(input, id) {
+										if (input.files && input.files[0]) {
+											var reader = new FileReader();
+									
+											reader.onload = function(e) {
+												$("#" + id).attr('src', e.target.result);
+											}					
+											reader.readAsDataURL(input.files[0]);
+										}
+									}
+										//이미지 파일 입력 여부 검사
+										$('#signature').change(function(){
+											if($('#signature').val() == '') { 
+												$('#imgFail').show();
+												$('#signature').focus();
+											return false;
+											}else{
+												$('#imgFail').hide();
+												var id = $(this).attr('id');
+												id = id + "View";
+												console.log(id);
+												readURL(this, id);
+										}
+									});	
+									
+								
+									</script>
 	               	   </div>
 	                	
 	                  
@@ -75,6 +157,7 @@
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원번호</label>
 			                    <div class="col-sm-3">
 			                    	<input type="text" class="form-control" name="empNum" id="exampleInputEmail1" th:value="${u.empNum}" readonly="readonly" >
+			                 		
 			                 	</div>	
 	                 </div>
 	                  
@@ -101,7 +184,7 @@
 				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${u.postCode}">
 							</div>		
 							 <div class="col-sm-3">
-										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
+										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-success" value="우편번호 찾기">									
 									
 							 </div>	
 			           </div>     	
@@ -262,46 +345,7 @@
                         </div>
 		             
 	                 </div>
-	                 
-	                 <div class="form-group row">
-	                  <div class="col-sm-4">
-		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">변경 부서</label>
-			                    <select class="col-sm-3" name="afterDemgCode">
-		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${u.demgName}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
-	                        	</select>
-                        </div>
-                        <th:script></th:script>
-                       	<div class="col-sm-4">
-		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">변경 직급</label>
-			                    <select class="col-sm-3" name="afterPoCode">
-		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${u.PoName}" th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
-	                        	</select>
-                        </div>
-                        
-                        
-	                 </div>
-	                 
-	                 <div class="form-group row">
-	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">인사 이동일</label>
-			                 <div class="col-md-4">
-			                 <div class="input-group">
-			                    <div class="input-group-prepend">
-			                      <span class="input-group-text">
-			                        <i class="far fa-calendar-alt"></i>
-			                      </span>
-			                    </div>
-									<input type="date" class="form-control" name="afterDate">
-										
-			                  </div>
-                			</div>
-	                 </div>
-	                 <div class="form-group row">
-	                   		<label for="inputEmail3" class="col-sm-1 col-form-label"></label>
-			                 <div class="col-md-4" style="color:red;">
-			                 	** 부서 변경시 인사 이동일을 반드시 입력해주세요.
-                			</div>
-	                 </div>
-	                 
+	                 	                 	                 	                    
 	                 
 	                  <div class="form-group row">
 	                   	  <div class="col-sm-4">
@@ -330,10 +374,6 @@
 			                    	<input type="text" class="form-control" th:value="${u.basicPay}"  name="basicPay" id="exampleInputEmail1">
 			                 </div>
 			                 
-			                  <div class="col-sm-2">
-			                 	 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='#'">급여 수정</button>
-			                 </div>
-                        
 	                 </div>
 	                 
 	                <div class="form-group row">
@@ -379,15 +419,102 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">수정 하기</button>
+	                  <button type="submit" class="btn btn-success">수정 하기</button>
 	                </div>
 	                
 	              </form>
-	            </div>
-	           </div>
-			<!-- /.col-md-6 -->
-			
-			<!-- /.col-md-6 -->
+                    
+
+                    
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="timeline">
+                    <!-- The timeline -->
+                 	
+                 	<form method="post" action="/employee/employeeMoveUpdate" class="form-horizontal" th:each="u:${update}" >
+                  		<div class="card-body"> 
+                  		<div class="form-group row">
+	                  <div class="col-sm-4">
+		                   	<input type="hidden" class="form-control" name="code" id="exampleInputEmail1" th:value="${u.code}" >
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">부서</label>
+			                    <select class="col-sm-3" name="demgCode">
+		                          <option  th:text="${u.demgName}" th:value="${u.demgCode}"></option>
+	                        	</select>
+                        </div>
+                        <th:script></th:script>
+                       	<div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-2 col-form-label">직급</label>
+			                    <select class="col-sm-3" name="poCode">
+		                          <option th:text="${u.poName}" th:value="${u.poCode}"></option>	                         
+	                        	</select>
+                        </div>
+                        
+                       </div>
+                        <div class="form-group row">
+	                  <div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">변경 부서</label>
+			                    <select class="col-sm-3" name="afterDemgCode">
+		                          <option th:each= "C :${depart}" th:selected="${C.demgName} == ${u.demgName}" th:text="${C.demgName}" th:value="${C.demgCode}"></option>
+	                        	</select>
+                        </div>
+                        <th:script></th:script>
+                       	<div class="col-sm-4">
+		                   	<label for="inputEmail3" class="col-sm-3 col-form-label">변경 직급</label>
+			                    <select class="col-sm-3" name="afterPoCode">
+		                          <option th:each ="P : ${position}" th:selected="${P.poName} == ${u.PoName}" th:text="${P.poName}" th:value="${P.poCode}"></option>	                         
+	                        	</select>
+                        </div>
+                        </div>
+                        <br>
+                         <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">인사 이동일</label>
+			                 <div class="col-md-4">
+			                 <div class="input-group">
+			                    <div class="input-group-prepend">
+			                      <span class="input-group-text">
+			                        <i class="far fa-calendar-alt"></i>
+			                      </span>
+			                    </div>
+									<input type="date" class="form-control" name="afterDate">
+										
+			                  </div>
+                			</div>
+	                 </div>
+	                 <br>
+	                 <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label"></label>
+			                 <div class="col-md-4" style="color:red;">
+			                 	** 부서 변경시 인사 이동일을 반드시 입력해주세요.
+                			</div>
+	                 </div>
+                     
+                     <div class="form-group row">
+	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">작성자</label>
+		                    	<div class="col-sm-3">
+		                    		<input type="text" class="form-control" name="writer" id="exampleInputEmail1"  th:value="${session.SID}" readonly="readonly">
+		                 		</div>
+	                 				
+	                 </div>   
+                       	                 
+		             
+	                 </div>
+                  
+	                 
+	                 <div class="card-footer">
+	                  <button type="submit" class="btn btn-success" id="moveCheckBtn">변경 하기</button>
+	                </div>
+	                 
+                  	</form>
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+		  </div>
+		  <!-- /.col-md-12 -->
 		</div>
 		<!-- /.row -->
 	</div>
@@ -417,6 +544,19 @@
 					 // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함 
 		             }
 		         })
+		         
+		          $('#moveCheckBtn').on('click',function(){
+		        	  if(confirm('변경하시겠습니까?')){
+		        		  alert('인사이동목록으로 이동합니다.');
+		        		  
+		        	  }else {
+		        		  alert('변경이 취소되었습니다.');
+		        	  }
+		        	  
+		        	  
+		        	  
+		          });
+		         
 		   });
 	
 		});

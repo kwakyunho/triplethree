@@ -23,8 +23,8 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/employee/employeeMyPage">My Page</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeMyUpdate">기본 정보 수정</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeMyPage" style="color: #28a745;">My Page</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeMyUpdate" style="color: #28a745;">기본 정보 수정</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -34,7 +34,7 @@
 	<div class="content">
 		 <div class="row">
               <div class="col-md-12">
-				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employee/employeeMyPage'">기본정보로 가기</button></div>
+				 <div class="col-md-2"><button type="button" class="btn btn-block bg-gradient-success" onclick="location.href='/employee/employeeMyPage'">기본정보로 가기</button></div>
 			 
 		 	</div>	     			
 	     </div>
@@ -54,16 +54,94 @@
 	              <!-- /.card-header -->
 	              <!-- form start -->
 	              <form method="post" action="/employee/employeeMyUpdate" class="form-horizontal" th:each="m :${mypage}" enctype="multipart/form-data">
-	                <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
-		                    	<div class="col-sm-3">
-		                 			<img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+		                    	<div class="col-sm-3" th:if="${m.photo} neq null">
+		                 			<img  id="photoView" th:src="${m.photo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
+		                 			<!--원래쓰던애 <img id="photoView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
+									<input class="form-control" name="image" id="photo" type="file"/>
+									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
+		                 		<div class="col-sm-3" th:if="${m.photo} eq null">
+		                 			<img id="photoView"class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:100px; height:100px;"/>
+									<input class="form-control" name="image" id="photo" type="file"/>
+									<span id="imgFail">사진을 선택해주세요</span>	
+		                 		</div>
+		                 		
+		                 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			                  <script type="text/javascript">
+								function readURL(input, id) {
+									if (input.files && input.files[0]) {
+										var reader = new FileReader();
+								
+										reader.onload = function(e) {
+											$("#" + id).attr('src', e.target.result);
+										}					
+										reader.readAsDataURL(input.files[0]);
+									}
+								}
+									//이미지 파일 입력 여부 검사
+									$('#photo').change(function(){
+										if($('#photo').val() == '') { 
+											$('#imgFail').show();
+											$('#photo').focus();
+										return false;
+										}else{
+											$('#imgFail').hide();
+											var id = $(this).attr('id');
+											id = id + "View";
+											console.log(id);
+											readURL(this, id);
+									}
+								});	
+								
+							
+								
+								</script>	
+		                 		
+		                 	
+	                 		
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
-			                    <div class="col-sm-3">
-			                 		<img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+			                    <div class="col-sm-3" th:if="${m.signature} neq null">
+			                 		<img   id="signatureView" th:src="${m.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
+			                 		<!--원래쓰던애 <img id="signatureView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
+									<input class="form-control" name="image" id="signature" type="file"/>
+									<span id="imgFail">서명을 선택해주세요</span>
+			                 	</div>
+			                 	<div class="col-sm-3" th:if="${m.signature} eq null">
+			                 		<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:100px; height:100px;"/>
+									<input class="form-control" name="image" id="signature" type="file"/>
+									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>		
+	               	 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				                  <script type="text/javascript">
+									function readURL(input, id) {
+										if (input.files && input.files[0]) {
+											var reader = new FileReader();
+									
+											reader.onload = function(e) {
+												$("#" + id).attr('src', e.target.result);
+											}					
+											reader.readAsDataURL(input.files[0]);
+										}
+									}
+										//이미지 파일 입력 여부 검사
+										$('#signature').change(function(){
+											if($('#signature').val() == '') { 
+												$('#imgFail').show();
+												$('#signature').focus();
+											return false;
+											}else{
+												$('#imgFail').hide();
+												var id = $(this).attr('id');
+												id = id + "View";
+												console.log(id);
+												readURL(this, id);
+										}
+									});	
+									
+								
+									</script>
 	               	   </div>
 	                	
 	                  
@@ -98,7 +176,7 @@
 				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control" th:value="${m.postCode}">
 							</div>		
 							 <div class="col-sm-3">
-										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
+										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-success" value="우편번호 찾기">									
 									
 							 </div>	
 			           </div>     	
@@ -327,7 +405,7 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">수정 하기</button>
+	                  <button type="submit" class="btn btn-success">수정 하기</button>
 	                </div>
 	                
 	              </form>
