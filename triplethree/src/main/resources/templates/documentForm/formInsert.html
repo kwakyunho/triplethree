@@ -28,7 +28,13 @@ div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td spa
 div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span img {width: auto; height: 100%}
 div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.doc_return {padding: 0;}
 
-
+.doc-customBtn {margin-top:0.5rem;}
+.doc-customBtn.ef-type1 {color: black; border-color: #ffffff; font-weight: bold; outline-style: auto;}
+.doc-customBtn.ef-type1:hover { color:#fff; background-color: #343a40; border-color: #343a40; outline-style: auto;}
+.doc-customBtn.ef-type2 {color: black; border-color: #ffffff; font-weight: bold; outline-style: auto;}
+.doc-customBtn.ef-type2:hover {color:#fff; background-color: #dd0000; border-color: #dd0000; outline-style: auto;}
+.doc-customBtn.ef-type3 {color: black; border-color: #ffffff; font-weight: bold; outline-style: auto;}
+.doc-customBtn.ef-type3:hover {color:#fff; background-color: #006600; border-color: #006600; outline-style: auto;}
 .display_block {display: block;}
 div.sign_type1 table {width: 100%;}
 .sign_type1_title {padding: 3px !important; border: 0px solid black; border-image: none; width: 100%; height: 90px; text-align: center; font-size: 22px; font-weight: bold; vertical-align: middle;}
@@ -39,8 +45,10 @@ div.sign_type1 table {width: 100%;}
 .sign_type1_td_codMainName {background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;}
 .sign_type1_td_codMainValue {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;}
 .sign_type1_td_codMaintext {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;}
-
 </style>
+
+<!-- 커스텀 signModal CSS -->
+<link rel="stylesheet" th:href="@{/custom/css/signModal.css}">
 
 </th:block>
 
@@ -74,11 +82,12 @@ div.sign_type1 table {width: 100%;}
 					<!-- 전자결재 문서 시작 -->
 					<div>
 						<!-- 전자결재 툴바 시작 -->
-						<div>
-							<span class="col-md-1" style="float: left;">&nbsp;</span>
-							<button type="button" class="btn btn-block btn-outline-success btn-xs col-md-2" style="float: left;">결재요청</button>
-							<button type="button" class="btn btn-block btn-outline-danger btn-xs col-md-2" style="float: left;">취소</button>
-							<button type="button" class="btn btn-block btn-outline-info btn-xs col-md-2" style="float: left;">결재정보</button>
+						<div style="height:45px;">
+							<a class="col-sm-1 doc-customBtn" style="float: left;">&nbsp;</a>
+							<button type="button" class="btn doc-customBtn ef-type3 btn-xs col-sm-2" style="float: left; margin-right: 5px; width: 75px;">결재요청</button>
+							<button type="button" class="btn doc-customBtn ef-type2 btn-xs col-sm-2" style="float: left; width: 75px;">취소</button>
+							<a class="col-sm-1 doc-customBtn" style="float: right;">&nbsp;</a>
+							<button type="button" class="btn doc-customBtn ef-type1 btn-xs col-sm-2" style="float: right; width: 75px;">결재정보</button>
 						</div>
 						<!-- 전자결재 툴바 끝 -->
 						<!-- 전자결재 레이아웃 시작 -->
@@ -244,6 +253,10 @@ div.sign_type1 table {width: 100%;}
 	</div>
 	<!-- /.container-fluid -->
 </div>
+
+<!-- 전자결재 모달 호출 -->
+<div th:replace="documentForm/signModal :: signModalCall"></div>
+
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -261,6 +274,10 @@ $(document).ready(function(){
 	$('.abcd').on('click', function(){
 		var a = prompt('입력하세요','');
 		$(this).children('span').text(a);
+	});
+	
+	$('.ef-type1').on('click', function(){
+		$('#signModal').modal('show');
 	});
 });
 </script>
