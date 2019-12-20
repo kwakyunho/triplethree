@@ -38,6 +38,9 @@ tr:hover{background: whitesmoke;}
 		<div class="card-header p-2 ajaxValCheck">
 			<ul class="nav nav-pills">
 				<li class="nav-item ajaxVal">
+					<a class="nav-link" href="#all" data-toggle="tab" id="All">전체</a>
+				</li>
+				<li class="nav-item ajaxVal">
 					<a class="nav-link" href="#starting" data-toggle="tab" id="Starting">진행</a>
 				</li>
 				<li class="nav-item ajaxVal">
@@ -46,121 +49,11 @@ tr:hover{background: whitesmoke;}
 				<li class="nav-item ajaxVal">
 					<a class="nav-link" href="#return" data-toggle="tab" id="Return">반려</a>
 				</li>
-				<li class="nav-item ajaxVal">
-					<a class="nav-link" href="#all" data-toggle="tab" id="All">전체</a>
-				</li>
 			</ul>
 		</div>
 		
 		<div>
 			<div class="tab-content">
-				<div class="tab-pane" id="starting">
-					<div class="content" style="align-content: center">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<form class="boardListForm">
-										<table
-											class="table table-head-fixed jsgrid-align-center dateTablePaging"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
-											<thead>
-												<tr>
-													<th style="width: 10px;">순차</th>
-													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">완료일</th>
-													<th style="width: 100px;">결재양식</th>
-													<th style="width: 500px;">제목</th>
-													<th style="width: 100px;">첨부</th>
-													<th style="width: 100px;">기안자</th>
-													<th style="width: 100px;">문서번호</th>
-													<th style="width: 100px;">결재상태</th>
-												</tr>
-											</thead>
-											<tbody id="selectStartingTr">
-											</tbody>
-										</table>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<div class="tab-pane" id="end">
-					<div class="content" style="align-content: center">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<form class="boardListForm">
-										<table
-											class="table table-head-fixed jsgrid-align-center dateTablePaging"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
-											<thead>
-												<tr>
-													<th style="width: 10px;">순차</th>
-													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">완료일</th>
-													<th style="width: 100px;">결재양식</th>
-													<th style="width: 500px;">제목</th>
-													<th style="width: 100px;">첨부</th>
-													<th style="width: 100px;">기안자</th>
-													<th style="width: 100px;">문서번호</th>
-													<th style="width: 100px;">결재상태</th>
-												</tr>
-											</thead>
-											<tbody id="selectEndTr">
-											</tbody>
-										</table>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="tab-pane" id="return">
-					<div class="content" style="align-content: center">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<form class="boardListForm">
-										<table
-											class="table table-head-fixed jsgrid-align-center dateTablePaging"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
-											<thead>
-												<tr>
-													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">완료일</th>
-													<th style="width: 100px;">결재양식</th>
-													<th style="width: 500px;">제목</th>
-													<th style="width: 100px;">첨부</th>
-													<th style="width: 100px;">기안자</th>
-													<th style="width: 100px;">문서번호</th>
-													<th style="width: 100px;">결재상태</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>3기안일올꺼에요</td>
-													<td>3완료일올꺼에요</td>
-													<td>3결재양식올꺼에요</td>
-													<td>3제목이올꺼에요</td>
-													<td>3첨부파일이올꺼에요</td>
-													<td>3기안자가올꺼에요</td>
-													<td>3문서번호가올꺼에요</td>
-													<td>3결재상태가올꺼에요</td>
-												</tr>
-											</tbody>
-										</table>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
 				<div class="tab-pane active" id="all">
 					<div class="content" style="align-content: center">
 						<div class="col-12">
@@ -168,7 +61,7 @@ tr:hover{background: whitesmoke;}
 								<div class="card-body">
 									<form class="boardListForm">
 										<table
-											class="table table-head-fixed jsgrid-align-center dateTablePaging"
+											class="table table-head-fixed jsgrid-align-center dateTablePagingAll"
 											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
 											id="boardListTable">
 											<thead style="text-align: center;">
@@ -185,6 +78,112 @@ tr:hover{background: whitesmoke;}
 												</tr>
 											</thead>
 											<tbody id="selectAllTr" style="text-align: center;">
+											</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="tab-pane" id="starting">
+					<div class="content" style="align-content: center">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<form class="boardListForm">
+										<table
+											class="table table-head-fixed jsgrid-align-center dateTablePagingStarting"
+											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
+											<thead style="text-align: center;">
+												<tr>
+													<th style="width: 10px;">순차</th>
+													<th style="width: 100px;">기안일</th>
+													<th style="width: 100px;">완료일</th>
+													<th style="width: 100px;">결재양식</th>
+													<th style="width: 500px;">제목</th>
+													<th style="width: 100px;">첨부</th>
+													<th style="width: 100px;">기안자</th>
+													<th style="width: 100px;">문서번호</th>
+													<th style="width: 100px;">결재상태</th>
+												</tr>
+											</thead>
+											<tbody id="selectStartingTr" style="text-align: center;">
+											</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="end">
+					<div class="content" style="align-content: center">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<form class="boardListForm">
+										<table
+											class="table table-head-fixed jsgrid-align-center dateTablePagingEnd"
+											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
+											id="boardListTable">
+											<thead style="text-align: center;">
+												<tr>
+													<th style="width: 10px;">순차</th>
+													<th style="width: 100px;">기안일</th>
+													<th style="width: 100px;">완료일</th>
+													<th style="width: 100px;">결재양식</th>
+													<th style="width: 500px;">제목</th>
+													<th style="width: 100px;">첨부</th>
+													<th style="width: 100px;">기안자</th>
+													<th style="width: 100px;">문서번호</th>
+													<th style="width: 100px;">결재상태</th>
+												</tr>
+											</thead>
+											<tbody id="selectEndTr" style="text-align: center;">
+											</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="tab-pane" id="return">
+					<div class="content" style="align-content: center">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<form class="boardListForm">
+										<table
+											class="table table-head-fixed jsgrid-align-center dateTablePagingReturn"
+											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
+											id="boardListTable">
+											<thead style="text-align: center;">
+												<tr>
+													<th style="width: 100px;">기안일</th>
+													<th style="width: 100px;">완료일</th>
+													<th style="width: 100px;">결재양식</th>
+													<th style="width: 500px;">제목</th>
+													<th style="width: 100px;">첨부</th>
+													<th style="width: 100px;">기안자</th>
+													<th style="width: 100px;">문서번호</th>
+													<th style="width: 100px;">결재상태</th>
+												</tr>
+											</thead>
+											<tbody style="text-align: center;">
+												<tr>
+													<td>3기안일올꺼에요</td>
+													<td>3완료일올꺼에요</td>
+													<td>3결재양식올꺼에요</td>
+													<td>3제목이올꺼에요</td>
+													<td>3첨부파일이올꺼에요</td>
+													<td>3기안자가올꺼에요</td>
+													<td>3문서번호가올꺼에요</td>
+													<td>3결재상태가올꺼에요</td>
+												</tr>
 											</tbody>
 										</table>
 									</form>

@@ -53,6 +53,8 @@ $(function(){
 							str += '</tr>'
 						});
 					$('#selectAllTr').append(str);
+					$('.dateTablePagingAll').DataTable();
+					
 					}else if(valCheck =='End'){
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
@@ -77,6 +79,8 @@ $(function(){
 							str += '</tr>'
 						});
 					$('#selectEndTr').append(str);
+					$('.dateTablePagingEnd').DataTable();
+					
 					}else if(valCheck =='Starting'){
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
@@ -101,11 +105,10 @@ $(function(){
 							str += '</tr>'
 						});
 						$('#selectStartingTr').append(str);
+						$('.dateTablePagingStarting').DataTable();
 					}
-					
-					$('.dateTablePaging').DataTable();
-					
-			}, error : function() {
+					//$('.dateTablePaging').DataTable();
+				}, error : function() {
 				console.log("실패");
 			}
 		});
