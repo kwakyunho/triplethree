@@ -40,9 +40,9 @@ public class SignDocumentController {
 	@GetMapping("/signDocument/signDraftBox")
 	public String selectDraftDocument(Model model) {
 		//model.addAttribute("selectAll", signDocumentService.selectDraftDocument(sid));
-		model.addAttribute("starting", "<span class='btn bg-gradient-success'>진행중</span>");
-		model.addAttribute("end", "<span class='btn bg-gradient-secondary'>완료</span>");
-		model.addAttribute("return", "<span class='btn bg-gradient-danger'>반려</span>");
+		//model.addAttribute("starting", "<span class='btn bg-gradient-success'>진행중</span>");
+		//model.addAttribute("end", "<span class='btn bg-gradient-secondary'>완료</span>");
+		//model.addAttribute("return", "<span class='btn bg-gradient-danger'>반려</span>");
 		return "/signDocument/signDraftDocument";
 	}
 	
@@ -54,7 +54,7 @@ public class SignDocumentController {
 	public @ResponseBody List<SignDocument> selectDraftDocument(String valCheck,HttpSession session) {
 		//System.out.println(valCheck);
 		String sid = (String) session.getAttribute("SID");
-		//System.out.println(signDocumentService.selectDraftDocument(valCheck,sid).size());
+		//System.out.println(signDocumentService.selectDraftDocument(valCheck,sid));
 		List<SignDocument> selectList = signDocumentService.selectDraftDocument(valCheck,sid);
 		return selectList;
 	}

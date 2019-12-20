@@ -23,13 +23,14 @@
  	<!-- 기안문서함에서 상단메뉴 텝 클릭에 따라 값을 뿌려주는 쿼리문 -->
  	<select id="selectDraftDocument" parameterType="String" resultMap="signDocument">
  		SELECT
-			s.writer_day
+ 			s.code
+			,s.writer_day
 			,s.sign_end_day
 			,s.doc_title
 			,s.doc_name
 			,d.dename
 			,p.poname
-			,e.emp_name
+			,e.emp_name AS empName
 			,s.doc_form_code
 			,s.sign_state
 		FROM
