@@ -88,21 +88,12 @@ $(function(){
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
 							str += '<td>'+data[i].writerDay+'</td>'
-										if(data[i].signEndDay == null){
-											str += '<td></td>';
-										}else{
-											str += '<td>'+data[i].signEndDay+'</td>';
-										};
 							str	+= '<td>'+data[i].docTitle+'</td>'
 							str += '<td>'+data[i].docName+'</td>'
 							str += '<td>'+'첨부파일 자리에요'+'</td>'
 							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 							str += '<td>'+data[i].docFormCode+'</td>'
-										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
-										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
-										}								
+							str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';							
 							str += '</tr>'
 						});
 						$('#selectStartingTr').append(str);
