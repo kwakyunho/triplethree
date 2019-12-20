@@ -9,7 +9,13 @@
 </th:block>
 
 <!-- 사용자 CSS -->
-
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
 
 <th:block layout:fragment="customContents">
 	<!-- Content Header (Page header) -->
@@ -53,17 +59,10 @@
               <div class="card-header">
                 <h3 class="card-title"><b>승인 대기중 인사이동 목록</b></h3>
 
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               <!-- /.card-header -->
+            <div class="card-body">  
              <form id="approForm" method="post" action = "/admin/employee/employeeAllMoveList">	
               <div class="card-body table-responsive p-0" >
                 <table id="approTable"class="table table-hover"  style="margid:auto; text-align:center;">
@@ -107,7 +106,7 @@
                 </table>
               </div>
              </form>
-              
+            </div>  
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -122,19 +121,11 @@
               <div class="card-header">
                 <h3 class="card-title"><b>승인완료 인사이동 목록</b></h3>
 
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
+             <div class="card-body">
               <div class="card-body table-responsive p-0" >
-                <table class="table table-hover" style="margid:auto; text-align:center;">
+                <table class="table table-hover" style="margid:auto; text-align:center;" id="employeeMoveListOkTable">
                   <thead>
 	                    <tr>
 	                    	  <th>인사이동코드</th> 
@@ -182,7 +173,7 @@
                   </tbody>
                 </table>
               </div>
-              
+             </div> 
               
               <!-- /.card-body -->
             </div>
@@ -197,7 +188,14 @@
 <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-
+<script>
+		$(function () {
+		    $('#approTable').DataTable();
+		    $('#employeeMoveListOkTable').DataTable();
+		    
+		  });
+</script>
+	
 <script type="text/javascript" th:inline="javascript">
 	$(document).ready(function(){
 		
@@ -243,6 +241,7 @@
 			}
 		});
 	
+		
 		
 		/* $('.approCheck').on('click',function(){
 			var code=$(this).val(); //하위요소 버튼테그 벨류값 저장
