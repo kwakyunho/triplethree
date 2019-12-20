@@ -9,7 +9,13 @@
 </th:block>
 
 <!-- 사용자 CSS -->
-
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
 
 <th:block layout:fragment="customContents">
 	<!-- Content Header (Page header) -->
@@ -22,9 +28,9 @@
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="/index">Home</a></li>
-						<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
-						<li class="breadcrumb-item">사원 조회</li>
+						<li class="breadcrumb-item"><a href="/index"  style="color: #28a745;">Home</a></li>
+						<li class="breadcrumb-item"><a href="/employee/employeeList"  style="color: #28a745;">사원 관리</a></li>
+						<li class="breadcrumb-item"  style="color: #28a745;">사원 조회</li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -39,12 +45,12 @@
 		<div class="container-fluid">
 		<div class="row" style="margin-left:auto;">
 			<div class="col-2">
-				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/employee/employeeInsert'">사원 등록</button>
+				<button  type="button" class="btn btn-block bg-gradient-success"
+					onclick="location.href='/employee/employeeInsert'" >사원 등록</button>
 			</div>
 			<div class="col-2">	
-				<button  type="button" class="btn btn-block bg-gradient-primary"
-					onclick="location.href='/admin/employee/employeeAllMoveList'">인사이동 목록으로 가기 </button>
+				<button  type="button" class="btn btn-block bg-gradient-success"
+					onclick="location.href='/admin/employee/employeeAllMoveList'" >인사이동 목록으로 가기 </button>
 			</div>
 		</div>
 		</div>
@@ -54,22 +60,15 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">사원 조회 목록</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
+             <div class="card-body"> 
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover" style="margid:auto; text-align:center;">
+                <table class="table table-head-fixed jsgrid-align-center" id="employeeListTable" style="margid:auto; text-align:center; white-space:nowrap; overflow:auto;">
                   <thead>
-                    <tr>
+                    <tr>	
+                    	  <th>순차</th>	
+                    	  <th>사원코드</th>
 	                      <th>사원번호</th>
 	                      <th>사원명</th>
 	                      <th>부서</th>
@@ -79,9 +78,13 @@
 	                      <th>재직상태</th>
 	                      <th>상세보기</th>
 	                      <th>수정</th>
-	                      <th>삭제(재직상태변경)</th>
+	                      
                     </tr>
-                    <tr th:each="e :${emList}">
+                   </thead>
+                   <tbody>
+                    <tr th:each="e,index :${emList}">
+                    	<td th:text="${index.index+1}"></td>
+                    	<td th:text="${e.code}"></td>
 						<td th:text="${e.empNum}"></td>
 						<td th:text="${e.empName}"></td>
 						<td th:text="${e.demgName}"></td>
@@ -90,28 +93,18 @@
 						<td th:text="${e.carPresence}"></td>
 						<td th:text="${e.liName}"></td>
 						<td>
-							<a th:href="@{/employee/employeeDetail(empNum=${e.empNum})}">상세보기</a>
+							<a th:href="@{/employee/employeeDetail(empNum=${e.empNum})}" class="btn btn-block btn-outline-success">상세보기</a>
 						</td>
 						<td>
 							<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
-							<a th:href="@{/employee/employeeUpdate(empNum=${e.empNum})}">수정</a>
+							<a th:href="@{/employee/employeeUpdate(empNum=${e.empNum})}" class="btn btn-block btn-outline-success">수정</a>
 						</td>
-						<td>
-							<a th:href="@{/}">삭제</a>
-						</td>
+						
 					</tr>
-                  </thead>
-                  <tbody>
-                   <!--  <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr> -->
-                   
-                  </tbody>
+                  </tbody> 
+                  
                 </table>
+              </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -127,9 +120,14 @@
 	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 
 
-
+	<!-- DataTables -->
 	<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 	<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+	<script>
+		$(function () {
+		    $('#employeeListTable').DataTable();
+		  });
+	</script>
 
 	<script>
 		$(function() {

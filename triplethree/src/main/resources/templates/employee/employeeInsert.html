@@ -23,9 +23,9 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/index">Home</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeInsert">사원 등록</a></li>
+					<li class="breadcrumb-item"><a href="/index" style="color: #28a745;">Home</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeList" style="color: #28a745;">사원 관리</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeInsert" style="color: #28a745;">사원 등록</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -34,7 +34,7 @@
 <!-- /.content-header -->
 	<div class="content">
 		<div class="col-md-2">
-		 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='/employee/employeeList'">사원 조회</button>
+		 <button type="button" class="btn btn-block bg-gradient-success" onclick="location.href='/employee/employeeList'">사원 조회</button>
 		 </div>
 	</div>
  <br>
@@ -83,7 +83,7 @@
 				                 		<input type="text" name="postCode" id="sample6_postcode" placeholder="우편번호 찾기" class="form-control">
 							</div>		
 							 <div class="col-sm-3">
-										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-primary" value="우편번호 찾기">									
+										<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block bg-gradient-success" value="우편번호 찾기">									
 									
 							 </div>	
 			           </div>     	
@@ -262,9 +262,7 @@
 			                    	<input type="text" class="form-control" name="basicPay" id="exampleInputEmail1" placeholder="*기본급여를 입력해주세요.">
 			                 </div>
 			                 
-			                 <div class="col-sm-2">
-			                 	 <button type="button" class="btn btn-block bg-gradient-primary" onclick="location.href='#'">급여 등록</button>
-			                 </div>
+			                 
                         
 	                 </div>
 	                 
@@ -284,20 +282,82 @@
 	                 </div>
 	                 
 	                 <div class="form-group row">
-	                    <label for="exampleInputFile" class="col-sm-1 col-form-label">사진 올리기</label>
+	                    <label for="uploadFile" class="col-sm-1 col-form-label">사진 올리기</label>
 	                    <div class="col-sm-4">                      
-	                        <input type="file" name="image" placeholder="여기는 사진" >	                   	                      
+							<img id="photoView" class="img-circle elevation-2" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
+							<input class="form-control" name="image" id="photo" type="file"/>
+							<span id="imgFail">사진을 선택해주세요</span>	                       
 	                    </div>
 	                  </div>
+	                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	                  <script type="text/javascript">
+						function readURL(input, id) {
+							if (input.files && input.files[0]) {
+								var reader = new FileReader();
+						
+								reader.onload = function(e) {
+									$("#" + id).attr('src', e.target.result);
+								}					
+								reader.readAsDataURL(input.files[0]);
+							}
+						}
+							//이미지 파일 입력 여부 검사
+							$('#photo').change(function(){
+								if($('#photo').val() == '') { 
+									$('#imgFail').show();
+									$('#photo').focus();
+								return false;
+								}else{
+									$('#imgFail').hide();
+									var id = $(this).attr('id');
+									id = id + "View";
+									console.log(id);
+									readURL(this, id);
+							}
+						});	
+						
+						
+						</script>
 	                  
-	                
-	                  
-	                  <div class="form-group row">
-	                    <label for="exampleInputFile" class="col-sm-1 col-form-label">서명 올리기</label>
-	                    <div class="col-sm-4">	                      
-	                        <input type="file" name="image" placeholder="여기는 서명">	                      
+	                <div class="form-group row">
+	                    <label for="uploadFile" class="col-sm-1 col-form-label">서명 올리기</label>
+	                    <div class="col-sm-4">                      
+							<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
+							<input class="form-control" name="image" id="signature" type="file"/>
+							<span id="imgFail">서명을 선택해주세요</span>	                       
 	                    </div>
 	                  </div>
+	                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	                  <script type="text/javascript">
+						function readURL(input, id) {
+							if (input.files && input.files[0]) {
+								var reader = new FileReader();
+						
+								reader.onload = function(e) {
+									$("#" + id).attr('src', e.target.result);
+								}					
+								reader.readAsDataURL(input.files[0]);
+							}
+						}
+							//이미지 파일 입력 여부 검사
+							$('#signature').change(function(){
+								if($('#signature').val() == '') { 
+									$('#imgFail').show();
+									$('#signature').focus();
+								return false;
+								}else{
+									$('#imgFail').hide();
+									var id = $(this).attr('id');
+									id = id + "View";
+									console.log(id);
+									readURL(this, id);
+							}
+						});	
+						
+						
+						</script>
+	                  
+	                  
 	                  
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">작성자</label>
@@ -310,7 +370,7 @@
 	                <!-- /.card-body -->
 	
 	                <div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">등록하기</button>
+	                  <button type="submit" class="btn btn-success">등록하기</button>
 	                </div>
 	              </form>
 	            </div>
@@ -348,9 +408,14 @@
 		             }
 		         })
 		   });
+		   
+		  
+						
+			
 	
 		});
 </script>
+
 
 </th:block>
 </html>

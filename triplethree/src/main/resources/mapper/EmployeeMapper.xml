@@ -96,8 +96,21 @@
 			)
 	</insert>
 	
+	<insert id="insertBasicPay" parameterType="shop.triplethree.vo.Employee">
+		INSERT INTO PAY_BILL (code, emp_code, basic_pay, writer,writer_day)
+			VALUES (
+					#{payCode},
+					#{code},
+					#{basicPay},
+					#{writer},
+					 NOW())
+			 
+		
+	</insert>
+	
 	<select id="selectEmployee" resultType="shop.triplethree.vo.Employee">
 			SELECT
+				em.code as code,
 				em.emp_num as empNum,
 				em.emp_name as empName,
 				de.dename as demgName,
@@ -228,8 +241,6 @@
 			
 			UPDATE EMP_MANAGE
 				SET
-					demgcode= #{demgCode},
-					pocode= #{poCode},
 					li_code= #{liCode},
 					password=#{password},
 					postcode=#{postCode},
@@ -262,27 +273,9 @@
 			UPDATE EMP_MANAGE
 				SET
 					demgcode= #{afterDemgCode},
-					pocode= #{afterPoCode},
-					li_code= #{liCode},
-					password=#{password},
-					postcode=#{postCode},
-					addr=#{addr},
-					detailaddr=#{detailAddr},
-					extraaddr=#{extraAddr},
-					phone=#{phone},
-					car_presence=#{carPresence},
-					email=#{email},
-					con_type=#{conType},
-					<if test="retireDate neq null and retireDate neq ''.toString()">
-					retire_date=#{retireDate},
-					</if>
-					basic_pay=#{basicPay},
-					photo=#{photo},
-					signature=#{signature},
-					writer=#{writer},
-					writer_day=NOW()
+					pocode= #{afterPoCode}							
 				WHERE 
-					emp_num= #{empNum}
+					code= #{code}
 				
 	</update>
 	
