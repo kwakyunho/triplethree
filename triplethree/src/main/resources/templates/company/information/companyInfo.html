@@ -6,6 +6,8 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
 	<title>회사정보</title>
 </th:block>
 
@@ -41,7 +43,7 @@
 				<div class="card">
 				<form th:action="@{/company/companyUpdate}" id="deleteForm" method="post">
 	 <div class="card-body table-responsive p-0" style="height: auto;">
-  	 <table class="table table-bordered table-striped dataTable"role="grid" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
+  	 <table class="table table-bordered table-striped dataTable"role="grid" id="workTimeTable" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
    	  <thead>
    	 
 	   	<tr>	
@@ -65,12 +67,12 @@
 	   		<td align="center" id="coEmail"th:text="${l.coEmail}"></td>	   		   	 	   	
 	   		<td align="center" id="yesOrNo"th:text="${l.yesOrNo}"></td> 	   	
 		   	<td class="deleteCoBtn">
-				<input type="button" value="폐업" class="btn btn-block btn-primary btn-sm" id="deleteCoBtn">
+				<input type="button" value="폐업" class="btn btn btn-success" id="deleteCoBtn">
 			</td>	
   			 <div id="right-box"class="col-lg-4">	
   		     <td>
   		     		<div class="input-group-prepend show" >
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    <button type="button" class="btn btn-success" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                      	 수정하시겠습니까
                     </font></font></button>
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
@@ -81,7 +83,7 @@
                   </div>  	 	 	 	 	
 			</td>
 			</div>
-			<td align="center"><a th:href="@{/company/companyDetail(coName=${l.coName})}" class="btn btn-primary">상세보기</a></td>			 		 
+			<td align="center"><a th:href="@{/company/companyDetail(coName=${l.coName})}" class="btn btn-success">상세보기</a></td>			 		 
 	   	</tr>
 	   	</tbody>
   	 </table>
@@ -104,7 +106,16 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<!-- DataTables -->
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+$(document).ready(function(){
+	// 테이블 페이징 처리를 위한 JS홏ㄹ
+	$('#workTimeTable').DataTable();
+});
 <!--상태유무 스크립트  -->
+</script>
 <script th:src="@{/custom/js/Company.js}"></script>
 
 </th:block>

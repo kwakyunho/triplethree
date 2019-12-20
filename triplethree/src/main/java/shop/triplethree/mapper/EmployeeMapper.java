@@ -24,6 +24,9 @@ public interface EmployeeMapper {
 	//사원등록처리하는 메서드
 	public int insertEmployee(Employee employee);
 	
+	//급여지급명세서테이블에도 insert하는 메서드
+	public int insertBasicPay(Employee employee);
+	
 	//사원목록 조회하는 메서드
 	public List<Employee> selectEmployee();
 	

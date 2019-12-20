@@ -41,40 +41,40 @@
 						<form action="/admin/pay/insertPay" method="post" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
-									<option value="">검색조건</option> 
+								<!--<option value=''>검색조건</option> 모든값을 가져올 수 있지 않을까  -->
 									<option value="emp_num">사원코드</option>						
 									<option value="emp_name" >사원명</option>
 									<option value="dename" >부서명</option>
 									<option value="poname">직급명</option>																					
 								</select>																							
 							</div>
-							<div>
+							 <div>
 								<input class="form-control" type="text" name="sv" 
 										 placeholder="검색어를 입력하세요"/>
 							 </div>
 							 <div>
-								<button type="submit"id="searchBtn" class="btn btn-block bg-gradient-primary">Search</button>					
-							</form>										
+								<button type="submit"id="searchBtn" class="btn btn-block btn btn-success">Search</button>					
 							</div>
-  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
-				 	
-					<tr>
-								
+							</form>	
+																
+  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 				 	
+					<tr>								
+						
 						<th align="center">사원번호</th>
 						<th align="center">사원명</th>
 						<th align="center">부서명</th>
 						<th align="center">직급</th>
-						<th align="center">급여입력</th>
-
-							
-												
+						<th align="center">급여입력</th>																
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
 					<tr class="insertPay" th:each="e :${insertSearchPay}">
-						<td id="empNum"th:text="${e.empNum}"></td>		
-						<td id="empName"th:text="${e.empName}"></td>					 										
-						<td id="demgName"th:text="${e.demgName}"></td>										
-						<td id="poName"th:text="${e.poName}"></td>															
+																
+								
+						<td class="empNum" th:text="${e.empNum}"></td>		
+						<td class="empName" th:text="${e.empName}"></td>					 										
+						<td id="demgName" th:text="${e.demgName}"></td>										
+						<td id="poName" th:text="${e.poName}"></td>															
+							<input class="empCode" id="empCode" name="empCode"type="hidden" th:value="${e.empCode}">													
 							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
 							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
 							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
@@ -88,11 +88,11 @@
 							<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
 							<input class="longCare" type="hidden" th:value="${e.longCare}">																																	
 							<input class="inseurPer" type="hidden" th:value="${e.inseurPer}">																																	
-							<input class="incomePer" type="hidden" th:value="${e.incomePer}">																																	
+							<input class="inCode" type="hidden" th:value="${e.inCode}">																																	
 							<input class="residentTax" type="hidden" th:value="${e.residentTax}">																																			
 															
 						<td>
-							<input type="button" name="choice" value="선택" class="btn btn-block bg-gradient-primary choiceBtn">
+							<input type="button" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn">
 						</td>
 					</tr>										
 				</table>
@@ -153,34 +153,25 @@
 						<th>공제금액</th>					
 					</tr>
 					<tr><td>국민연금</td>
-						<td><input type="text" name="nationPer" id="nationPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="nationPer" id="nationPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>건강보험</td>
-						<td><input type="text" name="healthPer"  id="healthPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="healthPer"  id="healthPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>장기요양보험</td>
-						<td><input type="text" name="longCare" id="longCare" class="form-control col-12"></td></tr>
+						<td><input type="text" name="longCare" id="longCare" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>고용보험</td>
-						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>소득세</td>
-						<td><input type="text" name="incomePer" id="incomePer" class="form-control col-12"></td></tr>
+						<td><input type="text" name="inCode" id="incomePer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>지방소득세</td>
-						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12"></td></tr>
+						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>공제액 계</td>
-						<td><input type="text" id="deductHap" class="form-control col-12"></td></tr>
+						<td><input type="text" id="sum4" class="form-control col-12" readonly="readonly"></td></tr>
 						<tr><td colspan="2" align="left">차인지급액 :
-						<input type="text" name="deductHap" class="form-control"  readonly="readonly"></td></tr>
+						<input type="text" id="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>
-				</div>
-			
-				<form action="/admin/pay/selectPay" method="post">
-				<button type="submit" value="급여지급" class="col-12" align="center">							
-					급여 지급액 등록
-				</button>				
-			</form>			
-
-			
-
-				<!-- /.card -->
-			
+				</div>					
+					<a href="/admin/pay/selectPay" class="col-12 btn btn-success">급여지급액 등록</a>												
+				<!-- /.card -->			
 			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->
@@ -195,7 +186,7 @@
 $(document).ready(function(){
 	$('#sel').on('change', function() {
 	    location.href= this.value;
-	});
+	})
 	//$('#sel').val(location.href);
 }
 

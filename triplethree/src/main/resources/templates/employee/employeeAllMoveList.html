@@ -9,7 +9,13 @@
 </th:block>
 
 <!-- 사용자 CSS -->
-
+<th:block layout:fragment="customCss">
+<style type="text/css">
+tr:hover{background: whitesmoke;}
+</style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
 
 <th:block layout:fragment="customContents">
 	<!-- Content Header (Page header) -->
@@ -22,9 +28,9 @@
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="/index">Home</a></li>
-						<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
-						<li class="breadcrumb-item"><a href="/employee/employeeMyMoveList">전체사원 인사이동 목록</a></li>
+						<li class="breadcrumb-item"><a href="/index" style="color: #28a745;">Home</a></li>
+						<li class="breadcrumb-item"><a href="/employee/employeeList" style="color: #28a745;">사원 관리</a></li>
+						<li class="breadcrumb-item"><a href="/employee/employeeMyMoveList" style="color: #28a745;">전체사원 인사이동 목록</a></li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -39,7 +45,7 @@
 		<div class="container-fluid">
 		<div class="row" style="margin-left:auto;">
 			<div class="col-2">
-				<button  type="button" class="btn btn-block bg-gradient-primary"
+				<button  type="button" class="btn btn-block bg-gradient-success"
 					onclick="location.href='/employee/employeeList'">사원 목록으로 가기</button>
 			</div>
 			
@@ -53,17 +59,10 @@
               <div class="card-header">
                 <h3 class="card-title"><b>승인 대기중 인사이동 목록</b></h3>
 
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               <!-- /.card-header -->
+            <div class="card-body">  
              <form id="approForm" method="post" action = "/admin/employee/employeeAllMoveList">	
               <div class="card-body table-responsive p-0" >
                 <table id="approTable"class="table table-hover"  style="margid:auto; text-align:center;">
@@ -86,18 +85,19 @@
                     </thead>
                      <tbody >
                      	
-	                    <tr  th:each="am :${AllMove}"  class="approTr">
-								<td class="approTd" th:text="${am.moveCode}"></td>
-								<td class="approTd2" th:text="${am.code}"></td>
+	                    <tr th:each="am, index :${AllMove}"  class="approTr">
+								<td th:text="${am.moveCode}"></td>
+								<td th:text="${am.code}"></td>
 								<td th:text="${am.empName}"></td>
 								<td th:text="${am.demgName}"></td>
 								<td th:text="${am.poName}"></td>
-								<td th:text="${am.afterDemgName}"></td>
+								<td th:text="${am.afterDemgName}" ></td>
 								<td th:text="${am.afterPoName}"></td>
 								<td th:text="${am.afterDate}"></td>
 								<td th:text="${am.writerName}"></td>
 								<td th:text="${am.writerDay}"></td>
 							    <td class="approTrInput">															    
+									<input type="hidden" th:value="${index.count}">
 							    	<button type="button" class="btn btn-block btn-outline-success btn-sm approCheck" th:value="${am.moveCode}">승인하기</button>
 							    </td>
 						</tr>
@@ -106,7 +106,7 @@
                 </table>
               </div>
              </form>
-              
+            </div>  
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -121,19 +121,11 @@
               <div class="card-header">
                 <h3 class="card-title"><b>승인완료 인사이동 목록</b></h3>
 
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
+             <div class="card-body">
               <div class="card-body table-responsive p-0" >
-                <table class="table table-hover" style="margid:auto; text-align:center;">
+                <table class="table table-hover" style="margid:auto; text-align:center;" id="employeeMoveListOkTable">
                   <thead>
 	                    <tr>
 	                    	  <th>인사이동코드</th> 
@@ -181,7 +173,7 @@
                   </tbody>
                 </table>
               </div>
-              
+             </div> 
               
               <!-- /.card-body -->
             </div>
@@ -193,15 +185,20 @@
 
 <th:block layout:fragment="customScript">
 
-	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-
-
-
-	<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
-	<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-
-	<script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script>
+		$(function () {
+		    $('#approTable').DataTable();
+		    $('#employeeMoveListOkTable').DataTable();
+		    
+		  });
+</script>
+	
+<script type="text/javascript" th:inline="javascript">
 	$(document).ready(function(){
+		
 		$(function() {
 			$("#example1").DataTable();
 			$('#example2').DataTable({
@@ -214,22 +211,66 @@
 			});
 		});
 		
-		$('.approCheck').on('click',function(){
+		
+		var demgArray = [[${AllMove}]];
+		console.log(demgArray[0]);
+		
+		$('.approTr').on('click', 'button', function(){
+			var num = $(this).parents('.approTr').find('input[type=hidden]').val() - 1;
+			
+			var code = demgArray[num].code;
+			var moveCode = demgArray[num].moveCode;
+			var afterDemgCode = demgArray[num].afterDemgCode;
+			var afterPoCode = demgArray[num].afterPoCode;
+			var inputInsertUrl = $(this).parents('.approTr').children('.approTrInput');
+			
+			if(confirm('승인 하시겠습니까?')){
+				inputInsertUrl.children('input[name="code"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="code" value=' + code + '>');
+				inputInsertUrl.children('input[name="moveCode"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="moveCode" value=' + moveCode + '>');
+				inputInsertUrl.children('input[name="afterDemgCode"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="afterDemgCode" value=' + afterDemgCode + '>');
+				inputInsertUrl.children('input[name="afterPoCode"]').remove();
+				inputInsertUrl.append('<input type="hidden" name="afterPoCode" value=' + afterPoCode + '>');
+				$('#approForm').submit();
+				alert('승인이 완료되었습니다.');
+				
+			}else {
+				return alert('승인이 취소되었습니다.');				
+			}
+		});
+	
+		
+		
+		/* $('.approCheck').on('click',function(){
 			var code=$(this).val(); //하위요소 버튼테그 벨류값 저장
 			if(confirm('승인 하시겠습니까?')){
-			var code = $(this).val()
-			$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="moveCode" value=' + code + '>');
-			var empCode = $(this).parents('.approTr').children('.approTd2').text();
-			$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="code" value=' + empCode + '>');
-			$('#approForm').submit();
-			alert('승인이 완료되었습니다.');
+				//인사이동관리코드 가지고 값 넣기
+				var code = $(this).val()
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="moveCode" value=' + code + '>');
+				//사원관리코드 가지고 값 넣기 
+				var EmpCode = $(this).parents('.approTr').children('.approTdCode').text();
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="code" value=' + EmpCode + '>');
+				//변경부서코드 가지고 값 넣기 
+				var DemgCode= $(this).parents('.approTr').children('#hiddenAfterDemgCode').val();
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="afterDemgCode" value=' + DemgCode + '>');
+				//변경직급코드 가지고 값 넣기
+				var PoCode = $(this).parents('.approTr').children('.approTdPo').find('input[type=hidden]').val();
+				$(this).parents('.approTr').children('.approTrInput').append('<input type="hidden" name="afterPoCode" value=' + PoCode + '>');
+				console.log(DemgCode);
+				console.log(PoCode);
+			//	$('#approForm').submit();
+				
+				alert('승인이 완료되었습니다.');
 		}else{
 			return alert('승인이 취소되었습니다.');
 		}
 						
 			
-		});
+		}); */
+		
 	});
-	</script>
+</script>
 </th:block>
 </html>

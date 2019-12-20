@@ -23,9 +23,9 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="/index">Home</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeList">사원 관리</a></li>
-					<li class="breadcrumb-item"><a href="/employee/employeeDetail">사원 상세 정보</a></li>
+					<li class="breadcrumb-item"><a href="/index" style="color: #28a745;">Home</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeList" style="color: #28a745;">사원 관리</a></li>
+					<li class="breadcrumb-item"><a href="/employee/employeeDetail" style="color: #28a745;">사원 상세 정보</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -38,7 +38,7 @@
 				 <div class="col-md-2" id="updateBtn">
 				 	<!-- <button type="button" class="btn btn-block bg-gradient-primary"  onclick="location.href='/employeeUpdate()'">사원 수정</button> -->
 				 	<input type="hidden" value="넣을값">
-				 	<a class="btn btn-block bg-gradient-primary" th:href="@{/employee/employeeUpdate(empNum=${detail.empNum})}">수정</a>
+				 	<a class="btn btn-block bg-gradient-success" th:href="@{/employee/employeeUpdate(empNum=${detail.empNum})}">수정</a>
 				 </div>
 			 
 		 	</div>	     			
@@ -62,12 +62,18 @@
 	                <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
-		                    	<div class="col-sm-3">
-		                 			<img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+		                    	<div class="col-sm-3" th:if="${d.photo} neq null">
+		                 			<img th:src="${d.photo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
+		                 		</div>
+		                 		<div class="col-sm-3" th:if="${d.photo} eq null">
+		                 			<img th:src="${d.photo}" class="img" alt="사진을 업로드해주세요." style="width:200px; height:200px;">
 		                 		</div>
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
-			                    <div class="col-sm-3">
-			                 		<img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+			                    <div class="col-sm-3" th:if="${d.signature} neq null">
+			                 		<img  th:src="${d.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
+			                 	</div>
+			                 	<div class="col-sm-3" th:if="${d.signature} eq null">
+			                 		<img  th:src="${d.signature}" class="img-fluid" alt="서명을 업로드해주세요." style="width:200px; height:200px;">
 			                 	</div>		
 	               	   </div>
 	                	
@@ -346,7 +352,7 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">사원 조회 목록으로 가기</button>
+	                  <button type="submit" class="btn btn-success">사원 조회 목록으로 가기</button>
 	                </div>
 	                
 	              </form>

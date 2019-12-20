@@ -22,7 +22,11 @@ public class PayService {
 		List<Employee> list = payMapper.insertSearchPay(sk, sv);
 		return list;
 	}
-	
+	/***급여 지급액등록(사실상 수정)**/
+	public int updatePay(Pay Pay) {
+		
+		return payMapper.updatePay(Pay);
+	}
 	/** 급여 대장  selectPay,payInsert**/
 	public List<Employee> selectPay() {
 		return payMapper.selectPay();
@@ -41,4 +45,5 @@ public class PayService {
 	public List<Pay> insertDeduct(){
 		return payMapper.insertDeduct();
 	}
+	
 }
