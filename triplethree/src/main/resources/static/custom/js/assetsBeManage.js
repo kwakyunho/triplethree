@@ -117,7 +117,7 @@ $(function () {
     					  //var sortation = dataObj.sortation;
     					  //console.log(sortation);
     					  var start = dataObj.reStart;
-    					  var end = moment(dataObj.reEnd);
+    					  var end = moment(dataObj.reEnd).add(1,'day');
     					  //var end = moment(dataObj.reEnd).add(1,'day').format('YYYY-MM-DD');
     					  var name = (dataObj.deName+'\-'+dataObj.empName+'\n예약시설:'+dataObj.beName+'\n'+'예약시작:'+moment(start).format('A.HH시mm분')+'\n예약끝:'+moment(end).format('A.HH시mm분'));
     					  var color = 'white';

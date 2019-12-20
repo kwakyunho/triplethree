@@ -70,7 +70,7 @@ public class ScheduleController {
 		schedule.setDemgcode(sdecode);
 		
 		scheduleService.insertSchedule(schedule); 
-		return "redirect:companySchedule";
+		return "redirect:/calender/companySchedule";
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class ScheduleController {
 		System.out.println("수정 버튼이 눌렸어요.");
 		
 		scheduleService.updateSchedule(schedule);
-		return "redirect:companySchedule";
+		return "redirect:/calender/companySchedule";
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class ScheduleController {
 		System.out.println(schedule.toString());
 		
 		scheduleService.deleteSchedule(schedule);
-		return "redirect:companySchedule";
+		return "redirect:/calender/companySchedule";
 	}
 	
 	@PostMapping(value="/calender/checkSID",produces = "application/json")

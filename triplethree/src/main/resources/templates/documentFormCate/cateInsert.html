@@ -39,7 +39,7 @@
 		<div class="row">
 			<div class="card card-info col-lg-8">
 				<!-- form start -->
-				<form id="cateNameList" class="form-horizontal" th:action="@{/documentFormCateInsert}" method="POST">
+				<form id="cateNameList" class="form-horizontal" th:action="@{/admin/documentFormCateInsert}" method="POST">
 					<div class="card-body">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">대분류</label>
@@ -288,7 +288,7 @@ $(document).ready(function(){
 				async: true,
 				type : 'POST',
 				data : {'largeCateName': largeCateName, 'middleCateName': middleCateName},
-				url : "selectCateNameList",
+				url : "/admin/selectCateNameList",
 				dataType : "json",
 				success : function(result) {
 					
@@ -373,7 +373,7 @@ $(document).ready(function(){
 				async: true,
 				type : 'POST',
 				data : {'condition' : condition, 'cateCode' : cateCode, 'smallCateName': smallCateName, 'useConfig' : useConfig},
-				url : "updateCateNameConfig",
+				url : "/admin/updateCateNameConfig",
 				dataType : "json",
 				success : function(result) {
 					

@@ -117,7 +117,7 @@ $(function () {
     					  //var sortation = dataObj.sortation;
     					  //console.log(sortation);
     					  var start = dataObj.reStart;
-    					  var end = moment(dataObj.reEnd);
+    					  var end = moment(dataObj.reEnd).add(1,'day');
     					  //var end = moment(dataObj.reEnd).add(1,'day').format('YYYY-MM-DD');
     					  var name = (dataObj.deName+'\-'+dataObj.empName+'\n예약차량:'+dataObj.veName+'\n'+'예약시작:'+moment(start).format('A.HH시mm분')+'\n예약끝:'+moment(end).format('A.HH시mm분'));
     					  var color = 'white';
@@ -303,7 +303,7 @@ $(function () {
 	// 등록 버튼 이벤트
 	$('#insertBtn').click(function(){
 		if(confirm('예약 하시겠습니까?')){
-			$('#formInsert').attr('action', 'assetsManageCaInsert').submit();
+			$('#formInsert').attr('action', '/assets/assetsManageCaInsert').submit();
 		}
 	});
 	
@@ -315,7 +315,7 @@ $(function () {
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('예약 내용을 수정하시겠습니까?')){
-				$('#formUpdateId').attr('action', 'assetsManageCaUpdate').submit();
+				$('#formUpdateId').attr('action', '/assets/assetsManageCaUpdate').submit();
 			}
 		}
 	});
@@ -332,7 +332,7 @@ $(function () {
 			//console.log('selectEndTime : ' + selectEndTime)
 		}else{
 			if(confirm('예약을 취소하시겠습니까?')){
-				$('#formUpdateId').attr('action', 'assetsManageCaDelete').submit();
+				$('#formUpdateId').attr('action', '/assets/assetsManageCaDelete').submit();
 			}
 		}
 	});	 
