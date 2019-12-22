@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,19 +44,12 @@ public class PayController {
 	}
 	/***급여 등록하기지만 수정으로 처리해줘야함*****/
 	@PostMapping("/admin/pay/selectPay")
-	public @ResponseBody String updatePay(@RequestParam(value="empCode") String empCode
-			                              , Pay pay
-			                              , Model model) {
-		System.out.println("/admin/pay/selectPay 실행");
-		 model.addAttribute("selectPay", payService.selectPay());
-		 model.addAttribute("payInsert", payService.payInsert());
-		 System.out.println(empCode+"<--급여등록코드");
-		 
-		 
+	public String updatePay(Pay pay){
+		 System.out.println(pay+"<--급여등록코드"); 
 		 payService.updatePay(pay);
 		 System.out.println(pay+"<--pay");
 		 
-		return "/pay/selectPay";
+		return "redirect:/pay/selectPay";
 	}
 	/** 급여대장** */
 	@GetMapping("/pay/selectPay")

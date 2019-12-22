@@ -28,6 +28,7 @@ public class Pay {
 	private String demgName;	//부서명
 	private Double inseurPer; //고용보험공제비율
 	private int inCode; //소득세
+	private int one; //소득세
 	private int residentTax;
 	private Double nationPer; //국민연금공제비율
 	private Double healthPer; //건보료공제비율
@@ -36,6 +37,12 @@ public class Pay {
 	private Year year;	//적용연도
 	public String getCode() {
 		return code;
+	}
+	public int getOne() {
+		return one;
+	}
+	public void setOne(int one) {
+		this.one = one;
 	}
 	public int getResidentTax() {
 		return residentTax;

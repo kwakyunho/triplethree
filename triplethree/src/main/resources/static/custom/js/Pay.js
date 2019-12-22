@@ -2,6 +2,7 @@
 $(function(){
 	
 	$('.choiceBtn').on('click', function(){
+		
 		var basicPay = $(this).parents('.insertPay').children('.basicPay');		
 		var beneFit = $(this).parents('.insertPay').children('.beneFit');		
 		var holidayPay = $(this).parents('.insertPay').children('.holidayPay');		
@@ -15,6 +16,7 @@ $(function(){
 		var healthPer = $(this).parents('.insertPay').children('.healthPer');		
 		var longCare = $(this).parents('.insertPay').children('.longCare');		
 		var inseurPer = $(this).parents('.insertPay').children('.inseurPer');		
+		var one = $(this).parents('.insertPay').children('.one');		//소득세
 		var inCode = $(this).parents('.insertPay').children('.inCode');		//소득세
 		var residentTax = $(this).parents('.insertPay').children('.residentTax'); //지방소득세		
 		var empName = $(this).parents('.insertPay').children('.empName');
@@ -39,12 +41,12 @@ $(function(){
 		$('#healthPer').val(healthPer.html('input').val());
 		$('#longCare').val(longCare.html('input').val());
 		$('#inseurPer').val(inseurPer.html('input').val());
-		$('#inCode').val(inCode.html('input').val());
+		$('#one').val(one.html('input').val());
 		$('#residentTax').val(residentTax.html('input').val());
+		$('#inCode').val(inCode.html('input').val());
+
 		
-		
-		
-			
+	
 		//.children('input[type="hidden"]').val();
 		var basicPay=document.getElementById("basicPay"); //기본급
 		var beneFit=document.getElementById("beneFit");	  //야간근무수당
@@ -59,6 +61,8 @@ $(function(){
 		var healthPer=document.getElementById("healthPer"); //건강보험요율
 		var longCare=document.getElementById("longCare"); //장기요양보험요율
 		var inseurPer=document.getElementById("inseurPer"); //고용보험요율
+		var one=document.getElementById("one"); //소득세
+		var residentTax=document.getElementById("residentTax"); //지방소득세
 		var inCode=document.getElementById("inCode"); //소득세
 		var sum1=document.getElementById("sum1"); //과세
 		var sum2=document.getElementById("sum2"); //비과세
@@ -85,15 +89,15 @@ $(function(){
 		console.log(nation);
 		nationPer.value=Math.floor(nation/10)*10;﻿//예를 들어 10으로 나누면 100.5 floor 함수로 소수점을 버리면 100, 다시 10을 곱하면 1000
 		
-		var nationPer=nationPer.value;
 		if (add > 4860000){
 			alert("기준소득월액 4,860,000원이상은 국민연금 최대납부액 대상자입니다");
-			$('#nationPer').val(218700);
+			$('#nationPer').val(parseInt(218700));
 		
 		}else if (add < 310000){
 			alert("기준소득월액 310,000원이하는 국민연금 최저납부액이 0원입니다");
 			$('#nationPer').val(0);
 		}
+		var nationPer=nationPer.value;
 		
 		//건강보험 계산 
 		var health1=parseFloat(healthPer.value)*parseInt(sum1.value);
@@ -103,7 +107,7 @@ $(function(){
 		
 		if(add > 99250000){
 			alert("기준소득월액 99,250,000원이상은 건강보험료 최대납부액은 대상자입니다");
-			$('#healthPer').val(3205770);
+			$('#healthPer').val(parseInt(3205770));
 		}else if (add < 280000){
 			alert("기준소득월액 280,000원이하는 건강보험료 최저납부액이 0원입니다");
 			$('#healthPer').val(0);
@@ -115,6 +119,7 @@ $(function(){
 		var inseur=Math.ceil(inseurper/2);
 		console.log(inseur);
 		inseurPer.value=Math.floor(inseur/10)*10;
+		var inseurPer=inseurPer.value;
 		
 		//장기요양보험 계산		
 		var longCare1=parseInt(healthPer)*parseFloat(longCare.value);
@@ -122,22 +127,31 @@ $(function(){
 		console.log(long);
 		longCare.value=Math.floor(long/10)*10;
 		var longCare=longCare.value;
+		
 		//장기요양 최저치 알아봐야 함
 		if(healthPer >= 3205770){	
 			$('#longCare').val(272810);
 		}else if(healthPer <=9040){
 			
-			//#('#longCare').val(0);
+			('#longCare').val(0);
 		}
-	
+		
+		var one =one.value;
+		
+		if(one >=0){
+			alert('지소네왔니')
+			$('#residentTax').val(parseInt(one/10));
+		}
+		
+		var residentTax=residentTax.value;
+		console.log(residentTax);
 		//공제액 합 		
-		var add4=parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare);
+		var add4=parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one)+parseInt(residentTax);
 		sum4.value =add4;
 		
 		//차인지급액
 		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
 		deductHap.value=deductHap1;
-		
 		
 		});	
 	

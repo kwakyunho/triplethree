@@ -46,7 +46,8 @@
 			p.self_dri_pay AS selfDriPay,
 			p.com_pay AS comPay,
 			p.meal_cost AS mealCost,
-			p.child_pay AS childPay
+			p.child_pay AS childPay,
+			i.one AS one
 	FROM (
 			SELECT A.*
 			FROM EMP_MANAGE A
@@ -64,7 +65,8 @@
 		ON A.pocode = C.CODE
 		inner JOIN PAY_BILL AS p
 		ON A.CODE = p.emp_code
-
+		inner JOIN INCOME AS i
+		ON p.in_code = i.code
 	</select>
 	
 	<!--퇴직금 검색쿼리문짜야험  -->
@@ -98,7 +100,8 @@
 	d.insur_per AS inseurPer,
 	d.nation_per AS nationPer,
 	d.health_per AS healthPer,
-	d.long_care AS longCare
+	d.long_care AS longCare,
+	i.one AS one
 	FROM (
 	SELECT em.*
 			FROM EMP_MANAGE em
@@ -117,6 +120,9 @@
 	on em.code=pay.emp_code
 	inner join DEDUCT_MANAGE as d
 	on d.code=pay.de_code
+	inner JOIN INCOME AS i
+	ON pay.in_code = i.code
+	
 	<if test="sv != null and sv neq ''.toString()">
 		WHERE 
 			${sk} Like CONCAT('%',#{sv},'%')					
