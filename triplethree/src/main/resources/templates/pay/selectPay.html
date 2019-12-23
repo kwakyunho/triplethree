@@ -80,9 +80,12 @@ tr:hover{background: whitesmoke;}
 							<th>소득세</th>
 							<th>지방소득세</th>
 							<th>공제액 계</th>
-							<th>차인지급액</th>				
+							<th>차인지급액</th>		
+							<th>수정</th>		
+									
 						</tr>	
 					</thead>
+					
 					<tbody>
 						 <tr th:each="p ,index : ${payInsert}" style="cursor:pointer">					 	
 						 <td th:text ="${p.empNum}"></td>						 						 						
@@ -109,7 +112,8 @@ tr:hover{background: whitesmoke;}
 						 <td th:text="${p.one}"></td>		
 						 <td th:text="${p.childPay}"></td>		
 						 <td th:text="${p.childPay}"></td>		
-						 <td th:text="${p.childPay}"></td>		
+						 <td th:text="${p.childPay}"></td>	
+						 <td><a class="btn btn btn-success" th:href="@{/admin/pay/updatePay(empCode=${p.empCode})}">수정</a></td>		
 						 </tr>
 					</tbody>	
 				</table>		
@@ -130,6 +134,7 @@ tr:hover{background: whitesmoke;}
     $('#boardListTable1').DataTable();
   });
 </script>
+
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <script th:src="@{/custom/js/Pay.js}"></script>
 

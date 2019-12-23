@@ -161,4 +161,51 @@
 		DEDUCT_MANAGE AS de
 	</select>
 	
+	<!--급여대장에서 수정화면을 보여주기  -->
+	<select id="updatePayView" resultType="shop.triplethree.vo.Pay">
+	SELECT
+	pay.code as code,
+	em.code as empCode,
+	em.emp_num as empNum,
+	em.emp_name as empName,
+	p.poname as poName,
+	de.dename as demgName,
+	pay.basic_pay AS basicPay,	
+	pay.benefit AS beneFit,
+	pay.holiday_pay AS holidayPay,
+	pay.overtime_pay AS overtimePay,
+	pay.position_benefit AS positionBenefit,
+	pay.self_dri_pay AS selfDriPay,
+	pay.com_pay AS comPay,
+	pay.meal_cost AS mealCost,
+	pay.child_pay AS childPay,
+	d.insur_per AS inseurPer,
+	d.nation_per AS nationPer,
+	d.health_per AS healthPer,
+	d.long_care AS longCare,
+	i.one AS one
+	FROM (
+	SELECT em.*
+			FROM EMP_MANAGE em
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) p
+			ON em.writer_day = p.writer_day
+			AND em.emp_num = p.emp_num) em
+	INNER JOIN POSISYS AS p
+	ON em.pocode = p.CODE 
+	
+	LEFT JOIN DEMG de
+	ON em.demgcode = de.CODE
+	inner join PAY_BILL as pay
+	on em.code=pay.emp_code
+	inner join DEDUCT_MANAGE as d
+	on d.code=pay.de_code
+	inner JOIN INCOME AS i
+	ON pay.in_code = i.code
+	WHERE 
+		pay.emp_code=#{empCode}
+	</select>
+	
 </mapper>
