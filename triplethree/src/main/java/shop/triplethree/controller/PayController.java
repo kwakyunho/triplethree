@@ -43,14 +43,14 @@ public class PayController {
 		return "pay/insertPay";	
 	}
 	/***급여 등록하기지만 수정으로 처리해줘야함*****/
-	@PostMapping("/admin/pay/selectPay")
-	public String updatePay(Pay pay){
-		// System.out.println(pay+"<--급여등록코드"); 
-		 payService.updatePay(pay);
-		 //System.out.println(pay+"<--pay");
-		 
-		return "redirect:/pay/selectPay";
-	}
+	/*
+	 * @PostMapping("/admin/pay/updatePay") public String updatePayInsert(Pay pay){
+	 * // System.out.println(pay+"<--급여등록코드"); payService.updatePay(pay);
+	 * //System.out.println(pay+"<--pay");
+	 * 
+	 * return "redirect:/pay/selectPay"; }
+	 */
+	 
 	/** 급여대장** */
 	@GetMapping("/pay/selectPay")
 	public String selectPay(Model model) {		
@@ -83,5 +83,12 @@ public class PayController {
 		
 		return "pay/updatePay";	
 	}
+	/**급여 진짜 수정하기***/
+	
+	  @PostMapping("/admin/pay/updatePay") 
+	  public String updatePay(Pay pay) {
+	  System.out.println("수정처리"); 
+	  payService.updatePay(pay);
+	  return "redirect:/pay/selectPay"; }
 	
 }

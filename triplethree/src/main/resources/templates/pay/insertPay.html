@@ -4,7 +4,7 @@
       layout:decorate="~{layouts/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>급여입력</title>
+	<title>급여 입력</title>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -172,7 +172,7 @@
 						<input type="text" id="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>
 				</div>
-					<form th:action="@{/admin/pay/selectPay}" method="post">
+					<form th:action="@{/admin/pay/updatePay}" method="post">
 					    <input id="empCode" name="empCode" type="hidden" value="값확인">	
 					    	<input class="basicPay" type="hidden" value="hidden">													
 							<input class="beneFit" type="hidden" value="beneFit">													
@@ -284,9 +284,15 @@ $(document).ready(function(){
 		//공제액 합 		
 	
 		var one =$('#one').val();
-	 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null && residentTax !=null){
-			$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one)+parseInt(residentTax));
-		}			 					
+		if(add < 1060000){
+			$('#one').val(parseInt(0));
+			$('#residentTax').val(parseInt(0));
+		}else{
+			
+		}
+	 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null ){
+			$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one));
+		}			 		 					
 		//차인지급액
 		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
 		deductHap.value=deductHap1;
