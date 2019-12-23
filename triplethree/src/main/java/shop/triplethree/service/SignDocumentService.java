@@ -21,8 +21,13 @@ public class SignDocumentService {
 	public List<SignDocument> selectDraftDocument(String valCheck,String sid){
 		return signDocumentMapper.selectDraftDocument(valCheck,sid);
 	}
-	public List<SignDocument> selectDraftDocumentReturn(String valCheck, String sid){
-		System.out.println(1);
-		return signDocumentMapper.selectDraftDocumentReturn(valCheck, sid);
+	
+	/**
+	 * 결재 문서함에서 본인이 결재자에 있는 모든 문서를 select하는 메서드
+	 * @param Strig
+	 * @return List<SignDocument>
+	 * */
+	public List<SignDocument> selectSignDocumentWait(String valCheck, String sid){
+		return signDocumentMapper.selectSignDocumentWait(valCheck, sid);
 	}
 }

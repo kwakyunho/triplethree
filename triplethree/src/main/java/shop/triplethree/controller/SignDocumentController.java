@@ -70,4 +70,10 @@ public class SignDocumentController {
 		System.out.println("값확인"+selectList.toString());
 		return selectList;
 	}
+	
+	/**
+	 * 결재 대기함에서 상단 메뉴 클릭시 클릭된 값에 맞는 결재문서를 가져와 뿌려주는 메서드
+	 * @param String valCheck
+	 * */
+	
 }
