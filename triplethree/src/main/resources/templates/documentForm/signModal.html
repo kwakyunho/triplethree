@@ -18,11 +18,11 @@
 					<div class="form-group">
 					
 					
-<div class="set_signModal header">
-	<div class="set_signModal contain">
+<div class="set-signModal header">
+	<div class="set-signModal contain-l">
 	<!-- 탭 -->
 		<ul class="zeroPadding">
-			<li class="bottomLine signModal signModal_select">
+			<li class="bottomLine signModal signModal-select">
 				<a href="#"><span class="txt">조직도</span></a>
 			</li>
 			<li class="bottomLine">
@@ -30,20 +30,20 @@
 			</li>
 		</ul>
 		<div>
-			<div class="set_signModal">
+			<div class="set-signModal">
 				<section class="search">
 					<form>
 						<input class="search" type="text" placeholder="이름/아이디/부서/직위/직책/전화">
-						<button class="search_btn fas fa-search" type="button" value="">
+						<button class="search-btn fas fa-search" type="button" value="">
 					</form>
 					<div style="position: relative; display: none; z-index: 60;">
 					</div>
 				</section>
 				<div>
 					<div>
-						<div style="min-height: 306px; max-height: 306px;">
+						<div style="min-height: 306px; max-height: 306px; overflow-y: scroll; overflow-x: hidden;">
 							<ul>
-								<li><a>관리자 데모</a>
+								<li style="font-size: 0.8rem;"><a>관리자 데모</a>
 									<ul>
 										<li><a>김대표 사장</a></li>
 										<li><a>영업본부</a>
@@ -102,43 +102,61 @@
 		</div>
 	</div>
 
-<div>
-	<div class="set_signModal">
-		<table>
+<div class="set-signModal contain-r">
+	<div class="set-signModal">
+		<table class="type-normal layer-line">
 			<thead>
 				<tr>
-					<th class="btn"></th>
-					<th class="kind">타입</th>
-					<th class="name">이름</th>
-					<th class="depart">부서</th>
-					<th class="state">상태</th>
-					<th class="func">
-						<span>
-							<span>삭제</span>
-						</span>
-					</th>
+					<th></th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>이름</th>
+					<th>상태</th>
+					<th><span>삭제</span></th>
 					<th></th>
 				</tr>
 			</thead>
 		</table>
-		<div>
+		<div style="overflow-x: hidden; overflow-y: scroll; height: 340px;">
 			<div>
-				<div>
-					<span>신청</span>
+				<div class="set-signModal-text-type1">
+					<span class="display-inline-block">결재</span>
 				</div>
-				<div>
-					<div>
-						<span></span>
+				<div style="position: relative; border-bottom: 1px solid #E4E4E4;">
+					<div style="position: absolute; top: 0; left: 0; width: 34px; height: 100%; background: #fafafa; cursor: pointer; border-right: 1px solid #dedede; padding: 0;">
+						<span class="fas fa-angle-double-right" style="position: absolute; top: 30%; left: 10px;"></span>
 					</div>
-					<div>
-						<table>
-							<tbody>
-								<tr>
-									<td>기안</td>
-									<td class="name">김다우</td>
-									<td class="depart">영업팀</td>
-									<td class="state"></td>
-									<td class="func"></td>
+					<div style="margin: 0 0 0 34px;">
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">영업팀</td>
+									<td style="width: 85px;">인턴</td>
+									<td style="width: 90px;">곽윤호</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">영업팀</td>
+									<td style="width: 85px;">과장</td>
+									<td style="width: 90px;">김다혜</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">영업팀</td>
+									<td style="width: 85px;">부장</td>
+									<td style="width: 90px;">최영은</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
 								</tr>
 							</tbody>
 						</table>
@@ -146,38 +164,40 @@
 				</div>
 			</div>
 			<div>
-				<div>
-					<span>승인</span>
+				<div class="set-signModal-text-type1">
+					<span class="display-inline-block">참조</span>
 				</div>
-				<div>
-					<div>
-						<span></span>
+				<div style="position: relative; border-bottom: 1px solid #E4E4E4;">
+					<div style="position: absolute; top: 0; left: 0; width: 34px; height: 100%; background: #fafafa; cursor: pointer; border-right: 1px solid #dedede; padding: 0;">
+						<span class="fas fa-angle-double-right" style="position: absolute; top: 30%; left: 10px;"></span>
 					</div>
-					<div>
-						<table>
-							<tbody>
-								<tr>
-									<td>
-										<select>
-											<option>결재</option>
-											<option>합의</option>
-										</select>
-									</td>
-									<td class="name">김대표</td>
-									<td class="depart">관리자 데모</td>
-									<td class="state"></td>
-									<td class="func">
-										<span>
-											<span></span>
-										</span>
-									</td>
+					<div style="margin: 0 0 0 34px;">
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">인사팀</td>
+									<td style="width: 85px;">대리</td>
+									<td style="width: 90px;">정해성</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">인사팀</td>
+									<td style="width: 85px;">과장</td>
+									<td style="width: 90px;">황인호</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div style="height: 177px;">
+			<div style="height: 130px;">
 				<div style="height: 100%">
 					<table style="height: 100%">
 						<tbody style="height: 100%">
@@ -189,19 +209,6 @@
 				</div>
 			</div>
 		</div>
-		<div>
-			<a>개인 결재선으로 저장</a>
-			<span></span>
-			<span>합의방식 : </span>
-			<span>
-				<input type="radio">
-				<label>순차합의</label>
-			</span>
-			<span>
-				<input type="radio">
-				<label>병렬합의</label>
-			</span>
-		</div>
 	</div>
 	<div style="display: none;">
 		<table>
@@ -210,27 +217,27 @@
 					<th class="btn"></th>
 					<th class="name">이름</th>
 					<th class="depart">부서</th>
-					<th class="time_chk">확인시간</th>			
+					<th class="time-chk">확인시간</th>			
 					<th class="func">삭제</th>
 					<th class="blank"></th>
 				</tr>
 			</thead>
 		</table>
         
-<div id="activity_groups" class="list_approval_line_wrap"><div class="activity_group approval_line" data-index="0">
-<div class="list_approval_line">
-    <div class="btn_langth btn-add-activity" title="" data-id=""><span class="ic_con ic_arrow_type4"></span></div>
-    <div class="activity-group-items tb_approval_line_wrap"><table class="type_normal tb_approval_line"><tbody>
+<div id="activity-groups" class="list-approval-line-wrap"><div class="activity-group approval-line" data-index="0">
+<div class="list-approval-line">
+    <div class="btn-langth btn-add-activity" title="" data-id=""><span class="ic-con ic-arrow-type4"></span></div>
+    <div class="activity-group-items tb-approval-line-wrap"><table class="type-normal tb-approval-line"><tbody>
 
 <tr class="appr-activity activity inactive ui-droppable" data-isnullactivity="true">
 	<td>
-		<p class="data_null null_activity_p">
-			<span class="ic_file_drag"></span>
+		<p class="data-null null-activity-p">
+			<span class="ic-file-drag"></span>
 			<span class="txt">드래그하여 항목을 추가할 수 있습니다.</span>
 		</p>
 	</td>
 </tr></tbody></table></div>
-</div></div><div class="empty-activity-group empty_approval_line" style="height: 317px;">
+</div></div><div class="empty-activity-group empty-approval-line" style="height: 317px;">
 <table style="height: 100%">
 <tbody style="height: 100%">
 <tr class="appr-activity activity ui-droppable" data-isnullactivity="true" style="height: 100%">
@@ -240,49 +247,38 @@
     </table>
 </div></div>
 
-<div class="tit_type2">
-	<a class="save-mysubscriber-btn btn_fn6" href="#" data-bypass="">개인 그룹으로 저장</a>
+<div class="tit-type2">
+	<a class="save-mysubscriber-btn btn-fn6" href="#" data-bypass="">개인 그룹으로 저장</a>
 	<span class="horspace1"></span>
-</div></div><div class="set_data wrap_approvalLine_set tabview-reader" style="display: none;"><table class="type_normal tb_approval_line">
+</div></div><div class="set-data wrap-approvalLine-set tabview-reader" style="display: none;"><table class="type-normal tb-approval-line">
 	<thead>
 		<tr>
 			<th class="btn"></th>
 			<th class="name">이름</th>
 			<th class="depart">부서</th>
-			<th class="time_chk">확인시간</th>			
+			<th class="time-chk">확인시간</th>			
 			<th class="func">삭제</th>
 			<th class="blank"></th>
 		</tr>
 	</thead>
 </table>
         
-<div id="activity_groups" class="list_approval_line_wrap"><div class="activity_group approval_line" data-index="0">
-<div class="list_approval_line">
-    <div class="btn_langth btn-add-activity" title="" data-id=""><span class="ic_con ic_arrow_type4"></span></div>
-    <div class="activity-group-items tb_approval_line_wrap"><table class="type_normal tb_approval_line"><tbody>
+<div id="activity-groups" class="list-approval-line-wrap"><div class="activity-group approval-line" data-index="0">
+<div class="list-approval-line">
+    <div class="btn-langth btn-add-activity" title="" data-id=""><span class="ic-con ic-arrow-type4"></span></div>
+    <div class="activity-group-items tb-approval-line-wrap"><table class="type-normal tb-approval-line"><tbody>
 
 <tr class="appr-activity activity inactive ui-droppable" data-isnullactivity="true">
 	<td>
-		<p class="data_null null_activity_p">
-			<span class="ic_file_drag"></span>
+		<p class="data-null null-activity-p">
+			<span class="ic-file-drag"></span>
 			<span class="txt">드래그하여 항목을 추가할 수 있습니다.</span>
 		</p>
 	</td>
 </tr></tbody></table></div>
-</div></div><div class="empty-activity-group empty_approval_line" style="height: 317px;">
-<table style="height: 100%">
-<tbody style="height: 100%">
-<tr class="appr-activity activity ui-droppable" data-isnullactivity="true" style="height: 100%">
-<td style="width: 100%; height: 100%"></td>
-            </tr>
-        </tbody>
-    </table>
-</div></div>
-
-<div class="tit_type2">
-	<a class="save-mysubscriber-btn btn_fn6" href="#" data-bypass="">개인 그룹으로 저장</a>
-	<span class="horspace1"></span>
 </div></div></div>
+
+</div></div>
 </div>
 					
 					
