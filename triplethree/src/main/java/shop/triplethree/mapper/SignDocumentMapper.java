@@ -13,5 +13,6 @@ public interface SignDocumentMapper {
 	public List<SignDocument> selectDraftDocument(String valCheck, String sid);
 	
 	// 결재 문서함에서 본인의 결재 건수가 있는 문서를 select하는 메서드
+	public List<SignDocument> selectSignDocumentWait(String sid);
 	public List<SignDocument> selectSignDocumentWait(String valCheck, String sid);
 }

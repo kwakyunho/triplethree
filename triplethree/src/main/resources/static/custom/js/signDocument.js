@@ -146,7 +146,7 @@ $(function(){
 		$.ajax({
 			type 		: 'POST',
 			data 		: {'valCheck': valCheck},
-			url 		: "/signDocument//signStandByDocument",
+			url 		: "/signDocument/signStandByDocument",
 			datatype	: 'json',
 			
 			success : function(data) {

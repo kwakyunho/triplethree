@@ -28,6 +28,11 @@ public class SignDocumentService {
 	 * @return List<SignDocument>
 	 * */
 	public List<SignDocument> selectSignDocumentWait(String valCheck, String sid){
-		return signDocumentMapper.selectSignDocumentWait(valCheck, sid);
+		if(valCheck != "null") {
+			System.out.println("valCheck가 null이 아니에요");
+			return signDocumentMapper.selectSignDocumentWait(valCheck, sid);
+		}else {
+			return signDocumentMapper.selectSignDocumentWait(sid);
+		}
 	}
 }

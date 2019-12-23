@@ -107,46 +107,45 @@
 	
 	<!-- 결재 대기문서함에서 본인이 결재자에 등록되어있는 문서를 불러온다  -->
 	<select id="selectSignDocumentWait" parameterType="String" resultMap="signDocument">
-		SELECT
-			a.CODE				
-			,d.doc_name			
-			,D.dename			
-			,p.poname			
-			,l.s_section		
-			,e.emp_name		
-			,a.writer_day		
-			,A.app_state AS signState
-		FROM	
-			APP_LINE_STANDARD AS a
-		LEFT JOIN
-			APP_LINE_ACCRUE AS A
-		ON
-			a.app_person = A.app_person
-		LEFT JOIN
-			LIST_MANAGE AS l
-		ON
-			a.sortation = l.CODE
-		LEFT JOIN
-			EMP_MANAGE AS e
+		SET @cntNum = 0;
+		<!-- SET @docCode = ""; -->
+		
+		SELECT 
+			IF(IF(@docCode <![CDATA[<>]]> (@docCode:= A.doc_code), TRUE, FALSE) = 1, @cntNum:= 0, @cntNum:= @cntNum + 1) AS num_cnt,
+			A.CODE, 																																				
+			B.doc_title, 																																		
+			B.doc_name, 																																		
+			A.app_state, 																																		
+			C.dename, 																																			
+			D.poname, 																																			
+			E.emp_name, 																																		
+			F.s_section,																																		
+			e.emp_name																																			
+		FROM
+			APP_LINE_ACCRUE A
+		LEFT JOIN 
+			SIG_DOC B
 		ON 
-			a.app_person = e.emp_num
+			A.doc_code = B.CODE
+		LEFT JOIN 
+			DEMG C
+		ON 
+			A.demgcode = C.code
+		LEFT JOIN 
+			POSISYS D
+		ON 
+			A.pocode = D.code
+		LEFT JOIN 
+			EMP_MANAGE E
+		ON 
+			A.app_person = E.emp_num
 		LEFT JOIN
-			DOC_FORM_MANAGE AS d
-		ON
-			a.doc_form_code = d.CODE
-		LEFT JOIN
-			DEMG AS D
-		ON
-			a.demgcode = D.CODE
-		LEFT JOIN
-			POSISYS AS p
-		ON
-			a.pocode = p.CODE
-		WHERE
-			a.app_person = #{sid}
-		AND
-			A.app_state = 'N'
-		GROUP BY
-			a.code
+			EMP_MANAGE e
+		on
+			B.emp_code = e.emp_num
+		LEFT JOIN 
+			LIST_MANAGE F
+		ON 
+			A.sortation = F.code
 	</select>
  </mapper>
