@@ -225,18 +225,9 @@ public class EmployeeController {
 	  */
 	 @PostMapping("/employee/employeeUpdate")
 	 public String updateEmployee(@RequestParam("image") MultipartFile[] file,Employee employee) {
-		 	//System.out.println("DemgCode : " + employee.getDemgCode());
-		 	//System.out.println("AfterDemgCode : " + employee.getAfterDemgCode());
-		    Path rootLocation = Paths.get(uploadPath);
-		 if(employee.getAfterDemgCode() != null || employee.getAfterPoCode() != null) {
-			 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
-				 System.out.println("변경하기거든?");
-				 String moveCode = commonService.codeGeneration("PECHANGE");
-				 employee.setMoveCode(moveCode);
-				 employeeService.insertMoveEmployee(employee);
-			 }
-		 }else {
-			 System.out.println("수정하기거든?");
+		  
+		 	Path rootLocation = Paths.get(uploadPath);
+		 
 			 try {			
 					
 					String filePath = null;
@@ -281,9 +272,24 @@ public class EmployeeController {
 						}
 						
 					}
-		 }
+		 
 		
 		 return "redirect:/employee/employeeList";	
+	 }
+	 
+	 @PostMapping("/employee/employeeMoveUpdate")
+	 public String updateMoveEmployee(Employee employee) {
+		 	//System.out.println("DemgCode : " + employee.getDemgCode());
+		 	//System.out.println("AfterDemgCode : " + employee.getAfterDemgCode());
+		 if(employee.getAfterDemgCode() != null || employee.getAfterPoCode() != null) {
+			 if(!employee.getDemgCode().equals(employee.getAfterDemgCode()) || !employee.getPoCode().equals(employee.getAfterPoCode())) {
+				 System.out.println("변경하기거든?");
+				 String moveCode = commonService.codeGeneration("PECHANGE");
+				 employee.setMoveCode(moveCode);
+				 employeeService.insertMoveEmployee(employee);
+			 }
+		 }
+		 return "redirect:/admin/employee/employeeAllMoveList";	
 	 }
 	 
 	 /**

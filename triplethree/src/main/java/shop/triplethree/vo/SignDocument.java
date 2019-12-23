@@ -3,82 +3,160 @@ package shop.triplethree.vo;
 public class SignDocument {
 
 	private String code; // 작성된 결재문서 관리코드
-	private String emp_code; // 사원코드
-	private String doc_form_code; // 문서양식 관리코드
-	private String doc_title; // 문서명
-	private String doc_name; // 문서제목
-	private String doc_con; // 사유(내용)
-	private String doc_bego; // 비고
-	private String writer_day; // 작성일자
-	private String start_date; // 시작기간(휴가일정)
-	private String end_date; // 종료기간(휴가일정)
+	private String empCode; // 사원코드
+	private String docFormCode; // 문서양식 관리코드
+	private String docTitle; // 문서명
+	private String docName; // 문서제목
+	private String docCon; // 사유(내용)
+	private String docBego; // 비고
+	private String writerDay; // 작성일자
+	private String signEndDay; // 결재 완료일
+	private String startDate; // 시작기간(휴가일정)
+	private String endDate; // 종료기간(휴가일정)
+	private String empName; // 사원이름
+	private String poName; // 직급명
+	private String deName; // 부서명
+	private String signState; // 전자결재상태
+	private String signCheck; // 접수완료체크
+	private String valCheck; // 상단 메뉴 벨류값 저장
+	private String accCode; // 결재라인누적관리코드
+	private String docFormCdoe; // 문서양식관리코드
+	private String reDocDate; // 반려일
+	private String comments; // 코멘트
 	
+	public String getAccCode() {
+		return accCode;
+	}
+	public void setAccCode(String accCode) {
+		this.accCode = accCode;
+	}
+	public String getDocFormCdoe() {
+		return docFormCdoe;
+	}
+	public void setDocFormCdoe(String docFormCdoe) {
+		this.docFormCdoe = docFormCdoe;
+	}
+	public String getReDocDate() {
+		return reDocDate;
+	}
+	public void setReDocDate(String reDocDate) {
+		this.reDocDate = reDocDate;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public String getValCheck() {
+		return valCheck;
+	}
+	public void setValCheck(String valCheck) {
+		this.valCheck = valCheck;
+	}
+	public String getSignState() {
+		return signState;
+	}
+	public void setSignState(String signState) {
+		this.signState = signState;
+	}
+	public String getSignCheck() {
+		return signCheck;
+	}
+	public void setSignCheck(String signCheck) {
+		this.signCheck = signCheck;
+	}
+	public String getSignEndDay() {
+		return signEndDay;
+	}
+	public void setSignEndDay(String signEndDay) {
+		this.signEndDay = signEndDay;
+	}
 	public String getCode() {
 		return code;
 	}
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getEmp_code() {
-		return emp_code;
+	public String getEmpCode() {
+		return empCode;
 	}
-	public void setEmp_code(String emp_code) {
-		this.emp_code = emp_code;
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
 	}
-	public String getDoc_form_code() {
-		return doc_form_code;
+	public String getDocFormCode() {
+		return docFormCode;
 	}
-	public void setDoc_form_code(String doc_form_code) {
-		this.doc_form_code = doc_form_code;
+	public void setDocFormCode(String docFormCode) {
+		this.docFormCode = docFormCode;
 	}
-	public String getDoc_title() {
-		return doc_title;
+	public String getDocTitle() {
+		return docTitle;
 	}
-	public void setDoc_title(String doc_title) {
-		this.doc_title = doc_title;
+	public void setDocTitle(String docTitle) {
+		this.docTitle = docTitle;
 	}
-	public String getDoc_name() {
-		return doc_name;
+	public String getDocName() {
+		return docName;
 	}
-	public void setDoc_name(String doc_name) {
-		this.doc_name = doc_name;
+	public void setDocName(String docName) {
+		this.docName = docName;
 	}
-	public String getDoc_con() {
-		return doc_con;
+	public String getDocCon() {
+		return docCon;
 	}
-	public void setDoc_con(String doc_con) {
-		this.doc_con = doc_con;
+	public void setDocCon(String docCon) {
+		this.docCon = docCon;
 	}
-	public String getDoc_bego() {
-		return doc_bego;
+	public String getDocBego() {
+		return docBego;
 	}
-	public void setDoc_bego(String doc_bego) {
-		this.doc_bego = doc_bego;
+	public void setDocBego(String docBego) {
+		this.docBego = docBego;
 	}
-	public String getWriter_day() {
-		return writer_day;
+	public String getWriterDay() {
+		return writerDay;
 	}
-	public void setWriter_day(String writer_day) {
-		this.writer_day = writer_day;
+	public void setWriterDay(String writerDay) {
+		this.writerDay = writerDay;
 	}
-	public String getStart_date() {
-		return start_date;
+	public String getStartDate() {
+		return startDate;
 	}
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-	public String getEnd_date() {
-		return end_date;
+	public String getEndDate() {
+		return endDate;
 	}
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
-	
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getPoName() {
+		return poName;
+	}
+	public void setPoName(String poName) {
+		this.poName = poName;
+	}
+	public String getDeName() {
+		return deName;
+	}
+	public void setDeName(String deName) {
+		this.deName = deName;
+	}
 	@Override
 	public String toString() {
-		return "SignDocument [code=" + code + ", emp_code=" + emp_code + ", doc_form_code=" + doc_form_code
-				+ ", doc_title=" + doc_title + ", doc_name=" + doc_name + ", doc_con=" + doc_con + ", doc_bego="
-				+ doc_bego + ", writer_day=" + writer_day + ", start_date=" + start_date + ", end_date=" + end_date
-				+ "]";
+		return "SignDocument [code=" + code + ", empCode=" + empCode + ", docFormCode=" + docFormCode + ", docTitle="
+				+ docTitle + ", docName=" + docName + ", docCon=" + docCon + ", docBego=" + docBego + ", writerDay="
+				+ writerDay + ", signEndDay=" + signEndDay + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", empName=" + empName + ", poName=" + poName + ", deName=" + deName + ", signState=" + signState
+				+ ", signCheck=" + signCheck + ", valCheck=" + valCheck + ", accCode=" + accCode + ", docFormCdoe="
+				+ docFormCdoe + ", reDocDate=" + reDocDate + ", comments=" + comments + "]";
 	}
 }

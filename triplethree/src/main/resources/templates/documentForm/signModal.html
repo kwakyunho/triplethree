@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts">
+
+<th:block th:fragment="signModalCall">
+
+<!-- 결재선 지정 Modal -->
+<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="signModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-type1" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">결재 정보</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+					
+					
+<div class="set-signModal header">
+	<div class="set-signModal contain-l">
+	<!-- 탭 -->
+		<ul class="zeroPadding">
+			<li class="bottomLine signModal signModal-select">
+				<a href="#"><span class="txt">조직도</span></a>
+			</li>
+			<li class="bottomLine">
+				<a href="#"><span class="txt">나의 결재선</span></a>
+			</li>
+		</ul>
+		<div>
+			<div class="set-signModal">
+				<section class="search">
+					<form>
+						<input class="search" type="text" placeholder="이름/아이디/부서/직위/직책/전화">
+						<button class="search-btn fas fa-search" type="button" value="">
+					</form>
+					<div style="position: relative; display: none; z-index: 60;">
+					</div>
+				</section>
+				<div>
+					<div>
+						<div style="min-height: 306px; max-height: 306px; overflow-y: scroll; overflow-x: hidden;">
+							<ul>
+								<li style="font-size: 0.8rem;"><a>관리자 데모</a>
+									<ul>
+										<li><a>김대표 사장</a></li>
+										<li><a>영업본부</a>
+											<ul>
+												<li><a>안상우 상무</a></li>
+												<li><a>영업팀</a>
+													<ul>
+														<li><a>김은수 부장</a></li>
+														<li><a>김성룡 과장</a></li>
+														<li><a>심현보 대리</a></li>
+														<li><a>오종원 대리</a></li>
+														<li><a>방희진 사원</a></li>
+														<li><a>김다우 과장</a></li>
+													</ul>
+												</li>
+												<li><a>마케팅팀</a></li>
+												<li><a>김해 정성치과</a></li>
+											</ul>
+										</li>
+										<li><a>경영지원본부</a>
+											<ul>
+												<li><a>전신입 회장</a></li>
+												<li><a>유수연 상무</a></li>
+												<li><a>재경팀</a></li>
+												<li><a>총무팀</a></li>
+												<li><a>인사팀</a>
+													<ul>
+														<li><a>허각 이사</a></li>
+														<li><a>김다우 과장</a></li>
+														<li><a>서율 사원</a></li>
+														<li><a>오광숙 사원</a></li>
+													</ul>
+												</li>
+												<li><a>법무팀</a></li>
+											</ul>
+										</li>
+										<li><a>시스템운영본부</a></li>
+										<li><a>서비스본부</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div style="display: none; border:none; padding:5px 0px 5px 0px;">
+					</div>
+				</div>
+			</div>
+			<div style="display: none; min-height: 339px; max-height: 339px;">
+				<section>
+					<div>
+						<span></span> 
+						<p>개인 결재선이 없습니다.<br></p>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+<div class="set-signModal contain-r">
+	<div class="set-signModal">
+		<table class="type-normal layer-line">
+			<thead>
+				<tr>
+					<th></th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>이름</th>
+					<th>상태</th>
+					<th><span>삭제</span></th>
+					<th></th>
+				</tr>
+			</thead>
+		</table>
+		<div style="overflow-x: hidden; overflow-y: scroll; height: 340px;">
+			<div>
+				<div class="set-signModal-text-type1">
+					<span class="display-inline-block">결재</span>
+				</div>
+				<div style="position: relative; border-bottom: 1px solid #E4E4E4;">
+					<div style="position: absolute; top: 0; left: 0; width: 34px; height: 100%; background: #fafafa; cursor: pointer; border-right: 1px solid #dedede; padding: 0;">
+						<span class="fas fa-angle-double-right" style="position: absolute; top: 30%; left: 10px;"></span>
+					</div>
+					<div style="margin: 0 0 0 34px;">
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">영업팀</td>
+									<td style="width: 85px;">인턴</td>
+									<td style="width: 90px;">곽윤호</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">영업팀</td>
+									<td style="width: 85px;">과장</td>
+									<td style="width: 90px;">김다혜</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">영업팀</td>
+									<td style="width: 85px;">부장</td>
+									<td style="width: 90px;">최영은</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="set-signModal-text-type1">
+					<span class="display-inline-block">참조</span>
+				</div>
+				<div style="position: relative; border-bottom: 1px solid #E4E4E4;">
+					<div style="position: absolute; top: 0; left: 0; width: 34px; height: 100%; background: #fafafa; cursor: pointer; border-right: 1px solid #dedede; padding: 0;">
+						<span class="fas fa-angle-double-right" style="position: absolute; top: 30%; left: 10px;"></span>
+					</div>
+					<div style="margin: 0 0 0 34px;">
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">인사팀</td>
+									<td style="width: 85px;">대리</td>
+									<td style="width: 90px;">정해성</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table style="border: 0; width: 100%;">
+							<tbody style="display: table-row-group; vertical-align: middle; border-color: inherit;">
+								<tr style="font-size: 0.8rem;">
+									<td style="padding-right: 0; padding-left: 35px; height: 30px; width: 125px;">인사팀</td>
+									<td style="width: 85px;">과장</td>
+									<td style="width: 90px;">황인호</td>
+									<td style="width: 95px;">몰라</td>
+									<td><span class="far fa-trash-alt"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div style="height: 130px;">
+				<div style="height: 100%">
+					<table style="height: 100%">
+						<tbody style="height: 100%">
+							<tr style="height: 100%">
+								<td style="width: 100%; height: 100%"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="display: none;">
+		<table>
+			<thead>
+				<tr>
+					<th class="btn"></th>
+					<th class="name">이름</th>
+					<th class="depart">부서</th>
+					<th class="time-chk">확인시간</th>			
+					<th class="func">삭제</th>
+					<th class="blank"></th>
+				</tr>
+			</thead>
+		</table>
+        
+<div id="activity-groups" class="list-approval-line-wrap"><div class="activity-group approval-line" data-index="0">
+<div class="list-approval-line">
+    <div class="btn-langth btn-add-activity" title="" data-id=""><span class="ic-con ic-arrow-type4"></span></div>
+    <div class="activity-group-items tb-approval-line-wrap"><table class="type-normal tb-approval-line"><tbody>
+
+<tr class="appr-activity activity inactive ui-droppable" data-isnullactivity="true">
+	<td>
+		<p class="data-null null-activity-p">
+			<span class="ic-file-drag"></span>
+			<span class="txt">드래그하여 항목을 추가할 수 있습니다.</span>
+		</p>
+	</td>
+</tr></tbody></table></div>
+</div></div><div class="empty-activity-group empty-approval-line" style="height: 317px;">
+<table style="height: 100%">
+<tbody style="height: 100%">
+<tr class="appr-activity activity ui-droppable" data-isnullactivity="true" style="height: 100%">
+<td style="width: 100%; height: 100%"></td>
+            </tr>
+        </tbody>
+    </table>
+</div></div>
+
+<div class="tit-type2">
+	<a class="save-mysubscriber-btn btn-fn6" href="#" data-bypass="">개인 그룹으로 저장</a>
+	<span class="horspace1"></span>
+</div></div><div class="set-data wrap-approvalLine-set tabview-reader" style="display: none;"><table class="type-normal tb-approval-line">
+	<thead>
+		<tr>
+			<th class="btn"></th>
+			<th class="name">이름</th>
+			<th class="depart">부서</th>
+			<th class="time-chk">확인시간</th>			
+			<th class="func">삭제</th>
+			<th class="blank"></th>
+		</tr>
+	</thead>
+</table>
+        
+<div id="activity-groups" class="list-approval-line-wrap"><div class="activity-group approval-line" data-index="0">
+<div class="list-approval-line">
+    <div class="btn-langth btn-add-activity" title="" data-id=""><span class="ic-con ic-arrow-type4"></span></div>
+    <div class="activity-group-items tb-approval-line-wrap"><table class="type-normal tb-approval-line"><tbody>
+
+<tr class="appr-activity activity inactive ui-droppable" data-isnullactivity="true">
+	<td>
+		<p class="data-null null-activity-p">
+			<span class="ic-file-drag"></span>
+			<span class="txt">드래그하여 항목을 추가할 수 있습니다.</span>
+		</p>
+	</td>
+</tr></tbody></table></div>
+</div></div></div>
+
+</div></div>
+</div>
+					
+					
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">확인</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</th:block>
+</html>

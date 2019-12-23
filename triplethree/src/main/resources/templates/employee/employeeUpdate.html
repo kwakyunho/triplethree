@@ -431,7 +431,7 @@
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
                  	
-                 	<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" >
+                 	<form method="post" action="/employee/employeeMoveUpdate" class="form-horizontal" th:each="u:${update}" >
                   		<div class="card-body"> 
                   		<div class="form-group row">
 	                  <div class="col-sm-4">
@@ -545,7 +545,17 @@
 		             }
 		         })
 		         
-		        
+		          $('#moveCheckBtn').on('click',function(){
+		        	  if(confirm('변경하시겠습니까?')){
+		        		  alert('인사이동목록으로 이동합니다.');
+		        		  
+		        	  }else {
+		        		  alert('변경이 취소되었습니다.');
+		        	  }
+		        	  
+		        	  
+		        	  
+		          });
 		         
 		   });
 	

@@ -2440,15 +2440,15 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #006633;
+  border-color: #006633;
   box-shadow: none;
 }
 
 .btn-primary:hover {
   color: #ffffff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -4151,7 +4151,7 @@ input[type="button"].btn-block {
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
   background-color: #ffffff;
-  border-color: #28a745;
+  border-color: #28a745 #28a745 #28a745;
 }
 
 .nav-tabs .dropdown-menu {
@@ -4167,7 +4167,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #ffffff;
-  background-color: #28a745;
+  background-color: #006633;
 }
 
 .nav-fill .nav-item {

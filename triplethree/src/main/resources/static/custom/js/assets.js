@@ -107,9 +107,9 @@ $("#inName").blur(function() {
 	
 		$.ajax({
 			type 		: 'POST',
-		data 		: {'name': name},
-		url 		: "/admin/assets/beNameCheck",
-		datatype	: 'json',
+			data 		: {'name': name},
+			url 		: "/admin/assets/beNameCheck",
+			datatype	: 'json',
 		
 			success : function(data) {
 			console.log("1 = 중복o / 0 = 중복x : "+ data);							
