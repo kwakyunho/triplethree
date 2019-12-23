@@ -11,6 +11,12 @@
 <th:block layout:fragment="customCss">
 <!-- DataTables -->
 <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+<style>
+.stylegreenBtn{
+	background-color: #006633;
+	border-color: #006633;
+}
+</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -23,8 +29,8 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">직급관리</a></li>
+					<li class="breadcrumb-item"><a href="#" style="color:#006633;">Home</a></li>
+					<li class="breadcrumb-item active">직급관리</li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -42,13 +48,13 @@
 				<div style="align-self:center; width:90%;">
 					<div id="accordion1">
 						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
-						<div class="card card-primary small" style="margin-top: 15px;">
+						<div class="card card-primary small" style="margin-top: 15px; background-color: #006633;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false"> 직급 등록 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" class="" aria-expanded="false" style="color:white;"> 직급 등록 하기 </a>
 								</h4>
 							</div>
-							<div id="collapseOne1" class="panel-collapse in collapse" style="">
+							<div id="collapseOne1" class="panel-collapse in collapse" style="background-color: white">
 							<div class="card-body" style="text-align: -webkit-center;">
 								<table style="text-align: center;">
 									<tr>
@@ -64,7 +70,7 @@
 									</tr>
 									<tr>
 										<td colspan="4" class="insertPoBtn">
-											<input type="button" value="등록하기" class="btn btn-block btn-primary btn-lg" id="inputPoBtn">
+											<input type="button" value="등록하기" class="btn btn-primary btn-lg stylegreenBtn" id="inputPoBtn">
 										</td>
 									</tr>
 								</table>
@@ -93,13 +99,13 @@
 				<div style="align-self:center; width:90%;">
 					<div id="accordion2">
 						<!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
-						<div class="card card-primary small" style="margin-top: 15px;">
+						<div class="card card-primary small" style="margin-top: 15px; background-color: #006633;">
 							<div class="card-header" style="align-self: center;">
 								<h4 class="card-title">
-									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false"> 직급 수정 하기 </a>
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="" aria-expanded="false" style="color:white;"> 직급 수정 하기 </a>
 								</h4>
 							</div>
-							<div id="collapseOne2" class="panel-collapse in collapse" style="">
+							<div id="collapseOne2" class="panel-collapse in collapse" style="background-color: white;">
 							<div class="card-body" style="text-align: -webkit-center;">
 								<table style="text-align: center;">
 									<tr>
@@ -117,7 +123,7 @@
 									</tr>
 									<tr>
 										<td colspan="4">
-											<input type="button" value="수정하기" class="btn btn-block btn-primary btn-lg" id="updatePoBtn">
+											<input type="button" value="수정하기" class="btn btn-primary btn-lg stylegreenBtn" id="updatePoBtn">
 										</td>
 									</tr>
 								</table>
@@ -165,16 +171,16 @@
 						</thead>
 						<tbody>
 							<tr class="positionListTr" th:each="P : ${PositionList}">	
-								<td id="positionCode" th:text="${P.positionCode}"></td>
-								<td id="positionNameBe" th:text="${P.positionNameBe}"></td>
-								<td id="positionLevel" th:text="${P.positionLevel}"></td>
-								<td id="positionWriter" th:text="${P.deName +'-'+P.empName}"></td>
-								<td id="positionWriterDay" th:text="${P.positionWriterDay}"></td>
-								<td id="positionSau" th:text="${P.positionSau}"></td>
-								<td id="positionApprover" th:text="${P.positionApprover}"></td>
-								<td id="positionApproDay" th:text="${P.positionApproDay}"></td>
-								<td id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
-								<td id="positionYesNO" th:text="${P.positionYesNO}"></td>
+								<td class="positionListTd" id="positionCode" th:text="${P.positionCode}"></td>
+								<td class="positionListTd" id="positionNameBe" th:text="${P.positionNameBe}"></td>
+								<td class="positionListTd" id="positionLevel" th:text="${P.positionLevel}"></td>
+								<td class="positionListTd" id="positionWriter" th:text="${P.deName +'-'+P.empName}"></td>
+								<td class="positionListTd" id="positionWriterDay" th:text="${P.positionWriterDay}"></td>
+								<td class="positionListTd" id="positionSau" th:text="${P.positionSau}"></td>
+								<td class="positionListTd" id="positionApprover" th:text="${P.positionApprover}"></td>
+								<td class="positionListTd" id="positionApproDay" th:text="${P.positionApproDay}"></td>
+								<td class="positionListTd" id="positionApperverSt" th:text="${P.positionApperverSt}"></td>
+								<td class="positionListTd" id="positionYesNO" th:text="${P.positionYesNO}"></td>
 								<td class="deletePoBtn">
 									<input type="button" value="삭제" class="btn btn-block btn-primary btn-sm" id="deletePoBtn">
 								</td>								

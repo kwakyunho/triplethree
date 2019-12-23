@@ -27,7 +27,7 @@ tr:hover{background: whitesmoke;}
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#" style="color:#006633;">Home</a></li>
 					<li class="breadcrumb-item">예약 관리</li>
 					<li class="breadcrumb-item active">이용 내역 조회</li>
 				</ol>
@@ -59,8 +59,8 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="l : ${List}" style="cursor:pointer" class="AssetsUpdateList">
-							<td th:text="${index}"></td> <!-- 숫자 나올수 있도록 해야함. -->
+						<tr th:each="l, index : ${List}" style="cursor:pointer" class="AssetsUpdateList">
+							<td th:text="${index.count}"></td>
 							<td th:if="${l.veName eq null}" th:text="${l.beName}" id="beName"></td>
 							<td th:if="${l.beName eq null}" th:text="${l.veName}" id="veName"></td>
 							<input type="hidden" id="code" th:value="${l.code}">
