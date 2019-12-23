@@ -39,17 +39,10 @@ public class PayController {
 		List<Employee> list =payService.insertSearchPay(sk,sv);
 		System.out.println(list.toString());
 		model.addAttribute("insertSearchPay", list);
-	
+		
+		
 		return "pay/insertPay";	
 	}
-	/***급여 등록하기지만 수정으로 처리해줘야함*****/
-	/*
-	 * @PostMapping("/admin/pay/updatePay") public String updatePayInsert(Pay pay){
-	 * // System.out.println(pay+"<--급여등록코드"); payService.updatePay(pay);
-	 * //System.out.println(pay+"<--pay");
-	 * 
-	 * return "redirect:/pay/selectPay"; }
-	 */
 	 
 	/** 급여대장** */
 	@GetMapping("/pay/selectPay")
