@@ -139,8 +139,13 @@ $(function(){
 		var one =one.value;
 		
 		if(one >=0){
-			alert('지소네왔니')
+			
 			$('#residentTax').val(parseInt(one/10));
+		}
+		if(sum1.value < 1060000){
+			alert('어디니');
+			$('#one').val(parseInt(0));
+			$('#residentTax').val(parseInt(0));
 		}
 		
 		var residentTax=residentTax.value;

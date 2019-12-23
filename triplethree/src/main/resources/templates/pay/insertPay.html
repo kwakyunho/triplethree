@@ -221,6 +221,12 @@ $(document).ready(function(){
 	var check = $('#empCode').val();
 	console.log('값확인'+check);
 	});
+	
+		
+	
+	
+	
+	
 	$('.insertChange').change(function(){
 		
 		
@@ -278,8 +284,8 @@ $(document).ready(function(){
 		//공제액 합 		
 	
 		var one =$('#one').val();
-	 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null){
-			$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one));
+	 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null && residentTax !=null){
+			$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one)+parseInt(residentTax));
 		}			 					
 		//차인지급액
 		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
