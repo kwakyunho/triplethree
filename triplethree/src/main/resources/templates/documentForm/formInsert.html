@@ -45,6 +45,35 @@ div.sign-type1 table {width: 100%;}
 .sign-type1-td-codMainName {background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;}
 .sign-type1-td-codMainValue {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;}
 .sign-type1-td-codMaintext {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;}
+
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+ul.tabs li{
+  background: none;
+  color: #222;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+ 
+ul.tabs li.current{
+  background: #ededed;
+  color: #222;
+}
+ 
+.tab-content{
+  display: none;
+  background: #ededed;
+  padding: 15px;
+}
+ 
+.tab-content.current{
+  display: inherit;
+}
+
 </style>
 
 <!-- 커스텀 signModal CSS -->
