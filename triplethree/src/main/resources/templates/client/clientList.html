@@ -95,6 +95,7 @@ tr:hover{background: whitesmoke;}
 <script type="text/javascript" th:inline="javascript">
 //거래처 datail 화면으로 이동하기 
 $(document).ready(function(){
+	
 	$('#clientListTable tbody').on('click','tr',function(){
 		var clientUrl = $(this).children('.clientCode');
 		clientUrl.append('<input type="hidden" name="code" value="">');
