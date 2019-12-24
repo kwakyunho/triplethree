@@ -201,76 +201,72 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
 	
-	$('.insertChange').change(function(){
-		
-		
-		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
-		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
-		sum1.value =add;
-		var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
-		sum2.value=add2;
-		//지급액계
-		var add3=add+add2;
-		sum3.value=add3;
-		
-		
-		//국민연금 
-		
-		if (add > 4860000){
-			alert("기준소득월액 4,860,000원이상은 국민연금 최대납부액 대상자입니다");
-			$('#nationPer').val(218700);
-		
-		}else if (add < 310000){
-			alert("기준소득월액 310,000원이하는 국민연금 최저납부액이 0원입니다");
-			$('#nationPer').val(0);
-		}else{
-			$('#nationPer').val(Math.floor(Math.ceil((add*0.09)/2)/10)*10);
-		}
-		//고용보험
-		if(add !=null){
-			$('#inseurPer').val(Math.floor(Math.ceil((add*0.013)/2)/10)*10);
-		}
-		var nationPer=$('#nationPer').val();
-		
-		var inseurPer=$('#inseurPer').val();
-		
-		//건강보험
-		if(add > 99250000){
-			alert("기준소득월액 99,250,000원이상은 건강보험료 최대납부액은 대상자입니다");
-			$('#healthPer').val(3205770);
-		}else if (add < 280000){
-			alert("기준소득월액 280,000원이하는 건강보험료 최저납부액이 0원입니다");
-			$('#healthPer').val(0);
-		}else{
-			$('#healthPer').val(Math.floor(Math.ceil(add*0.0646)/2)/10*10);
-		}
-		var healthPer=$('#healthPer').val();
-				
-		if(healthPer >= 3205770){	
-			$('#longCare').val(272810);
-		}else if(healthPer <=9040){
-			
-			$('#longCare').val(0);
-		}else{
-			$('#longCare').val(Math.floor(Math.ceil(healthPer*0.0851))/10*10);
-		}
-		var longCare=$('#longCare').val();
-		//공제액 합 		
+$('.insertChange').change(function(){
 	
-		var one =$('#one').val();
-		if(add < 1060000){
-			$('#one').val(parseInt(0));
-			$('#residentTax').val(parseInt(0));
-		}else{
+	
+	var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
+	+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
+	sum1.value =add;
+	var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+	sum2.value=add2;
+	//지급액계
+	var add3=add+add2;
+	sum3.value=add3;				
+	//국민연금 
+	
+	if (add > 4860000){
+		alert("기준소득월액 4,860,000원이상은 국민연금 최대납부액 대상자입니다");
+		$('#nationPer').val(218700);
+	
+	}else if (add < 310000){
+		alert("기준소득월액 310,000원이하는 국민연금 최저납부액이 0원입니다");
+		$('#nationPer').val(0);
+	}else{
+		$('#nationPer').val(Math.floor(Math.ceil((add*0.09)/2)/10)*10);
+	}
+	//고용보험
+	if(add !=null){
+		$('#inseurPer').val(Math.floor(Math.ceil((add*0.013)/2)/10)*10);
+	}
+	var nationPer=$('#nationPer').val();
+	
+	var inseurPer=$('#inseurPer').val();
+	
+	//건강보험
+	if(add > 99250000){
+		alert("기준소득월액 99,250,000원이상은 건강보험료 최대납부액은 대상자입니다");
+		$('#healthPer').val(3205770);
+	}else if (add < 280000){
+		alert("기준소득월액 280,000원이하는 건강보험료 최저납부액이 0원입니다");
+		$('#healthPer').val(0);
+	}else{
+		$('#healthPer').val(Math.floor(Math.ceil(add*0.0646)/2)/10*10);
+	}
+	var healthPer=$('#healthPer').val();
 			
-		}
-	 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null ){
-			$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one));
-		}			 		 					
-		//차인지급액
-		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
-		deductHap.value=deductHap1;
-	});
+	if(healthPer >= 3205770){	
+		$('#longCare').val(272810);
+	}else if(healthPer <=9040){
+		
+		$('#longCare').val(0);
+	}else{
+		$('#longCare').val(Math.floor(Math.ceil(healthPer*0.0851))/10*10);
+	}
+	var longCare=$('#longCare').val();
+	//공제액 합 		
+
+	var one =$('#one').val();
+	if(add < 1060000){
+		$('#one').val(parseInt(0));
+		$('#residentTax').val(parseInt(0));
+	}
+ 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null ){
+		$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one));
+	}			 		 					
+	//차인지급액
+	var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
+	deductHap.value=deductHap1;
+}); 
 
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->

@@ -85,30 +85,30 @@ tr:hover{background: whitesmoke;}
 						</tr>	
 					</thead>
 					
-					<tbody>
-						 <tr th:each="p ,index : ${payInsert}" style="cursor:pointer" class="tbodyClass">					 	
-						 <td class="empNum" id="empNum "th:text ="${p.empNum}"></td>						 						 						
-						 <td class="empName" id="empName" th:text="${p.empName}"></td>
-						 <td class="demgName" id="demgName" th:text="${p.demgName}"></td>										
-						 <td class="poName" id="poName" th:text="${p.poName}"></td>										
-						 <td><input class="basicPay" id="basicPay" th:value="${p.basicPay}" readonly="readonly"></td>										
-						 <td><input class="selfDriPay" id="selfDriPay" th:value="${p.selfDriPay}" readonly="readonly"></td>										
-						 <td><input class="comPay" id="comPay" th:value="${p.comPay}" readonly="readonly"></td>										
-						 <td><input class="mealCost" id="mealCost" th:value="${p.mealCost}" readonly="readonly"></td>
-						 <td><input class="beneFit" id="beneFit" th:value="${p.beneFit}" readonly="readonly"></td>
-						 <td><input class="childPay"  id="childPay"th:value="${p.childPay}" readonly="readonly"></td>										
-					 	 <td><input class="holidayPay"  id="holidayPay" th:value="${p.holidayPay}" readonly="readonly"></td>										
-						 <td><input class="overtimePay"  id="overtimePay" th:value="${p.overtimePay}" readonly="readonly"></td>										
-						 <td><input class="positionBenefit"  id="positionBenefit" th:value="${p.positionBenefit}" readonly="readonly"></td>										
-						 <td><input type="text"  class="taxation" id="taxation"></td>
-						 <td class="taxFree" id="taxFree"></td>
-						 <td class="Payment" id="Payment"></td>					 					
-						 <td >국민연금</td>						 		
-						 <td >건강보험</td>		
-						 <td >장기요양보험</td>			
-						 <td >고용보험</td>		
-						 <td th:text="${p.one}"></td>		
-						 <td >지방소득세</td>		
+					<tbody class=hap>
+						 <tr th:each="p ,index : ${payInsert}" style="cursor:pointer" class="tbodyClass">
+						 <td class="empNum" th:id="|p-${index.count}|" th:text ="${p.empNum}"></td>
+						 <td class="empName" th:text="${p.empName}"></td>
+						 <td class="demgName" th:text="${p.demgName}"></td>
+						 <td class="poName" th:text="${p.poName}"></td>
+						 <td class="basicPay" th:text="${p.basicPay}"></td>
+						 <td class="selfDriPay" th:text="${p.selfDriPay}"></td>
+						 <td class="comPay" th:text="${p.comPay}"></td>
+						 <td class="mealCost" th:text="${p.mealCost}"></td>
+						 <td class="beneFit" th:text="${p.beneFit}"></td>
+						 <td class="childPay" th:text="${p.childPay}"></td>
+					 	 <td class="holidayPay" th:text="${p.holidayPay}"></td>
+						 <td class="overtimePay" th:text="${p.overtimePay}"></td>
+						 <td class="positionBenefit" th:text="${p.positionBenefit}"></td>
+						 <td class="taxation"></td>
+						 <td class="taxFree"></td>
+						 <td class="payment"></td>					 					
+						 <td class="nationPer">국민연금</td>						 		
+						 <td class="healthPer">건강보험</td>		
+						 <td class="longCare">장기요양보험</td>			
+						 <td class="insurPer">고용보험</td>		
+						 <td class="one"th:text="${p.one}"></td>		
+						 <td class="residentTax">지방소득세</td>		
 						 <td >공제액 계</td>		
 						 <td >차인지급액</td>	
 						 <td><a class="btn btn btn-success" th:href="@{/admin/pay/updatePay(empCode=${p.empCode})}">수정</a></td>		
@@ -126,12 +126,73 @@ tr:hover{background: whitesmoke;}
 <th:block layout:fragment="customScript">
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-<script>
+<script type="text/javascript" th:inline="javascript">
   $(function () {
-    $('#boardListTable').DataTable();
-    $('#boardListTable1').DataTable();
+	// 급여 자동계산
+	var payInsert = [[${payInsert}]];	// 셀렉트 테이블 값들
+	var totalSize = payInsert.length;	// 테이블 로우 총 갯수
+	
+	for(i=0; i < totalSize; i++){
+		var num = i+1;
+		var parent = $('#p-'+num).parent('.tbodyClass'); // 부모객체를 찾기 위한 변수대입
+		
+		var basicPay = payInsert[i].basicPay;	// 기본급여
+		var selfDriPay = payInsert[i].selfDriPay;	// 차량유지비
+		var comPay = payInsert[i].comPay;	// 통신수당
+		var mealCost = payInsert[i].mealCost;	// 식대
+		var beneFit = payInsert[i].beneFit;	// 야간수당
+		var childPay = payInsert[i].childPay;	// 육아수당
+		var holidayPay = payInsert[i].holidayPay;	// 휴일수당
+		var overtimePay = payInsert[i].overtimePay;	// 연장수당
+		var positionBenefit = payInsert[i].positionBenefit;	// 직책수당
+		var nationPer = payInsert[i].nationPer;	// 국민연금
+		var healthPer = payInsert[i].healthPer;	// 건강보험
+		var insurPer = payInsert[i].insurPer;	// 고용보험
+		var longCare = payInsert[i].longCare;	// 장기요양보험
+		var one = payInsert[i].one;	// 소득세
+		var residentTax = payInsert[i].residentTax;	// 지방소득세
+	
+		var taxation = basicPay+comPay+beneFit+holidayPay+overtimePay+positionBenefit; // 과세
+		var taxFree = selfDriPay+mealCost+childPay;	//비과세
+		var payment = taxation+taxFree;	//지급액 계
+		parent.children('.taxation').text(taxation);
+		parent.children('.taxFree').text(taxFree);
+		parent.children('.payment').text(payment);
+		parent.children('.nationPer').text(Math.floor(Math.ceil((taxation*0.09)/2)/10)*10); //국민연금계산
+		parent.children('.healthPer').text(Math.floor(Math.ceil(taxation*0.0646/2)/10)*10); //건강보험계산
+		parent.children('.longCare').text(Math.floor(Math.ceil((taxation*0.09)/2)/10)*10); //장기요양보험계산
+		parent.children('.insurPer').text(Math.floor(Math.ceil(taxation*0.0851)/10)*10); //고용보험계산
+	
+		parent.children('.residentTax').text(parseInt(one/10)); //고용보험계산
+		//국민연금 최대치 최저치
+		if (taxation > 4860000){			
+			parent.children('.nationPer').text(parseInt(218700));		
+		}else if (taxation < 310000){			
+			parent.children('.nationPer').text(0);
+		}
+		//건강보험 최대치 최저치
+		if(taxation > 99250000){			
+			parent.children('.healthPer').text(parseInt(3205770));
+		}else if (taxation < 280000){			
+			parent.children('.healthPer').text(0);
+		}
+		
+		//장기요양 보험 최대치 최저치
+		if(parent.children('.healthPer').text() >= 3205770){	
+			parent.children('.longCare').text(272810);
+		}else if(parent.children('.healthPer').text() <=9040){
+			
+			parent.children('.longCare').text(0);
+		}
+		//소득세
+		
+	}
+	
+	// 데이터 테이블 호출
+	$('#boardListTable').DataTable();
+	$('#boardListTable1').DataTable();
+	
   });
- 
  
 </script>
 
