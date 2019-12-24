@@ -6,7 +6,7 @@
 $(function(){
 	$('.ajaxVal').one('click', function(){
 		var valCheck = $(this).children('a').prop('id');
-		console.log(valCheck);
+		console.log('기안문서함이에요.'+valCheck);
 		var code = null; // 작성된 결재문서관리코드
 		var writerDay = null; // 작성일자
 		var signEndDay = null; // 결재완료일
@@ -129,7 +129,7 @@ $(function(){
 $(function(){
 	$('.ajaxVal2').one('click', function(){
 		var valCheck = $(this).children('a').prop('id');
-		console.log(valCheck);
+		console.log('결재 문서함이에요.'+valCheck);
 		var code = null; // 작성된 결재문서관리코드
 		var writerDay = null; // 작성일자
 		var signEndDay = null; // 결재완료일

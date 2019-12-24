@@ -23,16 +23,22 @@ public class SignDocumentService {
 	}
 	
 	/**
-	 * 결재 문서함에서 본인이 결재자에 있는 모든 문서를 select하는 메서드
+	 * 결재 대기 문서에서 본인이 결재자에 있는 모든 문서를 select하는 메서드
 	 * @param Strig
 	 * @return List<SignDocument>
 	 * */
-	public List<SignDocument> selectSignDocumentWait(String valCheck, String sid){
-		if(valCheck != "null") {
-			System.out.println("valCheck가 null이 아니에요");
-			return signDocumentMapper.selectSignDocumentWait(valCheck, sid);
-		}else {
-			return signDocumentMapper.selectSignDocumentWait(sid);
-		}
+	public List<String> selectSignDocumentWait(String valCheck, String sid){
+			List<String> result = signDocumentMapper.selectSignDocumentWait(valCheck, sid);
+			//System.out.println("service result value : " + result);
+			return result;
+	}
+	
+	/**
+	 * 결재 문서함에서 본인의 결재가 있는 모든 문서를 select하는 메서드
+	 * @param String
+	 * @return List<SignDocument>
+	 * */
+	public List<SignDocument> selectSignDocumentEnd (String valCheck, String sid){
+		return signDocumentMapper.selectSignDocumentEnd(valCheck, sid);
 	}
 }
