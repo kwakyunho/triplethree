@@ -53,7 +53,8 @@
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="post" action="/employee/employeeMyUpdate" class="form-horizontal" th:each="m :${mypage}" enctype="multipart/form-data">
+	              <form method="post" action="/employee/employeeMyUpdate" id="employeeMyUpdate" class="form-horizontal" th:each="m :${mypage}" enctype="multipart/form-data">
+	                <div class="card-body"> 
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
 		                    	<div class="col-sm-3" th:if="${m.photo} neq null">
@@ -63,7 +64,7 @@
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
 		                 		<div class="col-sm-3" th:if="${m.photo} eq null">
-		                 			<img id="photoView"class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:100px; height:100px;"/>
+		                 			<img id="photoView"class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:200px; height:200px;"/>
 									<input class="form-control" name="image" id="photo" type="file"/>
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
@@ -103,13 +104,13 @@
 	                 		
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
 			                    <div class="col-sm-3" th:if="${m.signature} neq null">
-			                 		<img   id="signatureView" th:src="${m.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
+			                 		<img   id="signatureView" th:src="${m.signature}" class="img" alt="User Image" style="width:200px; height:200px;">
 			                 		<!--원래쓰던애 <img id="signatureView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
 									<input class="form-control" name="image" id="signature" type="file"/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>
 			                 	<div class="col-sm-3" th:if="${m.signature} eq null">
-			                 		<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:100px; height:100px;"/>
+			                 		<img id="signatureView"  class="img" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:200px; height:200px;"/>
 									<input class="form-control" name="image" id="signature" type="file"/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>		
@@ -133,7 +134,7 @@
 											return false;
 											}else{
 												$('#imgFail').hide();
-												var id = $(this).attr('id');
+												var id = $(this).attr('id');x
 												id = id + "View";
 												console.log(id);
 												readURL(this, id);
@@ -405,7 +406,7 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-success">수정 하기</button>
+	                  <button type="button" class="btn btn-success" id="myUpdateBtn">수정 하기</button>
 	                </div>
 	                
 	              </form>
@@ -442,6 +443,44 @@
 					 // Key 8번 백스페이스, Key 9번 탭, Key 46번 Delete 부터 0 ~ 9까지, Key 96 ~ 105까지 넘버패트
 					 // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함 
 		             }
+		         })
+		         
+		         
+		         $('#myUpdateBtn').on('click',function(){
+		        	 var password = $('input[name="password"]').val();
+		        	 var postCode = $('input[name="postCode"]').val();
+		        	 var phone = $('input[name="phone"]').val();
+		        	 var email = $('input[name="email"]').val();
+		        	 var writer = $('input[name="writer"]').val();
+		        	 
+		        	 if(password == ""){
+						   alert('패스워드를 입력해주세요.');
+						   password.focus();
+						   return false;
+					   }
+		        	 if(postCode == ""){
+						   alert('우편번호를 입력해주세요.');
+						   postCode.focus();
+						   return false;
+					   }
+					   if(phone == ""){
+						   alert('연락처를 입력해주세요.');
+						   phone.focus();
+						   return false;
+					   }
+					   if(email == ""){
+						   alert('이메일을 입력해주세요.');
+						   email.focus();
+						   return false;
+					   }
+					   if(writer == ""){
+						   alert('작성자가 없습니다. 로그인해주세요.');
+						   writer.focus();
+						   return false;
+					   }
+		        	 
+					   $('#employeeMyUpdate').submit();
+		        	 
 		         })
 		   });
 	

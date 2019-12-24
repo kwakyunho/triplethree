@@ -62,7 +62,7 @@
 		                 			<img th:src="${m.photo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
 		                 		</div>
 		                 		<div class="col-sm-3" th:if="${m.photo} eq null">
-		                 			<img th:src="${m.photo}" class="img" alt="사진을 업로드해주세요." style="width:200px; height:200px;">
+		                 			<img th:src="${m.photo}" class="img-circle elevation-2" alt="사진을 업로드해주세요." style="width:200px; height:200px;">
 		                 		</div>
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">signature</label>
 			                    <div class="col-sm-3" th:if="${m.signature} neq null">
