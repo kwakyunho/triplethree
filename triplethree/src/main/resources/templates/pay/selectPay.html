@@ -103,14 +103,14 @@ tr:hover{background: whitesmoke;}
 						 <td class="taxation"></td>
 						 <td class="taxFree"></td>
 						 <td class="payment"></td>					 					
-						 <td class="nationPer">국민연금</td>						 		
-						 <td class="healthPer">건강보험</td>		
-						 <td class="longCare">장기요양보험</td>			
-						 <td class="insurPer">고용보험</td>		
+						 <td class="nationPer"></td>						 		
+						 <td class="healthPer"></td>		
+						 <td class="longCare"></td>			
+						 <td class="insurPer"></td>		
 						 <td class="one"th:text="${p.one}"></td>		
-						 <td class="residentTax">지방소득세</td>		
-						 <td >공제액 계</td>		
-						 <td >차인지급액</td>	
+						 <td class="residentTax"></td>		
+						 <td class="deduct"></td>		
+						 <td class="deductHap"></td>	
 						 <td><a class="btn btn btn-success" th:href="@{/admin/pay/updatePay(empCode=${p.empCode})}">수정</a></td>		
 						 </tr>
 					</tbody>	
@@ -151,25 +151,26 @@ tr:hover{background: whitesmoke;}
 		var longCare = payInsert[i].longCare;	// 장기요양보험
 		var one = payInsert[i].one;	// 소득세
 		var residentTax = payInsert[i].residentTax;	// 지방소득세
-	
 		var taxation = basicPay+comPay+beneFit+holidayPay+overtimePay+positionBenefit; // 과세
 		var taxFree = selfDriPay+mealCost+childPay;	//비과세
 		var payment = taxation+taxFree;	//지급액 계
-		parent.children('.taxation').text(taxation);
-		parent.children('.taxFree').text(taxFree);
-		parent.children('.payment').text(payment);
-		parent.children('.nationPer').text(Math.floor(Math.ceil((taxation*0.09)/2)/10)*10); //국민연금계산
-		parent.children('.healthPer').text(Math.floor(Math.ceil(taxation*0.0646/2)/10)*10); //건강보험계산
-		parent.children('.longCare').text(Math.floor(Math.ceil((taxation*0.09)/2)/10)*10); //장기요양보험계산
-		parent.children('.insurPer').text(Math.floor(Math.ceil(taxation*0.0851)/10)*10); //고용보험계산
+		
 	
-		parent.children('.residentTax').text(parseInt(one/10)); //고용보험계산
+		parent.children('.taxation').text(taxation); //과세
+		parent.children('.taxFree').text(taxFree);	//비과세
+		parent.children('.payment').text(payment); //지급액계		
+		
+		parent.children('.nationPer').text(Math.floor(Math.ceil((taxation*0.09)/2)/10)*10); //국민연금계산
+		var nation =Math.floor(Math.ceil((taxation*0.09)/2)/10)*10; //국민
 		//국민연금 최대치 최저치
 		if (taxation > 4860000){			
 			parent.children('.nationPer').text(parseInt(218700));		
 		}else if (taxation < 310000){			
 			parent.children('.nationPer').text(0);
 		}
+		
+		parent.children('.healthPer').text(Math.floor(Math.ceil(taxation*0.0646/2)/10)*10); //건강보험계산
+		var health =Math.floor(Math.ceil(taxation*0.0646/2)/10)*10; //건강
 		//건강보험 최대치 최저치
 		if(taxation > 99250000){			
 			parent.children('.healthPer').text(parseInt(3205770));
@@ -177,6 +178,8 @@ tr:hover{background: whitesmoke;}
 			parent.children('.healthPer').text(0);
 		}
 		
+		parent.children('.longCare').text(Math.floor(Math.ceil(health*0.0851)/10)*10); //장기요양보험계산
+		var longCare =Math.floor(Math.ceil(health*0.0851)/10)*10;  //장기요양
 		//장기요양 보험 최대치 최저치
 		if(parent.children('.healthPer').text() >= 3205770){	
 			parent.children('.longCare').text(272810);
@@ -184,6 +187,20 @@ tr:hover{background: whitesmoke;}
 			
 			parent.children('.longCare').text(0);
 		}
+		
+		parent.children('.insurPer').text(Math.floor(Math.ceil((taxation*0.013)/2)/10)*10); //고용보험계산	
+		var insurPer =Math.floor(Math.ceil((taxation*0.013)/2)/10)*10; //고용보험
+		
+		parent.children('.residentTax').text(Math.floor(Math.ceil(one/10)/10)*10); //지방소득세
+		var residentTax =Math.floor(Math.ceil(one/10)/10)*10;  //지방소득세
+		
+		var sum1 = nation+health+longCare+insurPer+residentTax+one;
+		
+		parent.children('.deduct').text(sum1);
+		var deduct = parent.children('.deduct').text(sum1) 
+		var deductHap = taxation-deduct;	//차인지급액		
+		
+		
 		//소득세
 		
 	}
