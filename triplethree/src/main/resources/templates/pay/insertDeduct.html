@@ -67,7 +67,7 @@
 	  공제액등록
 	</button>
 </div>	
-	<!-- Modal -->
+	<!-- 모달창 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -75,33 +75,29 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel"></h4>
 	      </div>
-	      <div class="modal-body">
-	       
-	       <span id="year" class="sk">연도</span>	    	   
-	    	   <input type="text" name="year"/></br>
-	       <select>
-		       <option value="국민연금">국민연금</option>
-		       <input type="text" name="nation"/>
-		    </select></br> 
-		    <select>  
-		       <option value="건강보험료">건강보험료</option>
-		       <input type="text" name="health"/>
-		    </select></br>
-		    <select>   
-		       <option value="장기요양보험료">장기요양보험료</option>
-		       <input type="text" name="longCare"/>
-		    </select></br>
-		    <select>   
-		       <option value="고용보험">고용보험</option>
-		       <input type="text" name="inseurPer"/>
-		    </select> 
-	       		
-	       		
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">추가</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-	      </div>
+	     <form action="/admin/pay/insertDeduct" method="Post">
+		      <div class="modal-body">
+				<h5 align="center">공제액 설정시 연도와 요율을 확인해주세요</h5>		       
+		      	   <div>연도</div>	    	   
+		    	   <input type="text" name="year"/>
+		    	<br>	       
+			       <div>국민연금</div>
+			       <input type="text" name="nation"/>
+			    <br> 	  
+			       <div>건강보험료</div>
+			       <input type="text" name="health"/>
+			    <br>		      
+			       <div>장기요양보험료</div>
+			       <input type="text" name="longCare"/>
+			    <br>		    
+			       <div>고용보험</div>
+			       <input type="text" name="inseurPer"/>	       		
+		      </div>
+		      <div class="modal-footer">
+		        <button type="submit" class="btn btn-primary">추가</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+		      </div>
+	      </form>
 	    </div>
 	  </div>
 	</div>

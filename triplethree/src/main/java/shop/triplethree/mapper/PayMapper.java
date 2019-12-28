@@ -31,4 +31,7 @@ public interface PayMapper {
 	
 	/** *회사정보 수정클릭시 화면 보여주기 ***/
 	public Pay updatePayView(String empCode);
+	
+	/**공제액 모달창 수정***/
+	public int insertDeductModal(Pay pay);
 }

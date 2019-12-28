@@ -16,6 +16,8 @@ public class PayService {
 
 	@Autowired
 	private PayMapper payMapper;
+	@Autowired 
+	private CommonService commonService;
 	
 
 	/** 급여 입력  검색조건 **/
@@ -53,7 +55,14 @@ public class PayService {
 		
 		return payMapper.updatePayView(empCode);
 	}
+	/**급여대장에서 진짜 수정**/
 	public int updatePay(Pay pay) {
 		return payMapper.updatePay(pay);
+	}
+	/**공제액 설정 모달창***/
+	public int insertDeductModal(Pay pay) {
+		String deCode = commonService.codeGeneration("DEDUCT_MANAGE");
+		pay.setDeCode(deCode);
+		return payMapper.insertDeductModal(pay);
 	}
 }

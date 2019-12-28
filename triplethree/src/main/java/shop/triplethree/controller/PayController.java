@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.triplethree.mapper.CompanyMapper;
 import shop.triplethree.service.EmployeeService;
 import shop.triplethree.service.PayService;
 import shop.triplethree.vo.Company;
@@ -21,7 +22,7 @@ import shop.triplethree.vo.Pay;
 @Controller
 public class PayController {
 	@Autowired private PayService payService;
-	
+	@Autowired private CompanyMapper companyMapper;
 	/**급여등록화면**/
 	@GetMapping("/admin/pay/viewPay")
 	public String viewPay() {
@@ -78,10 +79,21 @@ public class PayController {
 	}
 	/**급여 진짜 수정하기***/
 	
-	  @PostMapping("/admin/pay/updatePay") 
+	  @PostMapping("/admin/pay/updatePay")  
 	  public String updatePay(Pay pay) {
-	  System.out.println("수정처리"); 
+	  //System.out.println("수정처리"); 
 	  payService.updatePay(pay);
-	  return "redirect:/pay/selectPay"; }
-	
+	  return "redirect:/pay/selectPay"; 
+	  }
+	 /***공제액 모달창 설정***/
+	  
+	  @PostMapping("/admin/pay/insertDeduct")
+	  public String insertDeductModal(Pay pay,HttpSession session, Model model) {
+
+		String sid = (String) session.getAttribute("SID");	
+		pay.setWriter(sid);
+		model.addAttribute("insertDeductModal", payService.insertDeductModal(pay));
+		  return "redirect:/pay/insertDeduct";
+	  }
+	  
 }

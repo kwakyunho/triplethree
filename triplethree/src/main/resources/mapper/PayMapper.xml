@@ -208,4 +208,26 @@
 		pay.emp_code=#{empCode}
 	</select>
 	
+	
+	<!--공제액 모달창 인설트  -->
+	<insert id="insertDeductModal" parameterType="shop.triplethree.vo.Pay">
+		INSERT INTO
+			DEDUCT_MANAGE (
+				code
+				,insur_per
+				,nation_per
+				,health_per
+				,long_care
+				,writer
+				,writer_day)
+		VALUES
+			(#{deCode}
+			,#{inseurPer}
+			,#{nationPer}
+			,#{healthPer}
+			,#{longCare}
+			,#{sid}
+			,NOW());
+	</insert>
+	
 </mapper>
