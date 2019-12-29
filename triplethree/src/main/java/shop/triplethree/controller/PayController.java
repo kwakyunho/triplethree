@@ -90,10 +90,10 @@ public class PayController {
 	  @PostMapping("/admin/pay/insertDeduct")
 	  public String insertDeductModal(Pay pay,HttpSession session, Model model) {
 
-		String sid = (String) session.getAttribute("SID");	
-		pay.setWriter(sid);
+		String writer = (String) session.getAttribute("SID");	
+		pay.setWriter(writer);
 		model.addAttribute("insertDeductModal", payService.insertDeductModal(pay));
-		  return "redirect:/pay/insertDeduct";
+		  return "redirect:/admin/pay/insertDeduct";
 	  }
 	  
 }

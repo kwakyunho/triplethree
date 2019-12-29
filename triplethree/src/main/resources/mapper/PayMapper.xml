@@ -218,6 +218,7 @@
 				,nation_per
 				,health_per
 				,long_care
+				,year
 				,writer
 				,writer_day)
 		VALUES
@@ -226,7 +227,8 @@
 			,#{nationPer}
 			,#{healthPer}
 			,#{longCare}
-			,#{sid}
+			,#{year}
+			,#{writer}
 			,NOW());
 	</insert>
 	

@@ -34,7 +34,7 @@ public class Pay {
 	private Double healthPer; //건보료공제비율
 	private Double longCare;	//장기요양공제비율
 	private Double industrialPer;	//산재보험비율	
-	private Year year;	//적용연도
+	private String year;	//적용연도
 	public String getCode() {
 		return code;
 	}
@@ -204,10 +204,10 @@ public class Pay {
 	public void setIndustrialPer(Double industrialPer) {
 		this.industrialPer = industrialPer;
 	}
-	public Year getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(Year year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	@Override
