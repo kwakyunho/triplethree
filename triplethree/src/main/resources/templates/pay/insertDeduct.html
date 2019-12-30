@@ -53,7 +53,7 @@
 							<th>수정</th>																											
 						</tr>
 						<tr th:each="d:${insertDeduct}">																																
-							<th id="deCode" th:text="${d.deCode}">공제액코드</th>							
+							<th id="deCode" th:text="${d.deCode}" th:value="${d.deCode}">공제액코드</th>							
 							<th id="year" th:text="${d.year}">연도</th>							
 							<th id="nationPer" th:text="${d.nationPer}">국민연금</th>
 							<th id="healthPer" th:text="${d.healthPer}">건강보험료</th>
@@ -123,7 +123,7 @@
 	     <form action="/admin/pay/updateDeduct" method="get">
 		      <div class="modal-body2">
 				<h4 align="center">공제액 수정을 합니다</h4>	
-							
+					
 			      	   <label>연도</label>	    	   
 			    	   <input type="number" id="year2" name="year" max="2100"/><h6>ex)2012와 같은 규칙을 지켜주세요</h6>
 			 	       <br>
@@ -140,7 +140,7 @@
 				       <input type="text" id="inseurPer2" name="inseurPer"/><h6>ex)요율이 6.16%면 0.0616으로 입력해주세요</h6>	       		
 			      </div>
 		      <div class="modal-footer">
-		        <button type="submit" id="updateDeduct"class="btn btn-primary updateDeduct">수정</button>
+		        <button type="submit" id="updateDeduct"class="btn btn-primary">수정</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 		      </div>
 	      </form>
@@ -166,7 +166,7 @@ $('#myModal').on('shown.bs.modal', function () {
 	  $('#myInput').focus()
 	});
 /*모달창 등록  */
-$('.btn-primary').on('click', function(){		
+$('#insertDeduct').on('click', function(){		
 	var year =$('#year1').val();
 	var nationPer =$('#nationPer1').val();
 	var healthPer =$('#healthPer1').val();
@@ -197,7 +197,7 @@ $('#myModal1').on('shown.bs.modal', function () {
 	  $('#myInput').focus()
 	});
 /*모달창 수정  */
-$('.updateDeduct').on('click', function(){			
+$('#updateDeduct').on('click', function(){			
 	var year =$('#year2').val();
 	var nationPer =$('#nationPer2').val();
 	var healthPer =$('#healthPer2').val();

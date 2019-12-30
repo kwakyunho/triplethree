@@ -240,7 +240,7 @@
 		health_per=#{healthPer},
 		long_care=#{longCare}, 
 	WHERE 
-		deCode=#{deCode}
+		code=#{deCode}
 	</update>
 	
 </mapper>
