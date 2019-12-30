@@ -252,8 +252,12 @@
 					email=#{email},
 					con_type=#{conType},
 					basic_pay=#{basicPay},
+					<if test="photo neq null and photo neq ''.toString()">
 					photo=#{photo},
+					</if>
+					<if test="signature neq null and signature neq ''.toString()">
 					signature=#{signature},
+					</if>
 					<if test="retireDate neq null and retireDate neq ''.toString()">
 					retire_date=#{retireDate},
 					</if>

@@ -66,12 +66,12 @@
 		                    	<div class="col-sm-3" th:if="${u.photo} neq null">
 		                 			<img  id="photoView" th:src="${u.photo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
 		                 			<!--원래쓰던애 <img id="photoView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
-									<input class="form-control" name="image" id="photo" type="file"/>
+									<input class="form-control" name="photoFile" id="photo" type="file" value="" />
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
 		                 		<div class="col-sm-3" th:if="${u.photo} eq null">
-		                 			<img id="photoView" class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:200px; height:200px;"/>
-									<input class="form-control" name="image" id="photo" type="file"/>
+		                 			<img id="photoView" class="img-circle elevation-2" src="#" alt="사진을 업로드 해주세요." style="width:200px; height:200px;"/>
+									<input class="form-control" name="photoFile" id="photo" type="file"/>
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
 		                 		
@@ -112,12 +112,12 @@
 			                    <div class="col-sm-3" th:if="${u.signature} neq null">
 			                 		<img   id="signatureView" th:src="${u.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
 			                 		<!--원래쓰던애 <img id="signatureView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
-									<input class="form-control" name="image" id="signature" type="file"/>
+									<input class="form-control" name="signatureFile" id="signature" type="file"/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>
 			                 	<div class="col-sm-3" th:if="${u.signature} eq null">
-			                 		<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:200px; height:200px;"/>
-									<input class="form-control" name="image" id="signature" type="file"/>
+			                 		<img id="signatureView"  class="img-fluid" src="#" alt="서명을 업로드 해주세요." style="width:200px; height:200px;"/>
+									<input class="form-control" name="signatureFile" id="signature" type="file" value=""/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>		
 	               	 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
