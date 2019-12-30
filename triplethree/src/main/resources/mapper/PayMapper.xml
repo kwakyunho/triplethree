@@ -46,7 +46,6 @@
 			p.self_dri_pay AS selfDriPay,
 			p.com_pay AS comPay,
 			p.meal_cost AS mealCost,
-			p.child_pay AS childPay,
 			i.one AS one
 	FROM (
 			SELECT A.*
@@ -96,7 +95,6 @@
 	pay.self_dri_pay AS selfDriPay,
 	pay.com_pay AS comPay,
 	pay.meal_cost AS mealCost,
-	pay.child_pay AS childPay,
 	d.insur_per AS inseurPer,
 	d.nation_per AS nationPer,
 	d.health_per AS healthPer,
@@ -142,7 +140,6 @@
 		self_dri_pay=#{selfDriPay}, 
 		com_pay=#{comPay}, 
 		meal_cost=#{mealCost}, 
-		child_pay=#{childPay}, 
 		writer=#{writer},
 		writer_day=NOW(),
 		payment_date=NOW()
@@ -152,6 +149,7 @@
 	<!-- 공제액 화면 -->
 	<select id="insertDeduct" resultType="shop.triplethree.vo.Pay">
 	SELECT
+		de.Code AS deCode,
 		de.insur_per*100 AS inseurPer,
 		de.nation_per*100 AS nationPer,
 		Round(de.health_per*100,2) AS healthPer,
@@ -178,7 +176,6 @@
 	pay.self_dri_pay AS selfDriPay,
 	pay.com_pay AS comPay,
 	pay.meal_cost AS mealCost,
-	pay.child_pay AS childPay,
 	d.insur_per AS inseurPer,
 	d.nation_per AS nationPer,
 	d.health_per AS healthPer,
@@ -231,5 +228,19 @@
 			,#{writer}
 			,NOW());
 	</insert>
+	
+	<!--공제액 모달창 수정  -->
+	<update id="updateDeduct" parameterType="shop.triplethree.vo.Pay">
+	UPDATE 
+		DEDUCT_MANAGE 
+	SET 
+		year=#{year},
+		insur_per=#{inseurPer},
+		nation_per=#{nationPer},
+		health_per=#{healthPer},
+		long_care=#{longCare}, 
+	WHERE 
+		deCode=#{deCode}
+	</update>
 	
 </mapper>

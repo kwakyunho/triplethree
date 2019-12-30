@@ -82,7 +82,7 @@
 								<input class="positionBenefit" type="hidden" th:value="${e.positionBenefit}">													
 								<input class="selfDriPay" type="hidden" th:value="${e.selfDriPay}">													
 								<input class="comPay" type="hidden" th:value="${e.comPay}">													
-								<input class="childPay" type="hidden" th:value="${e.childPay}">													
+																				
 								<input class="mealCost" type="hidden" th:value="${e.mealCost}">																																	
 								<input class="nationPer" type="hidden" th:value="${e.nationPer}">																																	
 								<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
@@ -127,8 +127,7 @@
 						<td><input type="text" id="comPay"name="comPay" class="form-control col-12"></td></tr>					
 					<tr><td>식대</td>					
 						<td><input type="text" id="mealCost"name="mealCost" class="form-control col-12"></td></tr>					
-					<tr><td>육아수당</td>								
-						<td><input type="text" id="childPay"name="childPay" class="form-control col-12"></td></tr>
+					
 												
 						<tr>
                     		<td align="left">과세 :
@@ -207,7 +206,7 @@ $('.insertChange').change(function(){
 	var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 	+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 	sum1.value =add;
-	var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+	var add2=parseInt(selfDriPay.value)+parseInt(mealCost.value);
 	sum2.value=add2;
 	//지급액계
 	var add3=add+add2;

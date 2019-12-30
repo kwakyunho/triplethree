@@ -64,8 +64,7 @@ tr:hover{background: whitesmoke;}
 							<th>차량유지비</th>
 							<th>통신수당</th>
 							<th>식대</th>
-							<th>야간수당</th>
-							<th>육아수당</th>
+							<th>야간수당</th>							
 							<th>휴일수당</th>
 							<th>연장수당</th>
 							<th>직책수당</th>						
@@ -96,7 +95,6 @@ tr:hover{background: whitesmoke;}
 						 <td class="comPay" th:text="${p.comPay}"></td>
 						 <td class="mealCost" th:text="${p.mealCost}"></td>
 						 <td class="beneFit" th:text="${p.beneFit}"></td>
-						 <td class="childPay" th:text="${p.childPay}"></td>
 					 	 <td class="holidayPay" th:text="${p.holidayPay}"></td>
 						 <td class="overtimePay" th:text="${p.overtimePay}"></td>
 						 <td class="positionBenefit" th:text="${p.positionBenefit}"></td>
@@ -141,7 +139,6 @@ tr:hover{background: whitesmoke;}
 		var comPay = payInsert[i].comPay;	// 통신수당
 		var mealCost = payInsert[i].mealCost;	// 식대
 		var beneFit = payInsert[i].beneFit;	// 야간수당
-		var childPay = payInsert[i].childPay;	// 육아수당
 		var holidayPay = payInsert[i].holidayPay;	// 휴일수당
 		var overtimePay = payInsert[i].overtimePay;	// 연장수당
 		var positionBenefit = payInsert[i].positionBenefit;	// 직책수당
@@ -152,7 +149,7 @@ tr:hover{background: whitesmoke;}
 		var one = payInsert[i].one;	// 소득세
 		var residentTax = payInsert[i].residentTax;	// 지방소득세
 		var taxation = basicPay+comPay+beneFit+holidayPay+overtimePay+positionBenefit; // 과세
-		var taxFree = selfDriPay+mealCost+childPay;	//비과세
+		var taxFree = selfDriPay+mealCost;	//비과세
 		var payment = taxation+taxFree;	//지급액 계
 		
 	

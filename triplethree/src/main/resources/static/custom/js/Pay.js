@@ -9,8 +9,7 @@ $(function(){
 		var overtimePay = $(this).parents('.insertPay').children('.overtimePay');		
 		var positionBenefit = $(this).parents('.insertPay').children('.positionBenefit');		
 		var selfDriPay = $(this).parents('.insertPay').children('.selfDriPay');		
-		var comPay = $(this).parents('.insertPay').children('.comPay');		
-		var childPay = $(this).parents('.insertPay').children('.childPay');		
+		var comPay = $(this).parents('.insertPay').children('.comPay');				
 		var mealCost = $(this).parents('.insertPay').children('.mealCost');		
 		var nationPer = $(this).parents('.insertPay').children('.nationPer');		
 		var healthPer = $(this).parents('.insertPay').children('.healthPer');		
@@ -34,8 +33,7 @@ $(function(){
 		$('#overtimePay').val(overtimePay.html('input').val());
 		$('#positionBenefit').val(positionBenefit.html('input').val());
 		$('#selfDriPay').val(selfDriPay.html('input').val());
-		$('#comPay').val(comPay.html('input').val());
-		$('#childPay').val(childPay.html('input').val());
+		$('#comPay').val(comPay.html('input').val());		
 		$('#mealCost').val(mealCost.html('input').val());
 		$('#nationPer').val(nationPer.html('input').val());
 		$('#healthPer').val(healthPer.html('input').val());
@@ -55,7 +53,6 @@ $(function(){
 		var positionBenefit=document.getElementById("positionBenefit");//직책수당
 		var selfDriPay=document.getElementById("selfDriPay");//자가운전보조금
 		var comPay=document.getElementById("comPay");//통신수당
-		var childPay=document.getElementById("childPay");//육아수당
 		var mealCost=document.getElementById("mealCost");//식대
 		var nationPer=document.getElementById("nationPer"); //국민연금요율
 		var healthPer=document.getElementById("healthPer"); //건강보험요율
@@ -76,7 +73,7 @@ $(function(){
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;
 		//비과세
-		var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+		var add2=parseInt(selfDriPay.value)+parseInt(mealCost.value);
 		sum2.value=add2;
 		//지급액계
 		var add3=add+add2;

@@ -87,8 +87,7 @@
 						<td><input type="text" th:value="${updatePayView.comPay}" id="comPay"name="comPay" class="form-control col-12"></td></tr>					
 					<tr><td>식대</td>					
 						<td><input type="text" th:value="${updatePayView.mealCost}" id="mealCost"name="mealCost" class="form-control col-12"></td></tr>					
-					<tr><td>육아수당</td>								
-						<td><input type="text" th:value="${updatePayView.childPay}" id="childPay"name="childPay" class="form-control col-12"></td></tr>
+				
 												
 						<tr>
                     		<td align="left">과세 :
@@ -156,7 +155,7 @@
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;
-		var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+		var add2=parseInt(selfDriPay.value)+parseInt(mealCost.value);
 		sum2.value=add2;
 		//지급액계
 		var add3=add+add2;
@@ -227,7 +226,7 @@
 		var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
 		+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
 		sum1.value =add;
-		var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
+		var add2=parseInt(selfDriPay.value)+parseInt(mealCost.value);
 		sum2.value=add2;
 		//지급액계
 		var add3=add+add2;

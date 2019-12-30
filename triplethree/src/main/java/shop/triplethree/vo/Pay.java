@@ -17,7 +17,6 @@ public class Pay {
 	private int selfDriPay;//자가운전보조금
 	private int comPay;		//통신수당
 	private int mealCost;	//식대보조금
-	private int childPay;	//육아수당
 	private int deductPay;	//공제후급여
 	private String writer;	//작성자
 	private LocalDateTime writerDay;	//작성일자
@@ -119,12 +118,6 @@ public class Pay {
 	public void setMealCost(int mealCost) {
 		this.mealCost = mealCost;
 	}
-	public int getChildPay() {
-		return childPay;
-	}
-	public void setChildPay(int childPay) {
-		this.childPay = childPay;
-	}
 	public int getDeductPay() {
 		return deductPay;
 	}
@@ -215,7 +208,7 @@ public class Pay {
 		return "Pay [code=" + code + ", empCode=" + empCode + ", deCode=" + deCode + ", basicPay=" + basicPay
 				+ ", beneFit=" + beneFit + ", holidayPay=" + holidayPay + ", overtimePay=" + overtimePay
 				+ ", positionBenefit=" + positionBenefit + ", selfDriPay=" + selfDriPay + ", comPay=" + comPay
-				+ ", mealCost=" + mealCost + ", childPay=" + childPay + ", deductPay=" + deductPay + ", writer="
+				+ ", mealCost=" + mealCost + ", childPay="  + ", deductPay=" + deductPay + ", writer="
 				+ writer + ", writerDay=" + writerDay + ", paymentDate=" + paymentDate + ", empNum=" + empNum
 				+ ", empName=" + empName + ", poName=" + poName + ", demgName=" + demgName + ", inseurPer=" + inseurPer
 				+ ", inCode=" + inCode + ", residentTax=" + residentTax + ", nationPer=" + nationPer + ", healthPer="
