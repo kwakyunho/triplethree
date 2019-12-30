@@ -60,7 +60,7 @@ tr:hover{background: whitesmoke;}
 						</thead>
 						<tbody>
 						  	<tr style="cursor:pointer" th:each="c , index : ${client2}">
-								<td th:text="${index.index+1}"></td>
+								<td class="clientTableNumber" th:text="${index.index+1}"></td>
 								<td class="clientCode" th:id="${c.code}" th:text="${c.code}"></td>
 								<td th:text="${c.liCode}"></td>
 								<td th:text="${c.liCode2}"></td>
@@ -75,6 +75,59 @@ tr:hover{background: whitesmoke;}
     	 </div>		<!-- /.card -->
    </div>		<!--./col-12 -->
 </div>		<!-- /.contents -->
+
+
+<div class="modal fade" id="clientListModal" tabindex="-1" role="dialog" aria-labelledby="workAttListModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="accName"></h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" style="float:left;">
+				<form style="font-size: 1.0rem;">
+					<div class="form-group col-md-12" style="float:left;" id="AddrHap">
+						<label for="recipient-name" class="col-form-label">주소</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="accBln">
+						<label for="recipient-name" class="col-form-label">사업자번호</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="code">
+						<label for="recipient-name" class="col-form-label">거래처코드</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="liCodeStr">
+						<label for="recipient-name" class="col-form-label">거래처종류</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="liCode2Str">
+						<label for="recipient-name" class="col-form-label">거래여부</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="accPhone">
+						<label for="recipient-name" class="col-form-label">거래처전화번호</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="accFax">
+						<label for="recipient-name" class="col-form-label">거래처팩스번호</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="accCeoName">
+						<label for="recipient-name" class="col-form-label">대표자이름</label>
+					</div>
+					<div class="form-group col-md-6" style="float:left;" id="repreNumber">
+						<label for="recipient-name" class="col-form-label">대표자이름</label>
+					</div>
+					<div class="form-group col-md-12" style="float:left;" id="accEmail">
+						<label for="recipient-name" class="col-form-label">이메일</label>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary sendBtn">수정</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 모달 사용 종료 -->
+
+
 </th:block>
 <th:block layout:fragment="customScript">
 
@@ -89,15 +142,52 @@ $(function(){
 
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
-		$('#clientListTable tbody').on('click','tr',function(){
-			var clientUrl = $(this).children('.clientCode');
-			clientUrl.append('<input type="hidden" name="code" value="">');
-			var clientCode = clientUrl.attr('id');
-			$('input[name=code]').val(clientCode);
-			$('.clientListForm').attr('method','POST');
-			$('.clientListForm').attr('action','/client/clientDetail'); // 나중에 detail 로 수정
-			$('.clientListForm').submit();
-		});
+	$('#clientListTable tbody').on('click','tr',function(){
+		var cliDetail = [[${client2}]];
+		var num = $(this).children('.clientTableNumber').text()-1;
+		console.log(cliDetail[1]);
+		
+		var code = cliDetail[num].code;
+		var liCode = cliDetail[num].liCode;
+		var liCodeStr = cliDetail[num].liCodeStr;
+		var liCode2 = cliDetail[num].liCode2;
+		var liCode2Str = cliDetail[num].liCode2Str;
+		var accName = cliDetail[num].accName;
+		var accCeoName = cliDetail[num].accCeoName;
+		var repreNumber = cliDetail[num].repreNumber;
+		var accFax = cliDetail[num].accFax;
+		var accPhone = cliDetail[num].accPhone;
+		var accEmail = cliDetail[num].accEmail;
+		var accBln = cliDetail[num].accBln;
+		
+		$('#clientListModal').modal('show');
+		
+		$('#accName').text(accName);
+		$('#liCodeStr').append('<p>'+liCodeStr+'</p>');
+		$('#liCode2Str').append('<p>'+liCode2Str+'</p>');
+		$('#accCeoName').append('<p>'+accCeoName+'</p>');
+		$('#repreNumber').append('<p>'+repreNumber+'</p>');
+		$('#accFax').append('<p>'+accFax+'</p>');
+		$('#accPhone').append('<p>'+accPhone+'</p>');
+		$('#accEmail').append('<p>'+accEmail+'</p>');
+		$('#accBln').append('<p>'+accBln+'</p>');
+		
+		/* var clientUrl = $(this).children('.clientCode');
+		clientUrl.append('<input type="hidden" name="code" value="">');
+		var clientCode = clientUrl.attr('id');
+		$('input[name=code]').val(clientCode);
+		$('.clientListForm').attr('method','POST');
+		$('.clientListForm').attr('action','/client/clientDetail'); // 나중에 detail 로 수정
+		$('.clientListForm').submit(); */
+	});
+	
+	$('#clientListTable tbody').on('click','tr',function(){
+		
+		
+	});
+		
+		
+		
 });
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->

@@ -17,6 +17,7 @@ public class ClientService {
 		String code = commonService.codeGeneration("ACC_MANAGE");
 		client.setCode(code); //생성된 코드 client 객체 안에 세팅
 		System.out.println(code + " : 생성된 코드");
+		System.out.println(client.getEmpCode() + "작성자 아이디");
 		return clientMapper.insertClient(client);
 	}
 	//거래처 리스트 가져오기
