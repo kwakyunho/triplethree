@@ -8,6 +8,7 @@
 		<!--급여 대장 클릭시 사원리스트  -->
 	<select id="selectPay" resultType="shop.triplethree.vo.Employee">		
 	SELECT  
+			A.code as empCode,
 			A.emp_num as empNum,
 			A.emp_name as empName,
 			B.dename as demgName,
@@ -32,6 +33,7 @@
 	<!-- 급여대장   -->
 	<select id="payInsert"  resultType="shop.triplethree.vo.Pay">
 		SELECT  
+			A.code as empCode,
 			A.emp_num as empNum,
 			A.emp_name as empName,
 			B.dename as demgName,
@@ -44,7 +46,8 @@
 			p.self_dri_pay AS selfDriPay,
 			p.com_pay AS comPay,
 			p.meal_cost AS mealCost,
-			p.child_pay AS childPay
+			p.child_pay AS childPay,
+			i.one AS one
 	FROM (
 			SELECT A.*
 			FROM EMP_MANAGE A
@@ -62,7 +65,8 @@
 		ON A.pocode = C.CODE
 		inner JOIN PAY_BILL AS p
 		ON A.CODE = p.emp_code
-
+		inner JOIN INCOME AS i
+		ON p.in_code = i.code
 	</select>
 	
 	<!--퇴직금 검색쿼리문짜야험  -->
@@ -96,7 +100,8 @@
 	d.insur_per AS inseurPer,
 	d.nation_per AS nationPer,
 	d.health_per AS healthPer,
-	d.long_care AS longCare
+	d.long_care AS longCare,
+	i.one AS one
 	FROM (
 	SELECT em.*
 			FROM EMP_MANAGE em
@@ -115,6 +120,9 @@
 	on em.code=pay.emp_code
 	inner join DEDUCT_MANAGE as d
 	on d.code=pay.de_code
+	inner JOIN INCOME AS i
+	ON pay.in_code = i.code
+	
 	<if test="sv != null and sv neq ''.toString()">
 		WHERE 
 			${sk} Like CONCAT('%',#{sv},'%')					
@@ -137,7 +145,7 @@
 		child_pay=#{childPay}, 
 		writer=#{writer},
 		writer_day=NOW(),
-		payment_date=CURTIME()
+		payment_date=NOW()
 	WHERE 
 		emp_code=#{empCode}
 	</update>
@@ -151,6 +159,53 @@
 		de.YEAR AS year
 	FROM
 		DEDUCT_MANAGE AS de
+	</select>
+	
+	<!--급여대장에서 수정화면을 보여주기  -->
+	<select id="updatePayView" resultType="shop.triplethree.vo.Pay">
+	SELECT
+	pay.code as code,
+	em.code as empCode,
+	em.emp_num as empNum,
+	em.emp_name as empName,
+	p.poname as poName,
+	de.dename as demgName,
+	pay.basic_pay AS basicPay,	
+	pay.benefit AS beneFit,
+	pay.holiday_pay AS holidayPay,
+	pay.overtime_pay AS overtimePay,
+	pay.position_benefit AS positionBenefit,
+	pay.self_dri_pay AS selfDriPay,
+	pay.com_pay AS comPay,
+	pay.meal_cost AS mealCost,
+	pay.child_pay AS childPay,
+	d.insur_per AS inseurPer,
+	d.nation_per AS nationPer,
+	d.health_per AS healthPer,
+	d.long_care AS longCare,
+	i.one AS one
+	FROM (
+	SELECT em.*
+			FROM EMP_MANAGE em
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) p
+			ON em.writer_day = p.writer_day
+			AND em.emp_num = p.emp_num) em
+	INNER JOIN POSISYS AS p
+	ON em.pocode = p.CODE 
+	
+	LEFT JOIN DEMG de
+	ON em.demgcode = de.CODE
+	inner join PAY_BILL as pay
+	on em.code=pay.emp_code
+	inner join DEDUCT_MANAGE as d
+	on d.code=pay.de_code
+	inner JOIN INCOME AS i
+	ON pay.in_code = i.code
+	WHERE 
+		pay.emp_code=#{empCode}
 	</select>
 	
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import shop.triplethree.mapper.EmployeeMapper;
 import shop.triplethree.mapper.PayMapper;
+import shop.triplethree.vo.Company;
 import shop.triplethree.vo.Employee;
 import shop.triplethree.vo.Pay;
 
@@ -23,10 +24,11 @@ public class PayService {
 		return list;
 	}
 	/***급여 지급액등록(사실상 수정)**/
-	public int updatePay(Pay Pay) {
-		
-		return payMapper.updatePay(Pay);
-	}
+	/*
+	 * public int updatePay(Pay Pay) {
+	 * 
+	 * return payMapper.updatePay(Pay); }
+	 */
 	/** 급여 대장  selectPay,payInsert**/
 	public List<Employee> selectPay() {
 		return payMapper.selectPay();
@@ -46,4 +48,12 @@ public class PayService {
 		return payMapper.insertDeduct();
 	}
 	
+	/**급여대장에서 수정하는 화면**/
+	public Pay updatePayView(String empCode) {
+		
+		return payMapper.updatePayView(empCode);
+	}
+	public int updatePay(Pay pay) {
+		return payMapper.updatePay(pay);
+	}
 }
