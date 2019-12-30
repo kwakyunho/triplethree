@@ -60,9 +60,13 @@ public class PayService {
 		return payMapper.updatePay(pay);
 	}
 	/**공제액 설정 모달창***/
-	public int insertDeductModal(Pay pay) {
+	public int deductList(Pay pay) {
 		String deCode = commonService.codeGeneration("DEDUCT_MANAGE");
 		pay.setDeCode(deCode);
-		return payMapper.insertDeductModal(pay);
+		return payMapper.deductList(pay);
+	}
+	
+	public Pay updateDeduct(String deCode) {
+		return payMapper.updateDeduct(deCode);
 	}
 }

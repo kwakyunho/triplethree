@@ -46,21 +46,25 @@
 							<th>연도</th>
 							<th>국민연금</th>
 							<th>건강보험료</th>
-							<th> 장기요양보험료</th>
+							<th>장기요양보험료</th>
 							<th>고용보험</th>				
-														
+																							
 						</tr>
-						<tr th:each="d:${insertDeduct}">									
-							<th id="year" th:text="${d.year}">연도</th>
-							<th name="nationPer"id="nationPer" th:text="${d.nationPer}">국민연금</th>
-							<th name="healthPer"id="healthPer" th:text="${d.healthPer}">건강보험료</th>
-							<th name="longCare"id="longCare" th:text="${d.longCare}"> 장기요양보험료</th>
-							<th name="inseurPer"id="inseurPer" th:text="${d.inseurPer}">고용보험</th>				
-							
+						<tr th:each="d:${insertDeduct}">																						
+							<th id="year" th:text="${d.year}">연도</th>							
+							<th id="nationPer" th:text="${d.nationPer}">국민연금</th>
+							<th id="healthPer" th:text="${d.healthPer}">건강보험료</th>
+							<th id="longCare" th:text="${d.longCare}"> 장기요양보험료</th>
+							<th id="inseurPer" th:text="${d.inseurPer}">고용보험</th>											
+															
 						</tr>	
 					</table>
-				</form>					
-			
+					<h5>2019년도 요율입니다</h5>					
+					<h6>*국민연금 보험료 산출 기준소득월액 9%입니다</h6>			
+					<h6>*건강보험 보험료 산출 기준소득월액 6.46%입니다</h6>			
+					<h6>*장기요양 보험료 산출 건강보험료의 8.51%입니다</h6>			
+					<h6>*고용보험 보험료 산출 기준소득월액 1.3%입니다</h6>								
+				</form>
 					<!-- Button trigger modal -->
 <div align="center">			
 	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
@@ -72,29 +76,31 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
+	      	<h3>공제액설정</h3>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel"></h4>
 	      </div>
 	     <form action="/admin/pay/insertDeduct" method="Post">
 		      <div class="modal-body">
-				<h5 align="center">공제액 설정시 연도와 요율을 확인해주세요</h5>		       
-		      	   <div>연도</div>	    	   
-		    	   <input type="text" name="year"/>
-		    	<br>	       
-			       <div>국민연금</div>
-			       <input type="text" name="nationPer"/>
-			    <br> 	  
-			       <div>건강보험료</div>
-			       <input type="text" name="healthPer"/>
-			    <br>		      
-			       <div>장기요양보험료</div>
-			       <input type="text" name="longCare"/>
-			    <br>		    
-			       <div>고용보험</div>
-			       <input type="text" name="inseurPer"/>	       		
-		      </div>
+				<h4 align="center">공제액 설정시 연도와 요율을 확인해주세요</h4>	
+				
+			      	   <label>연도</label>	    	   
+			    	   <input type="number" id="year1" name="year" max="2100"/><h6>ex)2012와 같은 규칙을 지켜주세요</h6>
+			 	       <br>
+				       <label>국민연금</label>
+				       <input type="text" id="nationPer1"name="nationPer"/><h6>ex)요율이 6.16%면 0.0616으로 입력해주세요</h6>
+				  	   <br>
+				       <label>건강보험료</label>
+				       <input type="text" id="healthPer1" name="healthPer"/><h6>ex)요율이 6.16%면 0.0616으로 입력해주세요</h6>
+				   	   <br>	      
+				       <label>장기요양보험료</label>
+				       <input type="text" id="longCare1" name="longCare"/><h6>ex)요율이 6.16%면 0.0616으로 입력해주세요</h6>
+					   <br>		    
+				       <label>고용보험</label>
+				       <input type="text" id="inseurPer1" name="inseurPer"/><h6>ex)요율이 6.16%면 0.0616으로 입력해주세요</h6>	       		
+			      </div>
 		      <div class="modal-footer">
-		        <button type="submit" class="btn btn-primary">추가</button>
+		        <button type="submit" id="insertDeduct"class="btn btn-primary">추가</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 		      </div>
 	      </form>
@@ -118,7 +124,38 @@
 <script type="text/javascript">
 $('#myModal').on('shown.bs.modal', function () {
 	  $('#myInput').focus()
-	})
+	});
+
+$('.btn-primary').on('click', function(){	
+	
+	var year =$('#year1').val();
+	var nationPer =$('#nationPer1').val();
+	var healthPer =$('#healthPer1').val();
+	var longCare =$('#longCare1').val();
+	var inseurPer =$('#inseurPer1').val();
+	
+	
+	
+	
+	if(year=='' || year.length<4 || year ==null){
+		alert('연도 4자리형식으로 입력해주세요')	
+		return false;
+	}else if(nationPer =='' || nationPer ==null || nationPer >=1){
+		alert('ex) 9%는 0.09로 입력해주세요');
+		return false;	
+	}else if(healthPer =='' || healthPer >=1 || healthPer==null){
+		alert('ex) 5%는 0.05로 입력해주세요');
+		return false;
+	}else if(longCare =='' || longCare >=1 || longCare==null){
+		alert('ex) 1.3%는 0.013로 입력해주세요');
+		return false;
+	}else if(inseurPer =='' || inseurPer >=1 || inseurPer==null){
+		alert('ex) 10%는 0.1로 입력해주세요');
+		return false;
+	}else{
+		return true;
+	}
+});	
 
 </script>
 </th:block>

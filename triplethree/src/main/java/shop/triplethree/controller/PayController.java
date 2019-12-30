@@ -62,13 +62,6 @@ public class PayController {
 		
 	}
 		
-	/**공제액 설정화면 이동****/
-	@GetMapping("/admin/pay/insertDeduct")
-	public String insertDeduct(Model model) {
-		//System.out.println("공제액 설정화면 이동");
-		model.addAttribute("insertDeduct", payService.insertDeduct());
-		return "/pay/insertDeduct";
-	}
 	/******급여대장에서 수정할 수 있도록 화면 이동*************/
 	@GetMapping("/admin/pay/updatePay")
 	public String updatePayView(@RequestParam(value="empCode") String empcode,Model model) {
@@ -85,15 +78,28 @@ public class PayController {
 	  payService.updatePay(pay);
 	  return "redirect:/pay/selectPay"; 
 	  }
+	  
+	  /**공제액 설정화면 이동****/
+	  @GetMapping("/admin/pay/insertDeduct")
+	  public String insertDeduct(Model model) {
+		  //System.out.println("공제액 설정화면 이동");
+		  model.addAttribute("insertDeduct", payService.insertDeduct());
+		  return "/pay/insertDeduct";
+	  }
 	 /***공제액 모달창 설정***/
 	  
 	  @PostMapping("/admin/pay/insertDeduct")
-	  public String insertDeductModal(Pay pay,HttpSession session, Model model) {
+	  public String deductList(Pay pay,HttpSession session, Model model) {
 
 		String writer = (String) session.getAttribute("SID");	
 		pay.setWriter(writer);
-		model.addAttribute("insertDeductModal", payService.insertDeductModal(pay));
+		model.addAttribute("insertDeductModal", payService.deductList(pay));
 		  return "redirect:/admin/pay/insertDeduct";
 	  }
-	  
+	  /***공제액 수정***/
+	  @GetMapping("/admin/pay/updateDeduct")
+	  public String updateDeduct(@RequestParam(value="deCode") String deCode,Model model) {
+		  model.addAttribute("updateDeduct", payService.updateDeduct(deCode));
+		  return "redirect:/admin/pay/insertDeduct";
+	  }
 }

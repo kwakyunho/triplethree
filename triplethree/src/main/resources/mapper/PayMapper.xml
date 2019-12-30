@@ -210,7 +210,7 @@
 	
 	
 	<!--공제액 모달창 인설트  -->
-	<insert id="insertDeductModal" parameterType="shop.triplethree.vo.Pay">
+	<insert id="deductList" parameterType="shop.triplethree.vo.Pay">
 		INSERT INTO
 			DEDUCT_MANAGE (
 				code
