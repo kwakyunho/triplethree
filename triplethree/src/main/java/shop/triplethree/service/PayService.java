@@ -65,8 +65,13 @@ public class PayService {
 		pay.setDeCode(deCode);
 		return payMapper.deductList(pay);
 	}
+	/**공제액 수정***/
+	public Pay updateDeductList(String deCode) {
+		return payMapper.updateDeductList(deCode);
+	}
 	
-	public Pay updateDeduct(String deCode) {
-		return payMapper.updateDeduct(deCode);
+	/**공제액 수정**/
+	public int updateDeduct(Pay pay) {
+		return payMapper.updateDeduct(pay);
 	}
 }

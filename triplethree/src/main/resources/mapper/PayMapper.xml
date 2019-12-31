@@ -228,8 +228,19 @@
 			,#{writer}
 			,NOW());
 	</insert>
-	
-	<!--공제액 모달창 수정  -->
+	<!-- 공제액 수정화면 -->
+	<select id="updateDeductList" resultType="shop.triplethree.vo.Pay">
+	SELECT
+		de.code AS deCode,
+		de.insur_per*100 AS inseurPer,
+		de.nation_per*100 AS nationPer,
+		Round(de.health_per*100,2) AS healthPer,
+		Round(de.long_care*100,2) AS longCare,
+		de.YEAR AS year
+	FROM
+		DEDUCT_MANAGE AS de
+	</select>
+	<!--공제액 수정  -->
 	<update id="updateDeduct" parameterType="shop.triplethree.vo.Pay">
 	UPDATE 
 		DEDUCT_MANAGE 
@@ -238,9 +249,11 @@
 		insur_per=#{inseurPer},
 		nation_per=#{nationPer},
 		health_per=#{healthPer},
-		long_care=#{longCare}, 
+		long_care=#{longCare},
+		writer=#{writer},
+		writer_day=NOW()
 	WHERE 
-		code=#{deCode}
+		deCode=#{deCode}
 	</update>
 	
 </mapper>

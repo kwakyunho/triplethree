@@ -197,7 +197,7 @@ tr:hover{background: whitesmoke;}
 		var sum1 = nation+health+longCare+insurPer+residentTax+one;
 		
 		parent.children('.deduct').text(sum1.toLocaleString());
-		var deduct = parent.children('.deduct').text(sum1) //공제액
+		var deduct = parent.children('.deduct').text(sum1.toLocaleString()) //공제액
 		var deductHap = payment-sum1;	//차인지급액		
 		parent.children('.deductHap').text(deductHap.toLocaleString());
 		

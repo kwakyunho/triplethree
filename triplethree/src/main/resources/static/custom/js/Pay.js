@@ -149,11 +149,11 @@ $(function(){
 		console.log(residentTax);
 		//공제액 합 		
 		var add4=parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one)+parseInt(residentTax);
-		sum4.value =add4;
+		sum4.value =add4.toLocaleString();
 		
 		//차인지급액
 		var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
-		deductHap.value=deductHap1;
+		deductHap.value=deductHap1.toLocaleString();
 		
 		});	
 	

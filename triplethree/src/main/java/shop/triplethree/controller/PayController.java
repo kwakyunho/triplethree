@@ -94,12 +94,12 @@ public class PayController {
 		String writer = (String) session.getAttribute("SID");	
 		pay.setWriter(writer);
 		model.addAttribute("insertDeductModal", payService.deductList(pay));
-		  return "redirect:/admin/pay/insertDeduct";
+		  return "redirect:/pay/insertDeduct";
 	  }
 	  /***공제액 수정***/
-	  @GetMapping("/admin/pay/updateDeduct")
-	  public String updateDeduct(@RequestParam(value="deCode") String deCode,Model model) {
-		  model.addAttribute("updateDeduct", payService.updateDeduct(deCode));
-		  return "redirect:/admin/pay/insertDeduct";
+	  @GetMapping("/admin/pay/updateDeductList")
+	  public String updateDeductList(@RequestParam(value="deCode") String deCode, Model model) {
+		  model.addAttribute("updateDeductList", payService.updateDeductList(deCode));
+		  return "redirect:/pay/updateDeduct";
 	  }
 }

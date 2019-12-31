@@ -28,14 +28,16 @@ public interface PayMapper {
 	/***공제액화면****/
 	public List<Pay> insertDeduct();
 	
-	
 	/** *회사정보 수정클릭시 화면 보여주기 ***/
 	public Pay updatePayView(String empCode);
 	
 	/**공제액 모달창 등록***/
 	public int deductList(Pay pay);
 	
+	/**공제액 수정화면**/
+	public Pay updateDeductList(String deCode);
+	
 	/**공제액 모달창 수정***/
-	public Pay updateDeduct(String deCode);
+	public int updateDeduct(Pay pay);
 	
 }
