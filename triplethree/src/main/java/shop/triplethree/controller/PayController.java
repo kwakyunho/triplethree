@@ -100,6 +100,14 @@ public class PayController {
 	  @GetMapping("/admin/pay/updateDeductList")
 	  public String updateDeductList(@RequestParam(value="deCode") String deCode, Model model) {
 		  model.addAttribute("updateDeductList", payService.updateDeductList(deCode));
-		  return "redirect:/pay/updateDeduct";
+		  return "/pay/updateDeduct";
+	  }
+	  
+	  @PostMapping("/admin/pay/updateDeduct")
+	  public String updateDeduct(Pay pay,HttpSession session) {
+		  String writer =(String) session.getAttribute("SID");
+		  pay.setWriter(writer);
+		  payService.updateDeduct(pay);
+		  return "redirect:/admin/pay/insertDeduct";
 	  }
 }

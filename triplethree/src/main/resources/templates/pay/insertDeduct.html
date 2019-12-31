@@ -44,7 +44,7 @@
 					<div class="card-header" style="margin-left:10px; font-size:1.2em;" align="right">단위:%</div>
 					<table class="table table-bordered table-striped dataTable"role="grid"> 
 						<tr>
-							<th>공제액코드</th>
+						
 							<th>연도</th>
 							<th>국민연금</th>
 							<th>건강보험료</th>
@@ -53,14 +53,13 @@
 							<th>수정</th>																											
 						</tr>
 						<tr th:each="d:${insertDeduct}">																																
-							<th class="deCode" id="deCode" th:text="${d.deCode}" th:value="${d.deCode}">공제액코드</th>							
+														
 							<th id="year" th:text="${d.year}">연도</th>							
 							<th id="nationPer" th:text="${d.nationPer}">국민연금</th>
 							<th id="healthPer" th:text="${d.healthPer}">건강보험료</th>
 							<th id="longCare" th:text="${d.longCare}"> 장기요양보험료</th>
-							<th id="inseurPer" th:text="${d.inseurPer}">고용보험</th>																								
-							<!-- <th><button type="button"class="btn btn-success" data-toggle="modal"data-target="#myModal1">수정하기</button></th>	 -->																												
-						 <th><a class="btn btn btn-success" th:href="@{/admin/pay/updateDeductList(deCode=${d.deCode})}">수정</a></th>	
+							<th id="inseurPer" th:text="${d.inseurPer}">고용보험</th>																																	
+						<th><a class="btn btn btn-success" th:href="@{/admin/pay/updateDeductList(deCode=${d.deCode})}">수정</a></th>	
 						</tr>						
 					</table>
 					</div>

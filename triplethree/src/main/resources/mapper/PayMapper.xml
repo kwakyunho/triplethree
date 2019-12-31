@@ -239,6 +239,8 @@
 		de.YEAR AS year
 	FROM
 		DEDUCT_MANAGE AS de
+	where
+	 	de.code=#{deCode}
 	</select>
 	<!--공제액 수정  -->
 	<update id="updateDeduct" parameterType="shop.triplethree.vo.Pay">
@@ -253,7 +255,7 @@
 		writer=#{writer},
 		writer_day=NOW()
 	WHERE 
-		deCode=#{deCode}
+		code=#{deCode}
 	</update>
 	
 </mapper>
