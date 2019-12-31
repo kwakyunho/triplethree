@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import shop.triplethree.vo.Company;
 import shop.triplethree.vo.Employee;
 import shop.triplethree.vo.Pay;
 
@@ -22,8 +23,12 @@ public interface PayMapper {
 	public List<Employee> insertSearchPay(String sk, String sv);
 	
 	/**급여  지급액입력***/
-	public int updatePay(Pay apy);
+	public int updatePay(Pay pay);
 	
 	/***공제액화면****/
 	public List<Pay> insertDeduct();
+	
+	
+	/** *회사정보 수정클릭시 화면 보여주기 ***/
+	public Pay updatePayView(String empCode);
 }

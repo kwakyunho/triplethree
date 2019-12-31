@@ -158,7 +158,7 @@ public class CompanyController {
 	/**회사정보 입력화면**/
 	@GetMapping("/admin/company/companyInsert")
 	public String insertCompany() {
-		System.out.println("회사정보입력화면");
+		//System.out.println("회사정보입력화면");
 		return "company/information/companyInsert";	
 	}
 	/**회사정보 입력처리 및 코드생성**/
@@ -179,40 +179,40 @@ public class CompanyController {
 	@GetMapping("/company/companyInfo")
 	public String selectCompany(Model model) {
 		model.addAttribute("companyInfo", companyService.selectCompany());
-		System.out.println(model+"<--model");
+		//System.out.println(model+"<--model");
 		return "company/information/companyInfo";
 	}
 	/**회사정보 수정 클릭시 화면 보여주기**/
 	@GetMapping("/company/companyUpdate")
 	public String updateCompanySelect(@RequestParam(value="Code") String code,Model model) {
-		System.out.println("Code"+code);
+		//System.out.println("Code"+code);
 		//companyService.updateCompanySelect(code);
 		model.addAttribute("company", companyService.updateCompanySelect(code));
-		System.out.println(model+"<--model수정");
+		//System.out.println(model+"<--model수정");
 		return "company/information/companyUpdate";	
 	}
 	
 	/**회사정보 진짜 수정클릭시 내용변경**/
 	@PostMapping("/company/companyUpdate")
 	public String updateCompany(Company company) {
-		System.out.println("여기오냐?");
+		//System.out.println("여기오냐?");
 		companyService.updateCompany(company);
 		return "redirect:/company/companyInfo";
 	}
 	/**회사정보 상세보기***/
 	@GetMapping("/company/companyDetail")
 	public String companyDetail(@RequestParam(value="coName") String coname,Model model) {
-		System.out.println("coName"+coname);
+		//System.out.println("coName"+coname);
 		model.addAttribute("companyDetail", companyService.companyDetail(coname));
-		System.out.println("상세보기");
+		//System.out.println("상세보기");
 		return "company/information/companyDetail";
 	}
 	
 	/**회사휴업 또는 폐업****/
 	@PostMapping("/company/deleteCompany")
 	public String deleteCompany(Company company) {
-		System.out.println("상태를 변경할꺼야?");
-		System.out.println(company.getCode());
+		//System.out.println("상태를 변경할꺼야?");
+		//System.out.println(company.getCode());
 		
 		companyService.deleteCompany(company);
 		return "redirect:/company/companyInfo";

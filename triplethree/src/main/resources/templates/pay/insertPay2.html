@@ -4,7 +4,7 @@
       layout:decorate="~{layouts/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>검색 및 변동시 급여조회</title>
+	<title>급여입력</title>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -13,7 +13,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h4 class="m-0 text-dark">검색 및 변동시 급여조회</h4>
+				<h4 class="m-0 text-dark">급여 입력</h4>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -34,6 +34,7 @@
 </script>
 <div class="content">
 	<div class="container-fluid">
+
 		<div class="row">
 			<div class="col-5">
 				<div class="card">
@@ -57,7 +58,7 @@
 							</div>
 							</form>	
 																
-  	 			<table class="table table-bordered table-striped dataTable"role="grid" id="insertPayList">  	   	 				 	
+  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 				 	
 					<tr>								
 						
 						<th align="center">사원번호</th>
@@ -67,36 +68,33 @@
 						<th align="center">급여입력</th>																
 					</tr>
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-					<tbody>
-						<tr class="insertPay" th:each="e,index :${insertSearchPay}">																						
-							
-							<td class="empNum" th:text="${e.empNum}"></td>		
-							<td class="empName" th:text="${e.empName}"></td>					 										
-							<td id="demgName" th:text="${e.demgName}"></td>										
-							<td id="poName" th:text="${e.poName}"></td>															
-								<input id="empCode" class="empCode" type="hidden" th:value="${e.empCode}">														
-								<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
-								<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
-								<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
-								<input class="overtimePay" type="hidden" th:value="${e.overtimePay}">													
-								<input class="positionBenefit" type="hidden" th:value="${e.positionBenefit}">													
-								<input class="selfDriPay" type="hidden" th:value="${e.selfDriPay}">													
-								<input class="comPay" type="hidden" th:value="${e.comPay}">													
-								<input class="childPay" type="hidden" th:value="${e.childPay}">													
-								<input class="mealCost" type="hidden" th:value="${e.mealCost}">																																	
-								<input class="nationPer" type="hidden" th:value="${e.nationPer}">																																	
-								<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
-								<input class="longCare" type="hidden" th:value="${e.longCare}">																																	
-								<input class="inseurPer" type="hidden" th:value="${e.inseurPer}">																																	
-								<input class="inCode" type="hidden" th:value="${e.inCode}">																																	
-								<input class="one" type="hidden" th:value="${e.one}">																																	
-																																									
-																
-							<td>
-								<input type="button" id="choice" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn">
-							</td>
-						</tr>	
-					</tbody>										
+					<tr class="insertPay" th:each="e,index :${insertSearchPay}">																							
+						
+						<td class="empNum" th:text="${e.empNum}"></td>		
+						<td class="empName" th:text="${e.empName}"></td>					 										
+						<td id="demgName" th:text="${e.demgName}"></td>										
+						<td id="poName" th:text="${e.poName}"></td>															
+							<input id="empCode" class="empCode" type="hidden" th:value="${e.empCode}">														
+							<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
+							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
+							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
+							<input class="overtimePay" type="hidden" th:value="${e.overtimePay}">													
+							<input class="positionBenefit" type="hidden" th:value="${e.positionBenefit}">													
+							<input class="selfDriPay" type="hidden" th:value="${e.selfDriPay}">													
+							<input class="comPay" type="hidden" th:value="${e.comPay}">													
+							<input class="childPay" type="hidden" th:value="${e.childPay}">													
+							<input class="mealCost" type="hidden" th:value="${e.mealCost}">																																	
+							<input class="nationPer" type="hidden" th:value="${e.nationPer}">																																	
+							<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
+							<input class="longCare" type="hidden" th:value="${e.longCare}">																																	
+							<input class="inseurPer" type="hidden" th:value="${e.inseurPer}">																																	
+							<input class="inCode" type="hidden" th:value="${e.inCode}">																																	
+							<input class="residentTax" type="hidden" th:value="${e.residentTax}">																																			
+															
+						<td>
+							<input type="button" id="choice" name="choice" value="선택" class="btn btn-block btn btn-success choiceBtn">
+						</td>
+					</tr>										
 				</table>
 				</div>
 				<!-- /.card -->
@@ -105,7 +103,7 @@
 			<!-- /.col-md-4 -->
 			<div class="col-4">
 				<div class="card">
-				<table class="table table-bordered table-striped dataTable insertChange"role="grid">
+				<table class="table table-bordered table-striped dataTable"role="grid">
 						<div align="center">지급액</div>
 					<tr>
 						<th>급여항목</th>	
@@ -163,7 +161,7 @@
 					<tr><td>고용보험</td>
 						<td><input type="text" name="inseurPer"  id="inseurPer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>소득세</td>
-						<td><input type="text" name="one" id="one" class="form-control col-12" readonly="readonly"></td></tr>
+						<td><input type="text" name="inCode" id="incomePer" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>지방소득세</td>
 						<td><input type="text" name="residentTax" id="residentTax" class="form-control col-12" readonly="readonly"></td></tr>
 					<tr><td>공제액 계</td>
@@ -172,14 +170,29 @@
 						<input type="text" id="deductHap" class="form-control"  readonly="readonly"></td></tr>
 				</table>
 				</div>
-					<form th:action="@{/pay/selectPay}" method="get">
-							    
-						<button type="submit" value="급여대장"  class="col-12 btn btn-success" id="check11">급여대장</button>				
-									
-					</form>
-														
-					<!-- <a th:href="@{/admin/pay/selectPay(pay=${e.empCode})}" class="col-12 btn btn-success">급여지급액 등록</a>	 -->											
 				
+					    	<form class="clientUpdateForm"> 
+					   		<input id="empCode" class="empCode" name="empCode" type="hidden" th:value="${updatePay?.empCode}">		 												
+			<!-- 			<input class="basicPay" type="hidden" th:value="${e.basicPay}">													
+							<input class="beneFit" type="hidden" th:value="${e.beneFit}">													
+							<input class="holidayPay" type="hidden" th:value="${e.holidayPay}">													
+							<input class="overtimePay" type="hidden" th:value="${e.overtimePay}">													
+							<input class="positionBenefit" type="hidden" th:value="${e.positionBenefit}">													
+							<input class="selfDriPay" type="hidden" th:value="${e.selfDriPay}">													
+							<input class="comPay" type="hidden" th:value="${e.comPay}">													
+							<input class="childPay" type="hidden" th:value="${e.childPay}">													
+							<input class="mealCost" type="hidden" th:value="${e.mealCost}">																																	
+							<input class="nationPer" type="hidden" th:value="${e.nationPer}">																																	
+							<input class="healthPer" type="hidden" th:value="${e.healthPer}">																																	
+							<input class="longCare" type="hidden" th:value="${e.longCare}">																																	
+							<input class="inseurPer" type="hidden" th:value="${e.inseurPer}">																																	
+							<input class="inCode" type="hidden" th:value="${e.inCode}">																																	
+							<input class="residentTax" type="hidden" th:value="${e.residentTax}">	 -->						    
+						<button type="submit" value="급여지급액등록"  class="col-12 btn btn-success" id="check11">급여지급액등록</button>				
+							</form>		 
+					
+<!-- 					<a th:href="@{/admin/pay/selectPay(pay=${updatePay.empCode})}" class="col-12 btn btn-success">급여지급액 등록</a>	 										
+ -->				
 				<!-- /.card -->			
 			<!-- /.col-md-6 -->
 		</div>
@@ -197,76 +210,20 @@ $(document).ready(function(){
 	    location.href= this.value;
 	})
 	//$('#sel').val(location.href);
-}
+})
 </script>
 <script type="text/javascript">
-	
-$('.insertChange').change(function(){
-	
-	
-	var add=parseInt(basicPay.value)+parseInt(beneFit.value)+parseInt(holidayPay.value)
-	+parseInt(overtimePay.value)+parseInt(positionBenefit.value)+parseInt(comPay.value);
-	sum1.value =add;
-	var add2=parseInt(selfDriPay.value)+parseInt(childPay.value)+parseInt(mealCost.value);
-	sum2.value=add2;
-	//지급액계
-	var add3=add+add2;
-	sum3.value=add3;				
-	//국민연금 
-	
-	if (add > 4860000){
-		alert("기준소득월액 4,860,000원이상은 국민연금 최대납부액 대상자입니다");
-		$('#nationPer').val(218700);
-	
-	}else if (add < 310000){
-		alert("기준소득월액 310,000원이하는 국민연금 최저납부액이 0원입니다");
-		$('#nationPer').val(0);
-	}else{
-		$('#nationPer').val(Math.floor(Math.ceil((add*0.09)/2)/10)*10);
-	}
-	//고용보험
-	if(add !=null){
-		$('#inseurPer').val(Math.floor(Math.ceil((add*0.013)/2)/10)*10);
-	}
-	var nationPer=$('#nationPer').val();
-	
-	var inseurPer=$('#inseurPer').val();
-	
-	//건강보험
-	if(add > 99250000){
-		alert("기준소득월액 99,250,000원이상은 건강보험료 최대납부액은 대상자입니다");
-		$('#healthPer').val(3205770);
-	}else if (add < 280000){
-		alert("기준소득월액 280,000원이하는 건강보험료 최저납부액이 0원입니다");
-		$('#healthPer').val(0);
-	}else{
-		$('#healthPer').val(Math.floor(Math.ceil(add*0.0646)/2)/10*10);
-	}
-	var healthPer=$('#healthPer').val();
-			
-	if(healthPer >= 3205770){	
-		$('#longCare').val(272810);
-	}else if(healthPer <=9040){
-		
-		$('#longCare').val(0);
-	}else{
-		$('#longCare').val(Math.floor(Math.ceil(healthPer*0.0851))/10*10);
-	}
-	var longCare=$('#longCare').val();
-
-	var one =$('#one').val();
-	if(add < 1060000){
-		$('#one').val(parseInt(0));
-		$('#residentTax').val(parseInt(0));
-	}
-	//공제액 합 		
- 	if(nationPer !=null && healthPer !=null && longCare !=null && inseurPer !=null && one !=null ){
-		$('#sum4').val(parseInt(nationPer)+parseInt(healthPer)+parseInt(longCare)+parseInt(inseurPer)+parseInt(one));
-	}			 		 					
-	//차인지급액
-	var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
-	deductHap.value=deductHap1;
-}); 
+//값 넘기기
+$(function(){
+	$('#check11').click(function(){
+		alert('클릭');
+	var check = $('#empCode').val();
+	console.log('값확인'+check);
+	$('.clientUpdateForm').attr('method','POST');
+	$('.clientUpdateForm').attr('action','/admin/pay/selectPay');
+	$('.clientUpdateForm').submit();
+	});
+});
 
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
@@ -274,7 +231,6 @@ $('.insertChange').change(function(){
 <script type="text/javascript"th:inline="javascript">
 var insertSearchPay=[[${insertSearchPay}]];
 console.log(insertSearchPay);
-
 </script>
 </th:block>
 </html>
