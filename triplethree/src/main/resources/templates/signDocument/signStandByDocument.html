@@ -43,20 +43,22 @@ tr:hover{background: whitesmoke;}
 					<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
 						<thead>
 							<tr>
-								<th style="width:100px;">기안일</th>
-								<th style="width:100px;">결재양식</th>
-								<th style="width:500px;">제목</th>
-								<th style="width:100px;">첨부</th>
-								<th style="width:100px;">기안자</th>
+								<!-- <th style="width: 10x;">순차</th> -->
+								<th style="width: 100px;">기안일</th>
+								<th style="width: 100px;">결재양식</th>
+								<th style="width: 500px;">제목</th>
+								<th style="width: 100px;">첨부</th>
+								<th style="width: 100px;">기안자</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>기안일올꺼에요</td>
-								<td>결재양식올꺼에요</td>
-								<td>제목이올꺼에요</td>
-								<td>첨부파일이올꺼에요</td>
-								<td>기안자가올꺼에요</td>
+							<tr th:if="${r.emp_name} eq ${session.SNAME}" th:each="r, index : ${result}">
+								<!-- <td th:text="${index.index+1}"></td> -->
+								<td th:text="${r.writer_day}"></td>
+								<td th:text="${r.doc_title}"></td>
+								<td th:text="${r.doc_name}"></td>
+								<td>첨부파일자리에요</td>
+								<td th:text="${r.empName}"></td>
 							</tr>
 						</tbody>
 					</table>

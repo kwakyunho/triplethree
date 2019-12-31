@@ -23,7 +23,14 @@ public class SignDocument {
 	private String docFormCdoe; // 문서양식관리코드
 	private String reDocDate; // 반려일
 	private String comments; // 코멘트
+	private String number; // 결재 순서
 	
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
 	public String getAccCode() {
 		return accCode;
 	}
@@ -157,6 +164,6 @@ public class SignDocument {
 				+ writerDay + ", signEndDay=" + signEndDay + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", empName=" + empName + ", poName=" + poName + ", deName=" + deName + ", signState=" + signState
 				+ ", signCheck=" + signCheck + ", valCheck=" + valCheck + ", accCode=" + accCode + ", docFormCdoe="
-				+ docFormCdoe + ", reDocDate=" + reDocDate + ", comments=" + comments + "]";
+				+ docFormCdoe + ", reDocDate=" + reDocDate + ", comments=" + comments + ", number=" + number + "]";
 	}
 }
