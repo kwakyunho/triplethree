@@ -22,7 +22,10 @@ public class SignDocumentController {
 	 * 전자결재탭에서 결재대기문서 클릭시 화면이동
 	 * */
 	@GetMapping("/signDocument/signStandByDocument")
-	public String selectSignDocumentWait() {
+	public String selectSignDocumentWait(String valCheck, String sid, Model model) {
+		List<String> result = signDocumentService.selectSignDocumentWait(valCheck, sid);
+		System.out.println("controller result value : " + result);
+		model.addAttribute("result", result);
 		return "/signDocument/signStandByDocument";
 	}
 	
@@ -69,5 +72,16 @@ public class SignDocumentController {
 		selectList = signDocumentService.selectDraftDocument(valCheck,sid);
 		System.out.println("값확인"+selectList.toString());
 		return selectList;
+	}
+	
+	/**
+	 * 결재 문서함에서 상단 메뉴 클릭시 클릭된 값에 맞는 결재문서를 가져와 뿌려주는 메서드
+	 * @param String valCheck
+	 * */
+	@PostMapping("/signDocument/signStandByDocument")
+	public @ResponseBody List<SignDocument> selectSignDocumentEnd(String valCheck, HttpSession session){
+		String sid = (String) session.getAttribute("SID");
+		//System.out.println(valCheck+sid);
+		return signDocumentService.selectSignDocumentEnd(valCheck, sid);
 	}
 }

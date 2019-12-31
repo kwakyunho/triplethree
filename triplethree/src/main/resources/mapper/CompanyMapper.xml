@@ -11,7 +11,7 @@
 			DEMG (
 				code
 				,dename
-				,level
+				,demg_id
 				,updamgcode
 				,reason
 				,writer
@@ -31,7 +31,7 @@
 		SELECT
 			d.code AS departmentCode
 			,d.dename AS departmentNameBe
-			,d.level AS departmentLevel
+			,d.demg_id AS departmentLevel
 			,d.updamgcode AS departmentUpcode
 			,d.writer AS departmentWriter
 			,d.writer_day AS departmentWriterDay
@@ -59,7 +59,7 @@
 		SELECT
 			code AS departmentCode
 			,dename AS departmentNameBe
-			,level AS departmentLevel
+			,demg_id AS departmentLevel
 			,updamgcode AS departmentUpcode
 			,writer AS departmentWriter
 			,writer_day AS departmentWriterDay
@@ -101,7 +101,7 @@
 			DEMG AS d 
 		SET 
 			d.dename = #{departmentNameAf}
-			,d.level = #{departmentLevel}
+			,d.demg_id = #{departmentLevel}
 			,d.updamgcode = #{departmentUpcode}
 			,d.reason = #{departmentSau}
 			,d.writer = #{sid}

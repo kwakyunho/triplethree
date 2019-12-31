@@ -7,7 +7,7 @@ public class Company {
 	private String sid;
 	private String departmentNameBe;
 	private String departmentNameAf;
-	private String departmentLevel;
+	private int departmentLevel;
 	private String departmentUpcode;
 	private String departmentSau;
 	private String departmentWriter;
@@ -66,10 +66,10 @@ public class Company {
 	public void setDepartmentNameAf(String departmentNameAf) {
 		this.departmentNameAf = departmentNameAf;
 	}
-	public String getDepartmentLevel() {
+	public int getDepartmentLevel() {
 		return departmentLevel;
 	}
-	public void setDepartmentLevel(String departmentLevel) {
+	public void setDepartmentLevel(int departmentLevel) {
 		this.departmentLevel = departmentLevel;
 	}
 	public String getDepartmentUpcode() {
