@@ -27,8 +27,8 @@ public class SignDocumentService {
 	 * @param Strig
 	 * @return List<SignDocument>
 	 * */
-	public List<String> selectSignDocumentWait(String valCheck, String sid){
-			List<String> result = signDocumentMapper.selectSignDocumentWait(valCheck, sid);
+	public List<String> selectSignDocumentWait(String sid){
+			List<String> result = signDocumentMapper.selectSignDocumentWait(sid);
 			//System.out.println("service result value : " + result);
 			return result;
 	}

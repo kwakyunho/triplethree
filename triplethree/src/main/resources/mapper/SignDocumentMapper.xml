@@ -107,49 +107,45 @@
 	
 	<!-- 결재 대기문서함에서 본인이 결재자에 등록되어있는 문서를 불러온다  -->
 	<select id="selectSignDocumentWait" parameterType="String" resultType="hashmap">
-		<choose>
-			<when test="valCheck neq 'null'">			
-				SELECT 
-					<!-- CONCAT(IF(IF(@docCode <![CDATA[<>]]> (@docCode:= A.doc_code), TRUE, FALSE) = 1, @cntNum:= 1, @cntNum:= @cntNum + 1)) AS number, -->
-					A.number,
-					A.CODE, 																																				
-					B.doc_title, 																																		
-					B.doc_name, 																																		
-					A.app_state, 																																		
-					C.dename, 																																			
-					D.poname, 																																			
-					E.emp_name, 																																		
-					F.s_section,																																		
-					e.emp_name AS empName,
-					DATE_FORMAT(B.writer_day,'%Y-%m-%d') AS writer_day																																	
-				FROM
-					APP_LINE_ACCRUE A
-				LEFT JOIN 
-					SIG_DOC B
-				ON 
-					A.doc_code = B.CODE
-				LEFT JOIN 
-					DEMG C
-				ON 
-					A.demgcode = C.code
-				LEFT JOIN 
-					POSISYS D
-				ON 
-					A.pocode = D.code
-				LEFT JOIN 
-					EMP_MANAGE E
-				ON 
-					A.app_person = E.emp_num
-				LEFT JOIN
-					EMP_MANAGE e
-				on
-					B.emp_code = e.emp_num
-				LEFT JOIN 
-					LIST_MANAGE F
-				ON 
-					A.sortation = F.code
-			</when>
-		</choose>
+			SELECT 
+				<!-- CONCAT(IF(IF(@docCode <![CDATA[<>]]> (@docCode:= A.doc_code), TRUE, FALSE) = 1, @cntNum:= 1, @cntNum:= @cntNum + 1)) AS number, -->
+				A.number,
+				A.CODE, 																																				
+				B.doc_title, 																																		
+				B.doc_name, 																																		
+				A.app_state, 																																		
+				C.dename, 																																			
+				D.poname, 																																			
+				E.emp_name, 																																		
+				F.s_section,																																		
+				e.emp_name AS empName,
+				DATE_FORMAT(B.writer_day,'%Y-%m-%d') AS writer_day																																	
+			FROM
+				APP_LINE_ACCRUE A
+			LEFT JOIN 
+				SIG_DOC B
+			ON 
+				A.doc_code = B.CODE
+			LEFT JOIN 
+				DEMG C
+			ON 
+				A.demgcode = C.code
+			LEFT JOIN 
+				POSISYS D
+			ON 
+				A.pocode = D.code
+			LEFT JOIN 
+				EMP_MANAGE E
+			ON 
+				A.app_person = E.emp_num
+			LEFT JOIN
+				EMP_MANAGE e
+			on
+				B.emp_code = e.emp_num
+			LEFT JOIN 
+				LIST_MANAGE F
+			ON 
+				A.sortation = F.code
 	</select>
 	
 	<!-- 결재문서함에서 본인이 결재 라인에 있는 문서를 모두 select한다.  -->

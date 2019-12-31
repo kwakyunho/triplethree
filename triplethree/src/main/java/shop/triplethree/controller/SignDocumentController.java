@@ -22,8 +22,8 @@ public class SignDocumentController {
 	 * 전자결재탭에서 결재대기문서 클릭시 화면이동
 	 * */
 	@GetMapping("/signDocument/signStandByDocument")
-	public String selectSignDocumentWait(String valCheck, String sid, Model model) {
-		List<String> result = signDocumentService.selectSignDocumentWait(valCheck, sid);
+	public String selectSignDocumentWait(String sid, Model model) {
+		List<String> result = signDocumentService.selectSignDocumentWait(sid);
 		System.out.println("controller result value : " + result);
 		model.addAttribute("result", result);
 		return "/signDocument/signStandByDocument";
