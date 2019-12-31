@@ -35,11 +35,11 @@ $(function(){
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
 							str += '<td>'+data[i].writerDay+'</td>'
-										if(data[i].signEndDay == null){
-											str += '<td></td>';
-										}else{
-											str += '<td>'+data[i].signEndDay+'</td>';
-										};
+							if(data[i].signEndDay == null){
+								str += '<td></td>';
+							}else{
+								str += '<td>'+data[i].signEndDay+'</td>';
+							};
 							str	+= '<td>'+data[i].docTitle+'</td>'
 							str += '<td>'+data[i].docName+'</td>'
 							str += '<td>'+'첨부파일 자리에요'+'</td>'
