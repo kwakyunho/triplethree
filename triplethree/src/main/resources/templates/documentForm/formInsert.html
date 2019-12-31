@@ -45,10 +45,15 @@ div.sign-type1 table {width: 100%;}
 .sign-type1-td-codMainName {background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;}
 .sign-type1-td-codMainValue {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;}
 .sign-type1-td-codMaintext {background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;}
+.sign-type1-bottom {padding-bottom: 20px}
+.sign-type1-top {height: 45px;}
 </style>
 
 <!-- 커스텀 signModal CSS -->
 <link rel="stylesheet" th:href="@{/custom/css/signModal.css}">
+
+<!-- 커스텀 tree CSS -->
+<link rel="stylesheet" th:href="@{/custom/tree/css/jquery.treeview.css}">
 
 </th:block>
 
@@ -82,7 +87,7 @@ div.sign-type1 table {width: 100%;}
 					<!-- 전자결재 문서 시작 -->
 					<div>
 						<!-- 전자결재 툴바 시작 -->
-						<div style="height:45px;">
+						<div class="sign-type1-top">
 							<a class="col-sm-1 doc-customBtn" style="float: left;">&nbsp;</a>
 							<button type="button" class="btn doc-customBtn ef-type3 btn-xs col-sm-2" style="float: left; margin-right: 5px; width: 75px;">결재요청</button>
 							<button type="button" class="btn doc-customBtn ef-type2 btn-xs col-sm-2" style="float: left; width: 75px;">취소</button>
@@ -93,7 +98,7 @@ div.sign-type1 table {width: 100%;}
 						<!-- 전자결재 레이아웃 시작 -->
 						<section>
 							<!-- 전자결재 댓글 포함 상세 시작 -->
-							<div>
+							<div class="sign-type1-bottom">
 								<!-- 전자결재 내용 시작 -->
 								<div class="col-lg-10 sign-type1" style="outline: double; text-align: -webkit-center;">
 									<form>
@@ -269,6 +274,12 @@ div.sign-type1 table {width: 100%;}
  * sendData.ajaxDataType = 'json';	// 리턴 타입
 -->
 
+<!-- tree js 호출 -->
+<script th:src="@{/custom/tree/js/jquery.treeview.js}"></script>
+
+<!-- treeModa js 호출 -->
+<script th:src="@{/custom/js/signModal.js}"></script>
+
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
 	$('.abcd').on('click', function(){
@@ -279,6 +290,8 @@ $(document).ready(function(){
 	$('.ef-type1').on('click', function(){
 		$('#signModal').modal('show');
 	});
+	
+	$("#browser").treeview({});
 });
 </script>
 </th:block>
