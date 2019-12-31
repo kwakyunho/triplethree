@@ -49,7 +49,7 @@
 	              </div>
 	              <!-- /.card-header -->
 	              <!-- form start -->
-	              <form method="post" action="/employee/employeeInsert" class="form-horizontal" enctype="multipart/form-data">
+	              <form method="post" id="employeeInsert" action="/employee/employeeInsert" class="form-horizontal" enctype="multipart/form-data">
 	                <div class="card-body">                
 	                  <div style="color:red;" >*은 필수로 입력해주시길 바랍니다.</div>
 	                  <br>
@@ -63,7 +63,7 @@
 	                  <div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">사원명</label>
 		                    	<div class="col-sm-3">
-		                    		<input type="text" class="form-control" name="empName" id="exampleInputEmail1" placeholder="*사원명을 입력해주세요.">
+		                    		<input type="text" class="form-control" name="empName" placeholder="*사원명을 입력해주세요." >
 		                 		</div>
 	                 		<label for="inputEmail3" class="col-sm-1 col-form-label">패스워드</label>
 			                    <div class="col-sm-3">
@@ -259,7 +259,7 @@
                        	
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
 		                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" name="basicPay" id="exampleInputEmail1" placeholder="*기본급여를 입력해주세요.">
+			                    	<input type="number" class="form-control" name="basicPay" id="basicPay" value="0" >
 			                 </div>
 			                 
 			                 
@@ -285,7 +285,7 @@
 	                    <label for="uploadFile" class="col-sm-1 col-form-label">사진 올리기</label>
 	                    <div class="col-sm-4">                      
 							<img id="photoView" class="img-circle elevation-2" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
-							<input class="form-control" name="image" id="photo" type="file"/>
+							<input class="form-control" name="photoFile" id="photo" type="file"/>
 							<span id="imgFail">사진을 선택해주세요</span>	                       
 	                    </div>
 	                  </div>
@@ -323,7 +323,7 @@
 	                    <label for="uploadFile" class="col-sm-1 col-form-label">서명 올리기</label>
 	                    <div class="col-sm-4">                      
 							<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
-							<input class="form-control" name="image" id="signature" type="file"/>
+							<input class="form-control" name="signatureFile" id="signature" type="file"/>
 							<span id="imgFail">서명을 선택해주세요</span>	                       
 	                    </div>
 	                  </div>
@@ -370,7 +370,7 @@
 	                <!-- /.card-body -->
 	
 	                <div class="card-footer">
-	                  <button type="submit" class="btn btn-success">등록하기</button>
+	                  <button type="button" class="btn btn-success" id="insertBtn">등록하기</button>
 	                </div>
 	              </form>
 	            </div>
@@ -410,7 +410,93 @@
 		   });
 		   
 		  
-						
+		   $('#insertBtn').on('click',function(){
+			   var empName = $('input[name="empName"]').val(); 
+			   var password = $('input[name="password"]').val(); 
+			   var postCode = $('input[name="postCode"]').val(); 
+			   var phone = $('input[name="phone"]').val(); 
+			   var email = $('input[name="email"]').val(); 
+			   var birthDate = $('input[name="birthDate"]').val(); 
+			   var demgCode = $('select[name="demgCode"]').val(); 
+			   var poCode = $('select[name="poCode"]').val(); 
+			   var liCode = $('select[name="liCode"]').val(); 
+			   var conType = $('select[name="conType"]').val(); 
+			   var basicPay = $('input[name="basicPay"]'); 
+			   var joinDate = $('input[name="joinDate"]').val(); 
+			   var writer = $('input[name="writer"]').val(); 
+			   
+			   
+			   
+			   if(empName == ""){
+				   alert('사원명을 입력해주세요.');
+				   empName.focus();
+				   return false;
+			   }
+			   if(password == ""){
+				   alert('패스워드를 입력해주세요.');
+				   password.focus();
+				   return false;
+			   }
+			   if(postCode == ""){
+				   alert('우편번호를 입력해주세요.');
+				   postCode.focus();
+				   return false;
+			   }
+			   if(phone == ""){
+				   alert('연락처를 입력해주세요.');
+				   phone.focus();
+				   return false;
+			   }
+			   if(email == ""){
+				   alert('이메일을 입력해주세요.');
+				   email.focus();
+				   return false;
+			   }
+			   if(birthDate == ""){
+				   alert('생일을 입력해주세요.');
+				   birthDate.focus();
+				   return false;
+			   }
+			   if(demgCode == ""){
+				   alert('부서를 선택해주세요.');
+				   demgCode.focus();
+				   return false;
+			   }
+			   if(poCode == ""){
+				   alert('직급을 선텍해주세요.');
+				   poCode.focus();
+				   return false;
+			   }
+			   if(liCode == ""){
+				   alert('재직상태를 선택해주세요.');
+				   liCode.focus();
+				   return false;
+			   }
+			   if(conType == ""){
+				   alert('계약형태를 선택해주세요.');
+				   conType.focus();
+				   return false;
+			   }
+			   if(basicPay.val() == 0){
+				   alert('기본급여를 입력해주세요.');
+				   basicPay.focus();
+				   return false;
+			   }
+			   if(joinDate == ""){
+				   alert('입사일을 입력해주세요.');
+				   joinDate.focus();
+				   return false;
+			   }
+			   if(writer == ""){
+				   alert('작성자가 없습니다. 로그인해주세요.');
+				   writer.focus();
+				   return false;
+			   }
+			   
+			   $('#employeeInsert').submit();
+			   
+		   });
+			
 			
 	
 		});

@@ -59,19 +59,19 @@
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
                    	
-						<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
-	                <div class="card-body">  
+					<form method="post" id="employeeUpdate" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
+	               	 <div class="card-body">  
 	                	<div class="form-group row">
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">photo</label>
 		                    	<div class="col-sm-3" th:if="${u.photo} neq null">
 		                 			<img  id="photoView" th:src="${u.photo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
 		                 			<!--원래쓰던애 <img id="photoView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
-									<input class="form-control" name="image" id="photo" type="file"/>
+									<input class="form-control" name="photoFile" id="photo" type="file" value="" />
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
 		                 		<div class="col-sm-3" th:if="${u.photo} eq null">
-		                 			<img id="photoView" class="img-circle elevation-2" type="hidden" src="#" alt="사진을 업로드 해주세요." style="width:100px; height:100px;"/>
-									<input class="form-control" name="image" id="photo" type="file"/>
+		                 			<img id="photoView" class="img-circle elevation-2" src="#" alt="사진을 업로드 해주세요." style="width:200px; height:200px;"/>
+									<input class="form-control" name="photoFile" id="photo" type="file"/>
 									<span id="imgFail">사진을 선택해주세요</span>	
 		                 		</div>
 		                 		
@@ -112,12 +112,12 @@
 			                    <div class="col-sm-3" th:if="${u.signature} neq null">
 			                 		<img   id="signatureView" th:src="${u.signature}" class="img-fluid" alt="User Image" style="width:200px; height:200px;">
 			                 		<!--원래쓰던애 <img id="signatureView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/> -->
-									<input class="form-control" name="image" id="signature" type="file"/>
+									<input class="form-control" name="signatureFile" id="signature" type="file"/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>
 			                 	<div class="col-sm-3" th:if="${u.signature} eq null">
-			                 		<img id="signatureView"  class="img-fluid" type="hidden" src="#" alt="서명을 업로드 해주세요." style="width:100px; height:100px;"/>
-									<input class="form-control" name="image" id="signature" type="file"/>
+			                 		<img id="signatureView"  class="img-fluid" src="#" alt="서명을 업로드 해주세요." style="width:200px; height:200px;"/>
+									<input class="form-control" name="signatureFile" id="signature" type="file" value=""/>
 									<span id="imgFail">서명을 선택해주세요</span>
 			                 	</div>		
 	               	 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -371,7 +371,7 @@
                        	
 	                   		<label for="inputEmail3" class="col-sm-1 col-form-label">기본급여</label>
 		                    <div class="col-sm-3">
-			                    	<input type="text" class="form-control" th:value="${u.basicPay}"  name="basicPay" id="exampleInputEmail1">
+			                    	<input type="number" class="form-control" th:value="${u.basicPay}"  name="basicPay" id="exampleInputEmail1">
 			                 </div>
 			                 
 	                 </div>
@@ -419,7 +419,7 @@
 	                </div>
 	                <!-- /.card-body -->
 					<div class="card-footer">
-	                  <button type="submit" class="btn btn-success">수정 하기</button>
+	                  <button type="button" class="btn btn-success" id="updateBtn">수정 하기</button>
 	                </div>
 	                
 	              </form>
@@ -431,7 +431,7 @@
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
                  	
-                 	<form method="post" action="/employee/employeeMoveUpdate" class="form-horizontal" th:each="u:${update}" >
+                 	<form method="post" action="/employee/employeeMoveUpdate" id="employeeMoveUpdate" class="form-horizontal" th:each="u:${update}" >
                   		<div class="card-body"> 
                   		<div class="form-group row">
 	                  <div class="col-sm-4">
@@ -501,7 +501,7 @@
                   
 	                 
 	                 <div class="card-footer">
-	                  <button type="submit" class="btn btn-success" id="moveCheckBtn">변경 하기</button>
+	                  <button type="button" class="btn btn-success" id="moveCheckBtn">변경 하기</button>
 	                </div>
 	                 
                   	</form>
@@ -545,17 +545,116 @@
 		             }
 		         })
 		         
-		          $('#moveCheckBtn').on('click',function(){
-		        	  if(confirm('변경하시겠습니까?')){
-		        		  alert('인사이동목록으로 이동합니다.');
-		        		  
-		        	  }else {
-		        		  alert('변경이 취소되었습니다.');
-		        	  }
-		        	  
-		        	  
-		        	  
-		          });
+		            
+		           $('#updateBtn').on('click',function(){
+		        	   var password = $('input[name="password"]').val();
+		        	   var postCode = $('input[name="postCode"]').val(); 
+					   var phone = $('input[name="phone"]').val(); 
+					   var email = $('input[name="email"]').val();  
+					   var liCode = $('select[name="liCode"]').val(); 
+					   var conType = $('select[name="conType"]').val(); 
+					   var basicPay = $('input[name="basicPay"]');  
+					   var writer = $('input[name="writer"]').val();
+					   
+					   
+					   if(password == ""){
+						   alert('패스워드를 입력해주세요.');
+						   password.focus();
+						   return false;
+					   }
+					   if(postCode == ""){
+						   alert('우편번호를 입력해주세요.');
+						   postCode.focus();
+						   return false;
+					   }
+					   if(phone == ""){
+						   alert('연락처를 입력해주세요.');
+						   phone.focus();
+						   return false;
+					   }
+					   if(email == ""){
+						   alert('이메일을 입력해주세요.');
+						   email.focus();
+						   return false;
+					   }
+					   if(liCode == ""){
+						   alert('재직상태를 선택해주세요.');
+						   liCode.focus();
+						   return false;
+					   }
+					   if(conType == ""){
+						   alert('계약형태를 선택해주세요.');
+						   conType.focus();
+						   return false;
+					   }
+					   if(basicPay.val() == 0){
+						   alert('기본급여를 입력해주세요.');
+						   basicPay.focus();
+						   return false;
+					   }
+					   if(writer == ""){
+						   alert('작성자가 없습니다. 로그인해주세요.');
+						   writer.focus();
+						   return false;
+					   }
+					   
+					   $('#employeeUpdate').submit();
+					   
+			        });
+		            
+		            
+		            $('#moveCheckBtn').on('click',function(){
+		 			   var demgCode = $('select[name="demgCode"]').val(); 
+					   var poCode = $('select[name="poCode"]').val(); 
+					   var afterDemgCode = $('select[name="afterDemgCode"]').val(); 
+					   var afterPoCode = $('select[name="afterPoCode"]').val(); 
+		               var afterDate= $('input[name="afterDate"]').val();
+		               var writer = $('input[name="writer"]').val();
+		               
+		               if(demgCode == ""){
+		            	   alert('부서를 선택해주세요.');ㅌ
+		            	   demgCode.focus();
+		            	   return false;
+		               }
+		               if(poCode == ""){
+		            	   alert('직급을 선택해주세요.');
+		            	   poCode.focus();
+		            	   return false;
+		               }
+		               if(afterDemgCode == ""){
+		            	   alert('변경부서를 선택해주세요.');
+		            	   afterDemgCode.focus();
+		            	   return false;
+		               }
+		               if(afterPoCode == ""){
+		            	   alert('변경직급을 선택해주세요.');
+		            	   afterPoCode.focus();
+		            	   return false;
+		               }
+		               if(afterDate == ""){
+		            	   alert('인사이동일을 선택해주세요.');
+		            	   afterDate.focus();
+		            	   return false;
+		               }
+		               if(writer == ""){
+						   alert('작성자가 없습니다. 로그인해주세요.');
+						   writer.focus();
+						   return false;
+					   }	
+		            	
+		            	
+	            	   if(confirm('변경하시겠습니까?')){
+			        		  if(demgCode != afterDemgCode ||poCode != afterPoCode){
+			        		 	alert('인사정보가 변경되었습니다. 인사이동목록으로 이동합니다.');
+			        		 	$('#employeeMoveUpdate').submit(); 
+			        		  }else{
+			        			alert('변경부서와 변경직급이 변경되지 않았습니다.');  
+			        		  }
+			        	  }else {
+			        		  alert('변경이 취소되었습니다.');
+			        	  }
+			        	  
+			          }); 
 		         
 		   });
 	
