@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>급여 대장</title>
+
+</th:block>
+<th:block layout:fragment="customCss">
+<style type="text/css">
+
+
+tr:hover{background: whitesmoke;}
+
+</style>
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+</th:block>
+<th:block layout:fragment="customContents">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h4 class="m-0 text-dark">급여 대장</h4>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">Dashboard v3</a></li>
+					<li class="breadcrumb-item">Dashboard v3</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+		<!-- div class="card">
+	 	 <form action="#" id="boardListTable">
+				<div>
+				사원코드 : <input type="text" name="empCode">
+				사원명 : <input type="text" name="empName">
+				부서: <input type="text" name="demgName">
+				직급 : <input type="text" name="poCode">
+				<input type="submit"  class="btn btn-success" value="조회하기">
+				</div>
+			</form> 
+				
+		</div> -->
+
+	<div class="card">	
+		<div class="card-body" style="overflow: scroll;">
+			<form class="boardListForm">
+				<table class="table table-bordered table-striped" style="white-space:pre;  width:100%; height:auto;" id="boardListTable">
+					<thead>					
+       					<tr class='tblTitle'>     						
+							<th>사원번호</th>
+							<th>사원명</th>							       						
+							<th>부서명</th>					
+							<th>직급</th>					
+							<th>기본급</th>					
+							<th>차량유지비</th>
+							<th>통신수당</th>
+							<th>식대</th>
+							<th>야간수당</th>							
+							<th>휴일수당</th>
+							<th>연장수당</th>
+							<th>직책수당</th>						
+							<th>과세</th>
+							<th>비과세</th>
+							<th>지급액 계</th>					
+							<th>국민연금</th>
+							<th>건강보험</th>
+							<th>장기요양보험</th>
+							<th>고용보험</th>
+							<th>소득세</th>
+							<th>지방소득세</th>
+							<th>공제액 계</th>
+							<th>차인지급액</th>		
+							<th>수정</th>		
+									
+						</tr>	
+					</thead>
+					
+					<tbody class=hap>
+						 <tr th:each="p ,index : ${payInsert}" style="cursor:pointer" class="tbodyClass">
+						 <td class="empNum" th:id="|p-${index.count}|" th:text ="${p.empNum}"></td>
+						 <td class="empName" th:text="${p.empName}"></td>
+						 <td class="demgName" th:text="${p.demgName}"></td>
+						 <td class="poName" th:text="${p.poName}"></td>
+						 <td class="basicPay" th:text="${#numbers.formatInteger(p.basicPay,0,'COMMA')}"></td>
+						 <td class="selfDriPay" th:text="${#numbers.formatInteger(p.selfDriPay,0,'COMMA')}"></td>
+						 <td class="comPay" th:text="${#numbers.formatInteger(p.comPay,0,'COMMA')}"></td>
+						 <td class="mealCost" th:text="${#numbers.formatInteger(p.mealCost,0,'COMMA')}"></td>
+						 <td class="beneFit" th:text="${#numbers.formatInteger(p.beneFit,0,'COMMA')}"></td>
+					 	 <td class="holidayPay" th:text="${#numbers.formatInteger(p.holidayPay,0,'COMMA')}"></td>
+						 <td class="overtimePay" th:text="${#numbers.formatInteger(p.overtimePay,0,'COMMA')}"></td>
+						 <td class="positionBenefit" th:text="${#numbers.formatInteger(p.positionBenefit,0,'COMMA')}"></td>
+						 <td class="taxation"></td>
+						 <td class="taxFree"></td>
+						 <td class="payment"></td>					 					
+						 <td class="nationPer"></td>						 		
+						 <td class="healthPer"></td>		
+						 <td class="longCare"></td>			
+						 <td class="insurPer"></td>		
+						 <td class="one"th:text="${#numbers.formatInteger(p.one,0,'COMMA')}"></td>		
+						 <td class="residentTax"></td>		
+						 <td class="deduct"></td>		
+						 <td class="deductHap"></td>	
+						 <td><a class="btn btn btn-success" th:href="@{/admin/pay/updatePay(empCode=${p.empCode})}">수정</a></td>		
+						 </tr>
+					</tbody>	
+				</table>		
+		
+			</form>
+	           	<!-- /.table -->
+        </div>
+	</div>
+
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+	
+  $(function () {
+	// 급여 자동계산
+	var payInsert = [[${payInsert}]];	// 셀렉트 테이블 값들
+	var totalSize = payInsert.length;	// 테이블 로우 총 갯수
+	
+	for(i=0; i < totalSize; i++){
+		var num = i+1;
+		var parent = $('#p-'+num).parent('.tbodyClass'); // 부모객체를 찾기 위한 변수대입
+		
+		var basicPay = payInsert[i].basicPay;	// 기본급여
+		var selfDriPay = payInsert[i].selfDriPay;	// 차량유지비
+		var comPay = payInsert[i].comPay;	// 통신수당
+		var mealCost = payInsert[i].mealCost;	// 식대
+		var beneFit = payInsert[i].beneFit;	// 야간수당
+		var holidayPay = payInsert[i].holidayPay;	// 휴일수당
+		var overtimePay = payInsert[i].overtimePay;	// 연장수당
+		var positionBenefit = payInsert[i].positionBenefit;	// 직책수당
+		var nationPer = payInsert[i].nationPer;	// 국민연금
+		var healthPer = payInsert[i].healthPer;	// 건강보험
+		var insurPer = payInsert[i].insurPer;	// 고용보험
+		var longCare = payInsert[i].longCare;	// 장기요양보험
+		var one = payInsert[i].one;	// 소득세
+		var residentTax = payInsert[i].residentTax;	// 지방소득세
+		var taxation = basicPay+comPay+beneFit+holidayPay+overtimePay+positionBenefit; // 과세
+		var taxFree = selfDriPay+mealCost;	//비과세
+		var payment = taxation+taxFree;	//지급액 계
+		
+		
+		parent.children('.taxation').text(taxation.toLocaleString());  //과세	
+		
+		parent.children('.taxFree').text(taxFree.toLocaleString());	//비과세
+		parent.children('.payment').text(payment.toLocaleString()); //지급액계		
+		
+		parent.children('.nationPer').text((Math.floor(Math.ceil((taxation*0.09)/2)/10)*10).toLocaleString()); //국민연금계산
+		var nation =Math.floor(Math.ceil((taxation*0.09)/2)/10)*10; //국민
+		//국민연금 최대치 최저치
+		if (taxation > 4860000){			
+			parent.children('.nationPer').text(parseInt(218700).toLocaleString());		
+		}else if (taxation < 310000){			
+			parent.children('.nationPer').text(0);
+		}
+		
+		parent.children('.healthPer').text((Math.floor(Math.ceil(taxation*0.0646/2)/10)*10).toLocaleString()); //건강보험계산
+		var health =Math.floor(Math.ceil(taxation*0.0646/2)/10)*10; //건강
+		//건강보험 최대치 최저치
+		if(taxation > 99250000){			
+			parent.children('.healthPer').text(parseInt(3205770).toLocaleString());
+		}else if (taxation < 280000){			
+			parent.children('.healthPer').text(0);
+		}
+		
+		parent.children('.longCare').text((Math.floor(Math.ceil(health*0.0851)/10)*10).toLocaleString()); //장기요양보험계산
+		var longCare =Math.floor(Math.ceil(health*0.0851)/10)*10;  //장기요양
+		//장기요양 보험 최대치 최저치
+		if(parent.children('.healthPer').text() >= 3205770){
+			parent.children('.longCare').text(parseInt(272810).toLocaleString());
+		}else if(parent.children('.healthPer').text() <=9040){
+			
+			parent.children('.longCare').text(0);
+		}
+		
+		parent.children('.insurPer').text((Math.floor(Math.ceil((taxation*0.013)/2)/10)*10).toLocaleString()); //고용보험계산	
+		var insurPer =Math.floor(Math.ceil((taxation*0.013)/2)/10)*10; //고용보험
+		
+		parent.children('.residentTax').text((Math.floor(Math.ceil(one/10)/10)*10).toLocaleString()); //지방소득세
+		var residentTax =Math.floor(Math.ceil(one/10)/10)*10;  //지방소득세
+		
+		var sum1 = nation+health+longCare+insurPer+residentTax+one;
+		
+		parent.children('.deduct').text(sum1.toLocaleString());
+		var deduct = parent.children('.deduct').text(sum1.toLocaleString()) //공제액
+		var deductHap = payment-sum1;	//차인지급액		
+		parent.children('.deductHap').text(deductHap.toLocaleString());
+		
+		//소득세
+		
+	}
+	
+	// 데이터 테이블 호출
+	$('#boardListTable').DataTable();
+	$('#boardListTable1').DataTable();
+	
+  });
+ 
+</script>
+
+<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
+<script th:src="@{/custom/js/Pay.js}"></script>
+
+</th:block>
+</html>
