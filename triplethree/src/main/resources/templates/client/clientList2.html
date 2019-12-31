@@ -78,15 +78,15 @@ tr:hover{background: whitesmoke;}
 
 
 <div class="modal fade" id="clientListModal" tabindex="-1" role="dialog" aria-labelledby="workAttListModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h3 class="modal-title" id="accName"></h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body" style="float:left;">
-				<form style="font-size: 1.0rem;">
-					<div class="form-group col-md-12" style="float:left;" id="AddrHap">
+				<form class="clientDetailForm" style="font-size: 1.0rem;">
+					<div class="form-group col-md-12" style="float:left;" id="addrHap">
 						<label for="recipient-name" class="col-form-label">주소</label>
 					</div>
 					<div class="form-group col-md-6" style="float:left;" id="accBln">
@@ -95,10 +95,10 @@ tr:hover{background: whitesmoke;}
 					<div class="form-group col-md-6" style="float:left;" id="code">
 						<label for="recipient-name" class="col-form-label">거래처코드</label>
 					</div>
-					<div class="form-group col-md-6" style="float:left;" id="liCodeStr">
+					<div class="form-group col-md-6" style="float:left;" id="liCode">
 						<label for="recipient-name" class="col-form-label">거래처종류</label>
 					</div>
-					<div class="form-group col-md-6" style="float:left;" id="liCode2Str">
+					<div class="form-group col-md-6" style="float:left;" id="liCode2">
 						<label for="recipient-name" class="col-form-label">거래여부</label>
 					</div>
 					<div class="form-group col-md-6" style="float:left;" id="accPhone">
@@ -120,7 +120,7 @@ tr:hover{background: whitesmoke;}
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary sendBtn">수정</button>
+				<button type="button" class="btn btn-primary goUpdateBtn">수정</button>
 			</div>
 		</div>
 	</div>
@@ -159,18 +159,39 @@ $(document).ready(function(){
 		var accPhone = cliDetail[num].accPhone;
 		var accEmail = cliDetail[num].accEmail;
 		var accBln = cliDetail[num].accBln;
+		var accAddr = cliDetail[num].accAddr;
+		var accDetailAddr = cliDetail[num].accDetailAddr;
+		var accExtraAddr = cliDetail[num].accExtraAddr;
+		var accPostcode = cliDetail[num].accPostcode;
+		
+		$('input[name=coment]').val('');
 		
 		$('#clientListModal').modal('show');
 		
+		$('.replaced').remove();
+		if(accDetailAddr==null){
+			accDetailAddr=''
+		}if(accExtraAddr==null){
+			accExtraAddr=''
+		}if(accPostcode==null){
+			accPostcode=''
+		}
+		
+		var addrHap = accAddr+accDetailAddr+accExtraAddr+' | 우편번호 |'+accPostcode;
+		
+		
 		$('#accName').text(accName);
-		$('#liCodeStr').append('<p>'+liCodeStr+'</p>');
-		$('#liCode2Str').append('<p>'+liCode2Str+'</p>');
-		$('#accCeoName').append('<p>'+accCeoName+'</p>');
-		$('#repreNumber').append('<p>'+repreNumber+'</p>');
-		$('#accFax').append('<p>'+accFax+'</p>');
-		$('#accPhone').append('<p>'+accPhone+'</p>');
-		$('#accEmail').append('<p>'+accEmail+'</p>');
-		$('#accBln').append('<p>'+accBln+'</p>');
+		$('#code').append('<p class="replaced">'+code+'</p>');
+		$('#code').append('<input type="hidden" name="code" value="'+code+'">');
+		$('#addrHap').append('<p class="replaced">'+addrHap+'</p>');
+		$('#liCode').append('<p  class="replaced">'+liCode+'</p>');
+		$('#liCode2').append('<p  class="replaced">'+liCode2+'</p>');
+		$('#accCeoName').append('<p  class="replaced">'+accCeoName+'</p>');
+		$('#repreNumber').append('<p  class="replaced">'+repreNumber+'</p>');
+		$('#accFax').append('<p  class="replaced">'+accFax+'</p>');
+		$('#accPhone').append('<p  class="replaced">'+accPhone+'</p>');
+		$('#accEmail').append('<p  class="replaced">'+accEmail+'</p>');
+		$('#accBln').append('<p  class="replaced">'+accBln+'</p>');
 		
 		/* var clientUrl = $(this).children('.clientCode');
 		clientUrl.append('<input type="hidden" name="code" value="">');
@@ -179,12 +200,14 @@ $(document).ready(function(){
 		$('.clientListForm').attr('method','POST');
 		$('.clientListForm').attr('action','/client/clientDetail'); // 나중에 detail 로 수정
 		$('.clientListForm').submit(); */
+		$('.goUpdateBtn').on('click',function(){
+			$('.clientDetailForm').attr('action','/admin/client/goClientUpdate');
+			$('.clientDetailForm').attr('method','POST');
+			$('.clientDetailForm').submit();	
+		});
 	});
 	
-	$('#clientListTable tbody').on('click','tr',function(){
-		
-		
-	});
+	
 		
 		
 		

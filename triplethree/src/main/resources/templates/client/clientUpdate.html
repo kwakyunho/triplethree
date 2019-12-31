@@ -185,6 +185,7 @@
 					</form>
 						  </div><!-- /.cardcard-primary -->
 						<div class="card-footer">
+							<button type="button" id="deleteBtn" class="btn btn-danger float-left">삭제하기</button>
 							<button type="button" id="updateSubmit" class="btn btn-success float-right">수정하기</button>
 						</div><!--  card footer -->
 					</div><!-- lg-12 구역 -->
@@ -277,6 +278,19 @@ $(function(){
 			$('.clientUpdateForm').attr('action','/admin/client/clientUpdate');
 			$('.clientUpdateForm').submit();
 		});
+	
+	$('#deleteBtn').on('click',function(){
+		var delcon = confirm('삭제하시겠습니까?');
+		if(delcon == true){
+			$('.clientUpdateForm').attr('action','/admin/client/clientDelete');
+			$('.clientUpdateForm').attr('method','POST');
+			$('.clientUpdateForm').submit();
+		}else{
+			return false;
+		}
+		
+		
+	});
 });
 </script>
 </th:block>
