@@ -7,6 +7,8 @@ import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import shop.triplethree.mapper.BoardMapper;
 import shop.triplethree.vo.Board;
 @Service
@@ -29,39 +31,68 @@ public class BoardService {
 		board.setWriter((String)session.getAttribute("SNAME"));
 		board.setEmpCode((String)session.getAttribute("SID"));
 		System.out.println("createBoardCode 실행 후" + board.toString());
-		
 		return board;
 	}
 	
-	//공지사항 목록 가져오기
-	public List<Board> boardList() {
-		List<Board> list = boardMapper.boardList();
-		return boardMapper.boardList();
+	//전사게시판 카테고리 가져오기
+	public List<Board> selectBCate() {
+		return boardMapper.selectBCate();
+	}
+	
+	//부서게시판 카테고리 가져오기
+	public List<Board> selectDBCate() {
+		return boardMapper.selectDBCate();
+	}
+	
+	//전사게시판 게시글 (공지사항 + 전사소식) 목록
+	public List<Board> selectBoardList() {
+		List<Board> list = boardMapper.selectBoardList();
+		return list;
+	}
+	
+	//전사게시판 공지사항 목록 
+	public List<Board> selectNoticeList() {
+		List<Board> list = boardMapper.selectNoticeList();
+		return list;
+	}
+	//전사게시판 전사소식 목록
+	public List<Board> selectNewsList() {
+		List<Board> list = boardMapper.selectNewsList();
+		return list;
+	}
+	//부서게시판 전체목록
+	public List<Board> departBoardList() {
+		List<Board> list = boardMapper.departBoardList();
+		return list;
 	}
 	
 	//게시물  가져오기
 	public Board getBoardByCode(String code) {
 		Board board = boardMapper.getBoardByCode(code);
-		System.out.println("****board 안이다***** "+board.toString());
 		System.out.println(board.getBoardCount() + " : 원래 카운트");
 		updateCnt(code);
-		System.out.println(board.getBoardCount() + ": updateCnt 메서드 실행 후 카운트 " );
 		return	board;
 	}
-	//게시물 가져오면서 작성자 바꾸기(다시 수정해보기)
+	
 	public Board getBoardForUpdate(String code,HttpSession session) {
-		Board board = boardMapper.getBoardForUpdate(code);
+		Board board = boardMapper.getBoardByCode(code);
 		board.setWriter((String)session.getAttribute("SNAME"));
 		board.setEmpCode((String)session.getAttribute("SID"));
 		return board;
 	}
-	//게시물 조회수 올리기
+
+	  //게시물 조회수 올리기
 	public int updateCnt(String code) {
-		return boardMapper.updateCnt(code);
+		return 	boardMapper.updateCnt(code);
 	}
-	//게시물 수정처리
+	
+	//전사 게시물 수정처리
 	public int updateBoard(Board board) {
 		return boardMapper.updateBoard(board);
+	}
+	//부서 게시물 수정처리
+	public int updateDepartBoard(Board board) {
+		return boardMapper.updateDepartBoard(board);
 	}
 	
 	//게시물 삭제하기

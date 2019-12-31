@@ -46,13 +46,12 @@ tr:hover{background: whitesmoke;}
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">전사공지</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">전사소식</a></li>
-                  <li style="margin-left:auto;"><button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/admin/board/boardInsert'">글쓰기</button><li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
-					<form class="form-horizontal boardListForm" enctype="multipart/form-data">
+					<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" enctype="multipart/form-data">
 	                <div class="card-body">  
 	                	<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="boardListTable">
 					<thead>
@@ -84,29 +83,12 @@ tr:hover{background: whitesmoke;}
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
-                 	<form class="form-horizontal newsListForm" enctype="multipart/form-data" >
+                 	
+                 	<form method="post" action="/employee/employeeUpdate" class="form-horizontal" th:each="u:${update}" >
                   		<div class="card-body"> 
-                  		<table class="table table-head-fixed jsgrid-align-center" style="white-space:nowrap; overflow:auto;  width:100%; height:auto;" id="newsListTable">
-							<thead>
-								<tr>
-									<th>순차</th>
-									<th style="width:500px;">글제목</th>
-									<th>작성자</th>
-									<th style="width:100px;">조회수</th>
-									<th style="width:100px;">작성일자</th>
-									
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="b ,index : ${newsList}" style="cursor:pointer">
-									<td th:text="${index.index+1}"></td>
-									<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
-									<td th:text="${b.writer}"></td>
-									<td th:text="${b.boardCount}"></td>
-									<td th:text="${b.writerDay}"></td>
-								</tr>
-							</tbody>
-						</table>
+                  		<div class="form-group row">
+	               				fsefsef
+		                </div>
 		              </div>
                   	</form>
                   </div>
@@ -127,7 +109,6 @@ tr:hover{background: whitesmoke;}
 <script>
   $(function () {
     $('#boardListTable').DataTable();
-    $('#newsListTable').DataTable();
   });
 </script>
 
@@ -142,18 +123,6 @@ $(document).ready(function(){
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
 		$('.boardListForm').submit();	// 전송
-	});
-});
-
-$(document).ready(function(){
-	$('#newsListTable tbody').on('click', 'tr', function(){	
-		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
-		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
-		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
-		$('.newsListForm').attr('method', 'POST');	// 폼 메서드 정의
-		$('.newsListForm').attr('action', '/board/boardDetail');//액션 경로 정의
-		$('.newsListForm').submit();	// 전송
 	});
 });
 </script>
