@@ -157,41 +157,35 @@
 		<choose>
 			<when test="valCheck eq 'Return'">
 				SELECT
-					r.code
-					,r.acc_code
-					,e.emp_name AS empName
-					,r.doc_form_code
-					,r.doc_title
-					,r.doc_name
-					,r.re_doc_date
-					,r.writer_day
-					,r.comments
-					,D.dename
-					,p.poname
+					R.code
+					,R.acc_code
+					,R.emp_code
+					,E.emp_name
+					,R.doc_form_code
+					,R.doc_title
+					,R.doc_name
+					,R.doc_con
+					,R.doc_bego
+					,A.app_state
+					,S.sign_state
+					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writer_day
+					,R.comments
 				FROM
-					RETURN_DOC_SAVE AS r
+					RETURN_DOC_SAVE AS R
 				LEFT JOIN
-					EMP_MANAGE AS e
+					APP_LINE_ACCRUE AS A
 				ON
-					r.emp_code = e.emp_num
+					R.acc_code = A.CODE
+				LEFT join
+					SIG_DOC AS S
+				ON
+					R.doc_form_code = S.CODE
 				LEFT JOIN
-					APP_LINE_ACCRUE AS a
+					EMP_MANAGE AS E
 				ON
-					r.acc_code = a.CODE
-				LEFT JOIN
-					DOC_FORM_MANAGE AS d
-				ON
-					r.doc_form_code = d.CODE
-				LEFT JOIN
-					DEMG AS D
-				ON
-					e.demgcode = D.CODE
-				LEFT JOIN
-					POSISYS AS p
-				ON
-					e.pocode = p.code
+					R.emp_code = E.emp_num
 				WHERE
-					r.emp_code = #{sid}
+					A.app_person = #{sid}
 			</when>
 			<otherwise>
 				SELECT
@@ -201,12 +195,11 @@
 					,R.doc_form_code
 					,R.doc_title
 					,R.doc_name
-					,DATE_FORMAT(R.re_doc_date,'%Y-%m-%d') AS reDocDate
 					,R.doc_con
 					,R.doc_bego
-					,R.sign_state
+					,S.sign_state
 					,R.sign_check
-					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writerDay
+					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writer_day
 					,R.comments
 				FROM
 					RETURN_DOC_SAVE AS R
@@ -214,15 +207,19 @@
 					APP_LINE_ACCRUE AS A
 				ON
 					R.acc_code = A.CODE
+				LEFT JOIN
+					SIG_DOC AS S
+				ON
+					R.doc_form_code = S.code
 				WHERE
 					A.app_person = #{sid} 
 				<if test="valCheck eq 'End'">
 				AND
-					R.sign_state = 'Y'
+					S.sign_state = 'Y'
 				</if>
 				<if test="valCheck eq 'Starting'">
 				AND
-					R.sign_state = 'N'
+					S.sign_state = 'N'
 				</if>
 			</otherwise>
 		</choose>
