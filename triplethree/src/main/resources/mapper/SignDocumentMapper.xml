@@ -152,7 +152,7 @@
 	
 	<!-- 결재문서함에서 본인이 결재 라인에 있는 문서를 모두 select한다.  -->
 	<select id="selectSignDocumentEnd" parameterType="String" resultMap="signDocument">
-		<choose>
+<!-- 		<choose>
 			<when test="valCheck eq 'Return'">
 				SELECT
 					r.code
@@ -227,7 +227,8 @@
 				AND
 					s.sign_state = 'N'
 				</if>
-				<!--  
+			</otherwise>
+		</choose> -->
 			SELECT
 				A.CODE AS code
 				,C.dename AS deName
@@ -268,8 +269,5 @@
 				A.app_person = 'TT20191202008' 
 			AND
 				B.sign_state = 'N'
-				-->
-			</otherwise>
-		</choose>
 	</select>
  </mapper>
