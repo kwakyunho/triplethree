@@ -114,27 +114,48 @@ tr:hover{background: whitesmoke;}
 				</table>
 				<table class="table table-bordered table-striped" style="white-space:pre;  width:100%; height:auto;">
 					<tr>
-						<td rowspan="2"></td>
-						<th>소계</th>
-						<th>기본급</th>					
-						<th>차량유지비</th>
-						<th>통신수당</th>
-						<th>식대</th>
-						<th>야간수당</th>							
-						<th>휴일수당</th>
-						<th>연장수당</th>
-						<th>직책수당</th>						
-						<th>과세</th>
-						<th>비과세</th>
-						<th>지급액 계</th>					
-						<th>국민연금</th>
-						<th>건강보험</th>
-						<th>장기요양보험</th>
-						<th>고용보험</th>
-						<th>소득세</th>
-						<th>지방소득세</th>
-						<th>공제액 계</th>
-						<th>차인지급액</th>		
+						<td></td>
+						<td>기본급</td>					
+						<td>차량유지비</td>
+						<td>통신수당</td>
+						<td>식대</td>
+						<td>야간수당</td>							
+						<td>휴일수당</td>
+						<td>연장수당</td>
+						<td>직책수당</td>						
+						<td>과세</td>
+						<td>비과세</td>
+						<td>지급액 계</td>					
+						<td>국민연금</td>
+						<td>건강보험</td>
+						<td>장기요양보험</td>
+						<td>고용보험</td>
+						<td>소득세</td>
+						<td>지방소득세</td>
+						<td>공제액 계</td>
+						<td>차인지급액</td>		
+					</tr>
+					<tr>
+						<td rowspan="2">소계</td>
+						<td><p id="basicPaySum"></td>					
+						<td>차량유지비</td>
+						<td>통신수당</td>
+						<td>식대</td>
+						<td>야간수당</td>							
+						<td>휴일수당</td>
+						<td>연장수당</td>
+						<td>직책수당</td>						
+						<td>과세</td>
+						<td>비과세</td>
+						<td>지급액 계</td>					
+						<td>국민연금</td>
+						<td>건강보험</td>
+						<td>장기요양보험</td>
+						<td>고용보험</td>
+						<td>소득세</td>
+						<td>지방소득세</td>
+						<td>공제액 계</td>
+						<td>차인지급액</td>
 					</tr>	
 				</table>							
 			</form>
@@ -175,6 +196,8 @@ tr:hover{background: whitesmoke;}
 		var taxFree = selfDriPay+mealCost;	//비과세
 		var payment = taxation+taxFree;	//지급액 계
 		
+		var sum = basicPay+basicPay;
+		console.log(sum);
 		
 		parent.children('.taxation').text(taxation.toLocaleString());  //과세	
 		
@@ -224,13 +247,17 @@ tr:hover{background: whitesmoke;}
 		
 		//소득세
 		
-	}
+				}
+	
+	 $("#basicPaySum").html(sum);
 	
 	// 데이터 테이블 호출
 	$('#boardListTable').DataTable();
 	$('#boardListTable1').DataTable();
 	
   });
+
+	
  
 </script>
 

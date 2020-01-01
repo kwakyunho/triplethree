@@ -96,13 +96,13 @@ public class PayController {
 		model.addAttribute("insertDeductModal", payService.deductList(pay));
 		  return "redirect:/pay/insertDeduct";
 	  }
-	  /***공제액 수정***/
+	  /***공제액 수정화면가기***/
 	  @GetMapping("/admin/pay/updateDeductList")
 	  public String updateDeductList(@RequestParam(value="deCode") String deCode, Model model) {
 		  model.addAttribute("updateDeductList", payService.updateDeductList(deCode));
 		  return "/pay/updateDeduct";
 	  }
-	  
+	  /**공제액 수정하기****/
 	  @PostMapping("/admin/pay/updateDeduct")
 	  public String updateDeduct(Pay pay,HttpSession session) {
 		  String writer =(String) session.getAttribute("SID");
