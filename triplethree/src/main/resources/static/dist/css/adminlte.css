@@ -11747,7 +11747,8 @@ body,
 [class*='sidebar-light-'] .nav-treeview > .nav-item > .nav-link.active, [class*='sidebar-light-'] .nav-treeview > .nav-item > .nav-link.active:hover {
   /* background-color: rgba(0, 0, 0, 0.1); */
   /* color: #212529; */
-  color: #006633;
+  color: #ffff;
+  background-color: #006633;
   font-weight: bold;
 }
 
