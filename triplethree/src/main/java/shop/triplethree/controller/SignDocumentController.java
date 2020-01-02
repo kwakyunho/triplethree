@@ -22,8 +22,8 @@ public class SignDocumentController {
 	 * 전자결재탭에서 결재대기문서 클릭시 화면이동
 	 * */
 	@GetMapping("/signDocument/signStandByDocument")
-	public String selectSignDocumentWait(String valCheck, String sid, Model model) {
-		List<String> result = signDocumentService.selectSignDocumentWait(valCheck, sid);
+	public String selectSignDocumentWait(String sid, Model model) {
+		List<String> result = signDocumentService.selectSignDocumentWait(sid);
 		System.out.println("controller result value : " + result);
 		model.addAttribute("result", result);
 		return "/signDocument/signStandByDocument";
@@ -60,17 +60,9 @@ public class SignDocumentController {
 		// 리턴을 위한 변수를 선언
 		List<SignDocument> selectList = null; 
 		String sid = (String) session.getAttribute("SID");
-		/*
-		 * if("Return".equals(valCheck)) { selectList =
-		 * signDocumentService.selectDraftDocument(valCheck,sid); //selectList =
-		 * signDocumentService.selectDraftDocumentReturn(valCheck, sid);
-		 * System.out.println("값확인"+selectList.toString()); }else { selectList =
-		 * signDocumentService.selectDraftDocument(valCheck,sid);
-		 * System.out.println("값확인"+selectList.toString()); }
-		 */
 		//System.out.println(signDocumentService.selectDraftDocument(valCheck,sid));
 		selectList = signDocumentService.selectDraftDocument(valCheck,sid);
-		System.out.println("값확인"+selectList.toString());
+		//System.out.println("값확인"+selectList.toString());
 		return selectList;
 	}
 	
@@ -82,6 +74,10 @@ public class SignDocumentController {
 	public @ResponseBody List<SignDocument> selectSignDocumentEnd(String valCheck, HttpSession session){
 		String sid = (String) session.getAttribute("SID");
 		//System.out.println(valCheck+sid);
-		return signDocumentService.selectSignDocumentEnd(valCheck, sid);
+		// 리턴을 위한 변수를 선언
+		List<SignDocument> selectList = null;
+		selectList = signDocumentService.selectSignDocumentEnd(valCheck, sid);
+		System.out.println(selectList);
+		return selectList;
 	}
 }

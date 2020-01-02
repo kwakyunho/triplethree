@@ -107,167 +107,117 @@
 	
 	<!-- 결재 대기문서함에서 본인이 결재자에 등록되어있는 문서를 불러온다  -->
 	<select id="selectSignDocumentWait" parameterType="String" resultType="hashmap">
-		<choose>
-			<when test="valCheck neq 'null'">
-				SELECT 
-					CONCAT(IF(IF(@docCode <![CDATA[<>]]> (@docCode:= A.doc_code), TRUE, FALSE) = 1, @cntNum:= 1, @cntNum:= @cntNum + 1)) AS number,
-					A.CODE, 																																				
-					B.doc_title, 																																		
-					B.doc_name, 																																		
-					A.app_state, 																																		
-					C.dename, 																																			
-					D.poname, 																																			
-					E.emp_name, 																																		
-					F.s_section,																																		
-					e.emp_name AS empName																																		
-				FROM
-					APP_LINE_ACCRUE A
-				LEFT JOIN 
-					SIG_DOC B
-				ON 
-					A.doc_code = B.CODE
-				LEFT JOIN 
-					DEMG C
-				ON 
-					A.demgcode = C.code
-				LEFT JOIN 
-					POSISYS D
-				ON 
-					A.pocode = D.code
-				LEFT JOIN 
-					EMP_MANAGE E
-				ON 
-					A.app_person = E.emp_num
-				LEFT JOIN
-					EMP_MANAGE e
-				on
-					B.emp_code = e.emp_num
-				LEFT JOIN 
-					LIST_MANAGE F
-				ON 
-					A.sortation = F.code
-			</when>
-		</choose>
+			SELECT 
+				<!-- CONCAT(IF(IF(@docCode <![CDATA[<>]]> (@docCode:= A.doc_code), TRUE, FALSE) = 1, @cntNum:= 1, @cntNum:= @cntNum + 1)) AS number, -->
+				A.number,
+				A.CODE, 																																				
+				B.doc_title, 																																		
+				B.doc_name, 																																		
+				A.app_state, 																																		
+				C.dename, 																																			
+				D.poname, 																																			
+				E.emp_name, 																																		
+				F.s_section,																																		
+				e.emp_name AS empName,
+				DATE_FORMAT(B.writer_day,'%Y-%m-%d') AS writer_day																																	
+			FROM
+				APP_LINE_ACCRUE A
+			LEFT JOIN 
+				SIG_DOC B
+			ON 
+				A.doc_code = B.CODE
+			LEFT JOIN 
+				DEMG C
+			ON 
+				A.demgcode = C.code
+			LEFT JOIN 
+				POSISYS D
+			ON 
+				A.pocode = D.code
+			LEFT JOIN 
+				EMP_MANAGE E
+			ON 
+				A.app_person = E.emp_num
+			LEFT JOIN
+				EMP_MANAGE e
+			on
+				B.emp_code = e.emp_num
+			LEFT JOIN 
+				LIST_MANAGE F
+			ON 
+				A.sortation = F.code
 	</select>
 	
 	<!-- 결재문서함에서 본인이 결재 라인에 있는 문서를 모두 select한다.  -->
 	<select id="selectSignDocumentEnd" parameterType="String" resultMap="signDocument">
-<!-- 		<choose>
+		<choose>
 			<when test="valCheck eq 'Return'">
 				SELECT
-					r.code
-					,r.acc_code
-					,e.emp_name AS empName
-					,r.doc_form_code
-					,r.doc_title
-					,r.doc_name
-					,r.re_doc_date
-					,r.writer_day
-					,r.comments
-					,D.dename
-					,p.poname
+					R.code
+					,R.acc_code
+					,R.emp_code
+					,E.emp_name
+					,R.doc_form_code
+					,R.doc_title
+					,R.doc_name
+					,R.doc_con
+					,R.doc_bego
+					,A.app_state
+					,S.sign_state
+					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writer_day
+					,R.comments
 				FROM
-					RETURN_DOC_SAVE AS r
+					RETURN_DOC_SAVE AS R
 				LEFT JOIN
-					EMP_MANAGE AS e
+					APP_LINE_ACCRUE AS A
 				ON
-					r.emp_code = e.emp_num
+					R.acc_code = A.CODE
+				LEFT join
+					SIG_DOC AS S
+				ON
+					R.doc_form_code = S.CODE
 				LEFT JOIN
-					APP_LINE_ACCRUE AS a
+					EMP_MANAGE AS E
 				ON
-					r.acc_code = a.CODE
-				LEFT JOIN
-					DOC_FORM_MANAGE AS d
-				ON
-					r.doc_form_code = d.CODE
-				LEFT JOIN
-					DEMG AS D
-				ON
-					e.demgcode = D.CODE
-				LEFT JOIN
-					POSISYS AS p
-				ON
-					e.pocode = p.code
+					R.emp_code = E.emp_num
 				WHERE
-					r.emp_code = #{sid}
+					A.app_person = #{sid}
 			</when>
 			<otherwise>
 				SELECT
-		 			s.code
-					,s.writer_day
-					,s.sign_end_day
-					,s.doc_title
-					,s.doc_name
-					,d.dename
-					,p.poname
-					,e.emp_name AS empName
-					,s.doc_form_code
-					,s.sign_state
+					R.code
+					,R.acc_code
+					,R.emp_code
+					,R.doc_form_code
+					,R.doc_title
+					,R.doc_name
+					,R.doc_con
+					,R.doc_bego
+					,S.sign_state
+					,R.sign_check
+					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writer_day
+					,R.comments
 				FROM
-					SIG_DOC AS s
+					RETURN_DOC_SAVE AS R
 				LEFT JOIN
-					EMP_MANAGE AS e
-				ON 
-					s.emp_code = e.emp_num
-				LEFT JOIN
-					DEMG AS d
+					APP_LINE_ACCRUE AS A
 				ON
-					e.demgcode = d.CODE
+					R.acc_code = A.CODE
 				LEFT JOIN
-					POSISYS AS p
+					SIG_DOC AS S
 				ON
-					e.pocode = p.CODE
+					R.doc_form_code = S.code
 				WHERE
-					s.emp_code = #{sid}
+					A.app_person = #{sid} 
 				<if test="valCheck eq 'End'">
 				AND
-					s.sign_state = 'Y'
+					S.sign_state = 'Y'
 				</if>
 				<if test="valCheck eq 'Starting'">
 				AND
-					s.sign_state = 'N'
+					S.sign_state = 'N'
 				</if>
 			</otherwise>
-		</choose> -->
-			SELECT
-				A.CODE AS code
-				,C.dename AS deName
-				,D.poname AS poName
-				,F.s_section AS setion
-				,E.emp_name AS signName
-				,A.app_state AS state
-				,B.doc_title AS docTitle
-				,B.doc_name AS docName
-				,E2.emp_name AS writeName
-			FROM
-				APP_LINE_ACCRUE A
-			LEFT JOIN
-				SIG_DOC B
-			ON
-				A.doc_code = B.CODE
-			LEFT JOIN
-				DEMG C
-			ON
-				A.demgcode = C.CODE
-			LEFT JOIN
-				POSISYS D
-			ON
-				A.pocode = D.CODE
-			LEFT JOIN
-				EMP_MANAGE E
-			ON
-				A.app_person = E.emp_num
-			LEFT JOIN
-				EMP_MANAGE E2
-			ON
-				B.emp_code = E2.emp_num
-			LEFT JOIN
-				LIST_MANAGE F
-			ON
-				A.sortation = F.CODE
-			WHERE
-				A.app_person = 'TT20191202008' 
-			AND
-				B.sign_state = 'N'
+		</choose>
 	</select>
  </mapper>

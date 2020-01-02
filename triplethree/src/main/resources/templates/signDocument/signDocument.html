@@ -38,9 +38,6 @@ tr:hover{background: whitesmoke;}
 		<div class="card-header p-2 ajaxValCheck2">
 			<ul class="nav nav-pills">
 				<li class="nav-item ajaxVal2">
-					<a class="nav-link" href="#all" data-toggle="tab" id="All">전체</a>
-				</li>
-				<li class="nav-item ajaxVal2">
 					<a class="nav-link" href="#starting" data-toggle="tab" id="Starting">진행</a>
 				</li>
 				<li class="nav-item ajaxVal2">
@@ -54,39 +51,6 @@ tr:hover{background: whitesmoke;}
 		
 		<div>
 			<div class="tab-content">
-				<div class="tab-pane active" id="all">
-					<div class="content" style="align-content: center">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<form class="boardListForm">
-										<table
-											class="table table-head-fixed jsgrid-align-center dateTablePagingAll"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
-											<thead style="text-align: center;">
-												<tr>
-													<th style="width: 10x;">순차</th>
-													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">완료일</th>
-													<th style="width: 100px;">결재양식</th>
-													<th style="width: 500px;">제목</th>
-													<th style="width: 100px;">첨부</th>
-													<th style="width: 100px;">기안자</th>
-													<th style="width: 100px;">문서번호</th>
-													<th style="width: 100px;">결재상태</th>
-												</tr>
-											</thead>
-											<tbody id="selectAllTr" style="text-align: center; font-size: small;">
-											</tbody>
-										</table>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			
 				<div class="tab-pane" id="starting">
 					<div class="content" style="align-content: center">
 						<div class="col-12">
@@ -100,6 +64,7 @@ tr:hover{background: whitesmoke;}
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
+													<th style="width: 100px;">완료일</th>
 													<th style="width: 100px;">결재양식</th>
 													<th style="width: 500px;">제목</th>
 													<th style="width: 100px;">첨부</th>
@@ -164,7 +129,7 @@ tr:hover{background: whitesmoke;}
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">반려일</th>
+													<th style="width: 100px;">완료일</th>
 													<th style="width: 100px;">결재양식</th>
 													<th style="width: 500px;">제목</th>
 													<th style="width: 100px;">첨부</th>

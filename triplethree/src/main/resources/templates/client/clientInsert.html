@@ -12,10 +12,10 @@
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<h1 class="m-0 text-dark">거래처 등록</h1>
 			</div><!-- /.col -->
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item">거래처등록</li>
 					<li class="breadcrumb-item"><a th:href="@{/client/clientList}" style="color:#28a745;" >거래처목록</a></li>
@@ -66,7 +66,7 @@
 	                    </div>
 	                    <label class="col-sm-2 col-form-label">거래처대표번호</label>
 	                    <div class="col-sm-4">
-	                      <input type="text" class="form-control col-12" name="repreNumber" placeholder="거래처 대표자 번호">
+	                      <input type="text" class="form-control col-12" id="repreNumber" name="repreNumber" placeholder="거래처 대표자 번호">
 	                    </div>
                   </div>
                   
@@ -171,7 +171,7 @@
                  <div class="form-group row col-sm-12">
 	                    <label class="col-sm-2 col-form-label">작성자</label>
 	                    <div class="col-sm-4">
-	                   		<input type="hidden"  name="empCode" th:value="${session.SID}" >
+	                   		<input type="hidden" name="empCode" th:value="${session.SID}">
 	                      	<input type="text" class="form-control col-12" th:value="${session.SNAME}" readonly="readonly">
 	                    </div>
                  </div>
@@ -194,7 +194,30 @@
 <div class="col-sm-2"></div>
 </th:block>
 
-<th:block layout:fragment="customScript">
+<th:block layout:fragment="customScript" >
 <script th:src="@{/custom/js/clientCheck.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+	  $('#repreNumber').keydown(function (event) {
+	      var key = event.charCode || event.keyCode || 0;
+	      $text = $(this); 
+	      if (key !== 8 && key !== 9) {
+	          if ($text.val().length === 3) {
+	              $text.val($text.val() + '-');
+	          }
+	          if ($text.val().length === 8) {
+	              $text.val($text.val() + '-');
+	          }
+	          
+	      return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+			 // Key 8번 백스페이스, Key 9번 탭, Key 46번 Delete 부터 0 ~ 9까지, Key 96 ~ 105까지 넘버패트
+			 // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함 
+	      }
+	  });
+});
+
+
+</script>
+
 </th:block>
 </html>

@@ -5,7 +5,7 @@
 
 <!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
-	<title>공지사항 목록</title>
+	<title>부서게시판</title>
 </th:block>
 
 <!-- 사용자 CSS -->
@@ -23,12 +23,12 @@ tr:hover{background: whitesmoke;}
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">게시판 관리</h1>
+				<h1 class="m-0 text-dark">부서게시판</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item">공지사항</li>
-					<li class="breadcrumb-item">부서별 게시판</li>
+					<li class="breadcrumb-item"><a th:href="@{/board/boardList}" style="color:#28a745;">전사게시판</a></li>
+					<li class="breadcrumb-item">부서게시판</li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -42,9 +42,9 @@ tr:hover{background: whitesmoke;}
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">
-					<h5 style="margin-top: 0.5rem;">공지사항 </h5>
+					<h5 style="margin-top: 0.5rem;">부서게시판  </h5>
 				</div>
-				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/board/boardInsert'" >공지사항 작성하기</button>
+				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/board/departBoardInsert'" >글쓰기</button>
 			</div>
 	       
 		<div class="card-body">
@@ -61,7 +61,7 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
+						<tr th:each="b ,index : ${departBoardList}" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
@@ -80,6 +80,8 @@ tr:hover{background: whitesmoke;}
 	     
 	 </div>
  </div>
+ 
+ 
 <!-- /.row -->
 <!-- /.container-fluid -->
 </th:block>
@@ -104,7 +106,7 @@ $(document).ready(function(){
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
-		$('.boardListForm').attr('action', '/board/boardDetail');	// 액션 경로 정의
+		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
 		$('.boardListForm').submit();	// 전송
 	});
 });
