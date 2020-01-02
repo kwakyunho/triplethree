@@ -212,7 +212,7 @@ div.sign-type1 table {width: 100%;}
 	<tbody>
 		<tr>
 			<td class="sign-type1-td-codMainName"><b style="color: red;">*</b> 휴가 종류</td>
-			<td class="sign-type1-td-codMainValue abcd">
+			<td class="sign-type1-td-codMainValue">
 				<span data-selectval="연차">연차</span>
 			</td>
 		</tr>
@@ -285,16 +285,11 @@ div.sign-type1 table {width: 100%;}
 
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
-	$('.abcd').on('click', function(){
-		var a = prompt('입력하세요','');
-		$(this).children('span').text(a);
-	});
-	
 	$('.ef-type1').on('click', function(){
 		$('#signModal').modal('show');
 	});
 	
-	$("#browser").treeview({});
+	$("#browserTree").treeview();
 });
 </script>
 </th:block>
