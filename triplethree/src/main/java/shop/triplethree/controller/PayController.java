@@ -48,9 +48,10 @@ public class PayController {
 	/** 급여대장** */
 	@GetMapping("/pay/selectPay")
 	public String selectPay(Model model) {		
-		//System.out.println("급여 급여대장이다");
-		 model.addAttribute("selectPay", payService.selectPay());
+		 model.addAttribute("selectPaySum", payService.selectPaySum());
+		 //System.out.println("총계에요");
 		 model.addAttribute("payInsert", payService.payInsert());
+		 //System.out.println("급여에유");
 		return "pay/selectPay";	
 	}
 	

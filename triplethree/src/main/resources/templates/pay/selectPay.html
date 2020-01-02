@@ -136,26 +136,26 @@ tr:hover{background: whitesmoke;}
 						<td>차인지급액</td>		
 					</tr>
 					<tr>
-						<td rowspan="2">소계</td>
-						<td><p id="basicPaySum"></td>					
-						<td>차량유지비</td>
-						<td>통신수당</td>
-						<td>식대</td>
-						<td>야간수당</td>							
-						<td>휴일수당</td>
-						<td>연장수당</td>
-						<td>직책수당</td>						
-						<td>과세</td>
-						<td>비과세</td>
-						<td>지급액 계</td>					
-						<td>국민연금</td>
-						<td>건강보험</td>
-						<td>장기요양보험</td>
-						<td>고용보험</td>
-						<td>소득세</td>
-						<td>지방소득세</td>
-						<td>공제액 계</td>
-						<td>차인지급액</td>
+						<td rowspan="2">총 계</td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.basicPay,0,'COMMA')}"></td>										
+						<td th:text="${#numbers.formatInteger(selectPaySum.selfDriPay,0,'COMMA')}"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.comPay,0,'COMMA')}"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.mealCost,0,'COMMA')}"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.beneFit,0,'COMMA')}"></td>							
+						<td th:text="${#numbers.formatInteger(selectPaySum.holidayPay,0,'COMMA')}"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.overtimePay,0,'COMMA')}"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.positionBenefit,0,'COMMA')}"></td>						
+						<td id="taxation"></td>
+						<td id="taxFree"></td>
+						<td id="payment"></td>					
+						<td id="nationPer"></td>
+						<td id="healthPer"></td>
+						<td id="longCare"></td>
+						<td id="insurPer"></td>
+						<td id="one"></td>
+						<td id="residentTax"></td>
+						<td id="deduct"></td>
+						<td id="deductHap"></td>
 					</tr>	
 				</table>							
 			</form>
@@ -173,6 +173,19 @@ tr:hover{background: whitesmoke;}
 	// 급여 자동계산
 	var payInsert = [[${payInsert}]];	// 셀렉트 테이블 값들
 	var totalSize = payInsert.length;	// 테이블 로우 총 갯수
+
+	var taxationSum = 0;
+	var residentTaxSum = 0;
+	var taxFreeSum =0;
+	var paymentSum =0;
+	var nationPerSum =0;
+	var healthPerSum =0;
+	var longCareSum =0;
+	var insurPerSum =0;
+	var oneSum =0;
+	var residentTaxSum =0;	
+	var deductSum =0;
+	var deductHapSum =0;
 	
 	for(i=0; i < totalSize; i++){
 		var num = i+1;
@@ -195,9 +208,6 @@ tr:hover{background: whitesmoke;}
 		var taxation = basicPay+comPay+beneFit+holidayPay+overtimePay+positionBenefit; // 과세
 		var taxFree = selfDriPay+mealCost;	//비과세
 		var payment = taxation+taxFree;	//지급액 계
-		
-		var sum = basicPay+basicPay;
-		console.log(sum);
 		
 		parent.children('.taxation').text(taxation.toLocaleString());  //과세	
 		
@@ -242,15 +252,51 @@ tr:hover{background: whitesmoke;}
 		
 		parent.children('.deduct').text(sum1.toLocaleString());
 		var deduct = parent.children('.deduct').text(sum1.toLocaleString()) //공제액
+		
 		var deductHap = payment-sum1;	//차인지급액		
 		parent.children('.deductHap').text(deductHap.toLocaleString());
 		
-		//소득세
+		//총계 구하기
+		taxationSum+=taxation;
+		taxFreeSum+=taxFree;
+		paymentSum+=payment;
+		nationPerSum+=nation;
+		healthPerSum+=health;
+		longCareSum+=longCare;
+		insurPerSum+=insurPer;
+		oneSum+=one;	
+		residentTaxSum+=residentTax;
+		deductSum +=sum1;
+		deductHapSum +=deductHap;
 		
-				}
+		
+	}
+	 
+	console.log(taxationSum);
+	console.log(residentTaxSum);
+	console.log(taxFreeSum);
+	console.log(paymentSum);
+	console.log(nationPerSum);
+	console.log(healthPerSum);
+	console.log(longCareSum);
+	console.log(insurPerSum);
+	console.log(oneSum);
+	console.log(residentTaxSum);
+	console.log(deductSum);
+	console.log(deductHapSum);
 	
-	 $("#basicPaySum").html(sum);
-	
+	$('#taxation').text(taxationSum.toLocaleString());
+	$('#residentTax').text(residentTaxSum.toLocaleString());
+	$('#taxFree').text(taxFreeSum.toLocaleString());
+	$('#payment').text(paymentSum.toLocaleString());
+	$('#nationPer').text(nationPerSum.toLocaleString());
+	$('#healthPer').text(healthPerSum.toLocaleString());
+	$('#longCare').text(longCareSum.toLocaleString());
+	$('#insurPer').text(insurPerSum.toLocaleString());
+	$('#one').text(oneSum.toLocaleString());
+	$('#residentTax').text(residentTaxSum.toLocaleString());
+	$('#deduct').text(deductSum.toLocaleString());
+	$('#deductHap').text(deductHapSum.toLocaleString());
 	// 데이터 테이블 호출
 	$('#boardListTable').DataTable();
 	$('#boardListTable1').DataTable();

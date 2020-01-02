@@ -38,6 +38,10 @@ public class PayService {
 	public List<Pay> payInsert(){
 		return payMapper.payInsert();
 	}
+	
+	public Pay selectPaySum() {
+		return payMapper.selectPaySum();
+	}
 
 	/** 퇴직금 검색 조회 **/
 	public List<Employee> selectRetiring() {

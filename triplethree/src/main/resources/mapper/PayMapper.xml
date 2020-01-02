@@ -258,4 +258,19 @@
 		code=#{deCode}
 	</update>
 	
+	<!--급여대장 총계  -->
+	<select id="selectPaySum" resultType="shop.triplethree.vo.Pay">
+	SELECT
+		SUM(p.basic_pay) AS basicPay,
+		SUM(p.self_dri_pay) AS selfDriPay,
+		SUM(p.com_pay) AS comPay,
+		SUM(p.meal_cost)AS mealCost,
+		SUM(p.benefit) AS beneFit,
+		SUM(p.holiday_pay) AS holidayPay,
+		SUM(p.overtime_pay) AS overtimePay,
+		SUM(p.position_benefit) AS positionBenefit
+	FROM
+		PAY_BILL AS p
+	</select>
+	
 </mapper>
