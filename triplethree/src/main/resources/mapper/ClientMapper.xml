@@ -71,6 +71,8 @@
 			, A.acc_ceo_name as acc_ceo_name
 			, A.acc_addr
 			, A.acc_postcode
+			,A.acc_extraaddr
+			,A.acc_detailaddr
 			, A.acc_bln
 			, A.acc_fax 
 			, A.acc_phone
@@ -202,6 +204,9 @@
 			, A.acc_name as acc_name
 			, A.acc_ceo_name as acc_ceo_name
 			,A.acc_addr
+			,A.acc_detailAddr
+			,A.acc_extraaddr
+			,A.acc_postcode
 			,A.acc_bln
 			,A.acc_fax 
 			,A.acc_phone

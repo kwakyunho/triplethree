@@ -1,5 +1,7 @@
 package shop.triplethree.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +78,7 @@ public class ClientController {
 	
 	//거래처 정보 입력
 	@PostMapping("/admin/client/clientInsert")
-	public String insertClient(Client client) {
+	public String insertClient(Client client,HttpSession Session) {
 		System.out.println("## clientInsert Code 생성 ##");
 		clientService.createClientCode(client); //코드생성 메서드 createClientCode
 		return "redirect:/client/clientList2";
