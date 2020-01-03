@@ -60,7 +60,7 @@ tr:hover{background: whitesmoke;}
 										<table
 											class="table table-head-fixed jsgrid-align-center dateTablePagingStarting"
 											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
-											<thead style="text-align: center;">
+											<thead style="text-align: center;" id="dateTablePagingStarting">
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
@@ -90,9 +90,8 @@ tr:hover{background: whitesmoke;}
 									<form class="boardListForm">
 										<table
 											class="table table-head-fixed jsgrid-align-center dateTablePagingEnd"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
-											<thead style="text-align: center;">
+											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
+											<thead style="text-align: center;" id="dateTablePagingEnd">
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
@@ -123,9 +122,8 @@ tr:hover{background: whitesmoke;}
 									<form class="boardListForm">
 										<table
 											class="table table-head-fixed jsgrid-align-center dateTablePagingReturn"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
-											<thead style="text-align: center;">
+											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
+											<thead style="text-align: center;" id="dateTablePagingReturn">
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
@@ -158,6 +156,9 @@ tr:hover{background: whitesmoke;}
 <!-- DataTables -->
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script type="text/javascript">
+
+</script>
 <!-- 전자결재 관련 스크립트 -->
 <script th:src="@{/custom/js/signDocument.js}"></script>
 </th:block>
