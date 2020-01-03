@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.triplethree.mapper.CompanyMapper;
 import shop.triplethree.service.EmployeeService;
 import shop.triplethree.service.PayService;
 import shop.triplethree.vo.Company;
@@ -21,7 +22,7 @@ import shop.triplethree.vo.Pay;
 @Controller
 public class PayController {
 	@Autowired private PayService payService;
-	
+	@Autowired private CompanyMapper companyMapper;
 	/**급여등록화면**/
 	@GetMapping("/admin/pay/viewPay")
 	public String viewPay() {
@@ -61,13 +62,6 @@ public class PayController {
 		
 	}
 		
-	/**공제액 설정화면 이동****/
-	@GetMapping("/admin/pay/insertDeduct")
-	public String insertDeduct(Model model) {
-		//System.out.println("공제액 설정화면 이동");
-		model.addAttribute("insertDeduct", payService.insertDeduct());
-		return "/pay/insertDeduct";
-	}
 	/******급여대장에서 수정할 수 있도록 화면 이동*************/
 	@GetMapping("/admin/pay/updatePay")
 	public String updatePayView(@RequestParam(value="empCode") String empcode,Model model) {
@@ -78,10 +72,34 @@ public class PayController {
 	}
 	/**급여 진짜 수정하기***/
 	
-	  @PostMapping("/admin/pay/updatePay") 
+	  @PostMapping("/admin/pay/updatePay")  
 	  public String updatePay(Pay pay) {
-	  System.out.println("수정처리"); 
+	  //System.out.println("수정처리"); 
 	  payService.updatePay(pay);
-	  return "redirect:/pay/selectPay"; }
-	
+	  return "redirect:/pay/selectPay"; 
+	  }
+	  
+	  /**공제액 설정화면 이동****/
+	  @GetMapping("/admin/pay/insertDeduct")
+	  public String insertDeduct(Model model) {
+		  //System.out.println("공제액 설정화면 이동");
+		  model.addAttribute("insertDeduct", payService.insertDeduct());
+		  return "/pay/insertDeduct";
+	  }
+	 /***공제액 모달창 설정***/
+	  
+	  @PostMapping("/admin/pay/insertDeduct")
+	  public String deductList(Pay pay,HttpSession session, Model model) {
+
+		String writer = (String) session.getAttribute("SID");	
+		pay.setWriter(writer);
+		model.addAttribute("insertDeductModal", payService.deductList(pay));
+		  return "redirect:/pay/insertDeduct";
+	  }
+	  /***공제액 수정***/
+	  @GetMapping("/admin/pay/updateDeductList")
+	  public String updateDeductList(@RequestParam(value="deCode") String deCode, Model model) {
+		  model.addAttribute("updateDeductList", payService.updateDeductList(deCode));
+		  return "redirect:/pay/updateDeduct";
+	  }
 }

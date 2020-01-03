@@ -26,3 +26,32 @@ ul.zeroPadding li.signModal {width: 50%; height: 30px; float: left;}
 ul.zeroPadding li.signModal-select {border-bottom: 1px solid #000;}
 ul.zeroPadding li a {color: #ddd; vertical-align: -webkit-baseline-middle;}
 ul.zeroPadding li.signModal-select a {color: #000;}
+
+
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+ul.tabs li{
+  background: none;
+  color: #ffffff;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+ 
+ul.tabs li.current{
+  background: #ffffff;
+  color: #222;
+  border-bottom: 1px #28a745;
+}
+ 
+.tab-content{
+  display: none;
+  background: #ffffff;
+}
+ 
+.tab-content.current{
+  display: inherit;
+}

@@ -30,32 +30,8 @@ $(function(){
 				str = '<tr>'
 					
 					// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업
-					if(valCheck =='All'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-										if(data[i].signEndDay == null){
-											str += '<td></td>';
-										}else{
-											str += '<td>'+data[i].signEndDay+'</td>';
-										};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
-										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
-										}								
-							str += '</tr>'
-						});
-					$('#selectAllTr').append(str);
-					$('.dateTablePagingAll').DataTable();
-					
 					// 결재 완료 문서에 대한 스크립트
-					}else if(valCheck =='End'){
+					if(valCheck =='End'){
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
 							str += '<td>'+data[i].writerDay+'</td>'
@@ -150,63 +126,46 @@ $(function(){
 			datatype	: 'json',
 			
 			success : function(data) {
+				//console.log(data);
 				str = '<tr>'
 					
-					// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업
-					if(valCheck =='All'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-										if(data[i].signEndDay == null){
-											str += '<td></td>';
-										}else{
-											str += '<td>'+data[i].signEndDay+'</td>';
-										};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
-										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
-										}								
-							str += '</tr>'
-						});
-					$('#selectAllTr').append(str);
-					$('.dateTablePagingAll').DataTable();
-					
+					// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업					
 					// 결재 완료 문서에 대한 스크립트
-					}else if(valCheck =='End'){
+					if(valCheck =='End'){
+						if(data.size = 0){
+							console.log(data.size);
+							str += '<td>'+'완료된 문서가 없습니다.'+'<td>';
+						}else{
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
 							str += '<td>'+data[i].writerDay+'</td>'
-										if(data[i].signEndDay == null){
-											str += '<td></td>';
-										}else{
-											str += '<td>'+data[i].signEndDay+'</td>';
-										};
+							if(data[i].signEndDay == null){
+								str += '<td></td>';
+							}else{
+								str += '<td>'+data[i].signEndDay+'</td>';
+							};
 							str	+= '<td>'+data[i].docTitle+'</td>'
 							str += '<td>'+data[i].docName+'</td>'
 							str += '<td>'+'첨부파일 자리에요'+'</td>'
 							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 							str += '<td>'+data[i].docFormCode+'</td>'
-										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
-										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
-										}								
+							str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'						
 							str += '</tr>'
 						});
-					$('#selectEndTr').append(str);
-					$('.dateTablePagingEnd').DataTable();
+						$('#selectEndTr').append(str);
+						$('.dateTablePagingEnd').DataTable();
+						}
 					
 					// 결재 진행중인 문서에 대한 스크립트
 					}else if(valCheck =='Starting'){
 						$.each(data, function(i){
 							str += '<td>'+[i+1]+'</td>'
 							str += '<td>'+data[i].writerDay+'</td>'
+							if(data[i].signEndDay == null){
+								str += '<td></td>';
+							}else{
+								str += '<td>'+data[i].signEndDay+'</td>';
+							};
 							str	+= '<td>'+data[i].docTitle+'</td>'
 							str += '<td>'+data[i].docName+'</td>'
 							str += '<td>'+'첨부파일 자리에요'+'</td>'

@@ -14,7 +14,7 @@
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-					<li class="nav-header">메뉴</li>
+					<!-- <li class="nav-header">메뉴</li> -->
 					<li class="nav-item has-treeview">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-cogs"></i>
@@ -74,7 +74,7 @@
 							<li class="nav-item">
 								<a th:href="@{/client/clientList2}" class="nav-link">
 									<i class="nav-icon fas fa-clipboard-list"></i>
-									<p>거래처(거래진행중) 목록</p>
+									<p>거래처(진행)</p>
 								</a>
 							</li>
 						</ul>
@@ -82,7 +82,7 @@
 							<li class="nav-item">
 								<a th:href="@{/client/clientList}" class="nav-link">
 									<i class="nav-icon fas fa-clipboard-list"></i>
-									<p>거래처(전체) 목록</p>
+									<p>거래처(전체)</p>
 								</a>
 							</li>
 						</ul>
@@ -96,19 +96,13 @@
 							<li class="nav-item">
 								<a th:href="@{/board/boardList}" class="nav-link">
 									<i class="nav-icon far fa-building"></i>
-									<p>공지게시판</p>
+									<p>전사게시판</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a th:href="@{/board/departBoardList}" class="nav-link">
 									<i class="nav-icon far fa-list-alt"></i>
-									<p>#.부서별게시판</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a th:href="@{/admin/documentFormCateInsert}" class="nav-link">
-									<i class="nav-icon fas fa-list-alt"></i>
-									<p>게시판 카테고리 등록.곽</p>
+									<p>!.부서게시판</p>
 								</a>
 							</li>
 						</ul>
@@ -234,7 +228,7 @@
 							<li class="nav-item">
 								<a th:href="@{/admin/pay/viewPay}" class="nav-link">										
 									<i class="fas fa-coins"></i>			
-									<p>!.급여 검색.황</p>
+									<p>급여 검색.황</p>
 								</a>
 							</li>
 							<li class="nav-item">

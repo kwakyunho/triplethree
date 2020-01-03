@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
+      layout:decorate="~{layouts/default}"
+      >
+
+
+<!-- 사용자 타이틀 -->
+<th:block layout:fragment="customTitle">
+	<title>글 작성하기 </title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+<!-- summernote -->
+<link rel="stylesheet" th:href="@{/plugins/summernote/summernote-bs4.css}">
+</th:block>
+
+
+<th:block layout:fragment="customContents">
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">부서게시판 글쓰기</li>
+					<li class="breadcrumb-item"><a th:href="@{/board/boardList}" style="color:#28a745;">전사게시판</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/departBoardList}" style="color:#28a745;">부서게시판</a></li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+			 <form action="/board/boardInsert" method="POST" class="boardInsertForm">
+			 <div class="card-header">
+			 	 <label class="col-md-2 col-form-label" style="font-size:larger;">글쓰기</label>
+			 </div>
+             <div class="card-body">
+             	<div class="form-group row col-sm-12">
+	                <label class="col-sm-2 col-form-label">카테고리</label>
+	                <div class="col-sm-10">
+	                	<select  class="form-control-sm" name="liCode">
+	                		<option th:each="l :${liCate}" th:value="${l.liCode}" th:text="${l.liCodeStr}"></option>
+	                	</select>
+	             	 </div>
+              	</div>
+				<div class="form-group row col-sm-12">
+					<label class="col-sm-2 col-form-label">제목 </label>
+					<div class="col-sm-10">
+						<input type="text" id="inputName" name="boardTitle" placeholder="제목을 입력해주세요" class="form-control">
+					</div>
+				</div>
+				<div class="form-groupb row col-sm-12">
+					<label class="col-sm-2 col-form-label"> 내용 </label>
+					<div class="col-sm-10">
+						<div class="mb-3">
+							<textarea class="textarea" placeholder="내용을 입력해주세요 " name="boardCon"
+							style="width: 100%; height: 300px; font-size: 14px;
+							line-height: 50px; border: 1px solid #dddddd; padding: 10px;">
+							</textarea>
+						</div>
+					</div>
+              	
+             	</div>
+      
+				<div class="form-group row col-sm-12">
+					<label class="col-sm-2 ine-height: 50px;  col-form-label">작성자</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" th:value=${session.SNAME} readonly="readonly">
+					</div>
+					<label class="col-sm-2 col-form-label">비밀번호</label>
+					<div class="col-sm-4">
+						<input type="password" class="form-control" name="boardPw">
+					</div>
+				</div>
+                 
+              <div class="form-group row col-sm-12">
+              	<div class="col-12">
+		          <button type="button" id="backBtn" class="btn btn-success float-auto" >이전으로 </button>
+		          <button type="button" id="insertBoard" class="btn btn-success float-right">글쓰기</button>
+		         <!--  <input type="submit" value="공지 작성하기" class="btn btn-success float-right"> -->
+		        </div>
+		      </div>
+            </div>
+            </form>
+            <!-- /.card-body -->
+           
+				</div>
+				</div>
+				<!-- /.card -->
+			<!-- /.card -->
+			</div> 
+			
+			<!-- /.col-md-6 -->
+			
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+<!-- Summernote -->
+<script th:src="@{/plugins/summernote/summernote-bs4.min.js}" ></script>
+<script>
+  $(function () {
+    // Summernote
+    $('.textarea').summernote()
+    
+   });
+   //뒤로가기(목록) 버튼 눌렀을 때 
+  $(function(){
+	 $('#backBtn').on('click',function(){
+		history.go(-1); 
+	 });
+  });
+  $(function(){
+		 $('#insertBoard').on('click',function(){
+			 var boardTitle = $('input[name=boardTitle]').val();
+			 var boardCon = $('input[name=boardCon]').val();
+			 var boardPw = $('input[name=boardPw]').val();
+			 
+			 if(boardTitle == ""){
+				 alert('제목을 입력해주세요');
+				 boardTitle.focus();
+				 return false;
+			 }
+			 if(boardCon == ""){
+				 alert('내용을 입력해주세요');
+				 boardCon.focus();
+				 return false;
+			 }
+			 if(boardPw == ""){
+				 alert('비밀번호를 입력해주세요');
+				 boardPw.focus();
+				 return false;
+			 }
+			 
+			 $(document).Toasts('create', {
+			        class: 'bg-success', 
+			        title: 'INSERT SUCCESS',
+			        sticky : true,
+			        body: '게시물 등록이 완료되었습니다'
+			      });
+			 
+			 $('.boardInsertForm').submit();
+		 });
+	  });
+</script>
+
+</th:block>
+</html>

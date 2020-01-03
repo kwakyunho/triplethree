@@ -26,8 +26,9 @@
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item">공지사항 작성 </li>
-					<li class="breadcrumb-item"><a th:href="@{/board/boardList}">공지사항 조회</a></li>
+					<li class="breadcrumb-item">글수정하기</li>
+					<li class="breadcrumb-item"><a th:href="@{/board/boardList}" style="color:#28a745;">전사게시판</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/board/departBoardList}" style="color:#28a745;">부서게시판</a></li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -39,24 +40,33 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="card">
-					<form class="boardUpdateForm">
+				<div class="card" >
+					<form class="boardUpdateForm" th:each="b:${board}">
 					         <div class="card-body">
 						          <div class="form-group row col-sm-12">
+						          		<div class="form-group row col-sm-12">
+							                <label class="col-sm-2 col-form-label">카테고리</label>
+							                <div class="col-sm-10">
+							                	<select  class="form-control-sm" name="liCode">
+							                		<option th:each="l :${liCate}" th:value="${l.liCode}" th:text="${l.liCodeStr}"></option>
+							                	</select>
+							             	</div>
+					              		</div>
 										<label class="col-sm-2 col-form-label">제목 </label>
 							            <div class="col-sm-10">
-							            	<input type="hidden" name="code" th:value="${board.code}">
-							            	<input type="hidden" name="empCode" th:value="${board.empCode}">
-							            	<input type="hidden" name="writerDay" th:value="${board.writerDay}">
-							            	<input type="hidden" name="boardCount" th:value="${board.boardCount}">
-							            	<input type="text" id="inputName" th:value="${board.boardTitle}" name="boardTitle" class="form-control">
+							            	<input type="hidden" name="code" th:value="${b.code}">
+							            	<input type="hidden" name="empCode" th:value="${b.empCode}">
+							            	<input type="hidden" name="liCode" th:value="${b.liCode}">
+							            	<input type="hidden" name="writerDay" th:value="${b.writerDay}">
+							            	<input type="hidden" name="boardCount" th:value="${b.boardCount}">
+							            	<input type="text" id="inputName" th:value="${b.boardTitle}" name="boardTitle" class="form-control">
 							         	 </div>
 						          </div>
 						          <div class="form-groupb row col-sm-12">
 						            	<label class="col-sm-2 col-form-label"> 내용 </label>
 						            	<div class="col-sm-10">
 							            	<div class="mb-3">
-							            	<textarea class="textarea"  name="boardCon" th:utext="${board.boardCon}"
+							            	<textarea class="textarea"  name="boardCon" th:utext="${b.boardCon}"
 						                      	style="width: 100%; height: 500px; font-size: 14px;
 												line-height: 50px; border: 1px solid #dddddd; padding: 10px;">
 											</textarea>
@@ -67,11 +77,11 @@
 						            <div class="form-group row col-sm-12">
 						                    <label class="col-sm-2 col-form-label">작성자</label>
 							                    <div class="col-sm-4">
-							                      <input type="text" class="form-control col-12" th:value="${board.writer}" readonly="readonly">
+							                      <input type="text" class="form-control col-12" th:value="${b.writer}" readonly="readonly">
 							                    </div>
 						                    <label class="col-sm-2 col-form-label">비밀번호</label>
 							                    <div class="col-sm-4">
-							                      <input type="password" class="form-control col-12" th:value="${board.boardPw}" name="boardPw" >
+							                      <input type="password" class="form-control col-12" th:value="${b.boardPw}" name="boardPw" >
 							                    </div>
 									</div> 
 			  	   					<div class="form-group row col-sm-12">
@@ -97,19 +107,19 @@
     $('.textarea').summernote();
   });
 </script>
-
-<script type="text/javascript">
+	
+<script type="text/javascript" th:inline="javascript">
 $(document).ready(function(){
 	$('#updateSubmit').on('click', function(){
 		 $(document).Toasts('create', {
 		        class: 'bg-success', 
 		        title: 'BOARD EDIT SUCCESS',
 		        sticky : true,
-		        body: '공지글 수정이 완료되었습니다'
-	      });
+		        body: '게시물 수정이 완료되었습니다'
+		});
 		 $(document).delay(1000);
 	$('.boardUpdateForm').attr('method', 'POST');
-	$('.boardUpdateForm').attr('action', '/admin/board/boardUpdate');
+	$('.boardUpdateForm').attr('action','/admin/board/boardUpdate');
 	$('.boardUpdateForm').submit();
 	});
 });

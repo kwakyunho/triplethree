@@ -41,50 +41,59 @@
 				</section>
 				<div>
 					<div>
-						<div style="min-height: 306px; max-height: 306px; overflow-y: scroll; overflow-x: hidden;">
-							<ul>
-								<li style="font-size: 0.8rem;"><a>관리자 데모</a>
+						<div style="min-height: 306px; max-height: 306px; overflow-y: scroll; overflow-x: hidden;" id="main">
+							<ul id="browserTree" class="tree">
+								<li style="font-size: 0.8rem;"><span class="fas fa-building">관리자 데모</span>
 									<ul>
-										<li><a>김대표 사장</a></li>
-										<li><a>영업본부</a>
+										<li><span class="far fa-user treeSelect">김대표 사장</span></li>
+										<li><span class="fas fa-building">영업본부</span>
 											<ul>
-												<li><a>안상우 상무</a></li>
-												<li><a>영업팀</a>
+												<li><span class="far fa-user treeSelect">안상우 상무</span></li>
+												<li><span class="fas fa-building">영업팀</span>
 													<ul>
-														<li><a>김은수 부장</a></li>
-														<li><a>김성룡 과장</a></li>
-														<li><a>심현보 대리</a></li>
-														<li><a>오종원 대리</a></li>
-														<li><a>방희진 사원</a></li>
-														<li><a>김다우 과장</a></li>
+														<li><span class="far fa-user treeSelect">김은수 부장</span></li>
+														<li><span class="far fa-user treeSelect">김성룡 과장</span></li>
+														<li><span class="far fa-user treeSelect">심현보 대리</span></li>
+														<li><span class="far fa-user treeSelect">오종원 대리</span></li>
+														<li><span class="far fa-user treeSelect">방희진 사원</span></li>
+														<li><span class="far fa-user treeSelect">김다우 과장</span></li>
 													</ul>
 												</li>
-												<li><a>마케팅팀</a></li>
-												<li><a>김해 정성치과</a></li>
+												<li><span class="fas fa-building">마케팅팀</span></li>
+												<li><span class="far fa-user treeSelect">김해 정성치과</span></li>
 											</ul>
 										</li>
-										<li><a>경영지원본부</a>
+										<li><span class="fas fa-building">경영지원본부</span>
 											<ul>
-												<li><a>전신입 회장</a></li>
-												<li><a>유수연 상무</a></li>
-												<li><a>재경팀</a></li>
-												<li><a>총무팀</a></li>
-												<li><a>인사팀</a>
+												<li><span class="far fa-user treeSelect">전신입 회장</span></li>
+												<li><span class="far fa-user treeSelect">유수연 상무</span></li>
+												<li><span class="fas fa-building">재경팀</span></li>
+												<li><span class="fas fa-building">총무팀</span></li>
+												<li><span class="fas fa-building">인사팀</span>
 													<ul>
-														<li><a>허각 이사</a></li>
-														<li><a>김다우 과장</a></li>
-														<li><a>서율 사원</a></li>
-														<li><a>오광숙 사원</a></li>
+														<li><span class="far fa-user treeSelect">허각 이사</span></li>
+														<li><span class="far fa-user treeSelect">김다우 과장</span></li>
+														<li><span class="far fa-user treeSelect">서율 사원</span></li>
+														<li><span class="far fa-user treeSelect">오광숙 사원</span></li>
 													</ul>
 												</li>
-												<li><a>법무팀</a></li>
+												<li><span class="fas fa-building">법무팀</span></li>
 											</ul>
 										</li>
-										<li><a>시스템운영본부</a></li>
-										<li><a>서비스본부</a></li>
+										<li><span class="fas fa-building">시스템운영본부</span></li>
+										<li><span class="fas fa-building">서비스본부</span></li>
 									</ul>
 								</li>
 							</ul>
+							
+							<!-- <ul id="browserTree" class="tree" style="font-size: 0.8rem;">
+								<li id="0"><span class="fas fa-building">전체</span>
+									<ul>
+										자식 노드가 들어올 공간
+									</ul> 
+								</li>
+							</ul> -->
+							
 						</div>
 					</div>
 					<div style="display: none; border:none; padding:5px 0px 5px 0px;">
