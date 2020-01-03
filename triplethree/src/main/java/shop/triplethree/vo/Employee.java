@@ -29,7 +29,7 @@ public class Employee {
 	private String joinDate;
 	private String birthDate;
 	private String photo;
-	private String retireDate;
+	private String retireDate;//퇴사일
 	private String signature;
 	private String conType;
 	private int basicPay;

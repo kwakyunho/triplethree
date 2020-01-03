@@ -61,7 +61,8 @@ public class PayController {
 	
 	/**퇴직금 등록화면**/
 	@GetMapping("/pay/selectRetiring")
-	public String selectRetiring() {
+	public String selectRetiring(Model model) {
+		model.addAttribute("selectRetiring", payService.selectRetiring());
 		//System.out.println("퇴직금 등록화면");
 		return "pay/selectRetiring";
 		

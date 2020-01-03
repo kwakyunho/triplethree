@@ -45,27 +45,25 @@
 				<div class="card">
   	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
 				 	
-					<tr><div align="center"></div>
-					<td class="col-auto"><input type="checkbox" name="allcheck"></td>
+					<tr>
+						<td class="col-auto"><input type="checkbox" name="allcheck"></td>
 						<td>사원번호</td>
 						<td>사원명</td>
 						<td>근속기간</td>
 						<td>입사일</td>
 						<td>퇴사일</td>
-						<td>퇴직급여</td>
-					
+						<td>퇴직급여</td>				
 					</tr>
 						<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-						 <tr th:each="s :${selectRetiring}">
-						 <td th:text="${s.}"></td>
-						 <td th:text="${s.}"></td>
-						 <td th:text="${s.}"></td>										
-						 <td th:text="${s.}"></td>										
-						 <td th:text="${s.}"></td>										
-						 <td th:text="${s.}"></td>										
-						 									
-						</tr>	
-					
+					 <tr th:each="s :${selectRetiring}">
+					 	 <td ></td>		
+						 <td th:text="${s.empNum}"></td>
+						 <td th:text="${s.empName}"></td>
+						 <td ></td>										
+						 <td ></td>										
+						 <td ></td>										
+						 <td ></td>															 									
+					</tr>						
 				</table>
 	
 				</div>				

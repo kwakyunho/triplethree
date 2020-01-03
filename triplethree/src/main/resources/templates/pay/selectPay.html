@@ -9,10 +9,12 @@
 </th:block>
 <th:block layout:fragment="customCss">
 <style type="text/css">
-
+.tablefixed{table-layout: fixed;}
 
 tr:hover{background: whitesmoke;}
-
+th{
+ position: fixed;
+}
 </style>
 <!-- DataTables -->
 <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
@@ -35,32 +37,18 @@ tr:hover{background: whitesmoke;}
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
 </div>
-<!-- /.content-header -->
-
-		<!-- div class="card">
-	 	 <form action="#" id="boardListTable">
-				<div>
-				사원코드 : <input type="text" name="empCode">
-				사원명 : <input type="text" name="empName">
-				부서: <input type="text" name="demgName">
-				직급 : <input type="text" name="poCode">
-				<input type="submit"  class="btn btn-success" value="조회하기">
-				</div>
-			</form> 
-				
-		</div> -->
 
 	<div class="card">	
 		<div class="card-body" style="overflow: scroll;">
 			<form class="boardListForm">
 				<table class="table table-bordered table-striped" style="white-space:pre;  width:100%; height:auto;" id="boardListTable">
 					<thead>					
-       					<tr class='tblTitle'>     						
+       					<tr class='tblTitle'>      					        					  						      												
 							<th>사원번호</th>
 							<th>사원명</th>							       						
 							<th>부서명</th>					
-							<th>직급</th>					
-							<th>기본급</th>					
+							<th>직급</th>																								
+							<th>기 본 급</th>					
 							<th>차량유지비</th>
 							<th>통신수당</th>
 							<th>식대</th>
@@ -81,37 +69,37 @@ tr:hover{background: whitesmoke;}
 							<th>차인지급액</th>		
 							<th>수정</th>											
 						</tr>	
-					</thead>
-					
+					</thead>				
 					<tbody class=hap>
 						 <tr th:each="p ,index : ${payInsert}" style="cursor:pointer" class="tbodyClass">
 						 <td class="empNum" th:id="|p-${index.count}|" th:text ="${p.empNum}"></td>
 						 <td class="empName" th:text="${p.empName}"></td>
 						 <td class="demgName" th:text="${p.demgName}"></td>
 						 <td class="poName" th:text="${p.poName}"></td>
-						 <td class="basicPay" th:text="${#numbers.formatInteger(p.basicPay,0,'COMMA')}"></td>
-						 <td class="selfDriPay" th:text="${#numbers.formatInteger(p.selfDriPay,0,'COMMA')}"></td>
-						 <td class="comPay" th:text="${#numbers.formatInteger(p.comPay,0,'COMMA')}"></td>
-						 <td class="mealCost" th:text="${#numbers.formatInteger(p.mealCost,0,'COMMA')}"></td>
-						 <td class="beneFit" th:text="${#numbers.formatInteger(p.beneFit,0,'COMMA')}"></td>
-					 	 <td class="holidayPay" th:text="${#numbers.formatInteger(p.holidayPay,0,'COMMA')}"></td>
-						 <td class="overtimePay" th:text="${#numbers.formatInteger(p.overtimePay,0,'COMMA')}"></td>
-						 <td class="positionBenefit" th:text="${#numbers.formatInteger(p.positionBenefit,0,'COMMA')}"></td>
-						 <td class="taxation"></td>
-						 <td class="taxFree"></td>
-						 <td class="payment"></td>					 					
-						 <td class="nationPer"></td>						 		
-						 <td class="healthPer"></td>		
-						 <td class="longCare"></td>			
-						 <td class="insurPer"></td>		
-						 <td class="one"th:text="${#numbers.formatInteger(p.one,0,'COMMA')}"></td>		
-						 <td class="residentTax"></td>		
-						 <td class="deduct"></td>		
-						 <td class="deductHap"></td>	
+						 <td class="basicPay" th:text="${#numbers.formatInteger(p.basicPay,0,'COMMA')}" align="right"></td>
+						 <td class="selfDriPay" th:text="${#numbers.formatInteger(p.selfDriPay,0,'COMMA')}" align="right"></td>
+						 <td class="comPay" th:text="${#numbers.formatInteger(p.comPay,0,'COMMA')}" align="right"></td>
+						 <td class="mealCost" th:text="${#numbers.formatInteger(p.mealCost,0,'COMMA')}" align="right"></td>
+						 <td class="beneFit" th:text="${#numbers.formatInteger(p.beneFit,0,'COMMA')}" align="right"></td>
+					 	 <td class="holidayPay" th:text="${#numbers.formatInteger(p.holidayPay,0,'COMMA')}" align="right"></td>
+						 <td class="overtimePay" th:text="${#numbers.formatInteger(p.overtimePay,0,'COMMA')}" align="right"></td>
+						 <td class="positionBenefit" th:text="${#numbers.formatInteger(p.positionBenefit,0,'COMMA')}" align="right"></td>
+						 <td class="taxation" align="right"></td>
+						 <td class="taxFree" align="right"></td>
+						 <td class="payment" align="right"></td>					 					
+						 <td class="nationPer" align="right"></td>						 		
+						 <td class="healthPer" align="right"></td>		
+						 <td class="longCare" align="right"></td>			
+						 <td class="insurPer" align="right"></td>		
+						 <td class="one"th:text="${#numbers.formatInteger(p.one,0,'COMMA')}" align="right"></td>		
+						 <td class="residentTax" align="right"></td>		
+						 <td class="deduct" align="right"></td>		
+						 <td class="deductHap" align="right"></td>	
 						 <td><a class="btn btn btn-success" th:href="@{/admin/pay/updatePay(empCode=${p.empCode})}">수정</a></td>		
 						 </tr>
 					</tbody>	
 				</table>
+			<div class="col-12">	
 				<table class="table table-bordered table-striped" style="white-space:pre;  width:100%; height:auto;">
 					<tr>
 						<td></td>
@@ -137,27 +125,28 @@ tr:hover{background: whitesmoke;}
 					</tr>
 					<tr>
 						<td rowspan="2">총 계</td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.basicPay,0,'COMMA')}"></td>										
-						<td th:text="${#numbers.formatInteger(selectPaySum.selfDriPay,0,'COMMA')}"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.comPay,0,'COMMA')}"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.mealCost,0,'COMMA')}"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.beneFit,0,'COMMA')}"></td>							
-						<td th:text="${#numbers.formatInteger(selectPaySum.holidayPay,0,'COMMA')}"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.overtimePay,0,'COMMA')}"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.positionBenefit,0,'COMMA')}"></td>						
-						<td id="taxation"></td>
-						<td id="taxFree"></td>
-						<td id="payment"></td>					
-						<td id="nationPer"></td>
-						<td id="healthPer"></td>
-						<td id="longCare"></td>
-						<td id="insurPer"></td>
-						<td id="one"></td>
-						<td id="residentTax"></td>
-						<td id="deduct"></td>
-						<td id="deductHap"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.basicPay,0,'COMMA')}" align="right"></td>										
+						<td th:text="${#numbers.formatInteger(selectPaySum.selfDriPay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.comPay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.mealCost,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.beneFit,0,'COMMA')}" align="right"></td>							
+						<td th:text="${#numbers.formatInteger(selectPaySum.holidayPay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.overtimePay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.positionBenefit,0,'COMMA')}" align="right"></td>						
+						<td id="taxation" align="right"></td>
+						<td id="taxFree" align="right"></td>
+						<td id="payment" align="right"></td>					
+						<td id="nationPer" align="right"></td>
+						<td id="healthPer" align="right"></td>
+						<td id="longCare" align="right"></td>
+						<td id="insurPer" align="right"></td>
+						<td id="one" align="right"></td>
+						<td id="residentTax" align="right"></td>
+						<td id="deduct" align="right"></td>
+						<td id="deductHap" align="right"></td>
 					</tr>	
-				</table>							
+				</table>
+				</div>							
 			</form>
 	           	<!-- /.table -->
         </div>
