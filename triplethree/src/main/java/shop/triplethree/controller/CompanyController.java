@@ -1,14 +1,24 @@
 package shop.triplethree.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.triplethree.mapper.CompanyMapper;
 import shop.triplethree.service.CompanyService;
@@ -21,6 +31,8 @@ public class CompanyController {
 	@Autowired private CompanyService companyService;
 	@Autowired private CompanyMapper companyMapper;
 
+	@Value("${file.upload.path}")
+	private String uploadPath;
 	
 	/**
 	 * 메뉴에서 부서관리탭을 누르고 들어올때 실행
@@ -164,11 +176,51 @@ public class CompanyController {
 	/**회사정보 입력처리 및 코드생성**/
 
 	@PostMapping("/company/companyInsert")
-	public String insertCompany(Company company, HttpSession session) {
+	public String insertCompany(@RequestParam("coLogofile") MultipartFile file,Company company, HttpSession session) {
 
 		String sid = (String) session.getAttribute("SID");
 		
-		company.setSid(sid);
+		 company.setSid(sid);
+		 Path rootLocation = Paths.get(uploadPath);
+		 String filePath = null;
+		 			
+		
+		 try {			
+				
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				InputStream inputStream = file.getInputStream();
+				System.out.println(inputStream + "<--inputStream");
+				
+			
+				
+				if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+					//테이블에 사진주소
+					Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+					filePath = "/img/" + originFileName;
+				}
+				
+			
+				System.out.println(filePath + "<- 1");
+				
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				
+				try {
+					Files.delete(rootLocation.resolve(originFileName));
+				
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}					
+				
+			}
+					
+		if(filePath != null) company.setCoLogo(filePath);
+	 	
 		companyService.insertCompany(company);
 		
 		
@@ -194,8 +246,50 @@ public class CompanyController {
 	
 	/**회사정보 진짜 수정클릭시 내용변경**/
 	@PostMapping("/company/companyUpdate")
-	public String updateCompany(Company company) {
+	public String updateCompany(Company company, @RequestParam("coLogofile") MultipartFile file, HttpSession session) {
 		//System.out.println("여기오냐?");
+		String sid = (String) session.getAttribute("SID");
+		
+		 company.setSid(sid);
+		 Path rootLocation = Paths.get(uploadPath);
+		 String filePath = null;
+		 			
+		
+		 try {			
+				
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				InputStream inputStream = file.getInputStream();
+				System.out.println(inputStream + "<--inputStream");
+				
+			
+				
+				if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+					//테이블에 사진주소
+					Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+					filePath = "/img/" + originFileName;
+				}
+				
+			
+				System.out.println(filePath + "<- 1");
+				
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				
+				try {
+					Files.delete(rootLocation.resolve(originFileName));
+				
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}					
+				
+			}
+					
+		if(filePath != null) company.setCoLogo(filePath);
 		companyService.updateCompany(company);
 		return "redirect:/company/companyInfo";
 	}

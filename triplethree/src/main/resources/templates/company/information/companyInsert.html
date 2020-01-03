@@ -34,7 +34,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-	<form role="form" class="form-horozontal" th:action="@{/company/companyInsert}" method="post">
+	<form role="form" class="form-horozontal" th:action="@{/company/companyInsert}" method="post" enctype="multipart/form-data">
  	  	<div class="card-body">
 	  	<div class="form-group row col-sm-12">
 	   		<label class="col-sm-2 col-form-label">회사코드</label>
@@ -162,8 +162,8 @@
 		   			<div class="form-group">
 						<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
 						<div class="col-xs-4">
-							<img id="logoImgView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
-							<input class="form-control" name="coLogo" id="logoImg" type="file"/>
+							<img id="coLogoView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
+							<input class="form-control" name="coLogofile" id="coLogo" type="file"/>
 							<span id="imgFail" >로고를 선택해주세요</span>
 						</div>
 					</div>
@@ -180,10 +180,10 @@
 							}
 						}
 							//이미지 파일 입력 여부 검사
-							$('#logoImg').change(function(){
-								if($('#logoImg').val() == '') { 
+							$('#coLogo').change(function(){
+								if($('#coLogo').val() == '') { 
 									$('#imgFail').show();
-									$('#logoImg').focus();
+									$('#coLogo').focus();
 								return false;
 								}else{
 									$('#imgFail').hide();
@@ -198,12 +198,12 @@
 	   		                
 	                   
 				</div>
-	  			</div>
 	  	 <input class="btn btn-block btn-success"
 	  	 type="submit" name="infoInsert" value="회사 정보 입력하기">
-	  	 </div>
 	
-	   </form>
+  				 </form>
+  			</div>
+	  	 </div>
 					</div>
 					<!-- /.card -->
 				<!-- /.card -->

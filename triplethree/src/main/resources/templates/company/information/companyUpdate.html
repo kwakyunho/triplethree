@@ -33,7 +33,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-	<form role="form" class="form-horozontal" th:action="@{/company/companyUpdate}" method="post">
+	<form role="form" class="form-horozontal" th:action="@{/company/companyUpdate}" method="post" enctype="multipart/form-data">
  	  	<div class="card-body">
 	  	<div class="form-group row col-sm-12">
 	   		<label class="col-sm-2 col-form-label">회사코드</label>
@@ -155,11 +155,47 @@
    			 <div class="col-sm-10">	
 	   			<input type="email" name="coEmail"  size="30" class="form-control col-12" th:value="${company.coEmail}">
 				</div>
-   		 	 </div>   		 
+   		 	 </div> 
+   		 	 <div class="form-group">  		 
 	   			<label class="col-sm-2 col-form-label">회사 로고</label>	
-   			 <div class="col-sm-4">
-   				<input type="file" id="img-input" name="coLogo" size="30" th:value="${company.coLogo}">
-			 </div>
+		   			<div class="form-group">
+						<label class="col-xs-3 control-label" for="uploadFile">사진 :</label>
+						<div class="col-xs-4">
+							<img id="coLogoView" class="img-responsive" type="hidden" src="#" alt="미리보기" style="width:100px; height:100px;"/>
+							<input class="form-control" name="coLogofile" id="coLogo" type="file"/>
+							<span id="imgFail" >로고를 선택해주세요</span>
+								<div class="col-sm-3" th:if="${company.coLogo} neq null">
+                 			<img th:src="${company.coLogo}" class="img-circle elevation-2" alt="User Image" style="width:200px; height:200px;">
+                 		</div>
+						</div>
+					</div>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				<script type="text/javascript">
+							function readURL(input, id) {
+							if (input.files && input.files[0]) {
+								var reader = new FileReader();
+						
+								reader.onload = function(e) {
+									$("#" + id).attr('src', e.target.result);
+								}					
+								reader.readAsDataURL(input.files[0]);
+							}
+						}
+							//이미지 파일 입력 여부 검사
+							$('#coLogo').change(function(){
+								if($('#coLogo').val() == '') { 
+									$('#imgFail').show();
+									$('#coLogo').focus();
+								return false;
+								}else{
+									$('#imgFail').hide();
+									var id = $(this).attr('id');
+									id = id + "View";
+									console.log(id);
+									readURL(this, id);
+								}
+							});		
+						</script>  		
 			 <!--작성자는 나중에 세션걸꺼니까 지울꺼임 지금은 테스트중이니까 살리고  -->
 	   			<label class="col-sm-2 col-form-label">작성자</label>
 	   		<div class="col-sm-4">	
@@ -171,8 +207,8 @@
 			</div>
   			</div>
   	 <input class="btn btn-block btn-success" type="submit" name="infoInsert" value="회사 정보 수정하기">
-   </form>
   	 </div>
+   </form>
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->
