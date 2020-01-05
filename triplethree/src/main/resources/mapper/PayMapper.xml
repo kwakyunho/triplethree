@@ -69,22 +69,16 @@
 	</select>
 	
 	<!--퇴직금 검색쿼리문짜야험  -->
-	<select id="selectRetiring" resultType="shop.triplethree.vo.Pay">	
+	<select id="selectRetiring" resultType="shop.triplethree.vo.Employee">	
 	SELECT  
-			A.code as empCode,
 			A.emp_num as empNum,
-			A.emp_name as empName,
+			A.emp_name as empName,				
+			A.retire_date AS retireDate,
+			A.join_date AS joinDate,
+			DATEDIFF(NOW(),A.join_date) AS diff,
 			B.dename as demgName,
-			C.poname as poName,
-			p.basic_pay AS basicPay,
-			p.benefit AS beneFit,
-			p.holiday_pay AS holidayPay,
-			p.overtime_pay AS overtimePay,
-			p.position_benefit AS positionBenefit,
-			p.self_dri_pay AS selfDriPay,
-			p.com_pay AS comPay,
-			p.meal_cost AS mealCost,
-			i.one AS one
+			C.poname as poName
+
 	FROM (
 			SELECT A.*
 			FROM EMP_MANAGE A

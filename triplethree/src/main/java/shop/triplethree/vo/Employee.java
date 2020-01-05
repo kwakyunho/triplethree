@@ -40,8 +40,15 @@ public class Employee {
 	private String approver; //승인자(인사이동목록)
 	private String approverName; //승인자 이름 (인사이동목록)
 	private String approveDay; //승인일자(인사이동목록)
+	private String diff; //근속기간
 	public String getCode() {
 		return code;
+	}
+	public String getDiff() {
+		return diff;
+	}
+	public void setDiff(String diff) {
+		this.diff = diff;
 	}
 	public void setCode(String code) {
 		this.code = code;
