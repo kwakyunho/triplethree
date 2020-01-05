@@ -44,11 +44,11 @@
 	    <div class="form-group row col-sm-12">
 	   		<label class="col-sm-2 col-form-label">회사명</label>	
 	   		 <div class="col-sm-4">
-	   			<input type="text" name="coName" size="10" class="form-control col-12" th:value="${company.coName}" readonly="readonly">
+	   			<input type="text" name="coName" id="coName"size="10" class="form-control col-12" th:value="${company.coName}" readonly="readonly">
 	   		</div>
 	   		<label class="col-sm-2 col-form-label">대표자명</label>
 	   		 <div class="col-sm-4">
-	   			<input type="text" name="coCeoname" size="10" class="form-control col-12" th:value="${company.coCeoname}">
+	   			<input type="text" name="coCeoname" id="coCeoname" size="10" class="form-control col-12" th:value="${company.coCeoname}">
 	   		</div>	
 	   	</div>	
 			<div class="form-group row">
@@ -133,7 +133,7 @@
 		<div class="form-group row col-sm-12">
 	   		 <label class="col-sm-2 col-form-label" >사업자등록번호</label>
 	   		  <div class="col-sm-4">
-	   			<input type="text" name="coBin" size="30" class="form-control col-12" th:value="${company.coBin}" readonly="readonly">
+	   			<input type="text" name="coBin" size="30" id="coBin"class="form-control col-12" th:value="${company.coBin}" readonly="readonly">
 			  </div>
 		</div>
 		  <div class="form-group row col-12">	  
@@ -206,7 +206,7 @@
 	   			<input type="text" name="coReason" size="5" class="form-control col-6" th:value="${company.coReason}">
 			</div>
   			</div>
-  	 <input class="btn btn-block btn-success" type="submit" name="infoInsert" value="회사 정보 수정하기">
+  	 <input class="btn btn-block btn-success" type="submit" name="infoInsert" id="updateCompany"value="회사 정보 수정하기">
   	 </div>
    </form>
 				</div>
@@ -226,6 +226,45 @@
 <th:block layout:fragment="customScript">
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <!-- <script th:src="@{/dist/js/pages/dashboard3.js}"></script> -->
-
+<script type="text/javascript">
+$(function(){	
+	$('#updateCompany').click(function(){
+		var coName =$('#coName');
+		var coCeoname =$('#coCeoname');
+		var coPostCode=$('input[name="coPostCode"]');
+		var coBin=$('#coBin');
+		var coLogo=$('#coLogo');
+		if(coName.val() ==""){
+			alert('회사명을 입력해주세요');
+			coName.focus();
+			return false;
+		}
+		if(coCeoname.val()==""){
+			alert('대표자 명을 입력해주세요')
+			coCeoname.focus();
+			return false;
+		}
+		if(coPostCode.val()==""){
+			alert('주소가 정확하지 않습니다.');
+			coPostCode.focus();
+			return false;
+		}
+		if(coBin.val() ==""){
+			alert('사업자등록번호를 입력해주세요');
+			coBin.focus();
+			return false;
+		}else if(coBin.val()<0){
+			alert('사업자등록번호가 올바르지 않습니다.');
+			coBin.focus();
+			return false;
+		}
+		if(coLogo.val()==""){
+			alert('로고를 선택해주세요');
+			coLogo.focus();
+			return false;
+		}		
+	});
+});
+</script>
 </th:block>
 </html>

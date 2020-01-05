@@ -10,4 +10,6 @@ $(function(){
 			$('#deleteForm').attr('action', 'deleteCompany').submit();
 		 }
 	});
+	
 });
+
