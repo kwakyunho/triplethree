@@ -1,12 +1,22 @@
 package shop.triplethree.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.triplethree.service.BoardService;
 import shop.triplethree.service.ClientService;
@@ -16,6 +26,9 @@ import shop.triplethree.vo.Board;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	
+	@Value("${board.file.upload.path}")
+	private String uploadPath;
 
 	/**
 	 * 게시글 상세보기
@@ -62,8 +75,39 @@ public class BoardController {
 	 * @return
 	 */
 	@PostMapping("/admin/board/boardInsert")
-	public String insertBoard(Board board, HttpSession session) {
+	public String insertBoard(Board board, HttpSession session,@RequestParam("boardfile") MultipartFile file) {
 		board = boardService.createBoardCode(session, board);
+		 Path rootLocation = Paths.get(uploadPath);
+		 String boardFilePath = null;
+		
+		 try {			
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				InputStream inputStream = file.getInputStream();
+				System.out.println(inputStream + "<--inputStream");
+				
+				if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+					//테이블에 파일 경로
+					Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+					boardFilePath = "/boardfiles/" + originFileName;
+				}
+				
+				System.out.println(boardFilePath + "<- 1");
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				try {
+					Files.delete(rootLocation.resolve(originFileName));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}					
+				
+			}
+		 
+		if(boardFilePath != null) board.setBoardFilePath(boardFilePath);
 		boardService.insertBoard(board);
 		System.out.println(board.toString() + "작성하기 폼에서 들어온 값들 ");
 		return "redirect:/board/boardList";

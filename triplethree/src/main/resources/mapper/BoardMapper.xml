@@ -70,7 +70,8 @@
 			,board_count
 			,board_pw
 			,li_code
-			,writer_day)
+			,writer_day
+			,board_file)
 		values
 			(#{code}
 			,#{empCode}
@@ -79,7 +80,8 @@
 			,0
 			,#{boardPw}
 			,#{liCode}
-			,NOW());
+			,NOW()
+			,#{boardFilePath});
 	</insert>
 	
 	<!-- 전사게시판 글 다가져오기 -->
