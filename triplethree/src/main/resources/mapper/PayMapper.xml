@@ -82,7 +82,7 @@
 				ELSE DATEDIFF(NOW(),A.join_date)
 				END
 			) AS longevity,
-				
+			p.basic_pay AS basicPay,	
 			B.dename as demgName,
 			C.poname as poName
 

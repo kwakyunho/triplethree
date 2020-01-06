@@ -45,24 +45,27 @@
 				<div class="card">
   	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
 				 	
-					<tr>
-						<td class="col-auto"><input type="checkbox" name="allcheck"></td>
+					<tr>					
 						<td align="center">사원번호</td>
+						<td align="center">부서</td>
+						<td align="center">직급</td>
 						<td align="center">사원명</td>
 						<td align="center">근속기간</td>
 						<td align="center">입사일</td>
 						<td align="center">퇴사일</td>
-						<td align="center">퇴직급여</td>				
+						<td align="center">퇴직금</td>				
 					</tr>
 						<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-					 <tr th:each="s :${selectRetiring}">
-					 	 <td ></td>		
+					 <tr th:each="s ,index :${selectRetiring}" class="selectRetiring">							
+						 <input class="basicPay" type="hidden"id="basicPay" th:value="${s.basicPay}">									 									
 						 <td th:text="${s.empNum}" align="center"></td>
+						 <td th:text="${s.demgName}" align="center"></td>
+						 <td th:text="${s.poName}" align="center"></td>
 						 <td th:text="${s.empName}" align="center"></td>
-						 <td th:text="${s.longevity}+'일'" align="right"></td>										
+						 <td th:text="${s.longevity}+'일'" align="right"></td><!--재직일수  -->										
 						 <td th:text="${s.joinDate}" align="center"></td>										
 						 <td th:text="${s.retireDate}" align="center"></td>										
-						 <td id="severancePay"></td>															 									
+						 <td class="severancePay" id="severancePay" th:text="${s.basicPay}*${s.longevity}/365"></td>
 					</tr>						
 				</table>
 	
