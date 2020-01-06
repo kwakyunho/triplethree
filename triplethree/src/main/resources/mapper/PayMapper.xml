@@ -68,14 +68,21 @@
 		ON p.in_code = i.code
 	</select>
 	
-	<!--퇴직금 검색쿼리문짜야험  -->
+	<!--퇴직금 조회  -->
 	<select id="selectRetiring" resultType="shop.triplethree.vo.Employee">	
 	SELECT  
 			A.emp_num as empNum,
 			A.emp_name as empName,				
 			A.retire_date AS retireDate,
 			A.join_date AS joinDate,
-			DATEDIFF(NOW(),A.join_date) AS diff,
+			(
+				CASE
+				WHEN A.retire_date IS NOT NULL AND A.retire_date <![CDATA[<>]]> ''
+				THEN DATEDIFF(A.retire_date,A.join_date)
+				ELSE DATEDIFF(NOW(),A.join_date)
+				END
+			) AS longevity,
+				
 			B.dename as demgName,
 			C.poname as poName
 
@@ -99,12 +106,7 @@
 		inner JOIN INCOME AS i
 		ON p.in_code = i.code
 	</select>
-	<!-- 	SELECT 
-	em.retire_date as retireDate
-	FROM EMP_MANAGE AS em
-	left JOIN DEMG AS d ON em.demgcode = d.code 
-	left JOIN POSISYS AS p ON em.pocode  = p.code
-	 -->
+	
 	
 	<!--급여 화면 검색  -->
 	<select id="insertSearchPay" resultType="shop.triplethree.vo.Pay">

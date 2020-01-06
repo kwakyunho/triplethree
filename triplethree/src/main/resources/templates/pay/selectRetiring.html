@@ -47,22 +47,22 @@
 				 	
 					<tr>
 						<td class="col-auto"><input type="checkbox" name="allcheck"></td>
-						<td>사원번호</td>
-						<td>사원명</td>
-						<td>근속기간</td>
-						<td>입사일</td>
-						<td>퇴사일</td>
-						<td>퇴직급여</td>				
+						<td align="center">사원번호</td>
+						<td align="center">사원명</td>
+						<td align="center">근속기간</td>
+						<td align="center">입사일</td>
+						<td align="center">퇴사일</td>
+						<td align="center">퇴직급여</td>				
 					</tr>
 						<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
 					 <tr th:each="s :${selectRetiring}">
 					 	 <td ></td>		
-						 <td th:text="${s.empNum}"></td>
-						 <td th:text="${s.empName}"></td>
-						 <td th:text="${s.diff}"></td>										
-						 <td th:text="${s.joinDate}" ></td>										
-						 <td th:text="${s.retireDate}" ></td>										
-						 <td ></td>															 									
+						 <td th:text="${s.empNum}" align="center"></td>
+						 <td th:text="${s.empName}" align="center"></td>
+						 <td th:text="${s.longevity}+'일'" align="right"></td>										
+						 <td th:text="${s.joinDate}" align="center"></td>										
+						 <td th:text="${s.retireDate}" align="center"></td>										
+						 <td id="severancePay"></td>															 									
 					</tr>						
 				</table>
 	

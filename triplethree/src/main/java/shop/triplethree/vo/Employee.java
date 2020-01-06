@@ -40,15 +40,15 @@ public class Employee {
 	private String approver; //승인자(인사이동목록)
 	private String approverName; //승인자 이름 (인사이동목록)
 	private String approveDay; //승인일자(인사이동목록)
-	private String diff; //근속기간
+	private String longevity; //근속기간
+	public String getLongevity() {
+		return longevity;
+	}
+	public void setLongevity(String longevity) {
+		this.longevity = longevity;
+	}
 	public String getCode() {
 		return code;
-	}
-	public String getDiff() {
-		return diff;
-	}
-	public void setDiff(String diff) {
-		this.diff = diff;
 	}
 	public void setCode(String code) {
 		this.code = code;
@@ -282,8 +282,9 @@ public class Employee {
 				+ ", retireDate=" + retireDate + ", signature=" + signature + ", conType=" + conType + ", basicPay="
 				+ basicPay + ", writer=" + writer + ", writerName=" + writerName + ", writerDay=" + writerDay
 				+ ", afterDate=" + afterDate + ", approver=" + approver + ", approverName=" + approverName
-				+ ", approveDay=" + approveDay + "]";
+				+ ", approveDay=" + approveDay + ", longevity=" + longevity + "]";
 	}
+
 	
 	
 	
