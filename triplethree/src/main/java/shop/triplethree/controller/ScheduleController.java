@@ -1,6 +1,7 @@
 package shop.triplethree.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.triplethree.service.ScheduleService;
@@ -115,5 +117,19 @@ public class ScheduleController {
 		String sid = (String) session.getAttribute("SID");
 		System.out.println("세션값 확인" + sid);
 		return sid;
+	}
+	
+	/**
+	 * 메인화면 일정 리스트 조회
+	 * */
+	@PostMapping(value="/indexList", produces = "application/json")
+	public @ResponseBody List<Schedule> indexListSelect(@RequestParam Map<String, String> json){
+		Schedule jsonS = new Schedule();
+		jsonS.setSid(json.get("userSid"));
+		jsonS.setDemgcode(json.get("userDemgCode"));
+		List<Schedule> result = scheduleService.selectSchedule(jsonS);
+		System.out.println("값확인" + result);
+		// curdate -> 오늘 날짜만 sql에서 뽑게 하는 쿼리문
+		return result;
 	}
 }

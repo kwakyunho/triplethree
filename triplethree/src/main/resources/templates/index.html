@@ -10,7 +10,23 @@
 
 <!-- 사용자 CSS -->
 <th:block layout:fragment="customCss">
+<style>
 
+#trCss{
+	border-bottom: 1px solid;
+	text-align: center;
+	
+}
+
+#thCss{
+	width: 180px;
+}
+
+#tdCss{
+	width: 180px;
+	text-align: center;
+}
+</style>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -44,41 +60,34 @@
 				<!-- /.card -->
 				
 				<!-- 메인화면 일정 부분 시작 -->
-				<div class="card bg-gradient-success">
+				<div class="card bg-gradient-default">
 					<div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
 						<h3 class="card-title">
-							<i class="far fa-calendar-alt"></i> 오늘의 할일
+							<i class="far fa-calendar-alt"></i> 오늘의 일정
 						</h3>
 						<div class="card-tools">
 							<div class="btn-group"></div>
-						<button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+						<button type="button" class="btn btn-secondary btn-sm" data-card-widget="collapse">
 							<i class="fas fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-							<i class="fas fa-times"></i>
 						</button>
 						</div>
 					</div>
 					<div class="card-body pt-0">
-						<div id="calendar" style="width: 100%">
+						<div id="calendar" style="width: 100%; min-height: 200px">
 							<div class="bootstrap-datetimepicker-widget usetwentyfour">
-								<table style="min-height: 291px;">
+								<table style="min-height: 200px;">
 									<thead>
+										<tr id="trCss">
+											<th id="thCss">일정구분</th>
+											<th id="thCss">일정명</th>
+											<th id="thCss">시간</th>
+										</tr>
 										<tr>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
+											<td id="tdCss">1</td>
+											<td id="tdCss">2</td>
+											<td id="tdCss">3</td>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-										</tr>
-									</tbody>
 								</table>
 							</div>
 						</div>
@@ -359,6 +368,21 @@ $(document).ready(function(){
 	// 버튼 클릭시 현재 상태 변경하기
 	$('.nowWorkStateList').on('click', function(){
 		$('.nowWorkState').text($(this).text());
+	});
+	
+	// 오늘 일정 조회 (정해성)
+	$(document).ready(function(){
+		var sendData = {};
+		sendData.ajaxType = 'POST';	// 전송타입
+		sendData.ajaxUrl = '/indexList';	// 호출 주소
+		sendData.ajaxDataType = 'json';	// 리턴 타입
+		
+		sendData.userSid = [[${session.SID}]];
+		sendData.userDemgCode = [[${session.SDEMGCODE}]];
+		
+		$(document).workTimeEvent(sendData, function(result){
+			
+		});
 	});
 });
 
