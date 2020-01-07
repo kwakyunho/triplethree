@@ -68,13 +68,43 @@
 		ON p.in_code = i.code
 	</select>
 	
-	<!--퇴직금 검색쿼리문짜야험  -->
+	<!--퇴직금 조회  -->
 	<select id="selectRetiring" resultType="shop.triplethree.vo.Employee">	
-		SELECT 
-	em.retire_date
-	FROM EMP_MANAGE AS em
-	left JOIN DEMG AS d ON em.demgcode = d.code 
-	left JOIN POSISYS AS p ON em.pocode  = p.code
+	SELECT  
+			A.emp_num as empNum,
+			A.emp_name as empName,				
+			A.retire_date AS retireDate,
+			A.join_date AS joinDate,
+			(
+				CASE
+				WHEN A.retire_date IS NOT NULL AND A.retire_date <![CDATA[<>]]> ''
+				THEN DATEDIFF(A.retire_date,A.join_date)
+				ELSE DATEDIFF(NOW(),A.join_date)
+				END
+			) AS longevity,
+			p.basic_pay AS basicPay,	
+			B.dename as demgName,
+			C.poname as poName
+
+	FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) A
+		
+		LEFT JOIN DEMG B
+		ON A.demgcode = B.CODE
+		
+		LEFT JOIN POSISYS C
+		ON A.pocode = C.CODE
+		inner JOIN PAY_BILL AS p
+		ON A.CODE = p.emp_code
+		inner JOIN INCOME AS i
+		ON p.in_code = i.code
 	</select>
 	
 	
@@ -239,6 +269,8 @@
 		de.YEAR AS year
 	FROM
 		DEDUCT_MANAGE AS de
+	where
+	 	de.code=#{deCode}
 	</select>
 	<!--공제액 수정  -->
 	<update id="updateDeduct" parameterType="shop.triplethree.vo.Pay">
@@ -253,7 +285,39 @@
 		writer=#{writer},
 		writer_day=NOW()
 	WHERE 
-		deCode=#{deCode}
+		code=#{deCode}
 	</update>
+	
+	<!--급여대장 총계  -->
+	<select id="selectPaySum" resultType="shop.triplethree.vo.Pay">
+	SELECT  
+			SUM(p.basic_pay) AS basicPay,
+		SUM(p.self_dri_pay) AS selfDriPay,
+		SUM(p.com_pay) AS comPay,
+		SUM(p.meal_cost)AS mealCost,
+		SUM(p.benefit) AS beneFit,
+		SUM(p.holiday_pay) AS holidayPay,
+		SUM(p.overtime_pay) AS overtimePay,
+		SUM(p.position_benefit) AS positionBenefit
+	FROM (
+			SELECT A.*
+			FROM EMP_MANAGE A
+			INNER JOIN (
+				SELECT emp_num, MAX(writer_day) AS writer_day
+				FROM EMP_MANAGE
+				GROUP BY emp_num) B
+			ON A.writer_day = B.writer_day
+			AND A.emp_num = B.emp_num) A
+		
+		LEFT JOIN DEMG B
+		ON A.demgcode = B.CODE
+		
+		LEFT JOIN POSISYS C
+		ON A.pocode = C.CODE
+		inner JOIN PAY_BILL AS p
+		ON A.CODE = p.emp_code
+		inner JOIN INCOME AS i
+		ON p.in_code = i.code
+	</select>
 	
 </mapper>

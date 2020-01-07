@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,9 @@ import shop.triplethree.vo.Pay;
 public class PayController {
 	@Autowired private PayService payService;
 	@Autowired private CompanyMapper companyMapper;
+		
+	@Value("${file.upload.path}")
+	private String uploadPath;
 	/**급여등록화면**/
 	@GetMapping("/admin/pay/viewPay")
 	public String viewPay() {
@@ -48,15 +52,17 @@ public class PayController {
 	/** 급여대장** */
 	@GetMapping("/pay/selectPay")
 	public String selectPay(Model model) {		
-		//System.out.println("급여 급여대장이다");
-		 model.addAttribute("selectPay", payService.selectPay());
+		 model.addAttribute("selectPaySum", payService.selectPaySum());
+		 //System.out.println("총계에요");
 		 model.addAttribute("payInsert", payService.payInsert());
+		 //System.out.println("급여에유");
 		return "pay/selectPay";	
 	}
 	
 	/**퇴직금 등록화면**/
 	@GetMapping("/pay/selectRetiring")
-	public String selectRetiring() {
+	public String selectRetiring(Model model) {
+		model.addAttribute("selectRetiring", payService.selectRetiring());
 		//System.out.println("퇴직금 등록화면");
 		return "pay/selectRetiring";
 		
@@ -96,10 +102,18 @@ public class PayController {
 		model.addAttribute("insertDeductModal", payService.deductList(pay));
 		  return "redirect:/pay/insertDeduct";
 	  }
-	  /***공제액 수정***/
+	  /***공제액 수정화면가기***/
 	  @GetMapping("/admin/pay/updateDeductList")
 	  public String updateDeductList(@RequestParam(value="deCode") String deCode, Model model) {
 		  model.addAttribute("updateDeductList", payService.updateDeductList(deCode));
-		  return "redirect:/pay/updateDeduct";
+		  return "/pay/updateDeduct";
+	  }
+	  /**공제액 수정하기****/
+	  @PostMapping("/admin/pay/updateDeduct")
+	  public String updateDeduct(Pay pay,HttpSession session) {
+		  String writer =(String) session.getAttribute("SID");
+		  pay.setWriter(writer);
+		  payService.updateDeduct(pay);
+		  return "redirect:/admin/pay/insertDeduct";
 	  }
 }

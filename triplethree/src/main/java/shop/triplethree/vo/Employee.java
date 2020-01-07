@@ -29,7 +29,7 @@ public class Employee {
 	private String joinDate;
 	private String birthDate;
 	private String photo;
-	private String retireDate;
+	private String retireDate;//퇴사일
 	private String signature;
 	private String conType;
 	private int basicPay;
@@ -40,6 +40,14 @@ public class Employee {
 	private String approver; //승인자(인사이동목록)
 	private String approverName; //승인자 이름 (인사이동목록)
 	private String approveDay; //승인일자(인사이동목록)
+	private int longevity; //근속기간
+	
+	public int getLongevity() {
+		return longevity;
+	}
+	public void setLongevity(int longevity) {
+		this.longevity = longevity;
+	}
 	public String getCode() {
 		return code;
 	}
@@ -275,8 +283,9 @@ public class Employee {
 				+ ", retireDate=" + retireDate + ", signature=" + signature + ", conType=" + conType + ", basicPay="
 				+ basicPay + ", writer=" + writer + ", writerName=" + writerName + ", writerDay=" + writerDay
 				+ ", afterDate=" + afterDate + ", approver=" + approver + ", approverName=" + approverName
-				+ ", approveDay=" + approveDay + "]";
+				+ ", approveDay=" + approveDay + ", longevity=" + longevity + "]";
 	}
+
 	
 	
 	

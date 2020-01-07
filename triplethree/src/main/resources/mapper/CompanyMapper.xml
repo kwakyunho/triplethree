@@ -285,7 +285,7 @@
 		,co_phone=#{coPhone}
 		,co_email=#{coEmail}
 		,co_logo=#{coLogo}
-		,writer=#{writer}
+		,writer=#{sid}
 		,writer_day=now()
 		,co_reason=#{coReason}
 	where
