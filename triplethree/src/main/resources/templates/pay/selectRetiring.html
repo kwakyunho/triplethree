@@ -3,8 +3,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layouts"
       layout:decorate="~{layouts/default}">
 
+<!-- 사용자 타이틀 -->
 <th:block layout:fragment="customTitle">
 	<title>퇴직금 조회</title>
+</th:block>
+
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
+
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -26,53 +35,41 @@
 	</div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
-<div class="content">
-	<div class="col-12">
-		<div class="card">
-			<form th:href="@{/pay/selectRetiring}" method="post">
- 				<div>
-				<input type="date" name="retirng1">~<input type="date" name="retirng2">
-				<button type="button">조회</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
-  	 			<table class="table table-bordered table-striped dataTable"role="grid">  	   	 
-				 	
-					<tr>					
-						<td align="center">사원번호</td>
-						<td align="center">부서</td>
-						<td align="center">직급</td>
-						<td align="center">사원명</td>
-						<td align="center">근속기간</td>
-						<td align="center">기본급</td>						
-						<td align="center">입사일</td>
-						<td align="center">퇴사일</td>
-						<td align="center">퇴직금</td>				
-						<td align="center">퇴직금</td>				
-					</tr>
-						<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
-					 <tr th:each="s ,index :${selectRetiring}" class="selectRetiring">							
-						 								 									
-						 <td th:text="${s.empNum}" align="center"></td>
-						 <td th:text="${s.demgName}" align="center"></td>
-						 <td th:text="${s.poName}" align="center"></td>
-						 <td th:text="${s.empName}" align="center"></td>
-						 <td th:text="${s.longevity}+'일'" align="right"></td><!--재직일수  -->										
-						 <td th:text="${s.basicPay}" align="right"></td>										
-						 <td th:text="${s.joinDate}" align="center"></td>										
-						 <td th:text="${s.retireDate}" align="center"></td>										
-						 <td class="severancePay" id="severancePay" th:text="${#numbers.formatInteger(s.basicPay/365*s.longevity,1,'COMMA')}"></td>
-						 
-						 
-					</tr>						
-				</table>
+					<table class="table table-bordered table-striped dataTable" role="grid"  id="boardListTable">
+						<thead>  	   	 
+							<tr>
+								<th align="center">사원번호</th>
+								<th align="center">부서</th>
+								<th align="center">직급</th>
+								<th align="center">사원명</th>
+								<th align="center">근속기간</th>
+								<th align="center">기본급</th>
+								<th align="center">입사일</th>
+								<th align="center">퇴사일</th>
+								<th align="center">퇴직금</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
+							<tr th:each="s :${selectRetiring}" class="selectRetiring">							
+								<td th:text="${s.empNum}" align="center"></td>
+								<td th:text="${s.demgName}" align="center"></td>
+								<td th:text="${s.poName}" align="center"></td>
+								<td th:text="${s.empName}" align="center"></td>
+								<td th:text="${s.longevity}+'일'" align="right"></td><!--재직일수  -->										
+								<td th:text="${#numbers.formatInteger(s.basicPay,1,'COMMA')}" align="right"></td>										
+								<td th:text="${s.joinDate}" align="center"></td>										
+								<td th:text="${s.retireDate}" align="center"></td>										
+								<td class="severancePay" id="severancePay" th:text="${#numbers.formatInteger(s.basicPay/365*s.longevity,1,'COMMA')}"></td>
+							</tr>
+						</tbody>
+					</table>
 	
 				</div>				
 				<!-- /.card -->
@@ -85,9 +82,19 @@
 </div>
 </th:block>
 
+<!-- 사용자 스크립트 -->
 <th:block layout:fragment="customScript">
-<!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
-<!-- <script th:src="@{/dist/js/pages/dashboard3.js}"></script> -->
+
+<!-- dataTable -->
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#boardListTable').DataTable();
+});
+
+</script>
 
 </th:block>
 </html>
