@@ -138,18 +138,14 @@ $(function(){
 							$.each(data, function(i){
 								str += '<td>'+[i+1]+'</td>'
 								str += '<td>'+data[i].writerDay+'</td>'
-								if(data[i].signEndDay == null){
-									str += '<td></td>';
-								}else{
-									str += '<td>'+data[i].signEndDay+'</td>';
-								};
+								str += '<td>'+data[i].signEndDay+'</td>'
 								str	+= '<td>'+data[i].docTitle+'</td>'
 								str += '<td>'+data[i].docName+'</td>'
 								str += '<td>'+'첨부파일 자리에요'+'</td>'
 								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 								str += '<td>'+data[i].docFormCode+'</td>'
 								str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'						
-									str += '</tr>'
+								str += '</tr>'
 							});
 							$('#selectEndTr').html('');
 							$('#selectEndTr').append(str);
@@ -160,11 +156,6 @@ $(function(){
 							$.each(data, function(i){
 								str += '<td>'+[i+1]+'</td>'
 								str += '<td>'+data[i].writerDay+'</td>'
-								if(data[i].signEndDay == null){
-									str += '<td></td>';
-								}else{
-									str += '<td>'+data[i].signEndDay+'</td>';
-								};
 								str	+= '<td>'+data[i].docTitle+'</td>'
 								str += '<td>'+data[i].docName+'</td>'
 								str += '<td>'+'첨부파일 자리에요'+'</td>'
@@ -183,11 +174,7 @@ $(function(){
 							$.each(data, function(i){
 								str += '<td>'+[i+1]+'</td>'
 								str += '<td>'+data[i].writerDay+'</td>'
-								if(data[i].reDocDate == null){
-									str += '<td></td>';
-								}else{
-									str += '<td>'+data[i].reDocDate+'</td>'
-								};
+								str += '<td>'+data[i].reDocDate+'</td>'
 								str	+= '<td>'+data[i].docTitle+'</td>'
 								str += '<td>'+data[i].docName+'</td>'
 								str += '<td>'+'첨부파일 자리에요'+'</td>'
@@ -199,7 +186,7 @@ $(function(){
 							});
 							$('#selectReturnTr').html('');
 							$('#selectReturnTr').append(str);
-							$('#dateTablePagingReturn').DataTable();	
+							$('#dateTablePagingReturn').DataTable();
 						}
 					}else {
 						//console.log(valCheck);
