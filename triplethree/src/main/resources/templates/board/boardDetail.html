@@ -53,16 +53,24 @@
                 	<span style="float:left;" th:text="|조회수 : ${board.boardCount}|"></span>
                 </h6>
 	       </div>
-	       <div>
+	       <!-- card-header ./div -->
 	       	<div class="card-body" style="min-height:500px;">
 	       		<table class="table table-condensed" >
 	       			<thead th:utext="${board.boardCon}"></thead>
 	       		</table>
 	       			<input type="hidden" name="code" th:id="${board.code}" th:value="${board.code}">
 	       			<input type="hidden" name="boardPw" th:value="${board.boardPw}" id="boardPw">
+       				
 	       	</div>
-	       </div>
 		</form>
+			<div class="card-body">
+				<div th:if="${board.boardFilePath} neq null">
+					<span th:text="|첨부파일 : ${#strings.substring(board.boardFilePath,12)}|"></span>
+				</div>
+				<!-- <div th:if="${board.boardFilePath} eq null">
+					<span th:text="|첨부파일 : ${#strings.substring(board.boardFilePath,12)}|"></span>
+				</div> -->
+			</div>
 	     </div>
 	     <!-- /.card -->
 	     <!-- <div class="col-12">

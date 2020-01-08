@@ -121,8 +121,39 @@ public class BoardController {
 	 * @return
 	 */
 	@PostMapping("/board/boardInsert")
-	public String insertDepartBoard(Board board, HttpSession session) {
+	public String insertDepartBoard(Board board, HttpSession session,@RequestParam("boardfile") MultipartFile file) {
 		board = boardService.createBoardCode(session, board);
+		Path rootLocation = Paths.get(uploadPath);
+		 String boardFilePath = null;
+		
+		 try {			
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				InputStream inputStream = file.getInputStream();
+				System.out.println(inputStream + "<--inputStream");
+				
+				if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+					//테이블에 파일 경로
+					Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+					boardFilePath = "/boardfiles/" + originFileName;
+				}
+				
+				System.out.println(boardFilePath + "<- 1");
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				try {
+					Files.delete(rootLocation.resolve(originFileName));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}					
+				
+			}
+		 
+		if(boardFilePath != null) board.setBoardFilePath(boardFilePath);
 		boardService.insertBoard(board);
 		System.out.println(board.toString() + "작성하기 폼에서 들어온 값들 ");
 		return "redirect:/board/departBoardList";
@@ -139,7 +170,7 @@ public class BoardController {
 		model.addAttribute("boardList", boardService.selectBoardList());
 		model.addAttribute("noticeList", boardService.selectNoticeList());
 		model.addAttribute("newsList", boardService.selectNewsList());
-		System.out.println("*****전사게시판 전체목록 SELECT*****");
+		System.out.println("*****전사게시판(공지+소식) 목록 SELECT*****");
 		return "/board/boardList";
 	}
 
@@ -232,10 +263,42 @@ public class BoardController {
 	 * @return board
 	 */
 	@PostMapping("/admin/board/boardUpdate")
-	public String boardUpdate(Board board) {
+	public String boardUpdate(Board board,@RequestParam("boardfile") MultipartFile file) {
 		System.out.println("*************************");
 		System.out.println("******board Update 처리****");
 		System.out.println("*************************");
+		
+		Path rootLocation = Paths.get(uploadPath);
+		String boardFilePath = null;
+		
+		 try {			
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				InputStream inputStream = file.getInputStream();
+				System.out.println(inputStream + "<--inputStream");
+				
+				if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+					//테이블에 파일 경로
+					Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+					boardFilePath = "/boardfiles/" + originFileName;
+				}
+				
+				System.out.println(boardFilePath + "<- 1");
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				try {
+					Files.delete(rootLocation.resolve(originFileName));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}					
+				
+			}
+		 
+		if(boardFilePath != null) board.setBoardFilePath(boardFilePath);
 		boardService.updateBoard(board); // 수정 처리 완료
 		return "redirect:/board/boardList";
 	}
@@ -247,10 +310,41 @@ public class BoardController {
 	 * @return board
 	 */
 	@PostMapping("/board/departBoardUpdate")
-	public String updateDepartBoard(Board board) {
+	public String updateDepartBoard(Board board,@RequestParam("boardfile") MultipartFile file) {
 		System.out.println("*************************");
 		System.out.println("***departBoard Update 처리**");
 		System.out.println("*************************");
+		Path rootLocation = Paths.get(uploadPath);
+		String boardFilePath = null;
+		
+		 try {			
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				InputStream inputStream = file.getInputStream();
+				System.out.println(inputStream + "<--inputStream");
+				
+				if(inputStream !=null && originFileName != null && !"".equals(originFileName.trim())) {
+					//테이블에 파일 경로
+					Files.copy(inputStream, rootLocation.resolve(originFileName), StandardCopyOption.REPLACE_EXISTING);
+					boardFilePath = "/boardfiles/" + originFileName;
+				}
+				
+				System.out.println(boardFilePath + "<- 1");
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				String originFileName = StringUtils.cleanPath(file.getOriginalFilename());
+				try {
+					Files.delete(rootLocation.resolve(originFileName));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}					
+				
+			}
+		 
+		if(boardFilePath != null) board.setBoardFilePath(boardFilePath);
 		boardService.updateDepartBoard(board); // 수정 처리 완료
 		return "redirect:/board/departBoardList";
 	}

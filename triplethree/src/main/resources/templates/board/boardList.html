@@ -51,6 +51,7 @@ tr:hover{background: whitesmoke;}
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
+               	<!-- 전사공지 tab 내용 -->
                   <div class="active tab-pane" id="activity">
 					<form class="form-horizontal boardListForm" enctype="multipart/form-data">
 	                <div class="card-body">  
@@ -66,7 +67,7 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
+						<tr th:each="b ,index : ${noticeList}" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
@@ -81,7 +82,9 @@ tr:hover{background: whitesmoke;}
 	                </div>
 	              </form>
                 </div>
-                  <!-- /.tab-pane -->
+                  <!-- /.tab-pane 전사공지 끝-->
+                  
+                  <!-- 전사소식 tab 내용 -->
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
                  	<form class="form-horizontal newsListForm" enctype="multipart/form-data" >
@@ -110,6 +113,7 @@ tr:hover{background: whitesmoke;}
 		              </div>
                   	</form>
                   </div>
+                  <!-- /.tab-pane 전사소식 끝-->
  				</div>
 		  	</div>
            </div>

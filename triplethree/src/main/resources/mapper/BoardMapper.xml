@@ -84,7 +84,7 @@
 			,#{boardFilePath});
 	</insert>
 	
-	<!-- 전사게시판 글 다가져오기 -->
+	<!-- 전사게시판(전사공지) 글 다가져오기 -->
 	<select id="selectBoardList" resultMap="boardResultMap">
 		SELECT
 			B.code
@@ -179,6 +179,7 @@
 			,board_con AS boardCon
 			,board_count AS boardCount
 			,date_format(B.writer_day,'%Y-%m-%d') as writerDay
+			,board_file as boardFilePath
  		FROM BOARD AS B
 		LEFT JOIN EMP_MANAGE AS EM
 		ON	B.emp_code = EM.emp_num
@@ -235,6 +236,7 @@
 			,board_con = #{boardCon}
 			,writer_day = #{writerDay}
 			,board_pw = #{boardPw}
+			,board_file=#{boardFilePath}
 		where
 			code = #{code}
 	</update>
@@ -249,6 +251,7 @@
 			,board_con = #{boardCon}
 			,writer_day = #{writerDay}
 			,board_pw = #{boardPw}
+			,board_file=#{boardFilePath}
 		where
 			code = #{code}
 	</update>
