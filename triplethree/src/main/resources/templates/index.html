@@ -15,7 +15,7 @@
 
 <th:block layout:fragment="customContents">
 <!-- Content Header (Page header) -->
-<div class="content-header">
+<div>
 	<div class="container-fluid">
 	</div><!-- /.container-fluid -->
 </div>
@@ -24,9 +24,14 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
+			<div class="index-page move-card col-lg-5" style="height: 400px;">
+			</div>
+			<div class="index-page move-card col-lg-5" style="height: 400px;">
+			</div>
+			<!-- /.col-md-6 -->
 		
 			<!-- 근태 시작 -->
-			<div class="col-lg-2 workTimeTool">
+			<div class="col-lg-2 workTimeTool" style="padding-top: 24px;">
 				<div class="card card-primary card-outline">
 					<div class="card-body box-profile">
 						<div class="text-center strong small" style="font-size: 1.3em;"><strong>근태관리</strong></div>
@@ -71,29 +76,38 @@
 			</div>
 			<!-- 근태 끝 -->
 			
+			<!-- 메인화면 그래프 시작 -->
 			<div class="index-page col-lg-6">
-				<!-- 메인화면 그래프 시작 -->
-				<div class="card index-graph" align="center" style="height: 250px;">
-				<h5 style="margin-top:8px;">최근 5년 매출 그래프</h5>
-				<p style="text-align:right;margin-bottom:8px;margin-right:8px;font-size:14px;">단위 : 억</p>
-				<div id="myfirstchart" style="height: 250px;"></div>
+				<div class="card card-danger" style="height: 335px;">
+					<div class="card-header">
+						<h3 class="card-title">최근 5년 매출 그래프</h3>
+					</div>
+					<div class="card-body">
+						<canvas id="chLine"  style="max-height: 248px;"></canvas>
+					</div>
 				</div>
-				<!-- /.card -->
-				<!-- 메인화면 매출그래프 끝 -->
-				
 			</div>
-			<!-- /.col-md-6 -->
+			<!-- 메인화면 매출그래프 끝 -->
+			
+			<!-- 메인화면 자산구조 그래프 시작 -->
 			<div class="index-page col-lg-6">
-				<!-- 메인화면 자산구조 그래프 시작 -->
-				<div class="card index-graph" align="center" style="height:250px;">
-				<h5 style="margin-top:8px;">자산구조</h5>
-				<p style="text-align:right;margin-bottom:8px;margin-right:8px;font-size:14px;">단위 : 억</p>
-					<div id="donut-example" style="height: 250px;"></div>
+				<div class="card card-danger" style="height: 335px;">
+					<div class="card-header">
+						<h3 class="card-title">자산구조</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="card-body">
+						<canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
+					</div>
+				<!-- /.card-body -->
 				</div>
-				<!-- /.card -->
-				<!-- 메인화면 자산구조 그래프 끝 -->
-			<!-- /.card -->
 			</div>
+			<!-- 메인화면 자산구조 그래프 끝 -->
+			
 			<!-- /.col-md-6 -->
 		</div>
 		<!-- /.row -->
@@ -205,12 +219,12 @@ $(document).ready(function(){
 	$('.nav-link-workTime').on('click', function(){
 		if($('.workTimeTool').attr('hidden') == 'hidden'){
 			$('.workTimeTool').prop('hidden', false);
-			$('.index-page').removeClass('col-lg-6');
-			$('.index-page').addClass('col-lg-5');
+			$('.move-card').removeClass('col-lg-6');
+			$('.move-card').addClass('col-lg-5');
 		}else{
 			$('.workTimeTool').prop('hidden', true);
-			$('.index-page').removeClass('col-lg-5');
-			$('.index-page').addClass('col-lg-6');
+			$('.move-card').removeClass('col-lg-5');
+			$('.move-card').addClass('col-lg-6');
 		}
 	});
 	
@@ -313,47 +327,68 @@ $(document).ready(function(){
 });
 
 </script>
-<!--매출액 그래프  -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<!-- ChartJS -->
+<script th:src="@{/plugins/chart.js/Chart.js}"></script>
+
 <script type="text/javascript">
-new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-    { year: '2014', 매출액: 334 },
-    { year: '2015', 매출액: 494 },
-    { year: '2016', 매출액: 991 },
-    { year: '2017', 매출액: 395 },
-    { year: '2018', 매출액: 724}
-   
+//-------------
+//- DONUT CHART -
+//-------------
+// Get context with jQuery - using jQuery's .get() method.
+var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+var donutData        = {
+  labels: [
+      '자산', 
+      '부채',
+      '자본', 
   ],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'year',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['매출액'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['매출액']
+  datasets: [
+    {
+      data: [1521,680,150],
+      backgroundColor : ['#f56954', '#00a65a', '#f39c12'],
+    }
+  ]
+}
+var donutOptions     = {
+  maintainAspectRatio : false,
+  responsive : true,
+}
+//Create pie or douhnut chart
+// You can switch between pie and douhnut using the method below.
+var donutChart = new Chart(donutChartCanvas, {
+  type: 'doughnut',
+  data: donutData,
+  options: donutOptions      
 });
-Morris.Donut({
-	  element: 'donut-example',
-	  data: [
-	    {label: "자산", value: 1521},
-	    {label: "부채", value: 680},
-	    {label: "자본", value: 150}
-	  ],
-	  backgroundColor: '#ccc',
-	  colors:[
-		  '#223599',
-		  '#991133',
-		  '#118822',
-	  ]  
-	});
+
+
+//최근 5년 그래프
+var chartData = {
+		  labels: ["2014", "2015", "2016", "2017", "2018"],
+		  datasets: [{
+		    data: [334, 494, 991, 395, 724],
+		  }]
+		};
+		
+var chLine = document.getElementById("chLine");
+if (chLine) {
+  new Chart(chLine, {
+  type: 'line',
+  data: chartData,
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: false
+        }
+      }]
+    },
+    legend: {
+      display: false
+    }
+  }
+  });
+}
 </script>
 </th:block>
 </html>
