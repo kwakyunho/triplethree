@@ -156,7 +156,7 @@
 					R.code
 					,R.acc_code
 					,R.emp_code
-					,E.emp_name
+					,E.emp_name AS empName
 					,R.doc_form_code
 					,R.doc_title
 					,R.doc_name
@@ -164,8 +164,10 @@
 					,R.doc_bego
 					,A.app_state
 					,S.sign_state
-					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writer_day
+					,DATE_FORMAT(S.writer_day,'%Y-%m-%d') AS writer_day
 					,R.comments
+					,D.dename
+					,P.poname
 				FROM
 					RETURN_DOC_SAVE AS R
 				LEFT JOIN
@@ -180,6 +182,14 @@
 					EMP_MANAGE AS E
 				ON
 					R.emp_code = E.emp_num
+				LEFT JOIN
+					DEMG AS D
+				ON
+					E.demgcode = D.CODE
+				LEFT JOIN
+					POSISYS AS P
+				ON
+					E.pocode = P.code
 				WHERE
 					A.app_person = #{sid}
 			</when>
@@ -194,9 +204,13 @@
 					,R.doc_con
 					,R.doc_bego
 					,S.sign_state
+					,S.sign_end_day
 					,R.sign_check
-					,DATE_FORMAT(R.writer_day,'%Y-%m-%d') AS writer_day
+					,DATE_FORMAT(S.writer_day,'%Y-%m-%d') AS writer_day
 					,R.comments
+					,E.emp_name AS empName
+					,D.dename
+					,P.poname
 				FROM
 					RETURN_DOC_SAVE AS R
 				LEFT JOIN
@@ -207,6 +221,18 @@
 					SIG_DOC AS S
 				ON
 					R.doc_form_code = S.code
+				LEFT JOIN
+					EMP_MANAGE AS E
+				ON
+					R.emp_code = E.emp_num
+				LEFT JOIN
+					DEMG AS D
+				ON
+					E.demgcode = D.CODE
+				LEFT JOIN
+					POSISYS AS P
+				ON
+					E.pocode = P.code
 				WHERE
 					A.app_person = #{sid} 
 				<if test="valCheck eq 'End'">

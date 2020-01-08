@@ -30,6 +30,10 @@ public class SignDocumentService {
 	public List<String> selectSignDocumentWait(String sid){
 			List<String> result = signDocumentMapper.selectSignDocumentWait(sid);
 			//System.out.println("service result value : " + result);
+		/*
+		 * int num = signDocumentMapper.selectSignNum(sid); System.out.println("순차확인 : "
+		 * + num);
+		 */
 			return result;
 	}
 	

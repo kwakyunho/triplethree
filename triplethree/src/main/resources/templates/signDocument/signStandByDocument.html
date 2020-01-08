@@ -52,14 +52,16 @@ tr:hover{background: whitesmoke;}
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:if="${r.emp_name} eq ${session.SNAME}" th:each="r, index : ${result}">
-								<!-- <td th:text="${index.index+1}"></td> -->
+							<tr th:if="${r.emp_name} eq ${session.SNAME}" th:each="r : ${result}">
 								<td th:text="${r.writer_day}"></td>
 								<td th:text="${r.doc_title}"></td>
 								<td th:text="${r.doc_name}"></td>
 								<td>첨부파일자리에요</td>
 								<td th:text="${r.empName}"></td>
 							</tr>
+							<!-- <tr th:unless="${r.emp_name} eq ${session.SNAME}" th:each="r : ${result}">
+								<td valign="top" colspan="5" class="dataTables_empty">결재할 문서가 없습니다.</td>
+							</tr> -->
 						</tbody>
 					</table>
 				</form>

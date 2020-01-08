@@ -35,32 +35,18 @@ tr:hover{background: whitesmoke;}
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
 </div>
-<!-- /.content-header -->
-
-		<!-- div class="card">
-	 	 <form action="#" id="boardListTable">
-				<div>
-				사원코드 : <input type="text" name="empCode">
-				사원명 : <input type="text" name="empName">
-				부서: <input type="text" name="demgName">
-				직급 : <input type="text" name="poCode">
-				<input type="submit"  class="btn btn-success" value="조회하기">
-				</div>
-			</form> 
-				
-		</div> -->
 
 	<div class="card">	
 		<div class="card-body" style="overflow: scroll;">
 			<form class="boardListForm">
 				<table class="table table-bordered table-striped" style="white-space:pre;  width:100%; height:auto;" id="boardListTable">
 					<thead>					
-       					<tr class='tblTitle'>     						
+       					<tr class='tblTitle'>      					        					  						      												
 							<th>사원번호</th>
 							<th>사원명</th>							       						
 							<th>부서명</th>					
-							<th>직급</th>					
-							<th>기본급</th>					
+							<th>직급</th>																								
+							<th>기 본 급</th>					
 							<th>차량유지비</th>
 							<th>통신수당</th>
 							<th>식대</th>
@@ -79,46 +65,91 @@ tr:hover{background: whitesmoke;}
 							<th>지방소득세</th>
 							<th>공제액 계</th>
 							<th>차인지급액</th>		
-							<th>수정</th>		
-									
+							<th>수정</th>											
 						</tr>	
-					</thead>
-					
+					</thead>				
 					<tbody class=hap>
 						 <tr th:each="p ,index : ${payInsert}" style="cursor:pointer" class="tbodyClass">
 						 <td class="empNum" th:id="|p-${index.count}|" th:text ="${p.empNum}"></td>
 						 <td class="empName" th:text="${p.empName}"></td>
 						 <td class="demgName" th:text="${p.demgName}"></td>
 						 <td class="poName" th:text="${p.poName}"></td>
-						 <td class="basicPay" th:text="${#numbers.formatInteger(p.basicPay,0,'COMMA')}"></td>
-						 <td class="selfDriPay" th:text="${#numbers.formatInteger(p.selfDriPay,0,'COMMA')}"></td>
-						 <td class="comPay" th:text="${#numbers.formatInteger(p.comPay,0,'COMMA')}"></td>
-						 <td class="mealCost" th:text="${#numbers.formatInteger(p.mealCost,0,'COMMA')}"></td>
-						 <td class="beneFit" th:text="${#numbers.formatInteger(p.beneFit,0,'COMMA')}"></td>
-					 	 <td class="holidayPay" th:text="${#numbers.formatInteger(p.holidayPay,0,'COMMA')}"></td>
-						 <td class="overtimePay" th:text="${#numbers.formatInteger(p.overtimePay,0,'COMMA')}"></td>
-						 <td class="positionBenefit" th:text="${#numbers.formatInteger(p.positionBenefit,0,'COMMA')}"></td>
-						 <td class="taxation"></td>
-						 <td class="taxFree"></td>
-						 <td class="payment"></td>					 					
-						 <td class="nationPer"></td>						 		
-						 <td class="healthPer"></td>		
-						 <td class="longCare"></td>			
-						 <td class="insurPer"></td>		
-						 <td class="one"th:text="${#numbers.formatInteger(p.one,0,'COMMA')}"></td>		
-						 <td class="residentTax"></td>		
-						 <td class="deduct"></td>		
-						 <td class="deductHap"></td>	
+						 <td class="basicPay" th:text="${#numbers.formatInteger(p.basicPay,0,'COMMA')}" align="right"></td>
+						 <td class="selfDriPay" th:text="${#numbers.formatInteger(p.selfDriPay,0,'COMMA')}" align="right"></td>
+						 <td class="comPay" th:text="${#numbers.formatInteger(p.comPay,0,'COMMA')}" align="right"></td>
+						 <td class="mealCost" th:text="${#numbers.formatInteger(p.mealCost,0,'COMMA')}" align="right"></td>
+						 <td class="beneFit" th:text="${#numbers.formatInteger(p.beneFit,0,'COMMA')}" align="right"></td>
+					 	 <td class="holidayPay" th:text="${#numbers.formatInteger(p.holidayPay,0,'COMMA')}" align="right"></td>
+						 <td class="overtimePay" th:text="${#numbers.formatInteger(p.overtimePay,0,'COMMA')}" align="right"></td>
+						 <td class="positionBenefit" th:text="${#numbers.formatInteger(p.positionBenefit,0,'COMMA')}" align="right"></td>
+						 <td class="taxation" align="right"></td>
+						 <td class="taxFree" align="right"></td>
+						 <td class="payment" align="right"></td>					 					
+						 <td class="nationPer" align="right"></td>						 		
+						 <td class="healthPer" align="right"></td>		
+						 <td class="longCare" align="right"></td>			
+						 <td class="insurPer" align="right"></td>		
+						 <td class="one"th:text="${#numbers.formatInteger(p.one,0,'COMMA')}" align="right"></td>		
+						 <td class="residentTax" align="right"></td>		
+						 <td class="deduct" align="right"></td>		
+						 <td class="deductHap" align="right"></td>	
 						 <td><a class="btn btn btn-success" th:href="@{/admin/pay/updatePay(empCode=${p.empCode})}">수정</a></td>		
 						 </tr>
 					</tbody>	
-				</table>		
-		
+				</table>
+			<div class="col-12">	
+				<table class="table table-bordered table-striped" style="white-space:pre;  width:100%; height:auto;">
+					<tr>
+						<td></td>
+						<td>기본급</td>					
+						<td>차량유지비</td>
+						<td>통신수당</td>
+						<td>식대</td>
+						<td>야간수당</td>							
+						<td>휴일수당</td>
+						<td>연장수당</td>
+						<td>직책수당</td>						
+						<td>과세</td>
+						<td>비과세</td>
+						<td>지급액 계</td>					
+						<td>국민연금</td>
+						<td>건강보험</td>
+						<td>장기요양보험</td>
+						<td>고용보험</td>
+						<td>소득세</td>
+						<td>지방소득세</td>
+						<td>공제액 계</td>
+						<td>차인지급액</td>		
+					</tr>
+					<tr>
+						<td rowspan="2">총 계</td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.basicPay,0,'COMMA')}" align="right"></td>										
+						<td th:text="${#numbers.formatInteger(selectPaySum.selfDriPay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.comPay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.mealCost,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.beneFit,0,'COMMA')}" align="right"></td>							
+						<td th:text="${#numbers.formatInteger(selectPaySum.holidayPay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.overtimePay,0,'COMMA')}" align="right"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.positionBenefit,0,'COMMA')}" align="right"></td>						
+						<td id="taxation" align="right"></td>
+						<td id="taxFree" align="right"></td>
+						<td id="payment" align="right"></td>					
+						<td id="nationPer" align="right"></td>
+						<td id="healthPer" align="right"></td>
+						<td id="longCare" align="right"></td>
+						<td id="insurPer" align="right"></td>
+						<td id="one" align="right"></td>
+						<td id="residentTax" align="right"></td>
+						<td id="deduct" align="right"></td>
+						<td id="deductHap" align="right"></td>
+					</tr>	
+				</table>
+				</div>							
 			</form>
 	           	<!-- /.table -->
         </div>
 	</div>
-
+  
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -129,6 +160,19 @@ tr:hover{background: whitesmoke;}
 	// 급여 자동계산
 	var payInsert = [[${payInsert}]];	// 셀렉트 테이블 값들
 	var totalSize = payInsert.length;	// 테이블 로우 총 갯수
+
+	var taxationSum = 0;
+	var residentTaxSum = 0;
+	var taxFreeSum =0;
+	var paymentSum =0;
+	var nationPerSum =0;
+	var healthPerSum =0;
+	var longCareSum =0;
+	var insurPerSum =0;
+	var oneSum =0;
+	var residentTaxSum =0;	
+	var deductSum =0;
+	var deductHapSum =0;
 	
 	for(i=0; i < totalSize; i++){
 		var num = i+1;
@@ -151,7 +195,6 @@ tr:hover{background: whitesmoke;}
 		var taxation = basicPay+comPay+beneFit+holidayPay+overtimePay+positionBenefit; // 과세
 		var taxFree = selfDriPay+mealCost;	//비과세
 		var payment = taxation+taxFree;	//지급액 계
-		
 		
 		parent.children('.taxation').text(taxation.toLocaleString());  //과세	
 		
@@ -196,18 +239,58 @@ tr:hover{background: whitesmoke;}
 		
 		parent.children('.deduct').text(sum1.toLocaleString());
 		var deduct = parent.children('.deduct').text(sum1.toLocaleString()) //공제액
+		
 		var deductHap = payment-sum1;	//차인지급액		
 		parent.children('.deductHap').text(deductHap.toLocaleString());
 		
-		//소득세
+		//총계 구하기
+		taxationSum+=taxation;
+		taxFreeSum+=taxFree;
+		paymentSum+=payment;
+		nationPerSum+=nation;
+		healthPerSum+=health;
+		longCareSum+=longCare;
+		insurPerSum+=insurPer;
+		oneSum+=one;	
+		residentTaxSum+=residentTax;
+		deductSum +=sum1;
+		deductHapSum +=deductHap;
+		
 		
 	}
+	 
+	console.log(taxationSum);
+	console.log(residentTaxSum);
+	console.log(taxFreeSum);
+	console.log(paymentSum);
+	console.log(nationPerSum);
+	console.log(healthPerSum);
+	console.log(longCareSum);
+	console.log(insurPerSum);
+	console.log(oneSum);
+	console.log(residentTaxSum);
+	console.log(deductSum);
+	console.log(deductHapSum);
 	
+	$('#taxation').text(taxationSum.toLocaleString());
+	$('#residentTax').text(residentTaxSum.toLocaleString());
+	$('#taxFree').text(taxFreeSum.toLocaleString());
+	$('#payment').text(paymentSum.toLocaleString());
+	$('#nationPer').text(nationPerSum.toLocaleString());
+	$('#healthPer').text(healthPerSum.toLocaleString());
+	$('#longCare').text(longCareSum.toLocaleString());
+	$('#insurPer').text(insurPerSum.toLocaleString());
+	$('#one').text(oneSum.toLocaleString());
+	$('#residentTax').text(residentTaxSum.toLocaleString());
+	$('#deduct').text(deductSum.toLocaleString());
+	$('#deductHap').text(deductHapSum.toLocaleString());
 	// 데이터 테이블 호출
 	$('#boardListTable').DataTable();
 	$('#boardListTable1').DataTable();
 	
   });
+
+	
  
 </script>
 

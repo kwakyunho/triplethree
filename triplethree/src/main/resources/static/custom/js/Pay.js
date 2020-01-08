@@ -25,8 +25,7 @@ $(function(){
 		//var empName=document.getElementById("empName").innerHTML;
 			//alert('선택된 사원명은 : '+empName +'입니다');
 		alert('선택된 사원명은 : '+empName.text()+'입니다');
-		$('#empCode').val(empCode.html('input').val());
-			
+		$('#empCode').val(empCode.html('input').val());		
 		$('#basicPay').val(basicPay.html('input').val());
 		$('#beneFit').val(beneFit.html('input').val());
 		$('#holidayPay').val(holidayPay.html('input').val());

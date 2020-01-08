@@ -4,7 +4,7 @@
 
 // 기안문서함 상단 메뉴 클릭시 실행되는 이벤트
 $(function(){
-	$('.ajaxVal').one('click', function(){
+	$('.ajaxVal').on('click', function(){
 		var valCheck = $(this).children('a').prop('id');
 		console.log('기안문서함이에요.'+valCheck);
 		var code = null; // 작성된 결재문서관리코드
@@ -18,7 +18,8 @@ $(function(){
 		var docFormCode = null; // 문서양식관리코드
 		var signState = null; // 전자결재상태
 		var str = null; // 테이블로 뿌리기 위해 필요한 변수
-
+		
+		//$('#select'+valCheck+'Tr').init();
 		// 기안문서의 상태를 구분하여 상태에 맞는 문서를 가져옴
 		$.ajax({
 			type 		: 'POST',
@@ -27,73 +28,74 @@ $(function(){
 			datatype	: 'json',
 			
 			success : function(data) {
+				//$('#select'+valCheck+'Tr').empty();
+				//$('#select'+valCheck+'Tr').init();
 				str = '<tr>'
-					
-					// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업
-					// 결재 완료 문서에 대한 스크립트
-					if(valCheck =='End'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-										if(data[i].signEndDay == null){
-											str += '<td></td>';
-										}else{
-											str += '<td>'+data[i].signEndDay+'</td>';
-										};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-										if(data[i].signState == 'N'){
-											str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';
-										}else if(data[i].signState == 'Y'){
-											str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>';
-										}								
-							str += '</tr>'
-						});
-					$('#selectEndTr').append(str);
-					$('.dateTablePagingEnd').DataTable();
-					
-					// 결재 진행중인 문서에 대한 스크립트
-					}else if(valCheck =='Starting'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-							str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';							
-							str += '</tr>'
-						});
-						$('#selectStartingTr').append(str);
-						$('.dateTablePagingStarting').DataTable();
-					
-					// 반려 문서에 대한 스크립트
-					}else if(valCheck =='Return'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-							if(data[i].reDocDate == null){
-								str += '<td></td>';
-							}else{
+					if(data.length != 0){
+						// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업
+						// 결재 완료 문서에 대한 스크립트
+						if(valCheck == 'End'){
+							$.each(data, function(i){
+								str += '<td>'+[i+1]+'</td>'
+								str += '<td>'+data[i].writerDay+'</td>'
+								str += '<td>'+data[i].signEndDay+'</td>'
+								str	+= '<td>'+data[i].docTitle+'</td>'
+								str += '<td>'+data[i].docName+'</td>'
+								str += '<td>'+'첨부파일 자리에요'+'</td>'
+								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+								str += '<td>'+data[i].docFormCode+'</td>'
+								str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'						
+									str += '</tr>'
+							});
+							$('#selectEndTr').html('');
+							$('#selectEndTr').append(str);
+							//$('.dateTablePagingEnd').DataTable();
+							$('#dateTablePaging'+valCheck+'').DataTable();
+							
+							// 결재 진행중인 문서에 대한 스크립트
+						}else if(valCheck == 'Starting'){
+							$.each(data, function(i){
+								str += '<td>'+[i+1]+'</td>'
+								str += '<td>'+data[i].writerDay+'</td>'
+								str	+= '<td>'+data[i].docTitle+'</td>'
+								str += '<td>'+data[i].docName+'</td>'
+								str += '<td>'+'첨부파일 자리에요'+'</td>'
+								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+								str += '<td>'+data[i].docFormCode+'</td>'
+								str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';							
+								str += '</tr>'
+							});
+							$('#selectStartingTr').html('');
+							$('#selectStartingTr').append(str);
+							//$('.dateTablePagingStarting').DataTable();
+							$('#dateTablePaging'+valCheck+'').DataTable();
+							
+							// 반려 문서에 대한 스크립트
+						}else if(valCheck == 'Return'){
+							$.each(data, function(i){
+								str += '<td>'+[i+1]+'</td>'
+								str += '<td>'+data[i].writerDay+'</td>'
 								str += '<td>'+data[i].reDocDate+'</td>'
-							};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].comments+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-							str += '<td><span class="btn bg-gradient-danger" style=" font-size: small;">반려</span</td>'							
-							str += '</tr>'
-						});
-						$('#selectReturnTr').append(str);
-						$('.dateTablePagingReturn').DataTable();	
+								str	+= '<td>'+data[i].docTitle+'</td>'
+								str += '<td>'+data[i].docName+'</td>'
+								str += '<td>'+'첨부파일 자리에요'+'</td>'
+								str += '<td>'+data[i].comments+'</td>'
+								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+								str += '<td>'+data[i].docFormCode+'</td>'
+								str += '<td><span class="btn bg-gradient-danger" style=" font-size: small;">반려</span</td>'							
+									str += '</tr>'
+							});
+							$('#selectReturnTr').html('');
+							$('#selectReturnTr').append(str);
+							//$('.dateTablePagingReturn').DataTable();
+							$('#dateTablePaging'+valCheck+'').DataTable();
+						}
+					}else{
+						str += '<td colspan="10"><span>해당된 문서가 없습니다.</span></td>'							
+						str += '</tr>'
+						$('#select'+valCheck+'Tr').html('');
+						$('#select'+valCheck+'Tr').append(str);
 					}
-					//$('.dateTablePaging').DataTable();
 				}, error : function() {
 				console.log("실패");
 			}
@@ -102,8 +104,8 @@ $(function(){
 });
 
 // 결재문서함 상단메뉴 클릭시 실행되는 이벤트
-$(function(){
-	$('.ajaxVal2').one('click', function(){
+
+	$('.ajaxVal2').on('click', function(){
 		var valCheck = $(this).children('a').prop('id');
 		console.log('결재 문서함이에요.'+valCheck);
 		var code = null; // 작성된 결재문서관리코드
@@ -126,83 +128,76 @@ $(function(){
 			datatype	: 'json',
 			
 			success : function(data) {
-				//console.log(data);
+				//console.log(data.length === 0);
 				str = '<tr>'
 					
-					// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업					
-					// 결재 완료 문서에 대한 스크립트
-					if(valCheck =='End'){
-						if(data.size = 0){
-							console.log(data.size);
-							str += '<td>'+'완료된 문서가 없습니다.'+'<td>';
-						}else{
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-							if(data[i].signEndDay == null){
-								str += '<td></td>';
-							}else{
-								str += '<td>'+data[i].signEndDay+'</td>';
-							};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-							str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'						
-							str += '</tr>'
-						});
-						$('#selectEndTr').append(str);
-						$('.dateTablePagingEnd').DataTable();
-						}
-					
-					// 결재 진행중인 문서에 대한 스크립트
-					}else if(valCheck =='Starting'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-							if(data[i].signEndDay == null){
-								str += '<td></td>';
-							}else{
-								str += '<td>'+data[i].signEndDay+'</td>';
-							};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-							str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';							
-							str += '</tr>'
-						});
-						$('#selectStartingTr').append(str);
-						$('.dateTablePagingStarting').DataTable();
-					
-					// 반려 문서에 대한 스크립트
-					}else if(valCheck =='Return'){
-						$.each(data, function(i){
-							str += '<td>'+[i+1]+'</td>'
-							str += '<td>'+data[i].writerDay+'</td>'
-							if(data[i].reDocDate == null){
-								str += '<td></td>';
-							}else{
+					if(data.length != 0){
+						// 기안문서함 상단의 메뉴 클릭시 값에 일치하는 리스트를 뿌려주는 작업					
+						// 결재 완료 문서에 대한 스크립트
+						if(valCheck =='End'){
+							$.each(data, function(i){
+								str += '<td>'+[i+1]+'</td>'
+								str += '<td>'+data[i].writerDay+'</td>'
+								str += '<td>'+data[i].signEndDay+'</td>'
+								str	+= '<td>'+data[i].docTitle+'</td>'
+								str += '<td>'+data[i].docName+'</td>'
+								str += '<td>'+'첨부파일 자리에요'+'</td>'
+								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+								str += '<td>'+data[i].docFormCode+'</td>'
+								str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'						
+								str += '</tr>'
+							});
+							$('#selectEndTr').html('');
+							$('#selectEndTr').append(str);
+							$('#dateTablePagingEnd').DataTable();
+								
+						// 결재 진행중인 문서에 대한 스크립트
+						}else if(valCheck =='Starting'){
+							$.each(data, function(i){
+								str += '<td>'+[i+1]+'</td>'
+								str += '<td>'+data[i].writerDay+'</td>'
+								str	+= '<td>'+data[i].docTitle+'</td>'
+								str += '<td>'+data[i].docName+'</td>'
+								str += '<td>'+'첨부파일 자리에요'+'</td>'
+								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+								str += '<td>'+data[i].docFormCode+'</td>'
+								str += '<td><span class="btn bg-gradient-success" style=" font-size: small;">진행중</span></td>';							
+								str += '</tr>'
+							});
+							$('#selectStartingTr').html('');
+							$('#selectStartingTr').append(str);
+							$('#dateTablePagingStarting').DataTable();
+							
+						// 반려 문서에 대한 스크립트
+						}else if(valCheck =='Return'){
+							
+							$.each(data, function(i){
+								str += '<td>'+[i+1]+'</td>'
+								str += '<td>'+data[i].writerDay+'</td>'
 								str += '<td>'+data[i].reDocDate+'</td>'
-							};
-							str	+= '<td>'+data[i].docTitle+'</td>'
-							str += '<td>'+data[i].docName+'</td>'
-							str += '<td>'+'첨부파일 자리에요'+'</td>'
-							str += '<td>'+data[i].comments+'</td>'
-							str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
-							str += '<td>'+data[i].docFormCode+'</td>'
-							str += '<td><span class="btn bg-gradient-danger" style=" font-size: small;">반려</span</td>'							
-							str += '</tr>'
-						});
-						$('#selectReturnTr').append(str);
-						$('.dateTablePagingReturn').DataTable();	
+								str	+= '<td>'+data[i].docTitle+'</td>'
+								str += '<td>'+data[i].docName+'</td>'
+								str += '<td>'+'첨부파일 자리에요'+'</td>'
+								str += '<td>'+data[i].comments+'</td>'
+								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
+								str += '<td>'+data[i].docFormCode+'</td>'
+								str += '<td><span class="btn bg-gradient-danger" style=" font-size: small;">반려</span></td>'							
+								str += '</tr>'
+							});
+							$('#selectReturnTr').html('');
+							$('#selectReturnTr').append(str);
+							$('#dateTablePagingReturn').DataTable();
+						}
+					}else {
+						//console.log(valCheck);
+						str += '<td colspan="10"><span>해당된 문서가 없습니다.</span></td>'							
+						str += '</tr>'
+						$('#select'+valCheck+'Tr').html('');
+						$('#select'+valCheck+'Tr').append(str);
 					}
-					//$('.dateTablePaging').DataTable();
 				}, error : function() {
 				console.log("실패");
 			}
 		});
 	});
-});
+//});
