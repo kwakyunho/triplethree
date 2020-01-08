@@ -24,7 +24,54 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="index-page col-lg-5">
+		
+			<!-- 근태 시작 -->
+			<div class="col-lg-2 workTimeTool">
+				<div class="card card-primary card-outline">
+					<div class="card-body box-profile">
+						<div class="text-center strong small" style="font-size: 1.3em;"><strong>근태관리</strong></div>
+						<div class="text-center" style="border-bottom-style: groove; margin-top: 5px;"></div>
+						<div class="text-muted text-center" style="margin-top: 10px;">
+							<span id="nowDay"></span>
+						</div>
+						<div class="profile-username text-center" style="margin-top: -10px;">
+							<span id="nowTime" style="font-size:xx-large;"></span>
+						</div>
+						<ul class="list-group list-group-unbordered mb-3" style="font-size: 0.875em;">
+							<li class="list-group-item">
+								<b>출근시간</b> <a class="float-right" id="startWorkTime" style="font-family:auto;">미등록</a>
+							</li>
+							<li class="list-group-item">
+								<b>퇴근시간</b> <a class="float-right" id="endWorkTime" style="font-family:auto;">미등록</a>
+							</li>
+							<li class="list-group-item">
+								<b>근무시간</b> <a class="float-right" id="ingWorkTime" style="font-family:auto;">미등록</a>
+							</li>
+						</ul>
+						<div class="btn btn-block">
+							<a href="#" class="btn btn-success btn-sm startWorkTime" style="width:45%"><b>출근</b></a>
+							<a href="#" class="btn btn-secondary btn-sm endWorkTime" style="width:45%"><b>퇴근</b></a>
+						</div>
+						
+						<div class="btn-group" style="width:100%;">
+							<button type="button" class="btn btn-default nowWorkState" style="font-size: 0.8rem;">근무중</button>
+							<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+								<span class="sr-only">Toggle Dropdown</span>
+								<div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-start" style="position: absolute; font-size: 0.8rem; will-change: transform; top: 0px; left: 0px; transform: translate3d(-1px, 37px, 0px);">
+									<a class="dropdown-item nowWorkStateList" href="#">근무중</a>
+									<a class="dropdown-item nowWorkStateList" href="#">회의중</a>
+									<a class="dropdown-item nowWorkStateList" href="#">자리비움</a>
+									<a class="dropdown-item nowWorkStateList" href="#">외출</a>
+									<a class="dropdown-item nowWorkStateList" href="#">외근</a>
+								</div>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 근태 끝 -->
+			
+			<div class="index-page col-lg-6">
 				<!-- 메인화면 그래프 시작 -->
 				<div class="card index-graph" align="center" style="height: 250px;">
 				<h5 style="margin-top:8px;">최근 5년 매출 그래프</h5>
@@ -34,52 +81,9 @@
 				<!-- /.card -->
 				<!-- 메인화면 매출그래프 끝 -->
 				
-				<!-- 메인화면 게시판 시작 -->
-				<!-- <div class="card">
-					<h5 style="margin-top:8px;color:#006600"align="center" >NOTICE</h5>
-					<div class="card-body">
-						<table class="index-board">
-							<thead>
-										<tr>
-											<th>최근 글 no</th>
-											<th></th>
-											<th>3</th>
-											<th>4</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-										</tr>
-									</tbody>
-						</table>
-								<div class="notice">
-									<h5 style="margin-top:8px;">게시판</h5>
-									<p style="text-align:right;margin-bottom:8px;margin-right:8px;font-size:14px;">단위 : 억</p>	
-								</div>
-					</div>
-				</div> -->
-				
-				<!-- /.card -->
-				<!-- 메인화면 게시판 끝 -->
 			</div>
 			<!-- /.col-md-6 -->
-			<div class="index-page col-lg-5">
+			<div class="index-page col-lg-6">
 				<!-- 메인화면 자산구조 그래프 시작 -->
 				<div class="card index-graph" align="center" style="height:250px;">
 				<h5 style="margin-top:8px;">자산구조</h5>
@@ -88,109 +92,7 @@
 				</div>
 				<!-- /.card -->
 				<!-- 메인화면 자산구조 그래프 끝 -->
-				
-				<!-- 메인화면 일정 부분 시작 -->
-				<div class="card bg-gradient-success" >
-					<div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
-						<h3 class="card-title">
-							<i class="far fa-calendar-alt"></i> 오늘의 할일
-						</h3>
-						<div class="card-tools">
-							<div class="btn-group"></div>
-						<button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-							<i class="fas fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-							<i class="fas fa-times"></i>
-						</button>
-						</div>
-					</div>
-					<!-- /.card -->
-					<div class="card-body pt-0">
-						<div id="calendar" style="width: 100%">
-							<div class="bootstrap-datetimepicker-widget usetwentyfour">
-								<!-- <table style="min-height: 250px;"> -->
-								<table>
-									<thead>
-										<tr>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- 메인화면 일정 부분 끝 -->
 			<!-- /.card -->
-			</div>
-			<!-- /.col-md-6 -->
-			<!--  style="visibility: hidden;" -->
-			<div class="col-lg-2 workTimeTool">
-				<!-- <div class="card"> -->
-				
-					<!-- Profile Image -->
-					<div class="card card-primary card-outline">
-						<div class="card-body box-profile">
-							<div class="text-center strong small" style="font-size: 1.3em;"><strong>근태관리</strong></div>
-							<div class="text-center" style="border-bottom-style: groove; margin-top: 5px;"></div>
-							<div class="text-muted text-center" style="margin-top: 10px;">
-								<span id="nowDay"></span>
-							</div>
-							<div class="profile-username text-center" style="margin-top: -10px;">
-								<span id="nowTime" style="font-size:xx-large;"></span>
-							</div>
-							<ul class="list-group list-group-unbordered mb-3" style="font-size: 0.875em;">
-								<li class="list-group-item">
-									<b>출근시간</b> <a class="float-right" id="startWorkTime" style="font-family:auto;">미등록</a>
-								</li>
-								<li class="list-group-item">
-									<b>퇴근시간</b> <a class="float-right" id="endWorkTime" style="font-family:auto;">미등록</a>
-								</li>
-								<li class="list-group-item">
-									<b>근무시간</b> <a class="float-right" id="ingWorkTime" style="font-family:auto;">미등록</a>
-								</li>
-							</ul>
-							<div class="btn btn-block">
-								<a href="#" class="btn btn-success btn-sm startWorkTime" style="width:45%"><b>출근</b></a>
-								<a href="#" class="btn btn-secondary btn-sm endWorkTime" style="width:45%"><b>퇴근</b></a>
-							</div>
-							
-							<div class="btn-group" style="width:100%;">
-								<button type="button" class="btn btn-default nowWorkState" style="font-size: 0.8rem;">근무중</button>
-								<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-									<span class="sr-only">Toggle Dropdown</span>
-									<div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-start" style="position: absolute; font-size: 0.8rem; will-change: transform; top: 0px; left: 0px; transform: translate3d(-1px, 37px, 0px);">
-										<a class="dropdown-item nowWorkStateList" href="#">근무중</a>
-										<a class="dropdown-item nowWorkStateList" href="#">회의중</a>
-										<a class="dropdown-item nowWorkStateList" href="#">자리비움</a>
-										<a class="dropdown-item nowWorkStateList" href="#">외출</a>
-										<a class="dropdown-item nowWorkStateList" href="#">외근</a>
-									</div>
-								</button>
-							</div>
-							
-						</div>
-						<!-- /.card-body -->
-						
-					</div>
-					
-					<!-- /.card -->
-				
-				<!-- </div> -->
-				<!-- /.card -->
 			</div>
 			<!-- /.col-md-6 -->
 		</div>
@@ -430,58 +332,6 @@ new Morris.Line({
     { year: '2018', 매출액: 724}
    
   ],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'year',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['매출액'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['매출액']
-});
-Morris.Donut({
-	  element: 'donut-example',
-	  data: [
-	    {label: "자산", value: 1521},
-	    {label: "부채", value: 680},
-	    {label: "자본", value: 150}
-	  ],
-	  backgroundColor: '#ccc',
-	  colors:[
-		  '#223599',
-		  '#991133',
-		  '#118822',
-	  ]  
-	});
-</script>
-</th:block>
-</html>;
-	
-	// 버튼 클릭시 현재 상태 변경하기
-	$('.nowWorkStateList').on('click', function(){
-		$('.nowWorkState').text($(this).text());
-	});
-});
-
-</script>
-<!--매출액 그래프  -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<script type="text/javascript">
-new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-    { year: '2014', 매출액: 334 },
-    { year: '2015', 매출액: 494 },
-    { year: '2016', 매출액: 991 },
-    { year: '2017', 매출액: 395 },
-    { year: '2018', 매출액: 724}
-   
-  ],colors[#006600],
   // The name of the data record attribute that contains x-values.
   xkey: 'year',
   // A list of names of data record attributes that contain y-values.
