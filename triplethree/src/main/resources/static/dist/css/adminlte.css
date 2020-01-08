@@ -4610,7 +4610,10 @@ input[type="button"].btn-block {
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
-
+.card index-graph{
+	padding:20px;
+	
+}
 .card > hr {
   margin-right: 0;
   margin-left: 0;
@@ -4758,6 +4761,9 @@ input[type="button"].btn-block {
   margin-bottom: 7.5px;
 }
 
+.index-board th, td {
+  border-bottom: 1px solid #ddd;
+}
 @media (min-width: 576px) {
   .card-group {
     -ms-flex-flow: row wrap;
