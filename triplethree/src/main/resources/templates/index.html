@@ -369,21 +369,6 @@ $(document).ready(function(){
 	$('.nowWorkStateList').on('click', function(){
 		$('.nowWorkState').text($(this).text());
 	});
-	
-	// 오늘 일정 조회 (정해성)
-	$(document).ready(function(){
-		var sendData = {};
-		sendData.ajaxType = 'POST';	// 전송타입
-		sendData.ajaxUrl = '/indexList';	// 호출 주소
-		sendData.ajaxDataType = 'json';	// 리턴 타입
-		
-		sendData.userSid = [[${session.SID}]];
-		sendData.userDemgCode = [[${session.SDEMGCODE}]];
-		
-		$(document).workTimeEvent(sendData, function(result){
-			
-		});
-	});
 });
 
 </script>
