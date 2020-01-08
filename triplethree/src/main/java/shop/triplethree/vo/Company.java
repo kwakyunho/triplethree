@@ -2,6 +2,8 @@ package shop.triplethree.vo;
 
 import java.time.LocalDateTime;
 
+
+
 public class Company {
 
 	private String sid;

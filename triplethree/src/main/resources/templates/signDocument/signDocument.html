@@ -59,12 +59,12 @@ tr:hover{background: whitesmoke;}
 									<form class="boardListForm">
 										<table
 											class="table table-head-fixed jsgrid-align-center dateTablePagingStarting"
-											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;">
+											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
+											id="dateTablePagingStarting">
 											<thead style="text-align: center;">
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">완료일</th>
 													<th style="width: 100px;">결재양식</th>
 													<th style="width: 500px;">제목</th>
 													<th style="width: 100px;">첨부</th>
@@ -91,7 +91,7 @@ tr:hover{background: whitesmoke;}
 										<table
 											class="table table-head-fixed jsgrid-align-center dateTablePagingEnd"
 											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
+											id="dateTablePagingEnd">
 											<thead style="text-align: center;">
 												<tr>
 													<th style="width: 10px;">순차</th>
@@ -124,12 +124,12 @@ tr:hover{background: whitesmoke;}
 										<table
 											class="table table-head-fixed jsgrid-align-center dateTablePagingReturn"
 											style="white-space: nowrap; overflow: auto; width: 100%; height: auto;"
-											id="boardListTable">
+											id="dateTablePagingReturn">
 											<thead style="text-align: center;">
 												<tr>
 													<th style="width: 10px;">순차</th>
 													<th style="width: 100px;">기안일</th>
-													<th style="width: 100px;">완료일</th>
+													<th style="width: 100px;">반려일</th>
 													<th style="width: 100px;">결재양식</th>
 													<th style="width: 500px;">제목</th>
 													<th style="width: 100px;">첨부</th>
@@ -158,6 +158,9 @@ tr:hover{background: whitesmoke;}
 <!-- DataTables -->
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<script type="text/javascript">
+
+</script>
 <!-- 전자결재 관련 스크립트 -->
 <script th:src="@{/custom/js/signDocument.js}"></script>
 </th:block>

@@ -15,7 +15,7 @@ public interface PayMapper {
 	/** 급여대장 **/
 	public List<Employee> selectPay();
 	public List<Pay> payInsert();
-
+	public Pay selectPaySum();
 	/** 퇴직금 검색조회 ***/
 	public List<Employee> selectRetiring();
 
@@ -40,4 +40,5 @@ public interface PayMapper {
 	/**공제액 모달창 수정***/
 	public int updateDeduct(Pay pay);
 	
+
 }

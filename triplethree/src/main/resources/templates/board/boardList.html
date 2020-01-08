@@ -124,7 +124,7 @@ tr:hover{background: whitesmoke;}
 <!-- DataTables -->
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-<script>
+<script type="text/javascript" th:inline="javascript">
   $(function () {
     $('#boardListTable').DataTable();
     $('#newsListTable').DataTable();

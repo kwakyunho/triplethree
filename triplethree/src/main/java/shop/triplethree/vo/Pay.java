@@ -34,6 +34,14 @@ public class Pay {
 	private Double longCare;	//장기요양공제비율
 	private Double industrialPer;	//산재보험비율	
 	private String year;	//적용연도
+	private String retireDate;
+	
+	public String getRetireDate() {
+		return retireDate;
+	}
+	public void setRetireDate(String retireDate) {
+		this.retireDate = retireDate;
+	}
 	public String getCode() {
 		return code;
 	}
