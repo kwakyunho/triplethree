@@ -12,6 +12,13 @@ public class Board {
 	private String boardPw;
 	private String liCode; //카테고리코드
 	private String liCodeMStr; //게시판 이름
+	private String boardFilePath; //첨부파일경로
+	public String getBoardFilePath() {
+		return boardFilePath;
+	}
+	public void setBoardFilePath(String boardFilePath) {
+		this.boardFilePath = boardFilePath;
+	}
 	public String getLiCodeMStr() {
 		return liCodeMStr;
 	}
