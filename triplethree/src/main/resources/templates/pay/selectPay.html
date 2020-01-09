@@ -145,8 +145,8 @@ tr:hover{background: whitesmoke;}
 					</tr>	
 				</table>
 				</div>							
+	       <div id="bar-example"></div>
 			</form>
-	           	<!-- /.table -->
         </div>
 	</div>
   
@@ -155,6 +155,10 @@ tr:hover{background: whitesmoke;}
 <th:block layout:fragment="customScript">
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
   $(function () {
 	// 급여 자동계산
@@ -286,11 +290,27 @@ tr:hover{background: whitesmoke;}
 	$('#deductHap').text(deductHapSum.toLocaleString());
 	// 데이터 테이블 호출
 	$('#boardListTable').DataTable();
-	$('#boardListTable1').DataTable();
 	
+	});
+  Morris.Bar({
+	  element: 'bar-example',
+	  data: [
+	    { y: '기본급', a: 177988764 },
+	    { y: '수당', a: 5564111 },
+	    { y: '과세', a: 179592875 },
+	    { y: '비과세', a: 3960000 },
+	    { y: '지급액 계', a: 183552875 },
+	    { y: '공제액 계', a: 21654800 },
+	    { y: '차인지급액', a: 161898075 }
+	  ],
+	  barColors:[
+		'#616B99'
+	  ],
+  
+	  xkey: 'y',
+	  ykeys: ['a'],
+	  labels: ['총 계']
   });
-
-	
  
 </script>
 
