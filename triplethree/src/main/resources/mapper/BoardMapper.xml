@@ -164,6 +164,26 @@
 		WHERE B.li_code = 'LIS-20191219000003' or B.li_code = 'LIS-20191219000004' or B.li_code = 'LIS-20191219000005' or B.li_code = 'LIS-20191219000006'
 	</select>
 	
+	<!-- 부서별로 따로따로 글 목록 리스트로 뽑아오기 (emp_code 대신 이름으로 보여주기) -->
+	<select id="departBoardList2" resultMap="boardResultMap">
+		SELECT
+			B.code
+			,B.li_code
+			,emp_code
+			,PO.poname AS poname
+         	,EM.emp_name AS writer
+         	,board_title
+			,board_con
+			,board_count 
+			,date_format(B.writer_day,'%Y-%m-%d') as writer_day
+ 		FROM BOARD AS B
+		LEFT JOIN EMP_MANAGE AS EM
+		ON	B.emp_code = EM.emp_num
+		LEFT JOIN POSISYS AS PO
+		ON	EM.pocode = PO.code
+		WHERE B.li_code = #{liCode}
+	</select>
+	
 	<!--글 정보 하나만 뽑아오기 code로   -->
 	<select id="getBoardByCode" parameterType="String" resultType="shop.triplethree.vo.Board">
 		SELECT

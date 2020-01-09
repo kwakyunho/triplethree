@@ -66,6 +66,7 @@
 			<div class="card-body">
 				<div th:if="${board.boardFilePath} neq null">
 					<span th:text="|첨부파일 : ${#strings.substring(board.boardFilePath,12)}|"></span>
+					<a th:href="@{/board/downloadBoardFile(code=${board.code})}"></a>
 				</div>
 				<!-- <div th:if="${board.boardFilePath} eq null">
 					<span th:text="|첨부파일 : ${#strings.substring(board.boardFilePath,12)}|"></span>

@@ -7,15 +7,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.jni.File;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -219,6 +224,7 @@ public class BoardController {
 	 */
 	@GetMapping("/board/departBoardList")
 	public String departBoardList(Model model) {
+		model.addAttribute("liCate", boardService.selectDBCate());
 		model.addAttribute("departBoardList", boardService.departBoardList());
 		return "/board/departBoardList";
 	}
@@ -404,5 +410,5 @@ public class BoardController {
 	 * 
 	 * return entity; }
 	 */
-
+	
 }
