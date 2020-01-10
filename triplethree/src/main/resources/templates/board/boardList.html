@@ -51,6 +51,7 @@ tr:hover{background: whitesmoke;}
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
+               	<!-- 전사공지 tab 내용 -->
                   <div class="active tab-pane" id="activity">
 					<form class="form-horizontal boardListForm" enctype="multipart/form-data">
 	                <div class="card-body">  
@@ -66,7 +67,7 @@ tr:hover{background: whitesmoke;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="b ,index : ${boardList}" style="cursor:pointer">
+						<tr th:each="b ,index : ${noticeList}" style="cursor:pointer">
 							<td th:text="${index.index+1}"></td>
 							<td class="boardTitle" th:id="${b.code}" th:text="${b.boardTitle}"></td>
 							<td th:text="${b.writer}"></td>
@@ -81,7 +82,9 @@ tr:hover{background: whitesmoke;}
 	                </div>
 	              </form>
                 </div>
-                  <!-- /.tab-pane -->
+                  <!-- /.tab-pane 전사공지 끝-->
+                  
+                  <!-- 전사소식 tab 내용 -->
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
                  	<form class="form-horizontal newsListForm" enctype="multipart/form-data" >
@@ -110,6 +113,7 @@ tr:hover{background: whitesmoke;}
 		              </div>
                   	</form>
                   </div>
+                  <!-- /.tab-pane 전사소식 끝-->
  				</div>
 		  	</div>
            </div>
@@ -136,23 +140,28 @@ tr:hover{background: whitesmoke;}
 $(document).ready(function(){
 	$('#boardListTable tbody').on('click', 'tr', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+		boardUrl.append('<input type="hidden" name="code" value="">');	// td 안쪽에 히든 인풋 생성
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
+		console.log(boardCode + " <- 글 코드 나와요");
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
+		var test = $('input[name=code]').val();
+		console.log(test + " <- 글 코드 input안에 들어갔나요");
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
+		$('.boardListForm').removeAttr('enctype');//enc속성 삭제
+		//$('.boardListForm').attr('action', '/board/test');
 		$('.boardListForm').submit();	// 전송
 	});
-});
-
-$(document).ready(function(){
+	
 	$('#newsListTable tbody').on('click', 'tr', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+		boardUrl.append('<input type="hidden" name="code" value="">');	// td 안쪽에 히든 인풋 생성
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
+		console.log(boardCode + "글 코드 나와요");
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
 		$('.newsListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.newsListForm').attr('action', '/board/boardDetail');//액션 경로 정의
+		$('.boardListForm').removeAttr('enctype');//enc속성 삭제
 		$('.newsListForm').submit();	// 전송
 	});
 });

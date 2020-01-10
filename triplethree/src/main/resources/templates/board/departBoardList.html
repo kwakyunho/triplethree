@@ -41,8 +41,12 @@ tr:hover{background: whitesmoke;}
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<div class="card-title">
+				<div class="card-title departList">
 					<h5 style="margin-top: 0.5rem;">부서게시판  </h5>
+					<select id="selectBox" class="form-control-sm" name="liCode">
+							<option >부서게시판</option>
+	                		<option th:each="l :${liCate}" th:value="${l.liCode}" th:text="${l.liCodeStr}"></option>
+                	</select>
 				</div>
 				<button type="button" style="float:right;"class="btn btn-success" onclick="location.href='/board/departBoardInsert'" >글쓰기</button>
 			</div>
@@ -108,6 +112,13 @@ $(document).ready(function(){
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
 		$('.boardListForm').submit();	// 전송
+	});
+});
+ $(document).ready(function(){	
+	$('#selectBox').change(function(){
+		var selectCate = $('#selectBox').val();
+		console.log(selectCate + 'select 변경된거');
+		
 	});
 });
 </script>
