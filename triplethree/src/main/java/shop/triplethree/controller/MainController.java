@@ -16,4 +16,14 @@ public class MainController {
 			return "employee/login";
 		}
 	}
+	
+	@GetMapping("/notLogin")
+	public String notLogin() {
+		return "notLogin";
+	}
+	
+	@GetMapping("/notPermission")
+	public String notPermission() {
+		return "notPermission";
+	}
 }

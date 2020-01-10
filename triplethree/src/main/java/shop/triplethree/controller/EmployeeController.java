@@ -35,6 +35,16 @@ public class EmployeeController {
 	
 	@Value("${file.upload.path}")
 	private String uploadPath;
+	
+		/**
+		 * 세션값이 없을 떄 로그인 화면으로 이동!
+		 * @return
+		 */
+		@GetMapping("/login")
+		public String login() {
+			return "/employee/login";
+		}
+		
 	  
 	  /**
 	   * 로그인 입력값을 받아서 Db와 조회해서 입력값있으면 로그인 그렇지 않으면 다시 로그인페이지 
@@ -61,6 +71,7 @@ public class EmployeeController {
 				if(em2 != null) {
 					//디비 조회 값이 있을 경우
 					if(em2.getPassword() != null && em2.getPassword().equals(employee.getPassword())) {
+						session.setAttribute("CHECK", "Y");	//세션체크확인
 						session.setAttribute("SCODE", em2.getCode());	//사원코드
 						session.setAttribute("SID", em2.getEmpNum());	//사원번호(아이디)
 						session.setAttribute("SNAME", em2.getEmpName());	//사원명
