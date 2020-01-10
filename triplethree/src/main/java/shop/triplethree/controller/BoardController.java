@@ -7,19 +7,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.tomcat.jni.File;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import shop.triplethree.service.BoardService;
-import shop.triplethree.service.ClientService;
 import shop.triplethree.vo.Board;
 
 @Controller
@@ -36,11 +41,17 @@ public class BoardController {
 	 * @param code
 	 */
 	@PostMapping("/board/boardDetail")
-	public String goToDetail(@RequestParam(value = "code", required = false) String code, Model model) {
+	public String goToDetail(@RequestParam(value="code") String code, Model model) {
 		// code로 선택된 글의 정보를 board 에 담아서 보내기
-		System.out.println("controller - code : " + code);
+		System.out.println("detail controller - code : " + code);
 		model.addAttribute("board", boardService.getBoardByCode(code));
 		return "/board/boardDetail";
+	}
+	
+	@PostMapping("/board/test")
+	public String test(@RequestParam(value="code")String code) {
+		System.out.println("test controller - code : " + code);
+		return "";
 	}
 
 	/**
@@ -219,6 +230,7 @@ public class BoardController {
 	 */
 	@GetMapping("/board/departBoardList")
 	public String departBoardList(Model model) {
+		model.addAttribute("liCate", boardService.selectDBCate());
 		model.addAttribute("departBoardList", boardService.departBoardList());
 		return "/board/departBoardList";
 	}
@@ -364,5 +376,45 @@ public class BoardController {
 
 		return "redirect:/board/boardList";
 	}
-
+	
+	/**
+	 * 첨부파일 다운로드
+	 * 
+	 * @param board의 pk코드를 받아와서 경로 가져온다
+	 * */
+	@GetMapping("/board/fileDownlad")
+	public String downloadFiles(@RequestParam(value = "code") String code) {
+		return "";
+	}
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value = "/displayFile") public ResponseEntity<byte[]>
+	 * displayFile(String fileName) throws Exception {
+	 * 
+	 * InputStream in = null; ResponseEntity<byte[]> entity = null;
+	 * 
+	 * logger.info("FILE NAME : " + fileName);
+	 * 
+	 * try { String formatName = fileName.substring(fileName.lastIndexOf("." ) + 1);
+	 * MediaType mType = MediaUtils.getMediaType(formatName);
+	 * 
+	 * HttpHeaders headers = new HttpHeaders();
+	 * 
+	 * in = new FileInputStream(uploadPath + fileName);
+	 * 
+	 * if (mType != null) { headers.setContentType(mType); } else { fileName =
+	 * fileName.substring(fileName.indexOf("_") + 1);
+	 * headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	 * headers.add("Content-Disposition", "attatchment; filename=\"" + new
+	 * String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\""); }
+	 * 
+	 * entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers,
+	 * HttpStatus.CREATED); } catch(Exception e) { e.printStackTrace(); entity = new
+	 * ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST); } finally { in.close(); }
+	 * 
+	 * return entity; }
+	 */
+	
 }
