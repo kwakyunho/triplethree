@@ -145,8 +145,8 @@ tr:hover{background: whitesmoke;}
 					</tr>	
 				</table>
 				</div>				
-			<canvas id="myChart" width="800px" height="450px"></canvas>			
-			<canvas id="myChart1" width="800px" height="450px"></canvas>			
+			<canvas id="myChart" width="800px" height="450px" style="display: block;"></canvas>			
+			<canvas id="myChart1" width="900px" height="450px"></canvas>			
 	     <!--   <div id="bar-example"></div> -->
 			</form>
         </div>
@@ -347,6 +347,12 @@ tr:hover{background: whitesmoke;}
 			}]
 		},
 		options: {
+			events: [
+				'mousemove',
+				'mouseout',
+				'touchstart',
+				'touchmove'
+			],
 			responsive: false,
 			scales: {
 				yAxes: [{
@@ -402,6 +408,12 @@ tr:hover{background: whitesmoke;}
 				}]
 			},
 			options: {
+				events: [
+					'mousemove',
+					'mouseout',
+					'touchstart',
+					'touchmove'
+				],
 				responsive: false,
 				scales: {
 					yAxes: [{
@@ -413,26 +425,8 @@ tr:hover{background: whitesmoke;}
 			}
 		});
 	});
- /*  Morris.Bar({
-	  element: 'bar-example',
-	  data: [
-	    { y: '기본급', a: 177988764 },
-	    { y: '수당', a: 5564111 },
-	    { y: '과세', a: 179592875 },
-	    { y: '비과세', a: 3960000 },
-	    { y: '지급액 계', a: 183552875 },
-	    { y: '공제액 계', a: 21654800 },
-	    { y: '차인지급액', a: 161898075 }
-	  ],
-	  barColors:[
-		'#616B99'
-	  ],
-  
-	  xkey: 'y',
-	  ykeys: ['a'],
-	  labels: ['총 계']
-  }); */
- 
+
+
 </script>
 
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
