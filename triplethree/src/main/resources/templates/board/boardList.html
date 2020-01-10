@@ -140,23 +140,28 @@ tr:hover{background: whitesmoke;}
 $(document).ready(function(){
 	$('#boardListTable tbody').on('click', 'tr', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+		boardUrl.append('<input type="hidden" name="code" value="">');	// td 안쪽에 히든 인풋 생성
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
+		console.log(boardCode + " <- 글 코드 나와요");
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
+		var test = $('input[name=code]').val();
+		console.log(test + " <- 글 코드 input안에 들어갔나요");
 		$('.boardListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.boardListForm').attr('action', '/board/boardDetail');//액션 경로 정의
+		$('.boardListForm').removeAttr('enctype');//enc속성 삭제
+		//$('.boardListForm').attr('action', '/board/test');
 		$('.boardListForm').submit();	// 전송
 	});
-});
-
-$(document).ready(function(){
+	
 	$('#newsListTable tbody').on('click', 'tr', function(){	
 		var boardUrl = $(this).children('.boardTitle');	// 하위요소 td 변수저장
-		boardUrl.append('<input type="hidden" name="code" val="">');	// td 안쪽에 히든 인풋 생성
+		boardUrl.append('<input type="hidden" name="code" value="">');	// td 안쪽에 히든 인풋 생성
 		var boardCode = boardUrl.attr('id');	// code id벨류값 추출
+		console.log(boardCode + "글 코드 나와요");
 		$('input[name=code]').val(boardCode);	// 히든 인풋 벨류에 코드값 대입
 		$('.newsListForm').attr('method', 'POST');	// 폼 메서드 정의
 		$('.newsListForm').attr('action', '/board/boardDetail');//액션 경로 정의
+		$('.boardListForm').removeAttr('enctype');//enc속성 삭제
 		$('.newsListForm').submit();	// 전송
 	});
 });

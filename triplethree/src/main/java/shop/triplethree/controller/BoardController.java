@@ -41,11 +41,17 @@ public class BoardController {
 	 * @param code
 	 */
 	@PostMapping("/board/boardDetail")
-	public String goToDetail(@RequestParam(value = "code", required = false) String code, Model model) {
+	public String goToDetail(@RequestParam(value="code") String code, Model model) {
 		// code로 선택된 글의 정보를 board 에 담아서 보내기
-		System.out.println("controller - code : " + code);
+		System.out.println("detail controller - code : " + code);
 		model.addAttribute("board", boardService.getBoardByCode(code));
 		return "/board/boardDetail";
+	}
+	
+	@PostMapping("/board/test")
+	public String test(@RequestParam(value="code")String code) {
+		System.out.println("test controller - code : " + code);
+		return "";
 	}
 
 	/**
