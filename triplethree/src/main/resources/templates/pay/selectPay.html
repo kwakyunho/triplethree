@@ -123,14 +123,14 @@ tr:hover{background: whitesmoke;}
 					</tr>
 					<tr>
 						<td rowspan="2">총 계</td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.basicPay,0,'COMMA')}" align="right"></td>										
-						<td th:text="${#numbers.formatInteger(selectPaySum.selfDriPay,0,'COMMA')}" align="right"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.comPay,0,'COMMA')}" align="right"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.mealCost,0,'COMMA')}" align="right"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.beneFit,0,'COMMA')}" align="right"></td>							
-						<td th:text="${#numbers.formatInteger(selectPaySum.holidayPay,0,'COMMA')}" align="right"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.overtimePay,0,'COMMA')}" align="right"></td>
-						<td th:text="${#numbers.formatInteger(selectPaySum.positionBenefit,0,'COMMA')}" align="right"></td>						
+						<td th:text="${#numbers.formatInteger(selectPaySum.basicPay,0,'COMMA')}" align="right" id="basicPaySum"></td>										
+						<td th:text="${#numbers.formatInteger(selectPaySum.selfDriPay,0,'COMMA')}" align="right" id="selfDriPaySum"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.comPay,0,'COMMA')}" align="right" id="comPaySum"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.mealCost,0,'COMMA')}" align="right" id="mealCostSum"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.beneFit,0,'COMMA')}" align="right" id="beneFitSum"></td>							
+						<td th:text="${#numbers.formatInteger(selectPaySum.holidayPay,0,'COMMA')}" align="right" id="holidayPaySum"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.overtimePay,0,'COMMA')}" align="right" id="overtimePaySum"></td>
+						<td th:text="${#numbers.formatInteger(selectPaySum.positionBenefit,0,'COMMA')}" align="right" id="positionBenefitSum"></td>						
 						<td id="taxation" align="right"></td>
 						<td id="taxFree" align="right"></td>
 						<td id="payment" align="right"></td>					
@@ -144,8 +144,10 @@ tr:hover{background: whitesmoke;}
 						<td id="deductHap" align="right"></td>
 					</tr>	
 				</table>
-				</div>							
-	       <div id="bar-example"></div>
+				</div>				
+			<canvas id="myChart" width="800px" height="450px"></canvas>			
+			<canvas id="myChart1" width="800px" height="450px"></canvas>			
+	     <!--   <div id="bar-example"></div> -->
 			</form>
         </div>
 	</div>
@@ -155,10 +157,8 @@ tr:hover{background: whitesmoke;}
 <th:block layout:fragment="customScript">
 <script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
   $(function () {
 	// 급여 자동계산
@@ -177,6 +177,14 @@ tr:hover{background: whitesmoke;}
 	var residentTaxSum =0;	
 	var deductSum =0;
 	var deductHapSum =0;
+	var basicPaySum = 0;
+	var selfDriPaySum =0;
+	var comPaySum =0;
+	var mealCostSum =0;
+	var beneFitSum =0;
+	var holidayPaySum =0;
+	var overtimePaySum =0;
+	var positionBenefitSum =0;
 	
 	for(i=0; i < totalSize; i++){
 		var num = i+1;
@@ -248,21 +256,29 @@ tr:hover{background: whitesmoke;}
 		parent.children('.deductHap').text(deductHap.toLocaleString());
 		
 		//총계 구하기
-		taxationSum+=taxation;
-		taxFreeSum+=taxFree;
-		paymentSum+=payment;
-		nationPerSum+=nation;
-		healthPerSum+=health;
-		longCareSum+=longCare;
-		insurPerSum+=insurPer;
-		oneSum+=one;	
-		residentTaxSum+=residentTax;
-		deductSum +=sum1;
-		deductHapSum +=deductHap;
-		
-		
+		taxationSum+=taxation; //과세총계
+		taxFreeSum+=taxFree;   //비과세총계
+		paymentSum+=payment;   //지급액 계
+		nationPerSum+=nation;  //국민연금 계
+		healthPerSum+=health;  //건강보험 계
+		longCareSum+=longCare; //장기요양보험 계
+		insurPerSum+=insurPer; //고용보험 계
+		oneSum+=one;	       //소득세 계
+		residentTaxSum+=residentTax; //지방소득세 계
+		deductSum +=sum1;		//공제액 계
+		deductHapSum +=deductHap; //차인지급액 계
+		basicPaySum +=basicPay; //기본급 계
+		selfDriPaySum += selfDriPay; //운전보조금 계
+		comPaySum += comPay; //통신수당 계
+		mealCostSum += mealCost; //식대 계
+		beneFitSum += beneFit; //야간수당 계
+		holidayPaySum += holidayPay; //휴일수당 계
+		overtimePaySum += overtimePay; //연장수당
+		positionBenefitSum += positionBenefit; //직책수당
+		extraPaySum = selfDriPaySum + comPaySum + mealCostSum + beneFitSum
+					  +holidayPaySum + overtimePaySum + positionBenefitSum; //수당 합
 	}
-	 
+	
 	console.log(taxationSum);
 	console.log(residentTaxSum);
 	console.log(taxFreeSum);
@@ -288,11 +304,116 @@ tr:hover{background: whitesmoke;}
 	$('#residentTax').text(residentTaxSum.toLocaleString());
 	$('#deduct').text(deductSum.toLocaleString());
 	$('#deductHap').text(deductHapSum.toLocaleString());
+	
+	
+	console.log(basicPaySum);
+	console.log(selfDriPaySum);
+	console.log(comPaySum);
+	console.log(mealCostSum);
+	console.log(positionBenefitSum);
+	
 	// 데이터 테이블 호출
 	$('#boardListTable').DataTable();
 	
+
+  var ctx = document.getElementById('myChart');
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: ['기본급','수당','과세', '비과세', '지급액 ','공제액 계','차인지급액'],
+			datasets: [{
+				label: '총 계',
+				data: [basicPaySum, extraPaySum,
+					taxationSum, taxFreeSum, paymentSum, deductSum,deductHapSum],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
+		}
 	});
-  Morris.Bar({
+	  var ctx = document.getElementById('myChart1');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['차량유지비','통신수당','식대','야간수당','휴일수당','연장수당','직책수당','국민연금','건강보험','장기요양보험','고용보험','소득세','지방소득세'],
+				datasets: [{
+					label: '총 계',
+					data: [selfDriPaySum, comPaySum, mealCostSum,
+						beneFitSum, holidayPaySum, overtimePaySum, positionBenefitSum,
+						nationPerSum, healthPerSum, longCareSum, insurPerSum,
+						oneSum , residentTaxSum],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(53, 153, 25, 0.2)',
+						'rgba(15, 12, 145, 0.2)',
+						'rgba(84, 33, 28, 0.2)',
+						'rgba(93, 82, 45, 0.2)',
+						'rgba(13, 12, 235, 0.2)',
+						'rgba(53, 192, 255, 0.2)',
+						'rgba(25, 159, 64, 0.2)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+			}
+		});
+	});
+ /*  Morris.Bar({
 	  element: 'bar-example',
 	  data: [
 	    { y: '기본급', a: 177988764 },
@@ -310,7 +431,7 @@ tr:hover{background: whitesmoke;}
 	  xkey: 'y',
 	  ykeys: ['a'],
 	  labels: ['총 계']
-  });
+  }); */
  
 </script>
 
