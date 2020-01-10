@@ -41,9 +41,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
+					<div class="card-body">
 				<form th:action="@{/company/companyUpdate}" id="deleteForm" method="post">
 	 <div class="card-body table-responsive p-0" style="height: auto;">
-  	 <table class="table table-bordered table-striped dataTable"role="grid" id="workTimeTable" style="white-space:nowrap; overflow:auto; height:150px;">  	   	 
+  	 <table class="table table-bordered table-striped dataTable" role="grid" id="workTimeTable" style="white-space:nowrap; overflow:auto; height:100px;">  	   	 
    	  <thead>
    	 
 	   	<tr>	
@@ -63,32 +64,33 @@
    	
 	   		<td align="center" id="coName" th:text="${l.coName}"></td>
 	   		<td align="center" id="coCeoname"th:text="${l.coCeoname}"></td>
-	   		<td align="center" id="coPhone"th:text="${l.coPhone}"></td>
+	   		<td align="center" id="coPhone"th:text="${l.coPhone}" style="margin:auto;"></td>
 	   		<td align="center" id="coEmail"th:text="${l.coEmail}"></td>	   		   	 	   	
 	   		<td align="center" id="yesOrNo"th:text="${l.yesOrNo}"></td> 	   	
-		   	<td class="deleteCoBtn">
+		   	<td class="deleteCoBtn" align="center">
 				<input type="button" value="폐업" class="btn btn btn-success" id="deleteCoBtn">
 			</td>	
-  			 <div id="right-box"class="col-lg-4">	
-  		     <td>
-  		     		<div class="input-group-prepend show" >
-                    <button type="button" class="btn btn-success" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  		     <td align="center">
+  			<!--  <div id="right-box"class="col-lg-4">	 -->
+  		     		<!-- <div class="input-group-prepend show"> -->
+                    <button type="button" class="btn btn-success" data-toggle="dropdown" aria-expanded="true"><font style="vertical-align: inherit;">
                      	 수정하시겠습니까
-                    </font></font></button>
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
+                 </font></button>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; /* transform: translate3d(0px, 42px, 0px); */">
                       <a class="dropdown-item" th:href="@{/company/companyUpdate(Code=${l.Code})}">네</a>	                                             
-                      <a class="dropdown-item" th:href="@{/company/companyInfo}">아니오</a>	                                             
-                      <div class="dropdown-divider"></div>              
+                      <a class="dropdown-item" th:href="@{/company/companyInfo}">아니오</a>                                
                     </div>  
-                  </div>  	 	 	 	 	
+                 <!--  </div> -->  	 	 	 	 	
+		<!-- 	</div> -->
 			</td>
-			</div>
 			<td align="center"><a th:href="@{/company/companyDetail(coName=${l.coName})}" class="btn btn-success">상세보기</a></td>			 		 
 	   	</tr>
 	   	</tbody>
   	 </table>
   	 </div>
    </form>
+   	</div>
+   	<!-- /.card  body end-->
 				</div>
 				<!-- /.card -->
 			<!-- /.card -->

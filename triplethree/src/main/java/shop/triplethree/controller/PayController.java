@@ -100,7 +100,7 @@ public class PayController {
 		String writer = (String) session.getAttribute("SID");	
 		pay.setWriter(writer);
 		model.addAttribute("insertDeductModal", payService.deductList(pay));
-		  return "redirect:/pay/insertDeduct";
+		  return "redirect:/admin/pay/insertDeduct";
 	  }
 	  /***공제액 수정화면가기***/
 	  @GetMapping("/admin/pay/updateDeductList")

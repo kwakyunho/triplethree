@@ -6,7 +6,13 @@
 <th:block layout:fragment="customTitle">
 	<title>급여 검색 및 변동시 급여조회</title>
 </th:block>
+<!-- 사용자 CSS -->
+<th:block layout:fragment="customCss">
 
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
+
+</th:block>
 <th:block layout:fragment="customContents">
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -37,11 +43,11 @@
 		<div class="row">
 			<div class="col-5">
 				<div class="card">
-					<div align="center">사원목록</div>						
+					<div align="center" style="margin-top:10px;margin-bottom:10px; font-weight:bold;" >사원목록</div>						
 						<form action="/admin/pay/insertPay" method="post" id="insertPayForm">
 							<div>
 								<select class="form-control" name="sk" id="sel">
-								<!--<option value=''>검색조건</option> 모든값을 가져올 수 있지 않을까  -->
+								<option value=''>검색조건</option> 
 									<option value="emp_num">사원코드</option>						
 									<option value="emp_name" >사원명</option>
 									<option value="dename" >부서명</option>
@@ -56,16 +62,18 @@
 								<button type="submit"id="searchBtn" class="btn btn-block btn btn-success">Search</button>					
 							</div>
 							</form>	
+							<br>
 																
-  	 			<table class="table table-bordered table-striped dataTable"role="grid" id="insertPayList">  	   	 				 	
-					<tr>								
-						
-						<th align="center">사원번호</th>
-						<th align="center">사원명</th>
-						<th align="center">부서명</th>
-						<th align="center">직급</th>
-						<th align="center">급여입력</th>																
-					</tr>
+  	 			<table class="table table-bordered table-striped dataTable"role="grid" id="insertPayList"> 
+	  	 			<thead> 	   	 				 	
+						<tr>														
+							<th align="center">사원번호</th>
+							<th align="center">사원명</th>
+							<th align="center">부서명</th>
+							<th align="center">직급</th>
+							<th align="center">급여입력</th>																
+						</tr>
+					</thead>	
 					<!--반복문 돌려서 사원코드,명,직급 뽑자  -->
 					<tbody>
 						<tr class="insertPay" th:each="e,index :${insertSearchPay}">																						
@@ -100,13 +108,14 @@
 				</table>
 				</div>
 				<!-- /.card -->
+				<!--card-body end  -->
 			<!-- /.card -->
 			</div>
 			<!-- /.col-md-4 -->
 			<div class="col-4">
 				<div class="card">
 				<table class="table table-bordered table-striped dataTable insertChange"role="grid">
-						<div align="center">지급액</div>
+						<div align="center" style="margin-top:10px;margin-bottom:10px; font-weight:bold;">지급액</div>
 					<tr>
 						<th>급여항목</th>	
 						<th>지급금액</th>
@@ -147,7 +156,7 @@
 			<div class="col-3"  id="deduct">
 				<div class="card">
 				<table class="table table-bordered table-striped dataTable"role="grid">
-					<div align="center">공제액</div>
+					<div align="center"  style="margin-top:10px;margin-bottom:10px; font-weight:bold;">공제액</div>
 					<tr>
 						<th>공제항목</th>					
 						<th>공제금액</th>					
@@ -188,6 +197,9 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<!-- dataTable -->
+<script th:src="@{/plugins/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
 <!--검색조건  -->
 <script type="text/javascript">
 $(document).ready(function(){
@@ -265,7 +277,9 @@ $('.insertChange').change(function(){
 	var deductHap1=parseInt(sum3.value)-parseInt(sum4.value);
 	deductHap.value=deductHap1.toLocaleString();
 }); 
-
+$(document).ready(function(){
+	$('#insertPayList').DataTable();
+});
 </script>
 <!-- 대시보드 사용함에 따라 주석 및 해제 할 것 -->
 <script th:src="@{/custom/js/Pay.js}"></script>
