@@ -44,7 +44,7 @@ $(function(){
 								str += '<td>'+'첨부파일 자리에요'+'</td>'
 								str += '<td>'+data[i].deName+'-'+data[i].poName+'-'+data[i].empName+'</td>'
 								str += '<td>'+data[i].docFormCode+'</td>'
-								str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'						
+								str += '<td><span class="btn bg-gradient-secondary" style=" font-size: small;">완료</span></td>'
 									str += '</tr>'
 							});
 							$('#selectEndTr').html('');
