@@ -31,13 +31,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor(loginInterceptor)
-				.addPathPatterns("/**")
+				.addPathPatterns("/**") // 제한할패턴
 				.excludePathPatterns("/mapper/**")// 제외할패턴
 				.excludePathPatterns(notLoadList);// 제외할패턴
 			
 		
 		registry.addInterceptor(adminInterceptor)
-				.addPathPatterns("/admin/**") 
+				.addPathPatterns("/admin/**") // 제한할패턴
 				.excludePathPatterns("/mapper/**")// 제외할패턴
 				.excludePathPatterns(notLoadList);// 제외할패턴
 		/*
