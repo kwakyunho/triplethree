@@ -27,7 +27,7 @@ public class PayController {
 		
 	@Value("${file.upload.path}")
 	private String uploadPath;
-	/**급여등록화면**/
+	/**급여 검색 및 변동시 급여조회 화면**/
 	@GetMapping("/admin/pay/viewPay")
 	public String viewPay() {
 		//System.out.println("급여등록화면");
@@ -35,7 +35,7 @@ public class PayController {
 	}
 	
 
-	/**급여 등록 검색**/
+	/**급여 검색 및 변동시 급여조회 실행**/
 	@PostMapping("/admin/pay/insertPay")
 	public String insertSearchPay(@RequestParam(value="sk") String sk
 								 ,@RequestParam(value="sv") String sv
@@ -73,14 +73,16 @@ public class PayController {
 	public String updatePayView(@RequestParam(value="empCode") String empcode,Model model) {
 		//System.out.println("empCode"+empcode);
 		model.addAttribute("updatePayView", payService.updatePayView(empcode));
-		
+		System.out.println("수정화면");
 		return "pay/updatePay";	
 	}
 	/**급여 진짜 수정하기***/
 	
 	  @PostMapping("/admin/pay/updatePay")  
-	  public String updatePay(Pay pay) {
-	  //System.out.println("수정처리"); 
+	  public String updatePay(Pay pay,HttpSession session) {
+	  String writer = (String) session.getAttribute("SID");	
+	  pay.setWriter(writer);
+	  System.out.println("수정처리"); 
 	  payService.updatePay(pay);
 	  return "redirect:/pay/selectPay"; 
 	  }
