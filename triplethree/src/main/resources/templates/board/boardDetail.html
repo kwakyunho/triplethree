@@ -36,6 +36,7 @@
 	<div class="content" style="align-content: center">
 	 <div class="col-12">
 	     <div class="card">
+	     <form class="listgagi"></form>
 	     <form class="boardDetailForm">
 	       <div class="card-header" th:each="b:${board}">
                 <h4 th:text="|[${board.liCodeStr}] ${board.boardTitle}|">
@@ -104,12 +105,16 @@
 		var liCode = board.liCode;
 		var liCodeMStr = board.liCodeMStr;
 	
-	$(document).ready(function(){
-		$('#backBtn').on('click', function(){	
-			$('.boardDetailForm').attr('method', 'POST');
-			$('.boardDetailForm').attr('action', '/board/boardList');
-			$('.boardDetailForm').submit();
-		});
+	$('#backBtn').on('click', function(){
+		$('.listgagi').attr('method', 'GET');
+		if(liCodeMStr=='전사게시판'){
+			$('.listgagi').attr('action', '/board/boardList');
+		}else if(liCodeMStr=='부서게시판'){
+			$('.listgagi').attr('action', '/board/departBoardList');
+		}
+		$('.listgagi').submit();
+	});
+	
 	$('#updateBtn').on('click',function(){
 		var dbPw = $('#boardPw').val();
 			if (confirm("수정하시겠습니까?")){  //확인
@@ -166,10 +171,9 @@
 		    return;
 		}
 	
-	})
+	});
 		
-	});
-	});
+});
 	</script>
 	
 	</th:block>
