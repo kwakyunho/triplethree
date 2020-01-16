@@ -59,7 +59,7 @@ public class EmployeeController {
 		//System.out.println(employee.getPassword()+ "<- 로그인 패스워드 입력값 ");  		
 		
 		String scriptStr = "<script>alert('아이디와 패스워드를 입력해주세요'); location.href='/login';</script>";
-		String scriptStr2 = "<script>alert('로그인 성공~!'); location.href='/';</script>";
+		String scriptStr2 = "<script>alert('로그인 성공~!'); location.href='/index';</script>";
 		String scriptStr3 = "<script>alert('등록된 비밀번호와 일치하지 않습니다.'); location.href='/login';</script>";
 		String scriptStr4 = "<script>alert('등록된 정보가 없습니다.'); location.href='/login';</script>";
 		String html = "text/html; charset=UTF-8";
