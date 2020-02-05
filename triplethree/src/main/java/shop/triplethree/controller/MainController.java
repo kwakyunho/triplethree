@@ -17,12 +17,12 @@ public class MainController {
 		}
 	}
 	
-	@GetMapping("/")
-	public String portfolio() {
-		return "portfolio";
-	}
+//	@GetMapping("/")
+//	public String portfolio() {
+//		return "index";
+//	}
 	
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
